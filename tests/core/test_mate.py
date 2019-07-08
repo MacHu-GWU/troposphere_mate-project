@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from troposphere import Template, Tags, Ref, Output, GetAtt
+from troposphere_mate import Template, Tags, Ref, Output, GetAtt
 
 
 def test_mutable_aws_object():
@@ -30,7 +30,6 @@ def test_mutable_aws_object():
     my_role.ManagedPolicyArns = [
         Ref(my_policy)
     ]
-    my_role.update_aws_object()
     assert tpl.to_dict()["Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role-two"
     assert tpl.to_dict()["Resources"]["MyRole"]["Properties"]["ManagedPolicyArns"] == [
         {"Ref": "MyPolicy"}
