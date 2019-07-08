@@ -6,7 +6,6 @@ from pytest import raises, approx
 
 def test():
     import troposphere_mate
-    pass
 
 
 if __name__ == "__main__":

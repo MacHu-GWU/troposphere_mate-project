@@ -53,7 +53,9 @@ Welcome to ``troposphere_mate`` Documentation
 
 `troposphere <https://github.com/cloudtools/troposphere>`_ is a great Python library allow you to define AWS CloudFormation Resource in Python Class. **But due to its implementation, IDLE can't use attribute auto hint, and Type hint doesn't work as well**. ``troposphere_mate`` provides API exactly same as ``troposphere``, but with availalbe Properties auto hint feature and type hint enabled. ``troposphere_mate`` is a thin wrapper layer on top of ``troposphere``.
 
-Here's how it looks like in IDLE
+My goal is 100% API compatible to ``troposphere``. Basically, you just need to replace ``from troposphere import Template, Ref, Tags, GetAtt`` to ``from troposphere_mate import Template, Ref, Tags, GetAtt``.
+
+Here's how it looks like in IDLE:
 
 .. image:: https://user-images.githubusercontent.com/6800411/60776028-e40d8100-a0f6-11e9-9cae-98af25cbd9b7.png
 
@@ -182,6 +184,8 @@ In other word, you don't need to remember the properties and the syntax.
             Ref(public_subnet2),
         ]
     )
+
+If you want to contribute your auto-associate logic to ``troposphere_mate``, please submit `issue <https://github.com/MacHu-GWU/troposphere_mate-project/issues>`_ or help me to improve. Here's an `example <https://github.com/MacHu-GWU/troposphere_mate-project/blob/master/troposphere_mate/core/associate.py>`_.
 
 
 .. _install:

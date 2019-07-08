@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-This module provides common AWSResource Association.
+This module provides auto AWSResource Association.
 """
 
 from .mate import AWSObject as MateAwsObject
@@ -68,7 +68,7 @@ class Mapper:
             resource_object2 = r1
         linker_class.associate(resource_object1, resource_object2)
 
-    # ---
+    # --- Implement Custom Association Logic
     class AwsLambdaFunction_IamRole(Linker):
         rtype1 = awslambda.Function
         rtype2 = iam.Role

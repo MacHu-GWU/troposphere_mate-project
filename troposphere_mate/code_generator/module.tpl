@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-# pragma: no cover
+
+"""
+This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
+"""
 
 import attr
 import {{ data.module_import_name }}
