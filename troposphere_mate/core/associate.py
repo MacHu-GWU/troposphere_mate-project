@@ -4,7 +4,6 @@
 This module provides auto AWSResource Association.
 """
 
-from .mate import AWSObject as MateAwsObject
 from troposphere import (
     Ref, GetAtt,
     AWSObject as TroposphereAWSObject,
@@ -14,6 +13,7 @@ from troposphere import (
     awslambda,
     iam,
 )
+from .mate import AWSObject as MateAwsObject
 
 
 def create_resource_type_key(rtype1, rtype2):
