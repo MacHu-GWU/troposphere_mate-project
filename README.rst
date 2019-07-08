@@ -61,7 +61,23 @@ Here's how it looks like in IDLE:
 
 .. image:: https://user-images.githubusercontent.com/6800411/60776079-3484de80-a0f7-11e9-81b8-c4b2f1c4b45e.png
 
-How ``troposphere`` implements::
+Of course you can do:
+
+.. code-block:: python
+
+    ec2 = ec2.Instance(
+        title="MyEc2Instance),
+        InstanceType="t2.micro",
+        Tags=Tags(
+            Creator="MyName",
+            Name="PlayGround",
+        ),
+        ...
+    )
+
+How ``troposphere`` implements:
+
+.. code-block:: python
 
     # content of troposphere.ec2.py
     class Instance(AWSObject):
@@ -74,7 +90,9 @@ How ``troposphere`` implements::
             ...
         }
 
-How ``troposphere_mate`` implements::
+How ``troposphere_mate`` implements:
+
+.. code-block:: python
 
     @attr.s
     class Instance(AWSObject):
@@ -89,6 +107,18 @@ How ``troposphere_mate`` implements::
 
         _aws_object_class = troposphere.ec2.Instance
 
+
+**ATTENTION!**:
+
+    **If you have updated the AWSObject after creation, You have to call** ``xxx.update_aws_object()`` **method to reflect the change to the real** ``troposphere.AWSObject``. Otherwise, the template will not generate the desired json for you.
+
+    Example::
+
+        from troposphere_mate import iam
+
+        my_role = iam.Role(title="MyRole")
+        my_role.RoleName = "my-role"
+        my_role.update_aws_object()
 
 
 Additional Features
