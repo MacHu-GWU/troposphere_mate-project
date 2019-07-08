@@ -42,3 +42,4 @@ def _sentinel_pickler(sentinel):
 copyreg.pickle(Sentinel, _sentinel_pickler, _sentinel_unpickler)
 
 NOTHING = Sentinel("NOTHING")
+REQUIRED = Sentinel("REQUIRED")
