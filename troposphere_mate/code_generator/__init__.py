@@ -1,16 +1,22 @@
+# -*- coding: utf-8 -*-
+
+import sys
 import attr
 import picage
 import importlib
 from jinja2 import Template
 from pathlib_mate import PathCls as Path
 
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Type, List, Dict
+
 
 @attr.s
 class ClassTemplate(object):
-    is_resource = attr.ib()
-    class_name = attr.ib()
-    class_import_name = attr.ib()
-    attributes = attr.ib()
+    is_resource = attr.ib()  # type: bool
+    class_name = attr.ib()  # type: str
+    class_import_name = attr.ib()  # type: str
+    attributes = attr.ib()  # type: List[Dict]
 
     tpl = Template(Path(__file__).change(new_basename="class.tpl").read_text())
 
@@ -20,8 +26,9 @@ class ClassTemplate(object):
 
 @attr.s
 class ModuleTemplate(object):
-    module_import_name = attr.ib()
-    class_templates = attr.ib()
+    module_import_name = attr.ib()  # type: str
+    additional_imports = attr.ib()  # type: list
+    class_templates = attr.ib()  # type: list
 
     tpl = Template(Path(__file__).change(new_basename="module.tpl").read_text())
 
@@ -37,6 +44,13 @@ def main():
 
     TROPOSPHERE_DIR = pkg.path
 
+    unimportable_types = ["int", "float", "str", "basestring", "bool",
+                          "list", "tuple", "set", "dict",
+                          "integer_range_checker", "integer_list_item_checker"]
+
+
+    generated_files = list()
+
     for p in Path(pkg.path).select_by_ext(".py", recursive=False):
         # 如果文件不是 __init__.py
         if p.fname != "__init__":
@@ -46,6 +60,7 @@ def main():
             )
             imported_module = importlib.import_module(module_import_name)
 
+            additional_imports = list()
             class_templates = list()
 
             # 尝试找出所有 AWSProperty 的子类
@@ -61,21 +76,31 @@ def main():
                         .strip()
                     class_import_name = "{}.{}".format(module_import_name, class_name)
 
-                    # class_name = attr.ib()
-                    # class_import_name = attr.ib()
-                    # attributes = attr.ib()
-
                     attributes = list()
                     props = getattr(imported_module, class_name).props
                     for key, define in props.items():
                         try:
+                            the_type = define[0]
                             required = define[1]
                             name = key
                             if required:
                                 default_syntax = ""
                             else:
                                 default_syntax = "default=NOTHING"
-                            attributes.append(dict(name=name, default_syntax=default_syntax))
+
+                            try:
+                                typehint = the_type.__name__
+                            except:
+                                typehint = the_type.__class__.__name__
+
+                            if typehint not in unimportable_types:
+                                additional_imports.append(typehint)
+
+                            attributes.append(dict(
+                                name=name,
+                                default_syntax=default_syntax,
+                                typehint=typehint,
+                            ))
                         except:
                             pass
                     attributes = list(sorted(attributes, key=lambda dct: dct["default_syntax"]))
@@ -88,53 +113,22 @@ def main():
                     )
                     class_templates.append(class_template)
 
+            additional_imports = list(set(additional_imports))
+            additional_imports.sort()
+
             module_template = ModuleTemplate(
                 module_import_name=module_import_name,
+                additional_imports=additional_imports,
                 class_templates=class_templates,
             )
 
             target_module_path = Path(TROPOSPHERE_MATE_DIR, p.relative_to(TROPOSPHERE_DIR))
             target_module_path.write_text(module_template.render())
-            # break
+            generated_files.append(target_module_path)
+
+    for p in generated_files:
+        print("    troposphere_mate/{}".format(Path(p).basename))
 
 
-# print(classname)
-# print(p.fname)
-
-# break
-
-# a = importlib.import_module("troposphere.iam")
-# print(a.ManagedPolicy.propos)
-# from troposphere.iam import ManagedPolicy
-
-
-# def find_all_troposphere_module():
-#     module_list = list()
-#     pkg = picage.Package(TROPOSPHERE_NAME)
-#     for p in Path(pkg.path).select_by_ext(".py", recursive=False):
-#         if p.fname != "__init__":
-#             fname = p.fname
-#             import_name = "{}.{}".format(TROPOSPHERE_NAME, fname)
-#             py_file_path = p.abspath
-#             module_list.append((fname, import_name, py_file_path))
-#     return module_list
-#
-#
-# def duplicate_troposphere_module(fname, import_name, py_file_path):
-#     print(fname, import_name, py_file_path)
-#     for line in Path(py_file_path).read_text().split("\n")
-#         if "class" in line and "(AWSProperty):" in line:
-#             classname = line.replace("class", "").replace("(AWSProperty):", "").strip()
-#             print(classname)
-#             print(p.fname)
-#
-#
-#
-#
-#
-# module_list = find_all_troposphere_module()
-# for fname, import_name, py_file_path in module_list:
-#     duplicate_troposphere_module(fname, import_name, py_file_path)
-#     break
 if __name__ == "__main__":
     main()

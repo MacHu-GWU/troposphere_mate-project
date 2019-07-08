@@ -9,6 +9,7 @@ from troposphere_mate.code_generator import ClassTemplate, ModuleTemplate
 class TestClassTemplate(object):
     def test(self):
         s = ClassTemplate(
+            is_resource=True,
             class_name="ManagedPolicy",
             class_import_name="troposphere.iam.ManagedPolicy",
             attributes=[
@@ -27,8 +28,10 @@ class TestModuleTemplate(object):
     def test(self):
         s = ModuleTemplate(
             module_import_name="troposphere.iam",
+            additional_imports=[],
             class_templates=[
                 ClassTemplate(
+                    is_resource=True,
                     class_name="ManagedPolicy",
                     class_import_name="troposphere.iam.ManagedPolicy",
                     attributes=[
@@ -42,7 +45,7 @@ class TestModuleTemplate(object):
                 ),
             ]
         ).render()
-        print(s)
+        # print(s)
 
 
 if __name__ == "__main__":

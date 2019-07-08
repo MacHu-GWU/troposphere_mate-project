@@ -1,31 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from pytest import raises, approx
-from troposphere import Template, Tags, Ref, AWSObject, Output, GetAtt
-
-
-def test1():
-    from troposphere import iam
-
-    tpl = Template()
-    my_policy = iam.ManagedPolicy(
-        title="MyPolicy",
-        template=tpl,
-        PolicyDocument={},
-    )
-    my_role = iam.Role(
-        title="MyRole",
-        template=tpl,
-        AssumeRolePolicyDocument={},
-        ManagedPolicyArns=[
-            Ref(my_policy)
-        ]
-    )
-    # print(tpl.to_json())
+from troposphere import Template, Tags, Ref, Output, GetAtt
 
 
 def test_mutable_aws_object():
+    """
+    确定 ``mate.AWSObject`` 变化时, 对应的 ``mate.AWSObject.aws_object`` 也应该
+    跟着变化.
+    """
     from troposphere_mate import iam
 
     tpl = Template()
@@ -101,54 +84,6 @@ def test_tags():
             "Value": "Alice"
         }
     ]
-
-
-def test_associate():
-    from troposphere_mate import ec2, awslambda
-    from troposphere_mate.core.associate import associate
-
-    tpl = Template()
-
-    vpc = ec2.VPC(
-        title="MyVPC",
-        template=tpl,
-        CidrBlock="10.53.0.0/16"
-    )
-
-    public_subnet1 = ec2.Subnet(
-        title="PublicSubnet1",
-        template=tpl,
-        CidrBlock="10.53.0.0/16",
-        VpcId=Ref(vpc)
-    )
-    public_subnet2 = ec2.Subnet(
-        title="PublicSubnet2",
-        template=tpl,
-        CidrBlock="10.53.2.0/16",
-        VpcId=Ref(vpc)
-    )
-
-    sg = ec2.SecurityGroup(
-        title="LambdaSG",
-        template=tpl,
-        GroupDescription="Just a SG"
-    )
-
-    lbd_func = awslambda.Function(
-        title="MyFunc",
-        template=tpl,
-        Code=awslambda.Code(
-            S3Bucket="my-bucket",
-            S3Key="0.0.1.zip",
-        ),
-        Handler="my_func.handler",
-        Role="arn:aws:iam::111122223333:role/lambda-basic-execution",
-        Runtime="python3.6"
-    )
-    associate(lbd_func, sg)
-    associate(lbd_func, public_subnet1)
-    associate(lbd_func, public_subnet2)
-    print(tpl.to_json())
 
 
 if __name__ == "__main__":

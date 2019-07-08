@@ -12,13 +12,14 @@ from troposphere import (
 from troposphere import (
     ec2,
     awslambda,
+    iam,
 )
 
 
 def create_resource_type_key(rtype1, rtype2):
     l = [rtype1.resource_type, rtype2.resource_type]
     l.sort()
-    return "-".join(l)
+    return " and ".join(l)
 
 
 mapper = dict()
@@ -51,7 +52,13 @@ class Mapper:
     @classmethod
     def associate(cls, r1, r2):
         identifier = create_resource_type_key(r1, r2)
-        linker_class = cls._mapper[identifier]  # type: Linker
+        if identifier in cls._mapper:
+            linker_class = cls._mapper[identifier]  # type: Linker
+        else:
+            msg = ("Association for {} has't not supported yet in troposphere_mate! "
+                   "Please submit your sugggestion to "
+                   "https://github.com/MacHu-GWU/troposphere_mate-project/issues").format(identifier)
+            raise NotImplementedError(msg)
 
         if r1.resource_type == linker_class.rtype1.resource_type:
             resource_object1 = r1
@@ -62,6 +69,13 @@ class Mapper:
         linker_class.associate(resource_object1, resource_object2)
 
     # ---
+    class AwsLambdaFunction_IamRole(Linker):
+        rtype1 = awslambda.Function
+        rtype2 = iam.Role
+
+        def associate(self, lbd_func, iam_role):
+            lbd_func.Role = Ref(iam_role)
+
     class AwsLambdaFunction_Ec2SecurityGroup(Linker):
         rtype1 = awslambda.Function
         rtype2 = ec2.SecurityGroup
