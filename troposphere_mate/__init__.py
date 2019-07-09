@@ -18,6 +18,9 @@ try:
     from troposphere import AWSObject as TroposphereAWSObject
 
     from .core.associate import associate
-    from .core.mate import AWSObject
+    from .core.mate import (
+        Template,
+        AWSObject,
+    )
 except ImportError as e:
     pass

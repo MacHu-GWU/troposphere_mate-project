@@ -154,7 +154,10 @@ def main():
                                         additional_imports.append(the_type.__name__)
                                         typehint_usename = "List[_{}]".format(the_type.__name__)
                                     else:
-                                        typehint_usename = "List[{}]".format(the_type.__name__)
+                                        if the_type.__name__ == "str":
+                                            typehint_usename = "List[Union[{}, AWSHelperFn]]".format(the_type.__name__)
+                                        else:
+                                            typehint_usename = "List[{}]".format(the_type.__name__)
                                 else:
                                     typehint_usename = "Any"
                             elif isinstance(the_type, tuple):
@@ -164,7 +167,10 @@ def main():
                                         additional_imports.append(typ.__name__)
                                         l.append("_{}".format(typ.__name__))
                                     else:
-                                        l.append(typ.__name__)
+                                        if typ.__name__ == "str":
+                                            l.append("Union[{}, AWSHelperFn]".format(typ.__name__))
+                                        else:
+                                            l.append(typ.__name__)
                                 typehint_usename = "Union[{}]".format(", ".join(l))
                             elif inspect.isfunction(the_type):
                                 if the_type.__name__ in validator_to_typehint_mapper:
@@ -176,7 +182,10 @@ def main():
                                     additional_imports.append(the_type.__name__)
                                     typehint_usename = "_{}".format(the_type.__name__)
                                 else:
-                                    typehint_usename = the_type.__name__
+                                    if the_type.__name__ == "str":
+                                        typehint_usename = "Union[{}, AWSHelperFn]".format(the_type.__name__)
+                                    else:
+                                        typehint_usename = the_type.__name__
 
                             properties.append(dict(
                                 name=name,

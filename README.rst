@@ -51,15 +51,26 @@
 Welcome to ``troposphere_mate`` Documentation
 ==============================================================================
 
-`troposphere <https://github.com/cloudtools/troposphere>`_ is a great Python library allow you to define AWS CloudFormation Resource in Python Class. **But due to its implementation, IDLE can't use attribute auto hint, and Type hint doesn't work as well**. ``troposphere_mate`` provides API exactly same as ``troposphere``, but with availalbe Properties auto hint feature and type hint enabled. ``troposphere_mate`` is a thin wrapper layer on top of ``troposphere``.
+.. contents::
+    :depth: 1
+    :local:
+
+`troposphere <https://github.com/cloudtools/troposphere>`_ is a great Python library allow you to define AWS CloudFormation Resource in Python Class. **But due to its implementation, IDLE can't use attribute auto hint, and Type hint doesn't work as well**. 
+
+``troposphere_mate`` provides **API exactly same as** ``troposphere``, and comes with **Properties auto hint** and **type hint**. ``troposphere_mate`` is just a thin wrapper layer on top of ``troposphere``. Any ``troposphere_mate.AWSObject`` is just subclass of ``troposphere.AWSObject``.
 
 My goal is 100% API compatible to ``troposphere``. Basically, you just need to replace ``from troposphere import Template, Ref, Tags, GetAtt`` to ``from troposphere_mate import Template, Ref, Tags, GetAtt``.
 
-Here's how it looks like in IDLE:
+**Here's how it looks like in IDLE**:
+
+.. image:: https://user-images.githubusercontent.com/6800411/60903484-686b1b80-a23f-11e9-8d20-22c989339cd0.png
+    :width: 600 px
 
 .. image:: https://user-images.githubusercontent.com/6800411/60776028-e40d8100-a0f6-11e9-9cae-98af25cbd9b7.png
+    :width: 600 px
 
 .. image:: https://user-images.githubusercontent.com/6800411/60776079-3484de80-a0f7-11e9-81b8-c4b2f1c4b45e.png
+    :width: 600 px
 
 Of course you can do:
 
@@ -94,35 +105,101 @@ How ``troposphere_mate`` implements:
 
 .. code-block:: python
 
-    @attr.s
-    class Instance(AWSObject):
-        title = attr.ib() # type: str
-
-        InstanceType = attr.ib(default=NOTHING) # type: str
-        SubnetId = attr.ib(default=NOTHING) # type: str
-        KeyName = attr.ib(default=NOTHING) # type: str
-
-        template = attr.ib(default=None) # type: Template
-        validation = attr.ib(default=True) # type: bool
-
-        _aws_object_class = troposphere.ec2.Instance
-
-
-**ATTENTION!**:
-
-    **If you have updated the AWSObject after creation, You have to call** ``xxx.update_aws_object()`` **method to reflect the change to the real** ``troposphere.AWSObject``. Otherwise, the template will not generate the desired json for you.
-
-    Example::
-
-        from troposphere_mate import iam
-
-        my_role = iam.Role(title="MyRole")
-        my_role.RoleName = "my-role"
-        my_role.update_aws_object()
+    # content of troposphere_mate.ec2.py
+    class Instance(troposphere.ec2.Instance, Mixin):
+        def __init__(self,
+                     title, # type: str
+                     template=None, # type: Template
+                     validation=True, # type: bool
+                     InstanceType=NOTHING, # type: str
+                     SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                     KeyName=NOTHING, # type: Union[str, AWSHelperFn]
+                     ...
+                     **kwargs):
+            ...
 
 
 Additional Features
 ------------------------------------------------------------------------------
+
+.. contents::
+    :depth: 1
+    :local:
+
+
+Batch Tagging
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sometimes you want to apply a set of common tags to all AWS Resource defined in a Template. ``trpoosphere_mate`` allows you to:
+
+- apply common tags to specified list of AWS Resource or all of Resources in a Template.
+- custom tag creation logic function, let's say based on the Resource Type.
+- allow you to choose the merge ``existing tag`` into ``common tag`` or reversely.
+
+Example:
+
+.. code-block:: python
+
+    from troposphere_mate import Template, ec2, Tags,
+    from functools import partial
+
+    tpl = Template()
+
+    my_vpc = ec2.VPC(
+        "MyVPC",
+        template=tpl,
+        CidrBlock="10.0.0.0/16",
+        Tags=Tags(
+            Creator="Alice"
+        )
+    )
+    my_sg = ec2.SecurityGroup(
+        "MySG",
+        template=tpl,
+        GroupDescription="My",
+        GroupName="MySG",
+        VpcId=Ref(my_vpc),
+    )
+    my_subnet = ec2.Subnet(
+        "MySubnet",
+        template=tpl,
+        CidrBlock="10.0.1.0/24",
+        VpcId=Ref(my_vpc),
+    )
+
+    # custom logic to create tag if it is a SecurityGroup
+    def get_name(resource, project):
+        if resource.resource_type == "AWS::EC2::SecurityGroup":
+            return "{}/sg/{}".format(project, resource.GroupName)
+
+    common_tags = dict(
+        Project="my-project",
+        Name=functools.partial(get_name, project="my-project"),
+        Creator="Bob",
+    )
+
+    # apply common tags to all aws resource
+    tpl.update_tags(common_tags, overwrite=False)
+
+    assert tags_list_to_dct(tpl.to_dict()["Resources"]["MyVPC"]["Properties"]["Tags"]) == dict(
+        Project="my-project",
+        Creator="Alice",
+    )
+    assert tags_list_to_dct(tpl.to_dict()["Resources"]["MySG"]["Properties"]["Tags"]) == dict(
+        Project="my-project",
+        Name="my-project/sg/MySG",
+        Creator="Bob",
+    )
+
+Any AWS Resource object and Template object has a utility method ``.update_tags()``
+
+.. code-block:: python
+
+    # by default overwrite = False, so common tags doesn't overwrite existing tags
+    # update single resource
+    my_ec2.update_tags({"Project": "my-project"})
+    # update entire template
+    tpl.update_taggs({"Project": "my-project"})
 
 
 Auto Reference

@@ -18,7 +18,7 @@ from {{ data.module_import_name }} import (
 {% endif %}
 
 from troposphere import Template, AWSHelperFn
-from troposphere_mate.core.mate import preprocess_init_kwargs
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
 from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 {% for class_template in data.class_templates %}

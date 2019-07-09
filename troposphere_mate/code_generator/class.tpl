@@ -1,4 +1,4 @@
-class {{ data.class_name }}({{ data.class_import_name }}):
+class {{ data.class_name }}({{ data.class_import_name }}, Mixin):
     def __init__(self,
                  {%- if data.is_resource %}
                  title, # type: str
