@@ -51,6 +51,8 @@
 Welcome to ``troposphere_mate`` Documentation
 ==============================================================================
 
+``troposphere_mate`` is **a productive Pythonic Cloudformation Orchestration Tool**.
+
 .. contents::
     :depth: 1
     :local:
