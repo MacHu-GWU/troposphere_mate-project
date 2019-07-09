@@ -4,648 +4,844 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.glue
 
-from troposphere.glue import CloudWatchEncryption
-from troposphere.glue import ConnectionInput
-from troposphere.glue import ConnectionPasswordEncryption
-from troposphere.glue import ConnectionsList
-from troposphere.glue import CsvClassifier
-from troposphere.glue import DataCatalogEncryptionSettingsProperty
-from troposphere.glue import DatabaseInput
-from troposphere.glue import EncryptionAtRest
-from troposphere.glue import EncryptionConfiguration
-from troposphere.glue import ExecutionProperty
-from troposphere.glue import GrokClassifier
-from troposphere.glue import JobBookmarksEncryption
-from troposphere.glue import JobCommand
-from troposphere.glue import JsonClassifier
-from troposphere.glue import PartitionInput
-from troposphere.glue import PhysicalConnectionRequirements
-from troposphere.glue import Predicate
-from troposphere.glue import S3Encryptions
-from troposphere.glue import Schedule
-from troposphere.glue import SchemaChangePolicy
-from troposphere.glue import SerdeInfo
-from troposphere.glue import SkewedInfo
-from troposphere.glue import StorageDescriptor
-from troposphere.glue import TableInput
-from troposphere.glue import Tags
-from troposphere.glue import Targets
-from troposphere.glue import XMLClassifier
-from troposphere.glue import boolean
-from troposphere.glue import connection_type_validator
-from troposphere.glue import delete_behavior_validator
-from troposphere.glue import double
-from troposphere.glue import positive_integer
-from troposphere.glue import table_type_validator
-from troposphere.glue import trigger_type_validator
-from troposphere.glue import update_behavior_validator
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class CsvClassifier(AWSObject):
-    
-    AllowSingleColumn = attr.ib(default=NOTHING) # type: boolean
-    ContainsHeader = attr.ib(default=NOTHING) # type: str
-    Delimiter = attr.ib(default=NOTHING) # type: str
-    DisableValueTrimming = attr.ib(default=NOTHING) # type: boolean
-    Header = attr.ib(default=NOTHING) # type: list
-    Name = attr.ib(default=NOTHING) # type: str
-    QuoteSymbol = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.CsvClassifier
-
-
-@attr.s
-class GrokClassifier(AWSObject):
-    
-    Classification = attr.ib() # type: str
-    GrokPattern = attr.ib() # type: str
-    CustomPatterns = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.GrokClassifier
-
-
-@attr.s
-class JsonClassifier(AWSObject):
-    
-    JsonPath = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.JsonClassifier
-
-
-@attr.s
-class XMLClassifier(AWSObject):
-    
-    Classification = attr.ib() # type: str
-    RowTag = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.XMLClassifier
-
-
-@attr.s
-class Classifier(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CsvClassifier = attr.ib(default=NOTHING) # type: CsvClassifier
-    GrokClassifier = attr.ib(default=NOTHING) # type: GrokClassifier
-    JsonClassifier = attr.ib(default=NOTHING) # type: JsonClassifier
-    XMLClassifier = attr.ib(default=NOTHING) # type: XMLClassifier
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Classifier
-
-
-@attr.s
-class PhysicalConnectionRequirements(AWSObject):
-    
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    SecurityGroupIdList = attr.ib(default=NOTHING) # type: list
-    SubnetId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.PhysicalConnectionRequirements
-
-
-@attr.s
-class ConnectionInput(AWSObject):
-    
-    ConnectionProperties = attr.ib() # type: dict
-    ConnectionType = attr.ib() # type: connection_type_validator
-    Description = attr.ib(default=NOTHING) # type: str
-    MatchCriteria = attr.ib(default=NOTHING) # type: list
-    Name = attr.ib(default=NOTHING) # type: str
-    PhysicalConnectionRequirements = attr.ib(default=NOTHING) # type: PhysicalConnectionRequirements
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.ConnectionInput
-
-
-@attr.s
-class Connection(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CatalogId = attr.ib() # type: str
-    ConnectionInput = attr.ib() # type: ConnectionInput
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Connection
-
-
-@attr.s
-class Schedule(AWSObject):
-    
-    ScheduleExpression = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Schedule
-
-
-@attr.s
-class SchemaChangePolicy(AWSObject):
-    
-    DeleteBehavior = attr.ib(default=NOTHING) # type: delete_behavior_validator
-    UpdateBehavior = attr.ib(default=NOTHING) # type: update_behavior_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.SchemaChangePolicy
-
-
-@attr.s
-class JdbcTarget(AWSObject):
-    
-    ConnectionName = attr.ib(default=NOTHING) # type: str
-    Exclusions = attr.ib(default=NOTHING) # type: list
-    Path = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.JdbcTarget
-
-
-@attr.s
-class S3Target(AWSObject):
-    
-    Exclusions = attr.ib(default=NOTHING) # type: list
-    Path = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.S3Target
-
-
-@attr.s
-class Targets(AWSObject):
-    
-    JdbcTargets = attr.ib(default=NOTHING) # type: list
-    S3Targets = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Targets
-
-
-@attr.s
-class Crawler(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DatabaseName = attr.ib() # type: str
-    Role = attr.ib() # type: str
-    Targets = attr.ib() # type: Targets
-    Classifiers = attr.ib(default=NOTHING) # type: list
-    Configuration = attr.ib(default=NOTHING) # type: str
-    CrawlerSecurityConfiguration = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Schedule = attr.ib(default=NOTHING) # type: Schedule
-    SchemaChangePolicy = attr.ib(default=NOTHING) # type: SchemaChangePolicy
-    TablePrefix = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Crawler
-
-
-@attr.s
-class ConnectionPasswordEncryption(AWSObject):
-    
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    ReturnConnectionPasswordEncrypted = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.ConnectionPasswordEncryption
-
-
-@attr.s
-class EncryptionAtRest(AWSObject):
-    
-    CatalogEncryptionMode = attr.ib(default=NOTHING) # type: str
-    SseAwsKmsKeyId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.EncryptionAtRest
-
-
-@attr.s
-class DataCatalogEncryptionSettingsProperty(AWSObject):
-    
-    ConnectionPasswordEncryption = attr.ib(default=NOTHING) # type: ConnectionPasswordEncryption
-    EncryptionAtRest = attr.ib(default=NOTHING) # type: EncryptionAtRest
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.DataCatalogEncryptionSettingsProperty
-
-
-@attr.s
-class DataCatalogEncryptionSettings(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CatalogId = attr.ib() # type: str
-    DataCatalogEncryptionSettings = attr.ib() # type: DataCatalogEncryptionSettingsProperty
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.DataCatalogEncryptionSettings
-
-
-@attr.s
-class DatabaseInput(AWSObject):
-    
-    Description = attr.ib(default=NOTHING) # type: str
-    LocationUri = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.DatabaseInput
-
-
-@attr.s
-class Database(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CatalogId = attr.ib() # type: str
-    DatabaseInput = attr.ib() # type: DatabaseInput
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Database
-
-
-@attr.s
-class DevEndpoint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PublicKey = attr.ib() # type: str
-    RoleArn = attr.ib() # type: str
-    EndpointName = attr.ib(default=NOTHING) # type: str
-    ExtraJarsS3Path = attr.ib(default=NOTHING) # type: str
-    ExtraPythonLibsS3Path = attr.ib(default=NOTHING) # type: str
-    NumberOfNodes = attr.ib(default=NOTHING) # type: positive_integer
-    SecurityConfiguration = attr.ib(default=NOTHING) # type: str
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    SubnetId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.DevEndpoint
-
-
-@attr.s
-class ConnectionsList(AWSObject):
-    
-    Connections = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.ConnectionsList
-
-
-@attr.s
-class ExecutionProperty(AWSObject):
-    
-    MaxConcurrentRuns = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.ExecutionProperty
-
-
-@attr.s
-class JobCommand(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    ScriptLocation = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.JobCommand
-
-
-@attr.s
-class Job(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Command = attr.ib() # type: JobCommand
-    Role = attr.ib() # type: str
-    AllocatedCapacity = attr.ib(default=NOTHING) # type: double
-    Connections = attr.ib(default=NOTHING) # type: ConnectionsList
-    DefaultArguments = attr.ib(default=NOTHING) # type: dict
-    Description = attr.ib(default=NOTHING) # type: str
-    ExecutionProperty = attr.ib(default=NOTHING) # type: ExecutionProperty
-    LogUri = attr.ib(default=NOTHING) # type: str
-    MaxRetries = attr.ib(default=NOTHING) # type: double
-    Name = attr.ib(default=NOTHING) # type: str
-    SecurityConfiguration = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Job
-
-
-@attr.s
-class Column(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Comment = attr.ib(default=NOTHING) # type: str
-    Type = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Column
-
-
-@attr.s
-class Order(AWSObject):
-    
-    Column = attr.ib() # type: str
-    SortOrder = attr.ib(default=NOTHING) # type: integer_range_checker
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Order
-
-
-@attr.s
-class SerdeInfo(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    SerializationLibrary = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.SerdeInfo
-
-
-@attr.s
-class SkewedInfo(AWSObject):
-    
-    SkewedColumnNames = attr.ib(default=NOTHING) # type: list
-    SkewedColumnValues = attr.ib(default=NOTHING) # type: list
-    SkewedColumnValueLocationMaps = attr.ib(default=NOTHING) # type: dict
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.SkewedInfo
-
-
-@attr.s
-class StorageDescriptor(AWSObject):
-    
-    BucketColumns = attr.ib(default=NOTHING) # type: list
-    Columns = attr.ib(default=NOTHING) # type: list
-    Compressed = attr.ib(default=NOTHING) # type: boolean
-    InputFormat = attr.ib(default=NOTHING) # type: str
-    Location = attr.ib(default=NOTHING) # type: str
-    NumberOfBuckets = attr.ib(default=NOTHING) # type: positive_integer
-    OutputFormat = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    SerdeInfo = attr.ib(default=NOTHING) # type: SerdeInfo
-    SkewedInfo = attr.ib(default=NOTHING) # type: SkewedInfo
-    SortColumns = attr.ib(default=NOTHING) # type: list
-    StoredAsSubDirectories = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.StorageDescriptor
-
-
-@attr.s
-class PartitionInput(AWSObject):
-    
-    Values = attr.ib() # type: list
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    StorageDescriptor = attr.ib(default=NOTHING) # type: StorageDescriptor
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.PartitionInput
-
-
-@attr.s
-class Partition(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CatalogId = attr.ib() # type: str
-    DatabaseName = attr.ib() # type: str
-    PartitionInput = attr.ib() # type: PartitionInput
-    TableName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Partition
-
-
-@attr.s
-class CloudWatchEncryption(AWSObject):
-    
-    CloudWatchEncryptionMode = attr.ib(default=NOTHING) # type: str
-    KmsKeyArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.CloudWatchEncryption
-
-
-@attr.s
-class JobBookmarksEncryption(AWSObject):
-    
-    JobBookmarksEncryptionMode = attr.ib(default=NOTHING) # type: str
-    KmsKeyArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.JobBookmarksEncryption
-
-
-@attr.s
-class S3Encryptions(AWSObject):
-    
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.S3Encryptions
-
-
-@attr.s
-class EncryptionConfiguration(AWSObject):
-    
-    CloudWatchEncryption = attr.ib(default=NOTHING) # type: CloudWatchEncryption
-    JobBookmarksEncryption = attr.ib(default=NOTHING) # type: JobBookmarksEncryption
-    S3Encryptions = attr.ib(default=NOTHING) # type: S3Encryptions
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.EncryptionConfiguration
-
-
-@attr.s
-class SecurityConfiguration(AWSObject):
-    title = attr.ib()   # type: str
-    
-    EncryptionConfiguration = attr.ib() # type: EncryptionConfiguration
-    Name = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.SecurityConfiguration
-
-
-@attr.s
-class TableInput(AWSObject):
-    
-    Description = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Owner = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    PartitionKeys = attr.ib(default=NOTHING) # type: list
-    Retention = attr.ib(default=NOTHING) # type: positive_integer
-    StorageDescriptor = attr.ib(default=NOTHING) # type: StorageDescriptor
-    TableType = attr.ib(default=NOTHING) # type: table_type_validator
-    ViewExpandedText = attr.ib(default=NOTHING) # type: str
-    ViewOriginalText = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.TableInput
-
-
-@attr.s
-class Table(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CatalogId = attr.ib() # type: str
-    DatabaseName = attr.ib() # type: str
-    TableInput = attr.ib() # type: TableInput
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Table
-
-
-@attr.s
-class Action(AWSObject):
-    
-    Arguments = attr.ib(default=NOTHING) # type: dict
-    JobName = attr.ib(default=NOTHING) # type: str
-    SecurityConfiguration = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Action
-
-
-@attr.s
-class Condition(AWSObject):
-    
-    JobName = attr.ib(default=NOTHING) # type: str
-    LogicalOperator = attr.ib(default=NOTHING) # type: str
-    State = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Condition
-
-
-@attr.s
-class Predicate(AWSObject):
-    
-    Conditions = attr.ib(default=NOTHING) # type: list
-    Logical = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Predicate
-
-
-@attr.s
-class Trigger(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Actions = attr.ib() # type: list
-    Type = attr.ib() # type: trigger_type_validator
-    Description = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Predicate = attr.ib(default=NOTHING) # type: Predicate
-    Schedule = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.glue.Trigger
+from troposphere.glue import (
+    Action as _Action,
+    CloudWatchEncryption as _CloudWatchEncryption,
+    Column as _Column,
+    Condition as _Condition,
+    ConnectionInput as _ConnectionInput,
+    ConnectionPasswordEncryption as _ConnectionPasswordEncryption,
+    ConnectionsList as _ConnectionsList,
+    CsvClassifier as _CsvClassifier,
+    DataCatalogEncryptionSettingsProperty as _DataCatalogEncryptionSettingsProperty,
+    DatabaseInput as _DatabaseInput,
+    EncryptionAtRest as _EncryptionAtRest,
+    EncryptionConfiguration as _EncryptionConfiguration,
+    ExecutionProperty as _ExecutionProperty,
+    GrokClassifier as _GrokClassifier,
+    JdbcTarget as _JdbcTarget,
+    JobBookmarksEncryption as _JobBookmarksEncryption,
+    JobCommand as _JobCommand,
+    JsonClassifier as _JsonClassifier,
+    Order as _Order,
+    PartitionInput as _PartitionInput,
+    PhysicalConnectionRequirements as _PhysicalConnectionRequirements,
+    Predicate as _Predicate,
+    S3Encryptions as _S3Encryptions,
+    S3Target as _S3Target,
+    Schedule as _Schedule,
+    SchemaChangePolicy as _SchemaChangePolicy,
+    SerdeInfo as _SerdeInfo,
+    SkewedInfo as _SkewedInfo,
+    StorageDescriptor as _StorageDescriptor,
+    TableInput as _TableInput,
+    Tags as _Tags,
+    Targets as _Targets,
+    XMLClassifier as _XMLClassifier,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class CsvClassifier(troposphere.glue.CsvClassifier, Mixin):
+    def __init__(self,
+                 title=None,
+                 AllowSingleColumn=NOTHING, # type: bool
+                 ContainsHeader=NOTHING, # type: Union[str, AWSHelperFn]
+                 Delimiter=NOTHING, # type: Union[str, AWSHelperFn]
+                 DisableValueTrimming=NOTHING, # type: bool
+                 Header=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 QuoteSymbol=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AllowSingleColumn=AllowSingleColumn,
+            ContainsHeader=ContainsHeader,
+            Delimiter=Delimiter,
+            DisableValueTrimming=DisableValueTrimming,
+            Header=Header,
+            Name=Name,
+            QuoteSymbol=QuoteSymbol,
+        )
+        super(CsvClassifier, self).__init__(**processed_kwargs)
+
+
+class GrokClassifier(troposphere.glue.GrokClassifier, Mixin):
+    def __init__(self,
+                 title=None,
+                 Classification=REQUIRED, # type: Union[str, AWSHelperFn]
+                 GrokPattern=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CustomPatterns=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Classification=Classification,
+            GrokPattern=GrokPattern,
+            CustomPatterns=CustomPatterns,
+            Name=Name,
+        )
+        super(GrokClassifier, self).__init__(**processed_kwargs)
+
+
+class JsonClassifier(troposphere.glue.JsonClassifier, Mixin):
+    def __init__(self,
+                 title=None,
+                 JsonPath=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            JsonPath=JsonPath,
+            Name=Name,
+        )
+        super(JsonClassifier, self).__init__(**processed_kwargs)
+
+
+class XMLClassifier(troposphere.glue.XMLClassifier, Mixin):
+    def __init__(self,
+                 title=None,
+                 Classification=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RowTag=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Classification=Classification,
+            RowTag=RowTag,
+            Name=Name,
+        )
+        super(XMLClassifier, self).__init__(**processed_kwargs)
+
+
+class Classifier(troposphere.glue.Classifier, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CsvClassifier=NOTHING, # type: _CsvClassifier
+                 GrokClassifier=NOTHING, # type: _GrokClassifier
+                 JsonClassifier=NOTHING, # type: _JsonClassifier
+                 XMLClassifier=NOTHING, # type: _XMLClassifier
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CsvClassifier=CsvClassifier,
+            GrokClassifier=GrokClassifier,
+            JsonClassifier=JsonClassifier,
+            XMLClassifier=XMLClassifier,
+        )
+        super(Classifier, self).__init__(**processed_kwargs)
+
+
+class PhysicalConnectionRequirements(troposphere.glue.PhysicalConnectionRequirements, Mixin):
+    def __init__(self,
+                 title=None,
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroupIdList=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AvailabilityZone=AvailabilityZone,
+            SecurityGroupIdList=SecurityGroupIdList,
+            SubnetId=SubnetId,
+        )
+        super(PhysicalConnectionRequirements, self).__init__(**processed_kwargs)
+
+
+class ConnectionInput(troposphere.glue.ConnectionInput, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConnectionProperties=REQUIRED, # type: dict
+                 ConnectionType=REQUIRED, # type: Any
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 MatchCriteria=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 PhysicalConnectionRequirements=NOTHING, # type: _PhysicalConnectionRequirements
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConnectionProperties=ConnectionProperties,
+            ConnectionType=ConnectionType,
+            Description=Description,
+            MatchCriteria=MatchCriteria,
+            Name=Name,
+            PhysicalConnectionRequirements=PhysicalConnectionRequirements,
+        )
+        super(ConnectionInput, self).__init__(**processed_kwargs)
+
+
+class Connection(troposphere.glue.Connection, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CatalogId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ConnectionInput=REQUIRED, # type: _ConnectionInput
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CatalogId=CatalogId,
+            ConnectionInput=ConnectionInput,
+        )
+        super(Connection, self).__init__(**processed_kwargs)
+
+
+class Schedule(troposphere.glue.Schedule, Mixin):
+    def __init__(self,
+                 title=None,
+                 ScheduleExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ScheduleExpression=ScheduleExpression,
+        )
+        super(Schedule, self).__init__(**processed_kwargs)
+
+
+class SchemaChangePolicy(troposphere.glue.SchemaChangePolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeleteBehavior=NOTHING, # type: Any
+                 UpdateBehavior=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeleteBehavior=DeleteBehavior,
+            UpdateBehavior=UpdateBehavior,
+        )
+        super(SchemaChangePolicy, self).__init__(**processed_kwargs)
+
+
+class JdbcTarget(troposphere.glue.JdbcTarget, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConnectionName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Exclusions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConnectionName=ConnectionName,
+            Exclusions=Exclusions,
+            Path=Path,
+        )
+        super(JdbcTarget, self).__init__(**processed_kwargs)
+
+
+class S3Target(troposphere.glue.S3Target, Mixin):
+    def __init__(self,
+                 title=None,
+                 Exclusions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Exclusions=Exclusions,
+            Path=Path,
+        )
+        super(S3Target, self).__init__(**processed_kwargs)
+
+
+class Targets(troposphere.glue.Targets, Mixin):
+    def __init__(self,
+                 title=None,
+                 JdbcTargets=NOTHING, # type: List[_JdbcTarget]
+                 S3Targets=NOTHING, # type: List[_S3Target]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            JdbcTargets=JdbcTargets,
+            S3Targets=S3Targets,
+        )
+        super(Targets, self).__init__(**processed_kwargs)
+
+
+class Crawler(troposphere.glue.Crawler, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DatabaseName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Role=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Targets=REQUIRED, # type: _Targets
+                 Classifiers=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Configuration=NOTHING, # type: Union[str, AWSHelperFn]
+                 CrawlerSecurityConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Schedule=NOTHING, # type: _Schedule
+                 SchemaChangePolicy=NOTHING, # type: _SchemaChangePolicy
+                 TablePrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DatabaseName=DatabaseName,
+            Role=Role,
+            Targets=Targets,
+            Classifiers=Classifiers,
+            Configuration=Configuration,
+            CrawlerSecurityConfiguration=CrawlerSecurityConfiguration,
+            Description=Description,
+            Name=Name,
+            Schedule=Schedule,
+            SchemaChangePolicy=SchemaChangePolicy,
+            TablePrefix=TablePrefix,
+            Tags=Tags,
+        )
+        super(Crawler, self).__init__(**processed_kwargs)
+
+
+class ConnectionPasswordEncryption(troposphere.glue.ConnectionPasswordEncryption, Mixin):
+    def __init__(self,
+                 title=None,
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ReturnConnectionPasswordEncrypted=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            KmsKeyId=KmsKeyId,
+            ReturnConnectionPasswordEncrypted=ReturnConnectionPasswordEncrypted,
+        )
+        super(ConnectionPasswordEncryption, self).__init__(**processed_kwargs)
+
+
+class EncryptionAtRest(troposphere.glue.EncryptionAtRest, Mixin):
+    def __init__(self,
+                 title=None,
+                 CatalogEncryptionMode=NOTHING, # type: Union[str, AWSHelperFn]
+                 SseAwsKmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CatalogEncryptionMode=CatalogEncryptionMode,
+            SseAwsKmsKeyId=SseAwsKmsKeyId,
+        )
+        super(EncryptionAtRest, self).__init__(**processed_kwargs)
+
+
+class DataCatalogEncryptionSettingsProperty(troposphere.glue.DataCatalogEncryptionSettingsProperty, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConnectionPasswordEncryption=NOTHING, # type: _ConnectionPasswordEncryption
+                 EncryptionAtRest=NOTHING, # type: _EncryptionAtRest
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConnectionPasswordEncryption=ConnectionPasswordEncryption,
+            EncryptionAtRest=EncryptionAtRest,
+        )
+        super(DataCatalogEncryptionSettingsProperty, self).__init__(**processed_kwargs)
+
+
+class DataCatalogEncryptionSettings(troposphere.glue.DataCatalogEncryptionSettings, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CatalogId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DataCatalogEncryptionSettings=REQUIRED, # type: _DataCatalogEncryptionSettingsProperty
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CatalogId=CatalogId,
+            DataCatalogEncryptionSettings=DataCatalogEncryptionSettings,
+        )
+        super(DataCatalogEncryptionSettings, self).__init__(**processed_kwargs)
+
+
+class DatabaseInput(troposphere.glue.DatabaseInput, Mixin):
+    def __init__(self,
+                 title=None,
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 LocationUri=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Description=Description,
+            LocationUri=LocationUri,
+            Name=Name,
+            Parameters=Parameters,
+        )
+        super(DatabaseInput, self).__init__(**processed_kwargs)
+
+
+class Database(troposphere.glue.Database, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CatalogId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DatabaseInput=REQUIRED, # type: _DatabaseInput
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CatalogId=CatalogId,
+            DatabaseInput=DatabaseInput,
+        )
+        super(Database, self).__init__(**processed_kwargs)
+
+
+class DevEndpoint(troposphere.glue.DevEndpoint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PublicKey=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EndpointName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExtraJarsS3Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExtraPythonLibsS3Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 NumberOfNodes=NOTHING, # type: int
+                 SecurityConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PublicKey=PublicKey,
+            RoleArn=RoleArn,
+            EndpointName=EndpointName,
+            ExtraJarsS3Path=ExtraJarsS3Path,
+            ExtraPythonLibsS3Path=ExtraPythonLibsS3Path,
+            NumberOfNodes=NumberOfNodes,
+            SecurityConfiguration=SecurityConfiguration,
+            SecurityGroupIds=SecurityGroupIds,
+            SubnetId=SubnetId,
+            Tags=Tags,
+        )
+        super(DevEndpoint, self).__init__(**processed_kwargs)
+
+
+class ConnectionsList(troposphere.glue.ConnectionsList, Mixin):
+    def __init__(self,
+                 title=None,
+                 Connections=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Connections=Connections,
+        )
+        super(ConnectionsList, self).__init__(**processed_kwargs)
+
+
+class ExecutionProperty(troposphere.glue.ExecutionProperty, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaxConcurrentRuns=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaxConcurrentRuns=MaxConcurrentRuns,
+        )
+        super(ExecutionProperty, self).__init__(**processed_kwargs)
+
+
+class JobCommand(troposphere.glue.JobCommand, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 ScriptLocation=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            ScriptLocation=ScriptLocation,
+        )
+        super(JobCommand, self).__init__(**processed_kwargs)
+
+
+class Job(troposphere.glue.Job, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Command=REQUIRED, # type: _JobCommand
+                 Role=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllocatedCapacity=NOTHING, # type: float
+                 Connections=NOTHING, # type: _ConnectionsList
+                 DefaultArguments=NOTHING, # type: dict
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExecutionProperty=NOTHING, # type: _ExecutionProperty
+                 LogUri=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaxRetries=NOTHING, # type: float
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Command=Command,
+            Role=Role,
+            AllocatedCapacity=AllocatedCapacity,
+            Connections=Connections,
+            DefaultArguments=DefaultArguments,
+            Description=Description,
+            ExecutionProperty=ExecutionProperty,
+            LogUri=LogUri,
+            MaxRetries=MaxRetries,
+            Name=Name,
+            SecurityConfiguration=SecurityConfiguration,
+            Tags=Tags,
+        )
+        super(Job, self).__init__(**processed_kwargs)
+
+
+class Column(troposphere.glue.Column, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Comment=NOTHING, # type: Union[str, AWSHelperFn]
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Comment=Comment,
+            Type=Type,
+        )
+        super(Column, self).__init__(**processed_kwargs)
+
+
+class Order(troposphere.glue.Order, Mixin):
+    def __init__(self,
+                 title=None,
+                 Column=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SortOrder=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Column=Column,
+            SortOrder=SortOrder,
+        )
+        super(Order, self).__init__(**processed_kwargs)
+
+
+class SerdeInfo(troposphere.glue.SerdeInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 SerializationLibrary=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Parameters=Parameters,
+            SerializationLibrary=SerializationLibrary,
+        )
+        super(SerdeInfo, self).__init__(**processed_kwargs)
+
+
+class SkewedInfo(troposphere.glue.SkewedInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 SkewedColumnNames=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SkewedColumnValues=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SkewedColumnValueLocationMaps=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SkewedColumnNames=SkewedColumnNames,
+            SkewedColumnValues=SkewedColumnValues,
+            SkewedColumnValueLocationMaps=SkewedColumnValueLocationMaps,
+        )
+        super(SkewedInfo, self).__init__(**processed_kwargs)
+
+
+class StorageDescriptor(troposphere.glue.StorageDescriptor, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketColumns=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Columns=NOTHING, # type: List[_Column]
+                 Compressed=NOTHING, # type: bool
+                 InputFormat=NOTHING, # type: Union[str, AWSHelperFn]
+                 Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 NumberOfBuckets=NOTHING, # type: int
+                 OutputFormat=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 SerdeInfo=NOTHING, # type: _SerdeInfo
+                 SkewedInfo=NOTHING, # type: _SkewedInfo
+                 SortColumns=NOTHING, # type: List[_Order]
+                 StoredAsSubDirectories=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketColumns=BucketColumns,
+            Columns=Columns,
+            Compressed=Compressed,
+            InputFormat=InputFormat,
+            Location=Location,
+            NumberOfBuckets=NumberOfBuckets,
+            OutputFormat=OutputFormat,
+            Parameters=Parameters,
+            SerdeInfo=SerdeInfo,
+            SkewedInfo=SkewedInfo,
+            SortColumns=SortColumns,
+            StoredAsSubDirectories=StoredAsSubDirectories,
+        )
+        super(StorageDescriptor, self).__init__(**processed_kwargs)
+
+
+class PartitionInput(troposphere.glue.PartitionInput, Mixin):
+    def __init__(self,
+                 title=None,
+                 Values=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 Parameters=NOTHING, # type: dict
+                 StorageDescriptor=NOTHING, # type: _StorageDescriptor
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Values=Values,
+            Parameters=Parameters,
+            StorageDescriptor=StorageDescriptor,
+        )
+        super(PartitionInput, self).__init__(**processed_kwargs)
+
+
+class Partition(troposphere.glue.Partition, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CatalogId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DatabaseName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PartitionInput=REQUIRED, # type: _PartitionInput
+                 TableName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CatalogId=CatalogId,
+            DatabaseName=DatabaseName,
+            PartitionInput=PartitionInput,
+            TableName=TableName,
+        )
+        super(Partition, self).__init__(**processed_kwargs)
+
+
+class CloudWatchEncryption(troposphere.glue.CloudWatchEncryption, Mixin):
+    def __init__(self,
+                 title=None,
+                 CloudWatchEncryptionMode=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CloudWatchEncryptionMode=CloudWatchEncryptionMode,
+            KmsKeyArn=KmsKeyArn,
+        )
+        super(CloudWatchEncryption, self).__init__(**processed_kwargs)
+
+
+class JobBookmarksEncryption(troposphere.glue.JobBookmarksEncryption, Mixin):
+    def __init__(self,
+                 title=None,
+                 JobBookmarksEncryptionMode=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            JobBookmarksEncryptionMode=JobBookmarksEncryptionMode,
+            KmsKeyArn=KmsKeyArn,
+        )
+        super(JobBookmarksEncryption, self).__init__(**processed_kwargs)
+
+
+class S3Encryptions(troposphere.glue.S3Encryptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+        )
+        super(S3Encryptions, self).__init__(**processed_kwargs)
+
+
+class EncryptionConfiguration(troposphere.glue.EncryptionConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 CloudWatchEncryption=NOTHING, # type: _CloudWatchEncryption
+                 JobBookmarksEncryption=NOTHING, # type: _JobBookmarksEncryption
+                 S3Encryptions=NOTHING, # type: _S3Encryptions
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CloudWatchEncryption=CloudWatchEncryption,
+            JobBookmarksEncryption=JobBookmarksEncryption,
+            S3Encryptions=S3Encryptions,
+        )
+        super(EncryptionConfiguration, self).__init__(**processed_kwargs)
+
+
+class SecurityConfiguration(troposphere.glue.SecurityConfiguration, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 EncryptionConfiguration=REQUIRED, # type: _EncryptionConfiguration
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            EncryptionConfiguration=EncryptionConfiguration,
+            Name=Name,
+        )
+        super(SecurityConfiguration, self).__init__(**processed_kwargs)
+
+
+class TableInput(troposphere.glue.TableInput, Mixin):
+    def __init__(self,
+                 title=None,
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Owner=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 PartitionKeys=NOTHING, # type: List[_Column]
+                 Retention=NOTHING, # type: int
+                 StorageDescriptor=NOTHING, # type: _StorageDescriptor
+                 TableType=NOTHING, # type: Any
+                 ViewExpandedText=NOTHING, # type: Union[str, AWSHelperFn]
+                 ViewOriginalText=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Description=Description,
+            Name=Name,
+            Owner=Owner,
+            Parameters=Parameters,
+            PartitionKeys=PartitionKeys,
+            Retention=Retention,
+            StorageDescriptor=StorageDescriptor,
+            TableType=TableType,
+            ViewExpandedText=ViewExpandedText,
+            ViewOriginalText=ViewOriginalText,
+        )
+        super(TableInput, self).__init__(**processed_kwargs)
+
+
+class Table(troposphere.glue.Table, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CatalogId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DatabaseName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TableInput=REQUIRED, # type: _TableInput
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CatalogId=CatalogId,
+            DatabaseName=DatabaseName,
+            TableInput=TableInput,
+        )
+        super(Table, self).__init__(**processed_kwargs)
+
+
+class Action(troposphere.glue.Action, Mixin):
+    def __init__(self,
+                 title=None,
+                 Arguments=NOTHING, # type: dict
+                 JobName=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Arguments=Arguments,
+            JobName=JobName,
+            SecurityConfiguration=SecurityConfiguration,
+        )
+        super(Action, self).__init__(**processed_kwargs)
+
+
+class Condition(troposphere.glue.Condition, Mixin):
+    def __init__(self,
+                 title=None,
+                 JobName=NOTHING, # type: Union[str, AWSHelperFn]
+                 LogicalOperator=NOTHING, # type: Union[str, AWSHelperFn]
+                 State=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            JobName=JobName,
+            LogicalOperator=LogicalOperator,
+            State=State,
+        )
+        super(Condition, self).__init__(**processed_kwargs)
+
+
+class Predicate(troposphere.glue.Predicate, Mixin):
+    def __init__(self,
+                 title=None,
+                 Conditions=NOTHING, # type: List[_Condition]
+                 Logical=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Conditions=Conditions,
+            Logical=Logical,
+        )
+        super(Predicate, self).__init__(**processed_kwargs)
+
+
+class Trigger(troposphere.glue.Trigger, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Actions=REQUIRED, # type: List[_Action]
+                 Type=REQUIRED, # type: Any
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Predicate=NOTHING, # type: _Predicate
+                 Schedule=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Actions=Actions,
+            Type=Type,
+            Description=Description,
+            Name=Name,
+            Predicate=Predicate,
+            Schedule=Schedule,
+            Tags=Tags,
+        )
+        super(Trigger, self).__init__(**processed_kwargs)

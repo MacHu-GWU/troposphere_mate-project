@@ -4,55 +4,76 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.inspector
 
-from troposphere.inspector import Tags
-from troposphere.inspector import integer
+from troposphere.inspector import (
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class AssessmentTarget(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AssessmentTargetName = attr.ib(default=NOTHING) # type: str
-    ResourceGroupArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.inspector.AssessmentTarget
-
-
-@attr.s
-class AssessmentTemplate(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AssessmentTargetArn = attr.ib() # type: str
-    DurationInSeconds = attr.ib() # type: integer
-    RulesPackageArns = attr.ib() # type: list
-    AssessmentTemplateName = attr.ib(default=NOTHING) # type: str
-    UserAttributesForFindings = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.inspector.AssessmentTemplate
+class AssessmentTarget(troposphere.inspector.AssessmentTarget, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AssessmentTargetName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResourceGroupArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AssessmentTargetName=AssessmentTargetName,
+            ResourceGroupArn=ResourceGroupArn,
+        )
+        super(AssessmentTarget, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ResourceGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ResourceGroupTags = attr.ib() # type: Tags
+class AssessmentTemplate(troposphere.inspector.AssessmentTemplate, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AssessmentTargetArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DurationInSeconds=REQUIRED, # type: int
+                 RulesPackageArns=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 AssessmentTemplateName=NOTHING, # type: Union[str, AWSHelperFn]
+                 UserAttributesForFindings=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AssessmentTargetArn=AssessmentTargetArn,
+            DurationInSeconds=DurationInSeconds,
+            RulesPackageArns=RulesPackageArns,
+            AssessmentTemplateName=AssessmentTemplateName,
+            UserAttributesForFindings=UserAttributesForFindings,
+        )
+        super(AssessmentTemplate, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.inspector.ResourceGroup
+class ResourceGroup(troposphere.inspector.ResourceGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ResourceGroupTags=REQUIRED, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ResourceGroupTags=ResourceGroupTags,
+        )
+        super(ResourceGroup, self).__init__(**processed_kwargs)

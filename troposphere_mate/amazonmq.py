@@ -4,122 +4,168 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.amazonmq
 
-from troposphere.amazonmq import ConfigurationId
-from troposphere.amazonmq import LogsConfiguration
-from troposphere.amazonmq import MaintenanceWindow
-from troposphere.amazonmq import boolean
-from troposphere.amazonmq import integer
+from troposphere.amazonmq import (
+    ConfigurationId as _ConfigurationId,
+    LogsConfiguration as _LogsConfiguration,
+    MaintenanceWindow as _MaintenanceWindow,
+    Tags as _Tags,
+    User as _User,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ConfigurationId(AWSObject):
-    
-    Id = attr.ib() # type: str
-    Revision = attr.ib() # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amazonmq.ConfigurationId
-
-
-@attr.s
-class MaintenanceWindow(AWSObject):
-    
-    DayOfWeek = attr.ib() # type: str
-    TimeOfDay = attr.ib() # type: str
-    TimeZone = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amazonmq.MaintenanceWindow
+class ConfigurationId(troposphere.amazonmq.ConfigurationId, Mixin):
+    def __init__(self,
+                 title=None,
+                 Id=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Revision=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Id=Id,
+            Revision=Revision,
+        )
+        super(ConfigurationId, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class User(AWSObject):
-    
-    Password = attr.ib() # type: str
-    Username = attr.ib() # type: str
-    ConsoleAccess = attr.ib(default=NOTHING) # type: boolean
-    Groups = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amazonmq.User
-
-
-@attr.s
-class LogsConfiguration(AWSObject):
-    
-    Audit = attr.ib(default=NOTHING) # type: boolean
-    General = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amazonmq.LogsConfiguration
+class MaintenanceWindow(troposphere.amazonmq.MaintenanceWindow, Mixin):
+    def __init__(self,
+                 title=None,
+                 DayOfWeek=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TimeOfDay=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TimeZone=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DayOfWeek=DayOfWeek,
+            TimeOfDay=TimeOfDay,
+            TimeZone=TimeZone,
+        )
+        super(MaintenanceWindow, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Broker(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AutoMinorVersionUpgrade = attr.ib() # type: boolean
-    BrokerName = attr.ib() # type: str
-    Users = attr.ib() # type: list
-    DeploymentMode = attr.ib() # type: str
-    EngineType = attr.ib() # type: str
-    EngineVersion = attr.ib() # type: str
-    HostInstanceType = attr.ib() # type: str
-    PubliclyAccessible = attr.ib() # type: boolean
-    Configuration = attr.ib(default=NOTHING) # type: ConfigurationId
-    Logs = attr.ib(default=NOTHING) # type: LogsConfiguration
-    MaintenanceWindowStartTime = attr.ib(default=NOTHING) # type: MaintenanceWindow
-    SecurityGroups = attr.ib(default=NOTHING) # type: list
-    SubnetIds = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amazonmq.Broker
+class User(troposphere.amazonmq.User, Mixin):
+    def __init__(self,
+                 title=None,
+                 Password=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Username=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ConsoleAccess=NOTHING, # type: bool
+                 Groups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Password=Password,
+            Username=Username,
+            ConsoleAccess=ConsoleAccess,
+            Groups=Groups,
+        )
+        super(User, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Configuration(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Data = attr.ib() # type: str
-    EngineType = attr.ib() # type: str
-    EngineVersion = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amazonmq.Configuration
+class LogsConfiguration(troposphere.amazonmq.LogsConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Audit=NOTHING, # type: bool
+                 General=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Audit=Audit,
+            General=General,
+        )
+        super(LogsConfiguration, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ConfigurationAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Broker = attr.ib() # type: str
-    Configuration = attr.ib() # type: ConfigurationId
+class Broker(troposphere.amazonmq.Broker, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AutoMinorVersionUpgrade=REQUIRED, # type: bool
+                 BrokerName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Users=REQUIRED, # type: List[_User]
+                 DeploymentMode=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EngineType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EngineVersion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 HostInstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PubliclyAccessible=REQUIRED, # type: bool
+                 Configuration=NOTHING, # type: _ConfigurationId
+                 Logs=NOTHING, # type: _LogsConfiguration
+                 MaintenanceWindowStartTime=NOTHING, # type: _MaintenanceWindow
+                 SecurityGroups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AutoMinorVersionUpgrade=AutoMinorVersionUpgrade,
+            BrokerName=BrokerName,
+            Users=Users,
+            DeploymentMode=DeploymentMode,
+            EngineType=EngineType,
+            EngineVersion=EngineVersion,
+            HostInstanceType=HostInstanceType,
+            PubliclyAccessible=PubliclyAccessible,
+            Configuration=Configuration,
+            Logs=Logs,
+            MaintenanceWindowStartTime=MaintenanceWindowStartTime,
+            SecurityGroups=SecurityGroups,
+            SubnetIds=SubnetIds,
+            Tags=Tags,
+        )
+        super(Broker, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.amazonmq.ConfigurationAssociation
+class Configuration(troposphere.amazonmq.Configuration, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Data=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EngineType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EngineVersion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Data=Data,
+            EngineType=EngineType,
+            EngineVersion=EngineVersion,
+            Name=Name,
+            Description=Description,
+        )
+        super(Configuration, self).__init__(**processed_kwargs)
+
+
+class ConfigurationAssociation(troposphere.amazonmq.ConfigurationAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Broker=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Configuration=REQUIRED, # type: _ConfigurationId
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Broker=Broker,
+            Configuration=Configuration,
+        )
+        super(ConfigurationAssociation, self).__init__(**processed_kwargs)

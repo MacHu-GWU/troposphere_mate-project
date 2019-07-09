@@ -4,265 +4,337 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.codebuild
 
-from troposphere.codebuild import Artifacts
-from troposphere.codebuild import CloudWatchLogs
-from troposphere.codebuild import Environment
-from troposphere.codebuild import GitSubmodulesConfig
-from troposphere.codebuild import LogsConfig
-from troposphere.codebuild import ProjectCache
-from troposphere.codebuild import ProjectTriggers
-from troposphere.codebuild import RegistryCredential
-from troposphere.codebuild import S3Logs
-from troposphere.codebuild import Source
-from troposphere.codebuild import SourceAuth
-from troposphere.codebuild import Tags
-from troposphere.codebuild import VpcConfig
-from troposphere.codebuild import boolean
-from troposphere.codebuild import integer
-from troposphere.codebuild import positive_integer
-from troposphere.codebuild import validate_credentials_provider
-from troposphere.codebuild import validate_image_pull_credentials
-from troposphere.codebuild import validate_status
-from troposphere.codebuild import validate_webhookfilter_type
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class SourceAuth(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Resource = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.SourceAuth
-
-
-@attr.s
-class Artifacts(AWSObject):
-    
-    Type = attr.ib() # type: str
-    ArtifactIdentifier = attr.ib(default=NOTHING) # type: str
-    EncryptionDisabled = attr.ib(default=NOTHING) # type: boolean
-    Location = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    NamespaceType = attr.ib(default=NOTHING) # type: str
-    OverrideArtifactName = attr.ib(default=NOTHING) # type: boolean
-    Packaging = attr.ib(default=NOTHING) # type: str
-    Path = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.Artifacts
-
-
-@attr.s
-class EnvironmentVariable(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Value = attr.ib() # type: str
-    Type = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.EnvironmentVariable
-
-
-@attr.s
-class RegistryCredential(AWSObject):
-    
-    Credential = attr.ib() # type: str
-    CredentialProvider = attr.ib() # type: validate_credentials_provider
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.RegistryCredential
-
-
-@attr.s
-class Environment(AWSObject):
-    
-    ComputeType = attr.ib() # type: str
-    Image = attr.ib() # type: str
-    Type = attr.ib() # type: str
-    Certificate = attr.ib(default=NOTHING) # type: str
-    EnvironmentVariables = attr.ib(default=NOTHING) # type: tuple
-    ImagePullCredentialsType = attr.ib(default=NOTHING) # type: validate_image_pull_credentials
-    PrivilegedMode = attr.ib(default=NOTHING) # type: boolean
-    RegistryCredential = attr.ib(default=NOTHING) # type: RegistryCredential
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.Environment
-
-
-@attr.s
-class ProjectCache(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Location = attr.ib(default=NOTHING) # type: str
-    Modes = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.ProjectCache
-
-
-@attr.s
-class GitSubmodulesConfig(AWSObject):
-    
-    FetchSubmodules = attr.ib() # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.GitSubmodulesConfig
-
-
-@attr.s
-class Source(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Auth = attr.ib(default=NOTHING) # type: SourceAuth
-    BuildSpec = attr.ib(default=NOTHING) # type: str
-    GitCloneDepth = attr.ib(default=NOTHING) # type: positive_integer
-    GitSubmodulesConfig = attr.ib(default=NOTHING) # type: GitSubmodulesConfig
-    InsecureSsl = attr.ib(default=NOTHING) # type: boolean
-    Location = attr.ib(default=NOTHING) # type: str
-    ReportBuildStatus = attr.ib(default=NOTHING) # type: boolean
-    SourceIdentifier = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.Source
-
-
-@attr.s
-class VpcConfig(AWSObject):
-    
-    SecurityGroupIds = attr.ib() # type: list
-    Subnets = attr.ib() # type: list
-    VpcId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.VpcConfig
-
-
-@attr.s
-class WebhookFilter(AWSObject):
-    
-    Pattern = attr.ib() # type: str
-    Type = attr.ib() # type: validate_webhookfilter_type
-    ExcludeMatchedPattern = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.WebhookFilter
-
-
-@attr.s
-class ProjectTriggers(AWSObject):
-    
-    Webhook = attr.ib(default=NOTHING) # type: boolean
-    FilterGroups = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.ProjectTriggers
-
-
-@attr.s
-class CloudWatchLogs(AWSObject):
-    
-    Status = attr.ib() # type: validate_status
-    GroupName = attr.ib(default=NOTHING) # type: str
-    StreamName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.CloudWatchLogs
-
-
-@attr.s
-class S3Logs(AWSObject):
-    
-    Status = attr.ib() # type: validate_status
-    EncryptionDisabled = attr.ib(default=NOTHING) # type: boolean
-    Location = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.S3Logs
-
-
-@attr.s
-class LogsConfig(AWSObject):
-    
-    CloudWatchLogs = attr.ib(default=NOTHING) # type: CloudWatchLogs
-    S3Logs = attr.ib(default=NOTHING) # type: S3Logs
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.LogsConfig
-
-
-@attr.s
-class ProjectSourceVersion(AWSObject):
-    
-    SourceIdentifier = attr.ib() # type: str
-    SourceVersion = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.ProjectSourceVersion
-
-
-@attr.s
-class Project(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Artifacts = attr.ib() # type: Artifacts
-    Environment = attr.ib() # type: Environment
-    ServiceRole = attr.ib() # type: str
-    Source = attr.ib() # type: Source
-    BadgeEnabled = attr.ib(default=NOTHING) # type: boolean
-    Cache = attr.ib(default=NOTHING) # type: ProjectCache
-    Description = attr.ib(default=NOTHING) # type: str
-    EncryptionKey = attr.ib(default=NOTHING) # type: str
-    LogsConfig = attr.ib(default=NOTHING) # type: LogsConfig
-    Name = attr.ib(default=NOTHING) # type: str
-    SecondaryArtifacts = attr.ib(default=NOTHING) # type: list
-    SecondarySourceVersions = attr.ib(default=NOTHING) # type: list
-    SecondarySources = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    TimeoutInMinutes = attr.ib(default=NOTHING) # type: integer
-    Triggers = attr.ib(default=NOTHING) # type: ProjectTriggers
-    VpcConfig = attr.ib(default=NOTHING) # type: VpcConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codebuild.Project
+from troposphere.codebuild import (
+    Artifacts as _Artifacts,
+    CloudWatchLogs as _CloudWatchLogs,
+    Environment as _Environment,
+    GitSubmodulesConfig as _GitSubmodulesConfig,
+    LogsConfig as _LogsConfig,
+    ProjectCache as _ProjectCache,
+    ProjectSourceVersion as _ProjectSourceVersion,
+    ProjectTriggers as _ProjectTriggers,
+    RegistryCredential as _RegistryCredential,
+    S3Logs as _S3Logs,
+    Source as _Source,
+    SourceAuth as _SourceAuth,
+    Tags as _Tags,
+    VpcConfig as _VpcConfig,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class SourceAuth(troposphere.codebuild.SourceAuth, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Resource=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Resource=Resource,
+        )
+        super(SourceAuth, self).__init__(**processed_kwargs)
+
+
+class Artifacts(troposphere.codebuild.Artifacts, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ArtifactIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 EncryptionDisabled=NOTHING, # type: bool
+                 Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 NamespaceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 OverrideArtifactName=NOTHING, # type: bool
+                 Packaging=NOTHING, # type: Union[str, AWSHelperFn]
+                 Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            ArtifactIdentifier=ArtifactIdentifier,
+            EncryptionDisabled=EncryptionDisabled,
+            Location=Location,
+            Name=Name,
+            NamespaceType=NamespaceType,
+            OverrideArtifactName=OverrideArtifactName,
+            Packaging=Packaging,
+            Path=Path,
+        )
+        super(Artifacts, self).__init__(**processed_kwargs)
+
+
+class EnvironmentVariable(troposphere.codebuild.EnvironmentVariable, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+            Type=Type,
+        )
+        super(EnvironmentVariable, self).__init__(**processed_kwargs)
+
+
+class RegistryCredential(troposphere.codebuild.RegistryCredential, Mixin):
+    def __init__(self,
+                 title=None,
+                 Credential=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CredentialProvider=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Credential=Credential,
+            CredentialProvider=CredentialProvider,
+        )
+        super(RegistryCredential, self).__init__(**processed_kwargs)
+
+
+class Environment(troposphere.codebuild.Environment, Mixin):
+    def __init__(self,
+                 title=None,
+                 ComputeType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Image=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Certificate=NOTHING, # type: Union[str, AWSHelperFn]
+                 ImagePullCredentialsType=NOTHING, # type: Any
+                 PrivilegedMode=NOTHING, # type: bool
+                 RegistryCredential=NOTHING, # type: _RegistryCredential
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ComputeType=ComputeType,
+            Image=Image,
+            Type=Type,
+            Certificate=Certificate,
+            ImagePullCredentialsType=ImagePullCredentialsType,
+            PrivilegedMode=PrivilegedMode,
+            RegistryCredential=RegistryCredential,
+        )
+        super(Environment, self).__init__(**processed_kwargs)
+
+
+class ProjectCache(troposphere.codebuild.ProjectCache, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 Modes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Location=Location,
+            Modes=Modes,
+        )
+        super(ProjectCache, self).__init__(**processed_kwargs)
+
+
+class GitSubmodulesConfig(troposphere.codebuild.GitSubmodulesConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 FetchSubmodules=REQUIRED, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FetchSubmodules=FetchSubmodules,
+        )
+        super(GitSubmodulesConfig, self).__init__(**processed_kwargs)
+
+
+class Source(troposphere.codebuild.Source, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Auth=NOTHING, # type: _SourceAuth
+                 BuildSpec=NOTHING, # type: Union[str, AWSHelperFn]
+                 GitCloneDepth=NOTHING, # type: int
+                 GitSubmodulesConfig=NOTHING, # type: _GitSubmodulesConfig
+                 InsecureSsl=NOTHING, # type: bool
+                 Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 ReportBuildStatus=NOTHING, # type: bool
+                 SourceIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Auth=Auth,
+            BuildSpec=BuildSpec,
+            GitCloneDepth=GitCloneDepth,
+            GitSubmodulesConfig=GitSubmodulesConfig,
+            InsecureSsl=InsecureSsl,
+            Location=Location,
+            ReportBuildStatus=ReportBuildStatus,
+            SourceIdentifier=SourceIdentifier,
+        )
+        super(Source, self).__init__(**processed_kwargs)
+
+
+class VpcConfig(troposphere.codebuild.VpcConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 SecurityGroupIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 Subnets=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SecurityGroupIds=SecurityGroupIds,
+            Subnets=Subnets,
+            VpcId=VpcId,
+        )
+        super(VpcConfig, self).__init__(**processed_kwargs)
+
+
+class WebhookFilter(troposphere.codebuild.WebhookFilter, Mixin):
+    def __init__(self,
+                 title=None,
+                 Pattern=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Any
+                 ExcludeMatchedPattern=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Pattern=Pattern,
+            Type=Type,
+            ExcludeMatchedPattern=ExcludeMatchedPattern,
+        )
+        super(WebhookFilter, self).__init__(**processed_kwargs)
+
+
+class ProjectTriggers(troposphere.codebuild.ProjectTriggers, Mixin):
+    def __init__(self,
+                 title=None,
+                 Webhook=NOTHING, # type: bool
+                 FilterGroups=NOTHING, # type: list
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Webhook=Webhook,
+            FilterGroups=FilterGroups,
+        )
+        super(ProjectTriggers, self).__init__(**processed_kwargs)
+
+
+class CloudWatchLogs(troposphere.codebuild.CloudWatchLogs, Mixin):
+    def __init__(self,
+                 title=None,
+                 Status=REQUIRED, # type: Any
+                 GroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 StreamName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Status=Status,
+            GroupName=GroupName,
+            StreamName=StreamName,
+        )
+        super(CloudWatchLogs, self).__init__(**processed_kwargs)
+
+
+class S3Logs(troposphere.codebuild.S3Logs, Mixin):
+    def __init__(self,
+                 title=None,
+                 Status=REQUIRED, # type: Any
+                 EncryptionDisabled=NOTHING, # type: bool
+                 Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Status=Status,
+            EncryptionDisabled=EncryptionDisabled,
+            Location=Location,
+        )
+        super(S3Logs, self).__init__(**processed_kwargs)
+
+
+class LogsConfig(troposphere.codebuild.LogsConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 CloudWatchLogs=NOTHING, # type: _CloudWatchLogs
+                 S3Logs=NOTHING, # type: _S3Logs
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CloudWatchLogs=CloudWatchLogs,
+            S3Logs=S3Logs,
+        )
+        super(LogsConfig, self).__init__(**processed_kwargs)
+
+
+class ProjectSourceVersion(troposphere.codebuild.ProjectSourceVersion, Mixin):
+    def __init__(self,
+                 title=None,
+                 SourceIdentifier=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SourceVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SourceIdentifier=SourceIdentifier,
+            SourceVersion=SourceVersion,
+        )
+        super(ProjectSourceVersion, self).__init__(**processed_kwargs)
+
+
+class Project(troposphere.codebuild.Project, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Artifacts=REQUIRED, # type: _Artifacts
+                 Environment=REQUIRED, # type: _Environment
+                 ServiceRole=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Source=REQUIRED, # type: _Source
+                 BadgeEnabled=NOTHING, # type: bool
+                 Cache=NOTHING, # type: _ProjectCache
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 EncryptionKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 LogsConfig=NOTHING, # type: _LogsConfig
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecondaryArtifacts=NOTHING, # type: List[_Artifacts]
+                 SecondarySourceVersions=NOTHING, # type: List[_ProjectSourceVersion]
+                 SecondarySources=NOTHING, # type: List[_Source]
+                 Tags=NOTHING, # type: _Tags
+                 TimeoutInMinutes=NOTHING, # type: int
+                 Triggers=NOTHING, # type: _ProjectTriggers
+                 VpcConfig=NOTHING, # type: _VpcConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Artifacts=Artifacts,
+            Environment=Environment,
+            ServiceRole=ServiceRole,
+            Source=Source,
+            BadgeEnabled=BadgeEnabled,
+            Cache=Cache,
+            Description=Description,
+            EncryptionKey=EncryptionKey,
+            LogsConfig=LogsConfig,
+            Name=Name,
+            SecondaryArtifacts=SecondaryArtifacts,
+            SecondarySourceVersions=SecondarySourceVersions,
+            SecondarySources=SecondarySources,
+            Tags=Tags,
+            TimeoutInMinutes=TimeoutInMinutes,
+            Triggers=Triggers,
+            VpcConfig=VpcConfig,
+        )
+        super(Project, self).__init__(**processed_kwargs)

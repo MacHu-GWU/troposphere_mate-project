@@ -4,168 +4,223 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.applicationautoscaling
 
-from troposphere.applicationautoscaling import CustomizedMetricSpecification
-from troposphere.applicationautoscaling import PredefinedMetricSpecification
-from troposphere.applicationautoscaling import ScalableTargetAction
-from troposphere.applicationautoscaling import StepScalingPolicyConfiguration
-from troposphere.applicationautoscaling import TargetTrackingScalingPolicyConfiguration
-from troposphere.applicationautoscaling import boolean
-from troposphere.applicationautoscaling import double
-from troposphere.applicationautoscaling import integer
-from troposphere.applicationautoscaling import positive_integer
+from troposphere.applicationautoscaling import (
+    CustomizedMetricSpecification as _CustomizedMetricSpecification,
+    MetricDimension as _MetricDimension,
+    PredefinedMetricSpecification as _PredefinedMetricSpecification,
+    ScalableTargetAction as _ScalableTargetAction,
+    ScheduledAction as _ScheduledAction,
+    StepAdjustment as _StepAdjustment,
+    StepScalingPolicyConfiguration as _StepScalingPolicyConfiguration,
+    TargetTrackingScalingPolicyConfiguration as _TargetTrackingScalingPolicyConfiguration,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ScalableTargetAction(AWSObject):
-    
-    MaxCapacity = attr.ib(default=NOTHING) # type: integer
-    MinCapacity = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.ScalableTargetAction
-
-
-@attr.s
-class ScheduledAction(AWSObject):
-    
-    Schedule = attr.ib() # type: str
-    ScheduledActionName = attr.ib() # type: str
-    EndTime = attr.ib(default=NOTHING) # type: str
-    ScalableTargetAction = attr.ib(default=NOTHING) # type: ScalableTargetAction
-    StartTime = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.ScheduledAction
+class ScalableTargetAction(troposphere.applicationautoscaling.ScalableTargetAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaxCapacity=NOTHING, # type: int
+                 MinCapacity=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaxCapacity=MaxCapacity,
+            MinCapacity=MinCapacity,
+        )
+        super(ScalableTargetAction, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ScalableTarget(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MaxCapacity = attr.ib() # type: integer
-    MinCapacity = attr.ib() # type: integer
-    ResourceId = attr.ib() # type: str
-    RoleARN = attr.ib() # type: str
-    ScalableDimension = attr.ib() # type: str
-    ServiceNamespace = attr.ib() # type: str
-    ScheduledActions = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.ScalableTarget
-
-
-@attr.s
-class StepAdjustment(AWSObject):
-    
-    ScalingAdjustment = attr.ib() # type: integer
-    MetricIntervalLowerBound = attr.ib(default=NOTHING) # type: integer
-    MetricIntervalUpperBound = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.StepAdjustment
+class ScheduledAction(troposphere.applicationautoscaling.ScheduledAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 Schedule=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ScheduledActionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EndTime=NOTHING, # type: Union[str, AWSHelperFn]
+                 ScalableTargetAction=NOTHING, # type: _ScalableTargetAction
+                 StartTime=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Schedule=Schedule,
+            ScheduledActionName=ScheduledActionName,
+            EndTime=EndTime,
+            ScalableTargetAction=ScalableTargetAction,
+            StartTime=StartTime,
+        )
+        super(ScheduledAction, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class StepScalingPolicyConfiguration(AWSObject):
-    
-    AdjustmentType = attr.ib(default=NOTHING) # type: str
-    Cooldown = attr.ib(default=NOTHING) # type: integer
-    MetricAggregationType = attr.ib(default=NOTHING) # type: str
-    MinAdjustmentMagnitude = attr.ib(default=NOTHING) # type: integer
-    StepAdjustments = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.StepScalingPolicyConfiguration
-
-
-@attr.s
-class MetricDimension(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.MetricDimension
-
-
-@attr.s
-class CustomizedMetricSpecification(AWSObject):
-    
-    Unit = attr.ib() # type: str
-    Dimensions = attr.ib(default=NOTHING) # type: list
-    MetricName = attr.ib(default=NOTHING) # type: str
-    Namespace = attr.ib(default=NOTHING) # type: str
-    Statistic = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.CustomizedMetricSpecification
+class ScalableTarget(troposphere.applicationautoscaling.ScalableTarget, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MaxCapacity=REQUIRED, # type: int
+                 MinCapacity=REQUIRED, # type: int
+                 ResourceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ScalableDimension=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceNamespace=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ScheduledActions=NOTHING, # type: List[_ScheduledAction]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MaxCapacity=MaxCapacity,
+            MinCapacity=MinCapacity,
+            ResourceId=ResourceId,
+            RoleARN=RoleARN,
+            ScalableDimension=ScalableDimension,
+            ServiceNamespace=ServiceNamespace,
+            ScheduledActions=ScheduledActions,
+        )
+        super(ScalableTarget, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class PredefinedMetricSpecification(AWSObject):
-    
-    PredefinedMetricType = attr.ib() # type: str
-    ResourceLabel = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.PredefinedMetricSpecification
-
-
-@attr.s
-class TargetTrackingScalingPolicyConfiguration(AWSObject):
-    
-    TargetValue = attr.ib() # type: double
-    CustomizedMetricSpecification = attr.ib(default=NOTHING) # type: CustomizedMetricSpecification
-    DisableScaleIn = attr.ib(default=NOTHING) # type: boolean
-    PredefinedMetricSpecification = attr.ib(default=NOTHING) # type: PredefinedMetricSpecification
-    ScaleInCooldown = attr.ib(default=NOTHING) # type: positive_integer
-    ScaleOutCooldown = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.applicationautoscaling.TargetTrackingScalingPolicyConfiguration
+class StepAdjustment(troposphere.applicationautoscaling.StepAdjustment, Mixin):
+    def __init__(self,
+                 title=None,
+                 ScalingAdjustment=REQUIRED, # type: int
+                 MetricIntervalLowerBound=NOTHING, # type: int
+                 MetricIntervalUpperBound=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ScalingAdjustment=ScalingAdjustment,
+            MetricIntervalLowerBound=MetricIntervalLowerBound,
+            MetricIntervalUpperBound=MetricIntervalUpperBound,
+        )
+        super(StepAdjustment, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ScalingPolicy(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PolicyName = attr.ib() # type: str
-    PolicyType = attr.ib(default=NOTHING) # type: str
-    ResourceId = attr.ib(default=NOTHING) # type: str
-    ScalableDimension = attr.ib(default=NOTHING) # type: str
-    ServiceNamespace = attr.ib(default=NOTHING) # type: str
-    ScalingTargetId = attr.ib(default=NOTHING) # type: str
-    StepScalingPolicyConfiguration = attr.ib(default=NOTHING) # type: StepScalingPolicyConfiguration
-    TargetTrackingScalingPolicyConfiguration = attr.ib(default=NOTHING) # type: TargetTrackingScalingPolicyConfiguration
+class StepScalingPolicyConfiguration(troposphere.applicationautoscaling.StepScalingPolicyConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 AdjustmentType=NOTHING, # type: Union[str, AWSHelperFn]
+                 Cooldown=NOTHING, # type: int
+                 MetricAggregationType=NOTHING, # type: Union[str, AWSHelperFn]
+                 MinAdjustmentMagnitude=NOTHING, # type: int
+                 StepAdjustments=NOTHING, # type: List[_StepAdjustment]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AdjustmentType=AdjustmentType,
+            Cooldown=Cooldown,
+            MetricAggregationType=MetricAggregationType,
+            MinAdjustmentMagnitude=MinAdjustmentMagnitude,
+            StepAdjustments=StepAdjustments,
+        )
+        super(StepScalingPolicyConfiguration, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.applicationautoscaling.ScalingPolicy
+class MetricDimension(troposphere.applicationautoscaling.MetricDimension, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+        )
+        super(MetricDimension, self).__init__(**processed_kwargs)
+
+
+class CustomizedMetricSpecification(troposphere.applicationautoscaling.CustomizedMetricSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 Unit=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Dimensions=NOTHING, # type: List[_MetricDimension]
+                 MetricName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Namespace=NOTHING, # type: Union[str, AWSHelperFn]
+                 Statistic=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Unit=Unit,
+            Dimensions=Dimensions,
+            MetricName=MetricName,
+            Namespace=Namespace,
+            Statistic=Statistic,
+        )
+        super(CustomizedMetricSpecification, self).__init__(**processed_kwargs)
+
+
+class PredefinedMetricSpecification(troposphere.applicationautoscaling.PredefinedMetricSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 PredefinedMetricType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ResourceLabel=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PredefinedMetricType=PredefinedMetricType,
+            ResourceLabel=ResourceLabel,
+        )
+        super(PredefinedMetricSpecification, self).__init__(**processed_kwargs)
+
+
+class TargetTrackingScalingPolicyConfiguration(troposphere.applicationautoscaling.TargetTrackingScalingPolicyConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 TargetValue=REQUIRED, # type: float
+                 CustomizedMetricSpecification=NOTHING, # type: _CustomizedMetricSpecification
+                 DisableScaleIn=NOTHING, # type: bool
+                 PredefinedMetricSpecification=NOTHING, # type: _PredefinedMetricSpecification
+                 ScaleInCooldown=NOTHING, # type: int
+                 ScaleOutCooldown=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TargetValue=TargetValue,
+            CustomizedMetricSpecification=CustomizedMetricSpecification,
+            DisableScaleIn=DisableScaleIn,
+            PredefinedMetricSpecification=PredefinedMetricSpecification,
+            ScaleInCooldown=ScaleInCooldown,
+            ScaleOutCooldown=ScaleOutCooldown,
+        )
+        super(TargetTrackingScalingPolicyConfiguration, self).__init__(**processed_kwargs)
+
+
+class ScalingPolicy(troposphere.applicationautoscaling.ScalingPolicy, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PolicyName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PolicyType=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResourceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ScalableDimension=NOTHING, # type: Union[str, AWSHelperFn]
+                 ServiceNamespace=NOTHING, # type: Union[str, AWSHelperFn]
+                 ScalingTargetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 StepScalingPolicyConfiguration=NOTHING, # type: _StepScalingPolicyConfiguration
+                 TargetTrackingScalingPolicyConfiguration=NOTHING, # type: _TargetTrackingScalingPolicyConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PolicyName=PolicyName,
+            PolicyType=PolicyType,
+            ResourceId=ResourceId,
+            ScalableDimension=ScalableDimension,
+            ServiceNamespace=ServiceNamespace,
+            ScalingTargetId=ScalingTargetId,
+            StepScalingPolicyConfiguration=StepScalingPolicyConfiguration,
+            TargetTrackingScalingPolicyConfiguration=TargetTrackingScalingPolicyConfiguration,
+        )
+        super(ScalingPolicy, self).__init__(**processed_kwargs)

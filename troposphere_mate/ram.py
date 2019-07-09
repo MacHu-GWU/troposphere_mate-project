@@ -4,30 +4,42 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.ram
 
-from troposphere.ram import Tags
-from troposphere.ram import boolean
+from troposphere.ram import (
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ResourceShare(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    AllowExternalPrincipals = attr.ib(default=NOTHING) # type: boolean
-    Principals = attr.ib(default=NOTHING) # type: list
-    ResourceArns = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ram.ResourceShare
+class ResourceShare(troposphere.ram.ResourceShare, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllowExternalPrincipals=NOTHING, # type: bool
+                 Principals=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ResourceArns=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            AllowExternalPrincipals=AllowExternalPrincipals,
+            Principals=Principals,
+            ResourceArns=ResourceArns,
+            Tags=Tags,
+        )
+        super(ResourceShare, self).__init__(**processed_kwargs)

@@ -4,117 +4,161 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.cloudwatch
 
-from troposphere.cloudwatch import Metric
-from troposphere.cloudwatch import MetricStat
-from troposphere.cloudwatch import boolean
-from troposphere.cloudwatch import double
-from troposphere.cloudwatch import integer
-from troposphere.cloudwatch import positive_integer
-from troposphere.cloudwatch import validate_unit
+from troposphere.cloudwatch import (
+    Metric as _Metric,
+    MetricDataQuery as _MetricDataQuery,
+    MetricDimension as _MetricDimension,
+    MetricStat as _MetricStat,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class MetricDimension(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.cloudwatch.MetricDimension
-
-
-@attr.s
-class Metric(AWSObject):
-    
-    Dimensions = attr.ib(default=NOTHING) # type: list
-    MetricName = attr.ib(default=NOTHING) # type: str
-    Namespace = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.cloudwatch.Metric
+class MetricDimension(troposphere.cloudwatch.MetricDimension, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+        )
+        super(MetricDimension, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class MetricStat(AWSObject):
-    
-    Metric = attr.ib() # type: Metric
-    Period = attr.ib() # type: integer
-    Stat = attr.ib() # type: str
-    Unit = attr.ib(default=NOTHING) # type: validate_unit
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.cloudwatch.MetricStat
-
-
-@attr.s
-class MetricDataQuery(AWSObject):
-    
-    Id = attr.ib() # type: str
-    Expression = attr.ib(default=NOTHING) # type: str
-    Label = attr.ib(default=NOTHING) # type: str
-    MetricStat = attr.ib(default=NOTHING) # type: MetricStat
-    ReturnData = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.cloudwatch.MetricDataQuery
+class Metric(troposphere.cloudwatch.Metric, Mixin):
+    def __init__(self,
+                 title=None,
+                 Dimensions=NOTHING, # type: List[_MetricDimension]
+                 MetricName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Namespace=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Dimensions=Dimensions,
+            MetricName=MetricName,
+            Namespace=Namespace,
+        )
+        super(Metric, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Alarm(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ComparisonOperator = attr.ib() # type: str
-    EvaluationPeriods = attr.ib() # type: positive_integer
-    Threshold = attr.ib() # type: double
-    ActionsEnabled = attr.ib(default=NOTHING) # type: boolean
-    AlarmActions = attr.ib(default=NOTHING) # type: list
-    AlarmDescription = attr.ib(default=NOTHING) # type: str
-    AlarmName = attr.ib(default=NOTHING) # type: str
-    DatapointsToAlarm = attr.ib(default=NOTHING) # type: positive_integer
-    Dimensions = attr.ib(default=NOTHING) # type: list
-    EvaluateLowSampleCountPercentile = attr.ib(default=NOTHING) # type: str
-    ExtendedStatistic = attr.ib(default=NOTHING) # type: str
-    InsufficientDataActions = attr.ib(default=NOTHING) # type: list
-    MetricName = attr.ib(default=NOTHING) # type: str
-    Metrics = attr.ib(default=NOTHING) # type: list
-    Namespace = attr.ib(default=NOTHING) # type: str
-    OKActions = attr.ib(default=NOTHING) # type: list
-    Period = attr.ib(default=NOTHING) # type: positive_integer
-    Statistic = attr.ib(default=NOTHING) # type: str
-    TreatMissingData = attr.ib(default=NOTHING) # type: str
-    Unit = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.cloudwatch.Alarm
+class MetricStat(troposphere.cloudwatch.MetricStat, Mixin):
+    def __init__(self,
+                 title=None,
+                 Metric=REQUIRED, # type: _Metric
+                 Period=REQUIRED, # type: int
+                 Stat=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Unit=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Metric=Metric,
+            Period=Period,
+            Stat=Stat,
+            Unit=Unit,
+        )
+        super(MetricStat, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Dashboard(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DashboardBody = attr.ib() # type: tuple
-    DashboardName = attr.ib(default=NOTHING) # type: str
+class MetricDataQuery(troposphere.cloudwatch.MetricDataQuery, Mixin):
+    def __init__(self,
+                 title=None,
+                 Id=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Expression=NOTHING, # type: Union[str, AWSHelperFn]
+                 Label=NOTHING, # type: Union[str, AWSHelperFn]
+                 MetricStat=NOTHING, # type: _MetricStat
+                 ReturnData=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Id=Id,
+            Expression=Expression,
+            Label=Label,
+            MetricStat=MetricStat,
+            ReturnData=ReturnData,
+        )
+        super(MetricDataQuery, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.cloudwatch.Dashboard
+class Alarm(troposphere.cloudwatch.Alarm, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ComparisonOperator=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EvaluationPeriods=REQUIRED, # type: int
+                 Threshold=REQUIRED, # type: float
+                 ActionsEnabled=NOTHING, # type: bool
+                 AlarmActions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 AlarmDescription=NOTHING, # type: Union[str, AWSHelperFn]
+                 AlarmName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DatapointsToAlarm=NOTHING, # type: int
+                 Dimensions=NOTHING, # type: List[_MetricDimension]
+                 EvaluateLowSampleCountPercentile=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExtendedStatistic=NOTHING, # type: Union[str, AWSHelperFn]
+                 InsufficientDataActions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 MetricName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Metrics=NOTHING, # type: List[_MetricDataQuery]
+                 Namespace=NOTHING, # type: Union[str, AWSHelperFn]
+                 OKActions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Period=NOTHING, # type: int
+                 Statistic=NOTHING, # type: Union[str, AWSHelperFn]
+                 TreatMissingData=NOTHING, # type: Union[str, AWSHelperFn]
+                 Unit=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ComparisonOperator=ComparisonOperator,
+            EvaluationPeriods=EvaluationPeriods,
+            Threshold=Threshold,
+            ActionsEnabled=ActionsEnabled,
+            AlarmActions=AlarmActions,
+            AlarmDescription=AlarmDescription,
+            AlarmName=AlarmName,
+            DatapointsToAlarm=DatapointsToAlarm,
+            Dimensions=Dimensions,
+            EvaluateLowSampleCountPercentile=EvaluateLowSampleCountPercentile,
+            ExtendedStatistic=ExtendedStatistic,
+            InsufficientDataActions=InsufficientDataActions,
+            MetricName=MetricName,
+            Metrics=Metrics,
+            Namespace=Namespace,
+            OKActions=OKActions,
+            Period=Period,
+            Statistic=Statistic,
+            TreatMissingData=TreatMissingData,
+            Unit=Unit,
+        )
+        super(Alarm, self).__init__(**processed_kwargs)
+
+
+class Dashboard(troposphere.cloudwatch.Dashboard, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DashboardBody=REQUIRED, # type: Union[Union[str, AWSHelperFn], dict]
+                 DashboardName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DashboardBody=DashboardBody,
+            DashboardName=DashboardName,
+        )
+        super(Dashboard, self).__init__(**processed_kwargs)

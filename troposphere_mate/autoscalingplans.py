@@ -4,171 +4,220 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.autoscalingplans
 
-from troposphere.autoscalingplans import ApplicationSource
-from troposphere.autoscalingplans import CustomizedLoadMetricSpecification
-from troposphere.autoscalingplans import CustomizedScalingMetricSpecification
-from troposphere.autoscalingplans import PredefinedLoadMetricSpecification
-from troposphere.autoscalingplans import PredefinedScalingMetricSpecification
-from troposphere.autoscalingplans import boolean
-from troposphere.autoscalingplans import double
-from troposphere.autoscalingplans import integer
-from troposphere.autoscalingplans import scalable_dimension_type
-from troposphere.autoscalingplans import service_namespace_type
-from troposphere.autoscalingplans import statistic_type
-from troposphere.autoscalingplans import validate_predictivescalingmaxcapacitybehavior
-from troposphere.autoscalingplans import validate_predictivescalingmode
-from troposphere.autoscalingplans import validate_scalingpolicyupdatebehavior
+from troposphere.autoscalingplans import (
+    ApplicationSource as _ApplicationSource,
+    CustomizedLoadMetricSpecification as _CustomizedLoadMetricSpecification,
+    CustomizedScalingMetricSpecification as _CustomizedScalingMetricSpecification,
+    MetricDimension as _MetricDimension,
+    PredefinedLoadMetricSpecification as _PredefinedLoadMetricSpecification,
+    PredefinedScalingMetricSpecification as _PredefinedScalingMetricSpecification,
+    ScalingInstruction as _ScalingInstruction,
+    TagFilter as _TagFilter,
+    TargetTrackingConfiguration as _TargetTrackingConfiguration,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class TagFilter(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Values = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.TagFilter
-
-
-@attr.s
-class ApplicationSource(AWSObject):
-    
-    CloudFormationStackARN = attr.ib(default=NOTHING) # type: str
-    TagFilters = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.ApplicationSource
+class TagFilter(troposphere.autoscalingplans.TagFilter, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Values=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Values=Values,
+        )
+        super(TagFilter, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class PredefinedScalingMetricSpecification(AWSObject):
-    
-    PredefinedScalingMetricType = attr.ib() # type: str
-    ResourceLabel = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.PredefinedScalingMetricSpecification
-
-
-@attr.s
-class MetricDimension(AWSObject):
-    
-    Value = attr.ib() # type: str
-    Name = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.MetricDimension
+class ApplicationSource(troposphere.autoscalingplans.ApplicationSource, Mixin):
+    def __init__(self,
+                 title=None,
+                 CloudFormationStackARN=NOTHING, # type: Union[str, AWSHelperFn]
+                 TagFilters=NOTHING, # type: List[_TagFilter]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CloudFormationStackARN=CloudFormationStackARN,
+            TagFilters=TagFilters,
+        )
+        super(ApplicationSource, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class CustomizedScalingMetricSpecification(AWSObject):
-    
-    MetricName = attr.ib() # type: str
-    Statistic = attr.ib() # type: statistic_type
-    Namespace = attr.ib() # type: str
-    Dimensions = attr.ib(default=NOTHING) # type: list
-    Unit = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.CustomizedScalingMetricSpecification
-
-
-@attr.s
-class TargetTrackingConfiguration(AWSObject):
-    
-    TargetValue = attr.ib() # type: double
-    ScaleOutCooldown = attr.ib(default=NOTHING) # type: integer
-    PredefinedScalingMetricSpecification = attr.ib(default=NOTHING) # type: PredefinedScalingMetricSpecification
-    DisableScaleIn = attr.ib(default=NOTHING) # type: boolean
-    ScaleInCooldown = attr.ib(default=NOTHING) # type: integer
-    EstimatedInstanceWarmup = attr.ib(default=NOTHING) # type: integer
-    CustomizedScalingMetricSpecification = attr.ib(default=NOTHING) # type: CustomizedScalingMetricSpecification
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.TargetTrackingConfiguration
+class PredefinedScalingMetricSpecification(troposphere.autoscalingplans.PredefinedScalingMetricSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 PredefinedScalingMetricType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ResourceLabel=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PredefinedScalingMetricType=PredefinedScalingMetricType,
+            ResourceLabel=ResourceLabel,
+        )
+        super(PredefinedScalingMetricSpecification, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class CustomizedLoadMetricSpecification(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MetricName = attr.ib() # type: str
-    Namespace = attr.ib() # type: str
-    Statistic = attr.ib() # type: str
-    Dimensions = attr.ib(default=NOTHING) # type: list
-    Unit = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.CustomizedLoadMetricSpecification
+class MetricDimension(troposphere.autoscalingplans.MetricDimension, Mixin):
+    def __init__(self,
+                 title=None,
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Value=Value,
+            Name=Name,
+        )
+        super(MetricDimension, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class PredefinedLoadMetricSpecification(AWSObject):
-    
-    PredefinedLoadMetricType = attr.ib() # type: str
-    ResourceLabel = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.PredefinedLoadMetricSpecification
-
-
-@attr.s
-class ScalingInstruction(AWSObject):
-    
-    MaxCapacity = attr.ib() # type: integer
-    MinCapacity = attr.ib() # type: integer
-    ResourceId = attr.ib() # type: str
-    ScalableDimension = attr.ib() # type: scalable_dimension_type
-    ServiceNamespace = attr.ib() # type: service_namespace_type
-    TargetTrackingConfigurations = attr.ib() # type: list
-    CustomizedLoadMetricSpecification = attr.ib(default=NOTHING) # type: CustomizedLoadMetricSpecification
-    DisableDynamicScaling = attr.ib(default=NOTHING) # type: boolean
-    PredefinedLoadMetricSpecification = attr.ib(default=NOTHING) # type: PredefinedLoadMetricSpecification
-    PredictiveScalingMaxCapacityBehavior = attr.ib(default=NOTHING) # type: validate_predictivescalingmaxcapacitybehavior
-    PredictiveScalingMaxCapacityBuffer = attr.ib(default=NOTHING) # type: integer
-    PredictiveScalingMode = attr.ib(default=NOTHING) # type: validate_predictivescalingmode
-    ScalingPolicyUpdateBehavior = attr.ib(default=NOTHING) # type: validate_scalingpolicyupdatebehavior
-    ScheduledActionBufferTime = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.autoscalingplans.ScalingInstruction
+class CustomizedScalingMetricSpecification(troposphere.autoscalingplans.CustomizedScalingMetricSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 MetricName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Statistic=REQUIRED, # type: str
+                 Namespace=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Dimensions=NOTHING, # type: List[_MetricDimension]
+                 Unit=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MetricName=MetricName,
+            Statistic=Statistic,
+            Namespace=Namespace,
+            Dimensions=Dimensions,
+            Unit=Unit,
+        )
+        super(CustomizedScalingMetricSpecification, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ScalingPlan(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApplicationSource = attr.ib() # type: ApplicationSource
-    ScalingInstructions = attr.ib() # type: list
+class TargetTrackingConfiguration(troposphere.autoscalingplans.TargetTrackingConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 TargetValue=REQUIRED, # type: float
+                 ScaleOutCooldown=NOTHING, # type: int
+                 PredefinedScalingMetricSpecification=NOTHING, # type: _PredefinedScalingMetricSpecification
+                 DisableScaleIn=NOTHING, # type: bool
+                 ScaleInCooldown=NOTHING, # type: int
+                 EstimatedInstanceWarmup=NOTHING, # type: int
+                 CustomizedScalingMetricSpecification=NOTHING, # type: _CustomizedScalingMetricSpecification
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TargetValue=TargetValue,
+            ScaleOutCooldown=ScaleOutCooldown,
+            PredefinedScalingMetricSpecification=PredefinedScalingMetricSpecification,
+            DisableScaleIn=DisableScaleIn,
+            ScaleInCooldown=ScaleInCooldown,
+            EstimatedInstanceWarmup=EstimatedInstanceWarmup,
+            CustomizedScalingMetricSpecification=CustomizedScalingMetricSpecification,
+        )
+        super(TargetTrackingConfiguration, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.autoscalingplans.ScalingPlan
+class CustomizedLoadMetricSpecification(troposphere.autoscalingplans.CustomizedLoadMetricSpecification, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MetricName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Namespace=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Statistic=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Dimensions=NOTHING, # type: List[_MetricDimension]
+                 Unit=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MetricName=MetricName,
+            Namespace=Namespace,
+            Statistic=Statistic,
+            Dimensions=Dimensions,
+            Unit=Unit,
+        )
+        super(CustomizedLoadMetricSpecification, self).__init__(**processed_kwargs)
+
+
+class PredefinedLoadMetricSpecification(troposphere.autoscalingplans.PredefinedLoadMetricSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 PredefinedLoadMetricType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ResourceLabel=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PredefinedLoadMetricType=PredefinedLoadMetricType,
+            ResourceLabel=ResourceLabel,
+        )
+        super(PredefinedLoadMetricSpecification, self).__init__(**processed_kwargs)
+
+
+class ScalingInstruction(troposphere.autoscalingplans.ScalingInstruction, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaxCapacity=REQUIRED, # type: int
+                 MinCapacity=REQUIRED, # type: int
+                 ResourceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ScalableDimension=REQUIRED, # type: str
+                 ServiceNamespace=REQUIRED, # type: str
+                 TargetTrackingConfigurations=REQUIRED, # type: List[_TargetTrackingConfiguration]
+                 CustomizedLoadMetricSpecification=NOTHING, # type: _CustomizedLoadMetricSpecification
+                 DisableDynamicScaling=NOTHING, # type: bool
+                 PredefinedLoadMetricSpecification=NOTHING, # type: _PredefinedLoadMetricSpecification
+                 PredictiveScalingMaxCapacityBehavior=NOTHING, # type: Any
+                 PredictiveScalingMaxCapacityBuffer=NOTHING, # type: int
+                 PredictiveScalingMode=NOTHING, # type: Any
+                 ScalingPolicyUpdateBehavior=NOTHING, # type: Any
+                 ScheduledActionBufferTime=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaxCapacity=MaxCapacity,
+            MinCapacity=MinCapacity,
+            ResourceId=ResourceId,
+            ScalableDimension=ScalableDimension,
+            ServiceNamespace=ServiceNamespace,
+            TargetTrackingConfigurations=TargetTrackingConfigurations,
+            CustomizedLoadMetricSpecification=CustomizedLoadMetricSpecification,
+            DisableDynamicScaling=DisableDynamicScaling,
+            PredefinedLoadMetricSpecification=PredefinedLoadMetricSpecification,
+            PredictiveScalingMaxCapacityBehavior=PredictiveScalingMaxCapacityBehavior,
+            PredictiveScalingMaxCapacityBuffer=PredictiveScalingMaxCapacityBuffer,
+            PredictiveScalingMode=PredictiveScalingMode,
+            ScalingPolicyUpdateBehavior=ScalingPolicyUpdateBehavior,
+            ScheduledActionBufferTime=ScheduledActionBufferTime,
+        )
+        super(ScalingInstruction, self).__init__(**processed_kwargs)
+
+
+class ScalingPlan(troposphere.autoscalingplans.ScalingPlan, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApplicationSource=REQUIRED, # type: _ApplicationSource
+                 ScalingInstructions=REQUIRED, # type: List[_ScalingInstruction]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApplicationSource=ApplicationSource,
+            ScalingInstructions=ScalingInstructions,
+        )
+        super(ScalingPlan, self).__init__(**processed_kwargs)

@@ -4,120 +4,152 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.elasticsearch
 
-from troposphere.elasticsearch import EBSOptions
-from troposphere.elasticsearch import ElasticsearchClusterConfig
-from troposphere.elasticsearch import EncryptionAtRestOptions
-from troposphere.elasticsearch import NodeToNodeEncryptionOptions
-from troposphere.elasticsearch import SnapshotOptions
-from troposphere.elasticsearch import VPCOptions
-from troposphere.elasticsearch import boolean
-from troposphere.elasticsearch import integer
-from troposphere.elasticsearch import positive_integer
-from troposphere.elasticsearch import validate_volume_type
+from troposphere.elasticsearch import (
+    EBSOptions as _EBSOptions,
+    ElasticsearchClusterConfig as _ElasticsearchClusterConfig,
+    EncryptionAtRestOptions as _EncryptionAtRestOptions,
+    NodeToNodeEncryptionOptions as _NodeToNodeEncryptionOptions,
+    SnapshotOptions as _SnapshotOptions,
+    Tags as _Tags,
+    VPCOptions as _VPCOptions,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class EBSOptions(AWSObject):
-    
-    EBSEnabled = attr.ib(default=NOTHING) # type: boolean
-    Iops = attr.ib(default=NOTHING) # type: positive_integer
-    VolumeSize = attr.ib(default=NOTHING) # type: integer
-    VolumeType = attr.ib(default=NOTHING) # type: validate_volume_type
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticsearch.EBSOptions
-
-
-@attr.s
-class ElasticsearchClusterConfig(AWSObject):
-    
-    DedicatedMasterCount = attr.ib(default=NOTHING) # type: integer
-    DedicatedMasterEnabled = attr.ib(default=NOTHING) # type: boolean
-    DedicatedMasterType = attr.ib(default=NOTHING) # type: str
-    InstanceCount = attr.ib(default=NOTHING) # type: integer
-    InstanceType = attr.ib(default=NOTHING) # type: str
-    ZoneAwarenessEnabled = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticsearch.ElasticsearchClusterConfig
+class EBSOptions(troposphere.elasticsearch.EBSOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 EBSEnabled=NOTHING, # type: bool
+                 Iops=NOTHING, # type: int
+                 VolumeSize=NOTHING, # type: int
+                 VolumeType=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EBSEnabled=EBSEnabled,
+            Iops=Iops,
+            VolumeSize=VolumeSize,
+            VolumeType=VolumeType,
+        )
+        super(EBSOptions, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class EncryptionAtRestOptions(AWSObject):
-    
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticsearch.EncryptionAtRestOptions
-
-
-@attr.s
-class NodeToNodeEncryptionOptions(AWSObject):
-    
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticsearch.NodeToNodeEncryptionOptions
-
-
-@attr.s
-class SnapshotOptions(AWSObject):
-    
-    AutomatedSnapshotStartHour = attr.ib(default=NOTHING) # type: integer_range_checker
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticsearch.SnapshotOptions
+class ElasticsearchClusterConfig(troposphere.elasticsearch.ElasticsearchClusterConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 DedicatedMasterCount=NOTHING, # type: int
+                 DedicatedMasterEnabled=NOTHING, # type: bool
+                 DedicatedMasterType=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceCount=NOTHING, # type: int
+                 InstanceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 ZoneAwarenessEnabled=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DedicatedMasterCount=DedicatedMasterCount,
+            DedicatedMasterEnabled=DedicatedMasterEnabled,
+            DedicatedMasterType=DedicatedMasterType,
+            InstanceCount=InstanceCount,
+            InstanceType=InstanceType,
+            ZoneAwarenessEnabled=ZoneAwarenessEnabled,
+        )
+        super(ElasticsearchClusterConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class VPCOptions(AWSObject):
-    
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    SubnetIds = attr.ib(default=NOTHING) # type: list
+class EncryptionAtRestOptions(troposphere.elasticsearch.EncryptionAtRestOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=NOTHING, # type: bool
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            KmsKeyId=KmsKeyId,
+        )
+        super(EncryptionAtRestOptions, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.elasticsearch.VPCOptions
+class NodeToNodeEncryptionOptions(troposphere.elasticsearch.NodeToNodeEncryptionOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+        )
+        super(NodeToNodeEncryptionOptions, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Domain(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AccessPolicies = attr.ib(default=NOTHING) # type: tuple
-    AdvancedOptions = attr.ib(default=NOTHING) # type: dict
-    DomainName = attr.ib(default=NOTHING) # type: str
-    EBSOptions = attr.ib(default=NOTHING) # type: EBSOptions
-    ElasticsearchClusterConfig = attr.ib(default=NOTHING) # type: ElasticsearchClusterConfig
-    ElasticsearchVersion = attr.ib(default=NOTHING) # type: str
-    EncryptionAtRestOptions = attr.ib(default=NOTHING) # type: EncryptionAtRestOptions
-    NodeToNodeEncryptionOptions = attr.ib(default=NOTHING) # type: NodeToNodeEncryptionOptions
-    SnapshotOptions = attr.ib(default=NOTHING) # type: SnapshotOptions
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    VPCOptions = attr.ib(default=NOTHING) # type: VPCOptions
+class SnapshotOptions(troposphere.elasticsearch.SnapshotOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 AutomatedSnapshotStartHour=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AutomatedSnapshotStartHour=AutomatedSnapshotStartHour,
+        )
+        super(SnapshotOptions, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.elasticsearch.Domain
+class VPCOptions(troposphere.elasticsearch.VPCOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SecurityGroupIds=SecurityGroupIds,
+            SubnetIds=SubnetIds,
+        )
+        super(VPCOptions, self).__init__(**processed_kwargs)
+
+
+class Domain(troposphere.elasticsearch.Domain, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AccessPolicies=NOTHING, # type: Union[dict]
+                 AdvancedOptions=NOTHING, # type: dict
+                 DomainName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EBSOptions=NOTHING, # type: _EBSOptions
+                 ElasticsearchClusterConfig=NOTHING, # type: _ElasticsearchClusterConfig
+                 ElasticsearchVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 EncryptionAtRestOptions=NOTHING, # type: _EncryptionAtRestOptions
+                 NodeToNodeEncryptionOptions=NOTHING, # type: _NodeToNodeEncryptionOptions
+                 SnapshotOptions=NOTHING, # type: _SnapshotOptions
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 VPCOptions=NOTHING, # type: _VPCOptions
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AccessPolicies=AccessPolicies,
+            AdvancedOptions=AdvancedOptions,
+            DomainName=DomainName,
+            EBSOptions=EBSOptions,
+            ElasticsearchClusterConfig=ElasticsearchClusterConfig,
+            ElasticsearchVersion=ElasticsearchVersion,
+            EncryptionAtRestOptions=EncryptionAtRestOptions,
+            NodeToNodeEncryptionOptions=NodeToNodeEncryptionOptions,
+            SnapshotOptions=SnapshotOptions,
+            Tags=Tags,
+            VPCOptions=VPCOptions,
+        )
+        super(Domain, self).__init__(**processed_kwargs)

@@ -4,291 +4,389 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.wafregional
 
-from troposphere.wafregional import Action
-from troposphere.wafregional import FieldToMatch
-from troposphere.wafregional import boolean
-from troposphere.wafregional import integer
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class Action(AWSObject):
-    
-    Type = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.Action
-
-
-@attr.s
-class FieldToMatch(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Data = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.FieldToMatch
-
-
-@attr.s
-class ByteMatchTuples(AWSObject):
-    
-    FieldToMatch = attr.ib() # type: FieldToMatch
-    PositionalConstraint = attr.ib() # type: str
-    TextTransformation = attr.ib() # type: str
-    TargetString = attr.ib(default=NOTHING) # type: str
-    TargetStringBase64 = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.ByteMatchTuples
-
-
-@attr.s
-class IPSetDescriptors(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.IPSetDescriptors
-
-
-@attr.s
-class Predicates(AWSObject):
-    
-    DataId = attr.ib() # type: str
-    Negated = attr.ib() # type: boolean
-    Type = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.Predicates
-
-
-@attr.s
-class GeoMatchConstraints(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.GeoMatchConstraints
-
-
-@attr.s
-class Rules(AWSObject):
-    
-    Action = attr.ib() # type: Action
-    Priority = attr.ib() # type: integer
-    RuleId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.Rules
-
-
-@attr.s
-class SqlInjectionMatchTuples(AWSObject):
-    
-    FieldToMatch = attr.ib() # type: FieldToMatch
-    TextTransformation = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.SqlInjectionMatchTuples
-
-
-@attr.s
-class ByteMatchSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    ByteMatchTuples = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.ByteMatchSet
-
-
-@attr.s
-class IPSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    IPSetDescriptors = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.IPSet
-
-
-@attr.s
-class Rule(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MetricName = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    Predicates = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.Rule
-
-
-@attr.s
-class SqlInjectionMatchSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    SqlInjectionMatchTuples = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.SqlInjectionMatchSet
-
-
-@attr.s
-class WebACL(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DefaultAction = attr.ib() # type: Action
-    MetricName = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    Rules = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.WebACL
-
-
-@attr.s
-class WebACLAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ResourceArn = attr.ib() # type: str
-    WebACLId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.WebACLAssociation
-
-
-@attr.s
-class SizeConstraint(AWSObject):
-    
-    ComparisonOperator = attr.ib() # type: str
-    FieldToMatch = attr.ib() # type: FieldToMatch
-    Size = attr.ib() # type: integer
-    TextTransformation = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.SizeConstraint
-
-
-@attr.s
-class SizeConstraintSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    SizeConstraints = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.SizeConstraintSet
-
-
-@attr.s
-class XssMatchTuple(AWSObject):
-    
-    FieldToMatch = attr.ib() # type: FieldToMatch
-    TextTransformation = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.XssMatchTuple
-
-
-@attr.s
-class XssMatchSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    XssMatchTuples = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.XssMatchSet
-
-
-@attr.s
-class RegexPatternSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    RegexPatternStrings = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.RegexPatternSet
-
-
-@attr.s
-class RateBasedRule(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MetricName = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    RateKey = attr.ib() # type: str
-    RateLimit = attr.ib() # type: integer
-    MatchPredicates = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.RateBasedRule
-
-
-@attr.s
-class GeoMatchSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    GeoMatchConstraints = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.wafregional.GeoMatchSet
+from troposphere.wafregional import (
+    Action as _Action,
+    ByteMatchTuples as _ByteMatchTuples,
+    FieldToMatch as _FieldToMatch,
+    GeoMatchConstraints as _GeoMatchConstraints,
+    IPSetDescriptors as _IPSetDescriptors,
+    Predicates as _Predicates,
+    Rules as _Rules,
+    SizeConstraint as _SizeConstraint,
+    SqlInjectionMatchTuples as _SqlInjectionMatchTuples,
+    XssMatchTuple as _XssMatchTuple,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class Action(troposphere.wafregional.Action, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+        )
+        super(Action, self).__init__(**processed_kwargs)
+
+
+class FieldToMatch(troposphere.wafregional.FieldToMatch, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Data=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Data=Data,
+        )
+        super(FieldToMatch, self).__init__(**processed_kwargs)
+
+
+class ByteMatchTuples(troposphere.wafregional.ByteMatchTuples, Mixin):
+    def __init__(self,
+                 title=None,
+                 FieldToMatch=REQUIRED, # type: _FieldToMatch
+                 PositionalConstraint=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TextTransformation=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetString=NOTHING, # type: Union[str, AWSHelperFn]
+                 TargetStringBase64=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FieldToMatch=FieldToMatch,
+            PositionalConstraint=PositionalConstraint,
+            TextTransformation=TextTransformation,
+            TargetString=TargetString,
+            TargetStringBase64=TargetStringBase64,
+        )
+        super(ByteMatchTuples, self).__init__(**processed_kwargs)
+
+
+class IPSetDescriptors(troposphere.wafregional.IPSetDescriptors, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Value=Value,
+        )
+        super(IPSetDescriptors, self).__init__(**processed_kwargs)
+
+
+class Predicates(troposphere.wafregional.Predicates, Mixin):
+    def __init__(self,
+                 title=None,
+                 DataId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Negated=REQUIRED, # type: bool
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DataId=DataId,
+            Negated=Negated,
+            Type=Type,
+        )
+        super(Predicates, self).__init__(**processed_kwargs)
+
+
+class GeoMatchConstraints(troposphere.wafregional.GeoMatchConstraints, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Value=Value,
+        )
+        super(GeoMatchConstraints, self).__init__(**processed_kwargs)
+
+
+class Rules(troposphere.wafregional.Rules, Mixin):
+    def __init__(self,
+                 title=None,
+                 Action=REQUIRED, # type: _Action
+                 Priority=REQUIRED, # type: int
+                 RuleId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Action=Action,
+            Priority=Priority,
+            RuleId=RuleId,
+        )
+        super(Rules, self).__init__(**processed_kwargs)
+
+
+class SqlInjectionMatchTuples(troposphere.wafregional.SqlInjectionMatchTuples, Mixin):
+    def __init__(self,
+                 title=None,
+                 FieldToMatch=REQUIRED, # type: _FieldToMatch
+                 TextTransformation=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FieldToMatch=FieldToMatch,
+            TextTransformation=TextTransformation,
+        )
+        super(SqlInjectionMatchTuples, self).__init__(**processed_kwargs)
+
+
+class ByteMatchSet(troposphere.wafregional.ByteMatchSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ByteMatchTuples=NOTHING, # type: List[_ByteMatchTuples]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            ByteMatchTuples=ByteMatchTuples,
+        )
+        super(ByteMatchSet, self).__init__(**processed_kwargs)
+
+
+class IPSet(troposphere.wafregional.IPSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 IPSetDescriptors=NOTHING, # type: List[_IPSetDescriptors]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            IPSetDescriptors=IPSetDescriptors,
+        )
+        super(IPSet, self).__init__(**processed_kwargs)
+
+
+class Rule(troposphere.wafregional.Rule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MetricName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Predicates=NOTHING, # type: List[_Predicates]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MetricName=MetricName,
+            Name=Name,
+            Predicates=Predicates,
+        )
+        super(Rule, self).__init__(**processed_kwargs)
+
+
+class SqlInjectionMatchSet(troposphere.wafregional.SqlInjectionMatchSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SqlInjectionMatchTuples=NOTHING, # type: List[_SqlInjectionMatchTuples]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            SqlInjectionMatchTuples=SqlInjectionMatchTuples,
+        )
+        super(SqlInjectionMatchSet, self).__init__(**processed_kwargs)
+
+
+class WebACL(troposphere.wafregional.WebACL, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DefaultAction=REQUIRED, # type: _Action
+                 MetricName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Rules=NOTHING, # type: List[_Rules]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DefaultAction=DefaultAction,
+            MetricName=MetricName,
+            Name=Name,
+            Rules=Rules,
+        )
+        super(WebACL, self).__init__(**processed_kwargs)
+
+
+class WebACLAssociation(troposphere.wafregional.WebACLAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ResourceArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 WebACLId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ResourceArn=ResourceArn,
+            WebACLId=WebACLId,
+        )
+        super(WebACLAssociation, self).__init__(**processed_kwargs)
+
+
+class SizeConstraint(troposphere.wafregional.SizeConstraint, Mixin):
+    def __init__(self,
+                 title=None,
+                 ComparisonOperator=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FieldToMatch=REQUIRED, # type: _FieldToMatch
+                 Size=REQUIRED, # type: int
+                 TextTransformation=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ComparisonOperator=ComparisonOperator,
+            FieldToMatch=FieldToMatch,
+            Size=Size,
+            TextTransformation=TextTransformation,
+        )
+        super(SizeConstraint, self).__init__(**processed_kwargs)
+
+
+class SizeConstraintSet(troposphere.wafregional.SizeConstraintSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SizeConstraints=NOTHING, # type: List[_SizeConstraint]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            SizeConstraints=SizeConstraints,
+        )
+        super(SizeConstraintSet, self).__init__(**processed_kwargs)
+
+
+class XssMatchTuple(troposphere.wafregional.XssMatchTuple, Mixin):
+    def __init__(self,
+                 title=None,
+                 FieldToMatch=REQUIRED, # type: _FieldToMatch
+                 TextTransformation=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FieldToMatch=FieldToMatch,
+            TextTransformation=TextTransformation,
+        )
+        super(XssMatchTuple, self).__init__(**processed_kwargs)
+
+
+class XssMatchSet(troposphere.wafregional.XssMatchSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 XssMatchTuples=NOTHING, # type: List[_XssMatchTuple]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            XssMatchTuples=XssMatchTuples,
+        )
+        super(XssMatchSet, self).__init__(**processed_kwargs)
+
+
+class RegexPatternSet(troposphere.wafregional.RegexPatternSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RegexPatternStrings=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            RegexPatternStrings=RegexPatternStrings,
+        )
+        super(RegexPatternSet, self).__init__(**processed_kwargs)
+
+
+class RateBasedRule(troposphere.wafregional.RateBasedRule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MetricName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RateKey=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RateLimit=REQUIRED, # type: int
+                 MatchPredicates=NOTHING, # type: List[_Predicates]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MetricName=MetricName,
+            Name=Name,
+            RateKey=RateKey,
+            RateLimit=RateLimit,
+            MatchPredicates=MatchPredicates,
+        )
+        super(RateBasedRule, self).__init__(**processed_kwargs)
+
+
+class GeoMatchSet(troposphere.wafregional.GeoMatchSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 GeoMatchConstraints=NOTHING, # type: List[_GeoMatchConstraints]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            GeoMatchConstraints=GeoMatchConstraints,
+        )
+        super(GeoMatchSet, self).__init__(**processed_kwargs)

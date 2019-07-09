@@ -4,106 +4,146 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.secretsmanager
 
-from troposphere.secretsmanager import GenerateSecretString
-from troposphere.secretsmanager import RotationRules
-from troposphere.secretsmanager import boolean
-from troposphere.secretsmanager import integer
-from troposphere.secretsmanager import validate_target_types
+from troposphere.secretsmanager import (
+    GenerateSecretString as _GenerateSecretString,
+    RotationRules as _RotationRules,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ResourcePolicy(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SecretId = attr.ib() # type: str
-    ResourcePolicy = attr.ib() # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.secretsmanager.ResourcePolicy
-
-
-@attr.s
-class RotationRules(AWSObject):
-    
-    AutomaticallyAfterDays = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.secretsmanager.RotationRules
+class ResourcePolicy(troposphere.secretsmanager.ResourcePolicy, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SecretId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ResourcePolicy=REQUIRED, # type: Union[dict]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SecretId=SecretId,
+            ResourcePolicy=ResourcePolicy,
+        )
+        super(ResourcePolicy, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class RotationSchedule(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SecretId = attr.ib() # type: str
-    RotationLambdaARN = attr.ib() # type: str
-    RotationRules = attr.ib(default=NOTHING) # type: RotationRules
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.secretsmanager.RotationSchedule
+class RotationRules(troposphere.secretsmanager.RotationRules, Mixin):
+    def __init__(self,
+                 title=None,
+                 AutomaticallyAfterDays=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AutomaticallyAfterDays=AutomaticallyAfterDays,
+        )
+        super(RotationRules, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class SecretTargetAttachment(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SecretId = attr.ib() # type: str
-    TargetId = attr.ib() # type: str
-    TargetType = attr.ib() # type: validate_target_types
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.secretsmanager.SecretTargetAttachment
-
-
-@attr.s
-class GenerateSecretString(AWSObject):
-    
-    ExcludeUppercase = attr.ib(default=NOTHING) # type: boolean
-    RequireEachIncludedType = attr.ib(default=NOTHING) # type: boolean
-    IncludeSpace = attr.ib(default=NOTHING) # type: boolean
-    ExcludeCharacters = attr.ib(default=NOTHING) # type: str
-    GenerateStringKey = attr.ib(default=NOTHING) # type: str
-    PasswordLength = attr.ib(default=NOTHING) # type: integer
-    ExcludePunctuation = attr.ib(default=NOTHING) # type: boolean
-    ExcludeLowercase = attr.ib(default=NOTHING) # type: boolean
-    SecretStringTemplate = attr.ib(default=NOTHING) # type: str
-    ExcludeNumbers = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.secretsmanager.GenerateSecretString
+class RotationSchedule(troposphere.secretsmanager.RotationSchedule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SecretId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RotationLambdaARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RotationRules=NOTHING, # type: _RotationRules
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SecretId=SecretId,
+            RotationLambdaARN=RotationLambdaARN,
+            RotationRules=RotationRules,
+        )
+        super(RotationSchedule, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Secret(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib(default=NOTHING) # type: str
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    SecretString = attr.ib(default=NOTHING) # type: str
-    GenerateSecretString = attr.ib(default=NOTHING) # type: GenerateSecretString
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
+class SecretTargetAttachment(troposphere.secretsmanager.SecretTargetAttachment, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SecretId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetType=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SecretId=SecretId,
+            TargetId=TargetId,
+            TargetType=TargetType,
+        )
+        super(SecretTargetAttachment, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.secretsmanager.Secret
+class GenerateSecretString(troposphere.secretsmanager.GenerateSecretString, Mixin):
+    def __init__(self,
+                 title=None,
+                 ExcludeUppercase=NOTHING, # type: bool
+                 RequireEachIncludedType=NOTHING, # type: bool
+                 IncludeSpace=NOTHING, # type: bool
+                 ExcludeCharacters=NOTHING, # type: Union[str, AWSHelperFn]
+                 GenerateStringKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 PasswordLength=NOTHING, # type: int
+                 ExcludePunctuation=NOTHING, # type: bool
+                 ExcludeLowercase=NOTHING, # type: bool
+                 SecretStringTemplate=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExcludeNumbers=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ExcludeUppercase=ExcludeUppercase,
+            RequireEachIncludedType=RequireEachIncludedType,
+            IncludeSpace=IncludeSpace,
+            ExcludeCharacters=ExcludeCharacters,
+            GenerateStringKey=GenerateStringKey,
+            PasswordLength=PasswordLength,
+            ExcludePunctuation=ExcludePunctuation,
+            ExcludeLowercase=ExcludeLowercase,
+            SecretStringTemplate=SecretStringTemplate,
+            ExcludeNumbers=ExcludeNumbers,
+        )
+        super(GenerateSecretString, self).__init__(**processed_kwargs)
+
+
+class Secret(troposphere.secretsmanager.Secret, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecretString=NOTHING, # type: Union[str, AWSHelperFn]
+                 GenerateSecretString=NOTHING, # type: _GenerateSecretString
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            KmsKeyId=KmsKeyId,
+            SecretString=SecretString,
+            GenerateSecretString=GenerateSecretString,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(Secret, self).__init__(**processed_kwargs)

@@ -4,239 +4,322 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.awslambda
 
-from troposphere.awslambda import AliasRoutingConfiguration
-from troposphere.awslambda import Code
-from troposphere.awslambda import Content
-from troposphere.awslambda import DeadLetterConfig
-from troposphere.awslambda import Environment
-from troposphere.awslambda import Tags
-from troposphere.awslambda import TracingConfig
-from troposphere.awslambda import VPCConfig
-from troposphere.awslambda import positive_integer
-from troposphere.awslambda import validate_memory_size
-from troposphere.awslambda import validate_variables_name
+from troposphere.awslambda import (
+    AliasRoutingConfiguration as _AliasRoutingConfiguration,
+    Code as _Code,
+    Content as _Content,
+    DeadLetterConfig as _DeadLetterConfig,
+    Environment as _Environment,
+    Tags as _Tags,
+    TracingConfig as _TracingConfig,
+    VPCConfig as _VPCConfig,
+    VersionWeight as _VersionWeight,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Code(AWSObject):
-    
-    S3Bucket = attr.ib(default=NOTHING) # type: str
-    S3Key = attr.ib(default=NOTHING) # type: str
-    S3ObjectVersion = attr.ib(default=NOTHING) # type: str
-    ZipFile = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.Code
-
-
-@attr.s
-class VPCConfig(AWSObject):
-    
-    SecurityGroupIds = attr.ib() # type: list
-    SubnetIds = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.VPCConfig
+class Code(troposphere.awslambda.Code, Mixin):
+    def __init__(self,
+                 title=None,
+                 S3Bucket=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3Key=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3ObjectVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 ZipFile=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            S3Bucket=S3Bucket,
+            S3Key=S3Key,
+            S3ObjectVersion=S3ObjectVersion,
+            ZipFile=ZipFile,
+        )
+        super(Code, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class EventSourceMapping(AWSObject):
-    title = attr.ib()   # type: str
-    
-    EventSourceArn = attr.ib() # type: str
-    FunctionName = attr.ib() # type: str
-    BatchSize = attr.ib(default=NOTHING) # type: positive_integer
-    Enabled = attr.ib(default=NOTHING) # type: bool
-    StartingPosition = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.EventSourceMapping
+class VPCConfig(troposphere.awslambda.VPCConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 SecurityGroupIds=REQUIRED, # type: list
+                 SubnetIds=REQUIRED, # type: list
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SecurityGroupIds=SecurityGroupIds,
+            SubnetIds=SubnetIds,
+        )
+        super(VPCConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class DeadLetterConfig(AWSObject):
-    
-    TargetArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.DeadLetterConfig
-
-
-@attr.s
-class Environment(AWSObject):
-    
-    Variables = attr.ib() # type: validate_variables_name
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.Environment
-
-
-@attr.s
-class TracingConfig(AWSObject):
-    
-    Mode = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.TracingConfig
+class EventSourceMapping(troposphere.awslambda.EventSourceMapping, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 EventSourceArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FunctionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BatchSize=NOTHING, # type: int
+                 Enabled=NOTHING, # type: bool
+                 StartingPosition=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            EventSourceArn=EventSourceArn,
+            FunctionName=FunctionName,
+            BatchSize=BatchSize,
+            Enabled=Enabled,
+            StartingPosition=StartingPosition,
+        )
+        super(EventSourceMapping, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Function(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Code = attr.ib() # type: Code
-    Handler = attr.ib() # type: str
-    Role = attr.ib() # type: str
-    Runtime = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DeadLetterConfig = attr.ib(default=NOTHING) # type: DeadLetterConfig
-    Environment = attr.ib(default=NOTHING) # type: Environment
-    FunctionName = attr.ib(default=NOTHING) # type: str
-    KmsKeyArn = attr.ib(default=NOTHING) # type: str
-    MemorySize = attr.ib(default=NOTHING) # type: validate_memory_size
-    Layers = attr.ib(default=NOTHING) # type: list
-    ReservedConcurrentExecutions = attr.ib(default=NOTHING) # type: positive_integer
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    Timeout = attr.ib(default=NOTHING) # type: positive_integer
-    TracingConfig = attr.ib(default=NOTHING) # type: TracingConfig
-    VpcConfig = attr.ib(default=NOTHING) # type: VPCConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.Function
+class DeadLetterConfig(troposphere.awslambda.DeadLetterConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 TargetArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TargetArn=TargetArn,
+        )
+        super(DeadLetterConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Permission(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Action = attr.ib() # type: str
-    FunctionName = attr.ib() # type: str
-    Principal = attr.ib() # type: str
-    EventSourceToken = attr.ib(default=NOTHING) # type: str
-    SourceAccount = attr.ib(default=NOTHING) # type: str
-    SourceArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.Permission
+class Environment(troposphere.awslambda.Environment, Mixin):
+    def __init__(self,
+                 title=None,
+                 Variables=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Variables=Variables,
+        )
+        super(Environment, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class VersionWeight(AWSObject):
-    
-    FunctionVersion = attr.ib() # type: str
-    FunctionWeight = attr.ib() # type: float
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.VersionWeight
-
-
-@attr.s
-class AliasRoutingConfiguration(AWSObject):
-    
-    AdditionalVersionWeights = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.AliasRoutingConfiguration
+class TracingConfig(troposphere.awslambda.TracingConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 Mode=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Mode=Mode,
+        )
+        super(TracingConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Alias(AWSObject):
-    title = attr.ib()   # type: str
-    
-    FunctionName = attr.ib() # type: str
-    FunctionVersion = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    RoutingConfig = attr.ib(default=NOTHING) # type: AliasRoutingConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.Alias
-
-
-@attr.s
-class Version(AWSObject):
-    title = attr.ib()   # type: str
-    
-    FunctionName = attr.ib() # type: str
-    CodeSha256 = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.Version
-
-
-@attr.s
-class Content(AWSObject):
-    
-    S3Bucket = attr.ib() # type: str
-    S3Key = attr.ib() # type: str
-    S3ObjectVersion = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.Content
-
-
-@attr.s
-class LayerVersion(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Content = attr.ib() # type: Content
-    CompatibleRuntimes = attr.ib(default=NOTHING) # type: list
-    Description = attr.ib(default=NOTHING) # type: str
-    LayerName = attr.ib(default=NOTHING) # type: str
-    LicenseInfo = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.awslambda.LayerVersion
+class Function(troposphere.awslambda.Function, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Code=REQUIRED, # type: _Code
+                 Handler=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Role=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Runtime=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeadLetterConfig=NOTHING, # type: _DeadLetterConfig
+                 Environment=NOTHING, # type: _Environment
+                 FunctionName=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 MemorySize=NOTHING, # type: Any
+                 Layers=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ReservedConcurrentExecutions=NOTHING, # type: int
+                 Tags=NOTHING, # type: _Tags
+                 Timeout=NOTHING, # type: int
+                 TracingConfig=NOTHING, # type: _TracingConfig
+                 VpcConfig=NOTHING, # type: _VPCConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Code=Code,
+            Handler=Handler,
+            Role=Role,
+            Runtime=Runtime,
+            Description=Description,
+            DeadLetterConfig=DeadLetterConfig,
+            Environment=Environment,
+            FunctionName=FunctionName,
+            KmsKeyArn=KmsKeyArn,
+            MemorySize=MemorySize,
+            Layers=Layers,
+            ReservedConcurrentExecutions=ReservedConcurrentExecutions,
+            Tags=Tags,
+            Timeout=Timeout,
+            TracingConfig=TracingConfig,
+            VpcConfig=VpcConfig,
+        )
+        super(Function, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class LayerVersionPermission(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Action = attr.ib() # type: str
-    LayerVersionArn = attr.ib() # type: str
-    Principal = attr.ib() # type: str
-    OrganizationId = attr.ib(default=NOTHING) # type: str
+class Permission(troposphere.awslambda.Permission, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Action=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FunctionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Principal=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EventSourceToken=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceAccount=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Action=Action,
+            FunctionName=FunctionName,
+            Principal=Principal,
+            EventSourceToken=EventSourceToken,
+            SourceAccount=SourceAccount,
+            SourceArn=SourceArn,
+        )
+        super(Permission, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.awslambda.LayerVersionPermission
+class VersionWeight(troposphere.awslambda.VersionWeight, Mixin):
+    def __init__(self,
+                 title=None,
+                 FunctionVersion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FunctionWeight=REQUIRED, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FunctionVersion=FunctionVersion,
+            FunctionWeight=FunctionWeight,
+        )
+        super(VersionWeight, self).__init__(**processed_kwargs)
+
+
+class AliasRoutingConfiguration(troposphere.awslambda.AliasRoutingConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 AdditionalVersionWeights=REQUIRED, # type: List[_VersionWeight]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AdditionalVersionWeights=AdditionalVersionWeights,
+        )
+        super(AliasRoutingConfiguration, self).__init__(**processed_kwargs)
+
+
+class Alias(troposphere.awslambda.Alias, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 FunctionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FunctionVersion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 RoutingConfig=NOTHING, # type: _AliasRoutingConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            FunctionName=FunctionName,
+            FunctionVersion=FunctionVersion,
+            Name=Name,
+            Description=Description,
+            RoutingConfig=RoutingConfig,
+        )
+        super(Alias, self).__init__(**processed_kwargs)
+
+
+class Version(troposphere.awslambda.Version, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 FunctionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CodeSha256=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            FunctionName=FunctionName,
+            CodeSha256=CodeSha256,
+            Description=Description,
+        )
+        super(Version, self).__init__(**processed_kwargs)
+
+
+class Content(troposphere.awslambda.Content, Mixin):
+    def __init__(self,
+                 title=None,
+                 S3Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3ObjectVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            S3Bucket=S3Bucket,
+            S3Key=S3Key,
+            S3ObjectVersion=S3ObjectVersion,
+        )
+        super(Content, self).__init__(**processed_kwargs)
+
+
+class LayerVersion(troposphere.awslambda.LayerVersion, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Content=REQUIRED, # type: _Content
+                 CompatibleRuntimes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 LayerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 LicenseInfo=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Content=Content,
+            CompatibleRuntimes=CompatibleRuntimes,
+            Description=Description,
+            LayerName=LayerName,
+            LicenseInfo=LicenseInfo,
+        )
+        super(LayerVersion, self).__init__(**processed_kwargs)
+
+
+class LayerVersionPermission(troposphere.awslambda.LayerVersionPermission, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Action=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LayerVersionArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Principal=REQUIRED, # type: Union[str, AWSHelperFn]
+                 OrganizationId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Action=Action,
+            LayerVersionArn=LayerVersionArn,
+            Principal=Principal,
+            OrganizationId=OrganizationId,
+        )
+        super(LayerVersionPermission, self).__init__(**processed_kwargs)

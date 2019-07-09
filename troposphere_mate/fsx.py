@@ -4,67 +4,92 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.fsx
 
-from troposphere.fsx import LustreConfiguration
-from troposphere.fsx import Tags
-from troposphere.fsx import WindowsConfiguration
-from troposphere.fsx import boolean
-from troposphere.fsx import integer
+from troposphere.fsx import (
+    LustreConfiguration as _LustreConfiguration,
+    Tags as _Tags,
+    WindowsConfiguration as _WindowsConfiguration,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class LustreConfiguration(AWSObject):
-    
-    ExportPath = attr.ib(default=NOTHING) # type: str
-    ImportedFileChunkSize = attr.ib(default=NOTHING) # type: integer
-    ImportPath = attr.ib(default=NOTHING) # type: str
-    WeeklyMaintenanceStartTime = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.fsx.LustreConfiguration
-
-
-@attr.s
-class WindowsConfiguration(AWSObject):
-    
-    ActiveDirectoryId = attr.ib(default=NOTHING) # type: str
-    AutomaticBackupRetentionDays = attr.ib(default=NOTHING) # type: integer
-    CopyTagsToBackups = attr.ib(default=NOTHING) # type: boolean
-    DailyAutomaticBackupStartTime = attr.ib(default=NOTHING) # type: str
-    ThroughputCapacity = attr.ib(default=NOTHING) # type: integer
-    WeeklyMaintenanceStartTime = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.fsx.WindowsConfiguration
+class LustreConfiguration(troposphere.fsx.LustreConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ExportPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 ImportedFileChunkSize=NOTHING, # type: int
+                 ImportPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 WeeklyMaintenanceStartTime=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ExportPath=ExportPath,
+            ImportedFileChunkSize=ImportedFileChunkSize,
+            ImportPath=ImportPath,
+            WeeklyMaintenanceStartTime=WeeklyMaintenanceStartTime,
+        )
+        super(LustreConfiguration, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class FileSystem(AWSObject):
-    title = attr.ib()   # type: str
-    
-    BackupId = attr.ib(default=NOTHING) # type: str
-    FileSystemType = attr.ib(default=NOTHING) # type: str
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    LustreConfiguration = attr.ib(default=NOTHING) # type: LustreConfiguration
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    StorageCapacity = attr.ib(default=NOTHING) # type: integer
-    SubnetIds = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    WindowsConfiguration = attr.ib(default=NOTHING) # type: WindowsConfiguration
+class WindowsConfiguration(troposphere.fsx.WindowsConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ActiveDirectoryId=NOTHING, # type: Union[str, AWSHelperFn]
+                 AutomaticBackupRetentionDays=NOTHING, # type: int
+                 CopyTagsToBackups=NOTHING, # type: bool
+                 DailyAutomaticBackupStartTime=NOTHING, # type: Union[str, AWSHelperFn]
+                 ThroughputCapacity=NOTHING, # type: int
+                 WeeklyMaintenanceStartTime=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ActiveDirectoryId=ActiveDirectoryId,
+            AutomaticBackupRetentionDays=AutomaticBackupRetentionDays,
+            CopyTagsToBackups=CopyTagsToBackups,
+            DailyAutomaticBackupStartTime=DailyAutomaticBackupStartTime,
+            ThroughputCapacity=ThroughputCapacity,
+            WeeklyMaintenanceStartTime=WeeklyMaintenanceStartTime,
+        )
+        super(WindowsConfiguration, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.fsx.FileSystem
+class FileSystem(troposphere.fsx.FileSystem, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 BackupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 FileSystemType=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LustreConfiguration=NOTHING, # type: _LustreConfiguration
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 StorageCapacity=NOTHING, # type: int
+                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Tags=NOTHING, # type: _Tags
+                 WindowsConfiguration=NOTHING, # type: _WindowsConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            BackupId=BackupId,
+            FileSystemType=FileSystemType,
+            KmsKeyId=KmsKeyId,
+            LustreConfiguration=LustreConfiguration,
+            SecurityGroupIds=SecurityGroupIds,
+            StorageCapacity=StorageCapacity,
+            SubnetIds=SubnetIds,
+            Tags=Tags,
+            WindowsConfiguration=WindowsConfiguration,
+        )
+        super(FileSystem, self).__init__(**processed_kwargs)

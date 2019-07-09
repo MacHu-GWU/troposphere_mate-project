@@ -4,63 +4,90 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.cloudtrail
 
-from troposphere.cloudtrail import Tags
-from troposphere.cloudtrail import boolean
+from troposphere.cloudtrail import (
+    DataResource as _DataResource,
+    EventSelector as _EventSelector,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class DataResource(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Values = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.cloudtrail.DataResource
-
-
-@attr.s
-class EventSelector(AWSObject):
-    
-    DataResources = attr.ib(default=NOTHING) # type: list
-    IncludeManagementEvents = attr.ib(default=NOTHING) # type: boolean
-    ReadWriteType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.cloudtrail.EventSelector
+class DataResource(troposphere.cloudtrail.DataResource, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Values=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Values=Values,
+        )
+        super(DataResource, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Trail(AWSObject):
-    title = attr.ib()   # type: str
-    
-    IsLogging = attr.ib() # type: boolean
-    S3BucketName = attr.ib() # type: str
-    CloudWatchLogsLogGroupArn = attr.ib(default=NOTHING) # type: str
-    CloudWatchLogsRoleArn = attr.ib(default=NOTHING) # type: str
-    EnableLogFileValidation = attr.ib(default=NOTHING) # type: boolean
-    EventSelectors = attr.ib(default=NOTHING) # type: list
-    IncludeGlobalServiceEvents = attr.ib(default=NOTHING) # type: boolean
-    IsMultiRegionTrail = attr.ib(default=NOTHING) # type: boolean
-    KMSKeyId = attr.ib(default=NOTHING) # type: str
-    S3KeyPrefix = attr.ib(default=NOTHING) # type: str
-    SnsTopicName = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    TrailName = attr.ib(default=NOTHING) # type: str
+class EventSelector(troposphere.cloudtrail.EventSelector, Mixin):
+    def __init__(self,
+                 title=None,
+                 DataResources=NOTHING, # type: List[_DataResource]
+                 IncludeManagementEvents=NOTHING, # type: bool
+                 ReadWriteType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DataResources=DataResources,
+            IncludeManagementEvents=IncludeManagementEvents,
+            ReadWriteType=ReadWriteType,
+        )
+        super(EventSelector, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.cloudtrail.Trail
+class Trail(troposphere.cloudtrail.Trail, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 IsLogging=REQUIRED, # type: bool
+                 S3BucketName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CloudWatchLogsLogGroupArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 CloudWatchLogsRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 EnableLogFileValidation=NOTHING, # type: bool
+                 EventSelectors=NOTHING, # type: List[_EventSelector]
+                 IncludeGlobalServiceEvents=NOTHING, # type: bool
+                 IsMultiRegionTrail=NOTHING, # type: bool
+                 KMSKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3KeyPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 SnsTopicName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 TrailName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            IsLogging=IsLogging,
+            S3BucketName=S3BucketName,
+            CloudWatchLogsLogGroupArn=CloudWatchLogsLogGroupArn,
+            CloudWatchLogsRoleArn=CloudWatchLogsRoleArn,
+            EnableLogFileValidation=EnableLogFileValidation,
+            EventSelectors=EventSelectors,
+            IncludeGlobalServiceEvents=IncludeGlobalServiceEvents,
+            IsMultiRegionTrail=IsMultiRegionTrail,
+            KMSKeyId=KMSKeyId,
+            S3KeyPrefix=S3KeyPrefix,
+            SnsTopicName=SnsTopicName,
+            Tags=Tags,
+            TrailName=TrailName,
+        )
+        super(Trail, self).__init__(**processed_kwargs)

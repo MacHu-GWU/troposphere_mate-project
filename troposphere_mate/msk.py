@@ -4,149 +4,180 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.msk
 
-from troposphere.msk import BrokerNodeGroupInfo
-from troposphere.msk import ClientAuthentication
-from troposphere.msk import ConfigurationInfo
-from troposphere.msk import EBSStorageInfo
-from troposphere.msk import EncryptionAtRest
-from troposphere.msk import EncryptionInTransit
-from troposphere.msk import EncryptionInfo
-from troposphere.msk import StorageInfo
-from troposphere.msk import Tls
-from troposphere.msk import boolean
-from troposphere.msk import integer
+from troposphere.msk import (
+    BrokerNodeGroupInfo as _BrokerNodeGroupInfo,
+    ClientAuthentication as _ClientAuthentication,
+    ConfigurationInfo as _ConfigurationInfo,
+    EBSStorageInfo as _EBSStorageInfo,
+    EncryptionAtRest as _EncryptionAtRest,
+    EncryptionInTransit as _EncryptionInTransit,
+    EncryptionInfo as _EncryptionInfo,
+    StorageInfo as _StorageInfo,
+    Tls as _Tls,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class EBSStorageInfo(AWSObject):
-    
-    VolumeSize = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.EBSStorageInfo
-
-
-@attr.s
-class StorageInfo(AWSObject):
-    
-    EBSStorageInfo = attr.ib(default=NOTHING) # type: EBSStorageInfo
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.StorageInfo
+class EBSStorageInfo(troposphere.msk.EBSStorageInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 VolumeSize=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VolumeSize=VolumeSize,
+        )
+        super(EBSStorageInfo, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class BrokerNodeGroupInfo(AWSObject):
-    
-    ClientSubnets = attr.ib() # type: list
-    InstanceType = attr.ib() # type: str
-    BrokerAZDistribution = attr.ib(default=NOTHING) # type: str
-    SecurityGroups = attr.ib(default=NOTHING) # type: list
-    StorageInfo = attr.ib(default=NOTHING) # type: StorageInfo
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.BrokerNodeGroupInfo
+class StorageInfo(troposphere.msk.StorageInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 EBSStorageInfo=NOTHING, # type: _EBSStorageInfo
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EBSStorageInfo=EBSStorageInfo,
+        )
+        super(StorageInfo, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Tls(AWSObject):
-    
-    CertificateAuthorityArnList = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.Tls
-
-
-@attr.s
-class ClientAuthentication(AWSObject):
-    
-    Tls = attr.ib(default=NOTHING) # type: Tls
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.ClientAuthentication
+class BrokerNodeGroupInfo(troposphere.msk.BrokerNodeGroupInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 ClientSubnets=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BrokerAZDistribution=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 StorageInfo=NOTHING, # type: _StorageInfo
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ClientSubnets=ClientSubnets,
+            InstanceType=InstanceType,
+            BrokerAZDistribution=BrokerAZDistribution,
+            SecurityGroups=SecurityGroups,
+            StorageInfo=StorageInfo,
+        )
+        super(BrokerNodeGroupInfo, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ConfigurationInfo(AWSObject):
-    
-    Arn = attr.ib() # type: str
-    Revision = attr.ib() # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.ConfigurationInfo
-
-
-@attr.s
-class EncryptionAtRest(AWSObject):
-    
-    DataVolumeKMSKeyId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.EncryptionAtRest
+class Tls(troposphere.msk.Tls, Mixin):
+    def __init__(self,
+                 title=None,
+                 CertificateAuthorityArnList=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CertificateAuthorityArnList=CertificateAuthorityArnList,
+        )
+        super(Tls, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class EncryptionInTransit(AWSObject):
-    
-    ClientBroker = attr.ib(default=NOTHING) # type: str
-    InCluster = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.EncryptionInTransit
-
-
-@attr.s
-class EncryptionInfo(AWSObject):
-    
-    EncryptionAtRest = attr.ib(default=NOTHING) # type: EncryptionAtRest
-    EncryptionInTransit = attr.ib(default=NOTHING) # type: EncryptionInTransit
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.msk.EncryptionInfo
+class ClientAuthentication(troposphere.msk.ClientAuthentication, Mixin):
+    def __init__(self,
+                 title=None,
+                 Tls=NOTHING, # type: _Tls
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Tls=Tls,
+        )
+        super(ClientAuthentication, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Cluster(AWSObject):
-    title = attr.ib()   # type: str
-    
-    BrokerNodeGroupInfo = attr.ib() # type: BrokerNodeGroupInfo
-    ClusterName = attr.ib() # type: str
-    KafkaVersion = attr.ib() # type: str
-    NumberOfBrokerNodes = attr.ib() # type: integer
-    ClientAuthentication = attr.ib(default=NOTHING) # type: ClientAuthentication
-    ConfigurationInfo = attr.ib(default=NOTHING) # type: ConfigurationInfo
-    EncryptionInfo = attr.ib(default=NOTHING) # type: EncryptionInfo
-    EnhancedMonitoring = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: dict
+class ConfigurationInfo(troposphere.msk.ConfigurationInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 Arn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Revision=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Arn=Arn,
+            Revision=Revision,
+        )
+        super(ConfigurationInfo, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.msk.Cluster
+class EncryptionAtRest(troposphere.msk.EncryptionAtRest, Mixin):
+    def __init__(self,
+                 title=None,
+                 DataVolumeKMSKeyId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DataVolumeKMSKeyId=DataVolumeKMSKeyId,
+        )
+        super(EncryptionAtRest, self).__init__(**processed_kwargs)
+
+
+class EncryptionInTransit(troposphere.msk.EncryptionInTransit, Mixin):
+    def __init__(self,
+                 title=None,
+                 ClientBroker=NOTHING, # type: Union[str, AWSHelperFn]
+                 InCluster=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ClientBroker=ClientBroker,
+            InCluster=InCluster,
+        )
+        super(EncryptionInTransit, self).__init__(**processed_kwargs)
+
+
+class EncryptionInfo(troposphere.msk.EncryptionInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 EncryptionAtRest=NOTHING, # type: _EncryptionAtRest
+                 EncryptionInTransit=NOTHING, # type: _EncryptionInTransit
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EncryptionAtRest=EncryptionAtRest,
+            EncryptionInTransit=EncryptionInTransit,
+        )
+        super(EncryptionInfo, self).__init__(**processed_kwargs)
+
+
+class Cluster(troposphere.msk.Cluster, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 BrokerNodeGroupInfo=REQUIRED, # type: _BrokerNodeGroupInfo
+                 ClusterName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 KafkaVersion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 NumberOfBrokerNodes=REQUIRED, # type: int
+                 ClientAuthentication=NOTHING, # type: _ClientAuthentication
+                 ConfigurationInfo=NOTHING, # type: _ConfigurationInfo
+                 EncryptionInfo=NOTHING, # type: _EncryptionInfo
+                 EnhancedMonitoring=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            BrokerNodeGroupInfo=BrokerNodeGroupInfo,
+            ClusterName=ClusterName,
+            KafkaVersion=KafkaVersion,
+            NumberOfBrokerNodes=NumberOfBrokerNodes,
+            ClientAuthentication=ClientAuthentication,
+            ConfigurationInfo=ConfigurationInfo,
+            EncryptionInfo=EncryptionInfo,
+            EnhancedMonitoring=EnhancedMonitoring,
+            Tags=Tags,
+        )
+        super(Cluster, self).__init__(**processed_kwargs)

@@ -4,439 +4,530 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.appmesh
 
-from troposphere.appmesh import AccessLog
-from troposphere.appmesh import AwsCloudMapServiceDiscovery
-from troposphere.appmesh import DnsServiceDiscovery
-from troposphere.appmesh import EgressFilter
-from troposphere.appmesh import FileAccessLog
-from troposphere.appmesh import HealthCheck
-from troposphere.appmesh import HttpRoute
-from troposphere.appmesh import HttpRouteAction
-from troposphere.appmesh import HttpRouteMatch
-from troposphere.appmesh import Logging
-from troposphere.appmesh import MeshSpec
-from troposphere.appmesh import PortMapping
-from troposphere.appmesh import RouteSpec
-from troposphere.appmesh import ServiceDiscovery
-from troposphere.appmesh import Tags
-from troposphere.appmesh import TcpRoute
-from troposphere.appmesh import TcpRouteAction
-from troposphere.appmesh import VirtualNodeServiceProvider
-from troposphere.appmesh import VirtualNodeSpec
-from troposphere.appmesh import VirtualRouterServiceProvider
-from troposphere.appmesh import VirtualRouterSpec
-from troposphere.appmesh import VirtualServiceBackend
-from troposphere.appmesh import VirtualServiceProvider
-from troposphere.appmesh import VirtualServiceSpec
-from troposphere.appmesh import integer
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class EgressFilter(AWSObject):
-    
-    Type = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.EgressFilter
-
-
-@attr.s
-class MeshSpec(AWSObject):
-    
-    EgressFilter = attr.ib(default=NOTHING) # type: EgressFilter
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.MeshSpec
-
-
-@attr.s
-class Mesh(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MeshName = attr.ib() # type: str
-    Spec = attr.ib(default=NOTHING) # type: MeshSpec
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.Mesh
-
-
-@attr.s
-class WeightedTarget(AWSObject):
-    
-    VirtualNode = attr.ib() # type: str
-    Weight = attr.ib() # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.WeightedTarget
-
-
-@attr.s
-class HttpRouteAction(AWSObject):
-    
-    WeightedTargets = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.HttpRouteAction
-
-
-@attr.s
-class HttpRouteMatch(AWSObject):
-    
-    Prefix = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.HttpRouteMatch
-
-
-@attr.s
-class HttpRoute(AWSObject):
-    
-    Action = attr.ib() # type: HttpRouteAction
-    Match = attr.ib() # type: HttpRouteMatch
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.HttpRoute
-
-
-@attr.s
-class TcpRouteAction(AWSObject):
-    
-    WeightedTargets = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.TcpRouteAction
-
-
-@attr.s
-class TcpRoute(AWSObject):
-    
-    Action = attr.ib() # type: TcpRouteAction
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.TcpRoute
-
-
-@attr.s
-class RouteSpec(AWSObject):
-    
-    HttpRoute = attr.ib(default=NOTHING) # type: HttpRoute
-    TcpRoute = attr.ib(default=NOTHING) # type: TcpRoute
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.RouteSpec
-
-
-@attr.s
-class Route(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MeshName = attr.ib() # type: str
-    RouteName = attr.ib() # type: str
-    Spec = attr.ib() # type: RouteSpec
-    VirtualRouterName = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.Route
-
-
-@attr.s
-class VirtualServiceBackend(AWSObject):
-    
-    VirtualServiceName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualServiceBackend
-
-
-@attr.s
-class Backend(AWSObject):
-    
-    VirtualService = attr.ib(default=NOTHING) # type: VirtualServiceBackend
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.Backend
-
-
-@attr.s
-class HealthCheck(AWSObject):
-    
-    HealthyThreshold = attr.ib() # type: integer
-    IntervalMillis = attr.ib() # type: integer
-    Protocol = attr.ib() # type: str
-    TimeoutMillis = attr.ib() # type: integer
-    UnhealthyThreshold = attr.ib() # type: integer
-    Path = attr.ib(default=NOTHING) # type: str
-    Port = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.HealthCheck
-
-
-@attr.s
-class PortMapping(AWSObject):
-    
-    Port = attr.ib() # type: integer
-    Protocol = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.PortMapping
-
-
-@attr.s
-class Listener(AWSObject):
-    
-    PortMapping = attr.ib() # type: PortMapping
-    HealthCheck = attr.ib(default=NOTHING) # type: HealthCheck
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.Listener
-
-
-@attr.s
-class FileAccessLog(AWSObject):
-    
-    Path = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.FileAccessLog
-
-
-@attr.s
-class AccessLog(AWSObject):
-    
-    File = attr.ib(default=NOTHING) # type: FileAccessLog
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.AccessLog
-
-
-@attr.s
-class Logging(AWSObject):
-    
-    AccessLog = attr.ib(default=NOTHING) # type: AccessLog
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.Logging
-
-
-@attr.s
-class AwsCloudMapInstanceAttribute(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.AwsCloudMapInstanceAttribute
-
-
-@attr.s
-class AwsCloudMapServiceDiscovery(AWSObject):
-    
-    NamespaceName = attr.ib() # type: str
-    ServiceName = attr.ib() # type: str
-    Attributes = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.AwsCloudMapServiceDiscovery
-
-
-@attr.s
-class DnsServiceDiscovery(AWSObject):
-    
-    Hostname = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.DnsServiceDiscovery
-
-
-@attr.s
-class ServiceDiscovery(AWSObject):
-    
-    AWSCloudMap = attr.ib(default=NOTHING) # type: AwsCloudMapServiceDiscovery
-    DNS = attr.ib(default=NOTHING) # type: DnsServiceDiscovery
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.ServiceDiscovery
-
-
-@attr.s
-class VirtualNodeSpec(AWSObject):
-    
-    Backends = attr.ib(default=NOTHING) # type: list
-    Listeners = attr.ib(default=NOTHING) # type: list
-    Logging = attr.ib(default=NOTHING) # type: Logging
-    ServiceDiscovery = attr.ib(default=NOTHING) # type: ServiceDiscovery
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualNodeSpec
-
-
-@attr.s
-class VirtualNode(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MeshName = attr.ib() # type: str
-    Spec = attr.ib() # type: VirtualNodeSpec
-    VirtualNodeName = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualNode
-
-
-@attr.s
-class VirtualRouterListener(AWSObject):
-    
-    PortMapping = attr.ib() # type: PortMapping
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualRouterListener
-
-
-@attr.s
-class VirtualRouterSpec(AWSObject):
-    
-    Listeners = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualRouterSpec
-
-
-@attr.s
-class VirtualRouter(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MeshName = attr.ib() # type: str
-    Spec = attr.ib() # type: VirtualRouterSpec
-    VirtualRouterName = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualRouter
-
-
-@attr.s
-class VirtualNodeServiceProvider(AWSObject):
-    
-    VirtualNodeName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualNodeServiceProvider
-
-
-@attr.s
-class VirtualRouterServiceProvider(AWSObject):
-    
-    VirtualRouterName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualRouterServiceProvider
-
-
-@attr.s
-class VirtualServiceProvider(AWSObject):
-    
-    VirtualNode = attr.ib(default=NOTHING) # type: VirtualNodeServiceProvider
-    VirtualRouter = attr.ib(default=NOTHING) # type: VirtualRouterServiceProvider
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualServiceProvider
-
-
-@attr.s
-class VirtualServiceSpec(AWSObject):
-    
-    Provider = attr.ib(default=NOTHING) # type: VirtualServiceProvider
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualServiceSpec
-
-
-@attr.s
-class VirtualService(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MeshName = attr.ib() # type: str
-    Spec = attr.ib() # type: VirtualServiceSpec
-    VirtualServiceName = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appmesh.VirtualService
+from troposphere.appmesh import (
+    AccessLog as _AccessLog,
+    AwsCloudMapInstanceAttribute as _AwsCloudMapInstanceAttribute,
+    AwsCloudMapServiceDiscovery as _AwsCloudMapServiceDiscovery,
+    Backend as _Backend,
+    DnsServiceDiscovery as _DnsServiceDiscovery,
+    EgressFilter as _EgressFilter,
+    FileAccessLog as _FileAccessLog,
+    HealthCheck as _HealthCheck,
+    HttpRoute as _HttpRoute,
+    HttpRouteAction as _HttpRouteAction,
+    HttpRouteMatch as _HttpRouteMatch,
+    Listener as _Listener,
+    Logging as _Logging,
+    MeshSpec as _MeshSpec,
+    PortMapping as _PortMapping,
+    RouteSpec as _RouteSpec,
+    ServiceDiscovery as _ServiceDiscovery,
+    Tags as _Tags,
+    TcpRoute as _TcpRoute,
+    TcpRouteAction as _TcpRouteAction,
+    VirtualNodeServiceProvider as _VirtualNodeServiceProvider,
+    VirtualNodeSpec as _VirtualNodeSpec,
+    VirtualRouterListener as _VirtualRouterListener,
+    VirtualRouterServiceProvider as _VirtualRouterServiceProvider,
+    VirtualRouterSpec as _VirtualRouterSpec,
+    VirtualServiceBackend as _VirtualServiceBackend,
+    VirtualServiceProvider as _VirtualServiceProvider,
+    VirtualServiceSpec as _VirtualServiceSpec,
+    WeightedTarget as _WeightedTarget,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class EgressFilter(troposphere.appmesh.EgressFilter, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+        )
+        super(EgressFilter, self).__init__(**processed_kwargs)
+
+
+class MeshSpec(troposphere.appmesh.MeshSpec, Mixin):
+    def __init__(self,
+                 title=None,
+                 EgressFilter=NOTHING, # type: _EgressFilter
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EgressFilter=EgressFilter,
+        )
+        super(MeshSpec, self).__init__(**processed_kwargs)
+
+
+class Mesh(troposphere.appmesh.Mesh, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MeshName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Spec=NOTHING, # type: _MeshSpec
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MeshName=MeshName,
+            Spec=Spec,
+            Tags=Tags,
+        )
+        super(Mesh, self).__init__(**processed_kwargs)
+
+
+class WeightedTarget(troposphere.appmesh.WeightedTarget, Mixin):
+    def __init__(self,
+                 title=None,
+                 VirtualNode=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Weight=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VirtualNode=VirtualNode,
+            Weight=Weight,
+        )
+        super(WeightedTarget, self).__init__(**processed_kwargs)
+
+
+class HttpRouteAction(troposphere.appmesh.HttpRouteAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 WeightedTargets=REQUIRED, # type: List[_WeightedTarget]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            WeightedTargets=WeightedTargets,
+        )
+        super(HttpRouteAction, self).__init__(**processed_kwargs)
+
+
+class HttpRouteMatch(troposphere.appmesh.HttpRouteMatch, Mixin):
+    def __init__(self,
+                 title=None,
+                 Prefix=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Prefix=Prefix,
+        )
+        super(HttpRouteMatch, self).__init__(**processed_kwargs)
+
+
+class HttpRoute(troposphere.appmesh.HttpRoute, Mixin):
+    def __init__(self,
+                 title=None,
+                 Action=REQUIRED, # type: _HttpRouteAction
+                 Match=REQUIRED, # type: _HttpRouteMatch
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Action=Action,
+            Match=Match,
+        )
+        super(HttpRoute, self).__init__(**processed_kwargs)
+
+
+class TcpRouteAction(troposphere.appmesh.TcpRouteAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 WeightedTargets=REQUIRED, # type: List[_WeightedTarget]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            WeightedTargets=WeightedTargets,
+        )
+        super(TcpRouteAction, self).__init__(**processed_kwargs)
+
+
+class TcpRoute(troposphere.appmesh.TcpRoute, Mixin):
+    def __init__(self,
+                 title=None,
+                 Action=REQUIRED, # type: _TcpRouteAction
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Action=Action,
+        )
+        super(TcpRoute, self).__init__(**processed_kwargs)
+
+
+class RouteSpec(troposphere.appmesh.RouteSpec, Mixin):
+    def __init__(self,
+                 title=None,
+                 HttpRoute=NOTHING, # type: _HttpRoute
+                 TcpRoute=NOTHING, # type: _TcpRoute
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HttpRoute=HttpRoute,
+            TcpRoute=TcpRoute,
+        )
+        super(RouteSpec, self).__init__(**processed_kwargs)
+
+
+class Route(troposphere.appmesh.Route, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MeshName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RouteName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Spec=REQUIRED, # type: _RouteSpec
+                 VirtualRouterName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MeshName=MeshName,
+            RouteName=RouteName,
+            Spec=Spec,
+            VirtualRouterName=VirtualRouterName,
+            Tags=Tags,
+        )
+        super(Route, self).__init__(**processed_kwargs)
+
+
+class VirtualServiceBackend(troposphere.appmesh.VirtualServiceBackend, Mixin):
+    def __init__(self,
+                 title=None,
+                 VirtualServiceName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VirtualServiceName=VirtualServiceName,
+        )
+        super(VirtualServiceBackend, self).__init__(**processed_kwargs)
+
+
+class Backend(troposphere.appmesh.Backend, Mixin):
+    def __init__(self,
+                 title=None,
+                 VirtualService=NOTHING, # type: _VirtualServiceBackend
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VirtualService=VirtualService,
+        )
+        super(Backend, self).__init__(**processed_kwargs)
+
+
+class HealthCheck(troposphere.appmesh.HealthCheck, Mixin):
+    def __init__(self,
+                 title=None,
+                 HealthyThreshold=REQUIRED, # type: int
+                 IntervalMillis=REQUIRED, # type: int
+                 Protocol=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TimeoutMillis=REQUIRED, # type: int
+                 UnhealthyThreshold=REQUIRED, # type: int
+                 Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 Port=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HealthyThreshold=HealthyThreshold,
+            IntervalMillis=IntervalMillis,
+            Protocol=Protocol,
+            TimeoutMillis=TimeoutMillis,
+            UnhealthyThreshold=UnhealthyThreshold,
+            Path=Path,
+            Port=Port,
+        )
+        super(HealthCheck, self).__init__(**processed_kwargs)
+
+
+class PortMapping(troposphere.appmesh.PortMapping, Mixin):
+    def __init__(self,
+                 title=None,
+                 Port=REQUIRED, # type: int
+                 Protocol=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Port=Port,
+            Protocol=Protocol,
+        )
+        super(PortMapping, self).__init__(**processed_kwargs)
+
+
+class Listener(troposphere.appmesh.Listener, Mixin):
+    def __init__(self,
+                 title=None,
+                 PortMapping=REQUIRED, # type: _PortMapping
+                 HealthCheck=NOTHING, # type: _HealthCheck
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PortMapping=PortMapping,
+            HealthCheck=HealthCheck,
+        )
+        super(Listener, self).__init__(**processed_kwargs)
+
+
+class FileAccessLog(troposphere.appmesh.FileAccessLog, Mixin):
+    def __init__(self,
+                 title=None,
+                 Path=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Path=Path,
+        )
+        super(FileAccessLog, self).__init__(**processed_kwargs)
+
+
+class AccessLog(troposphere.appmesh.AccessLog, Mixin):
+    def __init__(self,
+                 title=None,
+                 File=NOTHING, # type: _FileAccessLog
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            File=File,
+        )
+        super(AccessLog, self).__init__(**processed_kwargs)
+
+
+class Logging(troposphere.appmesh.Logging, Mixin):
+    def __init__(self,
+                 title=None,
+                 AccessLog=NOTHING, # type: _AccessLog
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AccessLog=AccessLog,
+        )
+        super(Logging, self).__init__(**processed_kwargs)
+
+
+class AwsCloudMapInstanceAttribute(troposphere.appmesh.AwsCloudMapInstanceAttribute, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Value=Value,
+        )
+        super(AwsCloudMapInstanceAttribute, self).__init__(**processed_kwargs)
+
+
+class AwsCloudMapServiceDiscovery(troposphere.appmesh.AwsCloudMapServiceDiscovery, Mixin):
+    def __init__(self,
+                 title=None,
+                 NamespaceName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Attributes=NOTHING, # type: List[_AwsCloudMapInstanceAttribute]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            NamespaceName=NamespaceName,
+            ServiceName=ServiceName,
+            Attributes=Attributes,
+        )
+        super(AwsCloudMapServiceDiscovery, self).__init__(**processed_kwargs)
+
+
+class DnsServiceDiscovery(troposphere.appmesh.DnsServiceDiscovery, Mixin):
+    def __init__(self,
+                 title=None,
+                 Hostname=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Hostname=Hostname,
+        )
+        super(DnsServiceDiscovery, self).__init__(**processed_kwargs)
+
+
+class ServiceDiscovery(troposphere.appmesh.ServiceDiscovery, Mixin):
+    def __init__(self,
+                 title=None,
+                 AWSCloudMap=NOTHING, # type: _AwsCloudMapServiceDiscovery
+                 DNS=NOTHING, # type: _DnsServiceDiscovery
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AWSCloudMap=AWSCloudMap,
+            DNS=DNS,
+        )
+        super(ServiceDiscovery, self).__init__(**processed_kwargs)
+
+
+class VirtualNodeSpec(troposphere.appmesh.VirtualNodeSpec, Mixin):
+    def __init__(self,
+                 title=None,
+                 Backends=NOTHING, # type: List[_Backend]
+                 Listeners=NOTHING, # type: List[_Listener]
+                 Logging=NOTHING, # type: _Logging
+                 ServiceDiscovery=NOTHING, # type: _ServiceDiscovery
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Backends=Backends,
+            Listeners=Listeners,
+            Logging=Logging,
+            ServiceDiscovery=ServiceDiscovery,
+        )
+        super(VirtualNodeSpec, self).__init__(**processed_kwargs)
+
+
+class VirtualNode(troposphere.appmesh.VirtualNode, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MeshName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Spec=REQUIRED, # type: _VirtualNodeSpec
+                 VirtualNodeName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MeshName=MeshName,
+            Spec=Spec,
+            VirtualNodeName=VirtualNodeName,
+            Tags=Tags,
+        )
+        super(VirtualNode, self).__init__(**processed_kwargs)
+
+
+class VirtualRouterListener(troposphere.appmesh.VirtualRouterListener, Mixin):
+    def __init__(self,
+                 title=None,
+                 PortMapping=REQUIRED, # type: _PortMapping
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PortMapping=PortMapping,
+        )
+        super(VirtualRouterListener, self).__init__(**processed_kwargs)
+
+
+class VirtualRouterSpec(troposphere.appmesh.VirtualRouterSpec, Mixin):
+    def __init__(self,
+                 title=None,
+                 Listeners=REQUIRED, # type: List[_VirtualRouterListener]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Listeners=Listeners,
+        )
+        super(VirtualRouterSpec, self).__init__(**processed_kwargs)
+
+
+class VirtualRouter(troposphere.appmesh.VirtualRouter, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MeshName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Spec=REQUIRED, # type: _VirtualRouterSpec
+                 VirtualRouterName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MeshName=MeshName,
+            Spec=Spec,
+            VirtualRouterName=VirtualRouterName,
+            Tags=Tags,
+        )
+        super(VirtualRouter, self).__init__(**processed_kwargs)
+
+
+class VirtualNodeServiceProvider(troposphere.appmesh.VirtualNodeServiceProvider, Mixin):
+    def __init__(self,
+                 title=None,
+                 VirtualNodeName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VirtualNodeName=VirtualNodeName,
+        )
+        super(VirtualNodeServiceProvider, self).__init__(**processed_kwargs)
+
+
+class VirtualRouterServiceProvider(troposphere.appmesh.VirtualRouterServiceProvider, Mixin):
+    def __init__(self,
+                 title=None,
+                 VirtualRouterName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VirtualRouterName=VirtualRouterName,
+        )
+        super(VirtualRouterServiceProvider, self).__init__(**processed_kwargs)
+
+
+class VirtualServiceProvider(troposphere.appmesh.VirtualServiceProvider, Mixin):
+    def __init__(self,
+                 title=None,
+                 VirtualNode=NOTHING, # type: _VirtualNodeServiceProvider
+                 VirtualRouter=NOTHING, # type: _VirtualRouterServiceProvider
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VirtualNode=VirtualNode,
+            VirtualRouter=VirtualRouter,
+        )
+        super(VirtualServiceProvider, self).__init__(**processed_kwargs)
+
+
+class VirtualServiceSpec(troposphere.appmesh.VirtualServiceSpec, Mixin):
+    def __init__(self,
+                 title=None,
+                 Provider=NOTHING, # type: _VirtualServiceProvider
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Provider=Provider,
+        )
+        super(VirtualServiceSpec, self).__init__(**processed_kwargs)
+
+
+class VirtualService(troposphere.appmesh.VirtualService, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MeshName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Spec=REQUIRED, # type: _VirtualServiceSpec
+                 VirtualServiceName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MeshName=MeshName,
+            Spec=Spec,
+            VirtualServiceName=VirtualServiceName,
+            Tags=Tags,
+        )
+        super(VirtualService, self).__init__(**processed_kwargs)

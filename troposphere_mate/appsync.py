@@ -4,300 +4,395 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.appsync
 
-from troposphere.appsync import AdditionalAuthenticationProviders
-from troposphere.appsync import AuthorizationConfig
-from troposphere.appsync import AwsIamConfig
-from troposphere.appsync import DynamoDBConfig
-from troposphere.appsync import ElasticsearchConfig
-from troposphere.appsync import HttpConfig
-from troposphere.appsync import LambdaConfig
-from troposphere.appsync import LogConfig
-from troposphere.appsync import OpenIDConnectConfig
-from troposphere.appsync import PipelineConfig
-from troposphere.appsync import RdsHttpEndpointConfig
-from troposphere.appsync import RelationalDatabaseConfig
-from troposphere.appsync import Tags
-from troposphere.appsync import UserPoolConfig
-from troposphere.appsync import boolean
-from troposphere.appsync import integer
-from troposphere.appsync import resolver_kind_validator
+from troposphere.appsync import (
+    AdditionalAuthenticationProviders as _AdditionalAuthenticationProviders,
+    AuthorizationConfig as _AuthorizationConfig,
+    AwsIamConfig as _AwsIamConfig,
+    DynamoDBConfig as _DynamoDBConfig,
+    ElasticsearchConfig as _ElasticsearchConfig,
+    HttpConfig as _HttpConfig,
+    LambdaConfig as _LambdaConfig,
+    LogConfig as _LogConfig,
+    OpenIDConnectConfig as _OpenIDConnectConfig,
+    PipelineConfig as _PipelineConfig,
+    RdsHttpEndpointConfig as _RdsHttpEndpointConfig,
+    RelationalDatabaseConfig as _RelationalDatabaseConfig,
+    Tags as _Tags,
+    UserPoolConfig as _UserPoolConfig,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class ApiKey(troposphere.appsync.ApiKey, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApiId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Expires=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApiId=ApiId,
+            Description=Description,
+            Expires=Expires,
+        )
+        super(ApiKey, self).__init__(**processed_kwargs)
+
+
+class DynamoDBConfig(troposphere.appsync.DynamoDBConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 AwsRegion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TableName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 UseCallerCredentials=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AwsRegion=AwsRegion,
+            TableName=TableName,
+            UseCallerCredentials=UseCallerCredentials,
+        )
+        super(DynamoDBConfig, self).__init__(**processed_kwargs)
+
+
+class ElasticsearchConfig(troposphere.appsync.ElasticsearchConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 AwsRegion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Endpoint=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AwsRegion=AwsRegion,
+            Endpoint=Endpoint,
+        )
+        super(ElasticsearchConfig, self).__init__(**processed_kwargs)
+
+
+class AwsIamConfig(troposphere.appsync.AwsIamConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 SigningRegion=NOTHING, # type: Union[str, AWSHelperFn]
+                 SigningServiceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SigningRegion=SigningRegion,
+            SigningServiceName=SigningServiceName,
+        )
+        super(AwsIamConfig, self).__init__(**processed_kwargs)
+
+
+class AuthorizationConfig(troposphere.appsync.AuthorizationConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 AuthorizationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AwsIamConfig=NOTHING, # type: _AwsIamConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AuthorizationType=AuthorizationType,
+            AwsIamConfig=AwsIamConfig,
+        )
+        super(AuthorizationConfig, self).__init__(**processed_kwargs)
+
 
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class ApiKey(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApiId = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    Expires = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.ApiKey
-
-
-@attr.s
-class DynamoDBConfig(AWSObject):
-    
-    AwsRegion = attr.ib() # type: str
-    TableName = attr.ib() # type: str
-    UseCallerCredentials = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.DynamoDBConfig
-
-
-@attr.s
-class ElasticsearchConfig(AWSObject):
-    
-    AwsRegion = attr.ib() # type: str
-    Endpoint = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.ElasticsearchConfig
-
-
-@attr.s
-class AwsIamConfig(AWSObject):
-    
-    SigningRegion = attr.ib(default=NOTHING) # type: str
-    SigningServiceName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.AwsIamConfig
-
-
-@attr.s
-class AuthorizationConfig(AWSObject):
-    
-    AuthorizationType = attr.ib() # type: str
-    AwsIamConfig = attr.ib(default=NOTHING) # type: AwsIamConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.AuthorizationConfig
-
-
-@attr.s
-class HttpConfig(AWSObject):
-    
-    Endpoint = attr.ib() # type: str
-    AuthorizationConfig = attr.ib(default=NOTHING) # type: AuthorizationConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.HttpConfig
-
-
-@attr.s
-class LambdaConfig(AWSObject):
-    
-    LambdaFunctionArn = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.LambdaConfig
-
-
-@attr.s
-class RdsHttpEndpointConfig(AWSObject):
-    
-    AwsRegion = attr.ib() # type: str
-    AwsSecretStoreArn = attr.ib() # type: str
-    DbClusterIdentifier = attr.ib() # type: str
-    DatabaseName = attr.ib(default=NOTHING) # type: str
-    Schema = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.RdsHttpEndpointConfig
-
-
-@attr.s
-class RelationalDatabaseConfig(AWSObject):
-    
-    RdsHttpEndpointConfig = attr.ib(default=NOTHING) # type: RdsHttpEndpointConfig
-    RelationalDatasourceType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.RelationalDatabaseConfig
-
-
-@attr.s
-class DataSource(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApiId = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    Type = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DynamoDBConfig = attr.ib(default=NOTHING) # type: DynamoDBConfig
-    ElasticsearchConfig = attr.ib(default=NOTHING) # type: ElasticsearchConfig
-    HttpConfig = attr.ib(default=NOTHING) # type: HttpConfig
-    LambdaConfig = attr.ib(default=NOTHING) # type: LambdaConfig
-    ServiceRoleArn = attr.ib(default=NOTHING) # type: str
-    RelationalDatabaseConfig = attr.ib(default=NOTHING) # type: RelationalDatabaseConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.DataSource
-
-
-@attr.s
-class FunctionConfiguration(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApiId = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DataSourceName = attr.ib(default=NOTHING) # type: str
-    FunctionVersion = attr.ib(default=NOTHING) # type: str
-    RequestMappingTemplate = attr.ib(default=NOTHING) # type: str
-    RequestMappingTemplateS3Location = attr.ib(default=NOTHING) # type: str
-    ResponseMappingTemplate = attr.ib(default=NOTHING) # type: str
-    ResponseMappingTemplateS3Location = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.FunctionConfiguration
-
-
-@attr.s
-class LogConfig(AWSObject):
-    
-    CloudWatchLogsRoleArn = attr.ib(default=NOTHING) # type: str
-    FieldLogLevel = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.LogConfig
-
-
-@attr.s
-class OpenIDConnectConfig(AWSObject):
-    
-    AuthTTL = attr.ib(default=NOTHING) # type: float
-    ClientId = attr.ib(default=NOTHING) # type: str
-    IatTTL = attr.ib(default=NOTHING) # type: float
-    Issuer = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.OpenIDConnectConfig
-
-
-@attr.s
-class UserPoolConfig(AWSObject):
-    
-    AppIdClientRegex = attr.ib(default=NOTHING) # type: str
-    AwsRegion = attr.ib(default=NOTHING) # type: str
-    DefaultAction = attr.ib(default=NOTHING) # type: str
-    UserPoolId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.UserPoolConfig
-
-
-@attr.s
-class AdditionalAuthenticationProviders(AWSObject):
-    
-    AuthenticationType = attr.ib() # type: str
-    OpenIDConnectConfig = attr.ib(default=NOTHING) # type: OpenIDConnectConfig
-    UserPoolConfig = attr.ib(default=NOTHING) # type: UserPoolConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.AdditionalAuthenticationProviders
-
-
-@attr.s
-class GraphQLApi(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AuthenticationType = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    AdditionalAuthenticationProviders = attr.ib(default=NOTHING) # type: AdditionalAuthenticationProviders
-    LogConfig = attr.ib(default=NOTHING) # type: LogConfig
-    OpenIDConnectConfig = attr.ib(default=NOTHING) # type: OpenIDConnectConfig
-    UserPoolConfig = attr.ib(default=NOTHING) # type: UserPoolConfig
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.GraphQLApi
-
-
-@attr.s
-class GraphQLSchema(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApiId = attr.ib() # type: str
-    Definition = attr.ib(default=NOTHING) # type: str
-    DefinitionS3Location = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.GraphQLSchema
-
-
-@attr.s
-class PipelineConfig(AWSObject):
-    
-    Functions = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.PipelineConfig
-
-
-@attr.s
-class Resolver(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApiId = attr.ib() # type: str
-    FieldName = attr.ib() # type: str
-    TypeName = attr.ib() # type: str
-    DataSourceName = attr.ib(default=NOTHING) # type: str
-    Kind = attr.ib(default=NOTHING) # type: resolver_kind_validator
-    PipelineConfig = attr.ib(default=NOTHING) # type: PipelineConfig
-    RequestMappingTemplate = attr.ib(default=NOTHING) # type: str
-    RequestMappingTemplateS3Location = attr.ib(default=NOTHING) # type: str
-    ResponseMappingTemplate = attr.ib(default=NOTHING) # type: str
-    ResponseMappingTemplateS3Location = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appsync.Resolver
+class HttpConfig(troposphere.appsync.HttpConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 Endpoint=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AuthorizationConfig=NOTHING, # type: _AuthorizationConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Endpoint=Endpoint,
+            AuthorizationConfig=AuthorizationConfig,
+        )
+        super(HttpConfig, self).__init__(**processed_kwargs)
+
+
+class LambdaConfig(troposphere.appsync.LambdaConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 LambdaFunctionArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LambdaFunctionArn=LambdaFunctionArn,
+        )
+        super(LambdaConfig, self).__init__(**processed_kwargs)
+
+
+class RdsHttpEndpointConfig(troposphere.appsync.RdsHttpEndpointConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 AwsRegion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AwsSecretStoreArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DbClusterIdentifier=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DatabaseName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Schema=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AwsRegion=AwsRegion,
+            AwsSecretStoreArn=AwsSecretStoreArn,
+            DbClusterIdentifier=DbClusterIdentifier,
+            DatabaseName=DatabaseName,
+            Schema=Schema,
+        )
+        super(RdsHttpEndpointConfig, self).__init__(**processed_kwargs)
+
+
+class RelationalDatabaseConfig(troposphere.appsync.RelationalDatabaseConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 RdsHttpEndpointConfig=NOTHING, # type: _RdsHttpEndpointConfig
+                 RelationalDatasourceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RdsHttpEndpointConfig=RdsHttpEndpointConfig,
+            RelationalDatasourceType=RelationalDatasourceType,
+        )
+        super(RelationalDatabaseConfig, self).__init__(**processed_kwargs)
+
+
+class DataSource(troposphere.appsync.DataSource, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApiId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DynamoDBConfig=NOTHING, # type: _DynamoDBConfig
+                 ElasticsearchConfig=NOTHING, # type: _ElasticsearchConfig
+                 HttpConfig=NOTHING, # type: _HttpConfig
+                 LambdaConfig=NOTHING, # type: _LambdaConfig
+                 ServiceRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 RelationalDatabaseConfig=NOTHING, # type: _RelationalDatabaseConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApiId=ApiId,
+            Name=Name,
+            Type=Type,
+            Description=Description,
+            DynamoDBConfig=DynamoDBConfig,
+            ElasticsearchConfig=ElasticsearchConfig,
+            HttpConfig=HttpConfig,
+            LambdaConfig=LambdaConfig,
+            ServiceRoleArn=ServiceRoleArn,
+            RelationalDatabaseConfig=RelationalDatabaseConfig,
+        )
+        super(DataSource, self).__init__(**processed_kwargs)
+
+
+class FunctionConfiguration(troposphere.appsync.FunctionConfiguration, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApiId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DataSourceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 FunctionVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 RequestMappingTemplate=NOTHING, # type: Union[str, AWSHelperFn]
+                 RequestMappingTemplateS3Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResponseMappingTemplate=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResponseMappingTemplateS3Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApiId=ApiId,
+            Name=Name,
+            Description=Description,
+            DataSourceName=DataSourceName,
+            FunctionVersion=FunctionVersion,
+            RequestMappingTemplate=RequestMappingTemplate,
+            RequestMappingTemplateS3Location=RequestMappingTemplateS3Location,
+            ResponseMappingTemplate=ResponseMappingTemplate,
+            ResponseMappingTemplateS3Location=ResponseMappingTemplateS3Location,
+        )
+        super(FunctionConfiguration, self).__init__(**processed_kwargs)
+
+
+class LogConfig(troposphere.appsync.LogConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 CloudWatchLogsRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 FieldLogLevel=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CloudWatchLogsRoleArn=CloudWatchLogsRoleArn,
+            FieldLogLevel=FieldLogLevel,
+        )
+        super(LogConfig, self).__init__(**processed_kwargs)
+
+
+class OpenIDConnectConfig(troposphere.appsync.OpenIDConnectConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 AuthTTL=NOTHING, # type: float
+                 ClientId=NOTHING, # type: Union[str, AWSHelperFn]
+                 IatTTL=NOTHING, # type: float
+                 Issuer=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AuthTTL=AuthTTL,
+            ClientId=ClientId,
+            IatTTL=IatTTL,
+            Issuer=Issuer,
+        )
+        super(OpenIDConnectConfig, self).__init__(**processed_kwargs)
+
+
+class UserPoolConfig(troposphere.appsync.UserPoolConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 AppIdClientRegex=NOTHING, # type: Union[str, AWSHelperFn]
+                 AwsRegion=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefaultAction=NOTHING, # type: Union[str, AWSHelperFn]
+                 UserPoolId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AppIdClientRegex=AppIdClientRegex,
+            AwsRegion=AwsRegion,
+            DefaultAction=DefaultAction,
+            UserPoolId=UserPoolId,
+        )
+        super(UserPoolConfig, self).__init__(**processed_kwargs)
+
+
+class AdditionalAuthenticationProviders(troposphere.appsync.AdditionalAuthenticationProviders, Mixin):
+    def __init__(self,
+                 title=None,
+                 AuthenticationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 OpenIDConnectConfig=NOTHING, # type: _OpenIDConnectConfig
+                 UserPoolConfig=NOTHING, # type: _UserPoolConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AuthenticationType=AuthenticationType,
+            OpenIDConnectConfig=OpenIDConnectConfig,
+            UserPoolConfig=UserPoolConfig,
+        )
+        super(AdditionalAuthenticationProviders, self).__init__(**processed_kwargs)
+
+
+class GraphQLApi(troposphere.appsync.GraphQLApi, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AuthenticationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AdditionalAuthenticationProviders=NOTHING, # type: _AdditionalAuthenticationProviders
+                 LogConfig=NOTHING, # type: _LogConfig
+                 OpenIDConnectConfig=NOTHING, # type: _OpenIDConnectConfig
+                 UserPoolConfig=NOTHING, # type: _UserPoolConfig
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AuthenticationType=AuthenticationType,
+            Name=Name,
+            AdditionalAuthenticationProviders=AdditionalAuthenticationProviders,
+            LogConfig=LogConfig,
+            OpenIDConnectConfig=OpenIDConnectConfig,
+            UserPoolConfig=UserPoolConfig,
+            Tags=Tags,
+        )
+        super(GraphQLApi, self).__init__(**processed_kwargs)
+
+
+class GraphQLSchema(troposphere.appsync.GraphQLSchema, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApiId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Definition=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefinitionS3Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApiId=ApiId,
+            Definition=Definition,
+            DefinitionS3Location=DefinitionS3Location,
+        )
+        super(GraphQLSchema, self).__init__(**processed_kwargs)
+
+
+class PipelineConfig(troposphere.appsync.PipelineConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 Functions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Functions=Functions,
+        )
+        super(PipelineConfig, self).__init__(**processed_kwargs)
+
+
+class Resolver(troposphere.appsync.Resolver, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApiId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FieldName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TypeName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DataSourceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Kind=NOTHING, # type: Any
+                 PipelineConfig=NOTHING, # type: _PipelineConfig
+                 RequestMappingTemplate=NOTHING, # type: Union[str, AWSHelperFn]
+                 RequestMappingTemplateS3Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResponseMappingTemplate=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResponseMappingTemplateS3Location=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApiId=ApiId,
+            FieldName=FieldName,
+            TypeName=TypeName,
+            DataSourceName=DataSourceName,
+            Kind=Kind,
+            PipelineConfig=PipelineConfig,
+            RequestMappingTemplate=RequestMappingTemplate,
+            RequestMappingTemplateS3Location=RequestMappingTemplateS3Location,
+            ResponseMappingTemplate=ResponseMappingTemplate,
+            ResponseMappingTemplateS3Location=ResponseMappingTemplateS3Location,
+        )
+        super(Resolver, self).__init__(**processed_kwargs)

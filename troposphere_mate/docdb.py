@@ -4,91 +4,138 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.docdb
 
-from troposphere.docdb import Tags
-from troposphere.docdb import boolean
-from troposphere.docdb import integer
+from troposphere.docdb import (
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class DBCluster(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AvailabilityZones = attr.ib(default=NOTHING) # type: list
-    BackupRetentionPeriod = attr.ib(default=NOTHING) # type: integer
-    DBClusterIdentifier = attr.ib(default=NOTHING) # type: str
-    DBClusterParameterGroupName = attr.ib(default=NOTHING) # type: str
-    DBSubnetGroupName = attr.ib(default=NOTHING) # type: str
-    EngineVersion = attr.ib(default=NOTHING) # type: str
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    MasterUserPassword = attr.ib(default=NOTHING) # type: str
-    MasterUsername = attr.ib(default=NOTHING) # type: str
-    Port = attr.ib(default=NOTHING) # type: integer
-    PreferredBackupWindow = attr.ib(default=NOTHING) # type: str
-    PreferredMaintenanceWindow = attr.ib(default=NOTHING) # type: str
-    SnapshotIdentifier = attr.ib(default=NOTHING) # type: str
-    StorageEncrypted = attr.ib(default=NOTHING) # type: boolean
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    VpcSecurityGroupIds = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.docdb.DBCluster
-
-
-@attr.s
-class DBClusterParameterGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib() # type: str
-    Family = attr.ib() # type: str
-    Parameters = attr.ib() # type: dict
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.docdb.DBClusterParameterGroup
-
-
-@attr.s
-class DBInstance(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DBClusterIdentifier = attr.ib() # type: str
-    DBInstanceClass = attr.ib() # type: str
-    AutoMinorVersionUpgrade = attr.ib(default=NOTHING) # type: boolean
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    DBInstanceIdentifier = attr.ib(default=NOTHING) # type: str
-    PreferredMaintenanceWindow = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.docdb.DBInstance
+class DBCluster(troposphere.docdb.DBCluster, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AvailabilityZones=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 BackupRetentionPeriod=NOTHING, # type: int
+                 DBClusterIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBClusterParameterGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 MasterUserPassword=NOTHING, # type: Union[str, AWSHelperFn]
+                 MasterUsername=NOTHING, # type: Union[str, AWSHelperFn]
+                 Port=NOTHING, # type: int
+                 PreferredBackupWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 PreferredMaintenanceWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 SnapshotIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 StorageEncrypted=NOTHING, # type: bool
+                 Tags=NOTHING, # type: _Tags
+                 VpcSecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AvailabilityZones=AvailabilityZones,
+            BackupRetentionPeriod=BackupRetentionPeriod,
+            DBClusterIdentifier=DBClusterIdentifier,
+            DBClusterParameterGroupName=DBClusterParameterGroupName,
+            DBSubnetGroupName=DBSubnetGroupName,
+            EngineVersion=EngineVersion,
+            KmsKeyId=KmsKeyId,
+            MasterUserPassword=MasterUserPassword,
+            MasterUsername=MasterUsername,
+            Port=Port,
+            PreferredBackupWindow=PreferredBackupWindow,
+            PreferredMaintenanceWindow=PreferredMaintenanceWindow,
+            SnapshotIdentifier=SnapshotIdentifier,
+            StorageEncrypted=StorageEncrypted,
+            Tags=Tags,
+            VpcSecurityGroupIds=VpcSecurityGroupIds,
+        )
+        super(DBCluster, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class DBSubnetGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DBSubnetGroupDescription = attr.ib() # type: str
-    SubnetIds = attr.ib() # type: list
-    DBSubnetGroupName = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
+class DBClusterParameterGroup(troposphere.docdb.DBClusterParameterGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Family=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Parameters=REQUIRED, # type: dict
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            Family=Family,
+            Parameters=Parameters,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(DBClusterParameterGroup, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.docdb.DBSubnetGroup
+class DBInstance(troposphere.docdb.DBInstance, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DBClusterIdentifier=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DBInstanceClass=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AutoMinorVersionUpgrade=NOTHING, # type: bool
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBInstanceIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 PreferredMaintenanceWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DBClusterIdentifier=DBClusterIdentifier,
+            DBInstanceClass=DBInstanceClass,
+            AutoMinorVersionUpgrade=AutoMinorVersionUpgrade,
+            AvailabilityZone=AvailabilityZone,
+            DBInstanceIdentifier=DBInstanceIdentifier,
+            PreferredMaintenanceWindow=PreferredMaintenanceWindow,
+            Tags=Tags,
+        )
+        super(DBInstance, self).__init__(**processed_kwargs)
+
+
+class DBSubnetGroup(troposphere.docdb.DBSubnetGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DBSubnetGroupDescription=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubnetIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 DBSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DBSubnetGroupDescription=DBSubnetGroupDescription,
+            SubnetIds=SubnetIds,
+            DBSubnetGroupName=DBSubnetGroupName,
+            Tags=Tags,
+        )
+        super(DBSubnetGroup, self).__init__(**processed_kwargs)

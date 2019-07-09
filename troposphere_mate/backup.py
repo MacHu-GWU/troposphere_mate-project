@@ -4,141 +4,183 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.backup
 
-from troposphere.backup import BackupPlanResourceType
-from troposphere.backup import BackupSelectionResourceType
-from troposphere.backup import LifecycleResourceType
-from troposphere.backup import NotificationObjectType
-from troposphere.backup import backup_vault_name
-from troposphere.backup import double
-from troposphere.backup import json_checker
+from troposphere.backup import (
+    BackupPlanResourceType as _BackupPlanResourceType,
+    BackupRuleResourceType as _BackupRuleResourceType,
+    BackupSelectionResourceType as _BackupSelectionResourceType,
+    ConditionResourceType as _ConditionResourceType,
+    LifecycleResourceType as _LifecycleResourceType,
+    NotificationObjectType as _NotificationObjectType,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class LifecycleResourceType(AWSObject):
-    
-    DeleteAfterDays = attr.ib(default=NOTHING) # type: double
-    MoveToColdStorageAfterDays = attr.ib(default=NOTHING) # type: double
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.backup.LifecycleResourceType
-
-
-@attr.s
-class BackupRuleResourceType(AWSObject):
-    
-    RuleName = attr.ib() # type: str
-    TargetBackupVault = attr.ib() # type: str
-    CompletionWindowMinutes = attr.ib(default=NOTHING) # type: double
-    Lifecycle = attr.ib(default=NOTHING) # type: LifecycleResourceType
-    RecoveryPointTags = attr.ib(default=NOTHING) # type: json_checker
-    ScheduleExpression = attr.ib(default=NOTHING) # type: str
-    StartWindowMinutes = attr.ib(default=NOTHING) # type: double
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.backup.BackupRuleResourceType
+class LifecycleResourceType(troposphere.backup.LifecycleResourceType, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeleteAfterDays=NOTHING, # type: float
+                 MoveToColdStorageAfterDays=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeleteAfterDays=DeleteAfterDays,
+            MoveToColdStorageAfterDays=MoveToColdStorageAfterDays,
+        )
+        super(LifecycleResourceType, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class BackupPlanResourceType(AWSObject):
-    
-    BackupPlanName = attr.ib() # type: str
-    BackupPlanRule = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.backup.BackupPlanResourceType
-
-
-@attr.s
-class BackupPlan(AWSObject):
-    title = attr.ib()   # type: str
-    
-    BackupPlan = attr.ib() # type: BackupPlanResourceType
-    BackupPlanTags = attr.ib(default=NOTHING) # type: dict
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.backup.BackupPlan
-
-
-@attr.s
-class ConditionResourceType(AWSObject):
-    
-    ConditionKey = attr.ib() # type: str
-    ConditionType = attr.ib() # type: str
-    ConditionValue = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.backup.ConditionResourceType
+class BackupRuleResourceType(troposphere.backup.BackupRuleResourceType, Mixin):
+    def __init__(self,
+                 title=None,
+                 RuleName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetBackupVault=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CompletionWindowMinutes=NOTHING, # type: float
+                 Lifecycle=NOTHING, # type: _LifecycleResourceType
+                 RecoveryPointTags=NOTHING, # type: json_checker
+                 ScheduleExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 StartWindowMinutes=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RuleName=RuleName,
+            TargetBackupVault=TargetBackupVault,
+            CompletionWindowMinutes=CompletionWindowMinutes,
+            Lifecycle=Lifecycle,
+            RecoveryPointTags=RecoveryPointTags,
+            ScheduleExpression=ScheduleExpression,
+            StartWindowMinutes=StartWindowMinutes,
+        )
+        super(BackupRuleResourceType, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class BackupSelectionResourceType(AWSObject):
-    
-    IamRoleArn = attr.ib() # type: str
-    SelectionName = attr.ib() # type: str
-    ListOfTags = attr.ib(default=NOTHING) # type: list
-    Resources = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.backup.BackupSelectionResourceType
-
-
-@attr.s
-class BackupSelection(AWSObject):
-    title = attr.ib()   # type: str
-    
-    BackupPlanId = attr.ib() # type: str
-    BackupSelection = attr.ib() # type: BackupSelectionResourceType
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.backup.BackupSelection
+class BackupPlanResourceType(troposphere.backup.BackupPlanResourceType, Mixin):
+    def __init__(self,
+                 title=None,
+                 BackupPlanName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BackupPlanRule=REQUIRED, # type: List[_BackupRuleResourceType]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BackupPlanName=BackupPlanName,
+            BackupPlanRule=BackupPlanRule,
+        )
+        super(BackupPlanResourceType, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class NotificationObjectType(AWSObject):
-    
-    BackupVaultEvents = attr.ib() # type: list
-    SNSTopicArn = attr.ib() # type: str
+class BackupPlan(troposphere.backup.BackupPlan, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 BackupPlan=REQUIRED, # type: _BackupPlanResourceType
+                 BackupPlanTags=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            BackupPlan=BackupPlan,
+            BackupPlanTags=BackupPlanTags,
+        )
+        super(BackupPlan, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.backup.NotificationObjectType
+class ConditionResourceType(troposphere.backup.ConditionResourceType, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConditionKey=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ConditionType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ConditionValue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConditionKey=ConditionKey,
+            ConditionType=ConditionType,
+            ConditionValue=ConditionValue,
+        )
+        super(ConditionResourceType, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class BackupVault(AWSObject):
-    title = attr.ib()   # type: str
-    
-    BackupVaultName = attr.ib() # type: backup_vault_name
-    AccessPolicy = attr.ib(default=NOTHING) # type: json_checker
-    BackupVaultTags = attr.ib(default=NOTHING) # type: json_checker
-    EncryptionKeyArn = attr.ib(default=NOTHING) # type: str
-    Notifications = attr.ib(default=NOTHING) # type: NotificationObjectType
+class BackupSelectionResourceType(troposphere.backup.BackupSelectionResourceType, Mixin):
+    def __init__(self,
+                 title=None,
+                 IamRoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SelectionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ListOfTags=NOTHING, # type: List[_ConditionResourceType]
+                 Resources=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IamRoleArn=IamRoleArn,
+            SelectionName=SelectionName,
+            ListOfTags=ListOfTags,
+            Resources=Resources,
+        )
+        super(BackupSelectionResourceType, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.backup.BackupVault
+class BackupSelection(troposphere.backup.BackupSelection, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 BackupPlanId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BackupSelection=REQUIRED, # type: _BackupSelectionResourceType
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            BackupPlanId=BackupPlanId,
+            BackupSelection=BackupSelection,
+        )
+        super(BackupSelection, self).__init__(**processed_kwargs)
+
+
+class NotificationObjectType(troposphere.backup.NotificationObjectType, Mixin):
+    def __init__(self,
+                 title=None,
+                 BackupVaultEvents=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 SNSTopicArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BackupVaultEvents=BackupVaultEvents,
+            SNSTopicArn=SNSTopicArn,
+        )
+        super(NotificationObjectType, self).__init__(**processed_kwargs)
+
+
+class BackupVault(troposphere.backup.BackupVault, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 BackupVaultName=REQUIRED, # type: str
+                 AccessPolicy=NOTHING, # type: json_checker
+                 BackupVaultTags=NOTHING, # type: json_checker
+                 EncryptionKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 Notifications=NOTHING, # type: _NotificationObjectType
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            BackupVaultName=BackupVaultName,
+            AccessPolicy=AccessPolicy,
+            BackupVaultTags=BackupVaultTags,
+            EncryptionKeyArn=EncryptionKeyArn,
+            Notifications=Notifications,
+        )
+        super(BackupVault, self).__init__(**processed_kwargs)

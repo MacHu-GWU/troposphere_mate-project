@@ -4,314 +4,399 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.ses
 
-from troposphere.ses import AddHeaderAction
-from troposphere.ses import BounceAction
-from troposphere.ses import CloudWatchDestination
-from troposphere.ses import EmailTemplate
-from troposphere.ses import EventDestination
-from troposphere.ses import Filter
-from troposphere.ses import IpFilter
-from troposphere.ses import KinesisFirehoseDestination
-from troposphere.ses import LambdaAction
-from troposphere.ses import Rule
-from troposphere.ses import S3Action
-from troposphere.ses import SNSAction
-from troposphere.ses import StopAction
-from troposphere.ses import WorkmailAction
-from troposphere.ses import boolean
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class DimensionConfiguration(AWSObject):
-    
-    DefaultDimensionValue = attr.ib() # type: str
-    DimensionName = attr.ib() # type: str
-    DimensionValueSource = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.DimensionConfiguration
-
-
-@attr.s
-class CloudWatchDestination(AWSObject):
-    
-    DimensionConfigurations = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.CloudWatchDestination
-
-
-@attr.s
-class KinesisFirehoseDestination(AWSObject):
-    
-    DeliveryStreamARN = attr.ib() # type: str
-    IAMRoleARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.KinesisFirehoseDestination
-
-
-@attr.s
-class EventDestination(AWSObject):
-    
-    MatchingEventTypes = attr.ib() # type: list
-    CloudWatchDestination = attr.ib(default=NOTHING) # type: CloudWatchDestination
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-    KinesisFirehoseDestination = attr.ib(default=NOTHING) # type: KinesisFirehoseDestination
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.EventDestination
-
-
-@attr.s
-class ConfigurationSetEventDestination(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ConfigurationSetName = attr.ib() # type: str
-    EventDestination = attr.ib() # type: EventDestination
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.ConfigurationSetEventDestination
-
-
-@attr.s
-class ConfigurationSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.ConfigurationSet
-
-
-@attr.s
-class IpFilter(AWSObject):
-    
-    Cidr = attr.ib() # type: str
-    Policy = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.IpFilter
-
-
-@attr.s
-class Filter(AWSObject):
-    
-    IpFilter = attr.ib() # type: IpFilter
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.Filter
-
-
-@attr.s
-class ReceiptFilter(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Filter = attr.ib() # type: Filter
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.ReceiptFilter
-
-
-@attr.s
-class ReceiptRuleSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RuleSetName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.ReceiptRuleSet
-
-
-@attr.s
-class AddHeaderAction(AWSObject):
-    
-    HeaderName = attr.ib() # type: str
-    HeaderValue = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.AddHeaderAction
-
-
-@attr.s
-class BounceAction(AWSObject):
-    
-    Message = attr.ib() # type: str
-    Sender = attr.ib() # type: str
-    SmtpReplyCode = attr.ib() # type: str
-    StatusCode = attr.ib(default=NOTHING) # type: str
-    TopicArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.BounceAction
-
-
-@attr.s
-class LambdaAction(AWSObject):
-    
-    FunctionArn = attr.ib() # type: str
-    InvocationType = attr.ib(default=NOTHING) # type: str
-    TopicArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.LambdaAction
-
-
-@attr.s
-class S3Action(AWSObject):
-    
-    BucketName = attr.ib() # type: str
-    KmsKeyArn = attr.ib(default=NOTHING) # type: str
-    ObjectKeyPrefix = attr.ib(default=NOTHING) # type: str
-    TopicArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.S3Action
-
-
-@attr.s
-class SNSAction(AWSObject):
-    
-    Encoding = attr.ib(default=NOTHING) # type: str
-    TopicArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.SNSAction
-
-
-@attr.s
-class StopAction(AWSObject):
-    
-    Scope = attr.ib() # type: str
-    TopicArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.StopAction
-
-
-@attr.s
-class WorkmailAction(AWSObject):
-    
-    OrganizationArn = attr.ib() # type: str
-    TopicArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.WorkmailAction
-
-
-@attr.s
-class Action(AWSObject):
-    
-    AddHeaderAction = attr.ib(default=NOTHING) # type: AddHeaderAction
-    BounceAction = attr.ib(default=NOTHING) # type: BounceAction
-    LambdaAction = attr.ib(default=NOTHING) # type: LambdaAction
-    S3Action = attr.ib(default=NOTHING) # type: S3Action
-    SNSAction = attr.ib(default=NOTHING) # type: SNSAction
-    StopAction = attr.ib(default=NOTHING) # type: StopAction
-    WorkmailAction = attr.ib(default=NOTHING) # type: WorkmailAction
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.Action
-
-
-@attr.s
-class Rule(AWSObject):
-    
-    Actions = attr.ib(default=NOTHING) # type: list
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-    Name = attr.ib(default=NOTHING) # type: str
-    Recipients = attr.ib(default=NOTHING) # type: list
-    ScanEnabled = attr.ib(default=NOTHING) # type: boolean
-    TlsPolicy = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.Rule
-
-
-@attr.s
-class ReceiptRule(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Rule = attr.ib() # type: Rule
-    RuleSetName = attr.ib() # type: str
-    After = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.ReceiptRule
-
-
-@attr.s
-class EmailTemplate(AWSObject):
-    
-    HtmlPart = attr.ib(default=NOTHING) # type: str
-    SubjectPart = attr.ib(default=NOTHING) # type: str
-    TemplateName = attr.ib(default=NOTHING) # type: str
-    TextPart = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.EmailTemplate
-
-
-@attr.s
-class Template(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Template = attr.ib(default=NOTHING) # type: EmailTemplate
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ses.Template
+from troposphere.ses import (
+    Action as _Action,
+    AddHeaderAction as _AddHeaderAction,
+    BounceAction as _BounceAction,
+    CloudWatchDestination as _CloudWatchDestination,
+    DimensionConfiguration as _DimensionConfiguration,
+    EmailTemplate as _EmailTemplate,
+    EventDestination as _EventDestination,
+    Filter as _Filter,
+    IpFilter as _IpFilter,
+    KinesisFirehoseDestination as _KinesisFirehoseDestination,
+    LambdaAction as _LambdaAction,
+    Rule as _Rule,
+    S3Action as _S3Action,
+    SNSAction as _SNSAction,
+    StopAction as _StopAction,
+    WorkmailAction as _WorkmailAction,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class DimensionConfiguration(troposphere.ses.DimensionConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 DefaultDimensionValue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DimensionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DimensionValueSource=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DefaultDimensionValue=DefaultDimensionValue,
+            DimensionName=DimensionName,
+            DimensionValueSource=DimensionValueSource,
+        )
+        super(DimensionConfiguration, self).__init__(**processed_kwargs)
+
+
+class CloudWatchDestination(troposphere.ses.CloudWatchDestination, Mixin):
+    def __init__(self,
+                 title=None,
+                 DimensionConfigurations=NOTHING, # type: List[_DimensionConfiguration]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DimensionConfigurations=DimensionConfigurations,
+        )
+        super(CloudWatchDestination, self).__init__(**processed_kwargs)
+
+
+class KinesisFirehoseDestination(troposphere.ses.KinesisFirehoseDestination, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeliveryStreamARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 IAMRoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeliveryStreamARN=DeliveryStreamARN,
+            IAMRoleARN=IAMRoleARN,
+        )
+        super(KinesisFirehoseDestination, self).__init__(**processed_kwargs)
+
+
+class EventDestination(troposphere.ses.EventDestination, Mixin):
+    def __init__(self,
+                 title=None,
+                 MatchingEventTypes=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 CloudWatchDestination=NOTHING, # type: _CloudWatchDestination
+                 Enabled=NOTHING, # type: bool
+                 KinesisFirehoseDestination=NOTHING, # type: _KinesisFirehoseDestination
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MatchingEventTypes=MatchingEventTypes,
+            CloudWatchDestination=CloudWatchDestination,
+            Enabled=Enabled,
+            KinesisFirehoseDestination=KinesisFirehoseDestination,
+            Name=Name,
+        )
+        super(EventDestination, self).__init__(**processed_kwargs)
+
+
+class ConfigurationSetEventDestination(troposphere.ses.ConfigurationSetEventDestination, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ConfigurationSetName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EventDestination=REQUIRED, # type: _EventDestination
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ConfigurationSetName=ConfigurationSetName,
+            EventDestination=EventDestination,
+        )
+        super(ConfigurationSetEventDestination, self).__init__(**processed_kwargs)
+
+
+class ConfigurationSet(troposphere.ses.ConfigurationSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+        )
+        super(ConfigurationSet, self).__init__(**processed_kwargs)
+
+
+class IpFilter(troposphere.ses.IpFilter, Mixin):
+    def __init__(self,
+                 title=None,
+                 Cidr=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Policy=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Cidr=Cidr,
+            Policy=Policy,
+        )
+        super(IpFilter, self).__init__(**processed_kwargs)
+
+
+class Filter(troposphere.ses.Filter, Mixin):
+    def __init__(self,
+                 title=None,
+                 IpFilter=REQUIRED, # type: _IpFilter
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IpFilter=IpFilter,
+            Name=Name,
+        )
+        super(Filter, self).__init__(**processed_kwargs)
+
+
+class ReceiptFilter(troposphere.ses.ReceiptFilter, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Filter=REQUIRED, # type: _Filter
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Filter=Filter,
+        )
+        super(ReceiptFilter, self).__init__(**processed_kwargs)
+
+
+class ReceiptRuleSet(troposphere.ses.ReceiptRuleSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RuleSetName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RuleSetName=RuleSetName,
+        )
+        super(ReceiptRuleSet, self).__init__(**processed_kwargs)
+
+
+class AddHeaderAction(troposphere.ses.AddHeaderAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 HeaderName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 HeaderValue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HeaderName=HeaderName,
+            HeaderValue=HeaderValue,
+        )
+        super(AddHeaderAction, self).__init__(**processed_kwargs)
+
+
+class BounceAction(troposphere.ses.BounceAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 Message=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Sender=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SmtpReplyCode=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StatusCode=NOTHING, # type: Union[str, AWSHelperFn]
+                 TopicArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Message=Message,
+            Sender=Sender,
+            SmtpReplyCode=SmtpReplyCode,
+            StatusCode=StatusCode,
+            TopicArn=TopicArn,
+        )
+        super(BounceAction, self).__init__(**processed_kwargs)
+
+
+class LambdaAction(troposphere.ses.LambdaAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 FunctionArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InvocationType=NOTHING, # type: Union[str, AWSHelperFn]
+                 TopicArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FunctionArn=FunctionArn,
+            InvocationType=InvocationType,
+            TopicArn=TopicArn,
+        )
+        super(LambdaAction, self).__init__(**processed_kwargs)
+
+
+class S3Action(troposphere.ses.S3Action, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 KmsKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 ObjectKeyPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 TopicArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketName=BucketName,
+            KmsKeyArn=KmsKeyArn,
+            ObjectKeyPrefix=ObjectKeyPrefix,
+            TopicArn=TopicArn,
+        )
+        super(S3Action, self).__init__(**processed_kwargs)
+
+
+class SNSAction(troposphere.ses.SNSAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 Encoding=NOTHING, # type: Union[str, AWSHelperFn]
+                 TopicArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Encoding=Encoding,
+            TopicArn=TopicArn,
+        )
+        super(SNSAction, self).__init__(**processed_kwargs)
+
+
+class StopAction(troposphere.ses.StopAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 Scope=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TopicArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Scope=Scope,
+            TopicArn=TopicArn,
+        )
+        super(StopAction, self).__init__(**processed_kwargs)
+
+
+class WorkmailAction(troposphere.ses.WorkmailAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 OrganizationArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TopicArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OrganizationArn=OrganizationArn,
+            TopicArn=TopicArn,
+        )
+        super(WorkmailAction, self).__init__(**processed_kwargs)
+
+
+class Action(troposphere.ses.Action, Mixin):
+    def __init__(self,
+                 title=None,
+                 AddHeaderAction=NOTHING, # type: _AddHeaderAction
+                 BounceAction=NOTHING, # type: _BounceAction
+                 LambdaAction=NOTHING, # type: _LambdaAction
+                 S3Action=NOTHING, # type: _S3Action
+                 SNSAction=NOTHING, # type: _SNSAction
+                 StopAction=NOTHING, # type: _StopAction
+                 WorkmailAction=NOTHING, # type: _WorkmailAction
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AddHeaderAction=AddHeaderAction,
+            BounceAction=BounceAction,
+            LambdaAction=LambdaAction,
+            S3Action=S3Action,
+            SNSAction=SNSAction,
+            StopAction=StopAction,
+            WorkmailAction=WorkmailAction,
+        )
+        super(Action, self).__init__(**processed_kwargs)
+
+
+class Rule(troposphere.ses.Rule, Mixin):
+    def __init__(self,
+                 title=None,
+                 Actions=NOTHING, # type: List[_Action]
+                 Enabled=NOTHING, # type: bool
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Recipients=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ScanEnabled=NOTHING, # type: bool
+                 TlsPolicy=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Actions=Actions,
+            Enabled=Enabled,
+            Name=Name,
+            Recipients=Recipients,
+            ScanEnabled=ScanEnabled,
+            TlsPolicy=TlsPolicy,
+        )
+        super(Rule, self).__init__(**processed_kwargs)
+
+
+class ReceiptRule(troposphere.ses.ReceiptRule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Rule=REQUIRED, # type: _Rule
+                 RuleSetName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 After=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Rule=Rule,
+            RuleSetName=RuleSetName,
+            After=After,
+        )
+        super(ReceiptRule, self).__init__(**processed_kwargs)
+
+
+class EmailTemplate(troposphere.ses.EmailTemplate, Mixin):
+    def __init__(self,
+                 title=None,
+                 HtmlPart=NOTHING, # type: Union[str, AWSHelperFn]
+                 SubjectPart=NOTHING, # type: Union[str, AWSHelperFn]
+                 TemplateName=NOTHING, # type: Union[str, AWSHelperFn]
+                 TextPart=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HtmlPart=HtmlPart,
+            SubjectPart=SubjectPart,
+            TemplateName=TemplateName,
+            TextPart=TextPart,
+        )
+        super(EmailTemplate, self).__init__(**processed_kwargs)
+
+
+class Template(troposphere.ses.Template, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Template=NOTHING, # type: _EmailTemplate
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Template=Template,
+        )
+        super(Template, self).__init__(**processed_kwargs)

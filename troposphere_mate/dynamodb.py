@@ -4,167 +4,206 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.dynamodb
 
-from troposphere.dynamodb import PointInTimeRecoverySpecification
-from troposphere.dynamodb import Projection
-from troposphere.dynamodb import ProvisionedThroughput
-from troposphere.dynamodb import SSESpecification
-from troposphere.dynamodb import StreamSpecification
-from troposphere.dynamodb import Tags
-from troposphere.dynamodb import TimeToLiveSpecification
-from troposphere.dynamodb import attribute_type_validator
-from troposphere.dynamodb import billing_mode_validator
-from troposphere.dynamodb import boolean
-from troposphere.dynamodb import key_type_validator
-from troposphere.dynamodb import projection_type_validator
+from troposphere.dynamodb import (
+    AttributeDefinition as _AttributeDefinition,
+    GlobalSecondaryIndex as _GlobalSecondaryIndex,
+    KeySchema as _KeySchema,
+    LocalSecondaryIndex as _LocalSecondaryIndex,
+    PointInTimeRecoverySpecification as _PointInTimeRecoverySpecification,
+    Projection as _Projection,
+    ProvisionedThroughput as _ProvisionedThroughput,
+    SSESpecification as _SSESpecification,
+    StreamSpecification as _StreamSpecification,
+    Tags as _Tags,
+    TimeToLiveSpecification as _TimeToLiveSpecification,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class AttributeDefinition(AWSObject):
-    
-    AttributeName = attr.ib() # type: str
-    AttributeType = attr.ib() # type: attribute_type_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.AttributeDefinition
-
-
-@attr.s
-class KeySchema(AWSObject):
-    
-    AttributeName = attr.ib() # type: str
-    KeyType = attr.ib() # type: key_type_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.KeySchema
+class AttributeDefinition(troposphere.dynamodb.AttributeDefinition, Mixin):
+    def __init__(self,
+                 title=None,
+                 AttributeName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AttributeType=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AttributeName=AttributeName,
+            AttributeType=AttributeType,
+        )
+        super(AttributeDefinition, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ProvisionedThroughput(AWSObject):
-    
-    ReadCapacityUnits = attr.ib() # type: int
-    WriteCapacityUnits = attr.ib() # type: int
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.ProvisionedThroughput
-
-
-@attr.s
-class Projection(AWSObject):
-    
-    NonKeyAttributes = attr.ib(default=NOTHING) # type: list
-    ProjectionType = attr.ib(default=NOTHING) # type: projection_type_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.Projection
+class KeySchema(troposphere.dynamodb.KeySchema, Mixin):
+    def __init__(self,
+                 title=None,
+                 AttributeName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 KeyType=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AttributeName=AttributeName,
+            KeyType=KeyType,
+        )
+        super(KeySchema, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class SSESpecification(AWSObject):
-    
-    SSEEnabled = attr.ib() # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.SSESpecification
-
-
-@attr.s
-class GlobalSecondaryIndex(AWSObject):
-    
-    IndexName = attr.ib() # type: str
-    KeySchema = attr.ib() # type: list
-    Projection = attr.ib() # type: Projection
-    ProvisionedThroughput = attr.ib(default=NOTHING) # type: ProvisionedThroughput
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.GlobalSecondaryIndex
+class ProvisionedThroughput(troposphere.dynamodb.ProvisionedThroughput, Mixin):
+    def __init__(self,
+                 title=None,
+                 ReadCapacityUnits=REQUIRED, # type: int
+                 WriteCapacityUnits=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ReadCapacityUnits=ReadCapacityUnits,
+            WriteCapacityUnits=WriteCapacityUnits,
+        )
+        super(ProvisionedThroughput, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class LocalSecondaryIndex(AWSObject):
-    
-    IndexName = attr.ib() # type: str
-    KeySchema = attr.ib() # type: list
-    Projection = attr.ib() # type: Projection
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.LocalSecondaryIndex
-
-
-@attr.s
-class PointInTimeRecoverySpecification(AWSObject):
-    
-    PointInTimeRecoveryEnabled = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.PointInTimeRecoverySpecification
+class Projection(troposphere.dynamodb.Projection, Mixin):
+    def __init__(self,
+                 title=None,
+                 NonKeyAttributes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ProjectionType=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            NonKeyAttributes=NonKeyAttributes,
+            ProjectionType=ProjectionType,
+        )
+        super(Projection, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class StreamSpecification(AWSObject):
-    
-    StreamViewType = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.StreamSpecification
-
-
-@attr.s
-class TimeToLiveSpecification(AWSObject):
-    
-    AttributeName = attr.ib() # type: str
-    Enabled = attr.ib() # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dynamodb.TimeToLiveSpecification
+class SSESpecification(troposphere.dynamodb.SSESpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 SSEEnabled=REQUIRED, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SSEEnabled=SSEEnabled,
+        )
+        super(SSESpecification, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Table(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AttributeDefinitions = attr.ib() # type: list
-    KeySchema = attr.ib() # type: list
-    BillingMode = attr.ib(default=NOTHING) # type: billing_mode_validator
-    GlobalSecondaryIndexes = attr.ib(default=NOTHING) # type: list
-    LocalSecondaryIndexes = attr.ib(default=NOTHING) # type: list
-    PointInTimeRecoverySpecification = attr.ib(default=NOTHING) # type: PointInTimeRecoverySpecification
-    ProvisionedThroughput = attr.ib(default=NOTHING) # type: ProvisionedThroughput
-    SSESpecification = attr.ib(default=NOTHING) # type: SSESpecification
-    StreamSpecification = attr.ib(default=NOTHING) # type: StreamSpecification
-    TableName = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    TimeToLiveSpecification = attr.ib(default=NOTHING) # type: TimeToLiveSpecification
+class GlobalSecondaryIndex(troposphere.dynamodb.GlobalSecondaryIndex, Mixin):
+    def __init__(self,
+                 title=None,
+                 IndexName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 KeySchema=REQUIRED, # type: List[_KeySchema]
+                 Projection=REQUIRED, # type: _Projection
+                 ProvisionedThroughput=NOTHING, # type: _ProvisionedThroughput
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IndexName=IndexName,
+            KeySchema=KeySchema,
+            Projection=Projection,
+            ProvisionedThroughput=ProvisionedThroughput,
+        )
+        super(GlobalSecondaryIndex, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.dynamodb.Table
+class LocalSecondaryIndex(troposphere.dynamodb.LocalSecondaryIndex, Mixin):
+    def __init__(self,
+                 title=None,
+                 IndexName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 KeySchema=REQUIRED, # type: List[_KeySchema]
+                 Projection=REQUIRED, # type: _Projection
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IndexName=IndexName,
+            KeySchema=KeySchema,
+            Projection=Projection,
+        )
+        super(LocalSecondaryIndex, self).__init__(**processed_kwargs)
+
+
+class PointInTimeRecoverySpecification(troposphere.dynamodb.PointInTimeRecoverySpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 PointInTimeRecoveryEnabled=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PointInTimeRecoveryEnabled=PointInTimeRecoveryEnabled,
+        )
+        super(PointInTimeRecoverySpecification, self).__init__(**processed_kwargs)
+
+
+class StreamSpecification(troposphere.dynamodb.StreamSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 StreamViewType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            StreamViewType=StreamViewType,
+        )
+        super(StreamSpecification, self).__init__(**processed_kwargs)
+
+
+class TimeToLiveSpecification(troposphere.dynamodb.TimeToLiveSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 AttributeName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Enabled=REQUIRED, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AttributeName=AttributeName,
+            Enabled=Enabled,
+        )
+        super(TimeToLiveSpecification, self).__init__(**processed_kwargs)
+
+
+class Table(troposphere.dynamodb.Table, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AttributeDefinitions=REQUIRED, # type: List[_AttributeDefinition]
+                 KeySchema=REQUIRED, # type: List[_KeySchema]
+                 BillingMode=NOTHING, # type: Any
+                 GlobalSecondaryIndexes=NOTHING, # type: List[_GlobalSecondaryIndex]
+                 LocalSecondaryIndexes=NOTHING, # type: List[_LocalSecondaryIndex]
+                 PointInTimeRecoverySpecification=NOTHING, # type: _PointInTimeRecoverySpecification
+                 ProvisionedThroughput=NOTHING, # type: _ProvisionedThroughput
+                 SSESpecification=NOTHING, # type: _SSESpecification
+                 StreamSpecification=NOTHING, # type: _StreamSpecification
+                 TableName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 TimeToLiveSpecification=NOTHING, # type: _TimeToLiveSpecification
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AttributeDefinitions=AttributeDefinitions,
+            KeySchema=KeySchema,
+            BillingMode=BillingMode,
+            GlobalSecondaryIndexes=GlobalSecondaryIndexes,
+            LocalSecondaryIndexes=LocalSecondaryIndexes,
+            PointInTimeRecoverySpecification=PointInTimeRecoverySpecification,
+            ProvisionedThroughput=ProvisionedThroughput,
+            SSESpecification=SSESpecification,
+            StreamSpecification=StreamSpecification,
+            TableName=TableName,
+            Tags=Tags,
+            TimeToLiveSpecification=TimeToLiveSpecification,
+        )
+        super(Table, self).__init__(**processed_kwargs)

@@ -4,155 +4,202 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.elasticloadbalancing
 
-from troposphere.elasticloadbalancing import AccessLoggingPolicy
-from troposphere.elasticloadbalancing import ConnectionDrainingPolicy
-from troposphere.elasticloadbalancing import ConnectionSettings
-from troposphere.elasticloadbalancing import HealthCheck
-from troposphere.elasticloadbalancing import boolean
-from troposphere.elasticloadbalancing import elb_name
-from troposphere.elasticloadbalancing import integer
-from troposphere.elasticloadbalancing import network_port
-from troposphere.elasticloadbalancing import positive_integer
+from troposphere.elasticloadbalancing import (
+    AccessLoggingPolicy as _AccessLoggingPolicy,
+    ConnectionDrainingPolicy as _ConnectionDrainingPolicy,
+    ConnectionSettings as _ConnectionSettings,
+    HealthCheck as _HealthCheck,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class AppCookieStickinessPolicy(AWSObject):
-    
-    CookieName = attr.ib() # type: str
-    PolicyName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.AppCookieStickinessPolicy
-
-
-@attr.s
-class HealthCheck(AWSObject):
-    
-    HealthyThreshold = attr.ib() # type: integer_range_checker
-    Interval = attr.ib() # type: positive_integer
-    Target = attr.ib() # type: str
-    Timeout = attr.ib() # type: positive_integer
-    UnhealthyThreshold = attr.ib() # type: integer_range_checker
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.HealthCheck
+class AppCookieStickinessPolicy(troposphere.elasticloadbalancing.AppCookieStickinessPolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 CookieName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PolicyName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CookieName=CookieName,
+            PolicyName=PolicyName,
+        )
+        super(AppCookieStickinessPolicy, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class LBCookieStickinessPolicy(AWSObject):
-    
-    CookieExpirationPeriod = attr.ib(default=NOTHING) # type: str
-    PolicyName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.LBCookieStickinessPolicy
-
-
-@attr.s
-class Listener(AWSObject):
-    
-    InstancePort = attr.ib() # type: network_port
-    LoadBalancerPort = attr.ib() # type: network_port
-    Protocol = attr.ib() # type: str
-    InstanceProtocol = attr.ib(default=NOTHING) # type: str
-    PolicyNames = attr.ib(default=NOTHING) # type: list
-    SSLCertificateId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.Listener
+class HealthCheck(troposphere.elasticloadbalancing.HealthCheck, Mixin):
+    def __init__(self,
+                 title=None,
+                 HealthyThreshold=REQUIRED, # type: Any
+                 Interval=REQUIRED, # type: int
+                 Target=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Timeout=REQUIRED, # type: int
+                 UnhealthyThreshold=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HealthyThreshold=HealthyThreshold,
+            Interval=Interval,
+            Target=Target,
+            Timeout=Timeout,
+            UnhealthyThreshold=UnhealthyThreshold,
+        )
+        super(HealthCheck, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Policy(AWSObject):
-    
-    PolicyName = attr.ib() # type: str
-    PolicyType = attr.ib() # type: str
-    Attributes = attr.ib(default=NOTHING) # type: list
-    InstancePorts = attr.ib(default=NOTHING) # type: list
-    LoadBalancerPorts = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.Policy
-
-
-@attr.s
-class ConnectionDrainingPolicy(AWSObject):
-    
-    Enabled = attr.ib() # type: bool
-    Timeout = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.ConnectionDrainingPolicy
+class LBCookieStickinessPolicy(troposphere.elasticloadbalancing.LBCookieStickinessPolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 CookieExpirationPeriod=NOTHING, # type: Union[str, AWSHelperFn]
+                 PolicyName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CookieExpirationPeriod=CookieExpirationPeriod,
+            PolicyName=PolicyName,
+        )
+        super(LBCookieStickinessPolicy, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ConnectionSettings(AWSObject):
-    
-    IdleTimeout = attr.ib() # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.ConnectionSettings
-
-
-@attr.s
-class AccessLoggingPolicy(AWSObject):
-    
-    Enabled = attr.ib() # type: bool
-    EmitInterval = attr.ib(default=NOTHING) # type: integer
-    S3BucketName = attr.ib(default=NOTHING) # type: str
-    S3BucketPrefix = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.elasticloadbalancing.AccessLoggingPolicy
+class Listener(troposphere.elasticloadbalancing.Listener, Mixin):
+    def __init__(self,
+                 title=None,
+                 InstancePort=REQUIRED, # type: int
+                 LoadBalancerPort=REQUIRED, # type: int
+                 Protocol=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceProtocol=NOTHING, # type: Union[str, AWSHelperFn]
+                 PolicyNames=NOTHING, # type: list
+                 SSLCertificateId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            InstancePort=InstancePort,
+            LoadBalancerPort=LoadBalancerPort,
+            Protocol=Protocol,
+            InstanceProtocol=InstanceProtocol,
+            PolicyNames=PolicyNames,
+            SSLCertificateId=SSLCertificateId,
+        )
+        super(Listener, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class LoadBalancer(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Listeners = attr.ib() # type: list
-    AccessLoggingPolicy = attr.ib(default=NOTHING) # type: AccessLoggingPolicy
-    AppCookieStickinessPolicy = attr.ib(default=NOTHING) # type: list
-    AvailabilityZones = attr.ib(default=NOTHING) # type: list
-    ConnectionDrainingPolicy = attr.ib(default=NOTHING) # type: ConnectionDrainingPolicy
-    ConnectionSettings = attr.ib(default=NOTHING) # type: ConnectionSettings
-    CrossZone = attr.ib(default=NOTHING) # type: boolean
-    HealthCheck = attr.ib(default=NOTHING) # type: HealthCheck
-    Instances = attr.ib(default=NOTHING) # type: list
-    LBCookieStickinessPolicy = attr.ib(default=NOTHING) # type: list
-    LoadBalancerName = attr.ib(default=NOTHING) # type: elb_name
-    Policies = attr.ib(default=NOTHING) # type: list
-    Scheme = attr.ib(default=NOTHING) # type: str
-    SecurityGroups = attr.ib(default=NOTHING) # type: list
-    Subnets = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: tuple
+class Policy(troposphere.elasticloadbalancing.Policy, Mixin):
+    def __init__(self,
+                 title=None,
+                 PolicyName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PolicyType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Attributes=NOTHING, # type: List[dict]
+                 InstancePorts=NOTHING, # type: list
+                 LoadBalancerPorts=NOTHING, # type: list
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PolicyName=PolicyName,
+            PolicyType=PolicyType,
+            Attributes=Attributes,
+            InstancePorts=InstancePorts,
+            LoadBalancerPorts=LoadBalancerPorts,
+        )
+        super(Policy, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.elasticloadbalancing.LoadBalancer
+class ConnectionDrainingPolicy(troposphere.elasticloadbalancing.ConnectionDrainingPolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=REQUIRED, # type: bool
+                 Timeout=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            Timeout=Timeout,
+        )
+        super(ConnectionDrainingPolicy, self).__init__(**processed_kwargs)
+
+
+class ConnectionSettings(troposphere.elasticloadbalancing.ConnectionSettings, Mixin):
+    def __init__(self,
+                 title=None,
+                 IdleTimeout=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IdleTimeout=IdleTimeout,
+        )
+        super(ConnectionSettings, self).__init__(**processed_kwargs)
+
+
+class AccessLoggingPolicy(troposphere.elasticloadbalancing.AccessLoggingPolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=REQUIRED, # type: bool
+                 EmitInterval=NOTHING, # type: int
+                 S3BucketName=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3BucketPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            EmitInterval=EmitInterval,
+            S3BucketName=S3BucketName,
+            S3BucketPrefix=S3BucketPrefix,
+        )
+        super(AccessLoggingPolicy, self).__init__(**processed_kwargs)
+
+
+class LoadBalancer(troposphere.elasticloadbalancing.LoadBalancer, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Listeners=REQUIRED, # type: list
+                 AccessLoggingPolicy=NOTHING, # type: _AccessLoggingPolicy
+                 AppCookieStickinessPolicy=NOTHING, # type: list
+                 AvailabilityZones=NOTHING, # type: list
+                 ConnectionDrainingPolicy=NOTHING, # type: _ConnectionDrainingPolicy
+                 ConnectionSettings=NOTHING, # type: _ConnectionSettings
+                 CrossZone=NOTHING, # type: bool
+                 HealthCheck=NOTHING, # type: _HealthCheck
+                 Instances=NOTHING, # type: list
+                 LBCookieStickinessPolicy=NOTHING, # type: list
+                 LoadBalancerName=NOTHING, # type: str
+                 Policies=NOTHING, # type: list
+                 Scheme=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroups=NOTHING, # type: list
+                 Subnets=NOTHING, # type: list
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Listeners=Listeners,
+            AccessLoggingPolicy=AccessLoggingPolicy,
+            AppCookieStickinessPolicy=AppCookieStickinessPolicy,
+            AvailabilityZones=AvailabilityZones,
+            ConnectionDrainingPolicy=ConnectionDrainingPolicy,
+            ConnectionSettings=ConnectionSettings,
+            CrossZone=CrossZone,
+            HealthCheck=HealthCheck,
+            Instances=Instances,
+            LBCookieStickinessPolicy=LBCookieStickinessPolicy,
+            LoadBalancerName=LoadBalancerName,
+            Policies=Policies,
+            Scheme=Scheme,
+            SecurityGroups=SecurityGroups,
+            Subnets=Subnets,
+            Tags=Tags,
+        )
+        super(LoadBalancer, self).__init__(**processed_kwargs)

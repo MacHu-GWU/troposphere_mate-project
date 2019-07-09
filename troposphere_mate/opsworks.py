@@ -4,464 +4,666 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.opsworks
 
-from troposphere.opsworks import AutoScalingThresholds
-from troposphere.opsworks import ChefConfiguration
-from troposphere.opsworks import EbsBlockDevice
-from troposphere.opsworks import LifeCycleConfiguration
-from troposphere.opsworks import LoadBasedAutoScaling
-from troposphere.opsworks import Recipes
-from troposphere.opsworks import ShutdownEventConfiguration
-from troposphere.opsworks import Source
-from troposphere.opsworks import SslConfiguration
-from troposphere.opsworks import StackConfigurationManager
-from troposphere.opsworks import TimeBasedAutoScaling
-from troposphere.opsworks import boolean
-from troposphere.opsworks import integer
-from troposphere.opsworks import validate_data_source_type
-from troposphere.opsworks import validate_volume_type
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class Source(AWSObject):
-    
-    Password = attr.ib(default=NOTHING) # type: str
-    Revision = attr.ib(default=NOTHING) # type: str
-    SshKey = attr.ib(default=NOTHING) # type: str
-    Type = attr.ib(default=NOTHING) # type: str
-    Url = attr.ib(default=NOTHING) # type: str
-    Username = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Source
-
-
-@attr.s
-class SslConfiguration(AWSObject):
-    
-    Certificate = attr.ib() # type: str
-    PrivateKey = attr.ib() # type: str
-    Chain = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.SslConfiguration
-
-
-@attr.s
-class ChefConfiguration(AWSObject):
-    
-    BerkshelfVersion = attr.ib(default=NOTHING) # type: str
-    ManageBerkshelf = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.ChefConfiguration
-
-
-@attr.s
-class Recipes(AWSObject):
-    
-    Configure = attr.ib(default=NOTHING) # type: list
-    Deploy = attr.ib(default=NOTHING) # type: list
-    Setup = attr.ib(default=NOTHING) # type: list
-    Shutdown = attr.ib(default=NOTHING) # type: list
-    Undeploy = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Recipes
-
-
-@attr.s
-class VolumeConfiguration(AWSObject):
-    
-    MountPoint = attr.ib() # type: str
-    NumberOfDisks = attr.ib() # type: integer
-    Size = attr.ib() # type: integer
-    Encrypted = attr.ib(default=NOTHING) # type: boolean
-    Iops = attr.ib(default=NOTHING) # type: integer
-    RaidLevel = attr.ib(default=NOTHING) # type: integer
-    VolumeType = attr.ib(default=NOTHING) # type: validate_volume_type
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.VolumeConfiguration
-
-
-@attr.s
-class StackConfigurationManager(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    Version = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.StackConfigurationManager
-
-
-@attr.s
-class TimeBasedAutoScaling(AWSObject):
-    
-    Monday = attr.ib(default=NOTHING) # type: dict
-    Tuesday = attr.ib(default=NOTHING) # type: dict
-    Wednesday = attr.ib(default=NOTHING) # type: dict
-    Thursday = attr.ib(default=NOTHING) # type: dict
-    Friday = attr.ib(default=NOTHING) # type: dict
-    Saturday = attr.ib(default=NOTHING) # type: dict
-    Sunday = attr.ib(default=NOTHING) # type: dict
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.TimeBasedAutoScaling
-
-
-@attr.s
-class AutoScalingThresholds(AWSObject):
-    
-    CpuThreshold = attr.ib(default=NOTHING) # type: float
-    IgnoreMetricsTime = attr.ib(default=NOTHING) # type: integer
-    InstanceCount = attr.ib(default=NOTHING) # type: integer
-    LoadThreshold = attr.ib(default=NOTHING) # type: float
-    MemoryThreshold = attr.ib(default=NOTHING) # type: float
-    ThresholdsWaitTime = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.AutoScalingThresholds
-
-
-@attr.s
-class Environment(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Value = attr.ib() # type: str
-    Secure = attr.ib(default=NOTHING) # type: bool
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Environment
-
-
-@attr.s
-class LoadBasedAutoScaling(AWSObject):
-    
-    DownScaling = attr.ib(default=NOTHING) # type: AutoScalingThresholds
-    Enable = attr.ib(default=NOTHING) # type: bool
-    UpScaling = attr.ib(default=NOTHING) # type: AutoScalingThresholds
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.LoadBasedAutoScaling
-
-
-@attr.s
-class DataSource(AWSObject):
-    
-    Arn = attr.ib(default=NOTHING) # type: str
-    DatabaseName = attr.ib(default=NOTHING) # type: str
-    Type = attr.ib(default=NOTHING) # type: validate_data_source_type
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.DataSource
-
-
-@attr.s
-class App(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    StackId = attr.ib() # type: str
-    Type = attr.ib() # type: str
-    AppSource = attr.ib(default=NOTHING) # type: Source
-    Attributes = attr.ib(default=NOTHING) # type: dict
-    DataSources = attr.ib(default=NOTHING) # type: list
-    Description = attr.ib(default=NOTHING) # type: str
-    Domains = attr.ib(default=NOTHING) # type: list
-    EnableSsl = attr.ib(default=NOTHING) # type: boolean
-    Environment = attr.ib(default=NOTHING) # type: list
-    Shortname = attr.ib(default=NOTHING) # type: str
-    SslConfiguration = attr.ib(default=NOTHING) # type: SslConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.App
-
-
-@attr.s
-class ElasticLoadBalancerAttachment(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ElasticLoadBalancerName = attr.ib() # type: str
-    LayerId = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.ElasticLoadBalancerAttachment
-
-
-@attr.s
-class EbsBlockDevice(AWSObject):
-    
-    DeleteOnTermination = attr.ib(default=NOTHING) # type: boolean
-    Iops = attr.ib(default=NOTHING) # type: integer
-    SnapshotId = attr.ib(default=NOTHING) # type: str
-    VolumeSize = attr.ib(default=NOTHING) # type: integer
-    VolumeType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.EbsBlockDevice
-
-
-@attr.s
-class BlockDeviceMapping(AWSObject):
-    
-    DeviceName = attr.ib(default=NOTHING) # type: str
-    Ebs = attr.ib(default=NOTHING) # type: EbsBlockDevice
-    NoDevice = attr.ib(default=NOTHING) # type: str
-    VirtualName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.BlockDeviceMapping
-
-
-@attr.s
-class Instance(AWSObject):
-    title = attr.ib()   # type: str
-    
-    InstanceType = attr.ib() # type: str
-    LayerIds = attr.ib() # type: list
-    StackId = attr.ib() # type: str
-    AgentVersion = attr.ib(default=NOTHING) # type: str
-    AmiId = attr.ib(default=NOTHING) # type: str
-    Architecture = attr.ib(default=NOTHING) # type: str
-    AutoScalingType = attr.ib(default=NOTHING) # type: str
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    BlockDeviceMappings = attr.ib(default=NOTHING) # type: list
-    EbsOptimized = attr.ib(default=NOTHING) # type: boolean
-    ElasticIps = attr.ib(default=NOTHING) # type: list
-    Hostname = attr.ib(default=NOTHING) # type: str
-    InstallUpdatesOnBoot = attr.ib(default=NOTHING) # type: boolean
-    Os = attr.ib(default=NOTHING) # type: str
-    RootDeviceType = attr.ib(default=NOTHING) # type: str
-    SshKeyName = attr.ib(default=NOTHING) # type: str
-    SubnetId = attr.ib(default=NOTHING) # type: str
-    Tenancy = attr.ib(default=NOTHING) # type: str
-    TimeBasedAutoScaling = attr.ib(default=NOTHING) # type: TimeBasedAutoScaling
-    VirtualizationType = attr.ib(default=NOTHING) # type: str
-    Volumes = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Instance
-
-
-@attr.s
-class ShutdownEventConfiguration(AWSObject):
-    
-    DelayUntilElbConnectionsDrained = attr.ib(default=NOTHING) # type: boolean
-    ExecutionTimeout = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.ShutdownEventConfiguration
-
-
-@attr.s
-class LifeCycleConfiguration(AWSObject):
-    
-    ShutdownEventConfiguration = attr.ib(default=NOTHING) # type: ShutdownEventConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.LifeCycleConfiguration
-
-
-@attr.s
-class Layer(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AutoAssignElasticIps = attr.ib() # type: boolean
-    AutoAssignPublicIps = attr.ib() # type: boolean
-    EnableAutoHealing = attr.ib() # type: boolean
-    Name = attr.ib() # type: str
-    Shortname = attr.ib() # type: str
-    StackId = attr.ib() # type: str
-    Type = attr.ib() # type: str
-    Attributes = attr.ib(default=NOTHING) # type: dict
-    CustomInstanceProfileArn = attr.ib(default=NOTHING) # type: str
-    CustomJson = attr.ib(default=NOTHING) # type: tuple
-    CustomRecipes = attr.ib(default=NOTHING) # type: Recipes
-    CustomSecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    InstallUpdatesOnBoot = attr.ib(default=NOTHING) # type: boolean
-    LifecycleEventConfiguration = attr.ib(default=NOTHING) # type: LifeCycleConfiguration
-    LoadBasedAutoScaling = attr.ib(default=NOTHING) # type: LoadBasedAutoScaling
-    Packages = attr.ib(default=NOTHING) # type: list
-    VolumeConfigurations = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Layer
-
-
-@attr.s
-class RdsDbInstance(AWSObject):
-    
-    DbPassword = attr.ib() # type: str
-    DbUser = attr.ib() # type: str
-    RdsDbInstanceArn = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.RdsDbInstance
-
-
-@attr.s
-class ElasticIp(AWSObject):
-    
-    Ip = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.ElasticIp
-
-
-@attr.s
-class Stack(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DefaultInstanceProfileArn = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    ServiceRoleArn = attr.ib() # type: str
-    AgentVersion = attr.ib(default=NOTHING) # type: str
-    Attributes = attr.ib(default=NOTHING) # type: dict
-    ChefConfiguration = attr.ib(default=NOTHING) # type: ChefConfiguration
-    CloneAppIds = attr.ib(default=NOTHING) # type: list
-    ClonePermissions = attr.ib(default=NOTHING) # type: boolean
-    ConfigurationManager = attr.ib(default=NOTHING) # type: StackConfigurationManager
-    CustomCookbooksSource = attr.ib(default=NOTHING) # type: Source
-    CustomJson = attr.ib(default=NOTHING) # type: tuple
-    DefaultAvailabilityZone = attr.ib(default=NOTHING) # type: str
-    DefaultOs = attr.ib(default=NOTHING) # type: str
-    DefaultRootDeviceType = attr.ib(default=NOTHING) # type: str
-    DefaultSshKeyName = attr.ib(default=NOTHING) # type: str
-    DefaultSubnetId = attr.ib(default=NOTHING) # type: str
-    EcsClusterArn = attr.ib(default=NOTHING) # type: str
-    ElasticIps = attr.ib(default=NOTHING) # type: list
-    HostnameTheme = attr.ib(default=NOTHING) # type: str
-    RdsDbInstances = attr.ib(default=NOTHING) # type: list
-    SourceStackId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    UseCustomCookbooks = attr.ib(default=NOTHING) # type: boolean
-    UseOpsworksSecurityGroups = attr.ib(default=NOTHING) # type: boolean
-    VpcId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Stack
-
-
-@attr.s
-class UserProfile(AWSObject):
-    title = attr.ib()   # type: str
-    
-    IamUserArn = attr.ib() # type: str
-    AllowSelfManagement = attr.ib(default=NOTHING) # type: boolean
-    SshPublicKey = attr.ib(default=NOTHING) # type: str
-    SshUsername = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.UserProfile
-
-
-@attr.s
-class Volume(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Ec2VolumeId = attr.ib() # type: str
-    StackId = attr.ib() # type: str
-    MountPoint = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Volume
-
-
-@attr.s
-class EngineAttribute(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.EngineAttribute
-
-
-@attr.s
-class Server(AWSObject):
-    title = attr.ib()   # type: str
-    
-    InstanceProfileArn = attr.ib() # type: str
-    InstanceType = attr.ib() # type: str
-    ServiceRoleArn = attr.ib() # type: str
-    AssociatePublicIpAddress = attr.ib(default=NOTHING) # type: boolean
-    BackupId = attr.ib(default=NOTHING) # type: str
-    BackupRetentionCount = attr.ib(default=NOTHING) # type: integer
-    DisableAutomatedBackup = attr.ib(default=NOTHING) # type: boolean
-    Engine = attr.ib(default=NOTHING) # type: str
-    EngineAttributes = attr.ib(default=NOTHING) # type: list
-    EngineModel = attr.ib(default=NOTHING) # type: str
-    EngineVersion = attr.ib(default=NOTHING) # type: str
-    KeyPair = attr.ib(default=NOTHING) # type: str
-    PreferredBackupWindow = attr.ib(default=NOTHING) # type: str
-    PreferredMaintenanceWindow = attr.ib(default=NOTHING) # type: str
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    ServerName = attr.ib(default=NOTHING) # type: str
-    SubnetIds = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.opsworks.Server
+from troposphere.opsworks import (
+    AutoScalingThresholds as _AutoScalingThresholds,
+    BlockDeviceMapping as _BlockDeviceMapping,
+    ChefConfiguration as _ChefConfiguration,
+    DataSource as _DataSource,
+    EbsBlockDevice as _EbsBlockDevice,
+    ElasticIp as _ElasticIp,
+    EngineAttribute as _EngineAttribute,
+    Environment as _Environment,
+    LifeCycleConfiguration as _LifeCycleConfiguration,
+    LoadBasedAutoScaling as _LoadBasedAutoScaling,
+    RdsDbInstance as _RdsDbInstance,
+    Recipes as _Recipes,
+    ShutdownEventConfiguration as _ShutdownEventConfiguration,
+    Source as _Source,
+    SslConfiguration as _SslConfiguration,
+    StackConfigurationManager as _StackConfigurationManager,
+    Tags as _Tags,
+    TimeBasedAutoScaling as _TimeBasedAutoScaling,
+    VolumeConfiguration as _VolumeConfiguration,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class Source(troposphere.opsworks.Source, Mixin):
+    def __init__(self,
+                 title=None,
+                 Password=NOTHING, # type: Union[str, AWSHelperFn]
+                 Revision=NOTHING, # type: Union[str, AWSHelperFn]
+                 SshKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 Url=NOTHING, # type: Union[str, AWSHelperFn]
+                 Username=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Password=Password,
+            Revision=Revision,
+            SshKey=SshKey,
+            Type=Type,
+            Url=Url,
+            Username=Username,
+        )
+        super(Source, self).__init__(**processed_kwargs)
+
+
+class SslConfiguration(troposphere.opsworks.SslConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Certificate=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PrivateKey=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Chain=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Certificate=Certificate,
+            PrivateKey=PrivateKey,
+            Chain=Chain,
+        )
+        super(SslConfiguration, self).__init__(**processed_kwargs)
+
+
+class ChefConfiguration(troposphere.opsworks.ChefConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 BerkshelfVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 ManageBerkshelf=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BerkshelfVersion=BerkshelfVersion,
+            ManageBerkshelf=ManageBerkshelf,
+        )
+        super(ChefConfiguration, self).__init__(**processed_kwargs)
+
+
+class Recipes(troposphere.opsworks.Recipes, Mixin):
+    def __init__(self,
+                 title=None,
+                 Configure=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Deploy=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Setup=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Shutdown=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Undeploy=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Configure=Configure,
+            Deploy=Deploy,
+            Setup=Setup,
+            Shutdown=Shutdown,
+            Undeploy=Undeploy,
+        )
+        super(Recipes, self).__init__(**processed_kwargs)
+
+
+class VolumeConfiguration(troposphere.opsworks.VolumeConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 MountPoint=REQUIRED, # type: Union[str, AWSHelperFn]
+                 NumberOfDisks=REQUIRED, # type: int
+                 Size=REQUIRED, # type: int
+                 Encrypted=NOTHING, # type: bool
+                 Iops=NOTHING, # type: int
+                 RaidLevel=NOTHING, # type: int
+                 VolumeType=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MountPoint=MountPoint,
+            NumberOfDisks=NumberOfDisks,
+            Size=Size,
+            Encrypted=Encrypted,
+            Iops=Iops,
+            RaidLevel=RaidLevel,
+            VolumeType=VolumeType,
+        )
+        super(VolumeConfiguration, self).__init__(**processed_kwargs)
+
+
+class StackConfigurationManager(troposphere.opsworks.StackConfigurationManager, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Version=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Version=Version,
+        )
+        super(StackConfigurationManager, self).__init__(**processed_kwargs)
+
+
+class TimeBasedAutoScaling(troposphere.opsworks.TimeBasedAutoScaling, Mixin):
+    def __init__(self,
+                 title=None,
+                 Monday=NOTHING, # type: dict
+                 Tuesday=NOTHING, # type: dict
+                 Wednesday=NOTHING, # type: dict
+                 Thursday=NOTHING, # type: dict
+                 Friday=NOTHING, # type: dict
+                 Saturday=NOTHING, # type: dict
+                 Sunday=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Monday=Monday,
+            Tuesday=Tuesday,
+            Wednesday=Wednesday,
+            Thursday=Thursday,
+            Friday=Friday,
+            Saturday=Saturday,
+            Sunday=Sunday,
+        )
+        super(TimeBasedAutoScaling, self).__init__(**processed_kwargs)
+
+
+class AutoScalingThresholds(troposphere.opsworks.AutoScalingThresholds, Mixin):
+    def __init__(self,
+                 title=None,
+                 CpuThreshold=NOTHING, # type: float
+                 IgnoreMetricsTime=NOTHING, # type: int
+                 InstanceCount=NOTHING, # type: int
+                 LoadThreshold=NOTHING, # type: float
+                 MemoryThreshold=NOTHING, # type: float
+                 ThresholdsWaitTime=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CpuThreshold=CpuThreshold,
+            IgnoreMetricsTime=IgnoreMetricsTime,
+            InstanceCount=InstanceCount,
+            LoadThreshold=LoadThreshold,
+            MemoryThreshold=MemoryThreshold,
+            ThresholdsWaitTime=ThresholdsWaitTime,
+        )
+        super(AutoScalingThresholds, self).__init__(**processed_kwargs)
+
+
+class Environment(troposphere.opsworks.Environment, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Secure=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Value=Value,
+            Secure=Secure,
+        )
+        super(Environment, self).__init__(**processed_kwargs)
+
+
+class LoadBasedAutoScaling(troposphere.opsworks.LoadBasedAutoScaling, Mixin):
+    def __init__(self,
+                 title=None,
+                 DownScaling=NOTHING, # type: _AutoScalingThresholds
+                 Enable=NOTHING, # type: bool
+                 UpScaling=NOTHING, # type: _AutoScalingThresholds
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DownScaling=DownScaling,
+            Enable=Enable,
+            UpScaling=UpScaling,
+        )
+        super(LoadBasedAutoScaling, self).__init__(**processed_kwargs)
+
+
+class DataSource(troposphere.opsworks.DataSource, Mixin):
+    def __init__(self,
+                 title=None,
+                 Arn=NOTHING, # type: Union[str, AWSHelperFn]
+                 DatabaseName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Type=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Arn=Arn,
+            DatabaseName=DatabaseName,
+            Type=Type,
+        )
+        super(DataSource, self).__init__(**processed_kwargs)
+
+
+class App(troposphere.opsworks.App, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StackId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AppSource=NOTHING, # type: _Source
+                 Attributes=NOTHING, # type: dict
+                 DataSources=NOTHING, # type: List[_DataSource]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Domains=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 EnableSsl=NOTHING, # type: bool
+                 Environment=NOTHING, # type: List[_Environment]
+                 Shortname=NOTHING, # type: Union[str, AWSHelperFn]
+                 SslConfiguration=NOTHING, # type: _SslConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            StackId=StackId,
+            Type=Type,
+            AppSource=AppSource,
+            Attributes=Attributes,
+            DataSources=DataSources,
+            Description=Description,
+            Domains=Domains,
+            EnableSsl=EnableSsl,
+            Environment=Environment,
+            Shortname=Shortname,
+            SslConfiguration=SslConfiguration,
+        )
+        super(App, self).__init__(**processed_kwargs)
+
+
+class ElasticLoadBalancerAttachment(troposphere.opsworks.ElasticLoadBalancerAttachment, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ElasticLoadBalancerName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LayerId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ElasticLoadBalancerName=ElasticLoadBalancerName,
+            LayerId=LayerId,
+            Tags=Tags,
+        )
+        super(ElasticLoadBalancerAttachment, self).__init__(**processed_kwargs)
+
+
+class EbsBlockDevice(troposphere.opsworks.EbsBlockDevice, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeleteOnTermination=NOTHING, # type: bool
+                 Iops=NOTHING, # type: int
+                 SnapshotId=NOTHING, # type: Union[str, AWSHelperFn]
+                 VolumeSize=NOTHING, # type: int
+                 VolumeType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeleteOnTermination=DeleteOnTermination,
+            Iops=Iops,
+            SnapshotId=SnapshotId,
+            VolumeSize=VolumeSize,
+            VolumeType=VolumeType,
+        )
+        super(EbsBlockDevice, self).__init__(**processed_kwargs)
+
+
+class BlockDeviceMapping(troposphere.opsworks.BlockDeviceMapping, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeviceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Ebs=NOTHING, # type: _EbsBlockDevice
+                 NoDevice=NOTHING, # type: Union[str, AWSHelperFn]
+                 VirtualName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeviceName=DeviceName,
+            Ebs=Ebs,
+            NoDevice=NoDevice,
+            VirtualName=VirtualName,
+        )
+        super(BlockDeviceMapping, self).__init__(**processed_kwargs)
+
+
+class Instance(troposphere.opsworks.Instance, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LayerIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 StackId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AgentVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 AmiId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Architecture=NOTHING, # type: Union[str, AWSHelperFn]
+                 AutoScalingType=NOTHING, # type: Union[str, AWSHelperFn]
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 BlockDeviceMappings=NOTHING, # type: List[_BlockDeviceMapping]
+                 EbsOptimized=NOTHING, # type: bool
+                 ElasticIps=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Hostname=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstallUpdatesOnBoot=NOTHING, # type: bool
+                 Os=NOTHING, # type: Union[str, AWSHelperFn]
+                 RootDeviceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 SshKeyName=NOTHING, # type: Union[str, AWSHelperFn]
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tenancy=NOTHING, # type: Union[str, AWSHelperFn]
+                 TimeBasedAutoScaling=NOTHING, # type: _TimeBasedAutoScaling
+                 VirtualizationType=NOTHING, # type: Union[str, AWSHelperFn]
+                 Volumes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            InstanceType=InstanceType,
+            LayerIds=LayerIds,
+            StackId=StackId,
+            AgentVersion=AgentVersion,
+            AmiId=AmiId,
+            Architecture=Architecture,
+            AutoScalingType=AutoScalingType,
+            AvailabilityZone=AvailabilityZone,
+            BlockDeviceMappings=BlockDeviceMappings,
+            EbsOptimized=EbsOptimized,
+            ElasticIps=ElasticIps,
+            Hostname=Hostname,
+            InstallUpdatesOnBoot=InstallUpdatesOnBoot,
+            Os=Os,
+            RootDeviceType=RootDeviceType,
+            SshKeyName=SshKeyName,
+            SubnetId=SubnetId,
+            Tenancy=Tenancy,
+            TimeBasedAutoScaling=TimeBasedAutoScaling,
+            VirtualizationType=VirtualizationType,
+            Volumes=Volumes,
+        )
+        super(Instance, self).__init__(**processed_kwargs)
+
+
+class ShutdownEventConfiguration(troposphere.opsworks.ShutdownEventConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 DelayUntilElbConnectionsDrained=NOTHING, # type: bool
+                 ExecutionTimeout=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DelayUntilElbConnectionsDrained=DelayUntilElbConnectionsDrained,
+            ExecutionTimeout=ExecutionTimeout,
+        )
+        super(ShutdownEventConfiguration, self).__init__(**processed_kwargs)
+
+
+class LifeCycleConfiguration(troposphere.opsworks.LifeCycleConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ShutdownEventConfiguration=NOTHING, # type: _ShutdownEventConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ShutdownEventConfiguration=ShutdownEventConfiguration,
+        )
+        super(LifeCycleConfiguration, self).__init__(**processed_kwargs)
+
+
+class Layer(troposphere.opsworks.Layer, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AutoAssignElasticIps=REQUIRED, # type: bool
+                 AutoAssignPublicIps=REQUIRED, # type: bool
+                 EnableAutoHealing=REQUIRED, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Shortname=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StackId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Attributes=NOTHING, # type: dict
+                 CustomInstanceProfileArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 CustomJson=NOTHING, # type: Union[Union[str, AWSHelperFn], dict]
+                 CustomRecipes=NOTHING, # type: _Recipes
+                 CustomSecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 InstallUpdatesOnBoot=NOTHING, # type: bool
+                 LifecycleEventConfiguration=NOTHING, # type: _LifeCycleConfiguration
+                 LoadBasedAutoScaling=NOTHING, # type: _LoadBasedAutoScaling
+                 Packages=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 VolumeConfigurations=NOTHING, # type: List[_VolumeConfiguration]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AutoAssignElasticIps=AutoAssignElasticIps,
+            AutoAssignPublicIps=AutoAssignPublicIps,
+            EnableAutoHealing=EnableAutoHealing,
+            Name=Name,
+            Shortname=Shortname,
+            StackId=StackId,
+            Type=Type,
+            Attributes=Attributes,
+            CustomInstanceProfileArn=CustomInstanceProfileArn,
+            CustomJson=CustomJson,
+            CustomRecipes=CustomRecipes,
+            CustomSecurityGroupIds=CustomSecurityGroupIds,
+            InstallUpdatesOnBoot=InstallUpdatesOnBoot,
+            LifecycleEventConfiguration=LifecycleEventConfiguration,
+            LoadBasedAutoScaling=LoadBasedAutoScaling,
+            Packages=Packages,
+            VolumeConfigurations=VolumeConfigurations,
+        )
+        super(Layer, self).__init__(**processed_kwargs)
+
+
+class RdsDbInstance(troposphere.opsworks.RdsDbInstance, Mixin):
+    def __init__(self,
+                 title=None,
+                 DbPassword=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DbUser=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RdsDbInstanceArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DbPassword=DbPassword,
+            DbUser=DbUser,
+            RdsDbInstanceArn=RdsDbInstanceArn,
+        )
+        super(RdsDbInstance, self).__init__(**processed_kwargs)
+
+
+class ElasticIp(troposphere.opsworks.ElasticIp, Mixin):
+    def __init__(self,
+                 title=None,
+                 Ip=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Ip=Ip,
+            Name=Name,
+        )
+        super(ElasticIp, self).__init__(**processed_kwargs)
+
+
+class Stack(troposphere.opsworks.Stack, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DefaultInstanceProfileArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceRoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AgentVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 Attributes=NOTHING, # type: dict
+                 ChefConfiguration=NOTHING, # type: _ChefConfiguration
+                 CloneAppIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ClonePermissions=NOTHING, # type: bool
+                 ConfigurationManager=NOTHING, # type: _StackConfigurationManager
+                 CustomCookbooksSource=NOTHING, # type: _Source
+                 CustomJson=NOTHING, # type: Union[Union[str, AWSHelperFn], dict]
+                 DefaultAvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefaultOs=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefaultRootDeviceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefaultSshKeyName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefaultSubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 EcsClusterArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 ElasticIps=NOTHING, # type: List[_ElasticIp]
+                 HostnameTheme=NOTHING, # type: Union[str, AWSHelperFn]
+                 RdsDbInstances=NOTHING, # type: List[_RdsDbInstance]
+                 SourceStackId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 UseCustomCookbooks=NOTHING, # type: bool
+                 UseOpsworksSecurityGroups=NOTHING, # type: bool
+                 VpcId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DefaultInstanceProfileArn=DefaultInstanceProfileArn,
+            Name=Name,
+            ServiceRoleArn=ServiceRoleArn,
+            AgentVersion=AgentVersion,
+            Attributes=Attributes,
+            ChefConfiguration=ChefConfiguration,
+            CloneAppIds=CloneAppIds,
+            ClonePermissions=ClonePermissions,
+            ConfigurationManager=ConfigurationManager,
+            CustomCookbooksSource=CustomCookbooksSource,
+            CustomJson=CustomJson,
+            DefaultAvailabilityZone=DefaultAvailabilityZone,
+            DefaultOs=DefaultOs,
+            DefaultRootDeviceType=DefaultRootDeviceType,
+            DefaultSshKeyName=DefaultSshKeyName,
+            DefaultSubnetId=DefaultSubnetId,
+            EcsClusterArn=EcsClusterArn,
+            ElasticIps=ElasticIps,
+            HostnameTheme=HostnameTheme,
+            RdsDbInstances=RdsDbInstances,
+            SourceStackId=SourceStackId,
+            Tags=Tags,
+            UseCustomCookbooks=UseCustomCookbooks,
+            UseOpsworksSecurityGroups=UseOpsworksSecurityGroups,
+            VpcId=VpcId,
+        )
+        super(Stack, self).__init__(**processed_kwargs)
+
+
+class UserProfile(troposphere.opsworks.UserProfile, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 IamUserArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllowSelfManagement=NOTHING, # type: bool
+                 SshPublicKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 SshUsername=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            IamUserArn=IamUserArn,
+            AllowSelfManagement=AllowSelfManagement,
+            SshPublicKey=SshPublicKey,
+            SshUsername=SshUsername,
+        )
+        super(UserProfile, self).__init__(**processed_kwargs)
+
+
+class Volume(troposphere.opsworks.Volume, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Ec2VolumeId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StackId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MountPoint=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Ec2VolumeId=Ec2VolumeId,
+            StackId=StackId,
+            MountPoint=MountPoint,
+            Name=Name,
+        )
+        super(Volume, self).__init__(**processed_kwargs)
+
+
+class EngineAttribute(troposphere.opsworks.EngineAttribute, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+        )
+        super(EngineAttribute, self).__init__(**processed_kwargs)
+
+
+class Server(troposphere.opsworks.Server, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 InstanceProfileArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceRoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AssociatePublicIpAddress=NOTHING, # type: bool
+                 BackupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 BackupRetentionCount=NOTHING, # type: int
+                 DisableAutomatedBackup=NOTHING, # type: bool
+                 Engine=NOTHING, # type: Union[str, AWSHelperFn]
+                 EngineAttributes=NOTHING, # type: List[_EngineAttribute]
+                 EngineModel=NOTHING, # type: Union[str, AWSHelperFn]
+                 EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 KeyPair=NOTHING, # type: Union[str, AWSHelperFn]
+                 PreferredBackupWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 PreferredMaintenanceWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ServerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            InstanceProfileArn=InstanceProfileArn,
+            InstanceType=InstanceType,
+            ServiceRoleArn=ServiceRoleArn,
+            AssociatePublicIpAddress=AssociatePublicIpAddress,
+            BackupId=BackupId,
+            BackupRetentionCount=BackupRetentionCount,
+            DisableAutomatedBackup=DisableAutomatedBackup,
+            Engine=Engine,
+            EngineAttributes=EngineAttributes,
+            EngineModel=EngineModel,
+            EngineVersion=EngineVersion,
+            KeyPair=KeyPair,
+            PreferredBackupWindow=PreferredBackupWindow,
+            PreferredMaintenanceWindow=PreferredMaintenanceWindow,
+            SecurityGroupIds=SecurityGroupIds,
+            ServerName=ServerName,
+            SubnetIds=SubnetIds,
+        )
+        super(Server, self).__init__(**processed_kwargs)

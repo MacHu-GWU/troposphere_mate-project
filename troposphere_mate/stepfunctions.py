@@ -4,41 +4,58 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.stepfunctions
 
-from troposphere.stepfunctions import Tags
+from troposphere.stepfunctions import (
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Activity(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
+class Activity(troposphere.stepfunctions.Activity, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(Activity, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.stepfunctions.Activity
-
-
-@attr.s
-class StateMachine(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DefinitionString = attr.ib() # type: str
-    RoleArn = attr.ib() # type: str
-    StateMachineName = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.stepfunctions.StateMachine
+class StateMachine(troposphere.stepfunctions.StateMachine, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DefinitionString=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StateMachineName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DefinitionString=DefinitionString,
+            RoleArn=RoleArn,
+            StateMachineName=StateMachineName,
+            Tags=Tags,
+        )
+        super(StateMachine, self).__init__(**processed_kwargs)

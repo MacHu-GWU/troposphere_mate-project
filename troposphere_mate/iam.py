@@ -4,185 +4,258 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.iam
 
-from troposphere.iam import LoginProfile
-from troposphere.iam import boolean
-from troposphere.iam import iam_group_name
-from troposphere.iam import iam_path
-from troposphere.iam import iam_role_name
-from troposphere.iam import iam_user_name
-from troposphere.iam import integer
-from troposphere.iam import status
+from troposphere.iam import (
+    LoginProfile as _LoginProfile,
+    Policy as _Policy,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class AccessKey(AWSObject):
-    title = attr.ib()   # type: str
-    
-    UserName = attr.ib() # type: str
-    Serial = attr.ib(default=NOTHING) # type: integer
-    Status = attr.ib(default=NOTHING) # type: status
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.AccessKey
-
-
-@attr.s
-class PolicyType(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PolicyDocument = attr.ib() # type: tuple
-    PolicyName = attr.ib() # type: str
-    Groups = attr.ib(default=NOTHING) # type: list
-    Roles = attr.ib(default=NOTHING) # type: list
-    Users = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.PolicyType
+class AccessKey(troposphere.iam.AccessKey, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 UserName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Serial=NOTHING, # type: int
+                 Status=NOTHING, # type: str
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            UserName=UserName,
+            Serial=Serial,
+            Status=Status,
+        )
+        super(AccessKey, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Policy(AWSObject):
-    
-    PolicyDocument = attr.ib() # type: tuple
-    PolicyName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.Policy
-
-
-@attr.s
-class Group(AWSObject):
-    title = attr.ib()   # type: str
-    
-    GroupName = attr.ib(default=NOTHING) # type: iam_group_name
-    ManagedPolicyArns = attr.ib(default=NOTHING) # type: list
-    Path = attr.ib(default=NOTHING) # type: iam_path
-    Policies = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.Group
+class PolicyType(troposphere.iam.PolicyType, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PolicyDocument=REQUIRED, # type: Union[dict]
+                 PolicyName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Groups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Roles=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Users=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PolicyDocument=PolicyDocument,
+            PolicyName=PolicyName,
+            Groups=Groups,
+            Roles=Roles,
+            Users=Users,
+        )
+        super(PolicyType, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class InstanceProfile(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Roles = attr.ib() # type: list
-    Path = attr.ib(default=NOTHING) # type: iam_path
-    InstanceProfileName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.InstanceProfile
-
-
-@attr.s
-class Role(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AssumeRolePolicyDocument = attr.ib() # type: tuple
-    ManagedPolicyArns = attr.ib(default=NOTHING) # type: list
-    MaxSessionDuration = attr.ib(default=NOTHING) # type: integer
-    Path = attr.ib(default=NOTHING) # type: iam_path
-    PermissionsBoundary = attr.ib(default=NOTHING) # type: str
-    Policies = attr.ib(default=NOTHING) # type: list
-    RoleName = attr.ib(default=NOTHING) # type: iam_role_name
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.Role
+class Policy(troposphere.iam.Policy, Mixin):
+    def __init__(self,
+                 title=None,
+                 PolicyDocument=REQUIRED, # type: Union[dict]
+                 PolicyName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PolicyDocument=PolicyDocument,
+            PolicyName=PolicyName,
+        )
+        super(Policy, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ServiceLinkedRole(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AWSServiceName = attr.ib() # type: str
-    CustomSuffix = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.ServiceLinkedRole
-
-
-@attr.s
-class LoginProfile(AWSObject):
-    
-    Password = attr.ib() # type: str
-    PasswordResetRequired = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.LoginProfile
+class Group(troposphere.iam.Group, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 GroupName=NOTHING, # type: str
+                 ManagedPolicyArns=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Path=NOTHING, # type: str
+                 Policies=NOTHING, # type: List[_Policy]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            GroupName=GroupName,
+            ManagedPolicyArns=ManagedPolicyArns,
+            Path=Path,
+            Policies=Policies,
+        )
+        super(Group, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class User(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Groups = attr.ib(default=NOTHING) # type: list
-    LoginProfile = attr.ib(default=NOTHING) # type: LoginProfile
-    ManagedPolicyArns = attr.ib(default=NOTHING) # type: list
-    Path = attr.ib(default=NOTHING) # type: iam_path
-    PermissionsBoundary = attr.ib(default=NOTHING) # type: str
-    Policies = attr.ib(default=NOTHING) # type: list
-    UserName = attr.ib(default=NOTHING) # type: iam_user_name
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.User
-
-
-@attr.s
-class UserToGroupAddition(AWSObject):
-    title = attr.ib()   # type: str
-    
-    GroupName = attr.ib() # type: str
-    Users = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iam.UserToGroupAddition
+class InstanceProfile(troposphere.iam.InstanceProfile, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Roles=REQUIRED, # type: list
+                 Path=NOTHING, # type: str
+                 InstanceProfileName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Roles=Roles,
+            Path=Path,
+            InstanceProfileName=InstanceProfileName,
+        )
+        super(InstanceProfile, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ManagedPolicy(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PolicyDocument = attr.ib() # type: tuple
-    Description = attr.ib(default=NOTHING) # type: str
-    Groups = attr.ib(default=NOTHING) # type: list
-    ManagedPolicyName = attr.ib(default=NOTHING) # type: str
-    Path = attr.ib(default=NOTHING) # type: iam_path
-    Roles = attr.ib(default=NOTHING) # type: list
-    Users = attr.ib(default=NOTHING) # type: list
+class Role(troposphere.iam.Role, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AssumeRolePolicyDocument=REQUIRED, # type: Union[dict]
+                 ManagedPolicyArns=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 MaxSessionDuration=NOTHING, # type: int
+                 Path=NOTHING, # type: str
+                 PermissionsBoundary=NOTHING, # type: Union[str, AWSHelperFn]
+                 Policies=NOTHING, # type: List[_Policy]
+                 RoleName=NOTHING, # type: str
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AssumeRolePolicyDocument=AssumeRolePolicyDocument,
+            ManagedPolicyArns=ManagedPolicyArns,
+            MaxSessionDuration=MaxSessionDuration,
+            Path=Path,
+            PermissionsBoundary=PermissionsBoundary,
+            Policies=Policies,
+            RoleName=RoleName,
+            Tags=Tags,
+        )
+        super(Role, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.iam.ManagedPolicy
+class ServiceLinkedRole(troposphere.iam.ServiceLinkedRole, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AWSServiceName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CustomSuffix=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AWSServiceName=AWSServiceName,
+            CustomSuffix=CustomSuffix,
+            Description=Description,
+        )
+        super(ServiceLinkedRole, self).__init__(**processed_kwargs)
+
+
+class LoginProfile(troposphere.iam.LoginProfile, Mixin):
+    def __init__(self,
+                 title=None,
+                 Password=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PasswordResetRequired=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Password=Password,
+            PasswordResetRequired=PasswordResetRequired,
+        )
+        super(LoginProfile, self).__init__(**processed_kwargs)
+
+
+class User(troposphere.iam.User, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Groups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 LoginProfile=NOTHING, # type: _LoginProfile
+                 ManagedPolicyArns=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Path=NOTHING, # type: str
+                 PermissionsBoundary=NOTHING, # type: Union[str, AWSHelperFn]
+                 Policies=NOTHING, # type: List[_Policy]
+                 UserName=NOTHING, # type: str
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Groups=Groups,
+            LoginProfile=LoginProfile,
+            ManagedPolicyArns=ManagedPolicyArns,
+            Path=Path,
+            PermissionsBoundary=PermissionsBoundary,
+            Policies=Policies,
+            UserName=UserName,
+        )
+        super(User, self).__init__(**processed_kwargs)
+
+
+class UserToGroupAddition(troposphere.iam.UserToGroupAddition, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 GroupName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Users=REQUIRED, # type: list
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            GroupName=GroupName,
+            Users=Users,
+        )
+        super(UserToGroupAddition, self).__init__(**processed_kwargs)
+
+
+class ManagedPolicy(troposphere.iam.ManagedPolicy, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PolicyDocument=REQUIRED, # type: Union[dict]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Groups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ManagedPolicyName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Path=NOTHING, # type: str
+                 Roles=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Users=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PolicyDocument=PolicyDocument,
+            Description=Description,
+            Groups=Groups,
+            ManagedPolicyName=ManagedPolicyName,
+            Path=Path,
+            Roles=Roles,
+            Users=Users,
+        )
+        super(ManagedPolicy, self).__init__(**processed_kwargs)

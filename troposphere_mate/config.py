@@ -4,199 +4,268 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.config
 
-from troposphere.config import ConfigSnapshotDeliveryProperties
-from troposphere.config import OrganizationAggregationSource
-from troposphere.config import RecordingGroup
-from troposphere.config import Scope
-from troposphere.config import Source
-from troposphere.config import boolean
+from troposphere.config import (
+    AccountAggregationSources as _AccountAggregationSources,
+    ConfigSnapshotDeliveryProperties as _ConfigSnapshotDeliveryProperties,
+    OrganizationAggregationSource as _OrganizationAggregationSource,
+    RecordingGroup as _RecordingGroup,
+    Scope as _Scope,
+    Source as _Source,
+    SourceDetails as _SourceDetails,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Scope(AWSObject):
-    
-    ComplianceResourceId = attr.ib(default=NOTHING) # type: str
-    ComplianceResourceTypes = attr.ib(default=NOTHING) # type: list
-    TagKey = attr.ib(default=NOTHING) # type: str
-    TagValue = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.Scope
-
-
-@attr.s
-class SourceDetails(AWSObject):
-    
-    EventSource = attr.ib() # type: str
-    MessageType = attr.ib() # type: str
-    MaximumExecutionFrequency = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.SourceDetails
+class Scope(troposphere.config.Scope, Mixin):
+    def __init__(self,
+                 title=None,
+                 ComplianceResourceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ComplianceResourceTypes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 TagKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 TagValue=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ComplianceResourceId=ComplianceResourceId,
+            ComplianceResourceTypes=ComplianceResourceTypes,
+            TagKey=TagKey,
+            TagValue=TagValue,
+        )
+        super(Scope, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Source(AWSObject):
-    
-    Owner = attr.ib() # type: str
-    SourceIdentifier = attr.ib() # type: str
-    SourceDetails = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.Source
-
-
-@attr.s
-class ConfigRule(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Source = attr.ib() # type: Source
-    ConfigRuleName = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    InputParameters = attr.ib(default=NOTHING) # type: dict
-    MaximumExecutionFrequency = attr.ib(default=NOTHING) # type: str
-    Scope = attr.ib(default=NOTHING) # type: Scope
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.ConfigRule
+class SourceDetails(troposphere.config.SourceDetails, Mixin):
+    def __init__(self,
+                 title=None,
+                 EventSource=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MessageType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MaximumExecutionFrequency=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EventSource=EventSource,
+            MessageType=MessageType,
+            MaximumExecutionFrequency=MaximumExecutionFrequency,
+        )
+        super(SourceDetails, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class AggregationAuthorization(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AuthorizedAccountId = attr.ib() # type: str
-    AuthorizedAwsRegion = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.AggregationAuthorization
-
-
-@attr.s
-class OrganizationAggregationSource(AWSObject):
-    
-    RoleArn = attr.ib() # type: str
-    AllAwsRegions = attr.ib(default=NOTHING) # type: boolean
-    AwsRegions = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.OrganizationAggregationSource
+class Source(troposphere.config.Source, Mixin):
+    def __init__(self,
+                 title=None,
+                 Owner=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SourceIdentifier=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SourceDetails=NOTHING, # type: List[_SourceDetails]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Owner=Owner,
+            SourceIdentifier=SourceIdentifier,
+            SourceDetails=SourceDetails,
+        )
+        super(Source, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class AccountAggregationSources(AWSObject):
-    
-    AccountIds = attr.ib() # type: list
-    AllAwsRegions = attr.ib(default=NOTHING) # type: boolean
-    AwsRegions = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.AccountAggregationSources
-
-
-@attr.s
-class ConfigurationAggregator(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ConfigurationAggregatorName = attr.ib() # type: str
-    AccountAggregationSources = attr.ib(default=NOTHING) # type: list
-    OrganizationAggregationSource = attr.ib(default=NOTHING) # type: OrganizationAggregationSource
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.ConfigurationAggregator
-
-
-@attr.s
-class RecordingGroup(AWSObject):
-    
-    AllSupported = attr.ib(default=NOTHING) # type: boolean
-    IncludeGlobalResourceTypes = attr.ib(default=NOTHING) # type: boolean
-    ResourceTypes = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.RecordingGroup
+class ConfigRule(troposphere.config.ConfigRule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Source=REQUIRED, # type: _Source
+                 ConfigRuleName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 InputParameters=NOTHING, # type: dict
+                 MaximumExecutionFrequency=NOTHING, # type: Union[str, AWSHelperFn]
+                 Scope=NOTHING, # type: _Scope
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Source=Source,
+            ConfigRuleName=ConfigRuleName,
+            Description=Description,
+            InputParameters=InputParameters,
+            MaximumExecutionFrequency=MaximumExecutionFrequency,
+            Scope=Scope,
+        )
+        super(ConfigRule, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ConfigurationRecorder(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RoleARN = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    RecordingGroup = attr.ib(default=NOTHING) # type: RecordingGroup
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.ConfigurationRecorder
-
-
-@attr.s
-class ConfigSnapshotDeliveryProperties(AWSObject):
-    
-    DeliveryFrequency = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.config.ConfigSnapshotDeliveryProperties
+class AggregationAuthorization(troposphere.config.AggregationAuthorization, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AuthorizedAccountId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AuthorizedAwsRegion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AuthorizedAccountId=AuthorizedAccountId,
+            AuthorizedAwsRegion=AuthorizedAwsRegion,
+        )
+        super(AggregationAuthorization, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class DeliveryChannel(AWSObject):
-    title = attr.ib()   # type: str
-    
-    S3BucketName = attr.ib() # type: str
-    ConfigSnapshotDeliveryProperties = attr.ib(default=NOTHING) # type: ConfigSnapshotDeliveryProperties
-    Name = attr.ib(default=NOTHING) # type: str
-    S3KeyPrefix = attr.ib(default=NOTHING) # type: str
-    SnsTopicARN = attr.ib(default=NOTHING) # type: str
+class OrganizationAggregationSource(troposphere.config.OrganizationAggregationSource, Mixin):
+    def __init__(self,
+                 title=None,
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllAwsRegions=NOTHING, # type: bool
+                 AwsRegions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RoleArn=RoleArn,
+            AllAwsRegions=AllAwsRegions,
+            AwsRegions=AwsRegions,
+        )
+        super(OrganizationAggregationSource, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.config.DeliveryChannel
+class AccountAggregationSources(troposphere.config.AccountAggregationSources, Mixin):
+    def __init__(self,
+                 title=None,
+                 AccountIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 AllAwsRegions=NOTHING, # type: bool
+                 AwsRegions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AccountIds=AccountIds,
+            AllAwsRegions=AllAwsRegions,
+            AwsRegions=AwsRegions,
+        )
+        super(AccountAggregationSources, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class RemediationConfiguration(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ConfigRuleName = attr.ib() # type: str
-    TargetId = attr.ib() # type: str
-    TargetType = attr.ib() # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    ResourceType = attr.ib(default=NOTHING) # type: str
-    TargetVersion = attr.ib(default=NOTHING) # type: str
+class ConfigurationAggregator(troposphere.config.ConfigurationAggregator, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ConfigurationAggregatorName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccountAggregationSources=NOTHING, # type: List[_AccountAggregationSources]
+                 OrganizationAggregationSource=NOTHING, # type: _OrganizationAggregationSource
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ConfigurationAggregatorName=ConfigurationAggregatorName,
+            AccountAggregationSources=AccountAggregationSources,
+            OrganizationAggregationSource=OrganizationAggregationSource,
+        )
+        super(ConfigurationAggregator, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.config.RemediationConfiguration
+class RecordingGroup(troposphere.config.RecordingGroup, Mixin):
+    def __init__(self,
+                 title=None,
+                 AllSupported=NOTHING, # type: bool
+                 IncludeGlobalResourceTypes=NOTHING, # type: bool
+                 ResourceTypes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AllSupported=AllSupported,
+            IncludeGlobalResourceTypes=IncludeGlobalResourceTypes,
+            ResourceTypes=ResourceTypes,
+        )
+        super(RecordingGroup, self).__init__(**processed_kwargs)
+
+
+class ConfigurationRecorder(troposphere.config.ConfigurationRecorder, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 RecordingGroup=NOTHING, # type: _RecordingGroup
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RoleARN=RoleARN,
+            Name=Name,
+            RecordingGroup=RecordingGroup,
+        )
+        super(ConfigurationRecorder, self).__init__(**processed_kwargs)
+
+
+class ConfigSnapshotDeliveryProperties(troposphere.config.ConfigSnapshotDeliveryProperties, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeliveryFrequency=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeliveryFrequency=DeliveryFrequency,
+        )
+        super(ConfigSnapshotDeliveryProperties, self).__init__(**processed_kwargs)
+
+
+class DeliveryChannel(troposphere.config.DeliveryChannel, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 S3BucketName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ConfigSnapshotDeliveryProperties=NOTHING, # type: _ConfigSnapshotDeliveryProperties
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3KeyPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 SnsTopicARN=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            S3BucketName=S3BucketName,
+            ConfigSnapshotDeliveryProperties=ConfigSnapshotDeliveryProperties,
+            Name=Name,
+            S3KeyPrefix=S3KeyPrefix,
+            SnsTopicARN=SnsTopicARN,
+        )
+        super(DeliveryChannel, self).__init__(**processed_kwargs)
+
+
+class RemediationConfiguration(troposphere.config.RemediationConfiguration, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ConfigRuleName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 ResourceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 TargetVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ConfigRuleName=ConfigRuleName,
+            TargetId=TargetId,
+            TargetType=TargetType,
+            Parameters=Parameters,
+            ResourceType=ResourceType,
+            TargetVersion=TargetVersion,
+        )
+        super(RemediationConfiguration, self).__init__(**processed_kwargs)

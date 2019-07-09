@@ -4,45 +4,62 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.mediastore
 
-from troposphere.mediastore import boolean
-from troposphere.mediastore import integer
+from troposphere.mediastore import (
+    CorsRule as _CorsRule,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class CorsRule(AWSObject):
-    
-    AllowedHeaders = attr.ib(default=NOTHING) # type: list
-    AllowedMethods = attr.ib(default=NOTHING) # type: list
-    AllowedOrigins = attr.ib(default=NOTHING) # type: list
-    ExposeHeaders = attr.ib(default=NOTHING) # type: list
-    MaxAgeSeconds = attr.ib(default=NOTHING) # type: integer
+class CorsRule(troposphere.mediastore.CorsRule, Mixin):
+    def __init__(self,
+                 title=None,
+                 AllowedHeaders=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 AllowedMethods=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 AllowedOrigins=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ExposeHeaders=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 MaxAgeSeconds=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AllowedHeaders=AllowedHeaders,
+            AllowedMethods=AllowedMethods,
+            AllowedOrigins=AllowedOrigins,
+            ExposeHeaders=ExposeHeaders,
+            MaxAgeSeconds=MaxAgeSeconds,
+        )
+        super(CorsRule, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.mediastore.CorsRule
-
-
-@attr.s
-class Container(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ContainerName = attr.ib() # type: str
-    AccessLoggingEnabled = attr.ib(default=NOTHING) # type: boolean
-    CorsPolicy = attr.ib(default=NOTHING) # type: list
-    LifecyclePolicy = attr.ib(default=NOTHING) # type: str
-    Policy = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.mediastore.Container
+class Container(troposphere.mediastore.Container, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ContainerName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccessLoggingEnabled=NOTHING, # type: bool
+                 CorsPolicy=NOTHING, # type: List[_CorsRule]
+                 LifecyclePolicy=NOTHING, # type: Union[str, AWSHelperFn]
+                 Policy=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ContainerName=ContainerName,
+            AccessLoggingEnabled=AccessLoggingEnabled,
+            CorsPolicy=CorsPolicy,
+            LifecyclePolicy=LifecyclePolicy,
+            Policy=Policy,
+        )
+        super(Container, self).__init__(**processed_kwargs)

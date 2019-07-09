@@ -4,372 +4,497 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.ssm
 
-from troposphere.ssm import InstanceAssociationOutputLocation
-from troposphere.ssm import LoggingInfo
-from troposphere.ssm import MaintenanceWindowAutomationParameters
-from troposphere.ssm import MaintenanceWindowLambdaParameters
-from troposphere.ssm import MaintenanceWindowRunCommandParameters
-from troposphere.ssm import MaintenanceWindowStepFunctionsParameters
-from troposphere.ssm import NotificationConfig
-from troposphere.ssm import PatchFilterGroup
-from troposphere.ssm import RuleGroup
-from troposphere.ssm import S3OutputLocation
-from troposphere.ssm import Tags
-from troposphere.ssm import TaskInvocationParameters
-from troposphere.ssm import boolean
-from troposphere.ssm import compliance_level
-from troposphere.ssm import integer
-from troposphere.ssm import json_checker
-from troposphere.ssm import notification_event
-from troposphere.ssm import notification_type
-from troposphere.ssm import operating_system
-from troposphere.ssm import s3_bucket_name
-from troposphere.ssm import task_type
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class NotificationConfig(AWSObject):
-    
-    NotificationArn = attr.ib(default=NOTHING) # type: str
-    NotificationEvents = attr.ib(default=NOTHING) # type: notification_event
-    NotificationType = attr.ib(default=NOTHING) # type: notification_type
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.NotificationConfig
-
-
-@attr.s
-class LoggingInfo(AWSObject):
-    
-    Region = attr.ib() # type: str
-    S3Bucket = attr.ib() # type: s3_bucket_name
-    S3Prefix = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.LoggingInfo
-
-
-@attr.s
-class MaintenanceWindowAutomationParameters(AWSObject):
-    
-    DocumentVersion = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.MaintenanceWindowAutomationParameters
-
-
-@attr.s
-class MaintenanceWindowLambdaParameters(AWSObject):
-    
-    ClientContext = attr.ib(default=NOTHING) # type: str
-    Payload = attr.ib(default=NOTHING) # type: json_checker
-    Qualifier = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.MaintenanceWindowLambdaParameters
-
-
-@attr.s
-class MaintenanceWindowRunCommandParameters(AWSObject):
-    
-    Comment = attr.ib(default=NOTHING) # type: str
-    DocumentHash = attr.ib(default=NOTHING) # type: str
-    DocumentHashType = attr.ib(default=NOTHING) # type: str
-    NotificationConfig = attr.ib(default=NOTHING) # type: NotificationConfig
-    OutputS3BucketName = attr.ib(default=NOTHING) # type: s3_bucket_name
-    OutputS3KeyPrefix = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    ServiceRoleArn = attr.ib(default=NOTHING) # type: str
-    TimeoutSeconds = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.MaintenanceWindowRunCommandParameters
-
-
-@attr.s
-class MaintenanceWindowStepFunctionsParameters(AWSObject):
-    
-    Input = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.MaintenanceWindowStepFunctionsParameters
-
-
-@attr.s
-class PatchFilter(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Values = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.PatchFilter
-
-
-@attr.s
-class PatchFilterGroup(AWSObject):
-    
-    PatchFilters = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.PatchFilterGroup
-
-
-@attr.s
-class Rule(AWSObject):
-    
-    ApproveAfterDays = attr.ib(default=NOTHING) # type: integer
-    ComplianceLevel = attr.ib(default=NOTHING) # type: compliance_level
-    PatchFilterGroup = attr.ib(default=NOTHING) # type: PatchFilterGroup
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.Rule
-
-
-@attr.s
-class RuleGroup(AWSObject):
-    
-    PatchRules = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.RuleGroup
-
-
-@attr.s
-class TaskInvocationParameters(AWSObject):
-    
-    MaintenanceWindowAutomationParameters = attr.ib(default=NOTHING) # type: MaintenanceWindowAutomationParameters
-    MaintenanceWindowLambdaParameters = attr.ib(default=NOTHING) # type: MaintenanceWindowLambdaParameters
-    MaintenanceWindowRunCommandParameters = attr.ib(default=NOTHING) # type: MaintenanceWindowRunCommandParameters
-    MaintenanceWindowStepFunctionsParameters = attr.ib(default=NOTHING) # type: MaintenanceWindowStepFunctionsParameters
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.TaskInvocationParameters
-
-
-@attr.s
-class Targets(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Values = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.Targets
-
-
-@attr.s
-class S3OutputLocation(AWSObject):
-    
-    OutputS3BucketName = attr.ib(default=NOTHING) # type: str
-    OutputS3KeyPrefix = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.S3OutputLocation
-
-
-@attr.s
-class InstanceAssociationOutputLocation(AWSObject):
-    
-    S3Location = attr.ib(default=NOTHING) # type: S3OutputLocation
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.InstanceAssociationOutputLocation
-
-
-@attr.s
-class Association(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    AssociationName = attr.ib(default=NOTHING) # type: str
-    DocumentVersion = attr.ib(default=NOTHING) # type: str
-    InstanceId = attr.ib(default=NOTHING) # type: str
-    OutputLocation = attr.ib(default=NOTHING) # type: InstanceAssociationOutputLocation
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    ScheduleExpression = attr.ib(default=NOTHING) # type: str
-    Targets = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.Association
-
-
-@attr.s
-class Document(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Content = attr.ib() # type: dict
-    DocumentType = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.Document
-
-
-@attr.s
-class MaintenanceWindow(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AllowUnassociatedTargets = attr.ib() # type: boolean
-    Cutoff = attr.ib() # type: integer
-    Duration = attr.ib() # type: integer
-    Name = attr.ib() # type: str
-    Schedule = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.MaintenanceWindow
-
-
-@attr.s
-class MaintenanceWindowTarget(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ResourceType = attr.ib() # type: str
-    Targets = attr.ib() # type: list
-    WindowId = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    OwnerInformation = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.MaintenanceWindowTarget
-
-
-@attr.s
-class MaintenanceWindowTask(AWSObject):
-    title = attr.ib()   # type: str
-    
-    MaxErrors = attr.ib() # type: str
-    Priority = attr.ib() # type: integer
-    ServiceRoleArn = attr.ib() # type: str
-    Targets = attr.ib() # type: list
-    TaskArn = attr.ib() # type: str
-    TaskType = attr.ib() # type: task_type
-    Description = attr.ib(default=NOTHING) # type: str
-    LoggingInfo = attr.ib(default=NOTHING) # type: LoggingInfo
-    MaxConcurrency = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    TaskInvocationParameters = attr.ib(default=NOTHING) # type: TaskInvocationParameters
-    TaskParameters = attr.ib(default=NOTHING) # type: dict
-    WindowId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.MaintenanceWindowTask
-
-
-@attr.s
-class Parameter(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Type = attr.ib() # type: str
-    Value = attr.ib() # type: str
-    AllowedPattern = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.Parameter
-
-
-@attr.s
-class PatchSource(AWSObject):
-    
-    Configuration = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Products = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.PatchSource
-
-
-@attr.s
-class PatchBaseline(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    ApprovalRules = attr.ib(default=NOTHING) # type: RuleGroup
-    ApprovedPatches = attr.ib(default=NOTHING) # type: list
-    ApprovedPatchesComplianceLevel = attr.ib(default=NOTHING) # type: compliance_level
-    ApprovedPatchesEnableNonSecurity = attr.ib(default=NOTHING) # type: boolean
-    Description = attr.ib(default=NOTHING) # type: str
-    GlobalFilters = attr.ib(default=NOTHING) # type: PatchFilterGroup
-    OperatingSystem = attr.ib(default=NOTHING) # type: operating_system
-    PatchGroups = attr.ib(default=NOTHING) # type: list
-    RejectedPatches = attr.ib(default=NOTHING) # type: list
-    RejectedPatchesAction = attr.ib(default=NOTHING) # type: str
-    Sources = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.PatchBaseline
-
-
-@attr.s
-class ResourceDataSync(AWSObject):
-    title = attr.ib()   # type: str
-    
-    BucketName = attr.ib() # type: str
-    BucketRegion = attr.ib() # type: str
-    SyncFormat = attr.ib() # type: str
-    SyncName = attr.ib() # type: str
-    BucketPrefix = attr.ib(default=NOTHING) # type: str
-    KMSKeyArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ssm.ResourceDataSync
+from troposphere.ssm import (
+    InstanceAssociationOutputLocation as _InstanceAssociationOutputLocation,
+    LoggingInfo as _LoggingInfo,
+    MaintenanceWindowAutomationParameters as _MaintenanceWindowAutomationParameters,
+    MaintenanceWindowLambdaParameters as _MaintenanceWindowLambdaParameters,
+    MaintenanceWindowRunCommandParameters as _MaintenanceWindowRunCommandParameters,
+    MaintenanceWindowStepFunctionsParameters as _MaintenanceWindowStepFunctionsParameters,
+    NotificationConfig as _NotificationConfig,
+    PatchFilter as _PatchFilter,
+    PatchFilterGroup as _PatchFilterGroup,
+    PatchSource as _PatchSource,
+    Rule as _Rule,
+    RuleGroup as _RuleGroup,
+    S3OutputLocation as _S3OutputLocation,
+    Tags as _Tags,
+    Targets as _Targets,
+    TaskInvocationParameters as _TaskInvocationParameters,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class NotificationConfig(troposphere.ssm.NotificationConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 NotificationArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 NotificationEvents=NOTHING, # type: List[str]
+                 NotificationType=NOTHING, # type: str
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            NotificationArn=NotificationArn,
+            NotificationEvents=NotificationEvents,
+            NotificationType=NotificationType,
+        )
+        super(NotificationConfig, self).__init__(**processed_kwargs)
+
+
+class LoggingInfo(troposphere.ssm.LoggingInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 Region=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3Bucket=REQUIRED, # type: str
+                 S3Prefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Region=Region,
+            S3Bucket=S3Bucket,
+            S3Prefix=S3Prefix,
+        )
+        super(LoggingInfo, self).__init__(**processed_kwargs)
+
+
+class MaintenanceWindowAutomationParameters(troposphere.ssm.MaintenanceWindowAutomationParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 DocumentVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DocumentVersion=DocumentVersion,
+            Parameters=Parameters,
+        )
+        super(MaintenanceWindowAutomationParameters, self).__init__(**processed_kwargs)
+
+
+class MaintenanceWindowLambdaParameters(troposphere.ssm.MaintenanceWindowLambdaParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 ClientContext=NOTHING, # type: Union[str, AWSHelperFn]
+                 Payload=NOTHING, # type: json_checker
+                 Qualifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ClientContext=ClientContext,
+            Payload=Payload,
+            Qualifier=Qualifier,
+        )
+        super(MaintenanceWindowLambdaParameters, self).__init__(**processed_kwargs)
+
+
+class MaintenanceWindowRunCommandParameters(troposphere.ssm.MaintenanceWindowRunCommandParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Comment=NOTHING, # type: Union[str, AWSHelperFn]
+                 DocumentHash=NOTHING, # type: Union[str, AWSHelperFn]
+                 DocumentHashType=NOTHING, # type: Union[str, AWSHelperFn]
+                 NotificationConfig=NOTHING, # type: _NotificationConfig
+                 OutputS3BucketName=NOTHING, # type: str
+                 OutputS3KeyPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 ServiceRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 TimeoutSeconds=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Comment=Comment,
+            DocumentHash=DocumentHash,
+            DocumentHashType=DocumentHashType,
+            NotificationConfig=NotificationConfig,
+            OutputS3BucketName=OutputS3BucketName,
+            OutputS3KeyPrefix=OutputS3KeyPrefix,
+            Parameters=Parameters,
+            ServiceRoleArn=ServiceRoleArn,
+            TimeoutSeconds=TimeoutSeconds,
+        )
+        super(MaintenanceWindowRunCommandParameters, self).__init__(**processed_kwargs)
+
+
+class MaintenanceWindowStepFunctionsParameters(troposphere.ssm.MaintenanceWindowStepFunctionsParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Input=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Input=Input,
+            Name=Name,
+        )
+        super(MaintenanceWindowStepFunctionsParameters, self).__init__(**processed_kwargs)
+
+
+class PatchFilter(troposphere.ssm.PatchFilter, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Values=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Values=Values,
+        )
+        super(PatchFilter, self).__init__(**processed_kwargs)
+
+
+class PatchFilterGroup(troposphere.ssm.PatchFilterGroup, Mixin):
+    def __init__(self,
+                 title=None,
+                 PatchFilters=NOTHING, # type: List[_PatchFilter]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PatchFilters=PatchFilters,
+        )
+        super(PatchFilterGroup, self).__init__(**processed_kwargs)
+
+
+class Rule(troposphere.ssm.Rule, Mixin):
+    def __init__(self,
+                 title=None,
+                 ApproveAfterDays=NOTHING, # type: int
+                 ComplianceLevel=NOTHING, # type: str
+                 PatchFilterGroup=NOTHING, # type: _PatchFilterGroup
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ApproveAfterDays=ApproveAfterDays,
+            ComplianceLevel=ComplianceLevel,
+            PatchFilterGroup=PatchFilterGroup,
+        )
+        super(Rule, self).__init__(**processed_kwargs)
+
+
+class RuleGroup(troposphere.ssm.RuleGroup, Mixin):
+    def __init__(self,
+                 title=None,
+                 PatchRules=NOTHING, # type: List[_Rule]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PatchRules=PatchRules,
+        )
+        super(RuleGroup, self).__init__(**processed_kwargs)
+
+
+class TaskInvocationParameters(troposphere.ssm.TaskInvocationParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaintenanceWindowAutomationParameters=NOTHING, # type: _MaintenanceWindowAutomationParameters
+                 MaintenanceWindowLambdaParameters=NOTHING, # type: _MaintenanceWindowLambdaParameters
+                 MaintenanceWindowRunCommandParameters=NOTHING, # type: _MaintenanceWindowRunCommandParameters
+                 MaintenanceWindowStepFunctionsParameters=NOTHING, # type: _MaintenanceWindowStepFunctionsParameters
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaintenanceWindowAutomationParameters=MaintenanceWindowAutomationParameters,
+            MaintenanceWindowLambdaParameters=MaintenanceWindowLambdaParameters,
+            MaintenanceWindowRunCommandParameters=MaintenanceWindowRunCommandParameters,
+            MaintenanceWindowStepFunctionsParameters=MaintenanceWindowStepFunctionsParameters,
+        )
+        super(TaskInvocationParameters, self).__init__(**processed_kwargs)
+
+
+class Targets(troposphere.ssm.Targets, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Values=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Values=Values,
+        )
+        super(Targets, self).__init__(**processed_kwargs)
+
+
+class S3OutputLocation(troposphere.ssm.S3OutputLocation, Mixin):
+    def __init__(self,
+                 title=None,
+                 OutputS3BucketName=NOTHING, # type: Union[str, AWSHelperFn]
+                 OutputS3KeyPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OutputS3BucketName=OutputS3BucketName,
+            OutputS3KeyPrefix=OutputS3KeyPrefix,
+        )
+        super(S3OutputLocation, self).__init__(**processed_kwargs)
+
+
+class InstanceAssociationOutputLocation(troposphere.ssm.InstanceAssociationOutputLocation, Mixin):
+    def __init__(self,
+                 title=None,
+                 S3Location=NOTHING, # type: _S3OutputLocation
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            S3Location=S3Location,
+        )
+        super(InstanceAssociationOutputLocation, self).__init__(**processed_kwargs)
+
+
+class Association(troposphere.ssm.Association, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AssociationName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DocumentVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 OutputLocation=NOTHING, # type: _InstanceAssociationOutputLocation
+                 Parameters=NOTHING, # type: dict
+                 ScheduleExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 Targets=NOTHING, # type: List[_Targets]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            AssociationName=AssociationName,
+            DocumentVersion=DocumentVersion,
+            InstanceId=InstanceId,
+            OutputLocation=OutputLocation,
+            Parameters=Parameters,
+            ScheduleExpression=ScheduleExpression,
+            Targets=Targets,
+        )
+        super(Association, self).__init__(**processed_kwargs)
+
+
+class Document(troposphere.ssm.Document, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Content=REQUIRED, # type: dict
+                 DocumentType=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Content=Content,
+            DocumentType=DocumentType,
+            Tags=Tags,
+        )
+        super(Document, self).__init__(**processed_kwargs)
+
+
+class MaintenanceWindow(troposphere.ssm.MaintenanceWindow, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AllowUnassociatedTargets=REQUIRED, # type: bool
+                 Cutoff=REQUIRED, # type: int
+                 Duration=REQUIRED, # type: int
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Schedule=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AllowUnassociatedTargets=AllowUnassociatedTargets,
+            Cutoff=Cutoff,
+            Duration=Duration,
+            Name=Name,
+            Schedule=Schedule,
+            Description=Description,
+        )
+        super(MaintenanceWindow, self).__init__(**processed_kwargs)
+
+
+class MaintenanceWindowTarget(troposphere.ssm.MaintenanceWindowTarget, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ResourceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Targets=REQUIRED, # type: List[_Targets]
+                 WindowId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 OwnerInformation=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ResourceType=ResourceType,
+            Targets=Targets,
+            WindowId=WindowId,
+            Description=Description,
+            Name=Name,
+            OwnerInformation=OwnerInformation,
+        )
+        super(MaintenanceWindowTarget, self).__init__(**processed_kwargs)
+
+
+class MaintenanceWindowTask(troposphere.ssm.MaintenanceWindowTask, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MaxErrors=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Priority=REQUIRED, # type: int
+                 ServiceRoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Targets=REQUIRED, # type: List[_Targets]
+                 TaskArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TaskType=REQUIRED, # type: str
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 LoggingInfo=NOTHING, # type: _LoggingInfo
+                 MaxConcurrency=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 TaskInvocationParameters=NOTHING, # type: _TaskInvocationParameters
+                 TaskParameters=NOTHING, # type: dict
+                 WindowId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MaxErrors=MaxErrors,
+            Priority=Priority,
+            ServiceRoleArn=ServiceRoleArn,
+            Targets=Targets,
+            TaskArn=TaskArn,
+            TaskType=TaskType,
+            Description=Description,
+            LoggingInfo=LoggingInfo,
+            MaxConcurrency=MaxConcurrency,
+            Name=Name,
+            TaskInvocationParameters=TaskInvocationParameters,
+            TaskParameters=TaskParameters,
+            WindowId=WindowId,
+        )
+        super(MaintenanceWindowTask, self).__init__(**processed_kwargs)
+
+
+class Parameter(troposphere.ssm.Parameter, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllowedPattern=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Type=Type,
+            Value=Value,
+            AllowedPattern=AllowedPattern,
+            Description=Description,
+            Name=Name,
+        )
+        super(Parameter, self).__init__(**processed_kwargs)
+
+
+class PatchSource(troposphere.ssm.PatchSource, Mixin):
+    def __init__(self,
+                 title=None,
+                 Configuration=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Products=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Configuration=Configuration,
+            Name=Name,
+            Products=Products,
+        )
+        super(PatchSource, self).__init__(**processed_kwargs)
+
+
+class PatchBaseline(troposphere.ssm.PatchBaseline, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ApprovalRules=NOTHING, # type: _RuleGroup
+                 ApprovedPatches=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ApprovedPatchesComplianceLevel=NOTHING, # type: str
+                 ApprovedPatchesEnableNonSecurity=NOTHING, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 GlobalFilters=NOTHING, # type: _PatchFilterGroup
+                 OperatingSystem=NOTHING, # type: str
+                 PatchGroups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 RejectedPatches=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 RejectedPatchesAction=NOTHING, # type: Union[str, AWSHelperFn]
+                 Sources=NOTHING, # type: List[_PatchSource]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            ApprovalRules=ApprovalRules,
+            ApprovedPatches=ApprovedPatches,
+            ApprovedPatchesComplianceLevel=ApprovedPatchesComplianceLevel,
+            ApprovedPatchesEnableNonSecurity=ApprovedPatchesEnableNonSecurity,
+            Description=Description,
+            GlobalFilters=GlobalFilters,
+            OperatingSystem=OperatingSystem,
+            PatchGroups=PatchGroups,
+            RejectedPatches=RejectedPatches,
+            RejectedPatchesAction=RejectedPatchesAction,
+            Sources=Sources,
+            Tags=Tags,
+        )
+        super(PatchBaseline, self).__init__(**processed_kwargs)
+
+
+class ResourceDataSync(troposphere.ssm.ResourceDataSync, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 BucketName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BucketRegion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SyncFormat=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SyncName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BucketPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 KMSKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            BucketName=BucketName,
+            BucketRegion=BucketRegion,
+            SyncFormat=SyncFormat,
+            SyncName=SyncName,
+            BucketPrefix=BucketPrefix,
+            KMSKeyArn=KMSKeyArn,
+        )
+        super(ResourceDataSync, self).__init__(**processed_kwargs)

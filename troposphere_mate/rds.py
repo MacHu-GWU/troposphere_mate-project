@@ -4,296 +4,446 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.rds
 
-from troposphere.rds import ScalingConfiguration
-from troposphere.rds import boolean
-from troposphere.rds import network_port
-from troposphere.rds import positive_integer
-from troposphere.rds import validate_backup_retention_period
-from troposphere.rds import validate_backup_window
-from troposphere.rds import validate_capacity
-from troposphere.rds import validate_engine
-from troposphere.rds import validate_engine_mode
-from troposphere.rds import validate_iops
-from troposphere.rds import validate_license_model
+from troposphere.rds import (
+    OptionConfiguration as _OptionConfiguration,
+    OptionSetting as _OptionSetting,
+    ProcessorFeature as _ProcessorFeature,
+    ScalingConfiguration as _ScalingConfiguration,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ProcessorFeature(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.ProcessorFeature
-
-
-@attr.s
-class DBInstance(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DBInstanceClass = attr.ib() # type: str
-    AllocatedStorage = attr.ib(default=NOTHING) # type: positive_integer
-    AllowMajorVersionUpgrade = attr.ib(default=NOTHING) # type: boolean
-    AutoMinorVersionUpgrade = attr.ib(default=NOTHING) # type: boolean
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    BackupRetentionPeriod = attr.ib(default=NOTHING) # type: validate_backup_retention_period
-    CharacterSetName = attr.ib(default=NOTHING) # type: str
-    CopyTagsToSnapshot = attr.ib(default=NOTHING) # type: boolean
-    DBClusterIdentifier = attr.ib(default=NOTHING) # type: str
-    DBInstanceIdentifier = attr.ib(default=NOTHING) # type: str
-    DBName = attr.ib(default=NOTHING) # type: str
-    DBParameterGroupName = attr.ib(default=NOTHING) # type: str
-    DBSecurityGroups = attr.ib(default=NOTHING) # type: list
-    DBSnapshotIdentifier = attr.ib(default=NOTHING) # type: str
-    DBSubnetGroupName = attr.ib(default=NOTHING) # type: str
-    DeleteAutomatedBackups = attr.ib(default=NOTHING) # type: boolean
-    DeletionProtection = attr.ib(default=NOTHING) # type: boolean
-    Domain = attr.ib(default=NOTHING) # type: str
-    DomainIAMRoleName = attr.ib(default=NOTHING) # type: str
-    EnableCloudwatchLogsExports = attr.ib(default=NOTHING) # type: list
-    EnableIAMDatabaseAuthentication = attr.ib(default=NOTHING) # type: boolean
-    EnablePerformanceInsights = attr.ib(default=NOTHING) # type: boolean
-    Engine = attr.ib(default=NOTHING) # type: validate_engine
-    EngineVersion = attr.ib(default=NOTHING) # type: str
-    Iops = attr.ib(default=NOTHING) # type: validate_iops
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    LicenseModel = attr.ib(default=NOTHING) # type: validate_license_model
-    MasterUsername = attr.ib(default=NOTHING) # type: str
-    MasterUserPassword = attr.ib(default=NOTHING) # type: str
-    MonitoringInterval = attr.ib(default=NOTHING) # type: positive_integer
-    MonitoringRoleArn = attr.ib(default=NOTHING) # type: str
-    MultiAZ = attr.ib(default=NOTHING) # type: boolean
-    OptionGroupName = attr.ib(default=NOTHING) # type: str
-    PerformanceInsightsKMSKeyId = attr.ib(default=NOTHING) # type: str
-    PerformanceInsightsRetentionPeriod = attr.ib(default=NOTHING) # type: positive_integer
-    Port = attr.ib(default=NOTHING) # type: network_port
-    PreferredBackupWindow = attr.ib(default=NOTHING) # type: validate_backup_window
-    PreferredMaintenanceWindow = attr.ib(default=NOTHING) # type: str
-    ProcessorFeatures = attr.ib(default=NOTHING) # type: list
-    PromotionTier = attr.ib(default=NOTHING) # type: positive_integer
-    PubliclyAccessible = attr.ib(default=NOTHING) # type: boolean
-    SourceDBInstanceIdentifier = attr.ib(default=NOTHING) # type: str
-    SourceRegion = attr.ib(default=NOTHING) # type: str
-    StorageEncrypted = attr.ib(default=NOTHING) # type: boolean
-    StorageType = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    UseDefaultProcessorFeatures = attr.ib(default=NOTHING) # type: boolean
-    Timezone = attr.ib(default=NOTHING) # type: str
-    VPCSecurityGroups = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.DBInstance
+class ProcessorFeature(troposphere.rds.ProcessorFeature, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+        )
+        super(ProcessorFeature, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class DBParameterGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib(default=NOTHING) # type: str
-    Family = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.DBParameterGroup
-
-
-@attr.s
-class DBSubnetGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DBSubnetGroupDescription = attr.ib() # type: str
-    SubnetIds = attr.ib() # type: list
-    DBSubnetGroupName = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.DBSubnetGroup
-
-
-@attr.s
-class RDSSecurityGroup(AWSObject):
-    
-    CIDRIP = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupId = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupName = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupOwnerId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.RDSSecurityGroup
-
-
-@attr.s
-class DBSecurityGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DBSecurityGroupIngress = attr.ib() # type: list
-    GroupDescription = attr.ib() # type: str
-    EC2VpcId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.DBSecurityGroup
-
-
-@attr.s
-class DBSecurityGroupIngress(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DBSecurityGroupName = attr.ib() # type: str
-    CIDRIP = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupId = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupName = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupOwnerId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.DBSecurityGroupIngress
-
-
-@attr.s
-class EventSubscription(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SnsTopicArn = attr.ib() # type: str
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-    EventCategories = attr.ib(default=NOTHING) # type: list
-    SourceIds = attr.ib(default=NOTHING) # type: list
-    SourceType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.EventSubscription
-
-
-@attr.s
-class OptionSetting(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.OptionSetting
-
-
-@attr.s
-class OptionConfiguration(AWSObject):
-    
-    OptionName = attr.ib() # type: str
-    DBSecurityGroupMemberships = attr.ib(default=NOTHING) # type: list
-    OptionSettings = attr.ib(default=NOTHING) # type: list
-    OptionVersion = attr.ib(default=NOTHING) # type: str
-    Port = attr.ib(default=NOTHING) # type: network_port
-    VpcSecurityGroupMemberships = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.OptionConfiguration
+class DBInstance(troposphere.rds.DBInstance, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DBInstanceClass=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllocatedStorage=NOTHING, # type: int
+                 AllowMajorVersionUpgrade=NOTHING, # type: bool
+                 AutoMinorVersionUpgrade=NOTHING, # type: bool
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 BackupRetentionPeriod=NOTHING, # type: Any
+                 CharacterSetName=NOTHING, # type: Union[str, AWSHelperFn]
+                 CopyTagsToSnapshot=NOTHING, # type: bool
+                 DBClusterIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBInstanceIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBParameterGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBSecurityGroups=NOTHING, # type: list
+                 DBSnapshotIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeleteAutomatedBackups=NOTHING, # type: bool
+                 DeletionProtection=NOTHING, # type: bool
+                 Domain=NOTHING, # type: Union[str, AWSHelperFn]
+                 DomainIAMRoleName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EnableCloudwatchLogsExports=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 EnableIAMDatabaseAuthentication=NOTHING, # type: bool
+                 EnablePerformanceInsights=NOTHING, # type: bool
+                 Engine=NOTHING, # type: Any
+                 EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 Iops=NOTHING, # type: Any
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LicenseModel=NOTHING, # type: Any
+                 MasterUsername=NOTHING, # type: Union[str, AWSHelperFn]
+                 MasterUserPassword=NOTHING, # type: Union[str, AWSHelperFn]
+                 MonitoringInterval=NOTHING, # type: int
+                 MonitoringRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 MultiAZ=NOTHING, # type: bool
+                 OptionGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 PerformanceInsightsKMSKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 PerformanceInsightsRetentionPeriod=NOTHING, # type: int
+                 Port=NOTHING, # type: int
+                 PreferredBackupWindow=NOTHING, # type: Any
+                 PreferredMaintenanceWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProcessorFeatures=NOTHING, # type: List[_ProcessorFeature]
+                 PromotionTier=NOTHING, # type: int
+                 PubliclyAccessible=NOTHING, # type: bool
+                 SourceDBInstanceIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceRegion=NOTHING, # type: Union[str, AWSHelperFn]
+                 StorageEncrypted=NOTHING, # type: bool
+                 StorageType=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 UseDefaultProcessorFeatures=NOTHING, # type: bool
+                 Timezone=NOTHING, # type: Union[str, AWSHelperFn]
+                 VPCSecurityGroups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DBInstanceClass=DBInstanceClass,
+            AllocatedStorage=AllocatedStorage,
+            AllowMajorVersionUpgrade=AllowMajorVersionUpgrade,
+            AutoMinorVersionUpgrade=AutoMinorVersionUpgrade,
+            AvailabilityZone=AvailabilityZone,
+            BackupRetentionPeriod=BackupRetentionPeriod,
+            CharacterSetName=CharacterSetName,
+            CopyTagsToSnapshot=CopyTagsToSnapshot,
+            DBClusterIdentifier=DBClusterIdentifier,
+            DBInstanceIdentifier=DBInstanceIdentifier,
+            DBName=DBName,
+            DBParameterGroupName=DBParameterGroupName,
+            DBSecurityGroups=DBSecurityGroups,
+            DBSnapshotIdentifier=DBSnapshotIdentifier,
+            DBSubnetGroupName=DBSubnetGroupName,
+            DeleteAutomatedBackups=DeleteAutomatedBackups,
+            DeletionProtection=DeletionProtection,
+            Domain=Domain,
+            DomainIAMRoleName=DomainIAMRoleName,
+            EnableCloudwatchLogsExports=EnableCloudwatchLogsExports,
+            EnableIAMDatabaseAuthentication=EnableIAMDatabaseAuthentication,
+            EnablePerformanceInsights=EnablePerformanceInsights,
+            Engine=Engine,
+            EngineVersion=EngineVersion,
+            Iops=Iops,
+            KmsKeyId=KmsKeyId,
+            LicenseModel=LicenseModel,
+            MasterUsername=MasterUsername,
+            MasterUserPassword=MasterUserPassword,
+            MonitoringInterval=MonitoringInterval,
+            MonitoringRoleArn=MonitoringRoleArn,
+            MultiAZ=MultiAZ,
+            OptionGroupName=OptionGroupName,
+            PerformanceInsightsKMSKeyId=PerformanceInsightsKMSKeyId,
+            PerformanceInsightsRetentionPeriod=PerformanceInsightsRetentionPeriod,
+            Port=Port,
+            PreferredBackupWindow=PreferredBackupWindow,
+            PreferredMaintenanceWindow=PreferredMaintenanceWindow,
+            ProcessorFeatures=ProcessorFeatures,
+            PromotionTier=PromotionTier,
+            PubliclyAccessible=PubliclyAccessible,
+            SourceDBInstanceIdentifier=SourceDBInstanceIdentifier,
+            SourceRegion=SourceRegion,
+            StorageEncrypted=StorageEncrypted,
+            StorageType=StorageType,
+            Tags=Tags,
+            UseDefaultProcessorFeatures=UseDefaultProcessorFeatures,
+            Timezone=Timezone,
+            VPCSecurityGroups=VPCSecurityGroups,
+        )
+        super(DBInstance, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class OptionGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    EngineName = attr.ib() # type: str
-    MajorEngineVersion = attr.ib() # type: str
-    OptionGroupDescription = attr.ib() # type: str
-    OptionConfigurations = attr.ib() # type: list
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.OptionGroup
-
-
-@attr.s
-class DBClusterParameterGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib() # type: str
-    Family = attr.ib() # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.rds.DBClusterParameterGroup
+class DBParameterGroup(troposphere.rds.DBParameterGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Family=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            Family=Family,
+            Parameters=Parameters,
+            Tags=Tags,
+        )
+        super(DBParameterGroup, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ScalingConfiguration(AWSObject):
-    
-    AutoPause = attr.ib(default=NOTHING) # type: boolean
-    MaxCapacity = attr.ib(default=NOTHING) # type: validate_capacity
-    MinCapacity = attr.ib(default=NOTHING) # type: validate_capacity
-    SecondsUntilAutoPause = attr.ib(default=NOTHING) # type: positive_integer
+class DBSubnetGroup(troposphere.rds.DBSubnetGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DBSubnetGroupDescription=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubnetIds=REQUIRED, # type: list
+                 DBSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DBSubnetGroupDescription=DBSubnetGroupDescription,
+            SubnetIds=SubnetIds,
+            DBSubnetGroupName=DBSubnetGroupName,
+            Tags=Tags,
+        )
+        super(DBSubnetGroup, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.rds.ScalingConfiguration
+class RDSSecurityGroup(troposphere.rds.RDSSecurityGroup, Mixin):
+    def __init__(self,
+                 title=None,
+                 CIDRIP=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupOwnerId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CIDRIP=CIDRIP,
+            EC2SecurityGroupId=EC2SecurityGroupId,
+            EC2SecurityGroupName=EC2SecurityGroupName,
+            EC2SecurityGroupOwnerId=EC2SecurityGroupOwnerId,
+        )
+        super(RDSSecurityGroup, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class DBCluster(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Engine = attr.ib() # type: validate_engine
-    AvailabilityZones = attr.ib(default=NOTHING) # type: list
-    BacktrackWindow = attr.ib(default=NOTHING) # type: integer_range_checker
-    BackupRetentionPeriod = attr.ib(default=NOTHING) # type: validate_backup_retention_period
-    DatabaseName = attr.ib(default=NOTHING) # type: str
-    DBClusterIdentifier = attr.ib(default=NOTHING) # type: str
-    DBClusterParameterGroupName = attr.ib(default=NOTHING) # type: str
-    DBSubnetGroupName = attr.ib(default=NOTHING) # type: str
-    DeletionProtection = attr.ib(default=NOTHING) # type: boolean
-    EnableCloudwatchLogsExports = attr.ib(default=NOTHING) # type: list
-    EnableIAMDatabaseAuthentication = attr.ib(default=NOTHING) # type: boolean
-    EngineMode = attr.ib(default=NOTHING) # type: validate_engine_mode
-    EngineVersion = attr.ib(default=NOTHING) # type: str
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    MasterUsername = attr.ib(default=NOTHING) # type: str
-    MasterUserPassword = attr.ib(default=NOTHING) # type: str
-    Port = attr.ib(default=NOTHING) # type: network_port
-    PreferredBackupWindow = attr.ib(default=NOTHING) # type: validate_backup_window
-    PreferredMaintenanceWindow = attr.ib(default=NOTHING) # type: str
-    ReplicationSourceIdentifier = attr.ib(default=NOTHING) # type: str
-    ScalingConfiguration = attr.ib(default=NOTHING) # type: ScalingConfiguration
-    SourceRegion = attr.ib(default=NOTHING) # type: str
-    SnapshotIdentifier = attr.ib(default=NOTHING) # type: str
-    StorageEncrypted = attr.ib(default=NOTHING) # type: boolean
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    VpcSecurityGroupIds = attr.ib(default=NOTHING) # type: list
+class DBSecurityGroup(troposphere.rds.DBSecurityGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DBSecurityGroupIngress=REQUIRED, # type: list
+                 GroupDescription=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EC2VpcId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DBSecurityGroupIngress=DBSecurityGroupIngress,
+            GroupDescription=GroupDescription,
+            EC2VpcId=EC2VpcId,
+            Tags=Tags,
+        )
+        super(DBSecurityGroup, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.rds.DBCluster
+class DBSecurityGroupIngress(troposphere.rds.DBSecurityGroupIngress, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DBSecurityGroupName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CIDRIP=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupOwnerId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DBSecurityGroupName=DBSecurityGroupName,
+            CIDRIP=CIDRIP,
+            EC2SecurityGroupId=EC2SecurityGroupId,
+            EC2SecurityGroupName=EC2SecurityGroupName,
+            EC2SecurityGroupOwnerId=EC2SecurityGroupOwnerId,
+        )
+        super(DBSecurityGroupIngress, self).__init__(**processed_kwargs)
+
+
+class EventSubscription(troposphere.rds.EventSubscription, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SnsTopicArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Enabled=NOTHING, # type: bool
+                 EventCategories=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SourceIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SourceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SnsTopicArn=SnsTopicArn,
+            Enabled=Enabled,
+            EventCategories=EventCategories,
+            SourceIds=SourceIds,
+            SourceType=SourceType,
+        )
+        super(EventSubscription, self).__init__(**processed_kwargs)
+
+
+class OptionSetting(troposphere.rds.OptionSetting, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+        )
+        super(OptionSetting, self).__init__(**processed_kwargs)
+
+
+class OptionConfiguration(troposphere.rds.OptionConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 OptionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DBSecurityGroupMemberships=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 OptionSettings=NOTHING, # type: List[_OptionSetting]
+                 OptionVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 Port=NOTHING, # type: int
+                 VpcSecurityGroupMemberships=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OptionName=OptionName,
+            DBSecurityGroupMemberships=DBSecurityGroupMemberships,
+            OptionSettings=OptionSettings,
+            OptionVersion=OptionVersion,
+            Port=Port,
+            VpcSecurityGroupMemberships=VpcSecurityGroupMemberships,
+        )
+        super(OptionConfiguration, self).__init__(**processed_kwargs)
+
+
+class OptionGroup(troposphere.rds.OptionGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 EngineName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MajorEngineVersion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 OptionGroupDescription=REQUIRED, # type: Union[str, AWSHelperFn]
+                 OptionConfigurations=REQUIRED, # type: List[_OptionConfiguration]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            EngineName=EngineName,
+            MajorEngineVersion=MajorEngineVersion,
+            OptionGroupDescription=OptionGroupDescription,
+            OptionConfigurations=OptionConfigurations,
+            Tags=Tags,
+        )
+        super(OptionGroup, self).__init__(**processed_kwargs)
+
+
+class DBClusterParameterGroup(troposphere.rds.DBClusterParameterGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Family=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            Family=Family,
+            Parameters=Parameters,
+            Tags=Tags,
+        )
+        super(DBClusterParameterGroup, self).__init__(**processed_kwargs)
+
+
+class ScalingConfiguration(troposphere.rds.ScalingConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 AutoPause=NOTHING, # type: bool
+                 MaxCapacity=NOTHING, # type: Any
+                 MinCapacity=NOTHING, # type: Any
+                 SecondsUntilAutoPause=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AutoPause=AutoPause,
+            MaxCapacity=MaxCapacity,
+            MinCapacity=MinCapacity,
+            SecondsUntilAutoPause=SecondsUntilAutoPause,
+        )
+        super(ScalingConfiguration, self).__init__(**processed_kwargs)
+
+
+class DBCluster(troposphere.rds.DBCluster, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Engine=REQUIRED, # type: Any
+                 AvailabilityZones=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 BacktrackWindow=NOTHING, # type: Any
+                 BackupRetentionPeriod=NOTHING, # type: Any
+                 DatabaseName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBClusterIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBClusterParameterGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DBSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeletionProtection=NOTHING, # type: bool
+                 EnableCloudwatchLogsExports=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 EnableIAMDatabaseAuthentication=NOTHING, # type: bool
+                 EngineMode=NOTHING, # type: Any
+                 EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 MasterUsername=NOTHING, # type: Union[str, AWSHelperFn]
+                 MasterUserPassword=NOTHING, # type: Union[str, AWSHelperFn]
+                 Port=NOTHING, # type: int
+                 PreferredBackupWindow=NOTHING, # type: Any
+                 PreferredMaintenanceWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 ReplicationSourceIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 ScalingConfiguration=NOTHING, # type: _ScalingConfiguration
+                 SourceRegion=NOTHING, # type: Union[str, AWSHelperFn]
+                 SnapshotIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 StorageEncrypted=NOTHING, # type: bool
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 VpcSecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Engine=Engine,
+            AvailabilityZones=AvailabilityZones,
+            BacktrackWindow=BacktrackWindow,
+            BackupRetentionPeriod=BackupRetentionPeriod,
+            DatabaseName=DatabaseName,
+            DBClusterIdentifier=DBClusterIdentifier,
+            DBClusterParameterGroupName=DBClusterParameterGroupName,
+            DBSubnetGroupName=DBSubnetGroupName,
+            DeletionProtection=DeletionProtection,
+            EnableCloudwatchLogsExports=EnableCloudwatchLogsExports,
+            EnableIAMDatabaseAuthentication=EnableIAMDatabaseAuthentication,
+            EngineMode=EngineMode,
+            EngineVersion=EngineVersion,
+            KmsKeyId=KmsKeyId,
+            MasterUsername=MasterUsername,
+            MasterUserPassword=MasterUserPassword,
+            Port=Port,
+            PreferredBackupWindow=PreferredBackupWindow,
+            PreferredMaintenanceWindow=PreferredMaintenanceWindow,
+            ReplicationSourceIdentifier=ReplicationSourceIdentifier,
+            ScalingConfiguration=ScalingConfiguration,
+            SourceRegion=SourceRegion,
+            SnapshotIdentifier=SnapshotIdentifier,
+            StorageEncrypted=StorageEncrypted,
+            Tags=Tags,
+            VpcSecurityGroupIds=VpcSecurityGroupIds,
+        )
+        super(DBCluster, self).__init__(**processed_kwargs)

@@ -4,131 +4,172 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.budgets
 
-from troposphere.budgets import BudgetData
-from troposphere.budgets import CostTypes
-from troposphere.budgets import Notification
-from troposphere.budgets import Spend
-from troposphere.budgets import TimePeriod
-from troposphere.budgets import boolean
+from troposphere.budgets import (
+    BudgetData as _BudgetData,
+    CostTypes as _CostTypes,
+    Notification as _Notification,
+    NotificationWithSubscribers as _NotificationWithSubscribers,
+    Spend as _Spend,
+    Subscriber as _Subscriber,
+    TimePeriod as _TimePeriod,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Spend(AWSObject):
-    
-    Amount = attr.ib() # type: float
-    Unit = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.budgets.Spend
-
-
-@attr.s
-class CostTypes(AWSObject):
-    
-    IncludeCredit = attr.ib(default=NOTHING) # type: boolean
-    IncludeDiscount = attr.ib(default=NOTHING) # type: boolean
-    IncludeOtherSubscription = attr.ib(default=NOTHING) # type: boolean
-    IncludeRecurring = attr.ib(default=NOTHING) # type: boolean
-    IncludeRefund = attr.ib(default=NOTHING) # type: boolean
-    IncludeSubscription = attr.ib(default=NOTHING) # type: boolean
-    IncludeSupport = attr.ib(default=NOTHING) # type: boolean
-    IncludeTax = attr.ib(default=NOTHING) # type: boolean
-    IncludeUpfront = attr.ib(default=NOTHING) # type: boolean
-    UseAmortized = attr.ib(default=NOTHING) # type: boolean
-    UseBlended = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.budgets.CostTypes
+class Spend(troposphere.budgets.Spend, Mixin):
+    def __init__(self,
+                 title=None,
+                 Amount=REQUIRED, # type: float
+                 Unit=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Amount=Amount,
+            Unit=Unit,
+        )
+        super(Spend, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class TimePeriod(AWSObject):
-    
-    End = attr.ib(default=NOTHING) # type: str
-    Start = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.budgets.TimePeriod
-
-
-@attr.s
-class BudgetData(AWSObject):
-    
-    BudgetType = attr.ib() # type: str
-    TimeUnit = attr.ib() # type: str
-    BudgetLimit = attr.ib(default=NOTHING) # type: Spend
-    BudgetName = attr.ib(default=NOTHING) # type: str
-    CostFilters = attr.ib(default=NOTHING) # type: dict
-    CostTypes = attr.ib(default=NOTHING) # type: CostTypes
-    TimePeriod = attr.ib(default=NOTHING) # type: TimePeriod
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.budgets.BudgetData
-
-
-@attr.s
-class Notification(AWSObject):
-    
-    ComparisonOperator = attr.ib() # type: str
-    NotificationType = attr.ib() # type: str
-    Threshold = attr.ib() # type: float
-    ThresholdType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.budgets.Notification
+class CostTypes(troposphere.budgets.CostTypes, Mixin):
+    def __init__(self,
+                 title=None,
+                 IncludeCredit=NOTHING, # type: bool
+                 IncludeDiscount=NOTHING, # type: bool
+                 IncludeOtherSubscription=NOTHING, # type: bool
+                 IncludeRecurring=NOTHING, # type: bool
+                 IncludeRefund=NOTHING, # type: bool
+                 IncludeSubscription=NOTHING, # type: bool
+                 IncludeSupport=NOTHING, # type: bool
+                 IncludeTax=NOTHING, # type: bool
+                 IncludeUpfront=NOTHING, # type: bool
+                 UseAmortized=NOTHING, # type: bool
+                 UseBlended=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IncludeCredit=IncludeCredit,
+            IncludeDiscount=IncludeDiscount,
+            IncludeOtherSubscription=IncludeOtherSubscription,
+            IncludeRecurring=IncludeRecurring,
+            IncludeRefund=IncludeRefund,
+            IncludeSubscription=IncludeSubscription,
+            IncludeSupport=IncludeSupport,
+            IncludeTax=IncludeTax,
+            IncludeUpfront=IncludeUpfront,
+            UseAmortized=UseAmortized,
+            UseBlended=UseBlended,
+        )
+        super(CostTypes, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Subscriber(AWSObject):
-    
-    Address = attr.ib() # type: str
-    SubscriptionType = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.budgets.Subscriber
-
-
-@attr.s
-class NotificationWithSubscribers(AWSObject):
-    
-    Notification = attr.ib() # type: Notification
-    Subscribers = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.budgets.NotificationWithSubscribers
+class TimePeriod(troposphere.budgets.TimePeriod, Mixin):
+    def __init__(self,
+                 title=None,
+                 End=NOTHING, # type: Union[str, AWSHelperFn]
+                 Start=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            End=End,
+            Start=Start,
+        )
+        super(TimePeriod, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Budget(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Budget = attr.ib() # type: BudgetData
-    NotificationsWithSubscribers = attr.ib(default=NOTHING) # type: list
+class BudgetData(troposphere.budgets.BudgetData, Mixin):
+    def __init__(self,
+                 title=None,
+                 BudgetType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TimeUnit=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BudgetLimit=NOTHING, # type: _Spend
+                 BudgetName=NOTHING, # type: Union[str, AWSHelperFn]
+                 CostFilters=NOTHING, # type: dict
+                 CostTypes=NOTHING, # type: _CostTypes
+                 TimePeriod=NOTHING, # type: _TimePeriod
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BudgetType=BudgetType,
+            TimeUnit=TimeUnit,
+            BudgetLimit=BudgetLimit,
+            BudgetName=BudgetName,
+            CostFilters=CostFilters,
+            CostTypes=CostTypes,
+            TimePeriod=TimePeriod,
+        )
+        super(BudgetData, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.budgets.Budget
+class Notification(troposphere.budgets.Notification, Mixin):
+    def __init__(self,
+                 title=None,
+                 ComparisonOperator=REQUIRED, # type: Union[str, AWSHelperFn]
+                 NotificationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Threshold=REQUIRED, # type: float
+                 ThresholdType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ComparisonOperator=ComparisonOperator,
+            NotificationType=NotificationType,
+            Threshold=Threshold,
+            ThresholdType=ThresholdType,
+        )
+        super(Notification, self).__init__(**processed_kwargs)
+
+
+class Subscriber(troposphere.budgets.Subscriber, Mixin):
+    def __init__(self,
+                 title=None,
+                 Address=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubscriptionType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Address=Address,
+            SubscriptionType=SubscriptionType,
+        )
+        super(Subscriber, self).__init__(**processed_kwargs)
+
+
+class NotificationWithSubscribers(troposphere.budgets.NotificationWithSubscribers, Mixin):
+    def __init__(self,
+                 title=None,
+                 Notification=REQUIRED, # type: _Notification
+                 Subscribers=REQUIRED, # type: List[_Subscriber]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Notification=Notification,
+            Subscribers=Subscribers,
+        )
+        super(NotificationWithSubscribers, self).__init__(**processed_kwargs)
+
+
+class Budget(troposphere.budgets.Budget, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Budget=REQUIRED, # type: _BudgetData
+                 NotificationsWithSubscribers=NOTHING, # type: List[_NotificationWithSubscribers]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Budget=Budget,
+            NotificationsWithSubscribers=NotificationsWithSubscribers,
+        )
+        super(Budget, self).__init__(**processed_kwargs)

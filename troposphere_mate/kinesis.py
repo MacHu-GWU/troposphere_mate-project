@@ -4,55 +4,75 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.kinesis
 
-from troposphere.kinesis import StreamEncryption
-from troposphere.kinesis import integer
+from troposphere.kinesis import (
+    StreamEncryption as _StreamEncryption,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class StreamEncryption(AWSObject):
-    
-    EncryptionType = attr.ib() # type: str
-    KeyId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesis.StreamEncryption
-
-
-@attr.s
-class Stream(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    RetentionPeriodHours = attr.ib(default=NOTHING) # type: integer
-    ShardCount = attr.ib(default=NOTHING) # type: integer
-    StreamEncryption = attr.ib(default=NOTHING) # type: StreamEncryption
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesis.Stream
+class StreamEncryption(troposphere.kinesis.StreamEncryption, Mixin):
+    def __init__(self,
+                 title=None,
+                 EncryptionType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 KeyId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EncryptionType=EncryptionType,
+            KeyId=KeyId,
+        )
+        super(StreamEncryption, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class StreamConsumer(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ConsumerName = attr.ib() # type: str
-    StreamARN = attr.ib() # type: str
+class Stream(troposphere.kinesis.Stream, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 RetentionPeriodHours=NOTHING, # type: int
+                 ShardCount=NOTHING, # type: int
+                 StreamEncryption=NOTHING, # type: _StreamEncryption
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            RetentionPeriodHours=RetentionPeriodHours,
+            ShardCount=ShardCount,
+            StreamEncryption=StreamEncryption,
+            Tags=Tags,
+        )
+        super(Stream, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.kinesis.StreamConsumer
+class StreamConsumer(troposphere.kinesis.StreamConsumer, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ConsumerName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StreamARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ConsumerName=ConsumerName,
+            StreamARN=StreamARN,
+        )
+        super(StreamConsumer, self).__init__(**processed_kwargs)

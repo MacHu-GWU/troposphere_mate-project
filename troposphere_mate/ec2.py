@@ -4,1556 +4,2185 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.ec2
 
-from troposphere.ec2 import CertificateAuthenticationRequest
-from troposphere.ec2 import ConnectionLogOptions
-from troposphere.ec2 import CreditSpecification
-from troposphere.ec2 import DirectoryServiceAuthenticationRequest
-from troposphere.ec2 import EBSBlockDevice
-from troposphere.ec2 import FleetLaunchTemplateSpecificationRequest
-from troposphere.ec2 import ICMP
-from troposphere.ec2 import IamInstanceProfile
-from troposphere.ec2 import InstanceMarketOptions
-from troposphere.ec2 import LaunchTemplateCreditSpecification
-from troposphere.ec2 import LaunchTemplateData
-from troposphere.ec2 import LaunchTemplateSpecification
-from troposphere.ec2 import LoadBalancersConfig
-from troposphere.ec2 import Monitoring
-from troposphere.ec2 import OnDemandOptionsRequest
-from troposphere.ec2 import Placement
-from troposphere.ec2 import PortRange
-from troposphere.ec2 import SpotFleetRequestConfigData
-from troposphere.ec2 import SpotOptions
-from troposphere.ec2 import SpotOptionsRequest
-from troposphere.ec2 import TargetCapacitySpecificationRequest
-from troposphere.ec2 import TargetGroupConfig
-from troposphere.ec2 import boolean
-from troposphere.ec2 import double
-from troposphere.ec2 import instance_tenancy
-from troposphere.ec2 import integer
-from troposphere.ec2 import network_port
-from troposphere.ec2 import positive_integer
-from troposphere.ec2 import validate_elasticinferenceaccelerator_type
-from troposphere.ec2 import vpc_endpoint_type
-from troposphere.ec2 import vpn_pre_shared_key
-from troposphere.ec2 import vpn_tunnel_inside_cidr
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class Tag(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Tag
-
-
-@attr.s
-class CustomerGateway(AWSObject):
-    title = attr.ib()   # type: str
-    
-    BgpAsn = attr.ib() # type: integer
-    IpAddress = attr.ib() # type: str
-    Type = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.CustomerGateway
-
-
-@attr.s
-class DHCPOptions(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DomainName = attr.ib(default=NOTHING) # type: str
-    DomainNameServers = attr.ib(default=NOTHING) # type: list
-    NetbiosNameServers = attr.ib(default=NOTHING) # type: list
-    NetbiosNodeType = attr.ib(default=NOTHING) # type: integer
-    NtpServers = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.DHCPOptions
-
-
-@attr.s
-class EgressOnlyInternetGateway(AWSObject):
-    title = attr.ib()   # type: str
-    
-    VpcId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.EgressOnlyInternetGateway
-
-
-@attr.s
-class EIP(AWSObject):
-    title = attr.ib()   # type: str
-    
-    InstanceId = attr.ib(default=NOTHING) # type: str
-    Domain = attr.ib(default=NOTHING) # type: str
-    PublicIpv4Pool = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.EIP
-
-
-@attr.s
-class EIPAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AllocationId = attr.ib(default=NOTHING) # type: str
-    EIP = attr.ib(default=NOTHING) # type: str
-    InstanceId = attr.ib(default=NOTHING) # type: str
-    NetworkInterfaceId = attr.ib(default=NOTHING) # type: str
-    PrivateIpAddress = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.EIPAssociation
-
-
-@attr.s
-class FlowLog(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ResourceId = attr.ib() # type: str
-    ResourceType = attr.ib() # type: str
-    TrafficType = attr.ib() # type: str
-    DeliverLogsPermissionArn = attr.ib(default=NOTHING) # type: str
-    LogDestination = attr.ib(default=NOTHING) # type: str
-    LogDestinationType = attr.ib(default=NOTHING) # type: str
-    LogGroupName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.FlowLog
-
-
-@attr.s
-class NatGateway(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AllocationId = attr.ib() # type: str
-    SubnetId = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NatGateway
-
-
-@attr.s
-class EBSBlockDevice(AWSObject):
-    
-    DeleteOnTermination = attr.ib(default=NOTHING) # type: boolean
-    Encrypted = attr.ib(default=NOTHING) # type: boolean
-    Iops = attr.ib(default=NOTHING) # type: integer
-    SnapshotId = attr.ib(default=NOTHING) # type: str
-    VolumeSize = attr.ib(default=NOTHING) # type: integer
-    VolumeType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.EBSBlockDevice
-
-
-@attr.s
-class BlockDeviceMapping(AWSObject):
-    
-    DeviceName = attr.ib() # type: str
-    Ebs = attr.ib(default=NOTHING) # type: EBSBlockDevice
-    NoDevice = attr.ib(default=NOTHING) # type: dict
-    VirtualName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.BlockDeviceMapping
-
-
-@attr.s
-class MountPoint(AWSObject):
-    
-    Device = attr.ib() # type: str
-    VolumeId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.MountPoint
-
-
-@attr.s
-class Placement(AWSObject):
-    
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    GroupName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Placement
-
-
-@attr.s
-class CreditSpecification(AWSObject):
-    
-    CPUCredits = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.CreditSpecification
-
-
-@attr.s
-class ElasticGpuSpecification(AWSObject):
-    
-    Type = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ElasticGpuSpecification
-
-
-@attr.s
-class LaunchTemplateSpecification(AWSObject):
-    
-    Version = attr.ib() # type: str
-    LaunchTemplateId = attr.ib(default=NOTHING) # type: str
-    LaunchTemplateName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LaunchTemplateSpecification
-
-
-@attr.s
-class PrivateIpAddressSpecification(AWSObject):
-    
-    Primary = attr.ib() # type: boolean
-    PrivateIpAddress = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.PrivateIpAddressSpecification
-
-
-@attr.s
-class NetworkInterfaceProperty(AWSObject):
-    
-    DeviceIndex = attr.ib() # type: integer
-    AssociatePublicIpAddress = attr.ib(default=NOTHING) # type: boolean
-    DeleteOnTermination = attr.ib(default=NOTHING) # type: boolean
-    Description = attr.ib(default=NOTHING) # type: str
-    GroupSet = attr.ib(default=NOTHING) # type: list
-    NetworkInterfaceId = attr.ib(default=NOTHING) # type: str
-    Ipv6AddressCount = attr.ib(default=NOTHING) # type: integer
-    Ipv6Addresses = attr.ib(default=NOTHING) # type: list
-    PrivateIpAddress = attr.ib(default=NOTHING) # type: str
-    PrivateIpAddresses = attr.ib(default=NOTHING) # type: list
-    SecondaryPrivateIpAddressCount = attr.ib(default=NOTHING) # type: integer
-    SubnetId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NetworkInterfaceProperty
-
-
-@attr.s
-class AssociationParameters(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Value = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.AssociationParameters
-
-
-@attr.s
-class SsmAssociations(AWSObject):
-    
-    DocumentName = attr.ib() # type: str
-    AssociationParameters = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SsmAssociations
-
-
-@attr.s
-class Host(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AvailabilityZone = attr.ib() # type: str
-    InstanceType = attr.ib() # type: str
-    AutoPlacement = attr.ib(default=NOTHING) # type: str
-    HostRecovery = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Host
-
-
-@attr.s
-class ElasticInferenceAccelerator(AWSObject):
-    
-    Type = attr.ib() # type: validate_elasticinferenceaccelerator_type
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ElasticInferenceAccelerator
-
-
-@attr.s
-class LicenseSpecification(AWSObject):
-    
-    LicenseConfigurationArn = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LicenseSpecification
-
-
-@attr.s
-class Instance(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Affinity = attr.ib(default=NOTHING) # type: str
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    BlockDeviceMappings = attr.ib(default=NOTHING) # type: list
-    CreditSpecification = attr.ib(default=NOTHING) # type: CreditSpecification
-    DisableApiTermination = attr.ib(default=NOTHING) # type: boolean
-    EbsOptimized = attr.ib(default=NOTHING) # type: boolean
-    ElasticGpuSpecifications = attr.ib(default=NOTHING) # type: list
-    ElasticInferenceAccelerators = attr.ib(default=NOTHING) # type: list
-    HostId = attr.ib(default=NOTHING) # type: str
-    IamInstanceProfile = attr.ib(default=NOTHING) # type: str
-    ImageId = attr.ib(default=NOTHING) # type: str
-    InstanceInitiatedShutdownBehavior = attr.ib(default=NOTHING) # type: str
-    InstanceType = attr.ib(default=NOTHING) # type: str
-    Ipv6AddressCount = attr.ib(default=NOTHING) # type: integer
-    Ipv6Addresses = attr.ib(default=NOTHING) # type: list
-    KernelId = attr.ib(default=NOTHING) # type: str
-    KeyName = attr.ib(default=NOTHING) # type: str
-    LaunchTemplate = attr.ib(default=NOTHING) # type: LaunchTemplateSpecification
-    LicenseSpecifications = attr.ib(default=NOTHING) # type: list
-    Monitoring = attr.ib(default=NOTHING) # type: boolean
-    NetworkInterfaces = attr.ib(default=NOTHING) # type: list
-    PlacementGroupName = attr.ib(default=NOTHING) # type: str
-    PrivateIpAddress = attr.ib(default=NOTHING) # type: str
-    RamdiskId = attr.ib(default=NOTHING) # type: str
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    SecurityGroups = attr.ib(default=NOTHING) # type: list
-    SsmAssociations = attr.ib(default=NOTHING) # type: list
-    SourceDestCheck = attr.ib(default=NOTHING) # type: boolean
-    SubnetId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    Tenancy = attr.ib(default=NOTHING) # type: str
-    UserData = attr.ib(default=NOTHING) # type: str
-    Volumes = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Instance
-
-
-@attr.s
-class InternetGateway(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.InternetGateway
-
-
-@attr.s
-class NetworkAcl(AWSObject):
-    title = attr.ib()   # type: str
-    
-    VpcId = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NetworkAcl
-
-
-@attr.s
-class ICMP(AWSObject):
-    
-    Code = attr.ib(default=NOTHING) # type: integer
-    Type = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ICMP
-
-
-@attr.s
-class PortRange(AWSObject):
-    
-    From = attr.ib(default=NOTHING) # type: network_port
-    To = attr.ib(default=NOTHING) # type: network_port
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.PortRange
-
-
-@attr.s
-class NetworkAclEntry(AWSObject):
-    title = attr.ib()   # type: str
-    
-    NetworkAclId = attr.ib() # type: str
-    Protocol = attr.ib() # type: network_port
-    RuleAction = attr.ib() # type: str
-    RuleNumber = attr.ib() # type: integer_range_checker
-    CidrBlock = attr.ib(default=NOTHING) # type: str
-    Egress = attr.ib(default=NOTHING) # type: boolean
-    Icmp = attr.ib(default=NOTHING) # type: ICMP
-    Ipv6CidrBlock = attr.ib(default=NOTHING) # type: str
-    PortRange = attr.ib(default=NOTHING) # type: PortRange
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NetworkAclEntry
-
-
-@attr.s
-class NetworkInterface(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SubnetId = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    GroupSet = attr.ib(default=NOTHING) # type: list
-    Ipv6AddressCount = attr.ib(default=NOTHING) # type: integer
-    Ipv6Addresses = attr.ib(default=NOTHING) # type: list
-    PrivateIpAddress = attr.ib(default=NOTHING) # type: str
-    PrivateIpAddresses = attr.ib(default=NOTHING) # type: list
-    SecondaryPrivateIpAddressCount = attr.ib(default=NOTHING) # type: integer
-    SourceDestCheck = attr.ib(default=NOTHING) # type: boolean
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NetworkInterface
-
-
-@attr.s
-class NetworkInterfaceAttachment(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DeviceIndex = attr.ib() # type: integer
-    InstanceId = attr.ib() # type: str
-    NetworkInterfaceId = attr.ib() # type: str
-    DeleteOnTermination = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NetworkInterfaceAttachment
-
-
-@attr.s
-class NetworkInterfacePermission(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AwsAccountId = attr.ib() # type: str
-    NetworkInterfaceId = attr.ib() # type: str
-    Permission = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NetworkInterfacePermission
-
-
-@attr.s
-class Route(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RouteTableId = attr.ib() # type: str
-    DestinationCidrBlock = attr.ib(default=NOTHING) # type: str
-    DestinationIpv6CidrBlock = attr.ib(default=NOTHING) # type: str
-    EgressOnlyInternetGatewayId = attr.ib(default=NOTHING) # type: str
-    GatewayId = attr.ib(default=NOTHING) # type: str
-    InstanceId = attr.ib(default=NOTHING) # type: str
-    NatGatewayId = attr.ib(default=NOTHING) # type: str
-    NetworkInterfaceId = attr.ib(default=NOTHING) # type: str
-    TransitGatewayId = attr.ib(default=NOTHING) # type: str
-    VpcPeeringConnectionId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Route
-
-
-@attr.s
-class RouteTable(AWSObject):
-    title = attr.ib()   # type: str
-    
-    VpcId = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.RouteTable
-
-
-@attr.s
-class SecurityGroupEgress(AWSObject):
-    title = attr.ib()   # type: str
-    
-    GroupId = attr.ib() # type: str
-    IpProtocol = attr.ib() # type: str
-    CidrIp = attr.ib(default=NOTHING) # type: str
-    CidrIpv6 = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DestinationPrefixListId = attr.ib(default=NOTHING) # type: str
-    DestinationSecurityGroupId = attr.ib(default=NOTHING) # type: str
-    FromPort = attr.ib(default=NOTHING) # type: network_port
-    ToPort = attr.ib(default=NOTHING) # type: network_port
-    SourceSecurityGroupId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SecurityGroupEgress
-
-
-@attr.s
-class SecurityGroupIngress(AWSObject):
-    title = attr.ib()   # type: str
-    
-    IpProtocol = attr.ib() # type: str
-    CidrIp = attr.ib(default=NOTHING) # type: str
-    CidrIpv6 = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    FromPort = attr.ib(default=NOTHING) # type: network_port
-    GroupName = attr.ib(default=NOTHING) # type: str
-    GroupId = attr.ib(default=NOTHING) # type: str
-    SourceSecurityGroupName = attr.ib(default=NOTHING) # type: str
-    SourceSecurityGroupId = attr.ib(default=NOTHING) # type: str
-    SourceSecurityGroupOwnerId = attr.ib(default=NOTHING) # type: str
-    ToPort = attr.ib(default=NOTHING) # type: network_port
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SecurityGroupIngress
-
-
-@attr.s
-class SecurityGroupRule(AWSObject):
-    
-    IpProtocol = attr.ib() # type: str
-    CidrIp = attr.ib(default=NOTHING) # type: str
-    CidrIpv6 = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DestinationPrefixListId = attr.ib(default=NOTHING) # type: str
-    DestinationSecurityGroupId = attr.ib(default=NOTHING) # type: str
-    FromPort = attr.ib(default=NOTHING) # type: network_port
-    SourceSecurityGroupId = attr.ib(default=NOTHING) # type: str
-    SourceSecurityGroupName = attr.ib(default=NOTHING) # type: str
-    SourceSecurityGroupOwnerId = attr.ib(default=NOTHING) # type: str
-    ToPort = attr.ib(default=NOTHING) # type: network_port
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SecurityGroupRule
-
-
-@attr.s
-class SecurityGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    GroupDescription = attr.ib() # type: str
-    GroupName = attr.ib(default=NOTHING) # type: str
-    SecurityGroupEgress = attr.ib(default=NOTHING) # type: list
-    SecurityGroupIngress = attr.ib(default=NOTHING) # type: list
-    VpcId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SecurityGroup
-
-
-@attr.s
-class Subnet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CidrBlock = attr.ib() # type: str
-    VpcId = attr.ib() # type: str
-    AssignIpv6AddressOnCreation = attr.ib(default=NOTHING) # type: boolean
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    Ipv6CidrBlock = attr.ib(default=NOTHING) # type: str
-    MapPublicIpOnLaunch = attr.ib(default=NOTHING) # type: boolean
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Subnet
-
-
-@attr.s
-class SubnetNetworkAclAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SubnetId = attr.ib() # type: str
-    NetworkAclId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SubnetNetworkAclAssociation
-
-
-@attr.s
-class SubnetRouteTableAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RouteTableId = attr.ib() # type: str
-    SubnetId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SubnetRouteTableAssociation
-
-
-@attr.s
-class Volume(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AvailabilityZone = attr.ib() # type: str
-    AutoEnableIO = attr.ib(default=NOTHING) # type: boolean
-    Encrypted = attr.ib(default=NOTHING) # type: boolean
-    Iops = attr.ib(default=NOTHING) # type: positive_integer
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    Size = attr.ib(default=NOTHING) # type: positive_integer
-    SnapshotId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    VolumeType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Volume
-
-
-@attr.s
-class VolumeAttachment(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Device = attr.ib() # type: str
-    InstanceId = attr.ib() # type: str
-    VolumeId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VolumeAttachment
-
-
-@attr.s
-class VPC(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CidrBlock = attr.ib() # type: str
-    EnableDnsSupport = attr.ib(default=NOTHING) # type: boolean
-    EnableDnsHostnames = attr.ib(default=NOTHING) # type: boolean
-    InstanceTenancy = attr.ib(default=NOTHING) # type: instance_tenancy
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPC
-
-
-@attr.s
-class VPCDHCPOptionsAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DhcpOptionsId = attr.ib() # type: str
-    VpcId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCDHCPOptionsAssociation
-
-
-@attr.s
-class VPCEndpoint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ServiceName = attr.ib() # type: str
-    VpcId = attr.ib() # type: str
-    PolicyDocument = attr.ib(default=NOTHING) # type: tuple
-    PrivateDnsEnabled = attr.ib(default=NOTHING) # type: boolean
-    RouteTableIds = attr.ib(default=NOTHING) # type: list
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    SubnetIds = attr.ib(default=NOTHING) # type: list
-    VpcEndpointType = attr.ib(default=NOTHING) # type: vpc_endpoint_type
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCEndpoint
-
-
-@attr.s
-class VPCEndpointConnectionNotification(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ConnectionEvents = attr.ib() # type: list
-    ConnectionNotificationArn = attr.ib() # type: str
-    ServiceId = attr.ib(default=NOTHING) # type: str
-    VPCEndpointId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCEndpointConnectionNotification
-
-
-@attr.s
-class VPCEndpointService(AWSObject):
-    title = attr.ib()   # type: str
-    
-    NetworkLoadBalancerArns = attr.ib() # type: list
-    AcceptanceRequired = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCEndpointService
-
-
-@attr.s
-class VPCEndpointServicePermissions(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ServiceId = attr.ib() # type: str
-    AllowedPrincipals = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCEndpointServicePermissions
-
-
-@attr.s
-class VPCGatewayAttachment(AWSObject):
-    title = attr.ib()   # type: str
-    
-    VpcId = attr.ib() # type: str
-    InternetGatewayId = attr.ib(default=NOTHING) # type: str
-    VpnGatewayId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCGatewayAttachment
-
-
-@attr.s
-class VpnTunnelOptionsSpecification(AWSObject):
-    
-    PreSharedKey = attr.ib(default=NOTHING) # type: vpn_pre_shared_key
-    TunnelInsideCidr = attr.ib(default=NOTHING) # type: vpn_tunnel_inside_cidr
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VpnTunnelOptionsSpecification
-
-
-@attr.s
-class VPNConnection(AWSObject):
-    title = attr.ib()   # type: str
-    
-    CustomerGatewayId = attr.ib() # type: str
-    Type = attr.ib() # type: str
-    StaticRoutesOnly = attr.ib(default=NOTHING) # type: boolean
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    TransitGatewayId = attr.ib(default=NOTHING) # type: str
-    VpnGatewayId = attr.ib(default=NOTHING) # type: str
-    VpnTunnelOptionsSpecifications = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPNConnection
-
-
-@attr.s
-class VPNConnectionRoute(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DestinationCidrBlock = attr.ib() # type: str
-    VpnConnectionId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPNConnectionRoute
-
-
-@attr.s
-class VPNGateway(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Type = attr.ib() # type: str
-    AmazonSideAsn = attr.ib(default=NOTHING) # type: positive_integer
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPNGateway
-
-
-@attr.s
-class VPNGatewayRoutePropagation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RouteTableIds = attr.ib() # type: list
-    VpnGatewayId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPNGatewayRoutePropagation
-
-
-@attr.s
-class VPCPeeringConnection(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PeerVpcId = attr.ib() # type: str
-    VpcId = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    PeerRegion = attr.ib(default=NOTHING) # type: str
-    PeerOwnerId = attr.ib(default=NOTHING) # type: str
-    PeerRoleArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCPeeringConnection
-
-
-@attr.s
-class Monitoring(AWSObject):
-    
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.Monitoring
-
-
-@attr.s
-class NetworkInterfaces(AWSObject):
-    
-    DeviceIndex = attr.ib() # type: integer
-    AssociatePublicIpAddress = attr.ib(default=NOTHING) # type: boolean
-    DeleteOnTermination = attr.ib(default=NOTHING) # type: boolean
-    Description = attr.ib(default=NOTHING) # type: str
-    Groups = attr.ib(default=NOTHING) # type: list
-    InterfaceType = attr.ib(default=NOTHING) # type: str
-    Ipv6AddressCount = attr.ib(default=NOTHING) # type: integer
-    Ipv6Addresses = attr.ib(default=NOTHING) # type: list
-    NetworkInterfaceId = attr.ib(default=NOTHING) # type: str
-    PrivateIpAddresses = attr.ib(default=NOTHING) # type: list
-    SecondaryPrivateIpAddressCount = attr.ib(default=NOTHING) # type: integer
-    SubnetId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.NetworkInterfaces
-
-
-@attr.s
-class SecurityGroups(AWSObject):
-    
-    GroupId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SecurityGroups
-
-
-@attr.s
-class IamInstanceProfile(AWSObject):
-    
-    Arn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.IamInstanceProfile
-
-
-@attr.s
-class SpotFleetTagSpecification(AWSObject):
-    
-    ResourceType = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SpotFleetTagSpecification
-
-
-@attr.s
-class LaunchSpecifications(AWSObject):
-    
-    ImageId = attr.ib() # type: str
-    InstanceType = attr.ib() # type: str
-    BlockDeviceMappings = attr.ib(default=NOTHING) # type: list
-    EbsOptimized = attr.ib(default=NOTHING) # type: boolean
-    IamInstanceProfile = attr.ib(default=NOTHING) # type: IamInstanceProfile
-    KernelId = attr.ib(default=NOTHING) # type: str
-    KeyName = attr.ib(default=NOTHING) # type: str
-    Monitoring = attr.ib(default=NOTHING) # type: Monitoring
-    NetworkInterfaces = attr.ib(default=NOTHING) # type: list
-    Placement = attr.ib(default=NOTHING) # type: Placement
-    RamdiskId = attr.ib(default=NOTHING) # type: str
-    SecurityGroups = attr.ib(default=NOTHING) # type: list
-    SpotPrice = attr.ib(default=NOTHING) # type: str
-    SubnetId = attr.ib(default=NOTHING) # type: str
-    TagSpecifications = attr.ib(default=NOTHING) # type: list
-    UserData = attr.ib(default=NOTHING) # type: str
-    WeightedCapacity = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LaunchSpecifications
-
-
-@attr.s
-class LaunchTemplateOverrides(AWSObject):
-    
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    InstanceType = attr.ib(default=NOTHING) # type: str
-    SpotPrice = attr.ib(default=NOTHING) # type: str
-    SubnetId = attr.ib(default=NOTHING) # type: str
-    WeightedCapacity = attr.ib(default=NOTHING) # type: double
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LaunchTemplateOverrides
-
-
-@attr.s
-class LaunchTemplateConfigs(AWSObject):
-    
-    LaunchTemplateSpecification = attr.ib() # type: LaunchTemplateSpecification
-    Overrides = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LaunchTemplateConfigs
-
-
-@attr.s
-class ClassicLoadBalancer(AWSObject):
-    
-    Name = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ClassicLoadBalancer
-
-
-@attr.s
-class ClassicLoadBalancersConfig(AWSObject):
-    
-    ClassicLoadBalancers = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ClassicLoadBalancersConfig
-
-
-@attr.s
-class TargetGroup(AWSObject):
-    
-    Arn = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TargetGroup
-
-
-@attr.s
-class TargetGroupConfig(AWSObject):
-    
-    TargetGroups = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TargetGroupConfig
-
-
-@attr.s
-class LoadBalancersConfig(AWSObject):
-    
-    ClassicLoadBalancersConfig = attr.ib(default=NOTHING) # type: list
-    TargetGroupsConfig = attr.ib(default=NOTHING) # type: TargetGroupConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LoadBalancersConfig
-
-
-@attr.s
-class SpotFleetRequestConfigData(AWSObject):
-    
-    IamFleetRole = attr.ib() # type: str
-    TargetCapacity = attr.ib() # type: positive_integer
-    AllocationStrategy = attr.ib(default=NOTHING) # type: str
-    ExcessCapacityTerminationPolicy = attr.ib(default=NOTHING) # type: str
-    InstanceInterruptionBehavior = attr.ib(default=NOTHING) # type: str
-    LaunchSpecifications = attr.ib(default=NOTHING) # type: list
-    LaunchTemplateConfigs = attr.ib(default=NOTHING) # type: list
-    LoadBalancersConfig = attr.ib(default=NOTHING) # type: LoadBalancersConfig
-    ReplaceUnhealthyInstances = attr.ib(default=NOTHING) # type: boolean
-    SpotPrice = attr.ib(default=NOTHING) # type: str
-    TerminateInstancesWithExpiration = attr.ib(default=NOTHING) # type: boolean
-    Type = attr.ib(default=NOTHING) # type: str
-    ValidFrom = attr.ib(default=NOTHING) # type: str
-    ValidUntil = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SpotFleetRequestConfigData
-
-
-@attr.s
-class SpotFleet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SpotFleetRequestConfigData = attr.ib() # type: SpotFleetRequestConfigData
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SpotFleet
-
-
-@attr.s
-class PlacementGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Strategy = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.PlacementGroup
-
-
-@attr.s
-class SubnetCidrBlock(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Ipv6CidrBlock = attr.ib() # type: str
-    SubnetId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SubnetCidrBlock
-
-
-@attr.s
-class VPCCidrBlock(AWSObject):
-    title = attr.ib()   # type: str
-    
-    VpcId = attr.ib() # type: str
-    AmazonProvidedIpv6CidrBlock = attr.ib(default=NOTHING) # type: boolean
-    CidrBlock = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.VPCCidrBlock
-
-
-@attr.s
-class TagSpecifications(AWSObject):
-    
-    ResourceType = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TagSpecifications
-
-
-@attr.s
-class SpotOptions(AWSObject):
-    
-    InstanceInterruptionBehavior = attr.ib(default=NOTHING) # type: str
-    MaxPrice = attr.ib(default=NOTHING) # type: str
-    SpotInstanceType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SpotOptions
-
-
-@attr.s
-class InstanceMarketOptions(AWSObject):
-    
-    MarketType = attr.ib(default=NOTHING) # type: str
-    SpotOptions = attr.ib(default=NOTHING) # type: SpotOptions
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.InstanceMarketOptions
-
-
-@attr.s
-class LaunchTemplateCreditSpecification(AWSObject):
-    
-    CpuCredits = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LaunchTemplateCreditSpecification
-
-
-@attr.s
-class LaunchTemplateData(AWSObject):
-    
-    ImageId = attr.ib() # type: str
-    BlockDeviceMappings = attr.ib(default=NOTHING) # type: list
-    CreditSpecification = attr.ib(default=NOTHING) # type: LaunchTemplateCreditSpecification
-    DisableApiTermination = attr.ib(default=NOTHING) # type: boolean
-    EbsOptimized = attr.ib(default=NOTHING) # type: boolean
-    ElasticGpuSpecifications = attr.ib(default=NOTHING) # type: list
-    IamInstanceProfile = attr.ib(default=NOTHING) # type: IamInstanceProfile
-    InstanceInitiatedShutdownBehavior = attr.ib(default=NOTHING) # type: str
-    InstanceMarketOptions = attr.ib(default=NOTHING) # type: InstanceMarketOptions
-    InstanceType = attr.ib(default=NOTHING) # type: str
-    KernelId = attr.ib(default=NOTHING) # type: str
-    KeyName = attr.ib(default=NOTHING) # type: str
-    Monitoring = attr.ib(default=NOTHING) # type: Monitoring
-    NetworkInterfaces = attr.ib(default=NOTHING) # type: list
-    Placement = attr.ib(default=NOTHING) # type: Placement
-    RamDiskId = attr.ib(default=NOTHING) # type: str
-    SecurityGroups = attr.ib(default=NOTHING) # type: list
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    TagSpecifications = attr.ib(default=NOTHING) # type: list
-    UserData = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LaunchTemplateData
-
-
-@attr.s
-class LaunchTemplate(AWSObject):
-    title = attr.ib()   # type: str
-    
-    LaunchTemplateData = attr.ib(default=NOTHING) # type: LaunchTemplateData
-    LaunchTemplateName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.LaunchTemplate
-
-
-@attr.s
-class TransitGateway(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AmazonSideAsn = attr.ib(default=NOTHING) # type: integer
-    AutoAcceptSharedAttachments = attr.ib(default=NOTHING) # type: str
-    DefaultRouteTableAssociation = attr.ib(default=NOTHING) # type: str
-    DefaultRouteTablePropagation = attr.ib(default=NOTHING) # type: str
-    DnsSupport = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    VpnEcmpSupport = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TransitGateway
-
-
-@attr.s
-class TransitGatewayAttachment(AWSObject):
-    title = attr.ib()   # type: str
-    
-    SubnetIds = attr.ib() # type: list
-    TransitGatewayId = attr.ib() # type: str
-    VpcId = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TransitGatewayAttachment
-
-
-@attr.s
-class TransitGatewayRoute(AWSObject):
-    title = attr.ib()   # type: str
-    
-    TransitGatewayRouteTableId = attr.ib() # type: str
-    Blackhole = attr.ib(default=NOTHING) # type: boolean
-    DestinationCidrBlock = attr.ib(default=NOTHING) # type: str
-    TransitGatewayAttachmentId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TransitGatewayRoute
-
-
-@attr.s
-class TransitGatewayRouteTable(AWSObject):
-    title = attr.ib()   # type: str
-    
-    TransitGatewayId = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TransitGatewayRouteTable
-
-
-@attr.s
-class TransitGatewayRouteTableAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    TransitGatewayAttachmentId = attr.ib() # type: str
-    TransitGatewayRouteTableId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TransitGatewayRouteTableAssociation
-
-
-@attr.s
-class TransitGatewayRouteTablePropagation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    TransitGatewayAttachmentId = attr.ib() # type: str
-    TransitGatewayRouteTableId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TransitGatewayRouteTablePropagation
-
-
-@attr.s
-class FleetLaunchTemplateSpecificationRequest(AWSObject):
-    
-    LaunchTemplateId = attr.ib(default=NOTHING) # type: str
-    LaunchTemplateName = attr.ib(default=NOTHING) # type: str
-    Version = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.FleetLaunchTemplateSpecificationRequest
-
-
-@attr.s
-class FleetLaunchTemplateOverridesRequest(AWSObject):
-    
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    InstanceType = attr.ib(default=NOTHING) # type: str
-    MaxPrice = attr.ib(default=NOTHING) # type: str
-    Priority = attr.ib(default=NOTHING) # type: double
-    SubnetId = attr.ib(default=NOTHING) # type: str
-    WeightedCapacity = attr.ib(default=NOTHING) # type: double
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.FleetLaunchTemplateOverridesRequest
-
-
-@attr.s
-class FleetLaunchTemplateConfigRequest(AWSObject):
-    
-    LaunchTemplateSpecification = attr.ib(default=NOTHING) # type: FleetLaunchTemplateSpecificationRequest
-    Overrides = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.FleetLaunchTemplateConfigRequest
-
-
-@attr.s
-class OnDemandOptionsRequest(AWSObject):
-    
-    AllocationStrategy = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.OnDemandOptionsRequest
-
-
-@attr.s
-class SpotOptionsRequest(AWSObject):
-    
-    AllocationStrategy = attr.ib(default=NOTHING) # type: str
-    InstanceInterruptionBehavior = attr.ib(default=NOTHING) # type: str
-    InstancePoolsToUseCount = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.SpotOptionsRequest
-
-
-@attr.s
-class TargetCapacitySpecificationRequest(AWSObject):
-    
-    DefaultTargetCapacityType = attr.ib(default=NOTHING) # type: str
-    OnDemandTargetCapacity = attr.ib(default=NOTHING) # type: integer
-    SpotTargetCapacity = attr.ib(default=NOTHING) # type: integer
-    TotalTargetCapacity = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.TargetCapacitySpecificationRequest
-
-
-@attr.s
-class EC2Fleet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    LaunchTemplateConfigs = attr.ib() # type: list
-    ExcessCapacityTerminationPolicy = attr.ib(default=NOTHING) # type: str
-    OnDemandOptions = attr.ib(default=NOTHING) # type: OnDemandOptionsRequest
-    ReplaceUnhealthyInstances = attr.ib(default=NOTHING) # type: boolean
-    SpotOptions = attr.ib(default=NOTHING) # type: SpotOptionsRequest
-    TagSpecifications = attr.ib(default=NOTHING) # type: list
-    TargetCapacitySpecification = attr.ib(default=NOTHING) # type: TargetCapacitySpecificationRequest
-    TerminateInstancesWithExpiration = attr.ib(default=NOTHING) # type: boolean
-    Type = attr.ib(default=NOTHING) # type: str
-    ValidFrom = attr.ib(default=NOTHING) # type: str
-    ValidUntil = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.EC2Fleet
-
-
-@attr.s
-class CapacityReservation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AvailabilityZone = attr.ib() # type: str
-    InstanceCount = attr.ib() # type: integer
-    InstancePlatform = attr.ib() # type: str
-    InstanceType = attr.ib() # type: str
-    EbsOptimized = attr.ib(default=NOTHING) # type: boolean
-    EndDate = attr.ib(default=NOTHING) # type: str
-    EndDateType = attr.ib(default=NOTHING) # type: str
-    EphemeralStorage = attr.ib(default=NOTHING) # type: boolean
-    InstanceMatchCriteria = attr.ib(default=NOTHING) # type: str
-    TagSpecifications = attr.ib(default=NOTHING) # type: list
-    Tenancy = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.CapacityReservation
-
-
-@attr.s
-class ClientVpnAuthorizationRule(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ClientVpnEndpointId = attr.ib() # type: str
-    TargetNetworkCidr = attr.ib() # type: str
-    AccessGroupId = attr.ib(default=NOTHING) # type: str
-    AuthorizeAllGroups = attr.ib(default=NOTHING) # type: boolean
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ClientVpnAuthorizationRule
-
-
-@attr.s
-class CertificateAuthenticationRequest(AWSObject):
-    
-    ClientRootCertificateChainArn = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.CertificateAuthenticationRequest
-
-
-@attr.s
-class DirectoryServiceAuthenticationRequest(AWSObject):
-    
-    DirectoryId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.DirectoryServiceAuthenticationRequest
-
-
-@attr.s
-class ClientAuthenticationRequest(AWSObject):
-    
-    Type = attr.ib() # type: str
-    ActiveDirectory = attr.ib(default=NOTHING) # type: DirectoryServiceAuthenticationRequest
-    MutualAuthentication = attr.ib(default=NOTHING) # type: CertificateAuthenticationRequest
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ClientAuthenticationRequest
-
-
-@attr.s
-class ConnectionLogOptions(AWSObject):
-    
-    Enabled = attr.ib() # type: boolean
-    CloudwatchLogGroup = attr.ib(default=NOTHING) # type: str
-    CloudwatchLogStream = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ConnectionLogOptions
-
-
-@attr.s
-class ClientVpnEndpoint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AuthenticationOptions = attr.ib() # type: list
-    ClientCidrBlock = attr.ib() # type: str
-    ConnectionLogOptions = attr.ib() # type: ConnectionLogOptions
-    ServerCertificateArn = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DnsServers = attr.ib(default=NOTHING) # type: list
-    TagSpecifications = attr.ib(default=NOTHING) # type: list
-    TransportProtocol = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ClientVpnEndpoint
-
-
-@attr.s
-class ClientVpnRoute(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ClientVpnEndpointId = attr.ib() # type: str
-    DestinationCidrBlock = attr.ib() # type: str
-    TargetVpcSubnetId = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ClientVpnRoute
-
-
-@attr.s
-class ClientVpnTargetNetworkAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ClientVpnEndpointId = attr.ib() # type: str
-    SubnetId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ec2.ClientVpnTargetNetworkAssociation
+from troposphere.ec2 import (
+    AssociationParameters as _AssociationParameters,
+    BlockDeviceMapping as _BlockDeviceMapping,
+    CertificateAuthenticationRequest as _CertificateAuthenticationRequest,
+    ClassicLoadBalancer as _ClassicLoadBalancer,
+    ClassicLoadBalancersConfig as _ClassicLoadBalancersConfig,
+    ClientAuthenticationRequest as _ClientAuthenticationRequest,
+    ConnectionLogOptions as _ConnectionLogOptions,
+    CreditSpecification as _CreditSpecification,
+    DirectoryServiceAuthenticationRequest as _DirectoryServiceAuthenticationRequest,
+    EBSBlockDevice as _EBSBlockDevice,
+    ElasticGpuSpecification as _ElasticGpuSpecification,
+    ElasticInferenceAccelerator as _ElasticInferenceAccelerator,
+    FleetLaunchTemplateConfigRequest as _FleetLaunchTemplateConfigRequest,
+    FleetLaunchTemplateOverridesRequest as _FleetLaunchTemplateOverridesRequest,
+    FleetLaunchTemplateSpecificationRequest as _FleetLaunchTemplateSpecificationRequest,
+    ICMP as _ICMP,
+    IamInstanceProfile as _IamInstanceProfile,
+    InstanceMarketOptions as _InstanceMarketOptions,
+    Ipv6Addresses as _Ipv6Addresses,
+    LaunchSpecifications as _LaunchSpecifications,
+    LaunchTemplateConfigs as _LaunchTemplateConfigs,
+    LaunchTemplateCreditSpecification as _LaunchTemplateCreditSpecification,
+    LaunchTemplateData as _LaunchTemplateData,
+    LaunchTemplateOverrides as _LaunchTemplateOverrides,
+    LaunchTemplateSpecification as _LaunchTemplateSpecification,
+    LicenseSpecification as _LicenseSpecification,
+    LoadBalancersConfig as _LoadBalancersConfig,
+    Monitoring as _Monitoring,
+    NetworkInterfaceProperty as _NetworkInterfaceProperty,
+    NetworkInterfaces as _NetworkInterfaces,
+    OnDemandOptionsRequest as _OnDemandOptionsRequest,
+    Placement as _Placement,
+    PortRange as _PortRange,
+    PrivateIpAddressSpecification as _PrivateIpAddressSpecification,
+    SecurityGroups as _SecurityGroups,
+    SpotFleetRequestConfigData as _SpotFleetRequestConfigData,
+    SpotFleetTagSpecification as _SpotFleetTagSpecification,
+    SpotOptions as _SpotOptions,
+    SpotOptionsRequest as _SpotOptionsRequest,
+    SsmAssociations as _SsmAssociations,
+    TagSpecifications as _TagSpecifications,
+    Tags as _Tags,
+    TargetCapacitySpecificationRequest as _TargetCapacitySpecificationRequest,
+    TargetGroup as _TargetGroup,
+    TargetGroupConfig as _TargetGroupConfig,
+    VpnTunnelOptionsSpecification as _VpnTunnelOptionsSpecification,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class Tag(troposphere.ec2.Tag, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Value=Value,
+        )
+        super(Tag, self).__init__(**processed_kwargs)
+
+
+class CustomerGateway(troposphere.ec2.CustomerGateway, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 BgpAsn=REQUIRED, # type: int
+                 IpAddress=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            BgpAsn=BgpAsn,
+            IpAddress=IpAddress,
+            Type=Type,
+            Tags=Tags,
+        )
+        super(CustomerGateway, self).__init__(**processed_kwargs)
+
+
+class DHCPOptions(troposphere.ec2.DHCPOptions, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DomainName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DomainNameServers=NOTHING, # type: list
+                 NetbiosNameServers=NOTHING, # type: list
+                 NetbiosNodeType=NOTHING, # type: int
+                 NtpServers=NOTHING, # type: list
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DomainName=DomainName,
+            DomainNameServers=DomainNameServers,
+            NetbiosNameServers=NetbiosNameServers,
+            NetbiosNodeType=NetbiosNodeType,
+            NtpServers=NtpServers,
+            Tags=Tags,
+        )
+        super(DHCPOptions, self).__init__(**processed_kwargs)
+
+
+class EgressOnlyInternetGateway(troposphere.ec2.EgressOnlyInternetGateway, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            VpcId=VpcId,
+        )
+        super(EgressOnlyInternetGateway, self).__init__(**processed_kwargs)
+
+
+class EIP(troposphere.ec2.EIP, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 InstanceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Domain=NOTHING, # type: Union[str, AWSHelperFn]
+                 PublicIpv4Pool=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            InstanceId=InstanceId,
+            Domain=Domain,
+            PublicIpv4Pool=PublicIpv4Pool,
+        )
+        super(EIP, self).__init__(**processed_kwargs)
+
+
+class EIPAssociation(troposphere.ec2.EIPAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AllocationId=NOTHING, # type: Union[str, AWSHelperFn]
+                 EIP=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 NetworkInterfaceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 PrivateIpAddress=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AllocationId=AllocationId,
+            EIP=EIP,
+            InstanceId=InstanceId,
+            NetworkInterfaceId=NetworkInterfaceId,
+            PrivateIpAddress=PrivateIpAddress,
+        )
+        super(EIPAssociation, self).__init__(**processed_kwargs)
+
+
+class FlowLog(troposphere.ec2.FlowLog, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ResourceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ResourceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TrafficType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DeliverLogsPermissionArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 LogDestination=NOTHING, # type: Union[str, AWSHelperFn]
+                 LogDestinationType=NOTHING, # type: Union[str, AWSHelperFn]
+                 LogGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ResourceId=ResourceId,
+            ResourceType=ResourceType,
+            TrafficType=TrafficType,
+            DeliverLogsPermissionArn=DeliverLogsPermissionArn,
+            LogDestination=LogDestination,
+            LogDestinationType=LogDestinationType,
+            LogGroupName=LogGroupName,
+        )
+        super(FlowLog, self).__init__(**processed_kwargs)
+
+
+class NatGateway(troposphere.ec2.NatGateway, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AllocationId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AllocationId=AllocationId,
+            SubnetId=SubnetId,
+            Tags=Tags,
+        )
+        super(NatGateway, self).__init__(**processed_kwargs)
+
+
+class EBSBlockDevice(troposphere.ec2.EBSBlockDevice, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeleteOnTermination=NOTHING, # type: bool
+                 Encrypted=NOTHING, # type: bool
+                 Iops=NOTHING, # type: int
+                 SnapshotId=NOTHING, # type: Union[str, AWSHelperFn]
+                 VolumeSize=NOTHING, # type: int
+                 VolumeType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeleteOnTermination=DeleteOnTermination,
+            Encrypted=Encrypted,
+            Iops=Iops,
+            SnapshotId=SnapshotId,
+            VolumeSize=VolumeSize,
+            VolumeType=VolumeType,
+        )
+        super(EBSBlockDevice, self).__init__(**processed_kwargs)
+
+
+class BlockDeviceMapping(troposphere.ec2.BlockDeviceMapping, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeviceName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Ebs=NOTHING, # type: _EBSBlockDevice
+                 NoDevice=NOTHING, # type: dict
+                 VirtualName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeviceName=DeviceName,
+            Ebs=Ebs,
+            NoDevice=NoDevice,
+            VirtualName=VirtualName,
+        )
+        super(BlockDeviceMapping, self).__init__(**processed_kwargs)
+
+
+class MountPoint(troposphere.ec2.MountPoint, Mixin):
+    def __init__(self,
+                 title=None,
+                 Device=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VolumeId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Device=Device,
+            VolumeId=VolumeId,
+        )
+        super(MountPoint, self).__init__(**processed_kwargs)
+
+
+class Placement(troposphere.ec2.Placement, Mixin):
+    def __init__(self,
+                 title=None,
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 GroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AvailabilityZone=AvailabilityZone,
+            GroupName=GroupName,
+        )
+        super(Placement, self).__init__(**processed_kwargs)
+
+
+class CreditSpecification(troposphere.ec2.CreditSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 CPUCredits=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CPUCredits=CPUCredits,
+        )
+        super(CreditSpecification, self).__init__(**processed_kwargs)
+
+
+class ElasticGpuSpecification(troposphere.ec2.ElasticGpuSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+        )
+        super(ElasticGpuSpecification, self).__init__(**processed_kwargs)
+
+
+class LaunchTemplateSpecification(troposphere.ec2.LaunchTemplateSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 Version=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LaunchTemplateId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LaunchTemplateName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Version=Version,
+            LaunchTemplateId=LaunchTemplateId,
+            LaunchTemplateName=LaunchTemplateName,
+        )
+        super(LaunchTemplateSpecification, self).__init__(**processed_kwargs)
+
+
+class PrivateIpAddressSpecification(troposphere.ec2.PrivateIpAddressSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 Primary=REQUIRED, # type: bool
+                 PrivateIpAddress=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Primary=Primary,
+            PrivateIpAddress=PrivateIpAddress,
+        )
+        super(PrivateIpAddressSpecification, self).__init__(**processed_kwargs)
+
+
+class NetworkInterfaceProperty(troposphere.ec2.NetworkInterfaceProperty, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeviceIndex=REQUIRED, # type: int
+                 AssociatePublicIpAddress=NOTHING, # type: bool
+                 DeleteOnTermination=NOTHING, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 GroupSet=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 NetworkInterfaceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Ipv6AddressCount=NOTHING, # type: int
+                 Ipv6Addresses=NOTHING, # type: List[_Ipv6Addresses]
+                 PrivateIpAddress=NOTHING, # type: Union[str, AWSHelperFn]
+                 PrivateIpAddresses=NOTHING, # type: List[_PrivateIpAddressSpecification]
+                 SecondaryPrivateIpAddressCount=NOTHING, # type: int
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeviceIndex=DeviceIndex,
+            AssociatePublicIpAddress=AssociatePublicIpAddress,
+            DeleteOnTermination=DeleteOnTermination,
+            Description=Description,
+            GroupSet=GroupSet,
+            NetworkInterfaceId=NetworkInterfaceId,
+            Ipv6AddressCount=Ipv6AddressCount,
+            Ipv6Addresses=Ipv6Addresses,
+            PrivateIpAddress=PrivateIpAddress,
+            PrivateIpAddresses=PrivateIpAddresses,
+            SecondaryPrivateIpAddressCount=SecondaryPrivateIpAddressCount,
+            SubnetId=SubnetId,
+        )
+        super(NetworkInterfaceProperty, self).__init__(**processed_kwargs)
+
+
+class AssociationParameters(troposphere.ec2.AssociationParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Value=Value,
+        )
+        super(AssociationParameters, self).__init__(**processed_kwargs)
+
+
+class SsmAssociations(troposphere.ec2.SsmAssociations, Mixin):
+    def __init__(self,
+                 title=None,
+                 DocumentName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AssociationParameters=NOTHING, # type: List[_AssociationParameters]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DocumentName=DocumentName,
+            AssociationParameters=AssociationParameters,
+        )
+        super(SsmAssociations, self).__init__(**processed_kwargs)
+
+
+class Host(troposphere.ec2.Host, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AvailabilityZone=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AutoPlacement=NOTHING, # type: Union[str, AWSHelperFn]
+                 HostRecovery=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AvailabilityZone=AvailabilityZone,
+            InstanceType=InstanceType,
+            AutoPlacement=AutoPlacement,
+            HostRecovery=HostRecovery,
+        )
+        super(Host, self).__init__(**processed_kwargs)
+
+
+class ElasticInferenceAccelerator(troposphere.ec2.ElasticInferenceAccelerator, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+        )
+        super(ElasticInferenceAccelerator, self).__init__(**processed_kwargs)
+
+
+class LicenseSpecification(troposphere.ec2.LicenseSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 LicenseConfigurationArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LicenseConfigurationArn=LicenseConfigurationArn,
+        )
+        super(LicenseSpecification, self).__init__(**processed_kwargs)
+
+
+class Instance(troposphere.ec2.Instance, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Affinity=NOTHING, # type: Union[str, AWSHelperFn]
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 BlockDeviceMappings=NOTHING, # type: list
+                 CreditSpecification=NOTHING, # type: _CreditSpecification
+                 DisableApiTermination=NOTHING, # type: bool
+                 EbsOptimized=NOTHING, # type: bool
+                 ElasticGpuSpecifications=NOTHING, # type: List[_ElasticGpuSpecification]
+                 ElasticInferenceAccelerators=NOTHING, # type: List[_ElasticInferenceAccelerator]
+                 HostId=NOTHING, # type: Union[str, AWSHelperFn]
+                 IamInstanceProfile=NOTHING, # type: Union[str, AWSHelperFn]
+                 ImageId=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceInitiatedShutdownBehavior=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 Ipv6AddressCount=NOTHING, # type: int
+                 Ipv6Addresses=NOTHING, # type: List[_Ipv6Addresses]
+                 KernelId=NOTHING, # type: Union[str, AWSHelperFn]
+                 KeyName=NOTHING, # type: Union[str, AWSHelperFn]
+                 LaunchTemplate=NOTHING, # type: _LaunchTemplateSpecification
+                 LicenseSpecifications=NOTHING, # type: List[_LicenseSpecification]
+                 Monitoring=NOTHING, # type: bool
+                 NetworkInterfaces=NOTHING, # type: List[_NetworkInterfaceProperty]
+                 PlacementGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 PrivateIpAddress=NOTHING, # type: Union[str, AWSHelperFn]
+                 RamdiskId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroupIds=NOTHING, # type: list
+                 SecurityGroups=NOTHING, # type: list
+                 SsmAssociations=NOTHING, # type: List[_SsmAssociations]
+                 SourceDestCheck=NOTHING, # type: bool
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 Tenancy=NOTHING, # type: Union[str, AWSHelperFn]
+                 UserData=NOTHING, # type: Union[str, AWSHelperFn]
+                 Volumes=NOTHING, # type: list
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Affinity=Affinity,
+            AvailabilityZone=AvailabilityZone,
+            BlockDeviceMappings=BlockDeviceMappings,
+            CreditSpecification=CreditSpecification,
+            DisableApiTermination=DisableApiTermination,
+            EbsOptimized=EbsOptimized,
+            ElasticGpuSpecifications=ElasticGpuSpecifications,
+            ElasticInferenceAccelerators=ElasticInferenceAccelerators,
+            HostId=HostId,
+            IamInstanceProfile=IamInstanceProfile,
+            ImageId=ImageId,
+            InstanceInitiatedShutdownBehavior=InstanceInitiatedShutdownBehavior,
+            InstanceType=InstanceType,
+            Ipv6AddressCount=Ipv6AddressCount,
+            Ipv6Addresses=Ipv6Addresses,
+            KernelId=KernelId,
+            KeyName=KeyName,
+            LaunchTemplate=LaunchTemplate,
+            LicenseSpecifications=LicenseSpecifications,
+            Monitoring=Monitoring,
+            NetworkInterfaces=NetworkInterfaces,
+            PlacementGroupName=PlacementGroupName,
+            PrivateIpAddress=PrivateIpAddress,
+            RamdiskId=RamdiskId,
+            SecurityGroupIds=SecurityGroupIds,
+            SecurityGroups=SecurityGroups,
+            SsmAssociations=SsmAssociations,
+            SourceDestCheck=SourceDestCheck,
+            SubnetId=SubnetId,
+            Tags=Tags,
+            Tenancy=Tenancy,
+            UserData=UserData,
+            Volumes=Volumes,
+        )
+        super(Instance, self).__init__(**processed_kwargs)
+
+
+class InternetGateway(troposphere.ec2.InternetGateway, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Tags=Tags,
+        )
+        super(InternetGateway, self).__init__(**processed_kwargs)
+
+
+class NetworkAcl(troposphere.ec2.NetworkAcl, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            VpcId=VpcId,
+            Tags=Tags,
+        )
+        super(NetworkAcl, self).__init__(**processed_kwargs)
+
+
+class ICMP(troposphere.ec2.ICMP, Mixin):
+    def __init__(self,
+                 title=None,
+                 Code=NOTHING, # type: int
+                 Type=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Code=Code,
+            Type=Type,
+        )
+        super(ICMP, self).__init__(**processed_kwargs)
+
+
+class PortRange(troposphere.ec2.PortRange, Mixin):
+    def __init__(self,
+                 title=None,
+                 From=NOTHING, # type: int
+                 To=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            From=From,
+            To=To,
+        )
+        super(PortRange, self).__init__(**processed_kwargs)
+
+
+class NetworkAclEntry(troposphere.ec2.NetworkAclEntry, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 NetworkAclId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Protocol=REQUIRED, # type: int
+                 RuleAction=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RuleNumber=REQUIRED, # type: Any
+                 CidrBlock=NOTHING, # type: Union[str, AWSHelperFn]
+                 Egress=NOTHING, # type: bool
+                 Icmp=NOTHING, # type: _ICMP
+                 Ipv6CidrBlock=NOTHING, # type: Union[str, AWSHelperFn]
+                 PortRange=NOTHING, # type: _PortRange
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            NetworkAclId=NetworkAclId,
+            Protocol=Protocol,
+            RuleAction=RuleAction,
+            RuleNumber=RuleNumber,
+            CidrBlock=CidrBlock,
+            Egress=Egress,
+            Icmp=Icmp,
+            Ipv6CidrBlock=Ipv6CidrBlock,
+            PortRange=PortRange,
+        )
+        super(NetworkAclEntry, self).__init__(**processed_kwargs)
+
+
+class NetworkInterface(troposphere.ec2.NetworkInterface, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 GroupSet=NOTHING, # type: list
+                 Ipv6AddressCount=NOTHING, # type: int
+                 Ipv6Addresses=NOTHING, # type: List[_Ipv6Addresses]
+                 PrivateIpAddress=NOTHING, # type: Union[str, AWSHelperFn]
+                 PrivateIpAddresses=NOTHING, # type: List[_PrivateIpAddressSpecification]
+                 SecondaryPrivateIpAddressCount=NOTHING, # type: int
+                 SourceDestCheck=NOTHING, # type: bool
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SubnetId=SubnetId,
+            Description=Description,
+            GroupSet=GroupSet,
+            Ipv6AddressCount=Ipv6AddressCount,
+            Ipv6Addresses=Ipv6Addresses,
+            PrivateIpAddress=PrivateIpAddress,
+            PrivateIpAddresses=PrivateIpAddresses,
+            SecondaryPrivateIpAddressCount=SecondaryPrivateIpAddressCount,
+            SourceDestCheck=SourceDestCheck,
+            Tags=Tags,
+        )
+        super(NetworkInterface, self).__init__(**processed_kwargs)
+
+
+class NetworkInterfaceAttachment(troposphere.ec2.NetworkInterfaceAttachment, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DeviceIndex=REQUIRED, # type: int
+                 InstanceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 NetworkInterfaceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DeleteOnTermination=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DeviceIndex=DeviceIndex,
+            InstanceId=InstanceId,
+            NetworkInterfaceId=NetworkInterfaceId,
+            DeleteOnTermination=DeleteOnTermination,
+        )
+        super(NetworkInterfaceAttachment, self).__init__(**processed_kwargs)
+
+
+class NetworkInterfacePermission(troposphere.ec2.NetworkInterfacePermission, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AwsAccountId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 NetworkInterfaceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Permission=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AwsAccountId=AwsAccountId,
+            NetworkInterfaceId=NetworkInterfaceId,
+            Permission=Permission,
+        )
+        super(NetworkInterfacePermission, self).__init__(**processed_kwargs)
+
+
+class Route(troposphere.ec2.Route, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RouteTableId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DestinationCidrBlock=NOTHING, # type: Union[str, AWSHelperFn]
+                 DestinationIpv6CidrBlock=NOTHING, # type: Union[str, AWSHelperFn]
+                 EgressOnlyInternetGatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 GatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 NatGatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 NetworkInterfaceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 TransitGatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 VpcPeeringConnectionId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RouteTableId=RouteTableId,
+            DestinationCidrBlock=DestinationCidrBlock,
+            DestinationIpv6CidrBlock=DestinationIpv6CidrBlock,
+            EgressOnlyInternetGatewayId=EgressOnlyInternetGatewayId,
+            GatewayId=GatewayId,
+            InstanceId=InstanceId,
+            NatGatewayId=NatGatewayId,
+            NetworkInterfaceId=NetworkInterfaceId,
+            TransitGatewayId=TransitGatewayId,
+            VpcPeeringConnectionId=VpcPeeringConnectionId,
+        )
+        super(Route, self).__init__(**processed_kwargs)
+
+
+class RouteTable(troposphere.ec2.RouteTable, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            VpcId=VpcId,
+            Tags=Tags,
+        )
+        super(RouteTable, self).__init__(**processed_kwargs)
+
+
+class SecurityGroupEgress(troposphere.ec2.SecurityGroupEgress, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 GroupId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 IpProtocol=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CidrIp=NOTHING, # type: Union[str, AWSHelperFn]
+                 CidrIpv6=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DestinationPrefixListId=NOTHING, # type: Union[str, AWSHelperFn]
+                 DestinationSecurityGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 FromPort=NOTHING, # type: int
+                 ToPort=NOTHING, # type: int
+                 SourceSecurityGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            GroupId=GroupId,
+            IpProtocol=IpProtocol,
+            CidrIp=CidrIp,
+            CidrIpv6=CidrIpv6,
+            Description=Description,
+            DestinationPrefixListId=DestinationPrefixListId,
+            DestinationSecurityGroupId=DestinationSecurityGroupId,
+            FromPort=FromPort,
+            ToPort=ToPort,
+            SourceSecurityGroupId=SourceSecurityGroupId,
+        )
+        super(SecurityGroupEgress, self).__init__(**processed_kwargs)
+
+
+class SecurityGroupIngress(troposphere.ec2.SecurityGroupIngress, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 IpProtocol=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CidrIp=NOTHING, # type: Union[str, AWSHelperFn]
+                 CidrIpv6=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 FromPort=NOTHING, # type: int
+                 GroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 GroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceSecurityGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceSecurityGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceSecurityGroupOwnerId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ToPort=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            IpProtocol=IpProtocol,
+            CidrIp=CidrIp,
+            CidrIpv6=CidrIpv6,
+            Description=Description,
+            FromPort=FromPort,
+            GroupName=GroupName,
+            GroupId=GroupId,
+            SourceSecurityGroupName=SourceSecurityGroupName,
+            SourceSecurityGroupId=SourceSecurityGroupId,
+            SourceSecurityGroupOwnerId=SourceSecurityGroupOwnerId,
+            ToPort=ToPort,
+        )
+        super(SecurityGroupIngress, self).__init__(**processed_kwargs)
+
+
+class SecurityGroupRule(troposphere.ec2.SecurityGroupRule, Mixin):
+    def __init__(self,
+                 title=None,
+                 IpProtocol=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CidrIp=NOTHING, # type: Union[str, AWSHelperFn]
+                 CidrIpv6=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DestinationPrefixListId=NOTHING, # type: Union[str, AWSHelperFn]
+                 DestinationSecurityGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 FromPort=NOTHING, # type: int
+                 SourceSecurityGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceSecurityGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceSecurityGroupOwnerId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ToPort=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IpProtocol=IpProtocol,
+            CidrIp=CidrIp,
+            CidrIpv6=CidrIpv6,
+            Description=Description,
+            DestinationPrefixListId=DestinationPrefixListId,
+            DestinationSecurityGroupId=DestinationSecurityGroupId,
+            FromPort=FromPort,
+            SourceSecurityGroupId=SourceSecurityGroupId,
+            SourceSecurityGroupName=SourceSecurityGroupName,
+            SourceSecurityGroupOwnerId=SourceSecurityGroupOwnerId,
+            ToPort=ToPort,
+        )
+        super(SecurityGroupRule, self).__init__(**processed_kwargs)
+
+
+class SecurityGroup(troposphere.ec2.SecurityGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 GroupDescription=REQUIRED, # type: Union[str, AWSHelperFn]
+                 GroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroupEgress=NOTHING, # type: list
+                 SecurityGroupIngress=NOTHING, # type: list
+                 VpcId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            GroupDescription=GroupDescription,
+            GroupName=GroupName,
+            SecurityGroupEgress=SecurityGroupEgress,
+            SecurityGroupIngress=SecurityGroupIngress,
+            VpcId=VpcId,
+            Tags=Tags,
+        )
+        super(SecurityGroup, self).__init__(**processed_kwargs)
+
+
+class Subnet(troposphere.ec2.Subnet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CidrBlock=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AssignIpv6AddressOnCreation=NOTHING, # type: bool
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 Ipv6CidrBlock=NOTHING, # type: Union[str, AWSHelperFn]
+                 MapPublicIpOnLaunch=NOTHING, # type: bool
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CidrBlock=CidrBlock,
+            VpcId=VpcId,
+            AssignIpv6AddressOnCreation=AssignIpv6AddressOnCreation,
+            AvailabilityZone=AvailabilityZone,
+            Ipv6CidrBlock=Ipv6CidrBlock,
+            MapPublicIpOnLaunch=MapPublicIpOnLaunch,
+            Tags=Tags,
+        )
+        super(Subnet, self).__init__(**processed_kwargs)
+
+
+class SubnetNetworkAclAssociation(troposphere.ec2.SubnetNetworkAclAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 NetworkAclId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SubnetId=SubnetId,
+            NetworkAclId=NetworkAclId,
+        )
+        super(SubnetNetworkAclAssociation, self).__init__(**processed_kwargs)
+
+
+class SubnetRouteTableAssociation(troposphere.ec2.SubnetRouteTableAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RouteTableId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RouteTableId=RouteTableId,
+            SubnetId=SubnetId,
+        )
+        super(SubnetRouteTableAssociation, self).__init__(**processed_kwargs)
+
+
+class Volume(troposphere.ec2.Volume, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AvailabilityZone=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AutoEnableIO=NOTHING, # type: bool
+                 Encrypted=NOTHING, # type: bool
+                 Iops=NOTHING, # type: int
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Size=NOTHING, # type: int
+                 SnapshotId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 VolumeType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AvailabilityZone=AvailabilityZone,
+            AutoEnableIO=AutoEnableIO,
+            Encrypted=Encrypted,
+            Iops=Iops,
+            KmsKeyId=KmsKeyId,
+            Size=Size,
+            SnapshotId=SnapshotId,
+            Tags=Tags,
+            VolumeType=VolumeType,
+        )
+        super(Volume, self).__init__(**processed_kwargs)
+
+
+class VolumeAttachment(troposphere.ec2.VolumeAttachment, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Device=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VolumeId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Device=Device,
+            InstanceId=InstanceId,
+            VolumeId=VolumeId,
+        )
+        super(VolumeAttachment, self).__init__(**processed_kwargs)
+
+
+class VPC(troposphere.ec2.VPC, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CidrBlock=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EnableDnsSupport=NOTHING, # type: bool
+                 EnableDnsHostnames=NOTHING, # type: bool
+                 InstanceTenancy=NOTHING, # type: Any
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CidrBlock=CidrBlock,
+            EnableDnsSupport=EnableDnsSupport,
+            EnableDnsHostnames=EnableDnsHostnames,
+            InstanceTenancy=InstanceTenancy,
+            Tags=Tags,
+        )
+        super(VPC, self).__init__(**processed_kwargs)
+
+
+class VPCDHCPOptionsAssociation(troposphere.ec2.VPCDHCPOptionsAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DhcpOptionsId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DhcpOptionsId=DhcpOptionsId,
+            VpcId=VpcId,
+        )
+        super(VPCDHCPOptionsAssociation, self).__init__(**processed_kwargs)
+
+
+class VPCEndpoint(troposphere.ec2.VPCEndpoint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ServiceName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PolicyDocument=NOTHING, # type: Union[dict]
+                 PrivateDnsEnabled=NOTHING, # type: bool
+                 RouteTableIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 VpcEndpointType=NOTHING, # type: str
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ServiceName=ServiceName,
+            VpcId=VpcId,
+            PolicyDocument=PolicyDocument,
+            PrivateDnsEnabled=PrivateDnsEnabled,
+            RouteTableIds=RouteTableIds,
+            SecurityGroupIds=SecurityGroupIds,
+            SubnetIds=SubnetIds,
+            VpcEndpointType=VpcEndpointType,
+        )
+        super(VPCEndpoint, self).__init__(**processed_kwargs)
+
+
+class VPCEndpointConnectionNotification(troposphere.ec2.VPCEndpointConnectionNotification, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ConnectionEvents=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 ConnectionNotificationArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 VPCEndpointId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ConnectionEvents=ConnectionEvents,
+            ConnectionNotificationArn=ConnectionNotificationArn,
+            ServiceId=ServiceId,
+            VPCEndpointId=VPCEndpointId,
+        )
+        super(VPCEndpointConnectionNotification, self).__init__(**processed_kwargs)
+
+
+class VPCEndpointService(troposphere.ec2.VPCEndpointService, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 NetworkLoadBalancerArns=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 AcceptanceRequired=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            NetworkLoadBalancerArns=NetworkLoadBalancerArns,
+            AcceptanceRequired=AcceptanceRequired,
+        )
+        super(VPCEndpointService, self).__init__(**processed_kwargs)
+
+
+class VPCEndpointServicePermissions(troposphere.ec2.VPCEndpointServicePermissions, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ServiceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllowedPrincipals=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ServiceId=ServiceId,
+            AllowedPrincipals=AllowedPrincipals,
+        )
+        super(VPCEndpointServicePermissions, self).__init__(**processed_kwargs)
+
+
+class VPCGatewayAttachment(troposphere.ec2.VPCGatewayAttachment, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InternetGatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 VpnGatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            VpcId=VpcId,
+            InternetGatewayId=InternetGatewayId,
+            VpnGatewayId=VpnGatewayId,
+        )
+        super(VPCGatewayAttachment, self).__init__(**processed_kwargs)
+
+
+class VpnTunnelOptionsSpecification(troposphere.ec2.VpnTunnelOptionsSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 PreSharedKey=NOTHING, # type: str
+                 TunnelInsideCidr=NOTHING, # type: str
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PreSharedKey=PreSharedKey,
+            TunnelInsideCidr=TunnelInsideCidr,
+        )
+        super(VpnTunnelOptionsSpecification, self).__init__(**processed_kwargs)
+
+
+class VPNConnection(troposphere.ec2.VPNConnection, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 CustomerGatewayId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StaticRoutesOnly=NOTHING, # type: bool
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 TransitGatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 VpnGatewayId=NOTHING, # type: Union[str, AWSHelperFn]
+                 VpnTunnelOptionsSpecifications=NOTHING, # type: List[_VpnTunnelOptionsSpecification]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            CustomerGatewayId=CustomerGatewayId,
+            Type=Type,
+            StaticRoutesOnly=StaticRoutesOnly,
+            Tags=Tags,
+            TransitGatewayId=TransitGatewayId,
+            VpnGatewayId=VpnGatewayId,
+            VpnTunnelOptionsSpecifications=VpnTunnelOptionsSpecifications,
+        )
+        super(VPNConnection, self).__init__(**processed_kwargs)
+
+
+class VPNConnectionRoute(troposphere.ec2.VPNConnectionRoute, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DestinationCidrBlock=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VpnConnectionId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DestinationCidrBlock=DestinationCidrBlock,
+            VpnConnectionId=VpnConnectionId,
+        )
+        super(VPNConnectionRoute, self).__init__(**processed_kwargs)
+
+
+class VPNGateway(troposphere.ec2.VPNGateway, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AmazonSideAsn=NOTHING, # type: int
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Type=Type,
+            AmazonSideAsn=AmazonSideAsn,
+            Tags=Tags,
+        )
+        super(VPNGateway, self).__init__(**processed_kwargs)
+
+
+class VPNGatewayRoutePropagation(troposphere.ec2.VPNGatewayRoutePropagation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RouteTableIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 VpnGatewayId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RouteTableIds=RouteTableIds,
+            VpnGatewayId=VpnGatewayId,
+        )
+        super(VPNGatewayRoutePropagation, self).__init__(**processed_kwargs)
+
+
+class VPCPeeringConnection(troposphere.ec2.VPCPeeringConnection, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PeerVpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 PeerRegion=NOTHING, # type: Union[str, AWSHelperFn]
+                 PeerOwnerId=NOTHING, # type: Union[str, AWSHelperFn]
+                 PeerRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PeerVpcId=PeerVpcId,
+            VpcId=VpcId,
+            Tags=Tags,
+            PeerRegion=PeerRegion,
+            PeerOwnerId=PeerOwnerId,
+            PeerRoleArn=PeerRoleArn,
+        )
+        super(VPCPeeringConnection, self).__init__(**processed_kwargs)
+
+
+class Monitoring(troposphere.ec2.Monitoring, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+        )
+        super(Monitoring, self).__init__(**processed_kwargs)
+
+
+class NetworkInterfaces(troposphere.ec2.NetworkInterfaces, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeviceIndex=REQUIRED, # type: int
+                 AssociatePublicIpAddress=NOTHING, # type: bool
+                 DeleteOnTermination=NOTHING, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Groups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 InterfaceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 Ipv6AddressCount=NOTHING, # type: int
+                 Ipv6Addresses=NOTHING, # type: List[_Ipv6Addresses]
+                 NetworkInterfaceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 PrivateIpAddresses=NOTHING, # type: List[_PrivateIpAddressSpecification]
+                 SecondaryPrivateIpAddressCount=NOTHING, # type: int
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeviceIndex=DeviceIndex,
+            AssociatePublicIpAddress=AssociatePublicIpAddress,
+            DeleteOnTermination=DeleteOnTermination,
+            Description=Description,
+            Groups=Groups,
+            InterfaceType=InterfaceType,
+            Ipv6AddressCount=Ipv6AddressCount,
+            Ipv6Addresses=Ipv6Addresses,
+            NetworkInterfaceId=NetworkInterfaceId,
+            PrivateIpAddresses=PrivateIpAddresses,
+            SecondaryPrivateIpAddressCount=SecondaryPrivateIpAddressCount,
+            SubnetId=SubnetId,
+        )
+        super(NetworkInterfaces, self).__init__(**processed_kwargs)
+
+
+class SecurityGroups(troposphere.ec2.SecurityGroups, Mixin):
+    def __init__(self,
+                 title=None,
+                 GroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            GroupId=GroupId,
+        )
+        super(SecurityGroups, self).__init__(**processed_kwargs)
+
+
+class IamInstanceProfile(troposphere.ec2.IamInstanceProfile, Mixin):
+    def __init__(self,
+                 title=None,
+                 Arn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Arn=Arn,
+        )
+        super(IamInstanceProfile, self).__init__(**processed_kwargs)
+
+
+class SpotFleetTagSpecification(troposphere.ec2.SpotFleetTagSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceType=ResourceType,
+            Tags=Tags,
+        )
+        super(SpotFleetTagSpecification, self).__init__(**processed_kwargs)
+
+
+class LaunchSpecifications(troposphere.ec2.LaunchSpecifications, Mixin):
+    def __init__(self,
+                 title=None,
+                 ImageId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BlockDeviceMappings=NOTHING, # type: List[_BlockDeviceMapping]
+                 EbsOptimized=NOTHING, # type: bool
+                 IamInstanceProfile=NOTHING, # type: _IamInstanceProfile
+                 KernelId=NOTHING, # type: Union[str, AWSHelperFn]
+                 KeyName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Monitoring=NOTHING, # type: _Monitoring
+                 NetworkInterfaces=NOTHING, # type: List[_NetworkInterfaces]
+                 Placement=NOTHING, # type: _Placement
+                 RamdiskId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroups=NOTHING, # type: List[_SecurityGroups]
+                 SpotPrice=NOTHING, # type: Union[str, AWSHelperFn]
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 TagSpecifications=NOTHING, # type: List[_SpotFleetTagSpecification]
+                 UserData=NOTHING, # type: Union[str, AWSHelperFn]
+                 WeightedCapacity=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ImageId=ImageId,
+            InstanceType=InstanceType,
+            BlockDeviceMappings=BlockDeviceMappings,
+            EbsOptimized=EbsOptimized,
+            IamInstanceProfile=IamInstanceProfile,
+            KernelId=KernelId,
+            KeyName=KeyName,
+            Monitoring=Monitoring,
+            NetworkInterfaces=NetworkInterfaces,
+            Placement=Placement,
+            RamdiskId=RamdiskId,
+            SecurityGroups=SecurityGroups,
+            SpotPrice=SpotPrice,
+            SubnetId=SubnetId,
+            TagSpecifications=TagSpecifications,
+            UserData=UserData,
+            WeightedCapacity=WeightedCapacity,
+        )
+        super(LaunchSpecifications, self).__init__(**processed_kwargs)
+
+
+class LaunchTemplateOverrides(troposphere.ec2.LaunchTemplateOverrides, Mixin):
+    def __init__(self,
+                 title=None,
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 SpotPrice=NOTHING, # type: Union[str, AWSHelperFn]
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 WeightedCapacity=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AvailabilityZone=AvailabilityZone,
+            InstanceType=InstanceType,
+            SpotPrice=SpotPrice,
+            SubnetId=SubnetId,
+            WeightedCapacity=WeightedCapacity,
+        )
+        super(LaunchTemplateOverrides, self).__init__(**processed_kwargs)
+
+
+class LaunchTemplateConfigs(troposphere.ec2.LaunchTemplateConfigs, Mixin):
+    def __init__(self,
+                 title=None,
+                 LaunchTemplateSpecification=REQUIRED, # type: _LaunchTemplateSpecification
+                 Overrides=NOTHING, # type: List[_LaunchTemplateOverrides]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LaunchTemplateSpecification=LaunchTemplateSpecification,
+            Overrides=Overrides,
+        )
+        super(LaunchTemplateConfigs, self).__init__(**processed_kwargs)
+
+
+class ClassicLoadBalancer(troposphere.ec2.ClassicLoadBalancer, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+        )
+        super(ClassicLoadBalancer, self).__init__(**processed_kwargs)
+
+
+class ClassicLoadBalancersConfig(troposphere.ec2.ClassicLoadBalancersConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 ClassicLoadBalancers=REQUIRED, # type: List[_ClassicLoadBalancer]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ClassicLoadBalancers=ClassicLoadBalancers,
+        )
+        super(ClassicLoadBalancersConfig, self).__init__(**processed_kwargs)
+
+
+class TargetGroup(troposphere.ec2.TargetGroup, Mixin):
+    def __init__(self,
+                 title=None,
+                 Arn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Arn=Arn,
+        )
+        super(TargetGroup, self).__init__(**processed_kwargs)
+
+
+class TargetGroupConfig(troposphere.ec2.TargetGroupConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 TargetGroups=REQUIRED, # type: List[_TargetGroup]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TargetGroups=TargetGroups,
+        )
+        super(TargetGroupConfig, self).__init__(**processed_kwargs)
+
+
+class LoadBalancersConfig(troposphere.ec2.LoadBalancersConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 ClassicLoadBalancersConfig=NOTHING, # type: List[_ClassicLoadBalancersConfig]
+                 TargetGroupsConfig=NOTHING, # type: _TargetGroupConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ClassicLoadBalancersConfig=ClassicLoadBalancersConfig,
+            TargetGroupsConfig=TargetGroupsConfig,
+        )
+        super(LoadBalancersConfig, self).__init__(**processed_kwargs)
+
+
+class SpotFleetRequestConfigData(troposphere.ec2.SpotFleetRequestConfigData, Mixin):
+    def __init__(self,
+                 title=None,
+                 IamFleetRole=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetCapacity=REQUIRED, # type: int
+                 AllocationStrategy=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExcessCapacityTerminationPolicy=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceInterruptionBehavior=NOTHING, # type: Union[str, AWSHelperFn]
+                 LaunchSpecifications=NOTHING, # type: List[_LaunchSpecifications]
+                 LaunchTemplateConfigs=NOTHING, # type: List[_LaunchTemplateConfigs]
+                 LoadBalancersConfig=NOTHING, # type: _LoadBalancersConfig
+                 ReplaceUnhealthyInstances=NOTHING, # type: bool
+                 SpotPrice=NOTHING, # type: Union[str, AWSHelperFn]
+                 TerminateInstancesWithExpiration=NOTHING, # type: bool
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 ValidFrom=NOTHING, # type: Union[str, AWSHelperFn]
+                 ValidUntil=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IamFleetRole=IamFleetRole,
+            TargetCapacity=TargetCapacity,
+            AllocationStrategy=AllocationStrategy,
+            ExcessCapacityTerminationPolicy=ExcessCapacityTerminationPolicy,
+            InstanceInterruptionBehavior=InstanceInterruptionBehavior,
+            LaunchSpecifications=LaunchSpecifications,
+            LaunchTemplateConfigs=LaunchTemplateConfigs,
+            LoadBalancersConfig=LoadBalancersConfig,
+            ReplaceUnhealthyInstances=ReplaceUnhealthyInstances,
+            SpotPrice=SpotPrice,
+            TerminateInstancesWithExpiration=TerminateInstancesWithExpiration,
+            Type=Type,
+            ValidFrom=ValidFrom,
+            ValidUntil=ValidUntil,
+        )
+        super(SpotFleetRequestConfigData, self).__init__(**processed_kwargs)
+
+
+class SpotFleet(troposphere.ec2.SpotFleet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SpotFleetRequestConfigData=REQUIRED, # type: _SpotFleetRequestConfigData
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SpotFleetRequestConfigData=SpotFleetRequestConfigData,
+        )
+        super(SpotFleet, self).__init__(**processed_kwargs)
+
+
+class PlacementGroup(troposphere.ec2.PlacementGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Strategy=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Strategy=Strategy,
+        )
+        super(PlacementGroup, self).__init__(**processed_kwargs)
+
+
+class SubnetCidrBlock(troposphere.ec2.SubnetCidrBlock, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Ipv6CidrBlock=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Ipv6CidrBlock=Ipv6CidrBlock,
+            SubnetId=SubnetId,
+        )
+        super(SubnetCidrBlock, self).__init__(**processed_kwargs)
+
+
+class VPCCidrBlock(troposphere.ec2.VPCCidrBlock, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AmazonProvidedIpv6CidrBlock=NOTHING, # type: bool
+                 CidrBlock=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            VpcId=VpcId,
+            AmazonProvidedIpv6CidrBlock=AmazonProvidedIpv6CidrBlock,
+            CidrBlock=CidrBlock,
+        )
+        super(VPCCidrBlock, self).__init__(**processed_kwargs)
+
+
+class TagSpecifications(troposphere.ec2.TagSpecifications, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceType=ResourceType,
+            Tags=Tags,
+        )
+        super(TagSpecifications, self).__init__(**processed_kwargs)
+
+
+class SpotOptions(troposphere.ec2.SpotOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 InstanceInterruptionBehavior=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaxPrice=NOTHING, # type: Union[str, AWSHelperFn]
+                 SpotInstanceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            InstanceInterruptionBehavior=InstanceInterruptionBehavior,
+            MaxPrice=MaxPrice,
+            SpotInstanceType=SpotInstanceType,
+        )
+        super(SpotOptions, self).__init__(**processed_kwargs)
+
+
+class InstanceMarketOptions(troposphere.ec2.InstanceMarketOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 MarketType=NOTHING, # type: Union[str, AWSHelperFn]
+                 SpotOptions=NOTHING, # type: _SpotOptions
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MarketType=MarketType,
+            SpotOptions=SpotOptions,
+        )
+        super(InstanceMarketOptions, self).__init__(**processed_kwargs)
+
+
+class LaunchTemplateCreditSpecification(troposphere.ec2.LaunchTemplateCreditSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 CpuCredits=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CpuCredits=CpuCredits,
+        )
+        super(LaunchTemplateCreditSpecification, self).__init__(**processed_kwargs)
+
+
+class LaunchTemplateData(troposphere.ec2.LaunchTemplateData, Mixin):
+    def __init__(self,
+                 title=None,
+                 ImageId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BlockDeviceMappings=NOTHING, # type: List[_BlockDeviceMapping]
+                 CreditSpecification=NOTHING, # type: _LaunchTemplateCreditSpecification
+                 DisableApiTermination=NOTHING, # type: bool
+                 EbsOptimized=NOTHING, # type: bool
+                 ElasticGpuSpecifications=NOTHING, # type: List[_ElasticGpuSpecification]
+                 IamInstanceProfile=NOTHING, # type: _IamInstanceProfile
+                 InstanceInitiatedShutdownBehavior=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceMarketOptions=NOTHING, # type: _InstanceMarketOptions
+                 InstanceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 KernelId=NOTHING, # type: Union[str, AWSHelperFn]
+                 KeyName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Monitoring=NOTHING, # type: _Monitoring
+                 NetworkInterfaces=NOTHING, # type: List[_NetworkInterfaces]
+                 Placement=NOTHING, # type: _Placement
+                 RamDiskId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroups=NOTHING, # type: list
+                 SecurityGroupIds=NOTHING, # type: list
+                 TagSpecifications=NOTHING, # type: List[_TagSpecifications]
+                 UserData=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ImageId=ImageId,
+            BlockDeviceMappings=BlockDeviceMappings,
+            CreditSpecification=CreditSpecification,
+            DisableApiTermination=DisableApiTermination,
+            EbsOptimized=EbsOptimized,
+            ElasticGpuSpecifications=ElasticGpuSpecifications,
+            IamInstanceProfile=IamInstanceProfile,
+            InstanceInitiatedShutdownBehavior=InstanceInitiatedShutdownBehavior,
+            InstanceMarketOptions=InstanceMarketOptions,
+            InstanceType=InstanceType,
+            KernelId=KernelId,
+            KeyName=KeyName,
+            Monitoring=Monitoring,
+            NetworkInterfaces=NetworkInterfaces,
+            Placement=Placement,
+            RamDiskId=RamDiskId,
+            SecurityGroups=SecurityGroups,
+            SecurityGroupIds=SecurityGroupIds,
+            TagSpecifications=TagSpecifications,
+            UserData=UserData,
+        )
+        super(LaunchTemplateData, self).__init__(**processed_kwargs)
+
+
+class LaunchTemplate(troposphere.ec2.LaunchTemplate, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 LaunchTemplateData=NOTHING, # type: _LaunchTemplateData
+                 LaunchTemplateName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            LaunchTemplateData=LaunchTemplateData,
+            LaunchTemplateName=LaunchTemplateName,
+        )
+        super(LaunchTemplate, self).__init__(**processed_kwargs)
+
+
+class TransitGateway(troposphere.ec2.TransitGateway, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AmazonSideAsn=NOTHING, # type: int
+                 AutoAcceptSharedAttachments=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefaultRouteTableAssociation=NOTHING, # type: Union[str, AWSHelperFn]
+                 DefaultRouteTablePropagation=NOTHING, # type: Union[str, AWSHelperFn]
+                 DnsSupport=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 VpnEcmpSupport=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AmazonSideAsn=AmazonSideAsn,
+            AutoAcceptSharedAttachments=AutoAcceptSharedAttachments,
+            DefaultRouteTableAssociation=DefaultRouteTableAssociation,
+            DefaultRouteTablePropagation=DefaultRouteTablePropagation,
+            DnsSupport=DnsSupport,
+            Tags=Tags,
+            VpnEcmpSupport=VpnEcmpSupport,
+        )
+        super(TransitGateway, self).__init__(**processed_kwargs)
+
+
+class TransitGatewayAttachment(troposphere.ec2.TransitGatewayAttachment, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 SubnetIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 TransitGatewayId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VpcId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            SubnetIds=SubnetIds,
+            TransitGatewayId=TransitGatewayId,
+            VpcId=VpcId,
+            Tags=Tags,
+        )
+        super(TransitGatewayAttachment, self).__init__(**processed_kwargs)
+
+
+class TransitGatewayRoute(troposphere.ec2.TransitGatewayRoute, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 TransitGatewayRouteTableId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Blackhole=NOTHING, # type: bool
+                 DestinationCidrBlock=NOTHING, # type: Union[str, AWSHelperFn]
+                 TransitGatewayAttachmentId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            TransitGatewayRouteTableId=TransitGatewayRouteTableId,
+            Blackhole=Blackhole,
+            DestinationCidrBlock=DestinationCidrBlock,
+            TransitGatewayAttachmentId=TransitGatewayAttachmentId,
+        )
+        super(TransitGatewayRoute, self).__init__(**processed_kwargs)
+
+
+class TransitGatewayRouteTable(troposphere.ec2.TransitGatewayRouteTable, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 TransitGatewayId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            TransitGatewayId=TransitGatewayId,
+            Tags=Tags,
+        )
+        super(TransitGatewayRouteTable, self).__init__(**processed_kwargs)
+
+
+class TransitGatewayRouteTableAssociation(troposphere.ec2.TransitGatewayRouteTableAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 TransitGatewayAttachmentId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TransitGatewayRouteTableId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            TransitGatewayAttachmentId=TransitGatewayAttachmentId,
+            TransitGatewayRouteTableId=TransitGatewayRouteTableId,
+        )
+        super(TransitGatewayRouteTableAssociation, self).__init__(**processed_kwargs)
+
+
+class TransitGatewayRouteTablePropagation(troposphere.ec2.TransitGatewayRouteTablePropagation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 TransitGatewayAttachmentId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TransitGatewayRouteTableId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            TransitGatewayAttachmentId=TransitGatewayAttachmentId,
+            TransitGatewayRouteTableId=TransitGatewayRouteTableId,
+        )
+        super(TransitGatewayRouteTablePropagation, self).__init__(**processed_kwargs)
+
+
+class FleetLaunchTemplateSpecificationRequest(troposphere.ec2.FleetLaunchTemplateSpecificationRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 LaunchTemplateId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LaunchTemplateName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Version=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LaunchTemplateId=LaunchTemplateId,
+            LaunchTemplateName=LaunchTemplateName,
+            Version=Version,
+        )
+        super(FleetLaunchTemplateSpecificationRequest, self).__init__(**processed_kwargs)
+
+
+class FleetLaunchTemplateOverridesRequest(troposphere.ec2.FleetLaunchTemplateOverridesRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaxPrice=NOTHING, # type: Union[str, AWSHelperFn]
+                 Priority=NOTHING, # type: float
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 WeightedCapacity=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AvailabilityZone=AvailabilityZone,
+            InstanceType=InstanceType,
+            MaxPrice=MaxPrice,
+            Priority=Priority,
+            SubnetId=SubnetId,
+            WeightedCapacity=WeightedCapacity,
+        )
+        super(FleetLaunchTemplateOverridesRequest, self).__init__(**processed_kwargs)
+
+
+class FleetLaunchTemplateConfigRequest(troposphere.ec2.FleetLaunchTemplateConfigRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 LaunchTemplateSpecification=NOTHING, # type: _FleetLaunchTemplateSpecificationRequest
+                 Overrides=NOTHING, # type: List[_FleetLaunchTemplateOverridesRequest]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LaunchTemplateSpecification=LaunchTemplateSpecification,
+            Overrides=Overrides,
+        )
+        super(FleetLaunchTemplateConfigRequest, self).__init__(**processed_kwargs)
+
+
+class OnDemandOptionsRequest(troposphere.ec2.OnDemandOptionsRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 AllocationStrategy=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AllocationStrategy=AllocationStrategy,
+        )
+        super(OnDemandOptionsRequest, self).__init__(**processed_kwargs)
+
+
+class SpotOptionsRequest(troposphere.ec2.SpotOptionsRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 AllocationStrategy=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstanceInterruptionBehavior=NOTHING, # type: Union[str, AWSHelperFn]
+                 InstancePoolsToUseCount=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AllocationStrategy=AllocationStrategy,
+            InstanceInterruptionBehavior=InstanceInterruptionBehavior,
+            InstancePoolsToUseCount=InstancePoolsToUseCount,
+        )
+        super(SpotOptionsRequest, self).__init__(**processed_kwargs)
+
+
+class TargetCapacitySpecificationRequest(troposphere.ec2.TargetCapacitySpecificationRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 DefaultTargetCapacityType=NOTHING, # type: Union[str, AWSHelperFn]
+                 OnDemandTargetCapacity=NOTHING, # type: int
+                 SpotTargetCapacity=NOTHING, # type: int
+                 TotalTargetCapacity=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DefaultTargetCapacityType=DefaultTargetCapacityType,
+            OnDemandTargetCapacity=OnDemandTargetCapacity,
+            SpotTargetCapacity=SpotTargetCapacity,
+            TotalTargetCapacity=TotalTargetCapacity,
+        )
+        super(TargetCapacitySpecificationRequest, self).__init__(**processed_kwargs)
+
+
+class EC2Fleet(troposphere.ec2.EC2Fleet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 LaunchTemplateConfigs=REQUIRED, # type: List[_FleetLaunchTemplateConfigRequest]
+                 ExcessCapacityTerminationPolicy=NOTHING, # type: Union[str, AWSHelperFn]
+                 OnDemandOptions=NOTHING, # type: _OnDemandOptionsRequest
+                 ReplaceUnhealthyInstances=NOTHING, # type: bool
+                 SpotOptions=NOTHING, # type: _SpotOptionsRequest
+                 TagSpecifications=NOTHING, # type: List[_TagSpecifications]
+                 TargetCapacitySpecification=NOTHING, # type: _TargetCapacitySpecificationRequest
+                 TerminateInstancesWithExpiration=NOTHING, # type: bool
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 ValidFrom=NOTHING, # type: Union[str, AWSHelperFn]
+                 ValidUntil=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            LaunchTemplateConfigs=LaunchTemplateConfigs,
+            ExcessCapacityTerminationPolicy=ExcessCapacityTerminationPolicy,
+            OnDemandOptions=OnDemandOptions,
+            ReplaceUnhealthyInstances=ReplaceUnhealthyInstances,
+            SpotOptions=SpotOptions,
+            TagSpecifications=TagSpecifications,
+            TargetCapacitySpecification=TargetCapacitySpecification,
+            TerminateInstancesWithExpiration=TerminateInstancesWithExpiration,
+            Type=Type,
+            ValidFrom=ValidFrom,
+            ValidUntil=ValidUntil,
+        )
+        super(EC2Fleet, self).__init__(**processed_kwargs)
+
+
+class CapacityReservation(troposphere.ec2.CapacityReservation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AvailabilityZone=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceCount=REQUIRED, # type: int
+                 InstancePlatform=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EbsOptimized=NOTHING, # type: bool
+                 EndDate=NOTHING, # type: Union[str, AWSHelperFn]
+                 EndDateType=NOTHING, # type: Union[str, AWSHelperFn]
+                 EphemeralStorage=NOTHING, # type: bool
+                 InstanceMatchCriteria=NOTHING, # type: Union[str, AWSHelperFn]
+                 TagSpecifications=NOTHING, # type: List[_TagSpecifications]
+                 Tenancy=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AvailabilityZone=AvailabilityZone,
+            InstanceCount=InstanceCount,
+            InstancePlatform=InstancePlatform,
+            InstanceType=InstanceType,
+            EbsOptimized=EbsOptimized,
+            EndDate=EndDate,
+            EndDateType=EndDateType,
+            EphemeralStorage=EphemeralStorage,
+            InstanceMatchCriteria=InstanceMatchCriteria,
+            TagSpecifications=TagSpecifications,
+            Tenancy=Tenancy,
+        )
+        super(CapacityReservation, self).__init__(**processed_kwargs)
+
+
+class ClientVpnAuthorizationRule(troposphere.ec2.ClientVpnAuthorizationRule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ClientVpnEndpointId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetNetworkCidr=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccessGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 AuthorizeAllGroups=NOTHING, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ClientVpnEndpointId=ClientVpnEndpointId,
+            TargetNetworkCidr=TargetNetworkCidr,
+            AccessGroupId=AccessGroupId,
+            AuthorizeAllGroups=AuthorizeAllGroups,
+            Description=Description,
+        )
+        super(ClientVpnAuthorizationRule, self).__init__(**processed_kwargs)
+
+
+class CertificateAuthenticationRequest(troposphere.ec2.CertificateAuthenticationRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 ClientRootCertificateChainArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ClientRootCertificateChainArn=ClientRootCertificateChainArn,
+        )
+        super(CertificateAuthenticationRequest, self).__init__(**processed_kwargs)
+
+
+class DirectoryServiceAuthenticationRequest(troposphere.ec2.DirectoryServiceAuthenticationRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 DirectoryId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DirectoryId=DirectoryId,
+        )
+        super(DirectoryServiceAuthenticationRequest, self).__init__(**processed_kwargs)
+
+
+class ClientAuthenticationRequest(troposphere.ec2.ClientAuthenticationRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ActiveDirectory=NOTHING, # type: _DirectoryServiceAuthenticationRequest
+                 MutualAuthentication=NOTHING, # type: _CertificateAuthenticationRequest
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            ActiveDirectory=ActiveDirectory,
+            MutualAuthentication=MutualAuthentication,
+        )
+        super(ClientAuthenticationRequest, self).__init__(**processed_kwargs)
+
+
+class ConnectionLogOptions(troposphere.ec2.ConnectionLogOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=REQUIRED, # type: bool
+                 CloudwatchLogGroup=NOTHING, # type: Union[str, AWSHelperFn]
+                 CloudwatchLogStream=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            CloudwatchLogGroup=CloudwatchLogGroup,
+            CloudwatchLogStream=CloudwatchLogStream,
+        )
+        super(ConnectionLogOptions, self).__init__(**processed_kwargs)
+
+
+class ClientVpnEndpoint(troposphere.ec2.ClientVpnEndpoint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AuthenticationOptions=REQUIRED, # type: List[_ClientAuthenticationRequest]
+                 ClientCidrBlock=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ConnectionLogOptions=REQUIRED, # type: _ConnectionLogOptions
+                 ServerCertificateArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DnsServers=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 TagSpecifications=NOTHING, # type: List[_TagSpecifications]
+                 TransportProtocol=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AuthenticationOptions=AuthenticationOptions,
+            ClientCidrBlock=ClientCidrBlock,
+            ConnectionLogOptions=ConnectionLogOptions,
+            ServerCertificateArn=ServerCertificateArn,
+            Description=Description,
+            DnsServers=DnsServers,
+            TagSpecifications=TagSpecifications,
+            TransportProtocol=TransportProtocol,
+        )
+        super(ClientVpnEndpoint, self).__init__(**processed_kwargs)
+
+
+class ClientVpnRoute(troposphere.ec2.ClientVpnRoute, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ClientVpnEndpointId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DestinationCidrBlock=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetVpcSubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ClientVpnEndpointId=ClientVpnEndpointId,
+            DestinationCidrBlock=DestinationCidrBlock,
+            TargetVpcSubnetId=TargetVpcSubnetId,
+            Description=Description,
+        )
+        super(ClientVpnRoute, self).__init__(**processed_kwargs)
+
+
+class ClientVpnTargetNetworkAssociation(troposphere.ec2.ClientVpnTargetNetworkAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ClientVpnEndpointId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ClientVpnEndpointId=ClientVpnEndpointId,
+            SubnetId=SubnetId,
+        )
+        super(ClientVpnTargetNetworkAssociation, self).__init__(**processed_kwargs)

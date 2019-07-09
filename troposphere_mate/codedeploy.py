@@ -4,334 +4,416 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.codedeploy
 
-from troposphere.codedeploy import AlarmConfiguration
-from troposphere.codedeploy import AutoRollbackConfiguration
-from troposphere.codedeploy import Deployment
-from troposphere.codedeploy import DeploymentStyle
-from troposphere.codedeploy import Ec2TagSet
-from troposphere.codedeploy import GitHubLocation
-from troposphere.codedeploy import LoadBalancerInfo
-from troposphere.codedeploy import MinimumHealthyHosts
-from troposphere.codedeploy import OnPremisesTagSet
-from troposphere.codedeploy import OnPremisesTagSetList
-from troposphere.codedeploy import Revision
-from troposphere.codedeploy import S3Location
-from troposphere.codedeploy import boolean
-from troposphere.codedeploy import deployment_option_validator
-from troposphere.codedeploy import deployment_type_validator
-from troposphere.codedeploy import positive_integer
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class GitHubLocation(AWSObject):
-    
-    CommitId = attr.ib() # type: str
-    Repository = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.GitHubLocation
-
-
-@attr.s
-class S3Location(AWSObject):
-    
-    Bucket = attr.ib() # type: str
-    BundleType = attr.ib() # type: str
-    Key = attr.ib() # type: str
-    ETag = attr.ib(default=NOTHING) # type: str
-    Version = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.S3Location
-
-
-@attr.s
-class Revision(AWSObject):
-    
-    GitHubLocation = attr.ib(default=NOTHING) # type: GitHubLocation
-    RevisionType = attr.ib(default=NOTHING) # type: str
-    S3Location = attr.ib(default=NOTHING) # type: S3Location
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.Revision
-
-
-@attr.s
-class AutoRollbackConfiguration(AWSObject):
-    
-    Enabled = attr.ib(default=NOTHING) # type: bool
-    Events = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.AutoRollbackConfiguration
-
-
-@attr.s
-class Deployment(AWSObject):
-    
-    Revision = attr.ib() # type: Revision
-    Description = attr.ib(default=NOTHING) # type: str
-    IgnoreApplicationStopFailures = attr.ib(default=NOTHING) # type: bool
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.Deployment
-
-
-@attr.s
-class DeploymentStyle(AWSObject):
-    
-    DeploymentOption = attr.ib(default=NOTHING) # type: deployment_option_validator
-    DeploymentType = attr.ib(default=NOTHING) # type: deployment_type_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.DeploymentStyle
-
-
-@attr.s
-class Ec2TagFilters(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Key = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.Ec2TagFilters
-
-
-@attr.s
-class TagFilters(AWSObject):
-    
-    Key = attr.ib(default=NOTHING) # type: str
-    Type = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.TagFilters
-
-
-@attr.s
-class ElbInfoList(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.ElbInfoList
-
-
-@attr.s
-class TargetGroupInfoList(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.TargetGroupInfoList
-
-
-@attr.s
-class LoadBalancerInfo(AWSObject):
-    
-    ElbInfoList = attr.ib(default=NOTHING) # type: list
-    TargetGroupInfoList = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.LoadBalancerInfo
-
-
-@attr.s
-class OnPremisesInstanceTagFilters(AWSObject):
-    
-    Key = attr.ib(default=NOTHING) # type: str
-    Type = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.OnPremisesInstanceTagFilters
-
-
-@attr.s
-class MinimumHealthyHosts(AWSObject):
-    
-    Type = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.MinimumHealthyHosts
-
-
-@attr.s
-class Application(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApplicationName = attr.ib(default=NOTHING) # type: str
-    ComputePlatform = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.Application
-
-
-@attr.s
-class DeploymentConfig(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DeploymentConfigName = attr.ib(default=NOTHING) # type: str
-    MinimumHealthyHosts = attr.ib(default=NOTHING) # type: MinimumHealthyHosts
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.DeploymentConfig
-
-
-@attr.s
-class Alarm(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.Alarm
-
-
-@attr.s
-class AlarmConfiguration(AWSObject):
-    
-    Alarms = attr.ib(default=NOTHING) # type: list
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-    IgnorePollAlarmFailure = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.AlarmConfiguration
-
-
-@attr.s
-class TriggerConfig(AWSObject):
-    
-    TriggerEvents = attr.ib(default=NOTHING) # type: list
-    TriggerName = attr.ib(default=NOTHING) # type: str
-    TriggerTargetArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.TriggerConfig
-
-
-@attr.s
-class Ec2TagSetListObject(AWSObject):
-    
-    Ec2TagGroup = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.Ec2TagSetListObject
-
-
-@attr.s
-class Ec2TagSet(AWSObject):
-    
-    Ec2TagSetList = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.Ec2TagSet
-
-
-@attr.s
-class OnPremisesTagSetObject(AWSObject):
-    
-    OnPremisesTagGroup = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.OnPremisesTagSetObject
-
-
-@attr.s
-class OnPremisesTagSetList(AWSObject):
-    
-    OnPremisesTagSetList = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.OnPremisesTagSetList
-
-
-@attr.s
-class OnPremisesTagSet(AWSObject):
-    
-    OnPremisesTagSetList = attr.ib(default=NOTHING) # type: OnPremisesTagSetList
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.OnPremisesTagSet
-
-
-@attr.s
-class DeploymentGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApplicationName = attr.ib() # type: str
-    ServiceRoleArn = attr.ib() # type: str
-    AlarmConfiguration = attr.ib(default=NOTHING) # type: AlarmConfiguration
-    AutoRollbackConfiguration = attr.ib(default=NOTHING) # type: AutoRollbackConfiguration
-    AutoScalingGroups = attr.ib(default=NOTHING) # type: list
-    Deployment = attr.ib(default=NOTHING) # type: Deployment
-    DeploymentConfigName = attr.ib(default=NOTHING) # type: str
-    DeploymentGroupName = attr.ib(default=NOTHING) # type: str
-    DeploymentStyle = attr.ib(default=NOTHING) # type: DeploymentStyle
-    Ec2TagFilters = attr.ib(default=NOTHING) # type: list
-    Ec2TagSet = attr.ib(default=NOTHING) # type: Ec2TagSet
-    LoadBalancerInfo = attr.ib(default=NOTHING) # type: LoadBalancerInfo
-    OnPremisesInstanceTagFilters = attr.ib(default=NOTHING) # type: list
-    OnPremisesInstanceTagSet = attr.ib(default=NOTHING) # type: OnPremisesTagSet
-    TriggerConfigurations = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.codedeploy.DeploymentGroup
+from troposphere.codedeploy import (
+    Alarm as _Alarm,
+    AlarmConfiguration as _AlarmConfiguration,
+    AutoRollbackConfiguration as _AutoRollbackConfiguration,
+    Deployment as _Deployment,
+    DeploymentStyle as _DeploymentStyle,
+    Ec2TagFilters as _Ec2TagFilters,
+    Ec2TagSet as _Ec2TagSet,
+    Ec2TagSetListObject as _Ec2TagSetListObject,
+    ElbInfoList as _ElbInfoList,
+    GitHubLocation as _GitHubLocation,
+    LoadBalancerInfo as _LoadBalancerInfo,
+    MinimumHealthyHosts as _MinimumHealthyHosts,
+    OnPremisesInstanceTagFilters as _OnPremisesInstanceTagFilters,
+    OnPremisesTagSet as _OnPremisesTagSet,
+    OnPremisesTagSetList as _OnPremisesTagSetList,
+    OnPremisesTagSetObject as _OnPremisesTagSetObject,
+    Revision as _Revision,
+    S3Location as _S3Location,
+    TagFilters as _TagFilters,
+    TargetGroupInfoList as _TargetGroupInfoList,
+    TriggerConfig as _TriggerConfig,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class GitHubLocation(troposphere.codedeploy.GitHubLocation, Mixin):
+    def __init__(self,
+                 title=None,
+                 CommitId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Repository=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CommitId=CommitId,
+            Repository=Repository,
+        )
+        super(GitHubLocation, self).__init__(**processed_kwargs)
+
+
+class S3Location(troposphere.codedeploy.S3Location, Mixin):
+    def __init__(self,
+                 title=None,
+                 Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BundleType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ETag=NOTHING, # type: Union[str, AWSHelperFn]
+                 Version=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Bucket=Bucket,
+            BundleType=BundleType,
+            Key=Key,
+            ETag=ETag,
+            Version=Version,
+        )
+        super(S3Location, self).__init__(**processed_kwargs)
+
+
+class Revision(troposphere.codedeploy.Revision, Mixin):
+    def __init__(self,
+                 title=None,
+                 GitHubLocation=NOTHING, # type: _GitHubLocation
+                 RevisionType=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3Location=NOTHING, # type: _S3Location
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            GitHubLocation=GitHubLocation,
+            RevisionType=RevisionType,
+            S3Location=S3Location,
+        )
+        super(Revision, self).__init__(**processed_kwargs)
+
+
+class AutoRollbackConfiguration(troposphere.codedeploy.AutoRollbackConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=NOTHING, # type: bool
+                 Events=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            Events=Events,
+        )
+        super(AutoRollbackConfiguration, self).__init__(**processed_kwargs)
+
+
+class Deployment(troposphere.codedeploy.Deployment, Mixin):
+    def __init__(self,
+                 title=None,
+                 Revision=REQUIRED, # type: _Revision
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 IgnoreApplicationStopFailures=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Revision=Revision,
+            Description=Description,
+            IgnoreApplicationStopFailures=IgnoreApplicationStopFailures,
+        )
+        super(Deployment, self).__init__(**processed_kwargs)
+
+
+class DeploymentStyle(troposphere.codedeploy.DeploymentStyle, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeploymentOption=NOTHING, # type: Any
+                 DeploymentType=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeploymentOption=DeploymentOption,
+            DeploymentType=DeploymentType,
+        )
+        super(DeploymentStyle, self).__init__(**processed_kwargs)
+
+
+class Ec2TagFilters(troposphere.codedeploy.Ec2TagFilters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Key=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Key=Key,
+            Value=Value,
+        )
+        super(Ec2TagFilters, self).__init__(**processed_kwargs)
+
+
+class TagFilters(troposphere.codedeploy.TagFilters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=NOTHING, # type: Union[str, AWSHelperFn]
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Type=Type,
+            Value=Value,
+        )
+        super(TagFilters, self).__init__(**processed_kwargs)
+
+
+class ElbInfoList(troposphere.codedeploy.ElbInfoList, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+        )
+        super(ElbInfoList, self).__init__(**processed_kwargs)
+
+
+class TargetGroupInfoList(troposphere.codedeploy.TargetGroupInfoList, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+        )
+        super(TargetGroupInfoList, self).__init__(**processed_kwargs)
+
+
+class LoadBalancerInfo(troposphere.codedeploy.LoadBalancerInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 ElbInfoList=NOTHING, # type: List[_ElbInfoList]
+                 TargetGroupInfoList=NOTHING, # type: List[_TargetGroupInfoList]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ElbInfoList=ElbInfoList,
+            TargetGroupInfoList=TargetGroupInfoList,
+        )
+        super(LoadBalancerInfo, self).__init__(**processed_kwargs)
+
+
+class OnPremisesInstanceTagFilters(troposphere.codedeploy.OnPremisesInstanceTagFilters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=NOTHING, # type: Union[str, AWSHelperFn]
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Type=Type,
+            Value=Value,
+        )
+        super(OnPremisesInstanceTagFilters, self).__init__(**processed_kwargs)
+
+
+class MinimumHealthyHosts(troposphere.codedeploy.MinimumHealthyHosts, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Value=Value,
+        )
+        super(MinimumHealthyHosts, self).__init__(**processed_kwargs)
+
+
+class Application(troposphere.codedeploy.Application, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApplicationName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ComputePlatform=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApplicationName=ApplicationName,
+            ComputePlatform=ComputePlatform,
+        )
+        super(Application, self).__init__(**processed_kwargs)
+
+
+class DeploymentConfig(troposphere.codedeploy.DeploymentConfig, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DeploymentConfigName=NOTHING, # type: Union[str, AWSHelperFn]
+                 MinimumHealthyHosts=NOTHING, # type: _MinimumHealthyHosts
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DeploymentConfigName=DeploymentConfigName,
+            MinimumHealthyHosts=MinimumHealthyHosts,
+        )
+        super(DeploymentConfig, self).__init__(**processed_kwargs)
+
+
+class Alarm(troposphere.codedeploy.Alarm, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+        )
+        super(Alarm, self).__init__(**processed_kwargs)
+
+
+class AlarmConfiguration(troposphere.codedeploy.AlarmConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Alarms=NOTHING, # type: List[_Alarm]
+                 Enabled=NOTHING, # type: bool
+                 IgnorePollAlarmFailure=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Alarms=Alarms,
+            Enabled=Enabled,
+            IgnorePollAlarmFailure=IgnorePollAlarmFailure,
+        )
+        super(AlarmConfiguration, self).__init__(**processed_kwargs)
+
+
+class TriggerConfig(troposphere.codedeploy.TriggerConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 TriggerEvents=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 TriggerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 TriggerTargetArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TriggerEvents=TriggerEvents,
+            TriggerName=TriggerName,
+            TriggerTargetArn=TriggerTargetArn,
+        )
+        super(TriggerConfig, self).__init__(**processed_kwargs)
+
+
+class Ec2TagSetListObject(troposphere.codedeploy.Ec2TagSetListObject, Mixin):
+    def __init__(self,
+                 title=None,
+                 Ec2TagGroup=NOTHING, # type: List[_Ec2TagFilters]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Ec2TagGroup=Ec2TagGroup,
+        )
+        super(Ec2TagSetListObject, self).__init__(**processed_kwargs)
+
+
+class Ec2TagSet(troposphere.codedeploy.Ec2TagSet, Mixin):
+    def __init__(self,
+                 title=None,
+                 Ec2TagSetList=NOTHING, # type: List[_Ec2TagSetListObject]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Ec2TagSetList=Ec2TagSetList,
+        )
+        super(Ec2TagSet, self).__init__(**processed_kwargs)
+
+
+class OnPremisesTagSetObject(troposphere.codedeploy.OnPremisesTagSetObject, Mixin):
+    def __init__(self,
+                 title=None,
+                 OnPremisesTagGroup=NOTHING, # type: List[_TagFilters]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OnPremisesTagGroup=OnPremisesTagGroup,
+        )
+        super(OnPremisesTagSetObject, self).__init__(**processed_kwargs)
+
+
+class OnPremisesTagSetList(troposphere.codedeploy.OnPremisesTagSetList, Mixin):
+    def __init__(self,
+                 title=None,
+                 OnPremisesTagSetList=NOTHING, # type: List[_OnPremisesTagSetObject]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OnPremisesTagSetList=OnPremisesTagSetList,
+        )
+        super(OnPremisesTagSetList, self).__init__(**processed_kwargs)
+
+
+class OnPremisesTagSet(troposphere.codedeploy.OnPremisesTagSet, Mixin):
+    def __init__(self,
+                 title=None,
+                 OnPremisesTagSetList=NOTHING, # type: _OnPremisesTagSetList
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OnPremisesTagSetList=OnPremisesTagSetList,
+        )
+        super(OnPremisesTagSet, self).__init__(**processed_kwargs)
+
+
+class DeploymentGroup(troposphere.codedeploy.DeploymentGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApplicationName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceRoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AlarmConfiguration=NOTHING, # type: _AlarmConfiguration
+                 AutoRollbackConfiguration=NOTHING, # type: _AutoRollbackConfiguration
+                 AutoScalingGroups=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Deployment=NOTHING, # type: _Deployment
+                 DeploymentConfigName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeploymentGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeploymentStyle=NOTHING, # type: _DeploymentStyle
+                 Ec2TagFilters=NOTHING, # type: List[_Ec2TagFilters]
+                 Ec2TagSet=NOTHING, # type: _Ec2TagSet
+                 LoadBalancerInfo=NOTHING, # type: _LoadBalancerInfo
+                 OnPremisesInstanceTagFilters=NOTHING, # type: List[_OnPremisesInstanceTagFilters]
+                 OnPremisesInstanceTagSet=NOTHING, # type: _OnPremisesTagSet
+                 TriggerConfigurations=NOTHING, # type: List[_TriggerConfig]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApplicationName=ApplicationName,
+            ServiceRoleArn=ServiceRoleArn,
+            AlarmConfiguration=AlarmConfiguration,
+            AutoRollbackConfiguration=AutoRollbackConfiguration,
+            AutoScalingGroups=AutoScalingGroups,
+            Deployment=Deployment,
+            DeploymentConfigName=DeploymentConfigName,
+            DeploymentGroupName=DeploymentGroupName,
+            DeploymentStyle=DeploymentStyle,
+            Ec2TagFilters=Ec2TagFilters,
+            Ec2TagSet=Ec2TagSet,
+            LoadBalancerInfo=LoadBalancerInfo,
+            OnPremisesInstanceTagFilters=OnPremisesInstanceTagFilters,
+            OnPremisesInstanceTagSet=OnPremisesInstanceTagSet,
+            TriggerConfigurations=TriggerConfigurations,
+        )
+        super(DeploymentGroup, self).__init__(**processed_kwargs)

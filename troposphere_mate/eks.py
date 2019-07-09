@@ -4,40 +4,54 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.eks
 
-from troposphere.eks import ResourcesVpcConfig
+from troposphere.eks import (
+    ResourcesVpcConfig as _ResourcesVpcConfig,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ResourcesVpcConfig(AWSObject):
-    
-    SubnetIds = attr.ib() # type: list
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
+class ResourcesVpcConfig(troposphere.eks.ResourcesVpcConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 SubnetIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SubnetIds=SubnetIds,
+            SecurityGroupIds=SecurityGroupIds,
+        )
+        super(ResourcesVpcConfig, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.eks.ResourcesVpcConfig
-
-
-@attr.s
-class Cluster(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ResourcesVpcConfig = attr.ib() # type: ResourcesVpcConfig
-    RoleArn = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Version = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.eks.Cluster
+class Cluster(troposphere.eks.Cluster, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ResourcesVpcConfig=REQUIRED, # type: _ResourcesVpcConfig
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Version=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ResourcesVpcConfig=ResourcesVpcConfig,
+            RoleArn=RoleArn,
+            Name=Name,
+            Version=Version,
+        )
+        super(Cluster, self).__init__(**processed_kwargs)

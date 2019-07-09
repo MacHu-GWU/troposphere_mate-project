@@ -4,446 +4,568 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.firehose
 
-from troposphere.firehose import BufferingHints
-from troposphere.firehose import CloudWatchLoggingOptions
-from troposphere.firehose import CopyCommand
-from troposphere.firehose import DataFormatConversionConfiguration
-from troposphere.firehose import Deserializer
-from troposphere.firehose import ElasticsearchDestinationConfiguration
-from troposphere.firehose import EncryptionConfiguration
-from troposphere.firehose import ExtendedS3DestinationConfiguration
-from troposphere.firehose import HiveJsonSerDe
-from troposphere.firehose import InputFormatConfiguration
-from troposphere.firehose import KMSEncryptionConfig
-from troposphere.firehose import KinesisStreamSourceConfiguration
-from troposphere.firehose import OpenXJsonSerDe
-from troposphere.firehose import OrcSerDe
-from troposphere.firehose import OutputFormatConfiguration
-from troposphere.firehose import ParquetSerDe
-from troposphere.firehose import ProcessingConfiguration
-from troposphere.firehose import RedshiftDestinationConfiguration
-from troposphere.firehose import RetryOptions
-from troposphere.firehose import S3Configuration
-from troposphere.firehose import S3DestinationConfiguration
-from troposphere.firehose import SchemaConfiguration
-from troposphere.firehose import Serializer
-from troposphere.firehose import SplunkDestinationConfiguration
-from troposphere.firehose import SplunkRetryOptions
-from troposphere.firehose import boolean
-from troposphere.firehose import delivery_stream_type_validator
-from troposphere.firehose import index_rotation_period_validator
-from troposphere.firehose import integer
-from troposphere.firehose import positive_integer
-from troposphere.firehose import processor_type_validator
-from troposphere.firehose import s3_backup_mode_elastic_search_validator
-from troposphere.firehose import s3_backup_mode_extended_s3_validator
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class BufferingHints(AWSObject):
-    
-    IntervalInSeconds = attr.ib() # type: positive_integer
-    SizeInMBs = attr.ib() # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.BufferingHints
-
-
-@attr.s
-class CloudWatchLoggingOptions(AWSObject):
-    
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-    LogGroupName = attr.ib(default=NOTHING) # type: str
-    LogStreamName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.CloudWatchLoggingOptions
-
-
-@attr.s
-class RetryOptions(AWSObject):
-    
-    DurationInSeconds = attr.ib() # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.RetryOptions
-
-
-@attr.s
-class KMSEncryptionConfig(AWSObject):
-    
-    AWSKMSKeyARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.KMSEncryptionConfig
-
-
-@attr.s
-class EncryptionConfiguration(AWSObject):
-    
-    KMSEncryptionConfig = attr.ib(default=NOTHING) # type: KMSEncryptionConfig
-    NoEncryptionConfig = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.EncryptionConfiguration
-
-
-@attr.s
-class S3Configuration(AWSObject):
-    
-    BucketARN = attr.ib() # type: str
-    BufferingHints = attr.ib() # type: BufferingHints
-    CompressionFormat = attr.ib() # type: str
-    RoleARN = attr.ib() # type: str
-    CloudWatchLoggingOptions = attr.ib(default=NOTHING) # type: CloudWatchLoggingOptions
-    EncryptionConfiguration = attr.ib(default=NOTHING) # type: EncryptionConfiguration
-    Prefix = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.S3Configuration
-
-
-@attr.s
-class CopyCommand(AWSObject):
-    
-    DataTableName = attr.ib() # type: str
-    CopyOptions = attr.ib(default=NOTHING) # type: str
-    DataTableColumns = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.CopyCommand
-
-
-@attr.s
-class ProcessorParameter(AWSObject):
-    
-    ParameterName = attr.ib() # type: str
-    ParameterValue = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.ProcessorParameter
-
-
-@attr.s
-class Processor(AWSObject):
-    
-    Parameters = attr.ib() # type: list
-    Type = attr.ib() # type: processor_type_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.Processor
-
-
-@attr.s
-class ProcessingConfiguration(AWSObject):
-    
-    Enabled = attr.ib() # type: boolean
-    Processors = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.ProcessingConfiguration
-
-
-@attr.s
-class ElasticsearchDestinationConfiguration(AWSObject):
-    
-    BufferingHints = attr.ib() # type: BufferingHints
-    DomainARN = attr.ib() # type: str
-    IndexName = attr.ib() # type: str
-    IndexRotationPeriod = attr.ib() # type: index_rotation_period_validator
-    RoleARN = attr.ib() # type: str
-    S3BackupMode = attr.ib() # type: s3_backup_mode_elastic_search_validator
-    TypeName = attr.ib() # type: str
-    CloudWatchLoggingOptions = attr.ib(default=NOTHING) # type: CloudWatchLoggingOptions
-    ProcessingConfiguration = attr.ib(default=NOTHING) # type: ProcessingConfiguration
-    RetryOptions = attr.ib(default=NOTHING) # type: RetryOptions
-    S3Configuration = attr.ib(default=NOTHING) # type: S3Configuration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.ElasticsearchDestinationConfiguration
-
-
-@attr.s
-class RedshiftDestinationConfiguration(AWSObject):
-    
-    ClusterJDBCURL = attr.ib() # type: str
-    CopyCommand = attr.ib() # type: CopyCommand
-    Password = attr.ib() # type: str
-    RoleARN = attr.ib() # type: str
-    S3Configuration = attr.ib() # type: S3Configuration
-    Username = attr.ib() # type: str
-    CloudWatchLoggingOptions = attr.ib(default=NOTHING) # type: CloudWatchLoggingOptions
-    ProcessingConfiguration = attr.ib(default=NOTHING) # type: ProcessingConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.RedshiftDestinationConfiguration
-
-
-@attr.s
-class S3DestinationConfiguration(AWSObject):
-    
-    BucketARN = attr.ib() # type: str
-    BufferingHints = attr.ib() # type: BufferingHints
-    CompressionFormat = attr.ib() # type: str
-    RoleARN = attr.ib() # type: str
-    CloudWatchLoggingOptions = attr.ib(default=NOTHING) # type: CloudWatchLoggingOptions
-    EncryptionConfiguration = attr.ib(default=NOTHING) # type: EncryptionConfiguration
-    ErrorOutputPrefix = attr.ib(default=NOTHING) # type: str
-    Prefix = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.S3DestinationConfiguration
-
-
-@attr.s
-class HiveJsonSerDe(AWSObject):
-    
-    TimestampFormats = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.HiveJsonSerDe
-
-
-@attr.s
-class OpenXJsonSerDe(AWSObject):
-    
-    CaseInsensitive = attr.ib(default=NOTHING) # type: boolean
-    ColumnToJsonKeyMappings = attr.ib(default=NOTHING) # type: dict
-    ConvertDotsInJsonKeysToUnderscores = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.OpenXJsonSerDe
-
-
-@attr.s
-class Deserializer(AWSObject):
-    
-    HiveJsonSerDe = attr.ib(default=NOTHING) # type: HiveJsonSerDe
-    OpenXJsonSerDe = attr.ib(default=NOTHING) # type: OpenXJsonSerDe
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.Deserializer
-
-
-@attr.s
-class InputFormatConfiguration(AWSObject):
-    
-    Deserializer = attr.ib() # type: Deserializer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.InputFormatConfiguration
-
-
-@attr.s
-class OrcSerDe(AWSObject):
-    
-    BlockSizeBytes = attr.ib(default=NOTHING) # type: integer
-    BloomFilterColumns = attr.ib(default=NOTHING) # type: list
-    BloomFilterFalsePositiveProbability = attr.ib(default=NOTHING) # type: float
-    Compression = attr.ib(default=NOTHING) # type: str
-    DictionaryKeyThreshold = attr.ib(default=NOTHING) # type: float
-    EnablePadding = attr.ib(default=NOTHING) # type: boolean
-    FormatVersion = attr.ib(default=NOTHING) # type: str
-    PaddingTolerance = attr.ib(default=NOTHING) # type: float
-    RowIndexStride = attr.ib(default=NOTHING) # type: integer
-    StripeSizeBytes = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.OrcSerDe
-
-
-@attr.s
-class ParquetSerDe(AWSObject):
-    
-    BlockSizeBytes = attr.ib(default=NOTHING) # type: integer
-    Compression = attr.ib(default=NOTHING) # type: str
-    EnableDictionaryCompression = attr.ib(default=NOTHING) # type: boolean
-    MaxPaddingBytes = attr.ib(default=NOTHING) # type: integer
-    PageSizeBytes = attr.ib(default=NOTHING) # type: integer
-    WriterVersion = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.ParquetSerDe
-
-
-@attr.s
-class Serializer(AWSObject):
-    
-    OrcSerDe = attr.ib(default=NOTHING) # type: OrcSerDe
-    ParquetSerDe = attr.ib(default=NOTHING) # type: ParquetSerDe
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.Serializer
-
-
-@attr.s
-class OutputFormatConfiguration(AWSObject):
-    
-    Serializer = attr.ib() # type: Serializer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.OutputFormatConfiguration
-
-
-@attr.s
-class SchemaConfiguration(AWSObject):
-    
-    CatalogId = attr.ib() # type: str
-    DatabaseName = attr.ib() # type: str
-    Region = attr.ib() # type: str
-    RoleARN = attr.ib() # type: str
-    TableName = attr.ib() # type: str
-    VersionId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.SchemaConfiguration
-
-
-@attr.s
-class DataFormatConversionConfiguration(AWSObject):
-    
-    Enabled = attr.ib() # type: boolean
-    InputFormatConfiguration = attr.ib() # type: InputFormatConfiguration
-    OutputFormatConfiguration = attr.ib() # type: OutputFormatConfiguration
-    SchemaConfiguration = attr.ib() # type: SchemaConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.DataFormatConversionConfiguration
-
-
-@attr.s
-class ExtendedS3DestinationConfiguration(AWSObject):
-    
-    BucketARN = attr.ib() # type: str
-    BufferingHints = attr.ib() # type: BufferingHints
-    CompressionFormat = attr.ib() # type: str
-    RoleARN = attr.ib() # type: str
-    CloudWatchLoggingOptions = attr.ib(default=NOTHING) # type: CloudWatchLoggingOptions
-    DataFormatConversionConfiguration = attr.ib(default=NOTHING) # type: DataFormatConversionConfiguration
-    EncryptionConfiguration = attr.ib(default=NOTHING) # type: EncryptionConfiguration
-    ErrorOutputPrefix = attr.ib(default=NOTHING) # type: str
-    Prefix = attr.ib(default=NOTHING) # type: str
-    ProcessingConfiguration = attr.ib(default=NOTHING) # type: ProcessingConfiguration
-    S3BackupConfiguration = attr.ib(default=NOTHING) # type: S3DestinationConfiguration
-    S3BackupMode = attr.ib(default=NOTHING) # type: s3_backup_mode_extended_s3_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.ExtendedS3DestinationConfiguration
-
-
-@attr.s
-class KinesisStreamSourceConfiguration(AWSObject):
-    
-    KinesisStreamARN = attr.ib() # type: str
-    RoleARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.KinesisStreamSourceConfiguration
-
-
-@attr.s
-class SplunkRetryOptions(AWSObject):
-    
-    DurationInSeconds = attr.ib() # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.SplunkRetryOptions
-
-
-@attr.s
-class SplunkDestinationConfiguration(AWSObject):
-    
-    HECEndpoint = attr.ib() # type: str
-    HECEndpointType = attr.ib() # type: str
-    HECToken = attr.ib() # type: str
-    S3Configuration = attr.ib() # type: S3DestinationConfiguration
-    CloudWatchLoggingOptions = attr.ib(default=NOTHING) # type: CloudWatchLoggingOptions
-    HECAcknowledgmentTimeoutInSeconds = attr.ib(default=NOTHING) # type: positive_integer
-    ProcessingConfiguration = attr.ib(default=NOTHING) # type: ProcessingConfiguration
-    RetryOptions = attr.ib(default=NOTHING) # type: SplunkRetryOptions
-    S3BackupMode = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.SplunkDestinationConfiguration
-
-
-@attr.s
-class DeliveryStream(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DeliveryStreamName = attr.ib(default=NOTHING) # type: str
-    DeliveryStreamType = attr.ib(default=NOTHING) # type: delivery_stream_type_validator
-    ElasticsearchDestinationConfiguration = attr.ib(default=NOTHING) # type: ElasticsearchDestinationConfiguration
-    ExtendedS3DestinationConfiguration = attr.ib(default=NOTHING) # type: ExtendedS3DestinationConfiguration
-    KinesisStreamSourceConfiguration = attr.ib(default=NOTHING) # type: KinesisStreamSourceConfiguration
-    RedshiftDestinationConfiguration = attr.ib(default=NOTHING) # type: RedshiftDestinationConfiguration
-    S3DestinationConfiguration = attr.ib(default=NOTHING) # type: S3DestinationConfiguration
-    SplunkDestinationConfiguration = attr.ib(default=NOTHING) # type: SplunkDestinationConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.firehose.DeliveryStream
+from troposphere.firehose import (
+    BufferingHints as _BufferingHints,
+    CloudWatchLoggingOptions as _CloudWatchLoggingOptions,
+    CopyCommand as _CopyCommand,
+    DataFormatConversionConfiguration as _DataFormatConversionConfiguration,
+    Deserializer as _Deserializer,
+    ElasticsearchDestinationConfiguration as _ElasticsearchDestinationConfiguration,
+    EncryptionConfiguration as _EncryptionConfiguration,
+    ExtendedS3DestinationConfiguration as _ExtendedS3DestinationConfiguration,
+    HiveJsonSerDe as _HiveJsonSerDe,
+    InputFormatConfiguration as _InputFormatConfiguration,
+    KMSEncryptionConfig as _KMSEncryptionConfig,
+    KinesisStreamSourceConfiguration as _KinesisStreamSourceConfiguration,
+    OpenXJsonSerDe as _OpenXJsonSerDe,
+    OrcSerDe as _OrcSerDe,
+    OutputFormatConfiguration as _OutputFormatConfiguration,
+    ParquetSerDe as _ParquetSerDe,
+    ProcessingConfiguration as _ProcessingConfiguration,
+    Processor as _Processor,
+    ProcessorParameter as _ProcessorParameter,
+    RedshiftDestinationConfiguration as _RedshiftDestinationConfiguration,
+    RetryOptions as _RetryOptions,
+    S3Configuration as _S3Configuration,
+    S3DestinationConfiguration as _S3DestinationConfiguration,
+    SchemaConfiguration as _SchemaConfiguration,
+    Serializer as _Serializer,
+    SplunkDestinationConfiguration as _SplunkDestinationConfiguration,
+    SplunkRetryOptions as _SplunkRetryOptions,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class BufferingHints(troposphere.firehose.BufferingHints, Mixin):
+    def __init__(self,
+                 title=None,
+                 IntervalInSeconds=REQUIRED, # type: int
+                 SizeInMBs=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IntervalInSeconds=IntervalInSeconds,
+            SizeInMBs=SizeInMBs,
+        )
+        super(BufferingHints, self).__init__(**processed_kwargs)
+
+
+class CloudWatchLoggingOptions(troposphere.firehose.CloudWatchLoggingOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=NOTHING, # type: bool
+                 LogGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 LogStreamName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            LogGroupName=LogGroupName,
+            LogStreamName=LogStreamName,
+        )
+        super(CloudWatchLoggingOptions, self).__init__(**processed_kwargs)
+
+
+class RetryOptions(troposphere.firehose.RetryOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 DurationInSeconds=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DurationInSeconds=DurationInSeconds,
+        )
+        super(RetryOptions, self).__init__(**processed_kwargs)
+
+
+class KMSEncryptionConfig(troposphere.firehose.KMSEncryptionConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 AWSKMSKeyARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AWSKMSKeyARN=AWSKMSKeyARN,
+        )
+        super(KMSEncryptionConfig, self).__init__(**processed_kwargs)
+
+
+class EncryptionConfiguration(troposphere.firehose.EncryptionConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 KMSEncryptionConfig=NOTHING, # type: _KMSEncryptionConfig
+                 NoEncryptionConfig=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            KMSEncryptionConfig=KMSEncryptionConfig,
+            NoEncryptionConfig=NoEncryptionConfig,
+        )
+        super(EncryptionConfiguration, self).__init__(**processed_kwargs)
+
+
+class S3Configuration(troposphere.firehose.S3Configuration, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BufferingHints=REQUIRED, # type: _BufferingHints
+                 CompressionFormat=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CloudWatchLoggingOptions=NOTHING, # type: _CloudWatchLoggingOptions
+                 EncryptionConfiguration=NOTHING, # type: _EncryptionConfiguration
+                 Prefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketARN=BucketARN,
+            BufferingHints=BufferingHints,
+            CompressionFormat=CompressionFormat,
+            RoleARN=RoleARN,
+            CloudWatchLoggingOptions=CloudWatchLoggingOptions,
+            EncryptionConfiguration=EncryptionConfiguration,
+            Prefix=Prefix,
+        )
+        super(S3Configuration, self).__init__(**processed_kwargs)
+
+
+class CopyCommand(troposphere.firehose.CopyCommand, Mixin):
+    def __init__(self,
+                 title=None,
+                 DataTableName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CopyOptions=NOTHING, # type: Union[str, AWSHelperFn]
+                 DataTableColumns=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DataTableName=DataTableName,
+            CopyOptions=CopyOptions,
+            DataTableColumns=DataTableColumns,
+        )
+        super(CopyCommand, self).__init__(**processed_kwargs)
+
+
+class ProcessorParameter(troposphere.firehose.ProcessorParameter, Mixin):
+    def __init__(self,
+                 title=None,
+                 ParameterName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ParameterValue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ParameterName=ParameterName,
+            ParameterValue=ParameterValue,
+        )
+        super(ProcessorParameter, self).__init__(**processed_kwargs)
+
+
+class Processor(troposphere.firehose.Processor, Mixin):
+    def __init__(self,
+                 title=None,
+                 Parameters=REQUIRED, # type: List[_ProcessorParameter]
+                 Type=REQUIRED, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Parameters=Parameters,
+            Type=Type,
+        )
+        super(Processor, self).__init__(**processed_kwargs)
+
+
+class ProcessingConfiguration(troposphere.firehose.ProcessingConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=REQUIRED, # type: bool
+                 Processors=REQUIRED, # type: List[_Processor]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            Processors=Processors,
+        )
+        super(ProcessingConfiguration, self).__init__(**processed_kwargs)
+
+
+class ElasticsearchDestinationConfiguration(troposphere.firehose.ElasticsearchDestinationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 BufferingHints=REQUIRED, # type: _BufferingHints
+                 DomainARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 IndexName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 IndexRotationPeriod=REQUIRED, # type: Any
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3BackupMode=REQUIRED, # type: Any
+                 TypeName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CloudWatchLoggingOptions=NOTHING, # type: _CloudWatchLoggingOptions
+                 ProcessingConfiguration=NOTHING, # type: _ProcessingConfiguration
+                 RetryOptions=NOTHING, # type: _RetryOptions
+                 S3Configuration=NOTHING, # type: _S3Configuration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BufferingHints=BufferingHints,
+            DomainARN=DomainARN,
+            IndexName=IndexName,
+            IndexRotationPeriod=IndexRotationPeriod,
+            RoleARN=RoleARN,
+            S3BackupMode=S3BackupMode,
+            TypeName=TypeName,
+            CloudWatchLoggingOptions=CloudWatchLoggingOptions,
+            ProcessingConfiguration=ProcessingConfiguration,
+            RetryOptions=RetryOptions,
+            S3Configuration=S3Configuration,
+        )
+        super(ElasticsearchDestinationConfiguration, self).__init__(**processed_kwargs)
+
+
+class RedshiftDestinationConfiguration(troposphere.firehose.RedshiftDestinationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ClusterJDBCURL=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CopyCommand=REQUIRED, # type: _CopyCommand
+                 Password=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3Configuration=REQUIRED, # type: _S3Configuration
+                 Username=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CloudWatchLoggingOptions=NOTHING, # type: _CloudWatchLoggingOptions
+                 ProcessingConfiguration=NOTHING, # type: _ProcessingConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ClusterJDBCURL=ClusterJDBCURL,
+            CopyCommand=CopyCommand,
+            Password=Password,
+            RoleARN=RoleARN,
+            S3Configuration=S3Configuration,
+            Username=Username,
+            CloudWatchLoggingOptions=CloudWatchLoggingOptions,
+            ProcessingConfiguration=ProcessingConfiguration,
+        )
+        super(RedshiftDestinationConfiguration, self).__init__(**processed_kwargs)
+
+
+class S3DestinationConfiguration(troposphere.firehose.S3DestinationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BufferingHints=REQUIRED, # type: _BufferingHints
+                 CompressionFormat=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CloudWatchLoggingOptions=NOTHING, # type: _CloudWatchLoggingOptions
+                 EncryptionConfiguration=NOTHING, # type: _EncryptionConfiguration
+                 ErrorOutputPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 Prefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketARN=BucketARN,
+            BufferingHints=BufferingHints,
+            CompressionFormat=CompressionFormat,
+            RoleARN=RoleARN,
+            CloudWatchLoggingOptions=CloudWatchLoggingOptions,
+            EncryptionConfiguration=EncryptionConfiguration,
+            ErrorOutputPrefix=ErrorOutputPrefix,
+            Prefix=Prefix,
+        )
+        super(S3DestinationConfiguration, self).__init__(**processed_kwargs)
+
+
+class HiveJsonSerDe(troposphere.firehose.HiveJsonSerDe, Mixin):
+    def __init__(self,
+                 title=None,
+                 TimestampFormats=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TimestampFormats=TimestampFormats,
+        )
+        super(HiveJsonSerDe, self).__init__(**processed_kwargs)
+
+
+class OpenXJsonSerDe(troposphere.firehose.OpenXJsonSerDe, Mixin):
+    def __init__(self,
+                 title=None,
+                 CaseInsensitive=NOTHING, # type: bool
+                 ColumnToJsonKeyMappings=NOTHING, # type: dict
+                 ConvertDotsInJsonKeysToUnderscores=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CaseInsensitive=CaseInsensitive,
+            ColumnToJsonKeyMappings=ColumnToJsonKeyMappings,
+            ConvertDotsInJsonKeysToUnderscores=ConvertDotsInJsonKeysToUnderscores,
+        )
+        super(OpenXJsonSerDe, self).__init__(**processed_kwargs)
+
+
+class Deserializer(troposphere.firehose.Deserializer, Mixin):
+    def __init__(self,
+                 title=None,
+                 HiveJsonSerDe=NOTHING, # type: _HiveJsonSerDe
+                 OpenXJsonSerDe=NOTHING, # type: _OpenXJsonSerDe
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HiveJsonSerDe=HiveJsonSerDe,
+            OpenXJsonSerDe=OpenXJsonSerDe,
+        )
+        super(Deserializer, self).__init__(**processed_kwargs)
+
+
+class InputFormatConfiguration(troposphere.firehose.InputFormatConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Deserializer=REQUIRED, # type: _Deserializer
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Deserializer=Deserializer,
+        )
+        super(InputFormatConfiguration, self).__init__(**processed_kwargs)
+
+
+class OrcSerDe(troposphere.firehose.OrcSerDe, Mixin):
+    def __init__(self,
+                 title=None,
+                 BlockSizeBytes=NOTHING, # type: int
+                 BloomFilterColumns=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 BloomFilterFalsePositiveProbability=NOTHING, # type: float
+                 Compression=NOTHING, # type: Union[str, AWSHelperFn]
+                 DictionaryKeyThreshold=NOTHING, # type: float
+                 EnablePadding=NOTHING, # type: bool
+                 FormatVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 PaddingTolerance=NOTHING, # type: float
+                 RowIndexStride=NOTHING, # type: int
+                 StripeSizeBytes=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BlockSizeBytes=BlockSizeBytes,
+            BloomFilterColumns=BloomFilterColumns,
+            BloomFilterFalsePositiveProbability=BloomFilterFalsePositiveProbability,
+            Compression=Compression,
+            DictionaryKeyThreshold=DictionaryKeyThreshold,
+            EnablePadding=EnablePadding,
+            FormatVersion=FormatVersion,
+            PaddingTolerance=PaddingTolerance,
+            RowIndexStride=RowIndexStride,
+            StripeSizeBytes=StripeSizeBytes,
+        )
+        super(OrcSerDe, self).__init__(**processed_kwargs)
+
+
+class ParquetSerDe(troposphere.firehose.ParquetSerDe, Mixin):
+    def __init__(self,
+                 title=None,
+                 BlockSizeBytes=NOTHING, # type: int
+                 Compression=NOTHING, # type: Union[str, AWSHelperFn]
+                 EnableDictionaryCompression=NOTHING, # type: bool
+                 MaxPaddingBytes=NOTHING, # type: int
+                 PageSizeBytes=NOTHING, # type: int
+                 WriterVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BlockSizeBytes=BlockSizeBytes,
+            Compression=Compression,
+            EnableDictionaryCompression=EnableDictionaryCompression,
+            MaxPaddingBytes=MaxPaddingBytes,
+            PageSizeBytes=PageSizeBytes,
+            WriterVersion=WriterVersion,
+        )
+        super(ParquetSerDe, self).__init__(**processed_kwargs)
+
+
+class Serializer(troposphere.firehose.Serializer, Mixin):
+    def __init__(self,
+                 title=None,
+                 OrcSerDe=NOTHING, # type: _OrcSerDe
+                 ParquetSerDe=NOTHING, # type: _ParquetSerDe
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OrcSerDe=OrcSerDe,
+            ParquetSerDe=ParquetSerDe,
+        )
+        super(Serializer, self).__init__(**processed_kwargs)
+
+
+class OutputFormatConfiguration(troposphere.firehose.OutputFormatConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Serializer=REQUIRED, # type: _Serializer
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Serializer=Serializer,
+        )
+        super(OutputFormatConfiguration, self).__init__(**processed_kwargs)
+
+
+class SchemaConfiguration(troposphere.firehose.SchemaConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 CatalogId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DatabaseName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Region=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TableName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VersionId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CatalogId=CatalogId,
+            DatabaseName=DatabaseName,
+            Region=Region,
+            RoleARN=RoleARN,
+            TableName=TableName,
+            VersionId=VersionId,
+        )
+        super(SchemaConfiguration, self).__init__(**processed_kwargs)
+
+
+class DataFormatConversionConfiguration(troposphere.firehose.DataFormatConversionConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=REQUIRED, # type: bool
+                 InputFormatConfiguration=REQUIRED, # type: _InputFormatConfiguration
+                 OutputFormatConfiguration=REQUIRED, # type: _OutputFormatConfiguration
+                 SchemaConfiguration=REQUIRED, # type: _SchemaConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            InputFormatConfiguration=InputFormatConfiguration,
+            OutputFormatConfiguration=OutputFormatConfiguration,
+            SchemaConfiguration=SchemaConfiguration,
+        )
+        super(DataFormatConversionConfiguration, self).__init__(**processed_kwargs)
+
+
+class ExtendedS3DestinationConfiguration(troposphere.firehose.ExtendedS3DestinationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BufferingHints=REQUIRED, # type: _BufferingHints
+                 CompressionFormat=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CloudWatchLoggingOptions=NOTHING, # type: _CloudWatchLoggingOptions
+                 DataFormatConversionConfiguration=NOTHING, # type: _DataFormatConversionConfiguration
+                 EncryptionConfiguration=NOTHING, # type: _EncryptionConfiguration
+                 ErrorOutputPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 Prefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProcessingConfiguration=NOTHING, # type: _ProcessingConfiguration
+                 S3BackupConfiguration=NOTHING, # type: _S3DestinationConfiguration
+                 S3BackupMode=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketARN=BucketARN,
+            BufferingHints=BufferingHints,
+            CompressionFormat=CompressionFormat,
+            RoleARN=RoleARN,
+            CloudWatchLoggingOptions=CloudWatchLoggingOptions,
+            DataFormatConversionConfiguration=DataFormatConversionConfiguration,
+            EncryptionConfiguration=EncryptionConfiguration,
+            ErrorOutputPrefix=ErrorOutputPrefix,
+            Prefix=Prefix,
+            ProcessingConfiguration=ProcessingConfiguration,
+            S3BackupConfiguration=S3BackupConfiguration,
+            S3BackupMode=S3BackupMode,
+        )
+        super(ExtendedS3DestinationConfiguration, self).__init__(**processed_kwargs)
+
+
+class KinesisStreamSourceConfiguration(troposphere.firehose.KinesisStreamSourceConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 KinesisStreamARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            KinesisStreamARN=KinesisStreamARN,
+            RoleARN=RoleARN,
+        )
+        super(KinesisStreamSourceConfiguration, self).__init__(**processed_kwargs)
+
+
+class SplunkRetryOptions(troposphere.firehose.SplunkRetryOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 DurationInSeconds=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DurationInSeconds=DurationInSeconds,
+        )
+        super(SplunkRetryOptions, self).__init__(**processed_kwargs)
+
+
+class SplunkDestinationConfiguration(troposphere.firehose.SplunkDestinationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 HECEndpoint=REQUIRED, # type: Union[str, AWSHelperFn]
+                 HECEndpointType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 HECToken=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3Configuration=REQUIRED, # type: _S3DestinationConfiguration
+                 CloudWatchLoggingOptions=NOTHING, # type: _CloudWatchLoggingOptions
+                 HECAcknowledgmentTimeoutInSeconds=NOTHING, # type: int
+                 ProcessingConfiguration=NOTHING, # type: _ProcessingConfiguration
+                 RetryOptions=NOTHING, # type: _SplunkRetryOptions
+                 S3BackupMode=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HECEndpoint=HECEndpoint,
+            HECEndpointType=HECEndpointType,
+            HECToken=HECToken,
+            S3Configuration=S3Configuration,
+            CloudWatchLoggingOptions=CloudWatchLoggingOptions,
+            HECAcknowledgmentTimeoutInSeconds=HECAcknowledgmentTimeoutInSeconds,
+            ProcessingConfiguration=ProcessingConfiguration,
+            RetryOptions=RetryOptions,
+            S3BackupMode=S3BackupMode,
+        )
+        super(SplunkDestinationConfiguration, self).__init__(**processed_kwargs)
+
+
+class DeliveryStream(troposphere.firehose.DeliveryStream, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DeliveryStreamName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeliveryStreamType=NOTHING, # type: Any
+                 ElasticsearchDestinationConfiguration=NOTHING, # type: _ElasticsearchDestinationConfiguration
+                 ExtendedS3DestinationConfiguration=NOTHING, # type: _ExtendedS3DestinationConfiguration
+                 KinesisStreamSourceConfiguration=NOTHING, # type: _KinesisStreamSourceConfiguration
+                 RedshiftDestinationConfiguration=NOTHING, # type: _RedshiftDestinationConfiguration
+                 S3DestinationConfiguration=NOTHING, # type: _S3DestinationConfiguration
+                 SplunkDestinationConfiguration=NOTHING, # type: _SplunkDestinationConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DeliveryStreamName=DeliveryStreamName,
+            DeliveryStreamType=DeliveryStreamType,
+            ElasticsearchDestinationConfiguration=ElasticsearchDestinationConfiguration,
+            ExtendedS3DestinationConfiguration=ExtendedS3DestinationConfiguration,
+            KinesisStreamSourceConfiguration=KinesisStreamSourceConfiguration,
+            RedshiftDestinationConfiguration=RedshiftDestinationConfiguration,
+            S3DestinationConfiguration=S3DestinationConfiguration,
+            SplunkDestinationConfiguration=SplunkDestinationConfiguration,
+        )
+        super(DeliveryStream, self).__init__(**processed_kwargs)

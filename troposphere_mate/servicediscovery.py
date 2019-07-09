@@ -4,135 +4,181 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.servicediscovery
 
-from troposphere.servicediscovery import DnsConfig
-from troposphere.servicediscovery import HealthCheckConfig
-from troposphere.servicediscovery import HealthCheckCustomConfig
+from troposphere.servicediscovery import (
+    DnsConfig as _DnsConfig,
+    DnsRecord as _DnsRecord,
+    HealthCheckConfig as _HealthCheckConfig,
+    HealthCheckCustomConfig as _HealthCheckCustomConfig,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Instance(AWSObject):
-    title = attr.ib()   # type: str
-    
-    InstanceAttributes = attr.ib() # type: dict
-    ServiceId = attr.ib() # type: str
-    InstanceId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.Instance
-
-
-@attr.s
-class PrivateDnsNamespace(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    Vpc = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.PrivateDnsNamespace
+class Instance(troposphere.servicediscovery.Instance, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 InstanceAttributes=REQUIRED, # type: dict
+                 ServiceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            InstanceAttributes=InstanceAttributes,
+            ServiceId=ServiceId,
+            InstanceId=InstanceId,
+        )
+        super(Instance, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class PublicDnsNamespace(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.PublicDnsNamespace
-
-
-@attr.s
-class HealthCheckConfig(AWSObject):
-    
-    Type = attr.ib() # type: str
-    FailureThreshold = attr.ib(default=NOTHING) # type: float
-    ResourcePath = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.HealthCheckConfig
+class PrivateDnsNamespace(troposphere.servicediscovery.PrivateDnsNamespace, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Vpc=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            Vpc=Vpc,
+            Description=Description,
+        )
+        super(PrivateDnsNamespace, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class HealthCheckCustomConfig(AWSObject):
-    
-    FailureThreshold = attr.ib() # type: float
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.HealthCheckCustomConfig
-
-
-@attr.s
-class DnsRecord(AWSObject):
-    
-    TTL = attr.ib() # type: str
-    Type = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.DnsRecord
+class PublicDnsNamespace(troposphere.servicediscovery.PublicDnsNamespace, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            Description=Description,
+        )
+        super(PublicDnsNamespace, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class DnsConfig(AWSObject):
-    
-    DnsRecords = attr.ib() # type: list
-    NamespaceId = attr.ib() # type: str
-    RoutingPolicy = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.DnsConfig
-
-
-@attr.s
-class Service(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib(default=NOTHING) # type: str
-    DnsConfig = attr.ib(default=NOTHING) # type: DnsConfig
-    HealthCheckConfig = attr.ib(default=NOTHING) # type: HealthCheckConfig
-    HealthCheckCustomConfig = attr.ib(default=NOTHING) # type: HealthCheckCustomConfig
-    Name = attr.ib(default=NOTHING) # type: str
-    NamespaceId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicediscovery.Service
+class HealthCheckConfig(troposphere.servicediscovery.HealthCheckConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FailureThreshold=NOTHING, # type: float
+                 ResourcePath=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            FailureThreshold=FailureThreshold,
+            ResourcePath=ResourcePath,
+        )
+        super(HealthCheckConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class HttpNamespace(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
+class HealthCheckCustomConfig(troposphere.servicediscovery.HealthCheckCustomConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 FailureThreshold=REQUIRED, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FailureThreshold=FailureThreshold,
+        )
+        super(HealthCheckCustomConfig, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.servicediscovery.HttpNamespace
+class DnsRecord(troposphere.servicediscovery.DnsRecord, Mixin):
+    def __init__(self,
+                 title=None,
+                 TTL=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TTL=TTL,
+            Type=Type,
+        )
+        super(DnsRecord, self).__init__(**processed_kwargs)
+
+
+class DnsConfig(troposphere.servicediscovery.DnsConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 DnsRecords=REQUIRED, # type: List[_DnsRecord]
+                 NamespaceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoutingPolicy=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DnsRecords=DnsRecords,
+            NamespaceId=NamespaceId,
+            RoutingPolicy=RoutingPolicy,
+        )
+        super(DnsConfig, self).__init__(**processed_kwargs)
+
+
+class Service(troposphere.servicediscovery.Service, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DnsConfig=NOTHING, # type: _DnsConfig
+                 HealthCheckConfig=NOTHING, # type: _HealthCheckConfig
+                 HealthCheckCustomConfig=NOTHING, # type: _HealthCheckCustomConfig
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 NamespaceId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            DnsConfig=DnsConfig,
+            HealthCheckConfig=HealthCheckConfig,
+            HealthCheckCustomConfig=HealthCheckCustomConfig,
+            Name=Name,
+            NamespaceId=NamespaceId,
+        )
+        super(Service, self).__init__(**processed_kwargs)
+
+
+class HttpNamespace(troposphere.servicediscovery.HttpNamespace, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            Description=Description,
+        )
+        super(HttpNamespace, self).__init__(**processed_kwargs)

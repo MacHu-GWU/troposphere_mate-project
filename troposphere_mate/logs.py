@@ -4,96 +4,136 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.logs
 
+from troposphere.logs import (
+    MetricTransformation as _MetricTransformation,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Destination(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DestinationName = attr.ib() # type: str
-    DestinationPolicy = attr.ib() # type: str
-    RoleArn = attr.ib() # type: str
-    TargetArn = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.logs.Destination
-
-
-@attr.s
-class LogGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    LogGroupName = attr.ib(default=NOTHING) # type: str
-    RetentionInDays = attr.ib(default=NOTHING) # type: integer_list_item_checker
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.logs.LogGroup
+class Destination(troposphere.logs.Destination, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DestinationName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DestinationPolicy=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DestinationName=DestinationName,
+            DestinationPolicy=DestinationPolicy,
+            RoleArn=RoleArn,
+            TargetArn=TargetArn,
+        )
+        super(Destination, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class LogStream(AWSObject):
-    title = attr.ib()   # type: str
-    
-    LogGroupName = attr.ib() # type: str
-    LogStreamName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.logs.LogStream
-
-
-@attr.s
-class MetricTransformation(AWSObject):
-    
-    MetricName = attr.ib() # type: str
-    MetricNamespace = attr.ib() # type: str
-    MetricValue = attr.ib() # type: str
-    DefaultValue = attr.ib(default=NOTHING) # type: float
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.logs.MetricTransformation
+class LogGroup(troposphere.logs.LogGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 LogGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 RetentionInDays=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            LogGroupName=LogGroupName,
+            RetentionInDays=RetentionInDays,
+        )
+        super(LogGroup, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class MetricFilter(AWSObject):
-    title = attr.ib()   # type: str
-    
-    FilterPattern = attr.ib() # type: str
-    LogGroupName = attr.ib() # type: str
-    MetricTransformations = attr.ib() # type: list
+class LogStream(troposphere.logs.LogStream, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 LogGroupName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LogStreamName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            LogGroupName=LogGroupName,
+            LogStreamName=LogStreamName,
+        )
+        super(LogStream, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.logs.MetricFilter
+class MetricTransformation(troposphere.logs.MetricTransformation, Mixin):
+    def __init__(self,
+                 title=None,
+                 MetricName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MetricNamespace=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MetricValue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DefaultValue=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MetricName=MetricName,
+            MetricNamespace=MetricNamespace,
+            MetricValue=MetricValue,
+            DefaultValue=DefaultValue,
+        )
+        super(MetricTransformation, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class SubscriptionFilter(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DestinationArn = attr.ib() # type: str
-    FilterPattern = attr.ib() # type: str
-    LogGroupName = attr.ib() # type: str
-    RoleArn = attr.ib(default=NOTHING) # type: str
+class MetricFilter(troposphere.logs.MetricFilter, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 FilterPattern=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LogGroupName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MetricTransformations=REQUIRED, # type: List[_MetricTransformation]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            FilterPattern=FilterPattern,
+            LogGroupName=LogGroupName,
+            MetricTransformations=MetricTransformations,
+        )
+        super(MetricFilter, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.logs.SubscriptionFilter
+class SubscriptionFilter(troposphere.logs.SubscriptionFilter, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DestinationArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FilterPattern=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LogGroupName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DestinationArn=DestinationArn,
+            FilterPattern=FilterPattern,
+            LogGroupName=LogGroupName,
+            RoleArn=RoleArn,
+        )
+        super(SubscriptionFilter, self).__init__(**processed_kwargs)

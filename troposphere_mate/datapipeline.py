@@ -4,105 +4,139 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.datapipeline
 
-from troposphere.datapipeline import boolean
+from troposphere.datapipeline import (
+    ObjectField as _ObjectField,
+    ParameterObject as _ParameterObject,
+    ParameterObjectAttribute as _ParameterObjectAttribute,
+    ParameterValue as _ParameterValue,
+    PipelineObject as _PipelineObject,
+    PipelineTag as _PipelineTag,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ParameterObjectAttribute(AWSObject):
-    
-    Key = attr.ib() # type: str
-    StringValue = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.datapipeline.ParameterObjectAttribute
-
-
-@attr.s
-class ParameterObject(AWSObject):
-    
-    Attributes = attr.ib() # type: list
-    Id = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.datapipeline.ParameterObject
+class ParameterObjectAttribute(troposphere.datapipeline.ParameterObjectAttribute, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StringValue=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            StringValue=StringValue,
+        )
+        super(ParameterObjectAttribute, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ParameterValue(AWSObject):
-    
-    Id = attr.ib() # type: str
-    StringValue = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.datapipeline.ParameterValue
-
-
-@attr.s
-class ObjectField(AWSObject):
-    
-    Key = attr.ib() # type: str
-    RefValue = attr.ib(default=NOTHING) # type: str
-    StringValue = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.datapipeline.ObjectField
+class ParameterObject(troposphere.datapipeline.ParameterObject, Mixin):
+    def __init__(self,
+                 title=None,
+                 Attributes=REQUIRED, # type: List[_ParameterObjectAttribute]
+                 Id=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Attributes=Attributes,
+            Id=Id,
+        )
+        super(ParameterObject, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class PipelineObject(AWSObject):
-    
-    Fields = attr.ib() # type: list
-    Id = attr.ib() # type: str
-    Name = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.datapipeline.PipelineObject
-
-
-@attr.s
-class PipelineTag(AWSObject):
-    
-    Key = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.datapipeline.PipelineTag
+class ParameterValue(troposphere.datapipeline.ParameterValue, Mixin):
+    def __init__(self,
+                 title=None,
+                 Id=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StringValue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Id=Id,
+            StringValue=StringValue,
+        )
+        super(ParameterValue, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Pipeline(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    PipelineObjects = attr.ib() # type: list
-    Activate = attr.ib(default=NOTHING) # type: boolean
-    Description = attr.ib(default=NOTHING) # type: str
-    ParameterObjects = attr.ib(default=NOTHING) # type: list
-    ParameterValues = attr.ib(default=NOTHING) # type: list
-    PipelineTags = attr.ib(default=NOTHING) # type: list
+class ObjectField(troposphere.datapipeline.ObjectField, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RefValue=NOTHING, # type: Union[str, AWSHelperFn]
+                 StringValue=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            RefValue=RefValue,
+            StringValue=StringValue,
+        )
+        super(ObjectField, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.datapipeline.Pipeline
+class PipelineObject(troposphere.datapipeline.PipelineObject, Mixin):
+    def __init__(self,
+                 title=None,
+                 Fields=REQUIRED, # type: List[_ObjectField]
+                 Id=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Fields=Fields,
+            Id=Id,
+            Name=Name,
+        )
+        super(PipelineObject, self).__init__(**processed_kwargs)
+
+
+class PipelineTag(troposphere.datapipeline.PipelineTag, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Value=Value,
+        )
+        super(PipelineTag, self).__init__(**processed_kwargs)
+
+
+class Pipeline(troposphere.datapipeline.Pipeline, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PipelineObjects=REQUIRED, # type: List[_PipelineObject]
+                 Activate=NOTHING, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 ParameterObjects=NOTHING, # type: List[_ParameterObject]
+                 ParameterValues=NOTHING, # type: List[_ParameterValue]
+                 PipelineTags=NOTHING, # type: List[_PipelineTag]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            PipelineObjects=PipelineObjects,
+            Activate=Activate,
+            Description=Description,
+            ParameterObjects=ParameterObjects,
+            ParameterValues=ParameterValues,
+            PipelineTags=PipelineTags,
+        )
+        super(Pipeline, self).__init__(**processed_kwargs)

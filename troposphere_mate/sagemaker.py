@@ -4,180 +4,251 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.sagemaker
 
-from troposphere.sagemaker import ContainerDefinition
-from troposphere.sagemaker import GitConfig
-from troposphere.sagemaker import Tags
-from troposphere.sagemaker import VpcConfig
-from troposphere.sagemaker import integer
+from troposphere.sagemaker import (
+    ContainerDefinition as _ContainerDefinition,
+    GitConfig as _GitConfig,
+    NotebookInstanceLifecycleHook as _NotebookInstanceLifecycleHook,
+    ProductionVariant as _ProductionVariant,
+    Tags as _Tags,
+    VpcConfig as _VpcConfig,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class GitConfig(AWSObject):
-    
-    RepositoryUrl = attr.ib() # type: str
-    Branch = attr.ib(default=NOTHING) # type: str
-    SecretArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.GitConfig
-
-
-@attr.s
-class CodeRepository(AWSObject):
-    title = attr.ib()   # type: str
-    
-    GitConfig = attr.ib() # type: GitConfig
-    CodeRepositoryName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.CodeRepository
+class GitConfig(troposphere.sagemaker.GitConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 RepositoryUrl=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Branch=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecretArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RepositoryUrl=RepositoryUrl,
+            Branch=Branch,
+            SecretArn=SecretArn,
+        )
+        super(GitConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Endpoint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    EndpointConfigName = attr.ib() # type: str
-    Tags = attr.ib() # type: Tags
-    EndpointName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.Endpoint
-
-
-@attr.s
-class ProductionVariant(AWSObject):
-    
-    ModelName = attr.ib() # type: str
-    VariantName = attr.ib() # type: str
-    InitialInstanceCount = attr.ib() # type: integer
-    InstanceType = attr.ib() # type: str
-    InitialVariantWeight = attr.ib() # type: float
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.ProductionVariant
+class CodeRepository(troposphere.sagemaker.CodeRepository, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 GitConfig=REQUIRED, # type: _GitConfig
+                 CodeRepositoryName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            GitConfig=GitConfig,
+            CodeRepositoryName=CodeRepositoryName,
+        )
+        super(CodeRepository, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class EndpointConfig(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ProductionVariants = attr.ib() # type: list
-    Tags = attr.ib() # type: Tags
-    EndpointConfigName = attr.ib(default=NOTHING) # type: str
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.EndpointConfig
-
-
-@attr.s
-class ContainerDefinition(AWSObject):
-    
-    Image = attr.ib() # type: str
-    ContainerHostname = attr.ib(default=NOTHING) # type: str
-    Environment = attr.ib(default=NOTHING) # type: dict
-    ModelDataUrl = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.ContainerDefinition
+class Endpoint(troposphere.sagemaker.Endpoint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 EndpointConfigName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=REQUIRED, # type: _Tags
+                 EndpointName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            EndpointConfigName=EndpointConfigName,
+            Tags=Tags,
+            EndpointName=EndpointName,
+        )
+        super(Endpoint, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class VpcConfig(AWSObject):
-    
-    Subnets = attr.ib() # type: list
-    SecurityGroupIds = attr.ib() # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.VpcConfig
-
-
-@attr.s
-class Model(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ExecutionRoleArn = attr.ib() # type: str
-    PrimaryContainer = attr.ib() # type: ContainerDefinition
-    Containers = attr.ib(default=NOTHING) # type: list
-    ModelName = attr.ib(default=NOTHING) # type: str
-    VpcConfig = attr.ib(default=NOTHING) # type: VpcConfig
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.Model
+class ProductionVariant(troposphere.sagemaker.ProductionVariant, Mixin):
+    def __init__(self,
+                 title=None,
+                 ModelName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VariantName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InitialInstanceCount=REQUIRED, # type: int
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InitialVariantWeight=REQUIRED, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ModelName=ModelName,
+            VariantName=VariantName,
+            InitialInstanceCount=InitialInstanceCount,
+            InstanceType=InstanceType,
+            InitialVariantWeight=InitialVariantWeight,
+        )
+        super(ProductionVariant, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class NotebookInstanceLifecycleHook(AWSObject):
-    
-    Content = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.NotebookInstanceLifecycleHook
-
-
-@attr.s
-class NotebookInstanceLifecycleConfig(AWSObject):
-    title = attr.ib()   # type: str
-    
-    NotebookInstanceLifecycleConfigName = attr.ib(default=NOTHING) # type: str
-    OnCreate = attr.ib(default=NOTHING) # type: list
-    OnStart = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.sagemaker.NotebookInstanceLifecycleConfig
+class EndpointConfig(troposphere.sagemaker.EndpointConfig, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ProductionVariants=REQUIRED, # type: List[_ProductionVariant]
+                 Tags=REQUIRED, # type: _Tags
+                 EndpointConfigName=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ProductionVariants=ProductionVariants,
+            Tags=Tags,
+            EndpointConfigName=EndpointConfigName,
+            KmsKeyId=KmsKeyId,
+        )
+        super(EndpointConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class NotebookInstance(AWSObject):
-    title = attr.ib()   # type: str
-    
-    InstanceType = attr.ib() # type: str
-    RoleArn = attr.ib() # type: str
-    AcceleratorTypes = attr.ib(default=NOTHING) # type: list
-    AdditionalCodeRepositories = attr.ib(default=NOTHING) # type: list
-    DefaultCodeRepository = attr.ib(default=NOTHING) # type: str
-    DirectInternetAccess = attr.ib(default=NOTHING) # type: str
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    LifecycleConfigName = attr.ib(default=NOTHING) # type: str
-    NotebookInstanceName = attr.ib(default=NOTHING) # type: str
-    RootAccess = attr.ib(default=NOTHING) # type: str
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    SubnetId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    VolumeSizeInGB = attr.ib(default=NOTHING) # type: integer
+class ContainerDefinition(troposphere.sagemaker.ContainerDefinition, Mixin):
+    def __init__(self,
+                 title=None,
+                 Image=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ContainerHostname=NOTHING, # type: Union[str, AWSHelperFn]
+                 Environment=NOTHING, # type: dict
+                 ModelDataUrl=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Image=Image,
+            ContainerHostname=ContainerHostname,
+            Environment=Environment,
+            ModelDataUrl=ModelDataUrl,
+        )
+        super(ContainerDefinition, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.sagemaker.NotebookInstance
+class VpcConfig(troposphere.sagemaker.VpcConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 Subnets=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 SecurityGroupIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Subnets=Subnets,
+            SecurityGroupIds=SecurityGroupIds,
+        )
+        super(VpcConfig, self).__init__(**processed_kwargs)
+
+
+class Model(troposphere.sagemaker.Model, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ExecutionRoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PrimaryContainer=REQUIRED, # type: _ContainerDefinition
+                 Containers=NOTHING, # type: List[_ContainerDefinition]
+                 ModelName=NOTHING, # type: Union[str, AWSHelperFn]
+                 VpcConfig=NOTHING, # type: _VpcConfig
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ExecutionRoleArn=ExecutionRoleArn,
+            PrimaryContainer=PrimaryContainer,
+            Containers=Containers,
+            ModelName=ModelName,
+            VpcConfig=VpcConfig,
+            Tags=Tags,
+        )
+        super(Model, self).__init__(**processed_kwargs)
+
+
+class NotebookInstanceLifecycleHook(troposphere.sagemaker.NotebookInstanceLifecycleHook, Mixin):
+    def __init__(self,
+                 title=None,
+                 Content=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Content=Content,
+        )
+        super(NotebookInstanceLifecycleHook, self).__init__(**processed_kwargs)
+
+
+class NotebookInstanceLifecycleConfig(troposphere.sagemaker.NotebookInstanceLifecycleConfig, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 NotebookInstanceLifecycleConfigName=NOTHING, # type: Union[str, AWSHelperFn]
+                 OnCreate=NOTHING, # type: List[_NotebookInstanceLifecycleHook]
+                 OnStart=NOTHING, # type: List[_NotebookInstanceLifecycleHook]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            NotebookInstanceLifecycleConfigName=NotebookInstanceLifecycleConfigName,
+            OnCreate=OnCreate,
+            OnStart=OnStart,
+        )
+        super(NotebookInstanceLifecycleConfig, self).__init__(**processed_kwargs)
+
+
+class NotebookInstance(troposphere.sagemaker.NotebookInstance, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceleratorTypes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 AdditionalCodeRepositories=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 DefaultCodeRepository=NOTHING, # type: Union[str, AWSHelperFn]
+                 DirectInternetAccess=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LifecycleConfigName=NOTHING, # type: Union[str, AWSHelperFn]
+                 NotebookInstanceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 RootAccess=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 VolumeSizeInGB=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            InstanceType=InstanceType,
+            RoleArn=RoleArn,
+            AcceleratorTypes=AcceleratorTypes,
+            AdditionalCodeRepositories=AdditionalCodeRepositories,
+            DefaultCodeRepository=DefaultCodeRepository,
+            DirectInternetAccess=DirectInternetAccess,
+            KmsKeyId=KmsKeyId,
+            LifecycleConfigName=LifecycleConfigName,
+            NotebookInstanceName=NotebookInstanceName,
+            RootAccess=RootAccess,
+            SecurityGroupIds=SecurityGroupIds,
+            SubnetId=SubnetId,
+            Tags=Tags,
+            VolumeSizeInGB=VolumeSizeInGB,
+        )
+        super(NotebookInstance, self).__init__(**processed_kwargs)

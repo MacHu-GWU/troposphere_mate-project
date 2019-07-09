@@ -4,484 +4,644 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.ecs
 
-from troposphere.ecs import AwsvpcConfiguration
-from troposphere.ecs import DeploymentConfiguration
-from troposphere.ecs import DockerVolumeConfiguration
-from troposphere.ecs import HealthCheck
-from troposphere.ecs import Host
-from troposphere.ecs import KernelCapabilities
-from troposphere.ecs import LinuxParameters
-from troposphere.ecs import LogConfiguration
-from troposphere.ecs import NetworkConfiguration
-from troposphere.ecs import ProxyConfiguration
-from troposphere.ecs import RepositoryCredentials
-from troposphere.ecs import Tags
-from troposphere.ecs import boolean
-from troposphere.ecs import ecs_proxy_type
-from troposphere.ecs import integer
-from troposphere.ecs import launch_type_validator
-from troposphere.ecs import network_port
-from troposphere.ecs import placement_constraint_validator
-from troposphere.ecs import placement_strategy_validator
-from troposphere.ecs import positive_integer
-from troposphere.ecs import scope_validator
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class Cluster(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ClusterName = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Cluster
-
-
-@attr.s
-class LoadBalancer(AWSObject):
-    
-    ContainerPort = attr.ib() # type: network_port
-    ContainerName = attr.ib(default=NOTHING) # type: str
-    LoadBalancerName = attr.ib(default=NOTHING) # type: str
-    TargetGroupArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.LoadBalancer
-
-
-@attr.s
-class DeploymentConfiguration(AWSObject):
-    
-    MaximumPercent = attr.ib(default=NOTHING) # type: positive_integer
-    MinimumHealthyPercent = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.DeploymentConfiguration
-
-
-@attr.s
-class PlacementConstraint(AWSObject):
-    
-    Type = attr.ib() # type: placement_constraint_validator
-    Expression = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.PlacementConstraint
-
-
-@attr.s
-class PlacementStrategy(AWSObject):
-    
-    Type = attr.ib() # type: placement_strategy_validator
-    Field = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.PlacementStrategy
-
-
-@attr.s
-class AwsvpcConfiguration(AWSObject):
-    
-    Subnets = attr.ib() # type: list
-    AssignPublicIp = attr.ib(default=NOTHING) # type: str
-    SecurityGroups = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.AwsvpcConfiguration
-
-
-@attr.s
-class NetworkConfiguration(AWSObject):
-    
-    AwsvpcConfiguration = attr.ib(default=NOTHING) # type: AwsvpcConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.NetworkConfiguration
-
-
-@attr.s
-class ServiceRegistry(AWSObject):
-    
-    ContainerName = attr.ib(default=NOTHING) # type: str
-    ContainerPort = attr.ib(default=NOTHING) # type: integer
-    Port = attr.ib(default=NOTHING) # type: integer
-    RegistryArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.ServiceRegistry
-
-
-@attr.s
-class Service(AWSObject):
-    title = attr.ib()   # type: str
-    
-    TaskDefinition = attr.ib() # type: str
-    Cluster = attr.ib(default=NOTHING) # type: str
-    DeploymentConfiguration = attr.ib(default=NOTHING) # type: DeploymentConfiguration
-    DesiredCount = attr.ib(default=NOTHING) # type: positive_integer
-    EnableECSManagedTags = attr.ib(default=NOTHING) # type: boolean
-    HealthCheckGracePeriodSeconds = attr.ib(default=NOTHING) # type: positive_integer
-    LaunchType = attr.ib(default=NOTHING) # type: launch_type_validator
-    LoadBalancers = attr.ib(default=NOTHING) # type: list
-    NetworkConfiguration = attr.ib(default=NOTHING) # type: NetworkConfiguration
-    Role = attr.ib(default=NOTHING) # type: str
-    PlacementConstraints = attr.ib(default=NOTHING) # type: list
-    PlacementStrategies = attr.ib(default=NOTHING) # type: list
-    PlatformVersion = attr.ib(default=NOTHING) # type: str
-    PropagateTags = attr.ib(default=NOTHING) # type: str
-    SchedulingStrategy = attr.ib(default=NOTHING) # type: str
-    ServiceName = attr.ib(default=NOTHING) # type: str
-    ServiceRegistries = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Service
-
-
-@attr.s
-class Environment(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Environment
-
-
-@attr.s
-class MountPoint(AWSObject):
-    
-    ContainerPath = attr.ib() # type: str
-    SourceVolume = attr.ib() # type: str
-    ReadOnly = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.MountPoint
-
-
-@attr.s
-class PortMapping(AWSObject):
-    
-    ContainerPort = attr.ib() # type: network_port
-    HostPort = attr.ib(default=NOTHING) # type: network_port
-    Protocol = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.PortMapping
-
-
-@attr.s
-class VolumesFrom(AWSObject):
-    
-    SourceContainer = attr.ib() # type: str
-    ReadOnly = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.VolumesFrom
-
-
-@attr.s
-class HostEntry(AWSObject):
-    
-    Hostname = attr.ib() # type: str
-    IpAddress = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.HostEntry
-
-
-@attr.s
-class Device(AWSObject):
-    
-    ContainerPath = attr.ib(default=NOTHING) # type: str
-    HostPath = attr.ib(default=NOTHING) # type: str
-    Permissions = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Device
-
-
-@attr.s
-class HealthCheck(AWSObject):
-    
-    Command = attr.ib() # type: list
-    Interval = attr.ib(default=NOTHING) # type: integer
-    Retries = attr.ib(default=NOTHING) # type: integer
-    StartPeriod = attr.ib(default=NOTHING) # type: integer
-    Timeout = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.HealthCheck
-
-
-@attr.s
-class KernelCapabilities(AWSObject):
-    
-    Add = attr.ib(default=NOTHING) # type: list
-    Drop = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.KernelCapabilities
-
-
-@attr.s
-class Tmpfs(AWSObject):
-    
-    ContainerPath = attr.ib(default=NOTHING) # type: str
-    MountOptions = attr.ib(default=NOTHING) # type: list
-    Size = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Tmpfs
-
-
-@attr.s
-class LinuxParameters(AWSObject):
-    
-    Capabilities = attr.ib(default=NOTHING) # type: KernelCapabilities
-    Devices = attr.ib(default=NOTHING) # type: list
-    InitProcessEnabled = attr.ib(default=NOTHING) # type: boolean
-    SharedMemorySize = attr.ib(default=NOTHING) # type: integer
-    Tmpfs = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.LinuxParameters
-
-
-@attr.s
-class LogConfiguration(AWSObject):
-    
-    LogDriver = attr.ib() # type: str
-    Options = attr.ib(default=NOTHING) # type: dict
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.LogConfiguration
-
-
-@attr.s
-class RepositoryCredentials(AWSObject):
-    
-    CredentialsParameter = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.RepositoryCredentials
-
-
-@attr.s
-class ResourceRequirement(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.ResourceRequirement
-
-
-@attr.s
-class Secret(AWSObject):
-    
-    Name = attr.ib() # type: str
-    ValueFrom = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Secret
-
-
-@attr.s
-class Ulimit(AWSObject):
-    
-    HardLimit = attr.ib() # type: integer
-    Name = attr.ib() # type: str
-    SoftLimit = attr.ib() # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Ulimit
-
-
-@attr.s
-class ContainerDependency(AWSObject):
-    
-    Condition = attr.ib() # type: str
-    ContainerName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.ContainerDependency
-
-
-@attr.s
-class ContainerDefinition(AWSObject):
-    
-    Command = attr.ib(default=NOTHING) # type: list
-    Cpu = attr.ib(default=NOTHING) # type: positive_integer
-    DependsOn = attr.ib(default=NOTHING) # type: list
-    DisableNetworking = attr.ib(default=NOTHING) # type: boolean
-    DnsSearchDomains = attr.ib(default=NOTHING) # type: list
-    DnsServers = attr.ib(default=NOTHING) # type: list
-    DockerLabels = attr.ib(default=NOTHING) # type: dict
-    DockerSecurityOptions = attr.ib(default=NOTHING) # type: list
-    EntryPoint = attr.ib(default=NOTHING) # type: list
-    Environment = attr.ib(default=NOTHING) # type: list
-    Essential = attr.ib(default=NOTHING) # type: boolean
-    ExtraHosts = attr.ib(default=NOTHING) # type: list
-    HealthCheck = attr.ib(default=NOTHING) # type: HealthCheck
-    Hostname = attr.ib(default=NOTHING) # type: str
-    Image = attr.ib(default=NOTHING) # type: str
-    Links = attr.ib(default=NOTHING) # type: list
-    LinuxParameters = attr.ib(default=NOTHING) # type: LinuxParameters
-    LogConfiguration = attr.ib(default=NOTHING) # type: LogConfiguration
-    Memory = attr.ib(default=NOTHING) # type: positive_integer
-    MemoryReservation = attr.ib(default=NOTHING) # type: positive_integer
-    MountPoints = attr.ib(default=NOTHING) # type: list
-    Name = attr.ib(default=NOTHING) # type: str
-    PortMappings = attr.ib(default=NOTHING) # type: list
-    Privileged = attr.ib(default=NOTHING) # type: boolean
-    ReadonlyRootFilesystem = attr.ib(default=NOTHING) # type: boolean
-    RepositoryCredentials = attr.ib(default=NOTHING) # type: RepositoryCredentials
-    ResourceRequirements = attr.ib(default=NOTHING) # type: list
-    Secrets = attr.ib(default=NOTHING) # type: list
-    StartTimeout = attr.ib(default=NOTHING) # type: integer
-    StopTimeout = attr.ib(default=NOTHING) # type: integer
-    Ulimits = attr.ib(default=NOTHING) # type: list
-    User = attr.ib(default=NOTHING) # type: str
-    VolumesFrom = attr.ib(default=NOTHING) # type: list
-    WorkingDirectory = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.ContainerDefinition
-
-
-@attr.s
-class Host(AWSObject):
-    
-    SourcePath = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Host
-
-
-@attr.s
-class DockerVolumeConfiguration(AWSObject):
-    
-    Autoprovision = attr.ib(default=NOTHING) # type: boolean
-    Driver = attr.ib(default=NOTHING) # type: str
-    DriverOpts = attr.ib(default=NOTHING) # type: dict
-    Labels = attr.ib(default=NOTHING) # type: dict
-    Scope = attr.ib(default=NOTHING) # type: scope_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.DockerVolumeConfiguration
-
-
-@attr.s
-class Volume(AWSObject):
-    
-    Name = attr.ib() # type: str
-    DockerVolumeConfiguration = attr.ib(default=NOTHING) # type: DockerVolumeConfiguration
-    Host = attr.ib(default=NOTHING) # type: Host
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.Volume
-
-
-@attr.s
-class ProxyConfiguration(AWSObject):
-    
-    ContainerName = attr.ib() # type: str
-    ProxyConfigurationProperties = attr.ib(default=NOTHING) # type: list
-    Type = attr.ib(default=NOTHING) # type: ecs_proxy_type
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.ProxyConfiguration
-
-
-@attr.s
-class TaskDefinition(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ContainerDefinitions = attr.ib(default=NOTHING) # type: list
-    Cpu = attr.ib(default=NOTHING) # type: str
-    ExecutionRoleArn = attr.ib(default=NOTHING) # type: str
-    Family = attr.ib(default=NOTHING) # type: str
-    Memory = attr.ib(default=NOTHING) # type: str
-    NetworkMode = attr.ib(default=NOTHING) # type: str
-    PlacementConstraints = attr.ib(default=NOTHING) # type: list
-    RequiresCompatibilities = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    TaskRoleArn = attr.ib(default=NOTHING) # type: str
-    Volumes = attr.ib(default=NOTHING) # type: list
-    ProxyConfiguration = attr.ib(default=NOTHING) # type: ProxyConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.ecs.TaskDefinition
+from troposphere.ecs import (
+    AwsvpcConfiguration as _AwsvpcConfiguration,
+    ContainerDefinition as _ContainerDefinition,
+    ContainerDependency as _ContainerDependency,
+    DeploymentConfiguration as _DeploymentConfiguration,
+    Device as _Device,
+    DockerVolumeConfiguration as _DockerVolumeConfiguration,
+    Environment as _Environment,
+    HealthCheck as _HealthCheck,
+    Host as _Host,
+    HostEntry as _HostEntry,
+    KernelCapabilities as _KernelCapabilities,
+    LinuxParameters as _LinuxParameters,
+    LoadBalancer as _LoadBalancer,
+    LogConfiguration as _LogConfiguration,
+    MountPoint as _MountPoint,
+    NetworkConfiguration as _NetworkConfiguration,
+    PlacementConstraint as _PlacementConstraint,
+    PlacementStrategy as _PlacementStrategy,
+    PortMapping as _PortMapping,
+    ProxyConfiguration as _ProxyConfiguration,
+    RepositoryCredentials as _RepositoryCredentials,
+    ResourceRequirement as _ResourceRequirement,
+    Secret as _Secret,
+    ServiceRegistry as _ServiceRegistry,
+    Tags as _Tags,
+    Tmpfs as _Tmpfs,
+    Ulimit as _Ulimit,
+    Volume as _Volume,
+    VolumesFrom as _VolumesFrom,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class Cluster(troposphere.ecs.Cluster, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ClusterName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ClusterName=ClusterName,
+            Tags=Tags,
+        )
+        super(Cluster, self).__init__(**processed_kwargs)
+
+
+class LoadBalancer(troposphere.ecs.LoadBalancer, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerPort=REQUIRED, # type: int
+                 ContainerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 LoadBalancerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 TargetGroupArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerPort=ContainerPort,
+            ContainerName=ContainerName,
+            LoadBalancerName=LoadBalancerName,
+            TargetGroupArn=TargetGroupArn,
+        )
+        super(LoadBalancer, self).__init__(**processed_kwargs)
+
+
+class DeploymentConfiguration(troposphere.ecs.DeploymentConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaximumPercent=NOTHING, # type: int
+                 MinimumHealthyPercent=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaximumPercent=MaximumPercent,
+            MinimumHealthyPercent=MinimumHealthyPercent,
+        )
+        super(DeploymentConfiguration, self).__init__(**processed_kwargs)
+
+
+class PlacementConstraint(troposphere.ecs.PlacementConstraint, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Any
+                 Expression=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Expression=Expression,
+        )
+        super(PlacementConstraint, self).__init__(**processed_kwargs)
+
+
+class PlacementStrategy(troposphere.ecs.PlacementStrategy, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Any
+                 Field=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Field=Field,
+        )
+        super(PlacementStrategy, self).__init__(**processed_kwargs)
+
+
+class AwsvpcConfiguration(troposphere.ecs.AwsvpcConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Subnets=REQUIRED, # type: list
+                 AssignPublicIp=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityGroups=NOTHING, # type: list
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Subnets=Subnets,
+            AssignPublicIp=AssignPublicIp,
+            SecurityGroups=SecurityGroups,
+        )
+        super(AwsvpcConfiguration, self).__init__(**processed_kwargs)
+
+
+class NetworkConfiguration(troposphere.ecs.NetworkConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 AwsvpcConfiguration=NOTHING, # type: _AwsvpcConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AwsvpcConfiguration=AwsvpcConfiguration,
+        )
+        super(NetworkConfiguration, self).__init__(**processed_kwargs)
+
+
+class ServiceRegistry(troposphere.ecs.ServiceRegistry, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ContainerPort=NOTHING, # type: int
+                 Port=NOTHING, # type: int
+                 RegistryArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerName=ContainerName,
+            ContainerPort=ContainerPort,
+            Port=Port,
+            RegistryArn=RegistryArn,
+        )
+        super(ServiceRegistry, self).__init__(**processed_kwargs)
+
+
+class Service(troposphere.ecs.Service, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 TaskDefinition=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Cluster=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeploymentConfiguration=NOTHING, # type: _DeploymentConfiguration
+                 DesiredCount=NOTHING, # type: int
+                 EnableECSManagedTags=NOTHING, # type: bool
+                 HealthCheckGracePeriodSeconds=NOTHING, # type: int
+                 LaunchType=NOTHING, # type: Any
+                 LoadBalancers=NOTHING, # type: List[_LoadBalancer]
+                 NetworkConfiguration=NOTHING, # type: _NetworkConfiguration
+                 Role=NOTHING, # type: Union[str, AWSHelperFn]
+                 PlacementConstraints=NOTHING, # type: List[_PlacementConstraint]
+                 PlacementStrategies=NOTHING, # type: List[_PlacementStrategy]
+                 PlatformVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 PropagateTags=NOTHING, # type: Union[str, AWSHelperFn]
+                 SchedulingStrategy=NOTHING, # type: Union[str, AWSHelperFn]
+                 ServiceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ServiceRegistries=NOTHING, # type: List[_ServiceRegistry]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            TaskDefinition=TaskDefinition,
+            Cluster=Cluster,
+            DeploymentConfiguration=DeploymentConfiguration,
+            DesiredCount=DesiredCount,
+            EnableECSManagedTags=EnableECSManagedTags,
+            HealthCheckGracePeriodSeconds=HealthCheckGracePeriodSeconds,
+            LaunchType=LaunchType,
+            LoadBalancers=LoadBalancers,
+            NetworkConfiguration=NetworkConfiguration,
+            Role=Role,
+            PlacementConstraints=PlacementConstraints,
+            PlacementStrategies=PlacementStrategies,
+            PlatformVersion=PlatformVersion,
+            PropagateTags=PropagateTags,
+            SchedulingStrategy=SchedulingStrategy,
+            ServiceName=ServiceName,
+            ServiceRegistries=ServiceRegistries,
+            Tags=Tags,
+        )
+        super(Service, self).__init__(**processed_kwargs)
+
+
+class Environment(troposphere.ecs.Environment, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+        )
+        super(Environment, self).__init__(**processed_kwargs)
+
+
+class MountPoint(troposphere.ecs.MountPoint, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerPath=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SourceVolume=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ReadOnly=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerPath=ContainerPath,
+            SourceVolume=SourceVolume,
+            ReadOnly=ReadOnly,
+        )
+        super(MountPoint, self).__init__(**processed_kwargs)
+
+
+class PortMapping(troposphere.ecs.PortMapping, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerPort=REQUIRED, # type: int
+                 HostPort=NOTHING, # type: int
+                 Protocol=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerPort=ContainerPort,
+            HostPort=HostPort,
+            Protocol=Protocol,
+        )
+        super(PortMapping, self).__init__(**processed_kwargs)
+
+
+class VolumesFrom(troposphere.ecs.VolumesFrom, Mixin):
+    def __init__(self,
+                 title=None,
+                 SourceContainer=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ReadOnly=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SourceContainer=SourceContainer,
+            ReadOnly=ReadOnly,
+        )
+        super(VolumesFrom, self).__init__(**processed_kwargs)
+
+
+class HostEntry(troposphere.ecs.HostEntry, Mixin):
+    def __init__(self,
+                 title=None,
+                 Hostname=REQUIRED, # type: Union[str, AWSHelperFn]
+                 IpAddress=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Hostname=Hostname,
+            IpAddress=IpAddress,
+        )
+        super(HostEntry, self).__init__(**processed_kwargs)
+
+
+class Device(troposphere.ecs.Device, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 HostPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 Permissions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerPath=ContainerPath,
+            HostPath=HostPath,
+            Permissions=Permissions,
+        )
+        super(Device, self).__init__(**processed_kwargs)
+
+
+class HealthCheck(troposphere.ecs.HealthCheck, Mixin):
+    def __init__(self,
+                 title=None,
+                 Command=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 Interval=NOTHING, # type: int
+                 Retries=NOTHING, # type: int
+                 StartPeriod=NOTHING, # type: int
+                 Timeout=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Command=Command,
+            Interval=Interval,
+            Retries=Retries,
+            StartPeriod=StartPeriod,
+            Timeout=Timeout,
+        )
+        super(HealthCheck, self).__init__(**processed_kwargs)
+
+
+class KernelCapabilities(troposphere.ecs.KernelCapabilities, Mixin):
+    def __init__(self,
+                 title=None,
+                 Add=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Drop=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Add=Add,
+            Drop=Drop,
+        )
+        super(KernelCapabilities, self).__init__(**processed_kwargs)
+
+
+class Tmpfs(troposphere.ecs.Tmpfs, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 MountOptions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Size=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerPath=ContainerPath,
+            MountOptions=MountOptions,
+            Size=Size,
+        )
+        super(Tmpfs, self).__init__(**processed_kwargs)
+
+
+class LinuxParameters(troposphere.ecs.LinuxParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Capabilities=NOTHING, # type: _KernelCapabilities
+                 Devices=NOTHING, # type: List[_Device]
+                 InitProcessEnabled=NOTHING, # type: bool
+                 SharedMemorySize=NOTHING, # type: int
+                 Tmpfs=NOTHING, # type: List[_Tmpfs]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Capabilities=Capabilities,
+            Devices=Devices,
+            InitProcessEnabled=InitProcessEnabled,
+            SharedMemorySize=SharedMemorySize,
+            Tmpfs=Tmpfs,
+        )
+        super(LinuxParameters, self).__init__(**processed_kwargs)
+
+
+class LogConfiguration(troposphere.ecs.LogConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 LogDriver=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Options=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LogDriver=LogDriver,
+            Options=Options,
+        )
+        super(LogConfiguration, self).__init__(**processed_kwargs)
+
+
+class RepositoryCredentials(troposphere.ecs.RepositoryCredentials, Mixin):
+    def __init__(self,
+                 title=None,
+                 CredentialsParameter=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CredentialsParameter=CredentialsParameter,
+        )
+        super(RepositoryCredentials, self).__init__(**processed_kwargs)
+
+
+class ResourceRequirement(troposphere.ecs.ResourceRequirement, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Value=Value,
+        )
+        super(ResourceRequirement, self).__init__(**processed_kwargs)
+
+
+class Secret(troposphere.ecs.Secret, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ValueFrom=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            ValueFrom=ValueFrom,
+        )
+        super(Secret, self).__init__(**processed_kwargs)
+
+
+class Ulimit(troposphere.ecs.Ulimit, Mixin):
+    def __init__(self,
+                 title=None,
+                 HardLimit=REQUIRED, # type: int
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SoftLimit=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HardLimit=HardLimit,
+            Name=Name,
+            SoftLimit=SoftLimit,
+        )
+        super(Ulimit, self).__init__(**processed_kwargs)
+
+
+class ContainerDependency(troposphere.ecs.ContainerDependency, Mixin):
+    def __init__(self,
+                 title=None,
+                 Condition=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ContainerName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Condition=Condition,
+            ContainerName=ContainerName,
+        )
+        super(ContainerDependency, self).__init__(**processed_kwargs)
+
+
+class ContainerDefinition(troposphere.ecs.ContainerDefinition, Mixin):
+    def __init__(self,
+                 title=None,
+                 Command=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Cpu=NOTHING, # type: int
+                 DependsOn=NOTHING, # type: List[_ContainerDependency]
+                 DisableNetworking=NOTHING, # type: bool
+                 DnsSearchDomains=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 DnsServers=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 DockerLabels=NOTHING, # type: dict
+                 DockerSecurityOptions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 EntryPoint=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Environment=NOTHING, # type: List[_Environment]
+                 Essential=NOTHING, # type: bool
+                 ExtraHosts=NOTHING, # type: List[_HostEntry]
+                 HealthCheck=NOTHING, # type: _HealthCheck
+                 Hostname=NOTHING, # type: Union[str, AWSHelperFn]
+                 Image=NOTHING, # type: Union[str, AWSHelperFn]
+                 Links=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 LinuxParameters=NOTHING, # type: _LinuxParameters
+                 LogConfiguration=NOTHING, # type: _LogConfiguration
+                 Memory=NOTHING, # type: int
+                 MemoryReservation=NOTHING, # type: int
+                 MountPoints=NOTHING, # type: List[_MountPoint]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 PortMappings=NOTHING, # type: List[_PortMapping]
+                 Privileged=NOTHING, # type: bool
+                 ReadonlyRootFilesystem=NOTHING, # type: bool
+                 RepositoryCredentials=NOTHING, # type: _RepositoryCredentials
+                 ResourceRequirements=NOTHING, # type: List[_ResourceRequirement]
+                 Secrets=NOTHING, # type: List[_Secret]
+                 StartTimeout=NOTHING, # type: int
+                 StopTimeout=NOTHING, # type: int
+                 Ulimits=NOTHING, # type: List[_Ulimit]
+                 User=NOTHING, # type: Union[str, AWSHelperFn]
+                 VolumesFrom=NOTHING, # type: List[_VolumesFrom]
+                 WorkingDirectory=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Command=Command,
+            Cpu=Cpu,
+            DependsOn=DependsOn,
+            DisableNetworking=DisableNetworking,
+            DnsSearchDomains=DnsSearchDomains,
+            DnsServers=DnsServers,
+            DockerLabels=DockerLabels,
+            DockerSecurityOptions=DockerSecurityOptions,
+            EntryPoint=EntryPoint,
+            Environment=Environment,
+            Essential=Essential,
+            ExtraHosts=ExtraHosts,
+            HealthCheck=HealthCheck,
+            Hostname=Hostname,
+            Image=Image,
+            Links=Links,
+            LinuxParameters=LinuxParameters,
+            LogConfiguration=LogConfiguration,
+            Memory=Memory,
+            MemoryReservation=MemoryReservation,
+            MountPoints=MountPoints,
+            Name=Name,
+            PortMappings=PortMappings,
+            Privileged=Privileged,
+            ReadonlyRootFilesystem=ReadonlyRootFilesystem,
+            RepositoryCredentials=RepositoryCredentials,
+            ResourceRequirements=ResourceRequirements,
+            Secrets=Secrets,
+            StartTimeout=StartTimeout,
+            StopTimeout=StopTimeout,
+            Ulimits=Ulimits,
+            User=User,
+            VolumesFrom=VolumesFrom,
+            WorkingDirectory=WorkingDirectory,
+        )
+        super(ContainerDefinition, self).__init__(**processed_kwargs)
+
+
+class Host(troposphere.ecs.Host, Mixin):
+    def __init__(self,
+                 title=None,
+                 SourcePath=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SourcePath=SourcePath,
+        )
+        super(Host, self).__init__(**processed_kwargs)
+
+
+class DockerVolumeConfiguration(troposphere.ecs.DockerVolumeConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Autoprovision=NOTHING, # type: bool
+                 Driver=NOTHING, # type: Union[str, AWSHelperFn]
+                 DriverOpts=NOTHING, # type: dict
+                 Labels=NOTHING, # type: dict
+                 Scope=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Autoprovision=Autoprovision,
+            Driver=Driver,
+            DriverOpts=DriverOpts,
+            Labels=Labels,
+            Scope=Scope,
+        )
+        super(DockerVolumeConfiguration, self).__init__(**processed_kwargs)
+
+
+class Volume(troposphere.ecs.Volume, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DockerVolumeConfiguration=NOTHING, # type: _DockerVolumeConfiguration
+                 Host=NOTHING, # type: _Host
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            DockerVolumeConfiguration=DockerVolumeConfiguration,
+            Host=Host,
+        )
+        super(Volume, self).__init__(**processed_kwargs)
+
+
+class ProxyConfiguration(troposphere.ecs.ProxyConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProxyConfigurationProperties=NOTHING, # type: list
+                 Type=NOTHING, # type: str
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerName=ContainerName,
+            ProxyConfigurationProperties=ProxyConfigurationProperties,
+            Type=Type,
+        )
+        super(ProxyConfiguration, self).__init__(**processed_kwargs)
+
+
+class TaskDefinition(troposphere.ecs.TaskDefinition, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ContainerDefinitions=NOTHING, # type: List[_ContainerDefinition]
+                 Cpu=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExecutionRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 Family=NOTHING, # type: Union[str, AWSHelperFn]
+                 Memory=NOTHING, # type: Union[str, AWSHelperFn]
+                 NetworkMode=NOTHING, # type: Union[str, AWSHelperFn]
+                 PlacementConstraints=NOTHING, # type: List[_PlacementConstraint]
+                 RequiresCompatibilities=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Tags=NOTHING, # type: _Tags
+                 TaskRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 Volumes=NOTHING, # type: List[_Volume]
+                 ProxyConfiguration=NOTHING, # type: _ProxyConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ContainerDefinitions=ContainerDefinitions,
+            Cpu=Cpu,
+            ExecutionRoleArn=ExecutionRoleArn,
+            Family=Family,
+            Memory=Memory,
+            NetworkMode=NetworkMode,
+            PlacementConstraints=PlacementConstraints,
+            RequiresCompatibilities=RequiresCompatibilities,
+            Tags=Tags,
+            TaskRoleArn=TaskRoleArn,
+            Volumes=Volumes,
+            ProxyConfiguration=ProxyConfiguration,
+        )
+        super(TaskDefinition, self).__init__(**processed_kwargs)

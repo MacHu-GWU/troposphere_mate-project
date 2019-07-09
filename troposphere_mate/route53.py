@@ -4,234 +4,313 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.route53
 
-from troposphere.route53 import AlarmIdentifier
-from troposphere.route53 import HealthCheckConfiguration
-from troposphere.route53 import HostedZoneConfiguration
-from troposphere.route53 import QueryLoggingConfig
-from troposphere.route53 import Tags
-from troposphere.route53 import boolean
-from troposphere.route53 import network_port
-from troposphere.route53 import positive_integer
-from troposphere.route53 import validate_ruletype
+from troposphere.route53 import (
+    AlarmIdentifier as _AlarmIdentifier,
+    HealthCheckConfiguration as _HealthCheckConfiguration,
+    HostedZoneConfiguration as _HostedZoneConfiguration,
+    HostedZoneVPCs as _HostedZoneVPCs,
+    IpAddressRequest as _IpAddressRequest,
+    QueryLoggingConfig as _QueryLoggingConfig,
+    Tags as _Tags,
+    TargetAddress as _TargetAddress,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class AliasTarget(AWSObject):
-    
-    HostedZoneId = attr.ib() # type: str
-    DNSName = attr.ib() # type: str
-    EvaluateTargetHealth = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.AliasTarget
-
-
-@attr.s
-class GeoLocation(AWSObject):
-    
-    ContinentCode = attr.ib(default=NOTHING) # type: str
-    CountryCode = attr.ib(default=NOTHING) # type: str
-    SubdivisionCode = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.GeoLocation
+class AliasTarget(troposphere.route53.AliasTarget, Mixin):
+    def __init__(self,
+                 title=None,
+                 HostedZoneId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DNSName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EvaluateTargetHealth=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            HostedZoneId=HostedZoneId,
+            DNSName=DNSName,
+            EvaluateTargetHealth=EvaluateTargetHealth,
+        )
+        super(AliasTarget, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class RecordSetGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    HostedZoneId = attr.ib(default=NOTHING) # type: str
-    HostedZoneName = attr.ib(default=NOTHING) # type: str
-    RecordSets = attr.ib(default=NOTHING) # type: list
-    Comment = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.RecordSetGroup
-
-
-@attr.s
-class AlarmIdentifier(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Region = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.AlarmIdentifier
+class GeoLocation(troposphere.route53.GeoLocation, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContinentCode=NOTHING, # type: Union[str, AWSHelperFn]
+                 CountryCode=NOTHING, # type: Union[str, AWSHelperFn]
+                 SubdivisionCode=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContinentCode=ContinentCode,
+            CountryCode=CountryCode,
+            SubdivisionCode=SubdivisionCode,
+        )
+        super(GeoLocation, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class HealthCheckConfiguration(AWSObject):
-    
-    Type = attr.ib() # type: str
-    AlarmIdentifier = attr.ib(default=NOTHING) # type: AlarmIdentifier
-    ChildHealthChecks = attr.ib(default=NOTHING) # type: list
-    EnableSNI = attr.ib(default=NOTHING) # type: boolean
-    FailureThreshold = attr.ib(default=NOTHING) # type: positive_integer
-    FullyQualifiedDomainName = attr.ib(default=NOTHING) # type: str
-    HealthThreshold = attr.ib(default=NOTHING) # type: positive_integer
-    InsufficientDataHealthStatus = attr.ib(default=NOTHING) # type: str
-    Inverted = attr.ib(default=NOTHING) # type: boolean
-    IPAddress = attr.ib(default=NOTHING) # type: str
-    MeasureLatency = attr.ib(default=NOTHING) # type: boolean
-    Port = attr.ib(default=NOTHING) # type: network_port
-    Regions = attr.ib(default=NOTHING) # type: list
-    RequestInterval = attr.ib(default=NOTHING) # type: positive_integer
-    ResourcePath = attr.ib(default=NOTHING) # type: str
-    SearchString = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.HealthCheckConfiguration
+class RecordSetGroup(troposphere.route53.RecordSetGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 HostedZoneId=NOTHING, # type: Union[str, AWSHelperFn]
+                 HostedZoneName=NOTHING, # type: Union[str, AWSHelperFn]
+                 RecordSets=NOTHING, # type: list
+                 Comment=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            HostedZoneId=HostedZoneId,
+            HostedZoneName=HostedZoneName,
+            RecordSets=RecordSets,
+            Comment=Comment,
+        )
+        super(RecordSetGroup, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class HealthCheck(AWSObject):
-    title = attr.ib()   # type: str
-    
-    HealthCheckConfig = attr.ib() # type: HealthCheckConfiguration
-    HealthCheckTags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.HealthCheck
-
-
-@attr.s
-class HostedZoneConfiguration(AWSObject):
-    
-    Comment = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.HostedZoneConfiguration
+class AlarmIdentifier(troposphere.route53.AlarmIdentifier, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Region=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Region=Region,
+        )
+        super(AlarmIdentifier, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class HostedZoneVPCs(AWSObject):
-    
-    VPCId = attr.ib() # type: str
-    VPCRegion = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.HostedZoneVPCs
-
-
-@attr.s
-class QueryLoggingConfig(AWSObject):
-    
-    CloudWatchLogsLogGroupArn = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.QueryLoggingConfig
-
-
-@attr.s
-class HostedZone(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    HostedZoneConfig = attr.ib(default=NOTHING) # type: HostedZoneConfiguration
-    HostedZoneTags = attr.ib(default=NOTHING) # type: Tags
-    QueryLoggingConfig = attr.ib(default=NOTHING) # type: QueryLoggingConfig
-    VPCs = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.HostedZone
-
-
-@attr.s
-class IpAddressRequest(AWSObject):
-    
-    SubnetId = attr.ib() # type: str
-    Ip = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.IpAddressRequest
+class HealthCheckConfiguration(troposphere.route53.HealthCheckConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AlarmIdentifier=NOTHING, # type: _AlarmIdentifier
+                 ChildHealthChecks=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 EnableSNI=NOTHING, # type: bool
+                 FailureThreshold=NOTHING, # type: int
+                 FullyQualifiedDomainName=NOTHING, # type: Union[str, AWSHelperFn]
+                 HealthThreshold=NOTHING, # type: int
+                 InsufficientDataHealthStatus=NOTHING, # type: Union[str, AWSHelperFn]
+                 Inverted=NOTHING, # type: bool
+                 IPAddress=NOTHING, # type: Union[str, AWSHelperFn]
+                 MeasureLatency=NOTHING, # type: bool
+                 Port=NOTHING, # type: int
+                 Regions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 RequestInterval=NOTHING, # type: int
+                 ResourcePath=NOTHING, # type: Union[str, AWSHelperFn]
+                 SearchString=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            AlarmIdentifier=AlarmIdentifier,
+            ChildHealthChecks=ChildHealthChecks,
+            EnableSNI=EnableSNI,
+            FailureThreshold=FailureThreshold,
+            FullyQualifiedDomainName=FullyQualifiedDomainName,
+            HealthThreshold=HealthThreshold,
+            InsufficientDataHealthStatus=InsufficientDataHealthStatus,
+            Inverted=Inverted,
+            IPAddress=IPAddress,
+            MeasureLatency=MeasureLatency,
+            Port=Port,
+            Regions=Regions,
+            RequestInterval=RequestInterval,
+            ResourcePath=ResourcePath,
+            SearchString=SearchString,
+        )
+        super(HealthCheckConfiguration, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ResolverEndpoint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Direction = attr.ib() # type: str
-    IpAddresses = attr.ib() # type: list
-    SecurityGroupIds = attr.ib() # type: list
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.ResolverEndpoint
-
-
-@attr.s
-class TargetAddress(AWSObject):
-    
-    Ip = attr.ib() # type: str
-    Port = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.TargetAddress
+class HealthCheck(troposphere.route53.HealthCheck, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 HealthCheckConfig=REQUIRED, # type: _HealthCheckConfiguration
+                 HealthCheckTags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            HealthCheckConfig=HealthCheckConfig,
+            HealthCheckTags=HealthCheckTags,
+        )
+        super(HealthCheck, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ResolverRule(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DomainName = attr.ib() # type: str
-    RuleType = attr.ib() # type: validate_ruletype
-    Name = attr.ib(default=NOTHING) # type: str
-    ResolverEndpointId = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    TargetIps = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.route53.ResolverRule
+class HostedZoneConfiguration(troposphere.route53.HostedZoneConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Comment=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Comment=Comment,
+        )
+        super(HostedZoneConfiguration, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ResolverRuleAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ResolverRuleId = attr.ib() # type: str
-    VPCId = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
+class HostedZoneVPCs(troposphere.route53.HostedZoneVPCs, Mixin):
+    def __init__(self,
+                 title=None,
+                 VPCId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VPCRegion=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VPCId=VPCId,
+            VPCRegion=VPCRegion,
+        )
+        super(HostedZoneVPCs, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.route53.ResolverRuleAssociation
+class QueryLoggingConfig(troposphere.route53.QueryLoggingConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 CloudWatchLogsLogGroupArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CloudWatchLogsLogGroupArn=CloudWatchLogsLogGroupArn,
+        )
+        super(QueryLoggingConfig, self).__init__(**processed_kwargs)
+
+
+class HostedZone(troposphere.route53.HostedZone, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 HostedZoneConfig=NOTHING, # type: _HostedZoneConfiguration
+                 HostedZoneTags=NOTHING, # type: _Tags
+                 QueryLoggingConfig=NOTHING, # type: _QueryLoggingConfig
+                 VPCs=NOTHING, # type: List[_HostedZoneVPCs]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            HostedZoneConfig=HostedZoneConfig,
+            HostedZoneTags=HostedZoneTags,
+            QueryLoggingConfig=QueryLoggingConfig,
+            VPCs=VPCs,
+        )
+        super(HostedZone, self).__init__(**processed_kwargs)
+
+
+class IpAddressRequest(troposphere.route53.IpAddressRequest, Mixin):
+    def __init__(self,
+                 title=None,
+                 SubnetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Ip=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SubnetId=SubnetId,
+            Ip=Ip,
+        )
+        super(IpAddressRequest, self).__init__(**processed_kwargs)
+
+
+class ResolverEndpoint(troposphere.route53.ResolverEndpoint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Direction=REQUIRED, # type: Union[str, AWSHelperFn]
+                 IpAddresses=REQUIRED, # type: List[_IpAddressRequest]
+                 SecurityGroupIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Direction=Direction,
+            IpAddresses=IpAddresses,
+            SecurityGroupIds=SecurityGroupIds,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(ResolverEndpoint, self).__init__(**processed_kwargs)
+
+
+class TargetAddress(troposphere.route53.TargetAddress, Mixin):
+    def __init__(self,
+                 title=None,
+                 Ip=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Port=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Ip=Ip,
+            Port=Port,
+        )
+        super(TargetAddress, self).__init__(**processed_kwargs)
+
+
+class ResolverRule(troposphere.route53.ResolverRule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DomainName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RuleType=REQUIRED, # type: Any
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResolverEndpointId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 TargetIps=NOTHING, # type: List[_TargetAddress]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DomainName=DomainName,
+            RuleType=RuleType,
+            Name=Name,
+            ResolverEndpointId=ResolverEndpointId,
+            Tags=Tags,
+            TargetIps=TargetIps,
+        )
+        super(ResolverRule, self).__init__(**processed_kwargs)
+
+
+class ResolverRuleAssociation(troposphere.route53.ResolverRuleAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ResolverRuleId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VPCId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ResolverRuleId=ResolverRuleId,
+            VPCId=VPCId,
+            Name=Name,
+        )
+        super(ResolverRuleAssociation, self).__init__(**processed_kwargs)

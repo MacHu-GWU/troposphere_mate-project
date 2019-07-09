@@ -4,121 +4,170 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.amplify
 
-from troposphere.amplify import BasicAuthConfig
-from troposphere.amplify import Tags
-from troposphere.amplify import boolean
+from troposphere.amplify import (
+    BasicAuthConfig as _BasicAuthConfig,
+    CustomRule as _CustomRule,
+    EnvironmentVariable as _EnvironmentVariable,
+    SubDomainSetting as _SubDomainSetting,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class BasicAuthConfig(AWSObject):
-    
-    Password = attr.ib() # type: str
-    Username = attr.ib() # type: str
-    EnableBasicAuth = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amplify.BasicAuthConfig
-
-
-@attr.s
-class CustomRule(AWSObject):
-    
-    Source = attr.ib() # type: str
-    Target = attr.ib() # type: str
-    Condition = attr.ib(default=NOTHING) # type: str
-    Status = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amplify.CustomRule
+class BasicAuthConfig(troposphere.amplify.BasicAuthConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 Password=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Username=REQUIRED, # type: Union[str, AWSHelperFn]
+                 EnableBasicAuth=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Password=Password,
+            Username=Username,
+            EnableBasicAuth=EnableBasicAuth,
+        )
+        super(BasicAuthConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class EnvironmentVariable(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Value = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amplify.EnvironmentVariable
-
-
-@attr.s
-class App(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    Repository = attr.ib() # type: str
-    AccessToken = attr.ib(default=NOTHING) # type: str
-    BasicAuthConfig = attr.ib(default=NOTHING) # type: BasicAuthConfig
-    BuildSpec = attr.ib(default=NOTHING) # type: str
-    CustomRules = attr.ib(default=NOTHING) # type: list
-    Description = attr.ib(default=NOTHING) # type: str
-    EnvironmentVariables = attr.ib(default=NOTHING) # type: list
-    IAMServiceRole = attr.ib(default=NOTHING) # type: str
-    OauthToken = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amplify.App
+class CustomRule(troposphere.amplify.CustomRule, Mixin):
+    def __init__(self,
+                 title=None,
+                 Source=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Target=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Condition=NOTHING, # type: Union[str, AWSHelperFn]
+                 Status=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Source=Source,
+            Target=Target,
+            Condition=Condition,
+            Status=Status,
+        )
+        super(CustomRule, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Branch(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AppId = attr.ib() # type: str
-    BranchName = attr.ib() # type: str
-    BasicAuthConfig = attr.ib(default=NOTHING) # type: BasicAuthConfig
-    BuildSpec = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    EnvironmentVariables = attr.ib(default=NOTHING) # type: list
-    Stage = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.amplify.Branch
+class EnvironmentVariable(troposphere.amplify.EnvironmentVariable, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+        )
+        super(EnvironmentVariable, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class SubDomainSetting(AWSObject):
-    
-    BranchName = attr.ib() # type: str
-    Prefix = attr.ib() # type: str
+class App(troposphere.amplify.App, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Repository=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccessToken=NOTHING, # type: Union[str, AWSHelperFn]
+                 BasicAuthConfig=NOTHING, # type: _BasicAuthConfig
+                 BuildSpec=NOTHING, # type: Union[str, AWSHelperFn]
+                 CustomRules=NOTHING, # type: List[_CustomRule]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 EnvironmentVariables=NOTHING, # type: List[_EnvironmentVariable]
+                 IAMServiceRole=NOTHING, # type: Union[str, AWSHelperFn]
+                 OauthToken=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            Repository=Repository,
+            AccessToken=AccessToken,
+            BasicAuthConfig=BasicAuthConfig,
+            BuildSpec=BuildSpec,
+            CustomRules=CustomRules,
+            Description=Description,
+            EnvironmentVariables=EnvironmentVariables,
+            IAMServiceRole=IAMServiceRole,
+            OauthToken=OauthToken,
+            Tags=Tags,
+        )
+        super(App, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.amplify.SubDomainSetting
+class Branch(troposphere.amplify.Branch, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AppId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BranchName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BasicAuthConfig=NOTHING, # type: _BasicAuthConfig
+                 BuildSpec=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 EnvironmentVariables=NOTHING, # type: List[_EnvironmentVariable]
+                 Stage=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AppId=AppId,
+            BranchName=BranchName,
+            BasicAuthConfig=BasicAuthConfig,
+            BuildSpec=BuildSpec,
+            Description=Description,
+            EnvironmentVariables=EnvironmentVariables,
+            Stage=Stage,
+            Tags=Tags,
+        )
+        super(Branch, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Domain(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AppId = attr.ib() # type: str
-    DomainName = attr.ib() # type: str
-    SubDomainSettings = attr.ib() # type: list
+class SubDomainSetting(troposphere.amplify.SubDomainSetting, Mixin):
+    def __init__(self,
+                 title=None,
+                 BranchName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Prefix=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BranchName=BranchName,
+            Prefix=Prefix,
+        )
+        super(SubDomainSetting, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.amplify.Domain
+class Domain(troposphere.amplify.Domain, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AppId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DomainName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubDomainSettings=REQUIRED, # type: List[_SubDomainSetting]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AppId=AppId,
+            DomainName=DomainName,
+            SubDomainSettings=SubDomainSettings,
+        )
+        super(Domain, self).__init__(**processed_kwargs)

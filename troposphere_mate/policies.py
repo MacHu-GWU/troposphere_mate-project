@@ -4,91 +4,104 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.policies
 
-from troposphere.policies import boolean
-from troposphere.policies import integer
-from troposphere.policies import positive_integer
-from troposphere.policies import validate_pausetime
 
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class AutoScalingRollingUpdate(AWSObject):
-    
-    MaxBatchSize = attr.ib(default=NOTHING) # type: positive_integer
-    MinInstancesInService = attr.ib(default=NOTHING) # type: integer
-    MinSuccessfulInstancesPercent = attr.ib(default=NOTHING) # type: integer
-    PauseTime = attr.ib(default=NOTHING) # type: validate_pausetime
-    SuspendProcesses = attr.ib(default=NOTHING) # type: list
-    WaitOnResourceSignals = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.policies.AutoScalingRollingUpdate
-
-
-@attr.s
-class AutoScalingScheduledAction(AWSObject):
-    
-    IgnoreUnmodifiedGroupSizeProperties = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.policies.AutoScalingScheduledAction
+class AutoScalingRollingUpdate(troposphere.policies.AutoScalingRollingUpdate, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaxBatchSize=NOTHING, # type: int
+                 MinInstancesInService=NOTHING, # type: int
+                 MinSuccessfulInstancesPercent=NOTHING, # type: int
+                 PauseTime=NOTHING, # type: Any
+                 SuspendProcesses=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 WaitOnResourceSignals=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaxBatchSize=MaxBatchSize,
+            MinInstancesInService=MinInstancesInService,
+            MinSuccessfulInstancesPercent=MinSuccessfulInstancesPercent,
+            PauseTime=PauseTime,
+            SuspendProcesses=SuspendProcesses,
+            WaitOnResourceSignals=WaitOnResourceSignals,
+        )
+        super(AutoScalingRollingUpdate, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class AutoScalingReplacingUpdate(AWSObject):
-    
-    WillReplace = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.policies.AutoScalingReplacingUpdate
-
-
-@attr.s
-class CodeDeployLambdaAliasUpdate(AWSObject):
-    
-    ApplicationName = attr.ib() # type: boolean
-    DeploymentGroupName = attr.ib() # type: boolean
-    AfterAllowTrafficHook = attr.ib(default=NOTHING) # type: str
-    BeforeAllowTrafficHook = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.policies.CodeDeployLambdaAliasUpdate
+class AutoScalingScheduledAction(troposphere.policies.AutoScalingScheduledAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 IgnoreUnmodifiedGroupSizeProperties=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            IgnoreUnmodifiedGroupSizeProperties=IgnoreUnmodifiedGroupSizeProperties,
+        )
+        super(AutoScalingScheduledAction, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ResourceSignal(AWSObject):
-    
-    Count = attr.ib(default=NOTHING) # type: positive_integer
-    Timeout = attr.ib(default=NOTHING) # type: validate_pausetime
+class AutoScalingReplacingUpdate(troposphere.policies.AutoScalingReplacingUpdate, Mixin):
+    def __init__(self,
+                 title=None,
+                 WillReplace=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            WillReplace=WillReplace,
+        )
+        super(AutoScalingReplacingUpdate, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.policies.ResourceSignal
+class CodeDeployLambdaAliasUpdate(troposphere.policies.CodeDeployLambdaAliasUpdate, Mixin):
+    def __init__(self,
+                 title=None,
+                 ApplicationName=REQUIRED, # type: bool
+                 DeploymentGroupName=REQUIRED, # type: bool
+                 AfterAllowTrafficHook=NOTHING, # type: Union[str, AWSHelperFn]
+                 BeforeAllowTrafficHook=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ApplicationName=ApplicationName,
+            DeploymentGroupName=DeploymentGroupName,
+            AfterAllowTrafficHook=AfterAllowTrafficHook,
+            BeforeAllowTrafficHook=BeforeAllowTrafficHook,
+        )
+        super(CodeDeployLambdaAliasUpdate, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class AutoScalingCreationPolicy(AWSObject):
-    
-    MinSuccessfulInstancesPercent = attr.ib(default=NOTHING) # type: integer
+class ResourceSignal(troposphere.policies.ResourceSignal, Mixin):
+    def __init__(self,
+                 title=None,
+                 Count=NOTHING, # type: int
+                 Timeout=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Count=Count,
+            Timeout=Timeout,
+        )
+        super(ResourceSignal, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.policies.AutoScalingCreationPolicy
+class AutoScalingCreationPolicy(troposphere.policies.AutoScalingCreationPolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 MinSuccessfulInstancesPercent=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MinSuccessfulInstancesPercent=MinSuccessfulInstancesPercent,
+        )
+        super(AutoScalingCreationPolicy, self).__init__(**processed_kwargs)

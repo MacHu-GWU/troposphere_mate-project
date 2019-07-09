@@ -4,101 +4,125 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.dlm
 
-from troposphere.dlm import CreateRule
-from troposphere.dlm import Parameters
-from troposphere.dlm import PolicyDetails
-from troposphere.dlm import RetainRule
-from troposphere.dlm import boolean
-from troposphere.dlm import integer
-from troposphere.dlm import validate_interval
-from troposphere.dlm import validate_interval_unit
-from troposphere.dlm import validate_state
+from troposphere.dlm import (
+    CreateRule as _CreateRule,
+    Parameters as _Parameters,
+    PolicyDetails as _PolicyDetails,
+    RetainRule as _RetainRule,
+    Schedule as _Schedule,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Parameters(AWSObject):
-    
-    ExcludeBootVolume = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dlm.Parameters
-
-
-@attr.s
-class CreateRule(AWSObject):
-    
-    Interval = attr.ib() # type: validate_interval
-    IntervalUnit = attr.ib() # type: validate_interval_unit
-    Times = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dlm.CreateRule
+class Parameters(troposphere.dlm.Parameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 ExcludeBootVolume=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ExcludeBootVolume=ExcludeBootVolume,
+        )
+        super(Parameters, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class RetainRule(AWSObject):
-    
-    Count = attr.ib() # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dlm.RetainRule
-
-
-@attr.s
-class Schedule(AWSObject):
-    
-    CopyTags = attr.ib(default=NOTHING) # type: boolean
-    CreateRule = attr.ib(default=NOTHING) # type: CreateRule
-    Name = attr.ib(default=NOTHING) # type: str
-    RetainRule = attr.ib(default=NOTHING) # type: RetainRule
-    TagsToAdd = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dlm.Schedule
+class CreateRule(troposphere.dlm.CreateRule, Mixin):
+    def __init__(self,
+                 title=None,
+                 Interval=REQUIRED, # type: Any
+                 IntervalUnit=REQUIRED, # type: Any
+                 Times=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Interval=Interval,
+            IntervalUnit=IntervalUnit,
+            Times=Times,
+        )
+        super(CreateRule, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class PolicyDetails(AWSObject):
-    
-    Parameters = attr.ib(default=NOTHING) # type: Parameters
-    PolicyType = attr.ib(default=NOTHING) # type: str
-    ResourceTypes = attr.ib(default=NOTHING) # type: list
-    Schedules = attr.ib(default=NOTHING) # type: list
-    TargetTags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.dlm.PolicyDetails
+class RetainRule(troposphere.dlm.RetainRule, Mixin):
+    def __init__(self,
+                 title=None,
+                 Count=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Count=Count,
+        )
+        super(RetainRule, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class LifecyclePolicy(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib(default=NOTHING) # type: str
-    ExecutionRoleArn = attr.ib(default=NOTHING) # type: str
-    PolicyDetails = attr.ib(default=NOTHING) # type: PolicyDetails
-    State = attr.ib(default=NOTHING) # type: validate_state
+class Schedule(troposphere.dlm.Schedule, Mixin):
+    def __init__(self,
+                 title=None,
+                 CopyTags=NOTHING, # type: bool
+                 CreateRule=NOTHING, # type: _CreateRule
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 RetainRule=NOTHING, # type: _RetainRule
+                 TagsToAdd=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CopyTags=CopyTags,
+            CreateRule=CreateRule,
+            Name=Name,
+            RetainRule=RetainRule,
+            TagsToAdd=TagsToAdd,
+        )
+        super(Schedule, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.dlm.LifecyclePolicy
+class PolicyDetails(troposphere.dlm.PolicyDetails, Mixin):
+    def __init__(self,
+                 title=None,
+                 Parameters=NOTHING, # type: _Parameters
+                 PolicyType=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResourceTypes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Schedules=NOTHING, # type: List[_Schedule]
+                 TargetTags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Parameters=Parameters,
+            PolicyType=PolicyType,
+            ResourceTypes=ResourceTypes,
+            Schedules=Schedules,
+            TargetTags=TargetTags,
+        )
+        super(PolicyDetails, self).__init__(**processed_kwargs)
+
+
+class LifecyclePolicy(troposphere.dlm.LifecyclePolicy, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 ExecutionRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 PolicyDetails=NOTHING, # type: _PolicyDetails
+                 State=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            ExecutionRoleArn=ExecutionRoleArn,
+            PolicyDetails=PolicyDetails,
+            State=State,
+        )
+        super(LifecyclePolicy, self).__init__(**processed_kwargs)

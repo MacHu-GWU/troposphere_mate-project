@@ -4,45 +4,64 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.kms
 
-from troposphere.kms import boolean
-from troposphere.kms import key_usage_type
+from troposphere.kms import (
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Alias(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AliasName = attr.ib() # type: str
-    TargetKeyId = attr.ib() # type: str
+class Alias(troposphere.kms.Alias, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AliasName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TargetKeyId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AliasName=AliasName,
+            TargetKeyId=TargetKeyId,
+        )
+        super(Alias, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.kms.Alias
-
-
-@attr.s
-class Key(AWSObject):
-    title = attr.ib()   # type: str
-    
-    KeyPolicy = attr.ib() # type: tuple
-    Description = attr.ib(default=NOTHING) # type: str
-    Enabled = attr.ib(default=NOTHING) # type: boolean
-    EnableKeyRotation = attr.ib(default=NOTHING) # type: boolean
-    KeyUsage = attr.ib(default=NOTHING) # type: key_usage_type
-    PendingWindowInDays = attr.ib(default=NOTHING) # type: integer_range_checker
-    Tags = attr.ib(default=NOTHING) # type: tuple
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kms.Key
+class Key(troposphere.kms.Key, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 KeyPolicy=REQUIRED, # type: Union[dict]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Enabled=NOTHING, # type: bool
+                 EnableKeyRotation=NOTHING, # type: bool
+                 KeyUsage=NOTHING, # type: str
+                 PendingWindowInDays=NOTHING, # type: Any
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            KeyPolicy=KeyPolicy,
+            Description=Description,
+            Enabled=Enabled,
+            EnableKeyRotation=EnableKeyRotation,
+            KeyUsage=KeyUsage,
+            PendingWindowInDays=PendingWindowInDays,
+            Tags=Tags,
+        )
+        super(Key, self).__init__(**processed_kwargs)

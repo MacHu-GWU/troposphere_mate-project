@@ -4,137 +4,202 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.redshift
 
-from troposphere.redshift import LoggingProperties
-from troposphere.redshift import Tags
-from troposphere.redshift import boolean
-from troposphere.redshift import integer
+from troposphere.redshift import (
+    AmazonRedshiftParameter as _AmazonRedshiftParameter,
+    LoggingProperties as _LoggingProperties,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class LoggingProperties(AWSObject):
-    
-    BucketName = attr.ib() # type: str
-    S3KeyPrefix = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.redshift.LoggingProperties
-
-
-@attr.s
-class Cluster(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ClusterType = attr.ib() # type: str
-    DBName = attr.ib() # type: str
-    MasterUsername = attr.ib() # type: str
-    MasterUserPassword = attr.ib() # type: str
-    NodeType = attr.ib() # type: str
-    AllowVersionUpgrade = attr.ib(default=NOTHING) # type: boolean
-    AutomatedSnapshotRetentionPeriod = attr.ib(default=NOTHING) # type: integer
-    AvailabilityZone = attr.ib(default=NOTHING) # type: str
-    ClusterIdentifier = attr.ib(default=NOTHING) # type: str
-    ClusterParameterGroupName = attr.ib(default=NOTHING) # type: str
-    ClusterSecurityGroups = attr.ib(default=NOTHING) # type: list
-    ClusterSubnetGroupName = attr.ib(default=NOTHING) # type: str
-    ClusterVersion = attr.ib(default=NOTHING) # type: str
-    ElasticIp = attr.ib(default=NOTHING) # type: str
-    Encrypted = attr.ib(default=NOTHING) # type: boolean
-    HsmClientCertificateIdentifier = attr.ib(default=NOTHING) # type: str
-    HsmConfigurationIdentifier = attr.ib(default=NOTHING) # type: str
-    IamRoles = attr.ib(default=NOTHING) # type: list
-    KmsKeyId = attr.ib(default=NOTHING) # type: str
-    LoggingProperties = attr.ib(default=NOTHING) # type: LoggingProperties
-    NumberOfNodes = attr.ib(default=NOTHING) # type: integer
-    OwnerAccount = attr.ib(default=NOTHING) # type: str
-    Port = attr.ib(default=NOTHING) # type: integer
-    PreferredMaintenanceWindow = attr.ib(default=NOTHING) # type: str
-    PubliclyAccessible = attr.ib(default=NOTHING) # type: boolean
-    SnapshotClusterIdentifier = attr.ib(default=NOTHING) # type: str
-    SnapshotIdentifier = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-    VpcSecurityGroupIds = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.redshift.Cluster
+class LoggingProperties(troposphere.redshift.LoggingProperties, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3KeyPrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketName=BucketName,
+            S3KeyPrefix=S3KeyPrefix,
+        )
+        super(LoggingProperties, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class AmazonRedshiftParameter(AWSObject):
-    
-    ParameterName = attr.ib() # type: str
-    ParameterValue = attr.ib() # type: str
+class Cluster(troposphere.redshift.Cluster, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ClusterType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DBName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MasterUsername=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MasterUserPassword=REQUIRED, # type: Union[str, AWSHelperFn]
+                 NodeType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllowVersionUpgrade=NOTHING, # type: bool
+                 AutomatedSnapshotRetentionPeriod=NOTHING, # type: int
+                 AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 ClusterIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 ClusterParameterGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ClusterSecurityGroups=NOTHING, # type: list
+                 ClusterSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ClusterVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 ElasticIp=NOTHING, # type: Union[str, AWSHelperFn]
+                 Encrypted=NOTHING, # type: bool
+                 HsmClientCertificateIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 HsmConfigurationIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 IamRoles=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LoggingProperties=NOTHING, # type: _LoggingProperties
+                 NumberOfNodes=NOTHING, # type: int
+                 OwnerAccount=NOTHING, # type: Union[str, AWSHelperFn]
+                 Port=NOTHING, # type: int
+                 PreferredMaintenanceWindow=NOTHING, # type: Union[str, AWSHelperFn]
+                 PubliclyAccessible=NOTHING, # type: bool
+                 SnapshotClusterIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 SnapshotIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 VpcSecurityGroupIds=NOTHING, # type: list
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ClusterType=ClusterType,
+            DBName=DBName,
+            MasterUsername=MasterUsername,
+            MasterUserPassword=MasterUserPassword,
+            NodeType=NodeType,
+            AllowVersionUpgrade=AllowVersionUpgrade,
+            AutomatedSnapshotRetentionPeriod=AutomatedSnapshotRetentionPeriod,
+            AvailabilityZone=AvailabilityZone,
+            ClusterIdentifier=ClusterIdentifier,
+            ClusterParameterGroupName=ClusterParameterGroupName,
+            ClusterSecurityGroups=ClusterSecurityGroups,
+            ClusterSubnetGroupName=ClusterSubnetGroupName,
+            ClusterVersion=ClusterVersion,
+            ElasticIp=ElasticIp,
+            Encrypted=Encrypted,
+            HsmClientCertificateIdentifier=HsmClientCertificateIdentifier,
+            HsmConfigurationIdentifier=HsmConfigurationIdentifier,
+            IamRoles=IamRoles,
+            KmsKeyId=KmsKeyId,
+            LoggingProperties=LoggingProperties,
+            NumberOfNodes=NumberOfNodes,
+            OwnerAccount=OwnerAccount,
+            Port=Port,
+            PreferredMaintenanceWindow=PreferredMaintenanceWindow,
+            PubliclyAccessible=PubliclyAccessible,
+            SnapshotClusterIdentifier=SnapshotClusterIdentifier,
+            SnapshotIdentifier=SnapshotIdentifier,
+            Tags=Tags,
+            VpcSecurityGroupIds=VpcSecurityGroupIds,
+        )
+        super(Cluster, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.redshift.AmazonRedshiftParameter
-
-
-@attr.s
-class ClusterParameterGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib() # type: str
-    ParameterGroupFamily = attr.ib() # type: str
-    Parameters = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.redshift.ClusterParameterGroup
+class AmazonRedshiftParameter(troposphere.redshift.AmazonRedshiftParameter, Mixin):
+    def __init__(self,
+                 title=None,
+                 ParameterName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ParameterValue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ParameterName=ParameterName,
+            ParameterValue=ParameterValue,
+        )
+        super(AmazonRedshiftParameter, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ClusterSecurityGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib() # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.redshift.ClusterSecurityGroup
-
-
-@attr.s
-class ClusterSecurityGroupIngress(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ClusterSecurityGroupName = attr.ib() # type: str
-    CIDRIP = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupName = attr.ib(default=NOTHING) # type: str
-    EC2SecurityGroupOwnerId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.redshift.ClusterSecurityGroupIngress
+class ClusterParameterGroup(troposphere.redshift.ClusterParameterGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ParameterGroupFamily=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: List[_AmazonRedshiftParameter]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            ParameterGroupFamily=ParameterGroupFamily,
+            Parameters=Parameters,
+            Tags=Tags,
+        )
+        super(ClusterParameterGroup, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ClusterSubnetGroup(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Description = attr.ib() # type: str
-    SubnetIds = attr.ib() # type: list
-    Tags = attr.ib(default=NOTHING) # type: Tags
+class ClusterSecurityGroup(troposphere.redshift.ClusterSecurityGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            Tags=Tags,
+        )
+        super(ClusterSecurityGroup, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.redshift.ClusterSubnetGroup
+class ClusterSecurityGroupIngress(troposphere.redshift.ClusterSecurityGroupIngress, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ClusterSecurityGroupName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CIDRIP=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EC2SecurityGroupOwnerId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ClusterSecurityGroupName=ClusterSecurityGroupName,
+            CIDRIP=CIDRIP,
+            EC2SecurityGroupName=EC2SecurityGroupName,
+            EC2SecurityGroupOwnerId=EC2SecurityGroupOwnerId,
+        )
+        super(ClusterSecurityGroupIngress, self).__init__(**processed_kwargs)
+
+
+class ClusterSubnetGroup(troposphere.redshift.ClusterSubnetGroup, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SubnetIds=REQUIRED, # type: list
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            SubnetIds=SubnetIds,
+            Tags=Tags,
+        )
+        super(ClusterSubnetGroup, self).__init__(**processed_kwargs)

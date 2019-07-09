@@ -4,69 +4,92 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.iot1click
 
-from troposphere.iot1click import PlacementTemplate
-from troposphere.iot1click import boolean
-from troposphere.iot1click import json_checker
+from troposphere.iot1click import (
+    PlacementTemplate as _PlacementTemplate,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Device(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DeviceId = attr.ib() # type: str
-    Enabled = attr.ib() # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iot1click.Device
-
-
-@attr.s
-class Placement(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ProjectName = attr.ib() # type: str
-    AssociatedDevices = attr.ib(default=NOTHING) # type: json_checker
-    Attributes = attr.ib(default=NOTHING) # type: json_checker
-    PlacementName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iot1click.Placement
+class Device(troposphere.iot1click.Device, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DeviceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Enabled=REQUIRED, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DeviceId=DeviceId,
+            Enabled=Enabled,
+        )
+        super(Device, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class PlacementTemplate(AWSObject):
-    
-    DefaultAttributes = attr.ib(default=NOTHING) # type: json_checker
-    DeviceTemplates = attr.ib(default=NOTHING) # type: json_checker
+class Placement(troposphere.iot1click.Placement, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ProjectName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AssociatedDevices=NOTHING, # type: json_checker
+                 Attributes=NOTHING, # type: json_checker
+                 PlacementName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ProjectName=ProjectName,
+            AssociatedDevices=AssociatedDevices,
+            Attributes=Attributes,
+            PlacementName=PlacementName,
+        )
+        super(Placement, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.iot1click.PlacementTemplate
+class PlacementTemplate(troposphere.iot1click.PlacementTemplate, Mixin):
+    def __init__(self,
+                 title=None,
+                 DefaultAttributes=NOTHING, # type: json_checker
+                 DeviceTemplates=NOTHING, # type: json_checker
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DefaultAttributes=DefaultAttributes,
+            DeviceTemplates=DeviceTemplates,
+        )
+        super(PlacementTemplate, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Project(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PlacementTemplate = attr.ib() # type: PlacementTemplate
-    Description = attr.ib(default=NOTHING) # type: str
-    ProjectName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.iot1click.Project
+class Project(troposphere.iot1click.Project, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PlacementTemplate=REQUIRED, # type: _PlacementTemplate
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProjectName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PlacementTemplate=PlacementTemplate,
+            Description=Description,
+            ProjectName=ProjectName,
+        )
+        super(Project, self).__init__(**processed_kwargs)

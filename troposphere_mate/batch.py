@@ -4,238 +4,317 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.batch
 
-from troposphere.batch import ComputeResources
-from troposphere.batch import ContainerProperties
-from troposphere.batch import LaunchTemplateSpecification
-from troposphere.batch import RetryStrategy
-from troposphere.batch import Timeout
-from troposphere.batch import VolumesHost
-from troposphere.batch import integer
-from troposphere.batch import positive_integer
-from troposphere.batch import validate_environment_state
-from troposphere.batch import validate_queue_state
+from troposphere.batch import (
+    ComputeEnvironmentOrder as _ComputeEnvironmentOrder,
+    ComputeResources as _ComputeResources,
+    ContainerProperties as _ContainerProperties,
+    Environment as _Environment,
+    LaunchTemplateSpecification as _LaunchTemplateSpecification,
+    MountPoints as _MountPoints,
+    ResourceRequirement as _ResourceRequirement,
+    RetryStrategy as _RetryStrategy,
+    Timeout as _Timeout,
+    Ulimit as _Ulimit,
+    Volumes as _Volumes,
+    VolumesHost as _VolumesHost,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class LaunchTemplateSpecification(AWSObject):
-    
-    LaunchTemplateId = attr.ib(default=NOTHING) # type: str
-    LaunchTemplateName = attr.ib(default=NOTHING) # type: str
-    Version = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.LaunchTemplateSpecification
-
-
-@attr.s
-class ComputeResources(AWSObject):
-    
-    MaxvCpus = attr.ib() # type: positive_integer
-    SecurityGroupIds = attr.ib() # type: list
-    Type = attr.ib() # type: str
-    Subnets = attr.ib() # type: list
-    MinvCpus = attr.ib() # type: positive_integer
-    InstanceRole = attr.ib() # type: str
-    InstanceTypes = attr.ib() # type: list
-    SpotIamFleetRole = attr.ib(default=NOTHING) # type: str
-    BidPercentage = attr.ib(default=NOTHING) # type: positive_integer
-    LaunchTemplate = attr.ib(default=NOTHING) # type: LaunchTemplateSpecification
-    ImageId = attr.ib(default=NOTHING) # type: str
-    Ec2KeyPair = attr.ib(default=NOTHING) # type: str
-    PlacementGroup = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: dict
-    DesiredvCpus = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.ComputeResources
+class LaunchTemplateSpecification(troposphere.batch.LaunchTemplateSpecification, Mixin):
+    def __init__(self,
+                 title=None,
+                 LaunchTemplateId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LaunchTemplateName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Version=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LaunchTemplateId=LaunchTemplateId,
+            LaunchTemplateName=LaunchTemplateName,
+            Version=Version,
+        )
+        super(LaunchTemplateSpecification, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class MountPoints(AWSObject):
-    
-    ReadOnly = attr.ib(default=NOTHING) # type: bool
-    SourceVolume = attr.ib(default=NOTHING) # type: str
-    ContainerPath = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.MountPoints
-
-
-@attr.s
-class VolumesHost(AWSObject):
-    
-    SourcePath = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.VolumesHost
-
-
-@attr.s
-class Volumes(AWSObject):
-    
-    Host = attr.ib(default=NOTHING) # type: VolumesHost
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.Volumes
-
-
-@attr.s
-class Environment(AWSObject):
-    
-    Value = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.Environment
+class ComputeResources(troposphere.batch.ComputeResources, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaxvCpus=REQUIRED, # type: int
+                 SecurityGroupIds=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Subnets=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 MinvCpus=REQUIRED, # type: int
+                 InstanceRole=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InstanceTypes=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 SpotIamFleetRole=NOTHING, # type: Union[str, AWSHelperFn]
+                 BidPercentage=NOTHING, # type: int
+                 LaunchTemplate=NOTHING, # type: _LaunchTemplateSpecification
+                 ImageId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Ec2KeyPair=NOTHING, # type: Union[str, AWSHelperFn]
+                 PlacementGroup=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: dict
+                 DesiredvCpus=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaxvCpus=MaxvCpus,
+            SecurityGroupIds=SecurityGroupIds,
+            Type=Type,
+            Subnets=Subnets,
+            MinvCpus=MinvCpus,
+            InstanceRole=InstanceRole,
+            InstanceTypes=InstanceTypes,
+            SpotIamFleetRole=SpotIamFleetRole,
+            BidPercentage=BidPercentage,
+            LaunchTemplate=LaunchTemplate,
+            ImageId=ImageId,
+            Ec2KeyPair=Ec2KeyPair,
+            PlacementGroup=PlacementGroup,
+            Tags=Tags,
+            DesiredvCpus=DesiredvCpus,
+        )
+        super(ComputeResources, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ResourceRequirement(AWSObject):
-    
-    Type = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.ResourceRequirement
-
-
-@attr.s
-class Ulimit(AWSObject):
-    
-    SoftLimit = attr.ib() # type: positive_integer
-    HardLimit = attr.ib() # type: positive_integer
-    Name = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.Ulimit
+class MountPoints(troposphere.batch.MountPoints, Mixin):
+    def __init__(self,
+                 title=None,
+                 ReadOnly=NOTHING, # type: bool
+                 SourceVolume=NOTHING, # type: Union[str, AWSHelperFn]
+                 ContainerPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ReadOnly=ReadOnly,
+            SourceVolume=SourceVolume,
+            ContainerPath=ContainerPath,
+        )
+        super(MountPoints, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ContainerProperties(AWSObject):
-    
-    Memory = attr.ib() # type: positive_integer
-    Vcpus = attr.ib() # type: positive_integer
-    Image = attr.ib() # type: str
-    MountPoints = attr.ib(default=NOTHING) # type: list
-    User = attr.ib(default=NOTHING) # type: str
-    Volumes = attr.ib(default=NOTHING) # type: list
-    Command = attr.ib(default=NOTHING) # type: list
-    Privileged = attr.ib(default=NOTHING) # type: bool
-    Environment = attr.ib(default=NOTHING) # type: list
-    JobRoleArn = attr.ib(default=NOTHING) # type: str
-    ReadonlyRootFilesystem = attr.ib(default=NOTHING) # type: bool
-    ResourceRequirements = attr.ib(default=NOTHING) # type: list
-    Ulimits = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.ContainerProperties
+class VolumesHost(troposphere.batch.VolumesHost, Mixin):
+    def __init__(self,
+                 title=None,
+                 SourcePath=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SourcePath=SourcePath,
+        )
+        super(VolumesHost, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class RetryStrategy(AWSObject):
-    
-    Attempts = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.RetryStrategy
-
-
-@attr.s
-class Timeout(AWSObject):
-    
-    AttemptDurationSeconds = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.Timeout
+class Volumes(troposphere.batch.Volumes, Mixin):
+    def __init__(self,
+                 title=None,
+                 Host=NOTHING, # type: _VolumesHost
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Host=Host,
+            Name=Name,
+        )
+        super(Volumes, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class JobDefinition(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ContainerProperties = attr.ib() # type: ContainerProperties
-    Type = attr.ib() # type: str
-    JobDefinitionName = attr.ib(default=NOTHING) # type: str
-    Parameters = attr.ib(default=NOTHING) # type: dict
-    RetryStrategy = attr.ib(default=NOTHING) # type: RetryStrategy
-    Timeout = attr.ib(default=NOTHING) # type: Timeout
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.JobDefinition
+class Environment(troposphere.batch.Environment, Mixin):
+    def __init__(self,
+                 title=None,
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Value=Value,
+            Name=Name,
+        )
+        super(Environment, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ComputeEnvironment(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Type = attr.ib() # type: str
-    ServiceRole = attr.ib() # type: str
-    ComputeResources = attr.ib() # type: ComputeResources
-    ComputeEnvironmentName = attr.ib(default=NOTHING) # type: str
-    State = attr.ib(default=NOTHING) # type: validate_environment_state
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.batch.ComputeEnvironment
+class ResourceRequirement(troposphere.batch.ResourceRequirement, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Value=Value,
+        )
+        super(ResourceRequirement, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ComputeEnvironmentOrder(AWSObject):
-    
-    ComputeEnvironment = attr.ib() # type: str
-    Order = attr.ib() # type: positive_integer
+class Ulimit(troposphere.batch.Ulimit, Mixin):
+    def __init__(self,
+                 title=None,
+                 SoftLimit=REQUIRED, # type: int
+                 HardLimit=REQUIRED, # type: int
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SoftLimit=SoftLimit,
+            HardLimit=HardLimit,
+            Name=Name,
+        )
+        super(Ulimit, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.batch.ComputeEnvironmentOrder
+class ContainerProperties(troposphere.batch.ContainerProperties, Mixin):
+    def __init__(self,
+                 title=None,
+                 Memory=REQUIRED, # type: int
+                 Vcpus=REQUIRED, # type: int
+                 Image=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MountPoints=NOTHING, # type: List[_MountPoints]
+                 User=NOTHING, # type: Union[str, AWSHelperFn]
+                 Volumes=NOTHING, # type: List[_Volumes]
+                 Command=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Privileged=NOTHING, # type: bool
+                 Environment=NOTHING, # type: List[_Environment]
+                 JobRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 ReadonlyRootFilesystem=NOTHING, # type: bool
+                 ResourceRequirements=NOTHING, # type: List[_ResourceRequirement]
+                 Ulimits=NOTHING, # type: List[_Ulimit]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Memory=Memory,
+            Vcpus=Vcpus,
+            Image=Image,
+            MountPoints=MountPoints,
+            User=User,
+            Volumes=Volumes,
+            Command=Command,
+            Privileged=Privileged,
+            Environment=Environment,
+            JobRoleArn=JobRoleArn,
+            ReadonlyRootFilesystem=ReadonlyRootFilesystem,
+            ResourceRequirements=ResourceRequirements,
+            Ulimits=Ulimits,
+        )
+        super(ContainerProperties, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class JobQueue(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ComputeEnvironmentOrder = attr.ib() # type: list
-    Priority = attr.ib() # type: positive_integer
-    State = attr.ib(default=NOTHING) # type: validate_queue_state
-    JobQueueName = attr.ib(default=NOTHING) # type: str
+class RetryStrategy(troposphere.batch.RetryStrategy, Mixin):
+    def __init__(self,
+                 title=None,
+                 Attempts=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Attempts=Attempts,
+        )
+        super(RetryStrategy, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.batch.JobQueue
+class Timeout(troposphere.batch.Timeout, Mixin):
+    def __init__(self,
+                 title=None,
+                 AttemptDurationSeconds=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AttemptDurationSeconds=AttemptDurationSeconds,
+        )
+        super(Timeout, self).__init__(**processed_kwargs)
+
+
+class JobDefinition(troposphere.batch.JobDefinition, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ContainerProperties=REQUIRED, # type: _ContainerProperties
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 JobDefinitionName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Parameters=NOTHING, # type: dict
+                 RetryStrategy=NOTHING, # type: _RetryStrategy
+                 Timeout=NOTHING, # type: _Timeout
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ContainerProperties=ContainerProperties,
+            Type=Type,
+            JobDefinitionName=JobDefinitionName,
+            Parameters=Parameters,
+            RetryStrategy=RetryStrategy,
+            Timeout=Timeout,
+        )
+        super(JobDefinition, self).__init__(**processed_kwargs)
+
+
+class ComputeEnvironment(troposphere.batch.ComputeEnvironment, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceRole=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ComputeResources=REQUIRED, # type: _ComputeResources
+                 ComputeEnvironmentName=NOTHING, # type: Union[str, AWSHelperFn]
+                 State=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Type=Type,
+            ServiceRole=ServiceRole,
+            ComputeResources=ComputeResources,
+            ComputeEnvironmentName=ComputeEnvironmentName,
+            State=State,
+        )
+        super(ComputeEnvironment, self).__init__(**processed_kwargs)
+
+
+class ComputeEnvironmentOrder(troposphere.batch.ComputeEnvironmentOrder, Mixin):
+    def __init__(self,
+                 title=None,
+                 ComputeEnvironment=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Order=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ComputeEnvironment=ComputeEnvironment,
+            Order=Order,
+        )
+        super(ComputeEnvironmentOrder, self).__init__(**processed_kwargs)
+
+
+class JobQueue(troposphere.batch.JobQueue, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ComputeEnvironmentOrder=REQUIRED, # type: List[_ComputeEnvironmentOrder]
+                 Priority=REQUIRED, # type: int
+                 State=NOTHING, # type: Any
+                 JobQueueName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ComputeEnvironmentOrder=ComputeEnvironmentOrder,
+            Priority=Priority,
+            State=State,
+            JobQueueName=JobQueueName,
+        )
+        super(JobQueue, self).__init__(**processed_kwargs)

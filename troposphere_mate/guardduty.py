@@ -4,135 +4,189 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.guardduty
 
-from troposphere.guardduty import Condition
-from troposphere.guardduty import FindingCriteria
-from troposphere.guardduty import boolean
-from troposphere.guardduty import integer
+from troposphere.guardduty import (
+    Condition as _Condition,
+    FindingCriteria as _FindingCriteria,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Detector(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Enable = attr.ib() # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.guardduty.Detector
-
-
-@attr.s
-class Condition(AWSObject):
-    
-    Eq = attr.ib(default=NOTHING) # type: list
-    Gte = attr.ib(default=NOTHING) # type: integer
-    Lt = attr.ib(default=NOTHING) # type: integer
-    Lte = attr.ib(default=NOTHING) # type: integer
-    Neq = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.guardduty.Condition
+class Detector(troposphere.guardduty.Detector, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Enable=REQUIRED, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Enable=Enable,
+        )
+        super(Detector, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class FindingCriteria(AWSObject):
-    
-    Criterion = attr.ib(default=NOTHING) # type: dict
-    ItemType = attr.ib(default=NOTHING) # type: Condition
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.guardduty.FindingCriteria
-
-
-@attr.s
-class Filter(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Action = attr.ib() # type: str
-    Description = attr.ib() # type: str
-    DetectorId = attr.ib() # type: str
-    FindingCriteria = attr.ib() # type: FindingCriteria
-    Rank = attr.ib() # type: integer
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.guardduty.Filter
+class Condition(troposphere.guardduty.Condition, Mixin):
+    def __init__(self,
+                 title=None,
+                 Eq=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Gte=NOTHING, # type: int
+                 Lt=NOTHING, # type: int
+                 Lte=NOTHING, # type: int
+                 Neq=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Eq=Eq,
+            Gte=Gte,
+            Lt=Lt,
+            Lte=Lte,
+            Neq=Neq,
+        )
+        super(Condition, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class IPSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Activate = attr.ib() # type: boolean
-    DetectorId = attr.ib() # type: str
-    Format = attr.ib() # type: str
-    Location = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.guardduty.IPSet
+class FindingCriteria(troposphere.guardduty.FindingCriteria, Mixin):
+    def __init__(self,
+                 title=None,
+                 Criterion=NOTHING, # type: dict
+                 ItemType=NOTHING, # type: _Condition
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Criterion=Criterion,
+            ItemType=ItemType,
+        )
+        super(FindingCriteria, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class Master(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DetectorId = attr.ib() # type: str
-    MasterId = attr.ib() # type: str
-    InvitationId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.guardduty.Master
-
-
-@attr.s
-class Member(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DetectorId = attr.ib() # type: str
-    Email = attr.ib() # type: str
-    MemberId = attr.ib() # type: str
-    Message = attr.ib(default=NOTHING) # type: str
-    Status = attr.ib(default=NOTHING) # type: str
-    DisableEmailNotification = attr.ib(default=NOTHING) # type: bool
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.guardduty.Member
+class Filter(troposphere.guardduty.Filter, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Action=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DetectorId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FindingCriteria=REQUIRED, # type: _FindingCriteria
+                 Rank=REQUIRED, # type: int
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Action=Action,
+            Description=Description,
+            DetectorId=DetectorId,
+            FindingCriteria=FindingCriteria,
+            Rank=Rank,
+            Name=Name,
+        )
+        super(Filter, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ThreatIntelSet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Activate = attr.ib() # type: boolean
-    DetectorId = attr.ib() # type: str
-    Format = attr.ib() # type: str
-    Location = attr.ib() # type: str
-    Name = attr.ib(default=NOTHING) # type: str
+class IPSet(troposphere.guardduty.IPSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Activate=REQUIRED, # type: bool
+                 DetectorId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Format=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Location=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Activate=Activate,
+            DetectorId=DetectorId,
+            Format=Format,
+            Location=Location,
+            Name=Name,
+        )
+        super(IPSet, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.guardduty.ThreatIntelSet
+class Master(troposphere.guardduty.Master, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DetectorId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MasterId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 InvitationId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DetectorId=DetectorId,
+            MasterId=MasterId,
+            InvitationId=InvitationId,
+        )
+        super(Master, self).__init__(**processed_kwargs)
+
+
+class Member(troposphere.guardduty.Member, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DetectorId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Email=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MemberId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Message=NOTHING, # type: Union[str, AWSHelperFn]
+                 Status=NOTHING, # type: Union[str, AWSHelperFn]
+                 DisableEmailNotification=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DetectorId=DetectorId,
+            Email=Email,
+            MemberId=MemberId,
+            Message=Message,
+            Status=Status,
+            DisableEmailNotification=DisableEmailNotification,
+        )
+        super(Member, self).__init__(**processed_kwargs)
+
+
+class ThreatIntelSet(troposphere.guardduty.ThreatIntelSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Activate=REQUIRED, # type: bool
+                 DetectorId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Format=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Location=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Activate=Activate,
+            DetectorId=DetectorId,
+            Format=Format,
+            Location=Location,
+            Name=Name,
+        )
+        super(ThreatIntelSet, self).__init__(**processed_kwargs)

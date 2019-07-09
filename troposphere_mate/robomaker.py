@@ -4,154 +4,210 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.robomaker
 
-from troposphere.robomaker import RenderingEngine
-from troposphere.robomaker import RobotSoftwareSuite
-from troposphere.robomaker import SimulationSoftwareSuite
-from troposphere.robomaker import Tags
+from troposphere.robomaker import (
+    RenderingEngine as _RenderingEngine,
+    RobotSoftwareSuite as _RobotSoftwareSuite,
+    SimulationSoftwareSuite as _SimulationSoftwareSuite,
+    SourceConfig as _SourceConfig,
+    Tags as _Tags,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class Fleet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.Fleet
-
-
-@attr.s
-class Robot(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Architecture = attr.ib() # type: str
-    GreengrassGroupId = attr.ib() # type: str
-    Fleet = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.Robot
+class Fleet(troposphere.robomaker.Fleet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(Fleet, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class RobotSoftwareSuite(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Version = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.RobotSoftwareSuite
-
-
-@attr.s
-class SourceConfig(AWSObject):
-    
-    Architecture = attr.ib() # type: str
-    S3Bucket = attr.ib() # type: str
-    S3Key = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.SourceConfig
-
-
-@attr.s
-class RobotApplication(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RobotSoftwareSuite = attr.ib() # type: RobotSoftwareSuite
-    Sources = attr.ib() # type: list
-    CurrentRevisionId = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.RobotApplication
+class Robot(troposphere.robomaker.Robot, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Architecture=REQUIRED, # type: Union[str, AWSHelperFn]
+                 GreengrassGroupId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Fleet=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Architecture=Architecture,
+            GreengrassGroupId=GreengrassGroupId,
+            Fleet=Fleet,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(Robot, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class RobotApplicationVersion(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Application = attr.ib() # type: str
-    CurrentRevisionId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.RobotApplicationVersion
-
-
-@attr.s
-class RenderingEngine(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Version = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.RenderingEngine
+class RobotSoftwareSuite(troposphere.robomaker.RobotSoftwareSuite, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Version=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Version=Version,
+        )
+        super(RobotSoftwareSuite, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class SimulationSoftwareSuite(AWSObject):
-    
-    Name = attr.ib() # type: str
-    Version = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.SimulationSoftwareSuite
-
-
-@attr.s
-class SimulationApplication(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RenderingEngine = attr.ib() # type: RenderingEngine
-    RobotSoftwareSuite = attr.ib() # type: RobotSoftwareSuite
-    SimulationSoftwareSuite = attr.ib() # type: SimulationSoftwareSuite
-    Sources = attr.ib() # type: list
-    CurrentRevisionId = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.robomaker.SimulationApplication
+class SourceConfig(troposphere.robomaker.SourceConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 Architecture=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Architecture=Architecture,
+            S3Bucket=S3Bucket,
+            S3Key=S3Key,
+        )
+        super(SourceConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class SimulationApplicationVersion(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Application = attr.ib() # type: str
-    CurrentRevisionId = attr.ib(default=NOTHING) # type: str
+class RobotApplication(troposphere.robomaker.RobotApplication, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RobotSoftwareSuite=REQUIRED, # type: _RobotSoftwareSuite
+                 Sources=REQUIRED, # type: List[_SourceConfig]
+                 CurrentRevisionId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RobotSoftwareSuite=RobotSoftwareSuite,
+            Sources=Sources,
+            CurrentRevisionId=CurrentRevisionId,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(RobotApplication, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.robomaker.SimulationApplicationVersion
+class RobotApplicationVersion(troposphere.robomaker.RobotApplicationVersion, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Application=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CurrentRevisionId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Application=Application,
+            CurrentRevisionId=CurrentRevisionId,
+        )
+        super(RobotApplicationVersion, self).__init__(**processed_kwargs)
+
+
+class RenderingEngine(troposphere.robomaker.RenderingEngine, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Version=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Version=Version,
+        )
+        super(RenderingEngine, self).__init__(**processed_kwargs)
+
+
+class SimulationSoftwareSuite(troposphere.robomaker.SimulationSoftwareSuite, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Version=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Version=Version,
+        )
+        super(SimulationSoftwareSuite, self).__init__(**processed_kwargs)
+
+
+class SimulationApplication(troposphere.robomaker.SimulationApplication, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RenderingEngine=REQUIRED, # type: _RenderingEngine
+                 RobotSoftwareSuite=REQUIRED, # type: _RobotSoftwareSuite
+                 SimulationSoftwareSuite=REQUIRED, # type: _SimulationSoftwareSuite
+                 Sources=REQUIRED, # type: List[_SourceConfig]
+                 CurrentRevisionId=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RenderingEngine=RenderingEngine,
+            RobotSoftwareSuite=RobotSoftwareSuite,
+            SimulationSoftwareSuite=SimulationSoftwareSuite,
+            Sources=Sources,
+            CurrentRevisionId=CurrentRevisionId,
+            Name=Name,
+            Tags=Tags,
+        )
+        super(SimulationApplication, self).__init__(**processed_kwargs)
+
+
+class SimulationApplicationVersion(troposphere.robomaker.SimulationApplicationVersion, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Application=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CurrentRevisionId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Application=Application,
+            CurrentRevisionId=CurrentRevisionId,
+        )
+        super(SimulationApplicationVersion, self).__init__(**processed_kwargs)

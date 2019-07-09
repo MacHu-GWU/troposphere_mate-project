@@ -4,287 +4,419 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.servicecatalog
 
-from troposphere.servicecatalog import ProvisioningPreferences
-from troposphere.servicecatalog import Tags
-from troposphere.servicecatalog import boolean
-from troposphere.servicecatalog import integer
-from troposphere.servicecatalog import validate_tag_update
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class AcceptedPortfolioShare(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PortfolioId = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.AcceptedPortfolioShare
-
-
-@attr.s
-class ProvisioningArtifactProperties(AWSObject):
-    
-    Info = attr.ib() # type: dict
-    Description = attr.ib(default=NOTHING) # type: str
-    DisableTemplateValidation = attr.ib(default=NOTHING) # type: boolean
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.ProvisioningArtifactProperties
-
-
-@attr.s
-class CloudFormationProduct(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Name = attr.ib() # type: str
-    Owner = attr.ib() # type: str
-    ProvisioningArtifactParameters = attr.ib() # type: list
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    Distributor = attr.ib(default=NOTHING) # type: str
-    SupportDescription = attr.ib(default=NOTHING) # type: str
-    SupportEmail = attr.ib(default=NOTHING) # type: str
-    SupportUrl = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.CloudFormationProduct
-
-
-@attr.s
-class ProvisioningParameter(AWSObject):
-    
-    Key = attr.ib(default=NOTHING) # type: str
-    Value = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.ProvisioningParameter
-
-
-@attr.s
-class ProvisioningPreferences(AWSObject):
-    
-    StackSetAccounts = attr.ib(default=NOTHING) # type: list
-    StackSetFailureToleranceCount = attr.ib(default=NOTHING) # type: integer
-    StackSetFailureTolerancePercentage = attr.ib(default=NOTHING) # type: integer
-    StackSetMaxConcurrencyCount = attr.ib(default=NOTHING) # type: integer
-    StackSetMaxConcurrencyPercentage = attr.ib(default=NOTHING) # type: integer
-    StackSetOperationType = attr.ib(default=NOTHING) # type: str
-    StackSetRegions = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.ProvisioningPreferences
-
-
-@attr.s
-class CloudFormationProvisionedProduct(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    NotificationArns = attr.ib(default=NOTHING) # type: list
-    PathId = attr.ib(default=NOTHING) # type: str
-    ProductId = attr.ib(default=NOTHING) # type: str
-    ProductName = attr.ib(default=NOTHING) # type: str
-    ProvisionedProductName = attr.ib(default=NOTHING) # type: str
-    ProvisioningArtifactId = attr.ib(default=NOTHING) # type: str
-    ProvisioningArtifactName = attr.ib(default=NOTHING) # type: str
-    ProvisioningParameters = attr.ib(default=NOTHING) # type: list
-    ProvisioningPreferences = attr.ib(default=NOTHING) # type: ProvisioningPreferences
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.CloudFormationProvisionedProduct
-
-
-@attr.s
-class LaunchNotificationConstraint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    NotificationArns = attr.ib() # type: list
-    PortfolioId = attr.ib() # type: str
-    ProductId = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.LaunchNotificationConstraint
-
-
-@attr.s
-class LaunchRoleConstraint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PortfolioId = attr.ib() # type: str
-    ProductId = attr.ib() # type: str
-    RoleArn = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.LaunchRoleConstraint
-
-
-@attr.s
-class LaunchTemplateConstraint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PortfolioId = attr.ib() # type: str
-    ProductId = attr.ib() # type: str
-    Rules = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.LaunchTemplateConstraint
-
-
-@attr.s
-class Portfolio(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DisplayName = attr.ib() # type: str
-    ProviderName = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: Tags
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.Portfolio
-
-
-@attr.s
-class PortfolioPrincipalAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PortfolioId = attr.ib() # type: str
-    PrincipalARN = attr.ib() # type: str
-    PrincipalType = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.PortfolioPrincipalAssociation
-
-
-@attr.s
-class PortfolioProductAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PortfolioId = attr.ib() # type: str
-    ProductId = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    SourcePortfolioId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.PortfolioProductAssociation
-
-
-@attr.s
-class PortfolioShare(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AccountId = attr.ib() # type: str
-    PortfolioId = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.PortfolioShare
-
-
-@attr.s
-class ResourceUpdateConstraint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PortfolioId = attr.ib() # type: str
-    ProductId = attr.ib() # type: str
-    TagUpdateOnProvisionedProduct = attr.ib() # type: validate_tag_update
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.ResourceUpdateConstraint
-
-
-@attr.s
-class StackSetConstraint(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AccountList = attr.ib() # type: list
-    AdminRole = attr.ib() # type: str
-    Description = attr.ib() # type: str
-    ExecutionRole = attr.ib() # type: str
-    PortfolioId = attr.ib() # type: str
-    ProductId = attr.ib() # type: str
-    RegionList = attr.ib() # type: list
-    StackInstanceControl = attr.ib() # type: str
-    AcceptLanguage = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.StackSetConstraint
-
-
-@attr.s
-class TagOption(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Key = attr.ib() # type: str
-    Value = attr.ib() # type: str
-    Active = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.TagOption
-
-
-@attr.s
-class TagOptionAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ResourceId = attr.ib() # type: str
-    TagOptionId = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.servicecatalog.TagOptionAssociation
+from troposphere.servicecatalog import (
+    ProvisioningArtifactProperties as _ProvisioningArtifactProperties,
+    ProvisioningParameter as _ProvisioningParameter,
+    ProvisioningPreferences as _ProvisioningPreferences,
+    Tags as _Tags,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class AcceptedPortfolioShare(troposphere.servicecatalog.AcceptedPortfolioShare, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PortfolioId=PortfolioId,
+            AcceptLanguage=AcceptLanguage,
+        )
+        super(AcceptedPortfolioShare, self).__init__(**processed_kwargs)
+
+
+class ProvisioningArtifactProperties(troposphere.servicecatalog.ProvisioningArtifactProperties, Mixin):
+    def __init__(self,
+                 title=None,
+                 Info=REQUIRED, # type: dict
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DisableTemplateValidation=NOTHING, # type: bool
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Info=Info,
+            Description=Description,
+            DisableTemplateValidation=DisableTemplateValidation,
+            Name=Name,
+        )
+        super(ProvisioningArtifactProperties, self).__init__(**processed_kwargs)
+
+
+class CloudFormationProduct(troposphere.servicecatalog.CloudFormationProduct, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Owner=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProvisioningArtifactParameters=REQUIRED, # type: List[_ProvisioningArtifactProperties]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Distributor=NOTHING, # type: Union[str, AWSHelperFn]
+                 SupportDescription=NOTHING, # type: Union[str, AWSHelperFn]
+                 SupportEmail=NOTHING, # type: Union[str, AWSHelperFn]
+                 SupportUrl=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Name=Name,
+            Owner=Owner,
+            ProvisioningArtifactParameters=ProvisioningArtifactParameters,
+            AcceptLanguage=AcceptLanguage,
+            Description=Description,
+            Distributor=Distributor,
+            SupportDescription=SupportDescription,
+            SupportEmail=SupportEmail,
+            SupportUrl=SupportUrl,
+            Tags=Tags,
+        )
+        super(CloudFormationProduct, self).__init__(**processed_kwargs)
+
+
+class ProvisioningParameter(troposphere.servicecatalog.ProvisioningParameter, Mixin):
+    def __init__(self,
+                 title=None,
+                 Key=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Key=Key,
+            Value=Value,
+        )
+        super(ProvisioningParameter, self).__init__(**processed_kwargs)
+
+
+class ProvisioningPreferences(troposphere.servicecatalog.ProvisioningPreferences, Mixin):
+    def __init__(self,
+                 title=None,
+                 StackSetAccounts=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 StackSetFailureToleranceCount=NOTHING, # type: int
+                 StackSetFailureTolerancePercentage=NOTHING, # type: int
+                 StackSetMaxConcurrencyCount=NOTHING, # type: int
+                 StackSetMaxConcurrencyPercentage=NOTHING, # type: int
+                 StackSetOperationType=NOTHING, # type: Union[str, AWSHelperFn]
+                 StackSetRegions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            StackSetAccounts=StackSetAccounts,
+            StackSetFailureToleranceCount=StackSetFailureToleranceCount,
+            StackSetFailureTolerancePercentage=StackSetFailureTolerancePercentage,
+            StackSetMaxConcurrencyCount=StackSetMaxConcurrencyCount,
+            StackSetMaxConcurrencyPercentage=StackSetMaxConcurrencyPercentage,
+            StackSetOperationType=StackSetOperationType,
+            StackSetRegions=StackSetRegions,
+        )
+        super(ProvisioningPreferences, self).__init__(**processed_kwargs)
+
+
+class CloudFormationProvisionedProduct(troposphere.servicecatalog.CloudFormationProvisionedProduct, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 NotificationArns=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 PathId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProductId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProductName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProvisionedProductName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProvisioningArtifactId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProvisioningArtifactName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProvisioningParameters=NOTHING, # type: List[_ProvisioningParameter]
+                 ProvisioningPreferences=NOTHING, # type: _ProvisioningPreferences
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AcceptLanguage=AcceptLanguage,
+            NotificationArns=NotificationArns,
+            PathId=PathId,
+            ProductId=ProductId,
+            ProductName=ProductName,
+            ProvisionedProductName=ProvisionedProductName,
+            ProvisioningArtifactId=ProvisioningArtifactId,
+            ProvisioningArtifactName=ProvisioningArtifactName,
+            ProvisioningParameters=ProvisioningParameters,
+            ProvisioningPreferences=ProvisioningPreferences,
+            Tags=Tags,
+        )
+        super(CloudFormationProvisionedProduct, self).__init__(**processed_kwargs)
+
+
+class LaunchNotificationConstraint(troposphere.servicecatalog.LaunchNotificationConstraint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 NotificationArns=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProductId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            NotificationArns=NotificationArns,
+            PortfolioId=PortfolioId,
+            ProductId=ProductId,
+            AcceptLanguage=AcceptLanguage,
+            Description=Description,
+        )
+        super(LaunchNotificationConstraint, self).__init__(**processed_kwargs)
+
+
+class LaunchRoleConstraint(troposphere.servicecatalog.LaunchRoleConstraint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProductId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PortfolioId=PortfolioId,
+            ProductId=ProductId,
+            RoleArn=RoleArn,
+            AcceptLanguage=AcceptLanguage,
+            Description=Description,
+        )
+        super(LaunchRoleConstraint, self).__init__(**processed_kwargs)
+
+
+class LaunchTemplateConstraint(troposphere.servicecatalog.LaunchTemplateConstraint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProductId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Rules=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PortfolioId=PortfolioId,
+            ProductId=ProductId,
+            Rules=Rules,
+            AcceptLanguage=AcceptLanguage,
+            Description=Description,
+        )
+        super(LaunchTemplateConstraint, self).__init__(**processed_kwargs)
+
+
+class Portfolio(troposphere.servicecatalog.Portfolio, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DisplayName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProviderName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DisplayName=DisplayName,
+            ProviderName=ProviderName,
+            AcceptLanguage=AcceptLanguage,
+            Description=Description,
+            Tags=Tags,
+        )
+        super(Portfolio, self).__init__(**processed_kwargs)
+
+
+class PortfolioPrincipalAssociation(troposphere.servicecatalog.PortfolioPrincipalAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PrincipalARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PrincipalType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PortfolioId=PortfolioId,
+            PrincipalARN=PrincipalARN,
+            PrincipalType=PrincipalType,
+            AcceptLanguage=AcceptLanguage,
+        )
+        super(PortfolioPrincipalAssociation, self).__init__(**processed_kwargs)
+
+
+class PortfolioProductAssociation(troposphere.servicecatalog.PortfolioProductAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProductId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourcePortfolioId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PortfolioId=PortfolioId,
+            ProductId=ProductId,
+            AcceptLanguage=AcceptLanguage,
+            SourcePortfolioId=SourcePortfolioId,
+        )
+        super(PortfolioProductAssociation, self).__init__(**processed_kwargs)
+
+
+class PortfolioShare(troposphere.servicecatalog.PortfolioShare, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AccountId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AccountId=AccountId,
+            PortfolioId=PortfolioId,
+            AcceptLanguage=AcceptLanguage,
+        )
+        super(PortfolioShare, self).__init__(**processed_kwargs)
+
+
+class ResourceUpdateConstraint(troposphere.servicecatalog.ResourceUpdateConstraint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProductId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TagUpdateOnProvisionedProduct=REQUIRED, # type: Any
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PortfolioId=PortfolioId,
+            ProductId=ProductId,
+            TagUpdateOnProvisionedProduct=TagUpdateOnProvisionedProduct,
+            AcceptLanguage=AcceptLanguage,
+            Description=Description,
+        )
+        super(ResourceUpdateConstraint, self).__init__(**processed_kwargs)
+
+
+class StackSetConstraint(troposphere.servicecatalog.StackSetConstraint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AccountList=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 AdminRole=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ExecutionRole=REQUIRED, # type: Union[str, AWSHelperFn]
+                 PortfolioId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ProductId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RegionList=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 StackInstanceControl=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AcceptLanguage=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AccountList=AccountList,
+            AdminRole=AdminRole,
+            Description=Description,
+            ExecutionRole=ExecutionRole,
+            PortfolioId=PortfolioId,
+            ProductId=ProductId,
+            RegionList=RegionList,
+            StackInstanceControl=StackInstanceControl,
+            AcceptLanguage=AcceptLanguage,
+        )
+        super(StackSetConstraint, self).__init__(**processed_kwargs)
+
+
+class TagOption(troposphere.servicecatalog.TagOption, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Active=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Key=Key,
+            Value=Value,
+            Active=Active,
+        )
+        super(TagOption, self).__init__(**processed_kwargs)
+
+
+class TagOptionAssociation(troposphere.servicecatalog.TagOptionAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ResourceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TagOptionId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ResourceId=ResourceId,
+            TagOptionId=TagOptionId,
+        )
+        super(TagOptionAssociation, self).__init__(**processed_kwargs)

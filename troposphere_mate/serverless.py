@@ -4,443 +4,603 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.serverless
 
-from troposphere.serverless import AccessLogSetting
-from troposphere.serverless import Auth
-from troposphere.serverless import Authorizers
-from troposphere.serverless import CanarySetting
-from troposphere.serverless import CognitoAuth
-from troposphere.serverless import CognitoAuthIdentity
-from troposphere.serverless import DeadLetterQueue
-from troposphere.serverless import DeploymentPreference
-from troposphere.serverless import Environment
-from troposphere.serverless import Filter
-from troposphere.serverless import Hooks
-from troposphere.serverless import LambdaRequestAuth
-from troposphere.serverless import LambdaRequestAuthIdentity
-from troposphere.serverless import LambdaTokenAuth
-from troposphere.serverless import LambdaTokenAuthIdentity
-from troposphere.serverless import PrimaryKey
-from troposphere.serverless import ProvisionedThroughput
-from troposphere.serverless import SSESpecification
-from troposphere.serverless import VPCConfig
-from troposphere.serverless import positive_integer
-from troposphere.serverless import primary_key_type_validator
-from troposphere.serverless import starting_position_validator
-from troposphere.serverless import validate_memory_size
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class DeadLetterQueue(AWSObject):
-    
-    Type = attr.ib(default=NOTHING) # type: str
-    TargetArn = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.DeadLetterQueue
-
-
-@attr.s
-class S3Location(AWSObject):
-    
-    Bucket = attr.ib() # type: str
-    Key = attr.ib() # type: str
-    Version = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.S3Location
-
-
-@attr.s
-class Hooks(AWSObject):
-    
-    PreTraffic = attr.ib(default=NOTHING) # type: str
-    PostTraffic = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.Hooks
-
-
-@attr.s
-class DeploymentPreference(AWSObject):
-    
-    Type = attr.ib() # type: str
-    Alarms = attr.ib(default=NOTHING) # type: list
-    Hooks = attr.ib(default=NOTHING) # type: Hooks
-    Enabled = attr.ib(default=NOTHING) # type: bool
-    Role = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.DeploymentPreference
-
-
-@attr.s
-class Function(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Handler = attr.ib() # type: str
-    Runtime = attr.ib() # type: str
-    CodeUri = attr.ib(default=NOTHING) # type: tuple
-    InlineCode = attr.ib(default=NOTHING) # type: str
-    FunctionName = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    MemorySize = attr.ib(default=NOTHING) # type: validate_memory_size
-    Timeout = attr.ib(default=NOTHING) # type: positive_integer
-    Role = attr.ib(default=NOTHING) # type: str
-    Policies = attr.ib(default=NOTHING) # type: tuple
-    Environment = attr.ib(default=NOTHING) # type: Environment
-    VpcConfig = attr.ib(default=NOTHING) # type: VPCConfig
-    Events = attr.ib(default=NOTHING) # type: dict
-    Tags = attr.ib(default=NOTHING) # type: dict
-    Tracing = attr.ib(default=NOTHING) # type: str
-    KmsKeyArn = attr.ib(default=NOTHING) # type: str
-    DeadLetterQueue = attr.ib(default=NOTHING) # type: DeadLetterQueue
-    DeploymentPreference = attr.ib(default=NOTHING) # type: DeploymentPreference
-    Layers = attr.ib(default=NOTHING) # type: list
-    AutoPublishAlias = attr.ib(default=NOTHING) # type: str
-    ReservedConcurrentExecutions = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.Function
-
-
-@attr.s
-class CognitoAuthIdentity(AWSObject):
-    
-    Header = attr.ib(default=NOTHING) # type: str
-    ValidationExpression = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.CognitoAuthIdentity
-
-
-@attr.s
-class LambdaTokenAuthIdentity(AWSObject):
-    
-    Header = attr.ib(default=NOTHING) # type: str
-    ValidationExpression = attr.ib(default=NOTHING) # type: str
-    ReauthorizeEvery = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.LambdaTokenAuthIdentity
-
-
-@attr.s
-class LambdaRequestAuthIdentity(AWSObject):
-    
-    Headers = attr.ib(default=NOTHING) # type: list
-    QueryStrings = attr.ib(default=NOTHING) # type: list
-    StageVariables = attr.ib(default=NOTHING) # type: list
-    Context = attr.ib(default=NOTHING) # type: list
-    ReauthorizeEvery = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.LambdaRequestAuthIdentity
-
-
-@attr.s
-class CognitoAuth(AWSObject):
-    
-    UserPoolArn = attr.ib(default=NOTHING) # type: str
-    Identity = attr.ib(default=NOTHING) # type: CognitoAuthIdentity
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.CognitoAuth
-
-
-@attr.s
-class LambdaTokenAuth(AWSObject):
-    
-    FunctionPayloadType = attr.ib(default=NOTHING) # type: str
-    FunctionArn = attr.ib(default=NOTHING) # type: str
-    FunctionInvokeRole = attr.ib(default=NOTHING) # type: str
-    Identity = attr.ib(default=NOTHING) # type: LambdaTokenAuthIdentity
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.LambdaTokenAuth
-
-
-@attr.s
-class LambdaRequestAuth(AWSObject):
-    
-    FunctionPayloadType = attr.ib(default=NOTHING) # type: str
-    FunctionArn = attr.ib(default=NOTHING) # type: str
-    FunctionInvokeRole = attr.ib(default=NOTHING) # type: str
-    Identity = attr.ib(default=NOTHING) # type: LambdaRequestAuthIdentity
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.LambdaRequestAuth
-
-
-@attr.s
-class Authorizers(AWSObject):
-    
-    DefaultAuthorizer = attr.ib(default=NOTHING) # type: str
-    CognitoAuth = attr.ib(default=NOTHING) # type: CognitoAuth
-    LambdaTokenAuth = attr.ib(default=NOTHING) # type: LambdaTokenAuth
-    LambdaRequestAuth = attr.ib(default=NOTHING) # type: LambdaRequestAuth
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.Authorizers
-
-
-@attr.s
-class Auth(AWSObject):
-    
-    DefaultAuthorizer = attr.ib(default=NOTHING) # type: str
-    Authorizers = attr.ib(default=NOTHING) # type: Authorizers
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.Auth
-
-
-@attr.s
-class Cors(AWSObject):
-    
-    AllowOrigin = attr.ib() # type: str
-    AllowCredentials = attr.ib(default=NOTHING) # type: str
-    AllowHeaders = attr.ib(default=NOTHING) # type: str
-    AllowMethods = attr.ib(default=NOTHING) # type: str
-    MaxAge = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.Cors
-
-
-@attr.s
-class Api(AWSObject):
-    title = attr.ib()   # type: str
-    
-    StageName = attr.ib() # type: str
-    AccessLogSetting = attr.ib(default=NOTHING) # type: AccessLogSetting
-    Auth = attr.ib(default=NOTHING) # type: Auth
-    BinaryMediaTypes = attr.ib(default=NOTHING) # type: list
-    CacheClusterEnabled = attr.ib(default=NOTHING) # type: bool
-    CacheClusterSize = attr.ib(default=NOTHING) # type: str
-    CanarySetting = attr.ib(default=NOTHING) # type: CanarySetting
-    Cors = attr.ib(default=NOTHING) # type: tuple
-    DefinitionBody = attr.ib(default=NOTHING) # type: dict
-    DefinitionUri = attr.ib(default=NOTHING) # type: str
-    EndpointConfiguration = attr.ib(default=NOTHING) # type: str
-    MethodSettings = attr.ib(default=NOTHING) # type: list
-    Name = attr.ib(default=NOTHING) # type: str
-    TracingEnabled = attr.ib(default=NOTHING) # type: bool
-    Variables = attr.ib(default=NOTHING) # type: dict
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.Api
-
-
-@attr.s
-class PrimaryKey(AWSObject):
-    
-    Name = attr.ib(default=NOTHING) # type: str
-    Type = attr.ib(default=NOTHING) # type: primary_key_type_validator
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.PrimaryKey
-
-
-@attr.s
-class SimpleTable(AWSObject):
-    title = attr.ib()   # type: str
-    
-    PrimaryKey = attr.ib(default=NOTHING) # type: PrimaryKey
-    ProvisionedThroughput = attr.ib(default=NOTHING) # type: ProvisionedThroughput
-    SSESpecification = attr.ib(default=NOTHING) # type: SSESpecification
-    Tags = attr.ib(default=NOTHING) # type: dict
-    TableName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.SimpleTable
-
-
-@attr.s
-class LayerVersion(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ContentUri = attr.ib() # type: tuple
-    CompatibleRuntimes = attr.ib(default=NOTHING) # type: list
-    Description = attr.ib(default=NOTHING) # type: str
-    LayerName = attr.ib(default=NOTHING) # type: str
-    LicenseInfo = attr.ib(default=NOTHING) # type: str
-    RetentionPolicy = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.LayerVersion
-
-
-@attr.s
-class S3Event(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Bucket = attr.ib() # type: str
-    Events = attr.ib() # type: list
-    Filter = attr.ib(default=NOTHING) # type: Filter
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.S3Event
-
-
-@attr.s
-class SNSEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Topic = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.SNSEvent
-
-
-@attr.s
-class KinesisEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Stream = attr.ib() # type: str
-    StartingPosition = attr.ib() # type: starting_position_validator
-    BatchSize = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.KinesisEvent
-
-
-@attr.s
-class DynamoDBEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Stream = attr.ib() # type: str
-    StartingPosition = attr.ib() # type: starting_position_validator
-    BatchSize = attr.ib(default=NOTHING) # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.DynamoDBEvent
-
-
-@attr.s
-class ApiEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Path = attr.ib() # type: str
-    Method = attr.ib() # type: str
-    RestApiId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.ApiEvent
-
-
-@attr.s
-class ScheduleEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Schedule = attr.ib() # type: str
-    Input = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.ScheduleEvent
-
-
-@attr.s
-class CloudWatchEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Pattern = attr.ib() # type: dict
-    Input = attr.ib(default=NOTHING) # type: str
-    InputPath = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.CloudWatchEvent
-
-
-@attr.s
-class IoTRuleEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Sql = attr.ib() # type: str
-    AwsIotSqlVersion = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.IoTRuleEvent
-
-
-@attr.s
-class AlexaSkillEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.AlexaSkillEvent
-
-
-@attr.s
-class SQSEvent(AWSObject):
-    title = attr.ib()   # type: str
-    
-    Queue = attr.ib() # type: str
-    BatchSize = attr.ib() # type: positive_integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.serverless.SQSEvent
+from troposphere.serverless import (
+    AccessLogSetting as _AccessLogSetting,
+    Auth as _Auth,
+    Authorizers as _Authorizers,
+    CanarySetting as _CanarySetting,
+    CognitoAuth as _CognitoAuth,
+    CognitoAuthIdentity as _CognitoAuthIdentity,
+    Cors as _Cors,
+    DeadLetterQueue as _DeadLetterQueue,
+    DeploymentPreference as _DeploymentPreference,
+    Environment as _Environment,
+    Filter as _Filter,
+    Hooks as _Hooks,
+    LambdaRequestAuth as _LambdaRequestAuth,
+    LambdaRequestAuthIdentity as _LambdaRequestAuthIdentity,
+    LambdaTokenAuth as _LambdaTokenAuth,
+    LambdaTokenAuthIdentity as _LambdaTokenAuthIdentity,
+    MethodSetting as _MethodSetting,
+    PrimaryKey as _PrimaryKey,
+    ProvisionedThroughput as _ProvisionedThroughput,
+    S3Location as _S3Location,
+    SSESpecification as _SSESpecification,
+    VPCConfig as _VPCConfig,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class DeadLetterQueue(troposphere.serverless.DeadLetterQueue, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 TargetArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            TargetArn=TargetArn,
+        )
+        super(DeadLetterQueue, self).__init__(**processed_kwargs)
+
+
+class S3Location(troposphere.serverless.S3Location, Mixin):
+    def __init__(self,
+                 title=None,
+                 Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Version=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Bucket=Bucket,
+            Key=Key,
+            Version=Version,
+        )
+        super(S3Location, self).__init__(**processed_kwargs)
+
+
+class Hooks(troposphere.serverless.Hooks, Mixin):
+    def __init__(self,
+                 title=None,
+                 PreTraffic=NOTHING, # type: Union[str, AWSHelperFn]
+                 PostTraffic=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PreTraffic=PreTraffic,
+            PostTraffic=PostTraffic,
+        )
+        super(Hooks, self).__init__(**processed_kwargs)
+
+
+class DeploymentPreference(troposphere.serverless.DeploymentPreference, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Alarms=NOTHING, # type: list
+                 Hooks=NOTHING, # type: _Hooks
+                 Enabled=NOTHING, # type: bool
+                 Role=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Alarms=Alarms,
+            Hooks=Hooks,
+            Enabled=Enabled,
+            Role=Role,
+        )
+        super(DeploymentPreference, self).__init__(**processed_kwargs)
+
+
+class Function(troposphere.serverless.Function, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Handler=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Runtime=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CodeUri=NOTHING, # type: Union[_S3Location, Union[str, AWSHelperFn]]
+                 InlineCode=NOTHING, # type: Union[str, AWSHelperFn]
+                 FunctionName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 MemorySize=NOTHING, # type: Any
+                 Timeout=NOTHING, # type: int
+                 Role=NOTHING, # type: Union[str, AWSHelperFn]
+                 Policies=NOTHING, # type: Union[dict, list, Union[str, AWSHelperFn]]
+                 Environment=NOTHING, # type: _Environment
+                 VpcConfig=NOTHING, # type: _VPCConfig
+                 Events=NOTHING, # type: dict
+                 Tags=NOTHING, # type: dict
+                 Tracing=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeadLetterQueue=NOTHING, # type: _DeadLetterQueue
+                 DeploymentPreference=NOTHING, # type: _DeploymentPreference
+                 Layers=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 AutoPublishAlias=NOTHING, # type: Union[str, AWSHelperFn]
+                 ReservedConcurrentExecutions=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Handler=Handler,
+            Runtime=Runtime,
+            CodeUri=CodeUri,
+            InlineCode=InlineCode,
+            FunctionName=FunctionName,
+            Description=Description,
+            MemorySize=MemorySize,
+            Timeout=Timeout,
+            Role=Role,
+            Policies=Policies,
+            Environment=Environment,
+            VpcConfig=VpcConfig,
+            Events=Events,
+            Tags=Tags,
+            Tracing=Tracing,
+            KmsKeyArn=KmsKeyArn,
+            DeadLetterQueue=DeadLetterQueue,
+            DeploymentPreference=DeploymentPreference,
+            Layers=Layers,
+            AutoPublishAlias=AutoPublishAlias,
+            ReservedConcurrentExecutions=ReservedConcurrentExecutions,
+        )
+        super(Function, self).__init__(**processed_kwargs)
+
+
+class CognitoAuthIdentity(troposphere.serverless.CognitoAuthIdentity, Mixin):
+    def __init__(self,
+                 title=None,
+                 Header=NOTHING, # type: Union[str, AWSHelperFn]
+                 ValidationExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Header=Header,
+            ValidationExpression=ValidationExpression,
+        )
+        super(CognitoAuthIdentity, self).__init__(**processed_kwargs)
+
+
+class LambdaTokenAuthIdentity(troposphere.serverless.LambdaTokenAuthIdentity, Mixin):
+    def __init__(self,
+                 title=None,
+                 Header=NOTHING, # type: Union[str, AWSHelperFn]
+                 ValidationExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 ReauthorizeEvery=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Header=Header,
+            ValidationExpression=ValidationExpression,
+            ReauthorizeEvery=ReauthorizeEvery,
+        )
+        super(LambdaTokenAuthIdentity, self).__init__(**processed_kwargs)
+
+
+class LambdaRequestAuthIdentity(troposphere.serverless.LambdaRequestAuthIdentity, Mixin):
+    def __init__(self,
+                 title=None,
+                 Headers=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 QueryStrings=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 StageVariables=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Context=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ReauthorizeEvery=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Headers=Headers,
+            QueryStrings=QueryStrings,
+            StageVariables=StageVariables,
+            Context=Context,
+            ReauthorizeEvery=ReauthorizeEvery,
+        )
+        super(LambdaRequestAuthIdentity, self).__init__(**processed_kwargs)
+
+
+class CognitoAuth(troposphere.serverless.CognitoAuth, Mixin):
+    def __init__(self,
+                 title=None,
+                 UserPoolArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 Identity=NOTHING, # type: _CognitoAuthIdentity
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            UserPoolArn=UserPoolArn,
+            Identity=Identity,
+        )
+        super(CognitoAuth, self).__init__(**processed_kwargs)
+
+
+class LambdaTokenAuth(troposphere.serverless.LambdaTokenAuth, Mixin):
+    def __init__(self,
+                 title=None,
+                 FunctionPayloadType=NOTHING, # type: Union[str, AWSHelperFn]
+                 FunctionArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 FunctionInvokeRole=NOTHING, # type: Union[str, AWSHelperFn]
+                 Identity=NOTHING, # type: _LambdaTokenAuthIdentity
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FunctionPayloadType=FunctionPayloadType,
+            FunctionArn=FunctionArn,
+            FunctionInvokeRole=FunctionInvokeRole,
+            Identity=Identity,
+        )
+        super(LambdaTokenAuth, self).__init__(**processed_kwargs)
+
+
+class LambdaRequestAuth(troposphere.serverless.LambdaRequestAuth, Mixin):
+    def __init__(self,
+                 title=None,
+                 FunctionPayloadType=NOTHING, # type: Union[str, AWSHelperFn]
+                 FunctionArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 FunctionInvokeRole=NOTHING, # type: Union[str, AWSHelperFn]
+                 Identity=NOTHING, # type: _LambdaRequestAuthIdentity
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FunctionPayloadType=FunctionPayloadType,
+            FunctionArn=FunctionArn,
+            FunctionInvokeRole=FunctionInvokeRole,
+            Identity=Identity,
+        )
+        super(LambdaRequestAuth, self).__init__(**processed_kwargs)
+
+
+class Authorizers(troposphere.serverless.Authorizers, Mixin):
+    def __init__(self,
+                 title=None,
+                 DefaultAuthorizer=NOTHING, # type: Union[str, AWSHelperFn]
+                 CognitoAuth=NOTHING, # type: _CognitoAuth
+                 LambdaTokenAuth=NOTHING, # type: _LambdaTokenAuth
+                 LambdaRequestAuth=NOTHING, # type: _LambdaRequestAuth
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DefaultAuthorizer=DefaultAuthorizer,
+            CognitoAuth=CognitoAuth,
+            LambdaTokenAuth=LambdaTokenAuth,
+            LambdaRequestAuth=LambdaRequestAuth,
+        )
+        super(Authorizers, self).__init__(**processed_kwargs)
+
+
+class Auth(troposphere.serverless.Auth, Mixin):
+    def __init__(self,
+                 title=None,
+                 DefaultAuthorizer=NOTHING, # type: Union[str, AWSHelperFn]
+                 Authorizers=NOTHING, # type: _Authorizers
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DefaultAuthorizer=DefaultAuthorizer,
+            Authorizers=Authorizers,
+        )
+        super(Auth, self).__init__(**processed_kwargs)
+
+
+class Cors(troposphere.serverless.Cors, Mixin):
+    def __init__(self,
+                 title=None,
+                 AllowOrigin=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AllowCredentials=NOTHING, # type: Union[str, AWSHelperFn]
+                 AllowHeaders=NOTHING, # type: Union[str, AWSHelperFn]
+                 AllowMethods=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaxAge=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AllowOrigin=AllowOrigin,
+            AllowCredentials=AllowCredentials,
+            AllowHeaders=AllowHeaders,
+            AllowMethods=AllowMethods,
+            MaxAge=MaxAge,
+        )
+        super(Cors, self).__init__(**processed_kwargs)
+
+
+class Api(troposphere.serverless.Api, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 StageName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccessLogSetting=NOTHING, # type: _AccessLogSetting
+                 Auth=NOTHING, # type: _Auth
+                 BinaryMediaTypes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 CacheClusterEnabled=NOTHING, # type: bool
+                 CacheClusterSize=NOTHING, # type: Union[str, AWSHelperFn]
+                 CanarySetting=NOTHING, # type: _CanarySetting
+                 Cors=NOTHING, # type: Union[Union[str, AWSHelperFn], _Cors]
+                 DefinitionBody=NOTHING, # type: dict
+                 DefinitionUri=NOTHING, # type: Union[str, AWSHelperFn]
+                 EndpointConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
+                 MethodSettings=NOTHING, # type: List[_MethodSetting]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 TracingEnabled=NOTHING, # type: bool
+                 Variables=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            StageName=StageName,
+            AccessLogSetting=AccessLogSetting,
+            Auth=Auth,
+            BinaryMediaTypes=BinaryMediaTypes,
+            CacheClusterEnabled=CacheClusterEnabled,
+            CacheClusterSize=CacheClusterSize,
+            CanarySetting=CanarySetting,
+            Cors=Cors,
+            DefinitionBody=DefinitionBody,
+            DefinitionUri=DefinitionUri,
+            EndpointConfiguration=EndpointConfiguration,
+            MethodSettings=MethodSettings,
+            Name=Name,
+            TracingEnabled=TracingEnabled,
+            Variables=Variables,
+        )
+        super(Api, self).__init__(**processed_kwargs)
+
+
+class PrimaryKey(troposphere.serverless.PrimaryKey, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Type=NOTHING, # type: Any
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Type=Type,
+        )
+        super(PrimaryKey, self).__init__(**processed_kwargs)
+
+
+class SimpleTable(troposphere.serverless.SimpleTable, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 PrimaryKey=NOTHING, # type: _PrimaryKey
+                 ProvisionedThroughput=NOTHING, # type: _ProvisionedThroughput
+                 SSESpecification=NOTHING, # type: _SSESpecification
+                 Tags=NOTHING, # type: dict
+                 TableName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            PrimaryKey=PrimaryKey,
+            ProvisionedThroughput=ProvisionedThroughput,
+            SSESpecification=SSESpecification,
+            Tags=Tags,
+            TableName=TableName,
+        )
+        super(SimpleTable, self).__init__(**processed_kwargs)
+
+
+class LayerVersion(troposphere.serverless.LayerVersion, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ContentUri=REQUIRED, # type: Union[_S3Location, Union[str, AWSHelperFn]]
+                 CompatibleRuntimes=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 LayerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 LicenseInfo=NOTHING, # type: Union[str, AWSHelperFn]
+                 RetentionPolicy=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ContentUri=ContentUri,
+            CompatibleRuntimes=CompatibleRuntimes,
+            Description=Description,
+            LayerName=LayerName,
+            LicenseInfo=LicenseInfo,
+            RetentionPolicy=RetentionPolicy,
+        )
+        super(LayerVersion, self).__init__(**processed_kwargs)
+
+
+class S3Event(troposphere.serverless.S3Event, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Events=REQUIRED, # type: list
+                 Filter=NOTHING, # type: _Filter
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Bucket=Bucket,
+            Events=Events,
+            Filter=Filter,
+        )
+        super(S3Event, self).__init__(**processed_kwargs)
+
+
+class SNSEvent(troposphere.serverless.SNSEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Topic=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Topic=Topic,
+        )
+        super(SNSEvent, self).__init__(**processed_kwargs)
+
+
+class KinesisEvent(troposphere.serverless.KinesisEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Stream=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StartingPosition=REQUIRED, # type: Any
+                 BatchSize=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Stream=Stream,
+            StartingPosition=StartingPosition,
+            BatchSize=BatchSize,
+        )
+        super(KinesisEvent, self).__init__(**processed_kwargs)
+
+
+class DynamoDBEvent(troposphere.serverless.DynamoDBEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Stream=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StartingPosition=REQUIRED, # type: Any
+                 BatchSize=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Stream=Stream,
+            StartingPosition=StartingPosition,
+            BatchSize=BatchSize,
+        )
+        super(DynamoDBEvent, self).__init__(**processed_kwargs)
+
+
+class ApiEvent(troposphere.serverless.ApiEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Path=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Method=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RestApiId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Path=Path,
+            Method=Method,
+            RestApiId=RestApiId,
+        )
+        super(ApiEvent, self).__init__(**processed_kwargs)
+
+
+class ScheduleEvent(troposphere.serverless.ScheduleEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Schedule=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Input=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Schedule=Schedule,
+            Input=Input,
+        )
+        super(ScheduleEvent, self).__init__(**processed_kwargs)
+
+
+class CloudWatchEvent(troposphere.serverless.CloudWatchEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Pattern=REQUIRED, # type: dict
+                 Input=NOTHING, # type: Union[str, AWSHelperFn]
+                 InputPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Pattern=Pattern,
+            Input=Input,
+            InputPath=InputPath,
+        )
+        super(CloudWatchEvent, self).__init__(**processed_kwargs)
+
+
+class IoTRuleEvent(troposphere.serverless.IoTRuleEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Sql=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AwsIotSqlVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Sql=Sql,
+            AwsIotSqlVersion=AwsIotSqlVersion,
+        )
+        super(IoTRuleEvent, self).__init__(**processed_kwargs)
+
+
+class AlexaSkillEvent(troposphere.serverless.AlexaSkillEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+        )
+        super(AlexaSkillEvent, self).__init__(**processed_kwargs)
+
+
+class SQSEvent(troposphere.serverless.SQSEvent, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Queue=REQUIRED, # type: Union[str, AWSHelperFn]
+                 BatchSize=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Queue=Queue,
+            BatchSize=BatchSize,
+        )
+        super(SQSEvent, self).__init__(**processed_kwargs)

@@ -4,231 +4,323 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.appstream
 
-from troposphere.appstream import ApplicationSettings
-from troposphere.appstream import ComputeCapacity
-from troposphere.appstream import DomainJoinInfo
-from troposphere.appstream import ServiceAccountCredentials
-from troposphere.appstream import VpcConfig
-from troposphere.appstream import boolean
-from troposphere.appstream import integer
+from troposphere.appstream import (
+    ApplicationSettings as _ApplicationSettings,
+    ComputeCapacity as _ComputeCapacity,
+    DomainJoinInfo as _DomainJoinInfo,
+    ServiceAccountCredentials as _ServiceAccountCredentials,
+    StorageConnector as _StorageConnector,
+    Tags as _Tags,
+    UserSetting as _UserSetting,
+    VpcConfig as _VpcConfig,
+)
 
 
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-@attr.s
-class ServiceAccountCredentials(AWSObject):
-    
-    AccountName = attr.ib() # type: str
-    AccountPassword = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.ServiceAccountCredentials
-
-
-@attr.s
-class DirectoryConfig(AWSObject):
-    title = attr.ib()   # type: str
-    
-    DirectoryName = attr.ib() # type: str
-    OrganizationalUnitDistinguishedNames = attr.ib() # type: list
-    ServiceAccountCredentials = attr.ib() # type: ServiceAccountCredentials
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.DirectoryConfig
+class ServiceAccountCredentials(troposphere.appstream.ServiceAccountCredentials, Mixin):
+    def __init__(self,
+                 title=None,
+                 AccountName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccountPassword=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            AccountName=AccountName,
+            AccountPassword=AccountPassword,
+        )
+        super(ServiceAccountCredentials, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ComputeCapacity(AWSObject):
-    
-    DesiredInstances = attr.ib() # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.ComputeCapacity
-
-
-@attr.s
-class VpcConfig(AWSObject):
-    
-    SecurityGroupIds = attr.ib(default=NOTHING) # type: list
-    SubnetIds = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.VpcConfig
+class DirectoryConfig(troposphere.appstream.DirectoryConfig, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DirectoryName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 OrganizationalUnitDistinguishedNames=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 ServiceAccountCredentials=REQUIRED, # type: _ServiceAccountCredentials
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DirectoryName=DirectoryName,
+            OrganizationalUnitDistinguishedNames=OrganizationalUnitDistinguishedNames,
+            ServiceAccountCredentials=ServiceAccountCredentials,
+        )
+        super(DirectoryConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class DomainJoinInfo(AWSObject):
-    
-    DirectoryName = attr.ib(default=NOTHING) # type: str
-    OrganizationalUnitDistinguishedName = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.DomainJoinInfo
-
-
-@attr.s
-class Fleet(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ComputeCapacity = attr.ib() # type: ComputeCapacity
-    InstanceType = attr.ib() # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DisconnectTimeoutInSeconds = attr.ib(default=NOTHING) # type: integer
-    DisplayName = attr.ib(default=NOTHING) # type: str
-    DomainJoinInfo = attr.ib(default=NOTHING) # type: DomainJoinInfo
-    EnableDefaultInternetAccess = attr.ib(default=NOTHING) # type: boolean
-    FleetType = attr.ib(default=NOTHING) # type: str
-    IdleDisconnectTimeoutInSeconds = attr.ib(default=NOTHING) # type: integer
-    ImageArn = attr.ib(default=NOTHING) # type: str
-    ImageName = attr.ib(default=NOTHING) # type: str
-    MaxUserDurationInSeconds = attr.ib(default=NOTHING) # type: integer
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    VpcConfig = attr.ib(default=NOTHING) # type: VpcConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.Fleet
+class ComputeCapacity(troposphere.appstream.ComputeCapacity, Mixin):
+    def __init__(self,
+                 title=None,
+                 DesiredInstances=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DesiredInstances=DesiredInstances,
+        )
+        super(ComputeCapacity, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class ImageBuilder(AWSObject):
-    title = attr.ib()   # type: str
-    
-    InstanceType = attr.ib() # type: str
-    AppstreamAgentVersion = attr.ib(default=NOTHING) # type: str
-    Description = attr.ib(default=NOTHING) # type: str
-    DisplayName = attr.ib(default=NOTHING) # type: str
-    DomainJoinInfo = attr.ib(default=NOTHING) # type: DomainJoinInfo
-    EnableDefaultInternetAccess = attr.ib(default=NOTHING) # type: boolean
-    ImageArn = attr.ib(default=NOTHING) # type: str
-    ImageName = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    VpcConfig = attr.ib(default=NOTHING) # type: VpcConfig
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.ImageBuilder
+class VpcConfig(troposphere.appstream.VpcConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SecurityGroupIds=SecurityGroupIds,
+            SubnetIds=SubnetIds,
+        )
+        super(VpcConfig, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class StackFleetAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    FleetName = attr.ib() # type: str
-    StackName = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.StackFleetAssociation
-
-
-@attr.s
-class StorageConnector(AWSObject):
-    
-    ConnectorType = attr.ib() # type: str
-    Domains = attr.ib(default=NOTHING) # type: list
-    ResourceIdentifier = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.StorageConnector
+class DomainJoinInfo(troposphere.appstream.DomainJoinInfo, Mixin):
+    def __init__(self,
+                 title=None,
+                 DirectoryName=NOTHING, # type: Union[str, AWSHelperFn]
+                 OrganizationalUnitDistinguishedName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DirectoryName=DirectoryName,
+            OrganizationalUnitDistinguishedName=OrganizationalUnitDistinguishedName,
+        )
+        super(DomainJoinInfo, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class UserSetting(AWSObject):
-    
-    Action = attr.ib() # type: str
-    Permission = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.UserSetting
-
-
-@attr.s
-class ApplicationSettings(AWSObject):
-    
-    Enabled = attr.ib() # type: boolean
-    SettingsGroup = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.ApplicationSettings
-
-
-@attr.s
-class Stack(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApplicationSettings = attr.ib(default=NOTHING) # type: ApplicationSettings
-    AttributesToDelete = attr.ib(default=NOTHING) # type: list
-    DeleteStorageConnectors = attr.ib(default=NOTHING) # type: boolean
-    Description = attr.ib(default=NOTHING) # type: str
-    DisplayName = attr.ib(default=NOTHING) # type: str
-    FeedbackURL = attr.ib(default=NOTHING) # type: str
-    Name = attr.ib(default=NOTHING) # type: str
-    RedirectURL = attr.ib(default=NOTHING) # type: str
-    StorageConnectors = attr.ib(default=NOTHING) # type: list
-    Tags = attr.ib(default=NOTHING) # type: tuple
-    UserSettings = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.appstream.Stack
+class Fleet(troposphere.appstream.Fleet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ComputeCapacity=REQUIRED, # type: _ComputeCapacity
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DisconnectTimeoutInSeconds=NOTHING, # type: int
+                 DisplayName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DomainJoinInfo=NOTHING, # type: _DomainJoinInfo
+                 EnableDefaultInternetAccess=NOTHING, # type: bool
+                 FleetType=NOTHING, # type: Union[str, AWSHelperFn]
+                 IdleDisconnectTimeoutInSeconds=NOTHING, # type: int
+                 ImageArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 ImageName=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaxUserDurationInSeconds=NOTHING, # type: int
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 VpcConfig=NOTHING, # type: _VpcConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ComputeCapacity=ComputeCapacity,
+            InstanceType=InstanceType,
+            Description=Description,
+            DisconnectTimeoutInSeconds=DisconnectTimeoutInSeconds,
+            DisplayName=DisplayName,
+            DomainJoinInfo=DomainJoinInfo,
+            EnableDefaultInternetAccess=EnableDefaultInternetAccess,
+            FleetType=FleetType,
+            IdleDisconnectTimeoutInSeconds=IdleDisconnectTimeoutInSeconds,
+            ImageArn=ImageArn,
+            ImageName=ImageName,
+            MaxUserDurationInSeconds=MaxUserDurationInSeconds,
+            Name=Name,
+            Tags=Tags,
+            VpcConfig=VpcConfig,
+        )
+        super(Fleet, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class StackUserAssociation(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AuthenticationType = attr.ib() # type: str
-    StackName = attr.ib() # type: str
-    UserName = attr.ib() # type: str
-    SendEmailNotification = attr.ib(default=NOTHING) # type: boolean
+class ImageBuilder(troposphere.appstream.ImageBuilder, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AppstreamAgentVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DisplayName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DomainJoinInfo=NOTHING, # type: _DomainJoinInfo
+                 EnableDefaultInternetAccess=NOTHING, # type: bool
+                 ImageArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 ImageName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 VpcConfig=NOTHING, # type: _VpcConfig
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            InstanceType=InstanceType,
+            AppstreamAgentVersion=AppstreamAgentVersion,
+            Description=Description,
+            DisplayName=DisplayName,
+            DomainJoinInfo=DomainJoinInfo,
+            EnableDefaultInternetAccess=EnableDefaultInternetAccess,
+            ImageArn=ImageArn,
+            ImageName=ImageName,
+            Name=Name,
+            Tags=Tags,
+            VpcConfig=VpcConfig,
+        )
+        super(ImageBuilder, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.appstream.StackUserAssociation
+class StackFleetAssociation(troposphere.appstream.StackFleetAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 FleetName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StackName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            FleetName=FleetName,
+            StackName=StackName,
+        )
+        super(StackFleetAssociation, self).__init__(**processed_kwargs)
 
 
-@attr.s
-class User(AWSObject):
-    title = attr.ib()   # type: str
-    
-    AuthenticationType = attr.ib() # type: str
-    UserName = attr.ib() # type: str
-    FirstName = attr.ib(default=NOTHING) # type: str
-    LastName = attr.ib(default=NOTHING) # type: str
-    MessageAction = attr.ib(default=NOTHING) # type: str
+class StorageConnector(troposphere.appstream.StorageConnector, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConnectorType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Domains=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ResourceIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConnectorType=ConnectorType,
+            Domains=Domains,
+            ResourceIdentifier=ResourceIdentifier,
+        )
+        super(StorageConnector, self).__init__(**processed_kwargs)
 
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
 
-    _aws_object_class = troposphere.appstream.User
+class UserSetting(troposphere.appstream.UserSetting, Mixin):
+    def __init__(self,
+                 title=None,
+                 Action=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Permission=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Action=Action,
+            Permission=Permission,
+        )
+        super(UserSetting, self).__init__(**processed_kwargs)
+
+
+class ApplicationSettings(troposphere.appstream.ApplicationSettings, Mixin):
+    def __init__(self,
+                 title=None,
+                 Enabled=REQUIRED, # type: bool
+                 SettingsGroup=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Enabled=Enabled,
+            SettingsGroup=SettingsGroup,
+        )
+        super(ApplicationSettings, self).__init__(**processed_kwargs)
+
+
+class Stack(troposphere.appstream.Stack, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApplicationSettings=NOTHING, # type: _ApplicationSettings
+                 AttributesToDelete=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 DeleteStorageConnectors=NOTHING, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 DisplayName=NOTHING, # type: Union[str, AWSHelperFn]
+                 FeedbackURL=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 RedirectURL=NOTHING, # type: Union[str, AWSHelperFn]
+                 StorageConnectors=NOTHING, # type: List[_StorageConnector]
+                 Tags=NOTHING, # type: Union[_Tags, list]
+                 UserSettings=NOTHING, # type: List[_UserSetting]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApplicationSettings=ApplicationSettings,
+            AttributesToDelete=AttributesToDelete,
+            DeleteStorageConnectors=DeleteStorageConnectors,
+            Description=Description,
+            DisplayName=DisplayName,
+            FeedbackURL=FeedbackURL,
+            Name=Name,
+            RedirectURL=RedirectURL,
+            StorageConnectors=StorageConnectors,
+            Tags=Tags,
+            UserSettings=UserSettings,
+        )
+        super(Stack, self).__init__(**processed_kwargs)
+
+
+class StackUserAssociation(troposphere.appstream.StackUserAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AuthenticationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StackName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 UserName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 SendEmailNotification=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AuthenticationType=AuthenticationType,
+            StackName=StackName,
+            UserName=UserName,
+            SendEmailNotification=SendEmailNotification,
+        )
+        super(StackUserAssociation, self).__init__(**processed_kwargs)
+
+
+class User(troposphere.appstream.User, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 AuthenticationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 UserName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FirstName=NOTHING, # type: Union[str, AWSHelperFn]
+                 LastName=NOTHING, # type: Union[str, AWSHelperFn]
+                 MessageAction=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            AuthenticationType=AuthenticationType,
+            UserName=UserName,
+            FirstName=FirstName,
+            LastName=LastName,
+            MessageAction=MessageAction,
+        )
+        super(User, self).__init__(**processed_kwargs)

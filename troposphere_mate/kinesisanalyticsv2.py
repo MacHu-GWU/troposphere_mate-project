@@ -4,478 +4,572 @@
 This code is auto generated from troposphere_mate.code_generator.__init__.py scripts.
 """
 
-import attr
+import sys
+if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
+    from typing import Union, List, Any
+
 import troposphere.kinesisanalyticsv2
 
-from troposphere.kinesisanalyticsv2 import ApplicationCodeConfiguration
-from troposphere.kinesisanalyticsv2 import ApplicationConfiguration
-from troposphere.kinesisanalyticsv2 import ApplicationSnapshotConfiguration
-from troposphere.kinesisanalyticsv2 import CSVMappingParameters
-from troposphere.kinesisanalyticsv2 import CheckpointConfiguration
-from troposphere.kinesisanalyticsv2 import CodeContent
-from troposphere.kinesisanalyticsv2 import DestinationSchema
-from troposphere.kinesisanalyticsv2 import EnvironmentProperties
-from troposphere.kinesisanalyticsv2 import FlinkApplicationConfiguration
-from troposphere.kinesisanalyticsv2 import InputLambdaProcessor
-from troposphere.kinesisanalyticsv2 import InputParallelism
-from troposphere.kinesisanalyticsv2 import InputProcessingConfiguration
-from troposphere.kinesisanalyticsv2 import InputSchema
-from troposphere.kinesisanalyticsv2 import JSONMappingParameters
-from troposphere.kinesisanalyticsv2 import KinesisFirehoseInput
-from troposphere.kinesisanalyticsv2 import KinesisFirehoseOutput
-from troposphere.kinesisanalyticsv2 import KinesisStreamsInput
-from troposphere.kinesisanalyticsv2 import KinesisStreamsOutput
-from troposphere.kinesisanalyticsv2 import LambdaOutput
-from troposphere.kinesisanalyticsv2 import MappingParameters
-from troposphere.kinesisanalyticsv2 import MonitoringConfiguration
-from troposphere.kinesisanalyticsv2 import Output
-from troposphere.kinesisanalyticsv2 import ParallelismConfiguration
-from troposphere.kinesisanalyticsv2 import RecordFormat
-from troposphere.kinesisanalyticsv2 import ReferenceDataSource
-from troposphere.kinesisanalyticsv2 import ReferenceSchema
-from troposphere.kinesisanalyticsv2 import S3ReferenceDataSource
-from troposphere.kinesisanalyticsv2 import SqlApplicationConfiguration
-from troposphere.kinesisanalyticsv2 import boolean
-from troposphere.kinesisanalyticsv2 import integer
-from troposphere.kinesisanalyticsv2 import json_checker
-from troposphere.kinesisanalyticsv2 import validate_runtime_environment
-
-
-from troposphere import Template
-from troposphere_mate.core.mate import AWSObject
-from troposphere_mate.core.sentiel import NOTHING
-
-
-
-@attr.s
-class S3ContentLocation(AWSObject):
-    
-    BucketARN = attr.ib(default=NOTHING) # type: str
-    FileKey = attr.ib(default=NOTHING) # type: str
-    ObjectVersion = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.S3ContentLocation
-
-
-@attr.s
-class CodeContent(AWSObject):
-    
-    ZipFileContent = attr.ib(default=NOTHING) # type: str
-    TextContent = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.CodeContent
-
-
-@attr.s
-class ApplicationCodeConfiguration(AWSObject):
-    
-    CodeContentType = attr.ib() # type: str
-    CodeContent = attr.ib() # type: CodeContent
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ApplicationCodeConfiguration
-
-
-@attr.s
-class PropertyGroup(AWSObject):
-    
-    PropertyMap = attr.ib(default=NOTHING) # type: json_checker
-    PropertyGroupId = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.PropertyGroup
-
-
-@attr.s
-class EnvironmentProperties(AWSObject):
-    
-    PropertyGroups = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.EnvironmentProperties
-
-
-@attr.s
-class CheckpointConfiguration(AWSObject):
-    
-    ConfigurationType = attr.ib() # type: str
-    CheckpointInterval = attr.ib(default=NOTHING) # type: integer
-    MinPauseBetweenCheckpoints = attr.ib(default=NOTHING) # type: integer
-    CheckpointingEnabled = attr.ib(default=NOTHING) # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.CheckpointConfiguration
-
-
-@attr.s
-class MonitoringConfiguration(AWSObject):
-    
-    ConfigurationType = attr.ib() # type: str
-    MetricsLevel = attr.ib(default=NOTHING) # type: str
-    LogLevel = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.MonitoringConfiguration
-
-
-@attr.s
-class ParallelismConfiguration(AWSObject):
-    
-    ConfigurationType = attr.ib() # type: str
-    ParallelismPerKPU = attr.ib(default=NOTHING) # type: integer
-    AutoScalingEnabled = attr.ib(default=NOTHING) # type: boolean
-    Parallelism = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ParallelismConfiguration
-
-
-@attr.s
-class FlinkApplicationConfiguration(AWSObject):
-    
-    CheckpointConfiguration = attr.ib(default=NOTHING) # type: CheckpointConfiguration
-    ParallelismConfiguration = attr.ib(default=NOTHING) # type: ParallelismConfiguration
-    MonitoringConfiguration = attr.ib(default=NOTHING) # type: MonitoringConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.FlinkApplicationConfiguration
-
-
-@attr.s
-class InputParallelism(AWSObject):
-    
-    Count = attr.ib(default=NOTHING) # type: integer
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.InputParallelism
-
-
-@attr.s
-class InputLambdaProcessor(AWSObject):
-    
-    ResourceARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.InputLambdaProcessor
-
-
-@attr.s
-class InputProcessingConfiguration(AWSObject):
-    
-    InputLambdaProcessor = attr.ib(default=NOTHING) # type: InputLambdaProcessor
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.InputProcessingConfiguration
-
-
-@attr.s
-class RecordColumn(AWSObject):
-    
-    SqlType = attr.ib() # type: str
-    Name = attr.ib() # type: str
-    Mapping = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.RecordColumn
-
-
-@attr.s
-class JSONMappingParameters(AWSObject):
-    
-    RecordRowPath = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.JSONMappingParameters
-
-
-@attr.s
-class CSVMappingParameters(AWSObject):
-    
-    RecordRowDelimiter = attr.ib() # type: str
-    RecordColumnDelimiter = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.CSVMappingParameters
-
-
-@attr.s
-class MappingParameters(AWSObject):
-    
-    JSONMappingParameters = attr.ib(default=NOTHING) # type: JSONMappingParameters
-    CSVMappingParameters = attr.ib(default=NOTHING) # type: CSVMappingParameters
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.MappingParameters
-
-
-@attr.s
-class RecordFormat(AWSObject):
-    
-    RecordFormatType = attr.ib() # type: str
-    MappingParameters = attr.ib(default=NOTHING) # type: MappingParameters
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.RecordFormat
-
-
-@attr.s
-class InputSchema(AWSObject):
-    
-    RecordColumns = attr.ib() # type: list
-    RecordFormat = attr.ib() # type: RecordFormat
-    RecordEncoding = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.InputSchema
-
-
-@attr.s
-class KinesisStreamsInput(AWSObject):
-    
-    ResourceARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.KinesisStreamsInput
-
-
-@attr.s
-class KinesisFirehoseInput(AWSObject):
-    
-    ResourceARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.KinesisFirehoseInput
-
-
-@attr.s
-class Input(AWSObject):
-    
-    InputSchema = attr.ib() # type: InputSchema
-    NamePrefix = attr.ib(default=NOTHING) # type: str
-    KinesisStreamsInput = attr.ib(default=NOTHING) # type: KinesisStreamsInput
-    KinesisFirehoseInput = attr.ib(default=NOTHING) # type: KinesisFirehoseInput
-    InputProcessingConfiguration = attr.ib(default=NOTHING) # type: InputProcessingConfiguration
-    InputParallelism = attr.ib(default=NOTHING) # type: InputParallelism
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.Input
-
-
-@attr.s
-class SqlApplicationConfiguration(AWSObject):
-    
-    Inputs = attr.ib(default=NOTHING) # type: list
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.SqlApplicationConfiguration
-
-
-@attr.s
-class ApplicationSnapshotConfiguration(AWSObject):
-    
-    SnapshotsEnabled = attr.ib() # type: boolean
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ApplicationSnapshotConfiguration
-
-
-@attr.s
-class ApplicationConfiguration(AWSObject):
-    
-    ApplicationCodeConfiguration = attr.ib(default=NOTHING) # type: ApplicationCodeConfiguration
-    EnvironmentProperties = attr.ib(default=NOTHING) # type: EnvironmentProperties
-    FlinkApplicationConfiguration = attr.ib(default=NOTHING) # type: FlinkApplicationConfiguration
-    SqlApplicationConfiguration = attr.ib(default=NOTHING) # type: SqlApplicationConfiguration
-    ApplicationSnapshotConfiguration = attr.ib(default=NOTHING) # type: ApplicationSnapshotConfiguration
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ApplicationConfiguration
-
-
-@attr.s
-class Application(AWSObject):
-    title = attr.ib()   # type: str
-    
-    RuntimeEnvironment = attr.ib() # type: validate_runtime_environment
-    ServiceExecutionRole = attr.ib() # type: str
-    ApplicationName = attr.ib(default=NOTHING) # type: str
-    ApplicationConfiguration = attr.ib(default=NOTHING) # type: ApplicationConfiguration
-    ApplicationDescription = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.Application
-
-
-@attr.s
-class S3ReferenceDataSource(AWSObject):
-    
-    BucketARN = attr.ib(default=NOTHING) # type: str
-    FileKey = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.S3ReferenceDataSource
-
-
-@attr.s
-class ReferenceSchema(AWSObject):
-    
-    RecordColumns = attr.ib() # type: list
-    RecordFormat = attr.ib() # type: RecordFormat
-    RecordEncoding = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ReferenceSchema
-
-
-@attr.s
-class ReferenceDataSource(AWSObject):
-    
-    ReferenceSchema = attr.ib() # type: ReferenceSchema
-    TableName = attr.ib(default=NOTHING) # type: str
-    S3ReferenceDataSource = attr.ib(default=NOTHING) # type: S3ReferenceDataSource
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ReferenceDataSource
-
-
-@attr.s
-class ApplicationReferenceDataSource(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApplicationName = attr.ib() # type: str
-    ReferenceDataSource = attr.ib() # type: ReferenceDataSource
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ApplicationReferenceDataSource
-
-
-@attr.s
-class LambdaOutput(AWSObject):
-    
-    ResourceARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.LambdaOutput
-
-
-@attr.s
-class KinesisFirehoseOutput(AWSObject):
-    
-    ResourceARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.KinesisFirehoseOutput
-
-
-@attr.s
-class KinesisStreamsOutput(AWSObject):
-    
-    ResourceARN = attr.ib() # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.KinesisStreamsOutput
-
-
-@attr.s
-class DestinationSchema(AWSObject):
-    
-    RecordFormatType = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.DestinationSchema
-
-
-@attr.s
-class Output(AWSObject):
-    
-    DestinationSchema = attr.ib() # type: DestinationSchema
-    LambdaOutput = attr.ib(default=NOTHING) # type: LambdaOutput
-    KinesisFirehoseOutput = attr.ib(default=NOTHING) # type: KinesisFirehoseOutput
-    KinesisStreamsOutput = attr.ib(default=NOTHING) # type: KinesisStreamsOutput
-    Name = attr.ib(default=NOTHING) # type: str
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.Output
-
-
-@attr.s
-class ApplicationOutput(AWSObject):
-    title = attr.ib()   # type: str
-    
-    ApplicationName = attr.ib() # type: str
-    Output = attr.ib() # type: Output
-
-    template = attr.ib(default=None) # type: Template
-    validation = attr.ib(default=True) # type: bool
-
-    _aws_object_class = troposphere.kinesisanalyticsv2.ApplicationOutput
+from troposphere.kinesisanalyticsv2 import (
+    ApplicationCodeConfiguration as _ApplicationCodeConfiguration,
+    ApplicationConfiguration as _ApplicationConfiguration,
+    ApplicationSnapshotConfiguration as _ApplicationSnapshotConfiguration,
+    CSVMappingParameters as _CSVMappingParameters,
+    CheckpointConfiguration as _CheckpointConfiguration,
+    CodeContent as _CodeContent,
+    DestinationSchema as _DestinationSchema,
+    EnvironmentProperties as _EnvironmentProperties,
+    FlinkApplicationConfiguration as _FlinkApplicationConfiguration,
+    Input as _Input,
+    InputLambdaProcessor as _InputLambdaProcessor,
+    InputParallelism as _InputParallelism,
+    InputProcessingConfiguration as _InputProcessingConfiguration,
+    InputSchema as _InputSchema,
+    JSONMappingParameters as _JSONMappingParameters,
+    KinesisFirehoseInput as _KinesisFirehoseInput,
+    KinesisFirehoseOutput as _KinesisFirehoseOutput,
+    KinesisStreamsInput as _KinesisStreamsInput,
+    KinesisStreamsOutput as _KinesisStreamsOutput,
+    LambdaOutput as _LambdaOutput,
+    MappingParameters as _MappingParameters,
+    MonitoringConfiguration as _MonitoringConfiguration,
+    Output as _Output,
+    ParallelismConfiguration as _ParallelismConfiguration,
+    PropertyGroup as _PropertyGroup,
+    RecordColumn as _RecordColumn,
+    RecordFormat as _RecordFormat,
+    ReferenceDataSource as _ReferenceDataSource,
+    ReferenceSchema as _ReferenceSchema,
+    S3ReferenceDataSource as _S3ReferenceDataSource,
+    SqlApplicationConfiguration as _SqlApplicationConfiguration,
+)
+
+
+from troposphere import Template, AWSHelperFn
+from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
+from troposphere_mate.core.sentiel import REQUIRED, NOTHING
+
+
+
+class S3ContentLocation(troposphere.kinesisanalyticsv2.S3ContentLocation, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketARN=NOTHING, # type: Union[str, AWSHelperFn]
+                 FileKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 ObjectVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketARN=BucketARN,
+            FileKey=FileKey,
+            ObjectVersion=ObjectVersion,
+        )
+        super(S3ContentLocation, self).__init__(**processed_kwargs)
+
+
+class CodeContent(troposphere.kinesisanalyticsv2.CodeContent, Mixin):
+    def __init__(self,
+                 title=None,
+                 ZipFileContent=NOTHING, # type: Union[str, AWSHelperFn]
+                 TextContent=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ZipFileContent=ZipFileContent,
+            TextContent=TextContent,
+        )
+        super(CodeContent, self).__init__(**processed_kwargs)
+
+
+class ApplicationCodeConfiguration(troposphere.kinesisanalyticsv2.ApplicationCodeConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 CodeContentType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CodeContent=REQUIRED, # type: _CodeContent
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CodeContentType=CodeContentType,
+            CodeContent=CodeContent,
+        )
+        super(ApplicationCodeConfiguration, self).__init__(**processed_kwargs)
+
+
+class PropertyGroup(troposphere.kinesisanalyticsv2.PropertyGroup, Mixin):
+    def __init__(self,
+                 title=None,
+                 PropertyMap=NOTHING, # type: json_checker
+                 PropertyGroupId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PropertyMap=PropertyMap,
+            PropertyGroupId=PropertyGroupId,
+        )
+        super(PropertyGroup, self).__init__(**processed_kwargs)
+
+
+class EnvironmentProperties(troposphere.kinesisanalyticsv2.EnvironmentProperties, Mixin):
+    def __init__(self,
+                 title=None,
+                 PropertyGroups=NOTHING, # type: List[_PropertyGroup]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PropertyGroups=PropertyGroups,
+        )
+        super(EnvironmentProperties, self).__init__(**processed_kwargs)
+
+
+class CheckpointConfiguration(troposphere.kinesisanalyticsv2.CheckpointConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConfigurationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CheckpointInterval=NOTHING, # type: int
+                 MinPauseBetweenCheckpoints=NOTHING, # type: int
+                 CheckpointingEnabled=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConfigurationType=ConfigurationType,
+            CheckpointInterval=CheckpointInterval,
+            MinPauseBetweenCheckpoints=MinPauseBetweenCheckpoints,
+            CheckpointingEnabled=CheckpointingEnabled,
+        )
+        super(CheckpointConfiguration, self).__init__(**processed_kwargs)
+
+
+class MonitoringConfiguration(troposphere.kinesisanalyticsv2.MonitoringConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConfigurationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MetricsLevel=NOTHING, # type: Union[str, AWSHelperFn]
+                 LogLevel=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConfigurationType=ConfigurationType,
+            MetricsLevel=MetricsLevel,
+            LogLevel=LogLevel,
+        )
+        super(MonitoringConfiguration, self).__init__(**processed_kwargs)
+
+
+class ParallelismConfiguration(troposphere.kinesisanalyticsv2.ParallelismConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConfigurationType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ParallelismPerKPU=NOTHING, # type: int
+                 AutoScalingEnabled=NOTHING, # type: bool
+                 Parallelism=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConfigurationType=ConfigurationType,
+            ParallelismPerKPU=ParallelismPerKPU,
+            AutoScalingEnabled=AutoScalingEnabled,
+            Parallelism=Parallelism,
+        )
+        super(ParallelismConfiguration, self).__init__(**processed_kwargs)
+
+
+class FlinkApplicationConfiguration(troposphere.kinesisanalyticsv2.FlinkApplicationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 CheckpointConfiguration=NOTHING, # type: _CheckpointConfiguration
+                 ParallelismConfiguration=NOTHING, # type: _ParallelismConfiguration
+                 MonitoringConfiguration=NOTHING, # type: _MonitoringConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CheckpointConfiguration=CheckpointConfiguration,
+            ParallelismConfiguration=ParallelismConfiguration,
+            MonitoringConfiguration=MonitoringConfiguration,
+        )
+        super(FlinkApplicationConfiguration, self).__init__(**processed_kwargs)
+
+
+class InputParallelism(troposphere.kinesisanalyticsv2.InputParallelism, Mixin):
+    def __init__(self,
+                 title=None,
+                 Count=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Count=Count,
+        )
+        super(InputParallelism, self).__init__(**processed_kwargs)
+
+
+class InputLambdaProcessor(troposphere.kinesisanalyticsv2.InputLambdaProcessor, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceARN=ResourceARN,
+        )
+        super(InputLambdaProcessor, self).__init__(**processed_kwargs)
+
+
+class InputProcessingConfiguration(troposphere.kinesisanalyticsv2.InputProcessingConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 InputLambdaProcessor=NOTHING, # type: _InputLambdaProcessor
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            InputLambdaProcessor=InputLambdaProcessor,
+        )
+        super(InputProcessingConfiguration, self).__init__(**processed_kwargs)
+
+
+class RecordColumn(troposphere.kinesisanalyticsv2.RecordColumn, Mixin):
+    def __init__(self,
+                 title=None,
+                 SqlType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Mapping=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SqlType=SqlType,
+            Name=Name,
+            Mapping=Mapping,
+        )
+        super(RecordColumn, self).__init__(**processed_kwargs)
+
+
+class JSONMappingParameters(troposphere.kinesisanalyticsv2.JSONMappingParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 RecordRowPath=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RecordRowPath=RecordRowPath,
+        )
+        super(JSONMappingParameters, self).__init__(**processed_kwargs)
+
+
+class CSVMappingParameters(troposphere.kinesisanalyticsv2.CSVMappingParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 RecordRowDelimiter=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RecordColumnDelimiter=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RecordRowDelimiter=RecordRowDelimiter,
+            RecordColumnDelimiter=RecordColumnDelimiter,
+        )
+        super(CSVMappingParameters, self).__init__(**processed_kwargs)
+
+
+class MappingParameters(troposphere.kinesisanalyticsv2.MappingParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 JSONMappingParameters=NOTHING, # type: _JSONMappingParameters
+                 CSVMappingParameters=NOTHING, # type: _CSVMappingParameters
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            JSONMappingParameters=JSONMappingParameters,
+            CSVMappingParameters=CSVMappingParameters,
+        )
+        super(MappingParameters, self).__init__(**processed_kwargs)
+
+
+class RecordFormat(troposphere.kinesisanalyticsv2.RecordFormat, Mixin):
+    def __init__(self,
+                 title=None,
+                 RecordFormatType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 MappingParameters=NOTHING, # type: _MappingParameters
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RecordFormatType=RecordFormatType,
+            MappingParameters=MappingParameters,
+        )
+        super(RecordFormat, self).__init__(**processed_kwargs)
+
+
+class InputSchema(troposphere.kinesisanalyticsv2.InputSchema, Mixin):
+    def __init__(self,
+                 title=None,
+                 RecordColumns=REQUIRED, # type: List[_RecordColumn]
+                 RecordFormat=REQUIRED, # type: _RecordFormat
+                 RecordEncoding=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RecordColumns=RecordColumns,
+            RecordFormat=RecordFormat,
+            RecordEncoding=RecordEncoding,
+        )
+        super(InputSchema, self).__init__(**processed_kwargs)
+
+
+class KinesisStreamsInput(troposphere.kinesisanalyticsv2.KinesisStreamsInput, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceARN=ResourceARN,
+        )
+        super(KinesisStreamsInput, self).__init__(**processed_kwargs)
+
+
+class KinesisFirehoseInput(troposphere.kinesisanalyticsv2.KinesisFirehoseInput, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceARN=ResourceARN,
+        )
+        super(KinesisFirehoseInput, self).__init__(**processed_kwargs)
+
+
+class Input(troposphere.kinesisanalyticsv2.Input, Mixin):
+    def __init__(self,
+                 title=None,
+                 InputSchema=REQUIRED, # type: _InputSchema
+                 NamePrefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 KinesisStreamsInput=NOTHING, # type: _KinesisStreamsInput
+                 KinesisFirehoseInput=NOTHING, # type: _KinesisFirehoseInput
+                 InputProcessingConfiguration=NOTHING, # type: _InputProcessingConfiguration
+                 InputParallelism=NOTHING, # type: _InputParallelism
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            InputSchema=InputSchema,
+            NamePrefix=NamePrefix,
+            KinesisStreamsInput=KinesisStreamsInput,
+            KinesisFirehoseInput=KinesisFirehoseInput,
+            InputProcessingConfiguration=InputProcessingConfiguration,
+            InputParallelism=InputParallelism,
+        )
+        super(Input, self).__init__(**processed_kwargs)
+
+
+class SqlApplicationConfiguration(troposphere.kinesisanalyticsv2.SqlApplicationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Inputs=NOTHING, # type: List[_Input]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Inputs=Inputs,
+        )
+        super(SqlApplicationConfiguration, self).__init__(**processed_kwargs)
+
+
+class ApplicationSnapshotConfiguration(troposphere.kinesisanalyticsv2.ApplicationSnapshotConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 SnapshotsEnabled=REQUIRED, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SnapshotsEnabled=SnapshotsEnabled,
+        )
+        super(ApplicationSnapshotConfiguration, self).__init__(**processed_kwargs)
+
+
+class ApplicationConfiguration(troposphere.kinesisanalyticsv2.ApplicationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ApplicationCodeConfiguration=NOTHING, # type: _ApplicationCodeConfiguration
+                 EnvironmentProperties=NOTHING, # type: _EnvironmentProperties
+                 FlinkApplicationConfiguration=NOTHING, # type: _FlinkApplicationConfiguration
+                 SqlApplicationConfiguration=NOTHING, # type: _SqlApplicationConfiguration
+                 ApplicationSnapshotConfiguration=NOTHING, # type: _ApplicationSnapshotConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ApplicationCodeConfiguration=ApplicationCodeConfiguration,
+            EnvironmentProperties=EnvironmentProperties,
+            FlinkApplicationConfiguration=FlinkApplicationConfiguration,
+            SqlApplicationConfiguration=SqlApplicationConfiguration,
+            ApplicationSnapshotConfiguration=ApplicationSnapshotConfiguration,
+        )
+        super(ApplicationConfiguration, self).__init__(**processed_kwargs)
+
+
+class Application(troposphere.kinesisanalyticsv2.Application, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RuntimeEnvironment=REQUIRED, # type: Any
+                 ServiceExecutionRole=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ApplicationName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ApplicationConfiguration=NOTHING, # type: _ApplicationConfiguration
+                 ApplicationDescription=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RuntimeEnvironment=RuntimeEnvironment,
+            ServiceExecutionRole=ServiceExecutionRole,
+            ApplicationName=ApplicationName,
+            ApplicationConfiguration=ApplicationConfiguration,
+            ApplicationDescription=ApplicationDescription,
+        )
+        super(Application, self).__init__(**processed_kwargs)
+
+
+class S3ReferenceDataSource(troposphere.kinesisanalyticsv2.S3ReferenceDataSource, Mixin):
+    def __init__(self,
+                 title=None,
+                 BucketARN=NOTHING, # type: Union[str, AWSHelperFn]
+                 FileKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BucketARN=BucketARN,
+            FileKey=FileKey,
+        )
+        super(S3ReferenceDataSource, self).__init__(**processed_kwargs)
+
+
+class ReferenceSchema(troposphere.kinesisanalyticsv2.ReferenceSchema, Mixin):
+    def __init__(self,
+                 title=None,
+                 RecordColumns=REQUIRED, # type: List[_RecordColumn]
+                 RecordFormat=REQUIRED, # type: _RecordFormat
+                 RecordEncoding=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RecordColumns=RecordColumns,
+            RecordFormat=RecordFormat,
+            RecordEncoding=RecordEncoding,
+        )
+        super(ReferenceSchema, self).__init__(**processed_kwargs)
+
+
+class ReferenceDataSource(troposphere.kinesisanalyticsv2.ReferenceDataSource, Mixin):
+    def __init__(self,
+                 title=None,
+                 ReferenceSchema=REQUIRED, # type: _ReferenceSchema
+                 TableName=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3ReferenceDataSource=NOTHING, # type: _S3ReferenceDataSource
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ReferenceSchema=ReferenceSchema,
+            TableName=TableName,
+            S3ReferenceDataSource=S3ReferenceDataSource,
+        )
+        super(ReferenceDataSource, self).__init__(**processed_kwargs)
+
+
+class ApplicationReferenceDataSource(troposphere.kinesisanalyticsv2.ApplicationReferenceDataSource, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApplicationName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ReferenceDataSource=REQUIRED, # type: _ReferenceDataSource
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApplicationName=ApplicationName,
+            ReferenceDataSource=ReferenceDataSource,
+        )
+        super(ApplicationReferenceDataSource, self).__init__(**processed_kwargs)
+
+
+class LambdaOutput(troposphere.kinesisanalyticsv2.LambdaOutput, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceARN=ResourceARN,
+        )
+        super(LambdaOutput, self).__init__(**processed_kwargs)
+
+
+class KinesisFirehoseOutput(troposphere.kinesisanalyticsv2.KinesisFirehoseOutput, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceARN=ResourceARN,
+        )
+        super(KinesisFirehoseOutput, self).__init__(**processed_kwargs)
+
+
+class KinesisStreamsOutput(troposphere.kinesisanalyticsv2.KinesisStreamsOutput, Mixin):
+    def __init__(self,
+                 title=None,
+                 ResourceARN=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ResourceARN=ResourceARN,
+        )
+        super(KinesisStreamsOutput, self).__init__(**processed_kwargs)
+
+
+class DestinationSchema(troposphere.kinesisanalyticsv2.DestinationSchema, Mixin):
+    def __init__(self,
+                 title=None,
+                 RecordFormatType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RecordFormatType=RecordFormatType,
+        )
+        super(DestinationSchema, self).__init__(**processed_kwargs)
+
+
+class Output(troposphere.kinesisanalyticsv2.Output, Mixin):
+    def __init__(self,
+                 title=None,
+                 DestinationSchema=REQUIRED, # type: _DestinationSchema
+                 LambdaOutput=NOTHING, # type: _LambdaOutput
+                 KinesisFirehoseOutput=NOTHING, # type: _KinesisFirehoseOutput
+                 KinesisStreamsOutput=NOTHING, # type: _KinesisStreamsOutput
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DestinationSchema=DestinationSchema,
+            LambdaOutput=LambdaOutput,
+            KinesisFirehoseOutput=KinesisFirehoseOutput,
+            KinesisStreamsOutput=KinesisStreamsOutput,
+            Name=Name,
+        )
+        super(Output, self).__init__(**processed_kwargs)
+
+
+class ApplicationOutput(troposphere.kinesisanalyticsv2.ApplicationOutput, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 ApplicationName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Output=REQUIRED, # type: _Output
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            ApplicationName=ApplicationName,
+            Output=Output,
+        )
+        super(ApplicationOutput, self).__init__(**processed_kwargs)
