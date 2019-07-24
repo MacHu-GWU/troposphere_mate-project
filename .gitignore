@@ -2,7 +2,8 @@
 troposphere_mate_venv/
 troposphere_mate.egg-info/
 troposphere_mate-*/
-
+troposphere_mate/orch_example/
+playground/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
