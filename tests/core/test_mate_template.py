@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from pytest import raises, approx
 import functools
-from troposphere_mate import Template, Tags, ec2, Ref
+from troposphere_mate import Template, Tags, Ref, Parameter, Output
 from troposphere_mate.core.tagger import tags_list_to_dct
 
 
 class TestTemplate(object):
     def test_update_tags(self):
+        from troposphere_mate import ec2
+
         # overwrite=False works
         tpl = Template()
 
@@ -53,6 +54,44 @@ class TestTemplate(object):
             Name="my-project/sg/MySG",
             Creator="Bob",
         )
+
+    def test_remove_resource(self):
+        from troposphere_mate import iam
+        from troposphere_mate import canned
+
+        tpl = Template()
+        role = iam.Role(
+            "MyRole",
+            template=tpl,
+            RoleName="my-role",
+            AssumeRolePolicyDocument=canned.iam.create_assume_role_policy_document([
+                canned.iam.AWSServiceName.aws_Lambda
+            ]),
+            ManagedPolicyArns=[canned.iam.AWSManagedPolicyArn.awsLambdaBasicExecutionRole, ]
+        )
+        tpl.add_output(Output("MyRoleArn", Value=Ref(role)))
+        assert len(tpl.resources) == 1
+        assert len(tpl.outputs) == 1
+        tpl.remove_resource(role)
+        assert len(tpl.resources) == 0
+        assert len(tpl.outputs) == 0
+
+
+    def test_remove_parameter_and_output(self):
+
+        from troposphere_mate import canned
+
+        tpl = Template()
+        p1 = Parameter("P1", Type="string")
+        tpl.add_parameter(p1)
+        o1 = Output("O1", Value=Ref("P1"))
+        tpl.add_output(o1)
+        assert len(tpl.parameters) == 1
+        assert len(tpl.outputs) == 1
+        tpl.remove_parameter(p1)
+        tpl.remove_output(o1)
+        assert len(tpl.parameters) == 0
+        assert len(tpl.outputs) == 0
 
 
 if __name__ == "__main__":
