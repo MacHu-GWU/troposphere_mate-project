@@ -73,6 +73,7 @@ class CacheCluster(troposphere.elasticache.CacheCluster, Mixin):
             SnapshotWindow=SnapshotWindow,
             Tags=Tags,
             VpcSecurityGroupIds=VpcSecurityGroupIds,
+            **kwargs
         )
         super(CacheCluster, self).__init__(**processed_kwargs)
 
@@ -93,6 +94,7 @@ class ParameterGroup(troposphere.elasticache.ParameterGroup, Mixin):
             CacheParameterGroupFamily=CacheParameterGroupFamily,
             Description=Description,
             Properties=Properties,
+            **kwargs
         )
         super(ParameterGroup, self).__init__(**processed_kwargs)
 
@@ -109,6 +111,7 @@ class SecurityGroup(troposphere.elasticache.SecurityGroup, Mixin):
             template=template,
             validation=validation,
             Description=Description,
+            **kwargs
         )
         super(SecurityGroup, self).__init__(**processed_kwargs)
 
@@ -129,6 +132,7 @@ class SecurityGroupIngress(troposphere.elasticache.SecurityGroupIngress, Mixin):
             CacheSecurityGroupName=CacheSecurityGroupName,
             EC2SecurityGroupName=EC2SecurityGroupName,
             EC2SecurityGroupOwnerId=EC2SecurityGroupOwnerId,
+            **kwargs
         )
         super(SecurityGroupIngress, self).__init__(**processed_kwargs)
 
@@ -149,6 +153,7 @@ class SubnetGroup(troposphere.elasticache.SubnetGroup, Mixin):
             Description=Description,
             SubnetIds=SubnetIds,
             CacheSubnetGroupName=CacheSubnetGroupName,
+            **kwargs
         )
         super(SubnetGroup, self).__init__(**processed_kwargs)
 
@@ -221,6 +226,7 @@ class ReplicationGroup(troposphere.elasticache.ReplicationGroup, Mixin):
             SnapshotWindow=SnapshotWindow,
             Tags=Tags,
             TransitEncryptionEnabled=TransitEncryptionEnabled,
+            **kwargs
         )
         super(ReplicationGroup, self).__init__(**processed_kwargs)
 
@@ -241,5 +247,6 @@ class NodeGroupConfiguration(troposphere.elasticache.NodeGroupConfiguration, Mix
             ReplicaAvailabilityZones=ReplicaAvailabilityZones,
             ReplicaCount=ReplicaCount,
             Slots=Slots,
+            **kwargs
         )
         super(NodeGroupConfiguration, self).__init__(**processed_kwargs)

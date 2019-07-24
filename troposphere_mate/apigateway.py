@@ -47,6 +47,7 @@ class AccessLogSetting(troposphere.apigateway.AccessLogSetting, Mixin):
             title=title,
             DestinationArn=DestinationArn,
             Format=Format,
+            **kwargs
         )
         super(AccessLogSetting, self).__init__(**processed_kwargs)
 
@@ -63,6 +64,7 @@ class Account(troposphere.apigateway.Account, Mixin):
             template=template,
             validation=validation,
             CloudWatchRoleArn=CloudWatchRoleArn,
+            **kwargs
         )
         super(Account, self).__init__(**processed_kwargs)
 
@@ -77,6 +79,7 @@ class StageKey(troposphere.apigateway.StageKey, Mixin):
             title=title,
             RestApiId=RestApiId,
             StageName=StageName,
+            **kwargs
         )
         super(StageKey, self).__init__(**processed_kwargs)
 
@@ -105,6 +108,7 @@ class ApiKey(troposphere.apigateway.ApiKey, Mixin):
             Name=Name,
             StageKeys=StageKeys,
             Value=Value,
+            **kwargs
         )
         super(ApiKey, self).__init__(**processed_kwargs)
 
@@ -139,6 +143,7 @@ class Authorizer(troposphere.apigateway.Authorizer, Mixin):
             IdentityValidationExpression=IdentityValidationExpression,
             ProviderARNs=ProviderARNs,
             RestApiId=RestApiId,
+            **kwargs
         )
         super(Authorizer, self).__init__(**processed_kwargs)
 
@@ -161,6 +166,7 @@ class BasePathMapping(troposphere.apigateway.BasePathMapping, Mixin):
             RestApiId=RestApiId,
             BasePath=BasePath,
             Stage=Stage,
+            **kwargs
         )
         super(BasePathMapping, self).__init__(**processed_kwargs)
 
@@ -179,6 +185,7 @@ class CanarySetting(troposphere.apigateway.CanarySetting, Mixin):
             PercentTraffic=PercentTraffic,
             StageVariableOverrides=StageVariableOverrides,
             UseStageCache=UseStageCache,
+            **kwargs
         )
         super(CanarySetting, self).__init__(**processed_kwargs)
 
@@ -195,6 +202,7 @@ class ClientCertificate(troposphere.apigateway.ClientCertificate, Mixin):
             template=template,
             validation=validation,
             Description=Description,
+            **kwargs
         )
         super(ClientCertificate, self).__init__(**processed_kwargs)
 
@@ -211,6 +219,7 @@ class DeploymentCanarySettings(troposphere.apigateway.DeploymentCanarySettings, 
             PercentTraffic=PercentTraffic,
             StageVariableOverrides=StageVariableOverrides,
             UseStageCache=UseStageCache,
+            **kwargs
         )
         super(DeploymentCanarySettings, self).__init__(**processed_kwargs)
 
@@ -241,6 +250,7 @@ class MethodSetting(troposphere.apigateway.MethodSetting, Mixin):
             MetricsEnabled=MetricsEnabled,
             ThrottlingBurstLimit=ThrottlingBurstLimit,
             ThrottlingRateLimit=ThrottlingRateLimit,
+            **kwargs
         )
         super(MethodSetting, self).__init__(**processed_kwargs)
 
@@ -287,6 +297,7 @@ class StageDescription(troposphere.apigateway.StageDescription, Mixin):
             ThrottlingBurstLimit=ThrottlingBurstLimit,
             ThrottlingRateLimit=ThrottlingRateLimit,
             Variables=Variables,
+            **kwargs
         )
         super(StageDescription, self).__init__(**processed_kwargs)
 
@@ -311,6 +322,7 @@ class Deployment(troposphere.apigateway.Deployment, Mixin):
             Description=Description,
             StageDescription=StageDescription,
             StageName=StageName,
+            **kwargs
         )
         super(Deployment, self).__init__(**processed_kwargs)
 
@@ -331,6 +343,7 @@ class Location(troposphere.apigateway.Location, Mixin):
             Path=Path,
             StatusCode=StatusCode,
             Type=Type,
+            **kwargs
         )
         super(Location, self).__init__(**processed_kwargs)
 
@@ -351,6 +364,7 @@ class DocumentationPart(troposphere.apigateway.DocumentationPart, Mixin):
             Location=Location,
             Properties=Properties,
             RestApiId=RestApiId,
+            **kwargs
         )
         super(DocumentationPart, self).__init__(**processed_kwargs)
 
@@ -371,6 +385,7 @@ class DocumentationVersion(troposphere.apigateway.DocumentationVersion, Mixin):
             DocumentationVersion=DocumentationVersion,
             RestApiId=RestApiId,
             Description=Description,
+            **kwargs
         )
         super(DocumentationVersion, self).__init__(**processed_kwargs)
 
@@ -383,6 +398,7 @@ class EndpointConfiguration(troposphere.apigateway.EndpointConfiguration, Mixin)
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Types=Types,
+            **kwargs
         )
         super(EndpointConfiguration, self).__init__(**processed_kwargs)
 
@@ -405,6 +421,7 @@ class DomainName(troposphere.apigateway.DomainName, Mixin):
             CertificateArn=CertificateArn,
             EndpointConfiguration=EndpointConfiguration,
             RegionalCertificateArn=RegionalCertificateArn,
+            **kwargs
         )
         super(DomainName, self).__init__(**processed_kwargs)
 
@@ -425,6 +442,7 @@ class IntegrationResponse(troposphere.apigateway.IntegrationResponse, Mixin):
             ResponseTemplates=ResponseTemplates,
             SelectionPattern=SelectionPattern,
             StatusCode=StatusCode,
+            **kwargs
         )
         super(IntegrationResponse, self).__init__(**processed_kwargs)
 
@@ -463,6 +481,7 @@ class Integration(troposphere.apigateway.Integration, Mixin):
             RequestTemplates=RequestTemplates,
             TimeoutInMillis=TimeoutInMillis,
             Uri=Uri,
+            **kwargs
         )
         super(Integration, self).__init__(**processed_kwargs)
 
@@ -479,6 +498,7 @@ class MethodResponse(troposphere.apigateway.MethodResponse, Mixin):
             StatusCode=StatusCode,
             ResponseModels=ResponseModels,
             ResponseParameters=ResponseParameters,
+            **kwargs
         )
         super(MethodResponse, self).__init__(**processed_kwargs)
 
@@ -519,6 +539,7 @@ class Method(troposphere.apigateway.Method, Mixin):
             RequestModels=RequestModels,
             RequestParameters=RequestParameters,
             RequestValidatorId=RequestValidatorId,
+            **kwargs
         )
         super(Method, self).__init__(**processed_kwargs)
 
@@ -543,6 +564,7 @@ class Model(troposphere.apigateway.Model, Mixin):
             Description=Description,
             Name=Name,
             Schema=Schema,
+            **kwargs
         )
         super(Model, self).__init__(**processed_kwargs)
 
@@ -565,6 +587,7 @@ class RequestValidator(troposphere.apigateway.RequestValidator, Mixin):
             RestApiId=RestApiId,
             ValidateRequestBody=ValidateRequestBody,
             ValidateRequestParameters=ValidateRequestParameters,
+            **kwargs
         )
         super(RequestValidator, self).__init__(**processed_kwargs)
 
@@ -585,6 +608,7 @@ class Resource(troposphere.apigateway.Resource, Mixin):
             ParentId=ParentId,
             PathPart=PathPart,
             RestApiId=RestApiId,
+            **kwargs
         )
         super(Resource, self).__init__(**processed_kwargs)
 
@@ -603,6 +627,7 @@ class S3Location(troposphere.apigateway.S3Location, Mixin):
             ETag=ETag,
             Key=Key,
             Version=Version,
+            **kwargs
         )
         super(S3Location, self).__init__(**processed_kwargs)
 
@@ -641,6 +666,7 @@ class RestApi(troposphere.apigateway.RestApi, Mixin):
             Name=Name,
             Parameters=Parameters,
             Policy=Policy,
+            **kwargs
         )
         super(RestApi, self).__init__(**processed_kwargs)
 
@@ -683,6 +709,7 @@ class Stage(troposphere.apigateway.Stage, Mixin):
             Tags=Tags,
             TracingEnabled=TracingEnabled,
             Variables=Variables,
+            **kwargs
         )
         super(Stage, self).__init__(**processed_kwargs)
 
@@ -699,6 +726,7 @@ class QuotaSettings(troposphere.apigateway.QuotaSettings, Mixin):
             Limit=Limit,
             Offset=Offset,
             Period=Period,
+            **kwargs
         )
         super(QuotaSettings, self).__init__(**processed_kwargs)
 
@@ -713,6 +741,7 @@ class ThrottleSettings(troposphere.apigateway.ThrottleSettings, Mixin):
             title=title,
             BurstLimit=BurstLimit,
             RateLimit=RateLimit,
+            **kwargs
         )
         super(ThrottleSettings, self).__init__(**processed_kwargs)
 
@@ -729,6 +758,7 @@ class ApiStage(troposphere.apigateway.ApiStage, Mixin):
             ApiId=ApiId,
             Stage=Stage,
             Throttle=Throttle,
+            **kwargs
         )
         super(ApiStage, self).__init__(**processed_kwargs)
 
@@ -753,6 +783,7 @@ class UsagePlan(troposphere.apigateway.UsagePlan, Mixin):
             Quota=Quota,
             Throttle=Throttle,
             UsagePlanName=UsagePlanName,
+            **kwargs
         )
         super(UsagePlan, self).__init__(**processed_kwargs)
 
@@ -773,6 +804,7 @@ class UsagePlanKey(troposphere.apigateway.UsagePlanKey, Mixin):
             KeyId=KeyId,
             KeyType=KeyType,
             UsagePlanId=UsagePlanId,
+            **kwargs
         )
         super(UsagePlanKey, self).__init__(**processed_kwargs)
 
@@ -797,6 +829,7 @@ class GatewayResponse(troposphere.apigateway.GatewayResponse, Mixin):
             ResponseParameters=ResponseParameters,
             ResponseTemplates=ResponseTemplates,
             StatusCode=StatusCode,
+            **kwargs
         )
         super(GatewayResponse, self).__init__(**processed_kwargs)
 
@@ -817,5 +850,6 @@ class VpcLink(troposphere.apigateway.VpcLink, Mixin):
             Name=Name,
             TargetArns=TargetArns,
             Description=Description,
+            **kwargs
         )
         super(VpcLink, self).__init__(**processed_kwargs)

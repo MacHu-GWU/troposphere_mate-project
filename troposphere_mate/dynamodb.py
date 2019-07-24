@@ -41,6 +41,7 @@ class AttributeDefinition(troposphere.dynamodb.AttributeDefinition, Mixin):
             title=title,
             AttributeName=AttributeName,
             AttributeType=AttributeType,
+            **kwargs
         )
         super(AttributeDefinition, self).__init__(**processed_kwargs)
 
@@ -55,6 +56,7 @@ class KeySchema(troposphere.dynamodb.KeySchema, Mixin):
             title=title,
             AttributeName=AttributeName,
             KeyType=KeyType,
+            **kwargs
         )
         super(KeySchema, self).__init__(**processed_kwargs)
 
@@ -69,6 +71,7 @@ class ProvisionedThroughput(troposphere.dynamodb.ProvisionedThroughput, Mixin):
             title=title,
             ReadCapacityUnits=ReadCapacityUnits,
             WriteCapacityUnits=WriteCapacityUnits,
+            **kwargs
         )
         super(ProvisionedThroughput, self).__init__(**processed_kwargs)
 
@@ -83,6 +86,7 @@ class Projection(troposphere.dynamodb.Projection, Mixin):
             title=title,
             NonKeyAttributes=NonKeyAttributes,
             ProjectionType=ProjectionType,
+            **kwargs
         )
         super(Projection, self).__init__(**processed_kwargs)
 
@@ -95,6 +99,7 @@ class SSESpecification(troposphere.dynamodb.SSESpecification, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SSEEnabled=SSEEnabled,
+            **kwargs
         )
         super(SSESpecification, self).__init__(**processed_kwargs)
 
@@ -113,6 +118,7 @@ class GlobalSecondaryIndex(troposphere.dynamodb.GlobalSecondaryIndex, Mixin):
             KeySchema=KeySchema,
             Projection=Projection,
             ProvisionedThroughput=ProvisionedThroughput,
+            **kwargs
         )
         super(GlobalSecondaryIndex, self).__init__(**processed_kwargs)
 
@@ -129,6 +135,7 @@ class LocalSecondaryIndex(troposphere.dynamodb.LocalSecondaryIndex, Mixin):
             IndexName=IndexName,
             KeySchema=KeySchema,
             Projection=Projection,
+            **kwargs
         )
         super(LocalSecondaryIndex, self).__init__(**processed_kwargs)
 
@@ -141,6 +148,7 @@ class PointInTimeRecoverySpecification(troposphere.dynamodb.PointInTimeRecoveryS
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             PointInTimeRecoveryEnabled=PointInTimeRecoveryEnabled,
+            **kwargs
         )
         super(PointInTimeRecoverySpecification, self).__init__(**processed_kwargs)
 
@@ -153,6 +161,7 @@ class StreamSpecification(troposphere.dynamodb.StreamSpecification, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             StreamViewType=StreamViewType,
+            **kwargs
         )
         super(StreamSpecification, self).__init__(**processed_kwargs)
 
@@ -167,6 +176,7 @@ class TimeToLiveSpecification(troposphere.dynamodb.TimeToLiveSpecification, Mixi
             title=title,
             AttributeName=AttributeName,
             Enabled=Enabled,
+            **kwargs
         )
         super(TimeToLiveSpecification, self).__init__(**processed_kwargs)
 
@@ -205,5 +215,6 @@ class Table(troposphere.dynamodb.Table, Mixin):
             TableName=TableName,
             Tags=Tags,
             TimeToLiveSpecification=TimeToLiveSpecification,
+            **kwargs
         )
         super(Table, self).__init__(**processed_kwargs)

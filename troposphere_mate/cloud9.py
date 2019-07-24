@@ -31,6 +31,7 @@ class Repository(troposphere.cloud9.Repository, Mixin):
             title=title,
             PathComponent=PathComponent,
             RepositoryUrl=RepositoryUrl,
+            **kwargs
         )
         super(Repository, self).__init__(**processed_kwargs)
 
@@ -59,5 +60,6 @@ class EnvironmentEC2(troposphere.cloud9.EnvironmentEC2, Mixin):
             OwnerArn=OwnerArn,
             Repositories=Repositories,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(EnvironmentEC2, self).__init__(**processed_kwargs)

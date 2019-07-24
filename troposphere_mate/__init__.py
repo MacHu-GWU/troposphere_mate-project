@@ -4,7 +4,6 @@
 Package Description.
 """
 
-
 from ._version import __version__
 
 __short_description__ = "Package short description."
@@ -20,7 +19,9 @@ try:
     from .core.associate import associate
     from .core.mate import (
         Template,
-        AWSObject,
+        Parameter,
+        Output,
     )
+    from troposphere_mate.core.canned import ConfigClass, MultiEnvBasicConfig, Constant, Derivable
 except ImportError as e:
     pass

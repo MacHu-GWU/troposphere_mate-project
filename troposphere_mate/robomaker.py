@@ -39,6 +39,7 @@ class Fleet(troposphere.robomaker.Fleet, Mixin):
             validation=validation,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(Fleet, self).__init__(**processed_kwargs)
 
@@ -63,6 +64,7 @@ class Robot(troposphere.robomaker.Robot, Mixin):
             Fleet=Fleet,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(Robot, self).__init__(**processed_kwargs)
 
@@ -77,6 +79,7 @@ class RobotSoftwareSuite(troposphere.robomaker.RobotSoftwareSuite, Mixin):
             title=title,
             Name=Name,
             Version=Version,
+            **kwargs
         )
         super(RobotSoftwareSuite, self).__init__(**processed_kwargs)
 
@@ -93,6 +96,7 @@ class SourceConfig(troposphere.robomaker.SourceConfig, Mixin):
             Architecture=Architecture,
             S3Bucket=S3Bucket,
             S3Key=S3Key,
+            **kwargs
         )
         super(SourceConfig, self).__init__(**processed_kwargs)
 
@@ -117,6 +121,7 @@ class RobotApplication(troposphere.robomaker.RobotApplication, Mixin):
             CurrentRevisionId=CurrentRevisionId,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(RobotApplication, self).__init__(**processed_kwargs)
 
@@ -135,6 +140,7 @@ class RobotApplicationVersion(troposphere.robomaker.RobotApplicationVersion, Mix
             validation=validation,
             Application=Application,
             CurrentRevisionId=CurrentRevisionId,
+            **kwargs
         )
         super(RobotApplicationVersion, self).__init__(**processed_kwargs)
 
@@ -149,6 +155,7 @@ class RenderingEngine(troposphere.robomaker.RenderingEngine, Mixin):
             title=title,
             Name=Name,
             Version=Version,
+            **kwargs
         )
         super(RenderingEngine, self).__init__(**processed_kwargs)
 
@@ -163,6 +170,7 @@ class SimulationSoftwareSuite(troposphere.robomaker.SimulationSoftwareSuite, Mix
             title=title,
             Name=Name,
             Version=Version,
+            **kwargs
         )
         super(SimulationSoftwareSuite, self).__init__(**processed_kwargs)
 
@@ -191,6 +199,7 @@ class SimulationApplication(troposphere.robomaker.SimulationApplication, Mixin):
             CurrentRevisionId=CurrentRevisionId,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(SimulationApplication, self).__init__(**processed_kwargs)
 
@@ -209,5 +218,6 @@ class SimulationApplicationVersion(troposphere.robomaker.SimulationApplicationVe
             validation=validation,
             Application=Application,
             CurrentRevisionId=CurrentRevisionId,
+            **kwargs
         )
         super(SimulationApplicationVersion, self).__init__(**processed_kwargs)

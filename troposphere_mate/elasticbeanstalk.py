@@ -41,6 +41,7 @@ class MaxAgeRule(troposphere.elasticbeanstalk.MaxAgeRule, Mixin):
             DeleteSourceFromS3=DeleteSourceFromS3,
             Enabled=Enabled,
             MaxAgeInDays=MaxAgeInDays,
+            **kwargs
         )
         super(MaxAgeRule, self).__init__(**processed_kwargs)
 
@@ -57,6 +58,7 @@ class MaxCountRule(troposphere.elasticbeanstalk.MaxCountRule, Mixin):
             DeleteSourceFromS3=DeleteSourceFromS3,
             Enabled=Enabled,
             MaxCount=MaxCount,
+            **kwargs
         )
         super(MaxCountRule, self).__init__(**processed_kwargs)
 
@@ -71,6 +73,7 @@ class ApplicationVersionLifecycleConfig(troposphere.elasticbeanstalk.Application
             title=title,
             MaxAgeRule=MaxAgeRule,
             MaxCountRule=MaxCountRule,
+            **kwargs
         )
         super(ApplicationVersionLifecycleConfig, self).__init__(**processed_kwargs)
 
@@ -85,6 +88,7 @@ class SourceBundle(troposphere.elasticbeanstalk.SourceBundle, Mixin):
             title=title,
             S3Bucket=S3Bucket,
             S3Key=S3Key,
+            **kwargs
         )
         super(SourceBundle, self).__init__(**processed_kwargs)
 
@@ -99,6 +103,7 @@ class SourceConfiguration(troposphere.elasticbeanstalk.SourceConfiguration, Mixi
             title=title,
             ApplicationName=ApplicationName,
             TemplateName=TemplateName,
+            **kwargs
         )
         super(SourceConfiguration, self).__init__(**processed_kwargs)
 
@@ -113,6 +118,7 @@ class ApplicationResourceLifecycleConfig(troposphere.elasticbeanstalk.Applicatio
             title=title,
             ServiceRole=ServiceRole,
             VersionLifecycleConfig=VersionLifecycleConfig,
+            **kwargs
         )
         super(ApplicationResourceLifecycleConfig, self).__init__(**processed_kwargs)
 
@@ -131,6 +137,7 @@ class OptionSettings(troposphere.elasticbeanstalk.OptionSettings, Mixin):
             OptionName=OptionName,
             Value=Value,
             ResourceName=ResourceName,
+            **kwargs
         )
         super(OptionSettings, self).__init__(**processed_kwargs)
 
@@ -151,6 +158,7 @@ class Application(troposphere.elasticbeanstalk.Application, Mixin):
             ApplicationName=ApplicationName,
             Description=Description,
             ResourceLifecycleConfig=ResourceLifecycleConfig,
+            **kwargs
         )
         super(Application, self).__init__(**processed_kwargs)
 
@@ -171,6 +179,7 @@ class ApplicationVersion(troposphere.elasticbeanstalk.ApplicationVersion, Mixin)
             ApplicationName=ApplicationName,
             Description=Description,
             SourceBundle=SourceBundle,
+            **kwargs
         )
         super(ApplicationVersion, self).__init__(**processed_kwargs)
 
@@ -199,6 +208,7 @@ class ConfigurationTemplate(troposphere.elasticbeanstalk.ConfigurationTemplate, 
             PlatformArn=PlatformArn,
             SolutionStackName=SolutionStackName,
             SourceConfiguration=SourceConfiguration,
+            **kwargs
         )
         super(ConfigurationTemplate, self).__init__(**processed_kwargs)
 
@@ -215,6 +225,7 @@ class Tier(troposphere.elasticbeanstalk.Tier, Mixin):
             Name=Name,
             Type=Type,
             Version=Version,
+            **kwargs
         )
         super(Tier, self).__init__(**processed_kwargs)
 
@@ -251,5 +262,6 @@ class Environment(troposphere.elasticbeanstalk.Environment, Mixin):
             TemplateName=TemplateName,
             Tier=Tier,
             VersionLabel=VersionLabel,
+            **kwargs
         )
         super(Environment, self).__init__(**processed_kwargs)

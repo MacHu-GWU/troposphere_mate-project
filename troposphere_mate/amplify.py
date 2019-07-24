@@ -37,6 +37,7 @@ class BasicAuthConfig(troposphere.amplify.BasicAuthConfig, Mixin):
             Password=Password,
             Username=Username,
             EnableBasicAuth=EnableBasicAuth,
+            **kwargs
         )
         super(BasicAuthConfig, self).__init__(**processed_kwargs)
 
@@ -55,6 +56,7 @@ class CustomRule(troposphere.amplify.CustomRule, Mixin):
             Target=Target,
             Condition=Condition,
             Status=Status,
+            **kwargs
         )
         super(CustomRule, self).__init__(**processed_kwargs)
 
@@ -69,6 +71,7 @@ class EnvironmentVariable(troposphere.amplify.EnvironmentVariable, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(EnvironmentVariable, self).__init__(**processed_kwargs)
 
@@ -105,6 +108,7 @@ class App(troposphere.amplify.App, Mixin):
             IAMServiceRole=IAMServiceRole,
             OauthToken=OauthToken,
             Tags=Tags,
+            **kwargs
         )
         super(App, self).__init__(**processed_kwargs)
 
@@ -135,6 +139,7 @@ class Branch(troposphere.amplify.Branch, Mixin):
             EnvironmentVariables=EnvironmentVariables,
             Stage=Stage,
             Tags=Tags,
+            **kwargs
         )
         super(Branch, self).__init__(**processed_kwargs)
 
@@ -149,6 +154,7 @@ class SubDomainSetting(troposphere.amplify.SubDomainSetting, Mixin):
             title=title,
             BranchName=BranchName,
             Prefix=Prefix,
+            **kwargs
         )
         super(SubDomainSetting, self).__init__(**processed_kwargs)
 
@@ -169,5 +175,6 @@ class Domain(troposphere.amplify.Domain, Mixin):
             AppId=AppId,
             DomainName=DomainName,
             SubDomainSettings=SubDomainSettings,
+            **kwargs
         )
         super(Domain, self).__init__(**processed_kwargs)

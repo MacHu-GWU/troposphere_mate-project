@@ -31,6 +31,7 @@ class Subscription(troposphere.sns.Subscription, Mixin):
             title=title,
             Endpoint=Endpoint,
             Protocol=Protocol,
+            **kwargs
         )
         super(Subscription, self).__init__(**processed_kwargs)
 
@@ -59,6 +60,7 @@ class SubscriptionResource(troposphere.sns.SubscriptionResource, Mixin):
             FilterPolicy=FilterPolicy,
             RawMessageDelivery=RawMessageDelivery,
             Region=Region,
+            **kwargs
         )
         super(SubscriptionResource, self).__init__(**processed_kwargs)
 
@@ -77,6 +79,7 @@ class TopicPolicy(troposphere.sns.TopicPolicy, Mixin):
             validation=validation,
             PolicyDocument=PolicyDocument,
             Topics=Topics,
+            **kwargs
         )
         super(TopicPolicy, self).__init__(**processed_kwargs)
 
@@ -99,5 +102,6 @@ class Topic(troposphere.sns.Topic, Mixin):
             KmsMasterKeyId=KmsMasterKeyId,
             Subscription=Subscription,
             TopicName=TopicName,
+            **kwargs
         )
         super(Topic, self).__init__(**processed_kwargs)

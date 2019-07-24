@@ -43,6 +43,7 @@ class FileSystem(troposphere.efs.FileSystem, Mixin):
             PerformanceMode=PerformanceMode,
             ProvisionedThroughputInMibps=ProvisionedThroughputInMibps,
             ThroughputMode=ThroughputMode,
+            **kwargs
         )
         super(FileSystem, self).__init__(**processed_kwargs)
 
@@ -65,5 +66,6 @@ class MountTarget(troposphere.efs.MountTarget, Mixin):
             SecurityGroups=SecurityGroups,
             SubnetId=SubnetId,
             IpAddress=IpAddress,
+            **kwargs
         )
         super(MountTarget, self).__init__(**processed_kwargs)

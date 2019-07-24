@@ -37,6 +37,7 @@ class EBSStorageInfo(troposphere.msk.EBSStorageInfo, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             VolumeSize=VolumeSize,
+            **kwargs
         )
         super(EBSStorageInfo, self).__init__(**processed_kwargs)
 
@@ -49,6 +50,7 @@ class StorageInfo(troposphere.msk.StorageInfo, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             EBSStorageInfo=EBSStorageInfo,
+            **kwargs
         )
         super(StorageInfo, self).__init__(**processed_kwargs)
 
@@ -69,6 +71,7 @@ class BrokerNodeGroupInfo(troposphere.msk.BrokerNodeGroupInfo, Mixin):
             BrokerAZDistribution=BrokerAZDistribution,
             SecurityGroups=SecurityGroups,
             StorageInfo=StorageInfo,
+            **kwargs
         )
         super(BrokerNodeGroupInfo, self).__init__(**processed_kwargs)
 
@@ -81,6 +84,7 @@ class Tls(troposphere.msk.Tls, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CertificateAuthorityArnList=CertificateAuthorityArnList,
+            **kwargs
         )
         super(Tls, self).__init__(**processed_kwargs)
 
@@ -93,6 +97,7 @@ class ClientAuthentication(troposphere.msk.ClientAuthentication, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Tls=Tls,
+            **kwargs
         )
         super(ClientAuthentication, self).__init__(**processed_kwargs)
 
@@ -107,6 +112,7 @@ class ConfigurationInfo(troposphere.msk.ConfigurationInfo, Mixin):
             title=title,
             Arn=Arn,
             Revision=Revision,
+            **kwargs
         )
         super(ConfigurationInfo, self).__init__(**processed_kwargs)
 
@@ -119,6 +125,7 @@ class EncryptionAtRest(troposphere.msk.EncryptionAtRest, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DataVolumeKMSKeyId=DataVolumeKMSKeyId,
+            **kwargs
         )
         super(EncryptionAtRest, self).__init__(**processed_kwargs)
 
@@ -133,6 +140,7 @@ class EncryptionInTransit(troposphere.msk.EncryptionInTransit, Mixin):
             title=title,
             ClientBroker=ClientBroker,
             InCluster=InCluster,
+            **kwargs
         )
         super(EncryptionInTransit, self).__init__(**processed_kwargs)
 
@@ -147,6 +155,7 @@ class EncryptionInfo(troposphere.msk.EncryptionInfo, Mixin):
             title=title,
             EncryptionAtRest=EncryptionAtRest,
             EncryptionInTransit=EncryptionInTransit,
+            **kwargs
         )
         super(EncryptionInfo, self).__init__(**processed_kwargs)
 
@@ -179,5 +188,6 @@ class Cluster(troposphere.msk.Cluster, Mixin):
             EncryptionInfo=EncryptionInfo,
             EnhancedMonitoring=EnhancedMonitoring,
             Tags=Tags,
+            **kwargs
         )
         super(Cluster, self).__init__(**processed_kwargs)

@@ -41,5 +41,6 @@ class ResourceShare(troposphere.ram.ResourceShare, Mixin):
             Principals=Principals,
             ResourceArns=ResourceArns,
             Tags=Tags,
+            **kwargs
         )
         super(ResourceShare, self).__init__(**processed_kwargs)

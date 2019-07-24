@@ -73,6 +73,7 @@ class CsvClassifier(troposphere.glue.CsvClassifier, Mixin):
             Header=Header,
             Name=Name,
             QuoteSymbol=QuoteSymbol,
+            **kwargs
         )
         super(CsvClassifier, self).__init__(**processed_kwargs)
 
@@ -91,6 +92,7 @@ class GrokClassifier(troposphere.glue.GrokClassifier, Mixin):
             GrokPattern=GrokPattern,
             CustomPatterns=CustomPatterns,
             Name=Name,
+            **kwargs
         )
         super(GrokClassifier, self).__init__(**processed_kwargs)
 
@@ -105,6 +107,7 @@ class JsonClassifier(troposphere.glue.JsonClassifier, Mixin):
             title=title,
             JsonPath=JsonPath,
             Name=Name,
+            **kwargs
         )
         super(JsonClassifier, self).__init__(**processed_kwargs)
 
@@ -121,6 +124,7 @@ class XMLClassifier(troposphere.glue.XMLClassifier, Mixin):
             Classification=Classification,
             RowTag=RowTag,
             Name=Name,
+            **kwargs
         )
         super(XMLClassifier, self).__init__(**processed_kwargs)
 
@@ -143,6 +147,7 @@ class Classifier(troposphere.glue.Classifier, Mixin):
             GrokClassifier=GrokClassifier,
             JsonClassifier=JsonClassifier,
             XMLClassifier=XMLClassifier,
+            **kwargs
         )
         super(Classifier, self).__init__(**processed_kwargs)
 
@@ -159,6 +164,7 @@ class PhysicalConnectionRequirements(troposphere.glue.PhysicalConnectionRequirem
             AvailabilityZone=AvailabilityZone,
             SecurityGroupIdList=SecurityGroupIdList,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(PhysicalConnectionRequirements, self).__init__(**processed_kwargs)
 
@@ -181,6 +187,7 @@ class ConnectionInput(troposphere.glue.ConnectionInput, Mixin):
             MatchCriteria=MatchCriteria,
             Name=Name,
             PhysicalConnectionRequirements=PhysicalConnectionRequirements,
+            **kwargs
         )
         super(ConnectionInput, self).__init__(**processed_kwargs)
 
@@ -199,6 +206,7 @@ class Connection(troposphere.glue.Connection, Mixin):
             validation=validation,
             CatalogId=CatalogId,
             ConnectionInput=ConnectionInput,
+            **kwargs
         )
         super(Connection, self).__init__(**processed_kwargs)
 
@@ -211,6 +219,7 @@ class Schedule(troposphere.glue.Schedule, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ScheduleExpression=ScheduleExpression,
+            **kwargs
         )
         super(Schedule, self).__init__(**processed_kwargs)
 
@@ -225,6 +234,7 @@ class SchemaChangePolicy(troposphere.glue.SchemaChangePolicy, Mixin):
             title=title,
             DeleteBehavior=DeleteBehavior,
             UpdateBehavior=UpdateBehavior,
+            **kwargs
         )
         super(SchemaChangePolicy, self).__init__(**processed_kwargs)
 
@@ -241,6 +251,7 @@ class JdbcTarget(troposphere.glue.JdbcTarget, Mixin):
             ConnectionName=ConnectionName,
             Exclusions=Exclusions,
             Path=Path,
+            **kwargs
         )
         super(JdbcTarget, self).__init__(**processed_kwargs)
 
@@ -255,6 +266,7 @@ class S3Target(troposphere.glue.S3Target, Mixin):
             title=title,
             Exclusions=Exclusions,
             Path=Path,
+            **kwargs
         )
         super(S3Target, self).__init__(**processed_kwargs)
 
@@ -269,6 +281,7 @@ class Targets(troposphere.glue.Targets, Mixin):
             title=title,
             JdbcTargets=JdbcTargets,
             S3Targets=S3Targets,
+            **kwargs
         )
         super(Targets, self).__init__(**processed_kwargs)
 
@@ -307,6 +320,7 @@ class Crawler(troposphere.glue.Crawler, Mixin):
             SchemaChangePolicy=SchemaChangePolicy,
             TablePrefix=TablePrefix,
             Tags=Tags,
+            **kwargs
         )
         super(Crawler, self).__init__(**processed_kwargs)
 
@@ -321,6 +335,7 @@ class ConnectionPasswordEncryption(troposphere.glue.ConnectionPasswordEncryption
             title=title,
             KmsKeyId=KmsKeyId,
             ReturnConnectionPasswordEncrypted=ReturnConnectionPasswordEncrypted,
+            **kwargs
         )
         super(ConnectionPasswordEncryption, self).__init__(**processed_kwargs)
 
@@ -335,6 +350,7 @@ class EncryptionAtRest(troposphere.glue.EncryptionAtRest, Mixin):
             title=title,
             CatalogEncryptionMode=CatalogEncryptionMode,
             SseAwsKmsKeyId=SseAwsKmsKeyId,
+            **kwargs
         )
         super(EncryptionAtRest, self).__init__(**processed_kwargs)
 
@@ -349,6 +365,7 @@ class DataCatalogEncryptionSettingsProperty(troposphere.glue.DataCatalogEncrypti
             title=title,
             ConnectionPasswordEncryption=ConnectionPasswordEncryption,
             EncryptionAtRest=EncryptionAtRest,
+            **kwargs
         )
         super(DataCatalogEncryptionSettingsProperty, self).__init__(**processed_kwargs)
 
@@ -367,6 +384,7 @@ class DataCatalogEncryptionSettings(troposphere.glue.DataCatalogEncryptionSettin
             validation=validation,
             CatalogId=CatalogId,
             DataCatalogEncryptionSettings=DataCatalogEncryptionSettings,
+            **kwargs
         )
         super(DataCatalogEncryptionSettings, self).__init__(**processed_kwargs)
 
@@ -385,6 +403,7 @@ class DatabaseInput(troposphere.glue.DatabaseInput, Mixin):
             LocationUri=LocationUri,
             Name=Name,
             Parameters=Parameters,
+            **kwargs
         )
         super(DatabaseInput, self).__init__(**processed_kwargs)
 
@@ -403,6 +422,7 @@ class Database(troposphere.glue.Database, Mixin):
             validation=validation,
             CatalogId=CatalogId,
             DatabaseInput=DatabaseInput,
+            **kwargs
         )
         super(Database, self).__init__(**processed_kwargs)
 
@@ -437,6 +457,7 @@ class DevEndpoint(troposphere.glue.DevEndpoint, Mixin):
             SecurityGroupIds=SecurityGroupIds,
             SubnetId=SubnetId,
             Tags=Tags,
+            **kwargs
         )
         super(DevEndpoint, self).__init__(**processed_kwargs)
 
@@ -449,6 +470,7 @@ class ConnectionsList(troposphere.glue.ConnectionsList, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Connections=Connections,
+            **kwargs
         )
         super(ConnectionsList, self).__init__(**processed_kwargs)
 
@@ -461,6 +483,7 @@ class ExecutionProperty(troposphere.glue.ExecutionProperty, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             MaxConcurrentRuns=MaxConcurrentRuns,
+            **kwargs
         )
         super(ExecutionProperty, self).__init__(**processed_kwargs)
 
@@ -475,6 +498,7 @@ class JobCommand(troposphere.glue.JobCommand, Mixin):
             title=title,
             Name=Name,
             ScriptLocation=ScriptLocation,
+            **kwargs
         )
         super(JobCommand, self).__init__(**processed_kwargs)
 
@@ -513,6 +537,7 @@ class Job(troposphere.glue.Job, Mixin):
             Name=Name,
             SecurityConfiguration=SecurityConfiguration,
             Tags=Tags,
+            **kwargs
         )
         super(Job, self).__init__(**processed_kwargs)
 
@@ -529,6 +554,7 @@ class Column(troposphere.glue.Column, Mixin):
             Name=Name,
             Comment=Comment,
             Type=Type,
+            **kwargs
         )
         super(Column, self).__init__(**processed_kwargs)
 
@@ -543,6 +569,7 @@ class Order(troposphere.glue.Order, Mixin):
             title=title,
             Column=Column,
             SortOrder=SortOrder,
+            **kwargs
         )
         super(Order, self).__init__(**processed_kwargs)
 
@@ -559,6 +586,7 @@ class SerdeInfo(troposphere.glue.SerdeInfo, Mixin):
             Name=Name,
             Parameters=Parameters,
             SerializationLibrary=SerializationLibrary,
+            **kwargs
         )
         super(SerdeInfo, self).__init__(**processed_kwargs)
 
@@ -575,6 +603,7 @@ class SkewedInfo(troposphere.glue.SkewedInfo, Mixin):
             SkewedColumnNames=SkewedColumnNames,
             SkewedColumnValues=SkewedColumnValues,
             SkewedColumnValueLocationMaps=SkewedColumnValueLocationMaps,
+            **kwargs
         )
         super(SkewedInfo, self).__init__(**processed_kwargs)
 
@@ -609,6 +638,7 @@ class StorageDescriptor(troposphere.glue.StorageDescriptor, Mixin):
             SkewedInfo=SkewedInfo,
             SortColumns=SortColumns,
             StoredAsSubDirectories=StoredAsSubDirectories,
+            **kwargs
         )
         super(StorageDescriptor, self).__init__(**processed_kwargs)
 
@@ -625,6 +655,7 @@ class PartitionInput(troposphere.glue.PartitionInput, Mixin):
             Values=Values,
             Parameters=Parameters,
             StorageDescriptor=StorageDescriptor,
+            **kwargs
         )
         super(PartitionInput, self).__init__(**processed_kwargs)
 
@@ -647,6 +678,7 @@ class Partition(troposphere.glue.Partition, Mixin):
             DatabaseName=DatabaseName,
             PartitionInput=PartitionInput,
             TableName=TableName,
+            **kwargs
         )
         super(Partition, self).__init__(**processed_kwargs)
 
@@ -661,6 +693,7 @@ class CloudWatchEncryption(troposphere.glue.CloudWatchEncryption, Mixin):
             title=title,
             CloudWatchEncryptionMode=CloudWatchEncryptionMode,
             KmsKeyArn=KmsKeyArn,
+            **kwargs
         )
         super(CloudWatchEncryption, self).__init__(**processed_kwargs)
 
@@ -675,6 +708,7 @@ class JobBookmarksEncryption(troposphere.glue.JobBookmarksEncryption, Mixin):
             title=title,
             JobBookmarksEncryptionMode=JobBookmarksEncryptionMode,
             KmsKeyArn=KmsKeyArn,
+            **kwargs
         )
         super(JobBookmarksEncryption, self).__init__(**processed_kwargs)
 
@@ -685,6 +719,7 @@ class S3Encryptions(troposphere.glue.S3Encryptions, Mixin):
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
+            **kwargs
         )
         super(S3Encryptions, self).__init__(**processed_kwargs)
 
@@ -701,6 +736,7 @@ class EncryptionConfiguration(troposphere.glue.EncryptionConfiguration, Mixin):
             CloudWatchEncryption=CloudWatchEncryption,
             JobBookmarksEncryption=JobBookmarksEncryption,
             S3Encryptions=S3Encryptions,
+            **kwargs
         )
         super(EncryptionConfiguration, self).__init__(**processed_kwargs)
 
@@ -719,6 +755,7 @@ class SecurityConfiguration(troposphere.glue.SecurityConfiguration, Mixin):
             validation=validation,
             EncryptionConfiguration=EncryptionConfiguration,
             Name=Name,
+            **kwargs
         )
         super(SecurityConfiguration, self).__init__(**processed_kwargs)
 
@@ -749,6 +786,7 @@ class TableInput(troposphere.glue.TableInput, Mixin):
             TableType=TableType,
             ViewExpandedText=ViewExpandedText,
             ViewOriginalText=ViewOriginalText,
+            **kwargs
         )
         super(TableInput, self).__init__(**processed_kwargs)
 
@@ -769,6 +807,7 @@ class Table(troposphere.glue.Table, Mixin):
             CatalogId=CatalogId,
             DatabaseName=DatabaseName,
             TableInput=TableInput,
+            **kwargs
         )
         super(Table, self).__init__(**processed_kwargs)
 
@@ -785,6 +824,7 @@ class Action(troposphere.glue.Action, Mixin):
             Arguments=Arguments,
             JobName=JobName,
             SecurityConfiguration=SecurityConfiguration,
+            **kwargs
         )
         super(Action, self).__init__(**processed_kwargs)
 
@@ -801,6 +841,7 @@ class Condition(troposphere.glue.Condition, Mixin):
             JobName=JobName,
             LogicalOperator=LogicalOperator,
             State=State,
+            **kwargs
         )
         super(Condition, self).__init__(**processed_kwargs)
 
@@ -815,6 +856,7 @@ class Predicate(troposphere.glue.Predicate, Mixin):
             title=title,
             Conditions=Conditions,
             Logical=Logical,
+            **kwargs
         )
         super(Predicate, self).__init__(**processed_kwargs)
 
@@ -843,5 +885,6 @@ class Trigger(troposphere.glue.Trigger, Mixin):
             Predicate=Predicate,
             Schedule=Schedule,
             Tags=Tags,
+            **kwargs
         )
         super(Trigger, self).__init__(**processed_kwargs)

@@ -34,6 +34,7 @@ class Parameters(troposphere.dlm.Parameters, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ExcludeBootVolume=ExcludeBootVolume,
+            **kwargs
         )
         super(Parameters, self).__init__(**processed_kwargs)
 
@@ -50,6 +51,7 @@ class CreateRule(troposphere.dlm.CreateRule, Mixin):
             Interval=Interval,
             IntervalUnit=IntervalUnit,
             Times=Times,
+            **kwargs
         )
         super(CreateRule, self).__init__(**processed_kwargs)
 
@@ -62,6 +64,7 @@ class RetainRule(troposphere.dlm.RetainRule, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Count=Count,
+            **kwargs
         )
         super(RetainRule, self).__init__(**processed_kwargs)
 
@@ -82,6 +85,7 @@ class Schedule(troposphere.dlm.Schedule, Mixin):
             Name=Name,
             RetainRule=RetainRule,
             TagsToAdd=TagsToAdd,
+            **kwargs
         )
         super(Schedule, self).__init__(**processed_kwargs)
 
@@ -102,6 +106,7 @@ class PolicyDetails(troposphere.dlm.PolicyDetails, Mixin):
             ResourceTypes=ResourceTypes,
             Schedules=Schedules,
             TargetTags=TargetTags,
+            **kwargs
         )
         super(PolicyDetails, self).__init__(**processed_kwargs)
 
@@ -124,5 +129,6 @@ class LifecyclePolicy(troposphere.dlm.LifecyclePolicy, Mixin):
             ExecutionRoleArn=ExecutionRoleArn,
             PolicyDetails=PolicyDetails,
             State=State,
+            **kwargs
         )
         super(LifecyclePolicy, self).__init__(**processed_kwargs)

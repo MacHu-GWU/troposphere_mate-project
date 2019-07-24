@@ -49,6 +49,7 @@ class ActionTypeId(troposphere.codepipeline.ActionTypeId, Mixin):
             Owner=Owner,
             Provider=Provider,
             Version=Version,
+            **kwargs
         )
         super(ActionTypeId, self).__init__(**processed_kwargs)
 
@@ -63,6 +64,7 @@ class ArtifactDetails(troposphere.codepipeline.ArtifactDetails, Mixin):
             title=title,
             MaximumCount=MaximumCount,
             MinimumCount=MinimumCount,
+            **kwargs
         )
         super(ArtifactDetails, self).__init__(**processed_kwargs)
 
@@ -77,6 +79,7 @@ class Blockers(troposphere.codepipeline.Blockers, Mixin):
             title=title,
             Name=Name,
             Type=Type,
+            **kwargs
         )
         super(Blockers, self).__init__(**processed_kwargs)
 
@@ -101,6 +104,7 @@ class ConfigurationProperties(troposphere.codepipeline.ConfigurationProperties, 
             Description=Description,
             Queryable=Queryable,
             Type=Type,
+            **kwargs
         )
         super(ConfigurationProperties, self).__init__(**processed_kwargs)
 
@@ -115,6 +119,7 @@ class EncryptionKey(troposphere.codepipeline.EncryptionKey, Mixin):
             title=title,
             Id=Id,
             Type=Type,
+            **kwargs
         )
         super(EncryptionKey, self).__init__(**processed_kwargs)
 
@@ -129,6 +134,7 @@ class DisableInboundStageTransitions(troposphere.codepipeline.DisableInboundStag
             title=title,
             Reason=Reason,
             StageName=StageName,
+            **kwargs
         )
         super(DisableInboundStageTransitions, self).__init__(**processed_kwargs)
 
@@ -141,6 +147,7 @@ class InputArtifacts(troposphere.codepipeline.InputArtifacts, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Name=Name,
+            **kwargs
         )
         super(InputArtifacts, self).__init__(**processed_kwargs)
 
@@ -153,6 +160,7 @@ class OutputArtifacts(troposphere.codepipeline.OutputArtifacts, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Name=Name,
+            **kwargs
         )
         super(OutputArtifacts, self).__init__(**processed_kwargs)
 
@@ -171,6 +179,7 @@ class Settings(troposphere.codepipeline.Settings, Mixin):
             ExecutionUrlTemplate=ExecutionUrlTemplate,
             RevisionUrlTemplate=RevisionUrlTemplate,
             ThirdPartyConfigurationUrl=ThirdPartyConfigurationUrl,
+            **kwargs
         )
         super(Settings, self).__init__(**processed_kwargs)
 
@@ -187,6 +196,7 @@ class ArtifactStore(troposphere.codepipeline.ArtifactStore, Mixin):
             Location=Location,
             Type=Type,
             EncryptionKey=EncryptionKey,
+            **kwargs
         )
         super(ArtifactStore, self).__init__(**processed_kwargs)
 
@@ -201,6 +211,7 @@ class ArtifactStoreMap(troposphere.codepipeline.ArtifactStoreMap, Mixin):
             title=title,
             ArtifactStore=ArtifactStore,
             Region=Region,
+            **kwargs
         )
         super(ArtifactStoreMap, self).__init__(**processed_kwargs)
 
@@ -227,6 +238,7 @@ class Actions(troposphere.codepipeline.Actions, Mixin):
             Region=Region,
             RoleArn=RoleArn,
             RunOrder=RunOrder,
+            **kwargs
         )
         super(Actions, self).__init__(**processed_kwargs)
 
@@ -243,6 +255,7 @@ class Stages(troposphere.codepipeline.Stages, Mixin):
             Actions=Actions,
             Name=Name,
             Blockers=Blockers,
+            **kwargs
         )
         super(Stages, self).__init__(**processed_kwargs)
 
@@ -271,6 +284,7 @@ class CustomActionType(troposphere.codepipeline.CustomActionType, Mixin):
             ConfigurationProperties=ConfigurationProperties,
             Settings=Settings,
             Version=Version,
+            **kwargs
         )
         super(CustomActionType, self).__init__(**processed_kwargs)
 
@@ -299,6 +313,7 @@ class Pipeline(troposphere.codepipeline.Pipeline, Mixin):
             DisableInboundStageTransitions=DisableInboundStageTransitions,
             Name=Name,
             RestartExecutionOnUpdate=RestartExecutionOnUpdate,
+            **kwargs
         )
         super(Pipeline, self).__init__(**processed_kwargs)
 
@@ -313,6 +328,7 @@ class WebhookAuthConfiguration(troposphere.codepipeline.WebhookAuthConfiguration
             title=title,
             AllowedIPRange=AllowedIPRange,
             SecretToken=SecretToken,
+            **kwargs
         )
         super(WebhookAuthConfiguration, self).__init__(**processed_kwargs)
 
@@ -327,6 +343,7 @@ class WebhookFilterRule(troposphere.codepipeline.WebhookFilterRule, Mixin):
             title=title,
             JsonPath=JsonPath,
             MatchEquals=MatchEquals,
+            **kwargs
         )
         super(WebhookFilterRule, self).__init__(**processed_kwargs)
 
@@ -357,5 +374,6 @@ class Webhook(troposphere.codepipeline.Webhook, Mixin):
             TargetPipelineVersion=TargetPipelineVersion,
             Name=Name,
             RegisterWithThirdParty=RegisterWithThirdParty,
+            **kwargs
         )
         super(Webhook, self).__init__(**processed_kwargs)

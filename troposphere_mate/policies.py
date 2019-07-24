@@ -35,6 +35,7 @@ class AutoScalingRollingUpdate(troposphere.policies.AutoScalingRollingUpdate, Mi
             PauseTime=PauseTime,
             SuspendProcesses=SuspendProcesses,
             WaitOnResourceSignals=WaitOnResourceSignals,
+            **kwargs
         )
         super(AutoScalingRollingUpdate, self).__init__(**processed_kwargs)
 
@@ -47,6 +48,7 @@ class AutoScalingScheduledAction(troposphere.policies.AutoScalingScheduledAction
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             IgnoreUnmodifiedGroupSizeProperties=IgnoreUnmodifiedGroupSizeProperties,
+            **kwargs
         )
         super(AutoScalingScheduledAction, self).__init__(**processed_kwargs)
 
@@ -59,6 +61,7 @@ class AutoScalingReplacingUpdate(troposphere.policies.AutoScalingReplacingUpdate
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             WillReplace=WillReplace,
+            **kwargs
         )
         super(AutoScalingReplacingUpdate, self).__init__(**processed_kwargs)
 
@@ -77,6 +80,7 @@ class CodeDeployLambdaAliasUpdate(troposphere.policies.CodeDeployLambdaAliasUpda
             DeploymentGroupName=DeploymentGroupName,
             AfterAllowTrafficHook=AfterAllowTrafficHook,
             BeforeAllowTrafficHook=BeforeAllowTrafficHook,
+            **kwargs
         )
         super(CodeDeployLambdaAliasUpdate, self).__init__(**processed_kwargs)
 
@@ -91,6 +95,7 @@ class ResourceSignal(troposphere.policies.ResourceSignal, Mixin):
             title=title,
             Count=Count,
             Timeout=Timeout,
+            **kwargs
         )
         super(ResourceSignal, self).__init__(**processed_kwargs)
 
@@ -103,5 +108,6 @@ class AutoScalingCreationPolicy(troposphere.policies.AutoScalingCreationPolicy, 
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             MinSuccessfulInstancesPercent=MinSuccessfulInstancesPercent,
+            **kwargs
         )
         super(AutoScalingCreationPolicy, self).__init__(**processed_kwargs)

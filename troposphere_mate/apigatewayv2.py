@@ -33,6 +33,7 @@ class AccessLogSettings(troposphere.apigatewayv2.AccessLogSettings, Mixin):
             title=title,
             DestinationArn=DestinationArn,
             Format=Format,
+            **kwargs
         )
         super(AccessLogSettings, self).__init__(**processed_kwargs)
 
@@ -53,6 +54,7 @@ class RouteSettings(troposphere.apigatewayv2.RouteSettings, Mixin):
             LoggingLevel=LoggingLevel,
             ThrottlingBurstLimit=ThrottlingBurstLimit,
             ThrottlingRateLimit=ThrottlingRateLimit,
+            **kwargs
         )
         super(RouteSettings, self).__init__(**processed_kwargs)
 
@@ -81,6 +83,7 @@ class Api(troposphere.apigatewayv2.Api, Mixin):
             Description=Description,
             DisableSchemaValidation=DisableSchemaValidation,
             Version=Version,
+            **kwargs
         )
         super(Api, self).__init__(**processed_kwargs)
 
@@ -103,6 +106,7 @@ class ApiMapping(troposphere.apigatewayv2.ApiMapping, Mixin):
             DomainName=DomainName,
             Stage=Stage,
             ApiMappingKey=ApiMappingKey,
+            **kwargs
         )
         super(ApiMapping, self).__init__(**processed_kwargs)
 
@@ -133,6 +137,7 @@ class Authorizer(troposphere.apigatewayv2.Authorizer, Mixin):
             AuthorizerCredentialsArn=AuthorizerCredentialsArn,
             AuthorizerResultTtlInSeconds=AuthorizerResultTtlInSeconds,
             IdentityValidationExpression=IdentityValidationExpression,
+            **kwargs
         )
         super(Authorizer, self).__init__(**processed_kwargs)
 
@@ -153,6 +158,7 @@ class Deployment(troposphere.apigatewayv2.Deployment, Mixin):
             ApiId=ApiId,
             Description=Description,
             StageName=StageName,
+            **kwargs
         )
         super(Deployment, self).__init__(**processed_kwargs)
 
@@ -169,6 +175,7 @@ class DomainNameConfiguration(troposphere.apigatewayv2.DomainNameConfiguration, 
             CertificateArn=CertificateArn,
             CertificateName=CertificateName,
             EndpointType=EndpointType,
+            **kwargs
         )
         super(DomainNameConfiguration, self).__init__(**processed_kwargs)
 
@@ -187,6 +194,7 @@ class DomainName(troposphere.apigatewayv2.DomainName, Mixin):
             validation=validation,
             DomainName=DomainName,
             DomainNameConfigurations=DomainNameConfigurations,
+            **kwargs
         )
         super(DomainName, self).__init__(**processed_kwargs)
 
@@ -227,6 +235,7 @@ class Integration(troposphere.apigatewayv2.Integration, Mixin):
             RequestTemplates=RequestTemplates,
             TemplateSelectionExpression=TemplateSelectionExpression,
             TimeoutInMillis=TimeoutInMillis,
+            **kwargs
         )
         super(Integration, self).__init__(**processed_kwargs)
 
@@ -255,6 +264,7 @@ class IntegrationResponse(troposphere.apigatewayv2.IntegrationResponse, Mixin):
             ResponseParameters=ResponseParameters,
             ResponseTemplates=ResponseTemplates,
             TemplateSelectionExpression=TemplateSelectionExpression,
+            **kwargs
         )
         super(IntegrationResponse, self).__init__(**processed_kwargs)
 
@@ -279,6 +289,7 @@ class Model(troposphere.apigatewayv2.Model, Mixin):
             Schema=Schema,
             ContentType=ContentType,
             Description=Description,
+            **kwargs
         )
         super(Model, self).__init__(**processed_kwargs)
 
@@ -317,6 +328,7 @@ class Route(troposphere.apigatewayv2.Route, Mixin):
             RequestParameters=RequestParameters,
             RouteResponseSelectionExpression=RouteResponseSelectionExpression,
             Target=Target,
+            **kwargs
         )
         super(Route, self).__init__(**processed_kwargs)
 
@@ -343,6 +355,7 @@ class RouteResponse(troposphere.apigatewayv2.RouteResponse, Mixin):
             ModelSelectionExpression=ModelSelectionExpression,
             ResponseModels=ResponseModels,
             ResponseParameters=ResponseParameters,
+            **kwargs
         )
         super(RouteResponse, self).__init__(**processed_kwargs)
 
@@ -375,5 +388,6 @@ class Stage(troposphere.apigatewayv2.Stage, Mixin):
             Description=Description,
             RouteSettings=RouteSettings,
             StageVariables=StageVariables,
+            **kwargs
         )
         super(Stage, self).__init__(**processed_kwargs)

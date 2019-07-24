@@ -34,6 +34,7 @@ class MetricDimension(troposphere.cloudwatch.MetricDimension, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(MetricDimension, self).__init__(**processed_kwargs)
 
@@ -50,6 +51,7 @@ class Metric(troposphere.cloudwatch.Metric, Mixin):
             Dimensions=Dimensions,
             MetricName=MetricName,
             Namespace=Namespace,
+            **kwargs
         )
         super(Metric, self).__init__(**processed_kwargs)
 
@@ -68,6 +70,7 @@ class MetricStat(troposphere.cloudwatch.MetricStat, Mixin):
             Period=Period,
             Stat=Stat,
             Unit=Unit,
+            **kwargs
         )
         super(MetricStat, self).__init__(**processed_kwargs)
 
@@ -88,6 +91,7 @@ class MetricDataQuery(troposphere.cloudwatch.MetricDataQuery, Mixin):
             Label=Label,
             MetricStat=MetricStat,
             ReturnData=ReturnData,
+            **kwargs
         )
         super(MetricDataQuery, self).__init__(**processed_kwargs)
 
@@ -142,6 +146,7 @@ class Alarm(troposphere.cloudwatch.Alarm, Mixin):
             Statistic=Statistic,
             TreatMissingData=TreatMissingData,
             Unit=Unit,
+            **kwargs
         )
         super(Alarm, self).__init__(**processed_kwargs)
 
@@ -160,5 +165,6 @@ class Dashboard(troposphere.cloudwatch.Dashboard, Mixin):
             validation=validation,
             DashboardBody=DashboardBody,
             DashboardName=DashboardName,
+            **kwargs
         )
         super(Dashboard, self).__init__(**processed_kwargs)

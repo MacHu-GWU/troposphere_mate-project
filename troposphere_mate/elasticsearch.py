@@ -41,6 +41,7 @@ class EBSOptions(troposphere.elasticsearch.EBSOptions, Mixin):
             Iops=Iops,
             VolumeSize=VolumeSize,
             VolumeType=VolumeType,
+            **kwargs
         )
         super(EBSOptions, self).__init__(**processed_kwargs)
 
@@ -63,6 +64,7 @@ class ElasticsearchClusterConfig(troposphere.elasticsearch.ElasticsearchClusterC
             InstanceCount=InstanceCount,
             InstanceType=InstanceType,
             ZoneAwarenessEnabled=ZoneAwarenessEnabled,
+            **kwargs
         )
         super(ElasticsearchClusterConfig, self).__init__(**processed_kwargs)
 
@@ -77,6 +79,7 @@ class EncryptionAtRestOptions(troposphere.elasticsearch.EncryptionAtRestOptions,
             title=title,
             Enabled=Enabled,
             KmsKeyId=KmsKeyId,
+            **kwargs
         )
         super(EncryptionAtRestOptions, self).__init__(**processed_kwargs)
 
@@ -89,6 +92,7 @@ class NodeToNodeEncryptionOptions(troposphere.elasticsearch.NodeToNodeEncryption
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Enabled=Enabled,
+            **kwargs
         )
         super(NodeToNodeEncryptionOptions, self).__init__(**processed_kwargs)
 
@@ -101,6 +105,7 @@ class SnapshotOptions(troposphere.elasticsearch.SnapshotOptions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AutomatedSnapshotStartHour=AutomatedSnapshotStartHour,
+            **kwargs
         )
         super(SnapshotOptions, self).__init__(**processed_kwargs)
 
@@ -115,6 +120,7 @@ class VPCOptions(troposphere.elasticsearch.VPCOptions, Mixin):
             title=title,
             SecurityGroupIds=SecurityGroupIds,
             SubnetIds=SubnetIds,
+            **kwargs
         )
         super(VPCOptions, self).__init__(**processed_kwargs)
 
@@ -151,5 +157,6 @@ class Domain(troposphere.elasticsearch.Domain, Mixin):
             SnapshotOptions=SnapshotOptions,
             Tags=Tags,
             VPCOptions=VPCOptions,
+            **kwargs
         )
         super(Domain, self).__init__(**processed_kwargs)

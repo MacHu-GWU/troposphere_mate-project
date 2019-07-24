@@ -35,6 +35,7 @@ class AssessmentTarget(troposphere.inspector.AssessmentTarget, Mixin):
             validation=validation,
             AssessmentTargetName=AssessmentTargetName,
             ResourceGroupArn=ResourceGroupArn,
+            **kwargs
         )
         super(AssessmentTarget, self).__init__(**processed_kwargs)
 
@@ -59,6 +60,7 @@ class AssessmentTemplate(troposphere.inspector.AssessmentTemplate, Mixin):
             RulesPackageArns=RulesPackageArns,
             AssessmentTemplateName=AssessmentTemplateName,
             UserAttributesForFindings=UserAttributesForFindings,
+            **kwargs
         )
         super(AssessmentTemplate, self).__init__(**processed_kwargs)
 
@@ -75,5 +77,6 @@ class ResourceGroup(troposphere.inspector.ResourceGroup, Mixin):
             template=template,
             validation=validation,
             ResourceGroupTags=ResourceGroupTags,
+            **kwargs
         )
         super(ResourceGroup, self).__init__(**processed_kwargs)

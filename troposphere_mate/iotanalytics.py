@@ -61,6 +61,7 @@ class RetentionPeriod(troposphere.iotanalytics.RetentionPeriod, Mixin):
             title=title,
             NumberOfDays=NumberOfDays,
             Unlimited=Unlimited,
+            **kwargs
         )
         super(RetentionPeriod, self).__init__(**processed_kwargs)
 
@@ -81,6 +82,7 @@ class Channel(troposphere.iotanalytics.Channel, Mixin):
             ChannelName=ChannelName,
             RetentionPeriod=RetentionPeriod,
             Tags=Tags,
+            **kwargs
         )
         super(Channel, self).__init__(**processed_kwargs)
 
@@ -97,6 +99,7 @@ class AddAttributes(troposphere.iotanalytics.AddAttributes, Mixin):
             Attributes=Attributes,
             Name=Name,
             Next=Next,
+            **kwargs
         )
         super(AddAttributes, self).__init__(**processed_kwargs)
 
@@ -113,6 +116,7 @@ class ActivityChannel(troposphere.iotanalytics.ActivityChannel, Mixin):
             ChannelName=ChannelName,
             Name=Name,
             Next=Next,
+            **kwargs
         )
         super(ActivityChannel, self).__init__(**processed_kwargs)
 
@@ -129,6 +133,7 @@ class Datastore(troposphere.iotanalytics.Datastore, Mixin):
             DatastoreName=DatastoreName,
             RetentionPeriod=RetentionPeriod,
             Tags=Tags,
+            **kwargs
         )
         super(Datastore, self).__init__(**processed_kwargs)
 
@@ -149,6 +154,7 @@ class DeviceRegistryEnrich(troposphere.iotanalytics.DeviceRegistryEnrich, Mixin)
             Next=Next,
             RoleArn=RoleArn,
             ThingName=ThingName,
+            **kwargs
         )
         super(DeviceRegistryEnrich, self).__init__(**processed_kwargs)
 
@@ -169,6 +175,7 @@ class DeviceShadowEnrich(troposphere.iotanalytics.DeviceShadowEnrich, Mixin):
             Next=Next,
             RoleArn=RoleArn,
             ThingName=ThingName,
+            **kwargs
         )
         super(DeviceShadowEnrich, self).__init__(**processed_kwargs)
 
@@ -185,6 +192,7 @@ class Filter(troposphere.iotanalytics.Filter, Mixin):
             Filter=Filter,
             Name=Name,
             Next=Next,
+            **kwargs
         )
         super(Filter, self).__init__(**processed_kwargs)
 
@@ -203,6 +211,7 @@ class Lambda(troposphere.iotanalytics.Lambda, Mixin):
             LambdaName=LambdaName,
             Name=Name,
             Next=Next,
+            **kwargs
         )
         super(Lambda, self).__init__(**processed_kwargs)
 
@@ -221,6 +230,7 @@ class Math(troposphere.iotanalytics.Math, Mixin):
             Math=Math,
             Name=Name,
             Next=Next,
+            **kwargs
         )
         super(Math, self).__init__(**processed_kwargs)
 
@@ -237,6 +247,7 @@ class RemoveAttributes(troposphere.iotanalytics.RemoveAttributes, Mixin):
             Attributes=Attributes,
             Name=Name,
             Next=Next,
+            **kwargs
         )
         super(RemoveAttributes, self).__init__(**processed_kwargs)
 
@@ -253,6 +264,7 @@ class SelectAttributes(troposphere.iotanalytics.SelectAttributes, Mixin):
             Attributes=Attributes,
             Name=Name,
             Next=Next,
+            **kwargs
         )
         super(SelectAttributes, self).__init__(**processed_kwargs)
 
@@ -283,6 +295,7 @@ class Activity(troposphere.iotanalytics.Activity, Mixin):
             Math=Math,
             RemoveAttributes=RemoveAttributes,
             SelectAttributes=SelectAttributes,
+            **kwargs
         )
         super(Activity, self).__init__(**processed_kwargs)
 
@@ -303,6 +316,7 @@ class Pipeline(troposphere.iotanalytics.Pipeline, Mixin):
             PipelineActivities=PipelineActivities,
             PipelineName=PipelineName,
             Tags=Tags,
+            **kwargs
         )
         super(Pipeline, self).__init__(**processed_kwargs)
 
@@ -317,6 +331,7 @@ class RetentionPeriod(troposphere.iotanalytics.RetentionPeriod, Mixin):
             title=title,
             NumberOfDays=NumberOfDays,
             Unlimited=Unlimited,
+            **kwargs
         )
         super(RetentionPeriod, self).__init__(**processed_kwargs)
 
@@ -337,6 +352,7 @@ class Datastore(troposphere.iotanalytics.Datastore, Mixin):
             DatastoreName=DatastoreName,
             RetentionPeriod=RetentionPeriod,
             Tags=Tags,
+            **kwargs
         )
         super(Datastore, self).__init__(**processed_kwargs)
 
@@ -351,6 +367,7 @@ class ResourceConfiguration(troposphere.iotanalytics.ResourceConfiguration, Mixi
             title=title,
             ComputeType=ComputeType,
             VolumeSizeInGB=VolumeSizeInGB,
+            **kwargs
         )
         super(ResourceConfiguration, self).__init__(**processed_kwargs)
 
@@ -363,6 +380,7 @@ class DatasetContentVersionValue(troposphere.iotanalytics.DatasetContentVersionV
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DatasetName=DatasetName,
+            **kwargs
         )
         super(DatasetContentVersionValue, self).__init__(**processed_kwargs)
 
@@ -375,6 +393,7 @@ class OutputFileUriValue(troposphere.iotanalytics.OutputFileUriValue, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             FileName=FileName,
+            **kwargs
         )
         super(OutputFileUriValue, self).__init__(**processed_kwargs)
 
@@ -395,6 +414,7 @@ class Variable(troposphere.iotanalytics.Variable, Mixin):
             OutputFileUriValue=OutputFileUriValue,
             StringValue=StringValue,
             VariableName=VariableName,
+            **kwargs
         )
         super(Variable, self).__init__(**processed_kwargs)
 
@@ -413,6 +433,7 @@ class ContainerAction(troposphere.iotanalytics.ContainerAction, Mixin):
             Image=Image,
             ResourceConfiguration=ResourceConfiguration,
             Variables=Variables,
+            **kwargs
         )
         super(ContainerAction, self).__init__(**processed_kwargs)
 
@@ -427,6 +448,7 @@ class DeltaTime(troposphere.iotanalytics.DeltaTime, Mixin):
             title=title,
             TimeExpression=TimeExpression,
             OffsetSeconds=OffsetSeconds,
+            **kwargs
         )
         super(DeltaTime, self).__init__(**processed_kwargs)
 
@@ -439,6 +461,7 @@ class QueryActionFilter(troposphere.iotanalytics.QueryActionFilter, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DeltaTime=DeltaTime,
+            **kwargs
         )
         super(QueryActionFilter, self).__init__(**processed_kwargs)
 
@@ -453,6 +476,7 @@ class QueryAction(troposphere.iotanalytics.QueryAction, Mixin):
             title=title,
             Filters=Filters,
             SqlQuery=SqlQuery,
+            **kwargs
         )
         super(QueryAction, self).__init__(**processed_kwargs)
 
@@ -469,6 +493,7 @@ class Action(troposphere.iotanalytics.Action, Mixin):
             ActionName=ActionName,
             ContainerAction=ContainerAction,
             QueryAction=QueryAction,
+            **kwargs
         )
         super(Action, self).__init__(**processed_kwargs)
 
@@ -483,6 +508,7 @@ class IotEventsDestinationConfiguration(troposphere.iotanalytics.IotEventsDestin
             title=title,
             InputName=InputName,
             RoleArn=RoleArn,
+            **kwargs
         )
         super(IotEventsDestinationConfiguration, self).__init__(**processed_kwargs)
 
@@ -497,6 +523,7 @@ class GlueConfiguration(troposphere.iotanalytics.GlueConfiguration, Mixin):
             title=title,
             DatabaseName=DatabaseName,
             TableName=TableName,
+            **kwargs
         )
         super(GlueConfiguration, self).__init__(**processed_kwargs)
 
@@ -515,6 +542,7 @@ class S3DestinationConfiguration(troposphere.iotanalytics.S3DestinationConfigura
             Key=Key,
             RoleArn=RoleArn,
             GlueConfiguration=GlueConfiguration,
+            **kwargs
         )
         super(S3DestinationConfiguration, self).__init__(**processed_kwargs)
 
@@ -529,6 +557,7 @@ class DatasetContentDeliveryRuleDestination(troposphere.iotanalytics.DatasetCont
             title=title,
             IotEventsDestinationConfiguration=IotEventsDestinationConfiguration,
             S3DestinationConfiguration=S3DestinationConfiguration,
+            **kwargs
         )
         super(DatasetContentDeliveryRuleDestination, self).__init__(**processed_kwargs)
 
@@ -543,6 +572,7 @@ class DatasetContentDeliveryRule(troposphere.iotanalytics.DatasetContentDelivery
             title=title,
             Destination=Destination,
             EntryName=EntryName,
+            **kwargs
         )
         super(DatasetContentDeliveryRule, self).__init__(**processed_kwargs)
 
@@ -555,6 +585,7 @@ class Schedule(troposphere.iotanalytics.Schedule, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ScheduleExpression=ScheduleExpression,
+            **kwargs
         )
         super(Schedule, self).__init__(**processed_kwargs)
 
@@ -567,6 +598,7 @@ class TriggeringDataset(troposphere.iotanalytics.TriggeringDataset, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DatasetName=DatasetName,
+            **kwargs
         )
         super(TriggeringDataset, self).__init__(**processed_kwargs)
 
@@ -581,6 +613,7 @@ class Trigger(troposphere.iotanalytics.Trigger, Mixin):
             title=title,
             Schedule=Schedule,
             TriggeringDataset=TriggeringDataset,
+            **kwargs
         )
         super(Trigger, self).__init__(**processed_kwargs)
 
@@ -595,6 +628,7 @@ class VersioningConfiguration(troposphere.iotanalytics.VersioningConfiguration, 
             title=title,
             MaxVersions=MaxVersions,
             Unlimited=Unlimited,
+            **kwargs
         )
         super(VersioningConfiguration, self).__init__(**processed_kwargs)
 
@@ -623,5 +657,6 @@ class Dataset(troposphere.iotanalytics.Dataset, Mixin):
             Tags=Tags,
             Triggers=Triggers,
             VersioningConfiguration=VersioningConfiguration,
+            **kwargs
         )
         super(Dataset, self).__init__(**processed_kwargs)

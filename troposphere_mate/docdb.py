@@ -63,6 +63,7 @@ class DBCluster(troposphere.docdb.DBCluster, Mixin):
             StorageEncrypted=StorageEncrypted,
             Tags=Tags,
             VpcSecurityGroupIds=VpcSecurityGroupIds,
+            **kwargs
         )
         super(DBCluster, self).__init__(**processed_kwargs)
 
@@ -87,6 +88,7 @@ class DBClusterParameterGroup(troposphere.docdb.DBClusterParameterGroup, Mixin):
             Parameters=Parameters,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(DBClusterParameterGroup, self).__init__(**processed_kwargs)
 
@@ -115,6 +117,7 @@ class DBInstance(troposphere.docdb.DBInstance, Mixin):
             DBInstanceIdentifier=DBInstanceIdentifier,
             PreferredMaintenanceWindow=PreferredMaintenanceWindow,
             Tags=Tags,
+            **kwargs
         )
         super(DBInstance, self).__init__(**processed_kwargs)
 
@@ -137,5 +140,6 @@ class DBSubnetGroup(troposphere.docdb.DBSubnetGroup, Mixin):
             SubnetIds=SubnetIds,
             DBSubnetGroupName=DBSubnetGroupName,
             Tags=Tags,
+            **kwargs
         )
         super(DBSubnetGroup, self).__init__(**processed_kwargs)

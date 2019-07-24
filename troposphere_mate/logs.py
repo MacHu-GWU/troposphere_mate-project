@@ -39,6 +39,7 @@ class Destination(troposphere.logs.Destination, Mixin):
             DestinationPolicy=DestinationPolicy,
             RoleArn=RoleArn,
             TargetArn=TargetArn,
+            **kwargs
         )
         super(Destination, self).__init__(**processed_kwargs)
 
@@ -57,6 +58,7 @@ class LogGroup(troposphere.logs.LogGroup, Mixin):
             validation=validation,
             LogGroupName=LogGroupName,
             RetentionInDays=RetentionInDays,
+            **kwargs
         )
         super(LogGroup, self).__init__(**processed_kwargs)
 
@@ -75,6 +77,7 @@ class LogStream(troposphere.logs.LogStream, Mixin):
             validation=validation,
             LogGroupName=LogGroupName,
             LogStreamName=LogStreamName,
+            **kwargs
         )
         super(LogStream, self).__init__(**processed_kwargs)
 
@@ -93,6 +96,7 @@ class MetricTransformation(troposphere.logs.MetricTransformation, Mixin):
             MetricNamespace=MetricNamespace,
             MetricValue=MetricValue,
             DefaultValue=DefaultValue,
+            **kwargs
         )
         super(MetricTransformation, self).__init__(**processed_kwargs)
 
@@ -113,6 +117,7 @@ class MetricFilter(troposphere.logs.MetricFilter, Mixin):
             FilterPattern=FilterPattern,
             LogGroupName=LogGroupName,
             MetricTransformations=MetricTransformations,
+            **kwargs
         )
         super(MetricFilter, self).__init__(**processed_kwargs)
 
@@ -135,5 +140,6 @@ class SubscriptionFilter(troposphere.logs.SubscriptionFilter, Mixin):
             FilterPattern=FilterPattern,
             LogGroupName=LogGroupName,
             RoleArn=RoleArn,
+            **kwargs
         )
         super(SubscriptionFilter, self).__init__(**processed_kwargs)

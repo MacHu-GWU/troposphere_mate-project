@@ -36,6 +36,7 @@ class ParameterObjectAttribute(troposphere.datapipeline.ParameterObjectAttribute
             title=title,
             Key=Key,
             StringValue=StringValue,
+            **kwargs
         )
         super(ParameterObjectAttribute, self).__init__(**processed_kwargs)
 
@@ -50,6 +51,7 @@ class ParameterObject(troposphere.datapipeline.ParameterObject, Mixin):
             title=title,
             Attributes=Attributes,
             Id=Id,
+            **kwargs
         )
         super(ParameterObject, self).__init__(**processed_kwargs)
 
@@ -64,6 +66,7 @@ class ParameterValue(troposphere.datapipeline.ParameterValue, Mixin):
             title=title,
             Id=Id,
             StringValue=StringValue,
+            **kwargs
         )
         super(ParameterValue, self).__init__(**processed_kwargs)
 
@@ -80,6 +83,7 @@ class ObjectField(troposphere.datapipeline.ObjectField, Mixin):
             Key=Key,
             RefValue=RefValue,
             StringValue=StringValue,
+            **kwargs
         )
         super(ObjectField, self).__init__(**processed_kwargs)
 
@@ -96,6 +100,7 @@ class PipelineObject(troposphere.datapipeline.PipelineObject, Mixin):
             Fields=Fields,
             Id=Id,
             Name=Name,
+            **kwargs
         )
         super(PipelineObject, self).__init__(**processed_kwargs)
 
@@ -110,6 +115,7 @@ class PipelineTag(troposphere.datapipeline.PipelineTag, Mixin):
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(PipelineTag, self).__init__(**processed_kwargs)
 
@@ -138,5 +144,6 @@ class Pipeline(troposphere.datapipeline.Pipeline, Mixin):
             ParameterObjects=ParameterObjects,
             ParameterValues=ParameterValues,
             PipelineTags=PipelineTags,
+            **kwargs
         )
         super(Pipeline, self).__init__(**processed_kwargs)

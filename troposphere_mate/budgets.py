@@ -37,6 +37,7 @@ class Spend(troposphere.budgets.Spend, Mixin):
             title=title,
             Amount=Amount,
             Unit=Unit,
+            **kwargs
         )
         super(Spend, self).__init__(**processed_kwargs)
 
@@ -69,6 +70,7 @@ class CostTypes(troposphere.budgets.CostTypes, Mixin):
             IncludeUpfront=IncludeUpfront,
             UseAmortized=UseAmortized,
             UseBlended=UseBlended,
+            **kwargs
         )
         super(CostTypes, self).__init__(**processed_kwargs)
 
@@ -83,6 +85,7 @@ class TimePeriod(troposphere.budgets.TimePeriod, Mixin):
             title=title,
             End=End,
             Start=Start,
+            **kwargs
         )
         super(TimePeriod, self).__init__(**processed_kwargs)
 
@@ -107,6 +110,7 @@ class BudgetData(troposphere.budgets.BudgetData, Mixin):
             CostFilters=CostFilters,
             CostTypes=CostTypes,
             TimePeriod=TimePeriod,
+            **kwargs
         )
         super(BudgetData, self).__init__(**processed_kwargs)
 
@@ -125,6 +129,7 @@ class Notification(troposphere.budgets.Notification, Mixin):
             NotificationType=NotificationType,
             Threshold=Threshold,
             ThresholdType=ThresholdType,
+            **kwargs
         )
         super(Notification, self).__init__(**processed_kwargs)
 
@@ -139,6 +144,7 @@ class Subscriber(troposphere.budgets.Subscriber, Mixin):
             title=title,
             Address=Address,
             SubscriptionType=SubscriptionType,
+            **kwargs
         )
         super(Subscriber, self).__init__(**processed_kwargs)
 
@@ -153,6 +159,7 @@ class NotificationWithSubscribers(troposphere.budgets.NotificationWithSubscriber
             title=title,
             Notification=Notification,
             Subscribers=Subscribers,
+            **kwargs
         )
         super(NotificationWithSubscribers, self).__init__(**processed_kwargs)
 
@@ -171,5 +178,6 @@ class Budget(troposphere.budgets.Budget, Mixin):
             validation=validation,
             Budget=Budget,
             NotificationsWithSubscribers=NotificationsWithSubscribers,
+            **kwargs
         )
         super(Budget, self).__init__(**processed_kwargs)

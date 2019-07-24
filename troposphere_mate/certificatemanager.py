@@ -32,6 +32,7 @@ class DomainValidationOption(troposphere.certificatemanager.DomainValidationOpti
             title=title,
             DomainName=DomainName,
             ValidationDomain=ValidationDomain,
+            **kwargs
         )
         super(DomainValidationOption, self).__init__(**processed_kwargs)
 
@@ -56,5 +57,6 @@ class Certificate(troposphere.certificatemanager.Certificate, Mixin):
             SubjectAlternativeNames=SubjectAlternativeNames,
             Tags=Tags,
             ValidationMethod=ValidationMethod,
+            **kwargs
         )
         super(Certificate, self).__init__(**processed_kwargs)

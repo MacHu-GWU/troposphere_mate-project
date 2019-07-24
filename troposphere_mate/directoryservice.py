@@ -31,6 +31,7 @@ class VpcSettings(troposphere.directoryservice.VpcSettings, Mixin):
             title=title,
             SubnetIds=SubnetIds,
             VpcId=VpcId,
+            **kwargs
         )
         super(VpcSettings, self).__init__(**processed_kwargs)
 
@@ -59,6 +60,7 @@ class MicrosoftAD(troposphere.directoryservice.MicrosoftAD, Mixin):
             Edition=Edition,
             EnableSso=EnableSso,
             ShortName=ShortName,
+            **kwargs
         )
         super(MicrosoftAD, self).__init__(**processed_kwargs)
 
@@ -89,5 +91,6 @@ class SimpleAD(troposphere.directoryservice.SimpleAD, Mixin):
             Description=Description,
             EnableSso=EnableSso,
             ShortName=ShortName,
+            **kwargs
         )
         super(SimpleAD, self).__init__(**processed_kwargs)

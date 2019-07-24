@@ -34,6 +34,7 @@ class Detector(troposphere.guardduty.Detector, Mixin):
             template=template,
             validation=validation,
             Enable=Enable,
+            **kwargs
         )
         super(Detector, self).__init__(**processed_kwargs)
 
@@ -54,6 +55,7 @@ class Condition(troposphere.guardduty.Condition, Mixin):
             Lt=Lt,
             Lte=Lte,
             Neq=Neq,
+            **kwargs
         )
         super(Condition, self).__init__(**processed_kwargs)
 
@@ -68,6 +70,7 @@ class FindingCriteria(troposphere.guardduty.FindingCriteria, Mixin):
             title=title,
             Criterion=Criterion,
             ItemType=ItemType,
+            **kwargs
         )
         super(FindingCriteria, self).__init__(**processed_kwargs)
 
@@ -94,6 +97,7 @@ class Filter(troposphere.guardduty.Filter, Mixin):
             FindingCriteria=FindingCriteria,
             Rank=Rank,
             Name=Name,
+            **kwargs
         )
         super(Filter, self).__init__(**processed_kwargs)
 
@@ -118,6 +122,7 @@ class IPSet(troposphere.guardduty.IPSet, Mixin):
             Format=Format,
             Location=Location,
             Name=Name,
+            **kwargs
         )
         super(IPSet, self).__init__(**processed_kwargs)
 
@@ -138,6 +143,7 @@ class Master(troposphere.guardduty.Master, Mixin):
             DetectorId=DetectorId,
             MasterId=MasterId,
             InvitationId=InvitationId,
+            **kwargs
         )
         super(Master, self).__init__(**processed_kwargs)
 
@@ -164,6 +170,7 @@ class Member(troposphere.guardduty.Member, Mixin):
             Message=Message,
             Status=Status,
             DisableEmailNotification=DisableEmailNotification,
+            **kwargs
         )
         super(Member, self).__init__(**processed_kwargs)
 
@@ -188,5 +195,6 @@ class ThreatIntelSet(troposphere.guardduty.ThreatIntelSet, Mixin):
             Format=Format,
             Location=Location,
             Name=Name,
+            **kwargs
         )
         super(ThreatIntelSet, self).__init__(**processed_kwargs)

@@ -33,6 +33,7 @@ class LoggingProperties(troposphere.redshift.LoggingProperties, Mixin):
             title=title,
             BucketName=BucketName,
             S3KeyPrefix=S3KeyPrefix,
+            **kwargs
         )
         super(LoggingProperties, self).__init__(**processed_kwargs)
 
@@ -105,6 +106,7 @@ class Cluster(troposphere.redshift.Cluster, Mixin):
             SnapshotIdentifier=SnapshotIdentifier,
             Tags=Tags,
             VpcSecurityGroupIds=VpcSecurityGroupIds,
+            **kwargs
         )
         super(Cluster, self).__init__(**processed_kwargs)
 
@@ -119,6 +121,7 @@ class AmazonRedshiftParameter(troposphere.redshift.AmazonRedshiftParameter, Mixi
             title=title,
             ParameterName=ParameterName,
             ParameterValue=ParameterValue,
+            **kwargs
         )
         super(AmazonRedshiftParameter, self).__init__(**processed_kwargs)
 
@@ -141,6 +144,7 @@ class ClusterParameterGroup(troposphere.redshift.ClusterParameterGroup, Mixin):
             ParameterGroupFamily=ParameterGroupFamily,
             Parameters=Parameters,
             Tags=Tags,
+            **kwargs
         )
         super(ClusterParameterGroup, self).__init__(**processed_kwargs)
 
@@ -159,6 +163,7 @@ class ClusterSecurityGroup(troposphere.redshift.ClusterSecurityGroup, Mixin):
             validation=validation,
             Description=Description,
             Tags=Tags,
+            **kwargs
         )
         super(ClusterSecurityGroup, self).__init__(**processed_kwargs)
 
@@ -181,6 +186,7 @@ class ClusterSecurityGroupIngress(troposphere.redshift.ClusterSecurityGroupIngre
             CIDRIP=CIDRIP,
             EC2SecurityGroupName=EC2SecurityGroupName,
             EC2SecurityGroupOwnerId=EC2SecurityGroupOwnerId,
+            **kwargs
         )
         super(ClusterSecurityGroupIngress, self).__init__(**processed_kwargs)
 
@@ -201,5 +207,6 @@ class ClusterSubnetGroup(troposphere.redshift.ClusterSubnetGroup, Mixin):
             Description=Description,
             SubnetIds=SubnetIds,
             Tags=Tags,
+            **kwargs
         )
         super(ClusterSubnetGroup, self).__init__(**processed_kwargs)

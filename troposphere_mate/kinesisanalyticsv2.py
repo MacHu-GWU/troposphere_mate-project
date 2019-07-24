@@ -63,6 +63,7 @@ class S3ContentLocation(troposphere.kinesisanalyticsv2.S3ContentLocation, Mixin)
             BucketARN=BucketARN,
             FileKey=FileKey,
             ObjectVersion=ObjectVersion,
+            **kwargs
         )
         super(S3ContentLocation, self).__init__(**processed_kwargs)
 
@@ -77,6 +78,7 @@ class CodeContent(troposphere.kinesisanalyticsv2.CodeContent, Mixin):
             title=title,
             ZipFileContent=ZipFileContent,
             TextContent=TextContent,
+            **kwargs
         )
         super(CodeContent, self).__init__(**processed_kwargs)
 
@@ -91,6 +93,7 @@ class ApplicationCodeConfiguration(troposphere.kinesisanalyticsv2.ApplicationCod
             title=title,
             CodeContentType=CodeContentType,
             CodeContent=CodeContent,
+            **kwargs
         )
         super(ApplicationCodeConfiguration, self).__init__(**processed_kwargs)
 
@@ -105,6 +108,7 @@ class PropertyGroup(troposphere.kinesisanalyticsv2.PropertyGroup, Mixin):
             title=title,
             PropertyMap=PropertyMap,
             PropertyGroupId=PropertyGroupId,
+            **kwargs
         )
         super(PropertyGroup, self).__init__(**processed_kwargs)
 
@@ -117,6 +121,7 @@ class EnvironmentProperties(troposphere.kinesisanalyticsv2.EnvironmentProperties
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             PropertyGroups=PropertyGroups,
+            **kwargs
         )
         super(EnvironmentProperties, self).__init__(**processed_kwargs)
 
@@ -135,6 +140,7 @@ class CheckpointConfiguration(troposphere.kinesisanalyticsv2.CheckpointConfigura
             CheckpointInterval=CheckpointInterval,
             MinPauseBetweenCheckpoints=MinPauseBetweenCheckpoints,
             CheckpointingEnabled=CheckpointingEnabled,
+            **kwargs
         )
         super(CheckpointConfiguration, self).__init__(**processed_kwargs)
 
@@ -151,6 +157,7 @@ class MonitoringConfiguration(troposphere.kinesisanalyticsv2.MonitoringConfigura
             ConfigurationType=ConfigurationType,
             MetricsLevel=MetricsLevel,
             LogLevel=LogLevel,
+            **kwargs
         )
         super(MonitoringConfiguration, self).__init__(**processed_kwargs)
 
@@ -169,6 +176,7 @@ class ParallelismConfiguration(troposphere.kinesisanalyticsv2.ParallelismConfigu
             ParallelismPerKPU=ParallelismPerKPU,
             AutoScalingEnabled=AutoScalingEnabled,
             Parallelism=Parallelism,
+            **kwargs
         )
         super(ParallelismConfiguration, self).__init__(**processed_kwargs)
 
@@ -185,6 +193,7 @@ class FlinkApplicationConfiguration(troposphere.kinesisanalyticsv2.FlinkApplicat
             CheckpointConfiguration=CheckpointConfiguration,
             ParallelismConfiguration=ParallelismConfiguration,
             MonitoringConfiguration=MonitoringConfiguration,
+            **kwargs
         )
         super(FlinkApplicationConfiguration, self).__init__(**processed_kwargs)
 
@@ -197,6 +206,7 @@ class InputParallelism(troposphere.kinesisanalyticsv2.InputParallelism, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Count=Count,
+            **kwargs
         )
         super(InputParallelism, self).__init__(**processed_kwargs)
 
@@ -209,6 +219,7 @@ class InputLambdaProcessor(troposphere.kinesisanalyticsv2.InputLambdaProcessor, 
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ResourceARN=ResourceARN,
+            **kwargs
         )
         super(InputLambdaProcessor, self).__init__(**processed_kwargs)
 
@@ -221,6 +232,7 @@ class InputProcessingConfiguration(troposphere.kinesisanalyticsv2.InputProcessin
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             InputLambdaProcessor=InputLambdaProcessor,
+            **kwargs
         )
         super(InputProcessingConfiguration, self).__init__(**processed_kwargs)
 
@@ -237,6 +249,7 @@ class RecordColumn(troposphere.kinesisanalyticsv2.RecordColumn, Mixin):
             SqlType=SqlType,
             Name=Name,
             Mapping=Mapping,
+            **kwargs
         )
         super(RecordColumn, self).__init__(**processed_kwargs)
 
@@ -249,6 +262,7 @@ class JSONMappingParameters(troposphere.kinesisanalyticsv2.JSONMappingParameters
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             RecordRowPath=RecordRowPath,
+            **kwargs
         )
         super(JSONMappingParameters, self).__init__(**processed_kwargs)
 
@@ -263,6 +277,7 @@ class CSVMappingParameters(troposphere.kinesisanalyticsv2.CSVMappingParameters, 
             title=title,
             RecordRowDelimiter=RecordRowDelimiter,
             RecordColumnDelimiter=RecordColumnDelimiter,
+            **kwargs
         )
         super(CSVMappingParameters, self).__init__(**processed_kwargs)
 
@@ -277,6 +292,7 @@ class MappingParameters(troposphere.kinesisanalyticsv2.MappingParameters, Mixin)
             title=title,
             JSONMappingParameters=JSONMappingParameters,
             CSVMappingParameters=CSVMappingParameters,
+            **kwargs
         )
         super(MappingParameters, self).__init__(**processed_kwargs)
 
@@ -291,6 +307,7 @@ class RecordFormat(troposphere.kinesisanalyticsv2.RecordFormat, Mixin):
             title=title,
             RecordFormatType=RecordFormatType,
             MappingParameters=MappingParameters,
+            **kwargs
         )
         super(RecordFormat, self).__init__(**processed_kwargs)
 
@@ -307,6 +324,7 @@ class InputSchema(troposphere.kinesisanalyticsv2.InputSchema, Mixin):
             RecordColumns=RecordColumns,
             RecordFormat=RecordFormat,
             RecordEncoding=RecordEncoding,
+            **kwargs
         )
         super(InputSchema, self).__init__(**processed_kwargs)
 
@@ -319,6 +337,7 @@ class KinesisStreamsInput(troposphere.kinesisanalyticsv2.KinesisStreamsInput, Mi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ResourceARN=ResourceARN,
+            **kwargs
         )
         super(KinesisStreamsInput, self).__init__(**processed_kwargs)
 
@@ -331,6 +350,7 @@ class KinesisFirehoseInput(troposphere.kinesisanalyticsv2.KinesisFirehoseInput, 
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ResourceARN=ResourceARN,
+            **kwargs
         )
         super(KinesisFirehoseInput, self).__init__(**processed_kwargs)
 
@@ -353,6 +373,7 @@ class Input(troposphere.kinesisanalyticsv2.Input, Mixin):
             KinesisFirehoseInput=KinesisFirehoseInput,
             InputProcessingConfiguration=InputProcessingConfiguration,
             InputParallelism=InputParallelism,
+            **kwargs
         )
         super(Input, self).__init__(**processed_kwargs)
 
@@ -365,6 +386,7 @@ class SqlApplicationConfiguration(troposphere.kinesisanalyticsv2.SqlApplicationC
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Inputs=Inputs,
+            **kwargs
         )
         super(SqlApplicationConfiguration, self).__init__(**processed_kwargs)
 
@@ -377,6 +399,7 @@ class ApplicationSnapshotConfiguration(troposphere.kinesisanalyticsv2.Applicatio
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SnapshotsEnabled=SnapshotsEnabled,
+            **kwargs
         )
         super(ApplicationSnapshotConfiguration, self).__init__(**processed_kwargs)
 
@@ -397,6 +420,7 @@ class ApplicationConfiguration(troposphere.kinesisanalyticsv2.ApplicationConfigu
             FlinkApplicationConfiguration=FlinkApplicationConfiguration,
             SqlApplicationConfiguration=SqlApplicationConfiguration,
             ApplicationSnapshotConfiguration=ApplicationSnapshotConfiguration,
+            **kwargs
         )
         super(ApplicationConfiguration, self).__init__(**processed_kwargs)
 
@@ -421,6 +445,7 @@ class Application(troposphere.kinesisanalyticsv2.Application, Mixin):
             ApplicationName=ApplicationName,
             ApplicationConfiguration=ApplicationConfiguration,
             ApplicationDescription=ApplicationDescription,
+            **kwargs
         )
         super(Application, self).__init__(**processed_kwargs)
 
@@ -435,6 +460,7 @@ class S3ReferenceDataSource(troposphere.kinesisanalyticsv2.S3ReferenceDataSource
             title=title,
             BucketARN=BucketARN,
             FileKey=FileKey,
+            **kwargs
         )
         super(S3ReferenceDataSource, self).__init__(**processed_kwargs)
 
@@ -451,6 +477,7 @@ class ReferenceSchema(troposphere.kinesisanalyticsv2.ReferenceSchema, Mixin):
             RecordColumns=RecordColumns,
             RecordFormat=RecordFormat,
             RecordEncoding=RecordEncoding,
+            **kwargs
         )
         super(ReferenceSchema, self).__init__(**processed_kwargs)
 
@@ -467,6 +494,7 @@ class ReferenceDataSource(troposphere.kinesisanalyticsv2.ReferenceDataSource, Mi
             ReferenceSchema=ReferenceSchema,
             TableName=TableName,
             S3ReferenceDataSource=S3ReferenceDataSource,
+            **kwargs
         )
         super(ReferenceDataSource, self).__init__(**processed_kwargs)
 
@@ -485,6 +513,7 @@ class ApplicationReferenceDataSource(troposphere.kinesisanalyticsv2.ApplicationR
             validation=validation,
             ApplicationName=ApplicationName,
             ReferenceDataSource=ReferenceDataSource,
+            **kwargs
         )
         super(ApplicationReferenceDataSource, self).__init__(**processed_kwargs)
 
@@ -497,6 +526,7 @@ class LambdaOutput(troposphere.kinesisanalyticsv2.LambdaOutput, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ResourceARN=ResourceARN,
+            **kwargs
         )
         super(LambdaOutput, self).__init__(**processed_kwargs)
 
@@ -509,6 +539,7 @@ class KinesisFirehoseOutput(troposphere.kinesisanalyticsv2.KinesisFirehoseOutput
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ResourceARN=ResourceARN,
+            **kwargs
         )
         super(KinesisFirehoseOutput, self).__init__(**processed_kwargs)
 
@@ -521,6 +552,7 @@ class KinesisStreamsOutput(troposphere.kinesisanalyticsv2.KinesisStreamsOutput, 
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ResourceARN=ResourceARN,
+            **kwargs
         )
         super(KinesisStreamsOutput, self).__init__(**processed_kwargs)
 
@@ -533,6 +565,7 @@ class DestinationSchema(troposphere.kinesisanalyticsv2.DestinationSchema, Mixin)
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             RecordFormatType=RecordFormatType,
+            **kwargs
         )
         super(DestinationSchema, self).__init__(**processed_kwargs)
 
@@ -553,6 +586,7 @@ class Output(troposphere.kinesisanalyticsv2.Output, Mixin):
             KinesisFirehoseOutput=KinesisFirehoseOutput,
             KinesisStreamsOutput=KinesisStreamsOutput,
             Name=Name,
+            **kwargs
         )
         super(Output, self).__init__(**processed_kwargs)
 
@@ -571,5 +605,6 @@ class ApplicationOutput(troposphere.kinesisanalyticsv2.ApplicationOutput, Mixin)
             validation=validation,
             ApplicationName=ApplicationName,
             Output=Output,
+            **kwargs
         )
         super(ApplicationOutput, self).__init__(**processed_kwargs)

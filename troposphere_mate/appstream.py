@@ -38,6 +38,7 @@ class ServiceAccountCredentials(troposphere.appstream.ServiceAccountCredentials,
             title=title,
             AccountName=AccountName,
             AccountPassword=AccountPassword,
+            **kwargs
         )
         super(ServiceAccountCredentials, self).__init__(**processed_kwargs)
 
@@ -58,6 +59,7 @@ class DirectoryConfig(troposphere.appstream.DirectoryConfig, Mixin):
             DirectoryName=DirectoryName,
             OrganizationalUnitDistinguishedNames=OrganizationalUnitDistinguishedNames,
             ServiceAccountCredentials=ServiceAccountCredentials,
+            **kwargs
         )
         super(DirectoryConfig, self).__init__(**processed_kwargs)
 
@@ -70,6 +72,7 @@ class ComputeCapacity(troposphere.appstream.ComputeCapacity, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DesiredInstances=DesiredInstances,
+            **kwargs
         )
         super(ComputeCapacity, self).__init__(**processed_kwargs)
 
@@ -84,6 +87,7 @@ class VpcConfig(troposphere.appstream.VpcConfig, Mixin):
             title=title,
             SecurityGroupIds=SecurityGroupIds,
             SubnetIds=SubnetIds,
+            **kwargs
         )
         super(VpcConfig, self).__init__(**processed_kwargs)
 
@@ -98,6 +102,7 @@ class DomainJoinInfo(troposphere.appstream.DomainJoinInfo, Mixin):
             title=title,
             DirectoryName=DirectoryName,
             OrganizationalUnitDistinguishedName=OrganizationalUnitDistinguishedName,
+            **kwargs
         )
         super(DomainJoinInfo, self).__init__(**processed_kwargs)
 
@@ -142,6 +147,7 @@ class Fleet(troposphere.appstream.Fleet, Mixin):
             Name=Name,
             Tags=Tags,
             VpcConfig=VpcConfig,
+            **kwargs
         )
         super(Fleet, self).__init__(**processed_kwargs)
 
@@ -178,6 +184,7 @@ class ImageBuilder(troposphere.appstream.ImageBuilder, Mixin):
             Name=Name,
             Tags=Tags,
             VpcConfig=VpcConfig,
+            **kwargs
         )
         super(ImageBuilder, self).__init__(**processed_kwargs)
 
@@ -196,6 +203,7 @@ class StackFleetAssociation(troposphere.appstream.StackFleetAssociation, Mixin):
             validation=validation,
             FleetName=FleetName,
             StackName=StackName,
+            **kwargs
         )
         super(StackFleetAssociation, self).__init__(**processed_kwargs)
 
@@ -212,6 +220,7 @@ class StorageConnector(troposphere.appstream.StorageConnector, Mixin):
             ConnectorType=ConnectorType,
             Domains=Domains,
             ResourceIdentifier=ResourceIdentifier,
+            **kwargs
         )
         super(StorageConnector, self).__init__(**processed_kwargs)
 
@@ -226,6 +235,7 @@ class UserSetting(troposphere.appstream.UserSetting, Mixin):
             title=title,
             Action=Action,
             Permission=Permission,
+            **kwargs
         )
         super(UserSetting, self).__init__(**processed_kwargs)
 
@@ -240,6 +250,7 @@ class ApplicationSettings(troposphere.appstream.ApplicationSettings, Mixin):
             title=title,
             Enabled=Enabled,
             SettingsGroup=SettingsGroup,
+            **kwargs
         )
         super(ApplicationSettings, self).__init__(**processed_kwargs)
 
@@ -276,6 +287,7 @@ class Stack(troposphere.appstream.Stack, Mixin):
             StorageConnectors=StorageConnectors,
             Tags=Tags,
             UserSettings=UserSettings,
+            **kwargs
         )
         super(Stack, self).__init__(**processed_kwargs)
 
@@ -298,6 +310,7 @@ class StackUserAssociation(troposphere.appstream.StackUserAssociation, Mixin):
             StackName=StackName,
             UserName=UserName,
             SendEmailNotification=SendEmailNotification,
+            **kwargs
         )
         super(StackUserAssociation, self).__init__(**processed_kwargs)
 
@@ -322,5 +335,6 @@ class User(troposphere.appstream.User, Mixin):
             FirstName=FirstName,
             LastName=LastName,
             MessageAction=MessageAction,
+            **kwargs
         )
         super(User, self).__init__(**processed_kwargs)

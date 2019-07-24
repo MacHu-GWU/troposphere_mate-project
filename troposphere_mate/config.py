@@ -41,6 +41,7 @@ class Scope(troposphere.config.Scope, Mixin):
             ComplianceResourceTypes=ComplianceResourceTypes,
             TagKey=TagKey,
             TagValue=TagValue,
+            **kwargs
         )
         super(Scope, self).__init__(**processed_kwargs)
 
@@ -57,6 +58,7 @@ class SourceDetails(troposphere.config.SourceDetails, Mixin):
             EventSource=EventSource,
             MessageType=MessageType,
             MaximumExecutionFrequency=MaximumExecutionFrequency,
+            **kwargs
         )
         super(SourceDetails, self).__init__(**processed_kwargs)
 
@@ -73,6 +75,7 @@ class Source(troposphere.config.Source, Mixin):
             Owner=Owner,
             SourceIdentifier=SourceIdentifier,
             SourceDetails=SourceDetails,
+            **kwargs
         )
         super(Source, self).__init__(**processed_kwargs)
 
@@ -99,6 +102,7 @@ class ConfigRule(troposphere.config.ConfigRule, Mixin):
             InputParameters=InputParameters,
             MaximumExecutionFrequency=MaximumExecutionFrequency,
             Scope=Scope,
+            **kwargs
         )
         super(ConfigRule, self).__init__(**processed_kwargs)
 
@@ -117,6 +121,7 @@ class AggregationAuthorization(troposphere.config.AggregationAuthorization, Mixi
             validation=validation,
             AuthorizedAccountId=AuthorizedAccountId,
             AuthorizedAwsRegion=AuthorizedAwsRegion,
+            **kwargs
         )
         super(AggregationAuthorization, self).__init__(**processed_kwargs)
 
@@ -133,6 +138,7 @@ class OrganizationAggregationSource(troposphere.config.OrganizationAggregationSo
             RoleArn=RoleArn,
             AllAwsRegions=AllAwsRegions,
             AwsRegions=AwsRegions,
+            **kwargs
         )
         super(OrganizationAggregationSource, self).__init__(**processed_kwargs)
 
@@ -149,6 +155,7 @@ class AccountAggregationSources(troposphere.config.AccountAggregationSources, Mi
             AccountIds=AccountIds,
             AllAwsRegions=AllAwsRegions,
             AwsRegions=AwsRegions,
+            **kwargs
         )
         super(AccountAggregationSources, self).__init__(**processed_kwargs)
 
@@ -169,6 +176,7 @@ class ConfigurationAggregator(troposphere.config.ConfigurationAggregator, Mixin)
             ConfigurationAggregatorName=ConfigurationAggregatorName,
             AccountAggregationSources=AccountAggregationSources,
             OrganizationAggregationSource=OrganizationAggregationSource,
+            **kwargs
         )
         super(ConfigurationAggregator, self).__init__(**processed_kwargs)
 
@@ -185,6 +193,7 @@ class RecordingGroup(troposphere.config.RecordingGroup, Mixin):
             AllSupported=AllSupported,
             IncludeGlobalResourceTypes=IncludeGlobalResourceTypes,
             ResourceTypes=ResourceTypes,
+            **kwargs
         )
         super(RecordingGroup, self).__init__(**processed_kwargs)
 
@@ -205,6 +214,7 @@ class ConfigurationRecorder(troposphere.config.ConfigurationRecorder, Mixin):
             RoleARN=RoleARN,
             Name=Name,
             RecordingGroup=RecordingGroup,
+            **kwargs
         )
         super(ConfigurationRecorder, self).__init__(**processed_kwargs)
 
@@ -217,6 +227,7 @@ class ConfigSnapshotDeliveryProperties(troposphere.config.ConfigSnapshotDelivery
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DeliveryFrequency=DeliveryFrequency,
+            **kwargs
         )
         super(ConfigSnapshotDeliveryProperties, self).__init__(**processed_kwargs)
 
@@ -241,6 +252,7 @@ class DeliveryChannel(troposphere.config.DeliveryChannel, Mixin):
             Name=Name,
             S3KeyPrefix=S3KeyPrefix,
             SnsTopicARN=SnsTopicARN,
+            **kwargs
         )
         super(DeliveryChannel, self).__init__(**processed_kwargs)
 
@@ -267,5 +279,6 @@ class RemediationConfiguration(troposphere.config.RemediationConfiguration, Mixi
             Parameters=Parameters,
             ResourceType=ResourceType,
             TargetVersion=TargetVersion,
+            **kwargs
         )
         super(RemediationConfiguration, self).__init__(**processed_kwargs)

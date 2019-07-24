@@ -38,6 +38,7 @@ class Action(troposphere.wafregional.Action, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Type=Type,
+            **kwargs
         )
         super(Action, self).__init__(**processed_kwargs)
 
@@ -52,6 +53,7 @@ class FieldToMatch(troposphere.wafregional.FieldToMatch, Mixin):
             title=title,
             Type=Type,
             Data=Data,
+            **kwargs
         )
         super(FieldToMatch, self).__init__(**processed_kwargs)
 
@@ -72,6 +74,7 @@ class ByteMatchTuples(troposphere.wafregional.ByteMatchTuples, Mixin):
             TextTransformation=TextTransformation,
             TargetString=TargetString,
             TargetStringBase64=TargetStringBase64,
+            **kwargs
         )
         super(ByteMatchTuples, self).__init__(**processed_kwargs)
 
@@ -86,6 +89,7 @@ class IPSetDescriptors(troposphere.wafregional.IPSetDescriptors, Mixin):
             title=title,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(IPSetDescriptors, self).__init__(**processed_kwargs)
 
@@ -102,6 +106,7 @@ class Predicates(troposphere.wafregional.Predicates, Mixin):
             DataId=DataId,
             Negated=Negated,
             Type=Type,
+            **kwargs
         )
         super(Predicates, self).__init__(**processed_kwargs)
 
@@ -116,6 +121,7 @@ class GeoMatchConstraints(troposphere.wafregional.GeoMatchConstraints, Mixin):
             title=title,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(GeoMatchConstraints, self).__init__(**processed_kwargs)
 
@@ -132,6 +138,7 @@ class Rules(troposphere.wafregional.Rules, Mixin):
             Action=Action,
             Priority=Priority,
             RuleId=RuleId,
+            **kwargs
         )
         super(Rules, self).__init__(**processed_kwargs)
 
@@ -146,6 +153,7 @@ class SqlInjectionMatchTuples(troposphere.wafregional.SqlInjectionMatchTuples, M
             title=title,
             FieldToMatch=FieldToMatch,
             TextTransformation=TextTransformation,
+            **kwargs
         )
         super(SqlInjectionMatchTuples, self).__init__(**processed_kwargs)
 
@@ -164,6 +172,7 @@ class ByteMatchSet(troposphere.wafregional.ByteMatchSet, Mixin):
             validation=validation,
             Name=Name,
             ByteMatchTuples=ByteMatchTuples,
+            **kwargs
         )
         super(ByteMatchSet, self).__init__(**processed_kwargs)
 
@@ -182,6 +191,7 @@ class IPSet(troposphere.wafregional.IPSet, Mixin):
             validation=validation,
             Name=Name,
             IPSetDescriptors=IPSetDescriptors,
+            **kwargs
         )
         super(IPSet, self).__init__(**processed_kwargs)
 
@@ -202,6 +212,7 @@ class Rule(troposphere.wafregional.Rule, Mixin):
             MetricName=MetricName,
             Name=Name,
             Predicates=Predicates,
+            **kwargs
         )
         super(Rule, self).__init__(**processed_kwargs)
 
@@ -220,6 +231,7 @@ class SqlInjectionMatchSet(troposphere.wafregional.SqlInjectionMatchSet, Mixin):
             validation=validation,
             Name=Name,
             SqlInjectionMatchTuples=SqlInjectionMatchTuples,
+            **kwargs
         )
         super(SqlInjectionMatchSet, self).__init__(**processed_kwargs)
 
@@ -242,6 +254,7 @@ class WebACL(troposphere.wafregional.WebACL, Mixin):
             MetricName=MetricName,
             Name=Name,
             Rules=Rules,
+            **kwargs
         )
         super(WebACL, self).__init__(**processed_kwargs)
 
@@ -260,6 +273,7 @@ class WebACLAssociation(troposphere.wafregional.WebACLAssociation, Mixin):
             validation=validation,
             ResourceArn=ResourceArn,
             WebACLId=WebACLId,
+            **kwargs
         )
         super(WebACLAssociation, self).__init__(**processed_kwargs)
 
@@ -278,6 +292,7 @@ class SizeConstraint(troposphere.wafregional.SizeConstraint, Mixin):
             FieldToMatch=FieldToMatch,
             Size=Size,
             TextTransformation=TextTransformation,
+            **kwargs
         )
         super(SizeConstraint, self).__init__(**processed_kwargs)
 
@@ -296,6 +311,7 @@ class SizeConstraintSet(troposphere.wafregional.SizeConstraintSet, Mixin):
             validation=validation,
             Name=Name,
             SizeConstraints=SizeConstraints,
+            **kwargs
         )
         super(SizeConstraintSet, self).__init__(**processed_kwargs)
 
@@ -310,6 +326,7 @@ class XssMatchTuple(troposphere.wafregional.XssMatchTuple, Mixin):
             title=title,
             FieldToMatch=FieldToMatch,
             TextTransformation=TextTransformation,
+            **kwargs
         )
         super(XssMatchTuple, self).__init__(**processed_kwargs)
 
@@ -328,6 +345,7 @@ class XssMatchSet(troposphere.wafregional.XssMatchSet, Mixin):
             validation=validation,
             Name=Name,
             XssMatchTuples=XssMatchTuples,
+            **kwargs
         )
         super(XssMatchSet, self).__init__(**processed_kwargs)
 
@@ -346,6 +364,7 @@ class RegexPatternSet(troposphere.wafregional.RegexPatternSet, Mixin):
             validation=validation,
             Name=Name,
             RegexPatternStrings=RegexPatternStrings,
+            **kwargs
         )
         super(RegexPatternSet, self).__init__(**processed_kwargs)
 
@@ -370,6 +389,7 @@ class RateBasedRule(troposphere.wafregional.RateBasedRule, Mixin):
             RateKey=RateKey,
             RateLimit=RateLimit,
             MatchPredicates=MatchPredicates,
+            **kwargs
         )
         super(RateBasedRule, self).__init__(**processed_kwargs)
 
@@ -388,5 +408,6 @@ class GeoMatchSet(troposphere.wafregional.GeoMatchSet, Mixin):
             validation=validation,
             Name=Name,
             GeoMatchConstraints=GeoMatchConstraints,
+            **kwargs
         )
         super(GeoMatchSet, self).__init__(**processed_kwargs)

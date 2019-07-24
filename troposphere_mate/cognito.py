@@ -49,6 +49,7 @@ class CognitoIdentityProvider(troposphere.cognito.CognitoIdentityProvider, Mixin
             ClientId=ClientId,
             ProviderName=ProviderName,
             ServerSideTokenCheck=ServerSideTokenCheck,
+            **kwargs
         )
         super(CognitoIdentityProvider, self).__init__(**processed_kwargs)
 
@@ -65,6 +66,7 @@ class CognitoStreams(troposphere.cognito.CognitoStreams, Mixin):
             RoleArn=RoleArn,
             StreamingStatus=StreamingStatus,
             StreamName=StreamName,
+            **kwargs
         )
         super(CognitoStreams, self).__init__(**processed_kwargs)
 
@@ -79,6 +81,7 @@ class PushSync(troposphere.cognito.PushSync, Mixin):
             title=title,
             ApplicationArns=ApplicationArns,
             RoleArn=RoleArn,
+            **kwargs
         )
         super(PushSync, self).__init__(**processed_kwargs)
 
@@ -113,6 +116,7 @@ class IdentityPool(troposphere.cognito.IdentityPool, Mixin):
             PushSync=PushSync,
             SamlProviderARNs=SamlProviderARNs,
             SupportedLoginProviders=SupportedLoginProviders,
+            **kwargs
         )
         super(IdentityPool, self).__init__(**processed_kwargs)
 
@@ -131,6 +135,7 @@ class MappingRule(troposphere.cognito.MappingRule, Mixin):
             MatchType=MatchType,
             RoleARN=RoleARN,
             Value=Value,
+            **kwargs
         )
         super(MappingRule, self).__init__(**processed_kwargs)
 
@@ -143,6 +148,7 @@ class RulesConfiguration(troposphere.cognito.RulesConfiguration, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Rules=Rules,
+            **kwargs
         )
         super(RulesConfiguration, self).__init__(**processed_kwargs)
 
@@ -159,6 +165,7 @@ class RoleMapping(troposphere.cognito.RoleMapping, Mixin):
             Type=Type,
             AmbiguousRoleResolution=AmbiguousRoleResolution,
             RulesConfiguration=RulesConfiguration,
+            **kwargs
         )
         super(RoleMapping, self).__init__(**processed_kwargs)
 
@@ -179,6 +186,7 @@ class IdentityPoolRoleAttachment(troposphere.cognito.IdentityPoolRoleAttachment,
             IdentityPoolId=IdentityPoolId,
             RoleMappings=RoleMappings,
             Roles=Roles,
+            **kwargs
         )
         super(IdentityPoolRoleAttachment, self).__init__(**processed_kwargs)
 
@@ -195,6 +203,7 @@ class InviteMessageTemplate(troposphere.cognito.InviteMessageTemplate, Mixin):
             EmailMessage=EmailMessage,
             EmailSubject=EmailSubject,
             SMSMessage=SMSMessage,
+            **kwargs
         )
         super(InviteMessageTemplate, self).__init__(**processed_kwargs)
 
@@ -211,6 +220,7 @@ class AdminCreateUserConfig(troposphere.cognito.AdminCreateUserConfig, Mixin):
             AllowAdminCreateUserOnly=AllowAdminCreateUserOnly,
             InviteMessageTemplate=InviteMessageTemplate,
             UnusedAccountValidityDays=UnusedAccountValidityDays,
+            **kwargs
         )
         super(AdminCreateUserConfig, self).__init__(**processed_kwargs)
 
@@ -225,6 +235,7 @@ class DeviceConfiguration(troposphere.cognito.DeviceConfiguration, Mixin):
             title=title,
             ChallengeRequiredOnNewDevice=ChallengeRequiredOnNewDevice,
             DeviceOnlyRememberedOnUserPrompt=DeviceOnlyRememberedOnUserPrompt,
+            **kwargs
         )
         super(DeviceConfiguration, self).__init__(**processed_kwargs)
 
@@ -239,6 +250,7 @@ class EmailConfiguration(troposphere.cognito.EmailConfiguration, Mixin):
             title=title,
             ReplyToEmailAddress=ReplyToEmailAddress,
             SourceArn=SourceArn,
+            **kwargs
         )
         super(EmailConfiguration, self).__init__(**processed_kwargs)
 
@@ -265,6 +277,7 @@ class LambdaConfig(troposphere.cognito.LambdaConfig, Mixin):
             PreAuthentication=PreAuthentication,
             PreSignUp=PreSignUp,
             VerifyAuthChallengeResponse=VerifyAuthChallengeResponse,
+            **kwargs
         )
         super(LambdaConfig, self).__init__(**processed_kwargs)
 
@@ -287,6 +300,7 @@ class PasswordPolicy(troposphere.cognito.PasswordPolicy, Mixin):
             RequireSymbols=RequireSymbols,
             RequireUppercase=RequireUppercase,
             TemporaryPasswordValidityDays=TemporaryPasswordValidityDays,
+            **kwargs
         )
         super(PasswordPolicy, self).__init__(**processed_kwargs)
 
@@ -299,6 +313,7 @@ class Policies(troposphere.cognito.Policies, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             PasswordPolicy=PasswordPolicy,
+            **kwargs
         )
         super(Policies, self).__init__(**processed_kwargs)
 
@@ -313,6 +328,7 @@ class NumberAttributeConstraints(troposphere.cognito.NumberAttributeConstraints,
             title=title,
             MaxValue=MaxValue,
             MinValue=MinValue,
+            **kwargs
         )
         super(NumberAttributeConstraints, self).__init__(**processed_kwargs)
 
@@ -327,6 +343,7 @@ class StringAttributeConstraints(troposphere.cognito.StringAttributeConstraints,
             title=title,
             MaxLength=MaxLength,
             MinLength=MinLength,
+            **kwargs
         )
         super(StringAttributeConstraints, self).__init__(**processed_kwargs)
 
@@ -351,6 +368,7 @@ class SchemaAttribute(troposphere.cognito.SchemaAttribute, Mixin):
             NumberAttributeConstraints=NumberAttributeConstraints,
             StringAttributeConstraints=StringAttributeConstraints,
             Required=Required,
+            **kwargs
         )
         super(SchemaAttribute, self).__init__(**processed_kwargs)
 
@@ -365,6 +383,7 @@ class SmsConfiguration(troposphere.cognito.SmsConfiguration, Mixin):
             title=title,
             SnsCallerArn=SnsCallerArn,
             ExternalId=ExternalId,
+            **kwargs
         )
         super(SmsConfiguration, self).__init__(**processed_kwargs)
 
@@ -413,6 +432,7 @@ class UserPool(troposphere.cognito.UserPool, Mixin):
             SmsVerificationMessage=SmsVerificationMessage,
             UsernameAttributes=UsernameAttributes,
             UserPoolTags=UserPoolTags,
+            **kwargs
         )
         super(UserPool, self).__init__(**processed_kwargs)
 
@@ -441,6 +461,7 @@ class UserPoolClient(troposphere.cognito.UserPoolClient, Mixin):
             ReadAttributes=ReadAttributes,
             RefreshTokenValidity=RefreshTokenValidity,
             WriteAttributes=WriteAttributes,
+            **kwargs
         )
         super(UserPoolClient, self).__init__(**processed_kwargs)
 
@@ -465,6 +486,7 @@ class UserPoolGroup(troposphere.cognito.UserPoolGroup, Mixin):
             Description=Description,
             Precedence=Precedence,
             RoleArn=RoleArn,
+            **kwargs
         )
         super(UserPoolGroup, self).__init__(**processed_kwargs)
 
@@ -479,6 +501,7 @@ class AttributeType(troposphere.cognito.AttributeType, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(AttributeType, self).__init__(**processed_kwargs)
 
@@ -507,6 +530,7 @@ class UserPoolUser(troposphere.cognito.UserPoolUser, Mixin):
             MessageAction=MessageAction,
             Username=Username,
             ValidationData=ValidationData,
+            **kwargs
         )
         super(UserPoolUser, self).__init__(**processed_kwargs)
 
@@ -527,5 +551,6 @@ class UserPoolUserToGroupAttachment(troposphere.cognito.UserPoolUserToGroupAttac
             GroupName=GroupName,
             Username=Username,
             UserPoolId=UserPoolId,
+            **kwargs
         )
         super(UserPoolUserToGroupAttachment, self).__init__(**processed_kwargs)

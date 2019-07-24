@@ -42,6 +42,7 @@ class Stack(troposphere.cloudformation.Stack, Mixin):
             Parameters=Parameters,
             Tags=Tags,
             TimeoutInMinutes=TimeoutInMinutes,
+            **kwargs
         )
         super(Stack, self).__init__(**processed_kwargs)
 
@@ -62,6 +63,7 @@ class WaitCondition(troposphere.cloudformation.WaitCondition, Mixin):
             Count=Count,
             Handle=Handle,
             Timeout=Timeout,
+            **kwargs
         )
         super(WaitCondition, self).__init__(**processed_kwargs)
 
@@ -76,6 +78,7 @@ class WaitConditionHandle(troposphere.cloudformation.WaitConditionHandle, Mixin)
             title=title,
             template=template,
             validation=validation,
+            **kwargs
         )
         super(WaitConditionHandle, self).__init__(**processed_kwargs)
 
@@ -102,6 +105,7 @@ class InitFile(troposphere.cloudformation.InitFile, Mixin):
             source=source,
             authentication=authentication,
             context=context,
+            **kwargs
         )
         super(InitFile, self).__init__(**processed_kwargs)
 
@@ -124,6 +128,7 @@ class InitService(troposphere.cloudformation.InitService, Mixin):
             packages=packages,
             sources=sources,
             commands=commands,
+            **kwargs
         )
         super(InitService, self).__init__(**processed_kwargs)
 
@@ -148,6 +153,7 @@ class InitConfig(troposphere.cloudformation.InitConfig, Mixin):
             files=files,
             commands=commands,
             services=services,
+            **kwargs
         )
         super(InitConfig, self).__init__(**processed_kwargs)
 
@@ -174,5 +180,6 @@ class AuthenticationBlock(troposphere.cloudformation.AuthenticationBlock, Mixin)
             uris=uris,
             username=username,
             roleName=roleName,
+            **kwargs
         )
         super(AuthenticationBlock, self).__init__(**processed_kwargs)

@@ -37,6 +37,7 @@ class LustreConfiguration(troposphere.fsx.LustreConfiguration, Mixin):
             ImportedFileChunkSize=ImportedFileChunkSize,
             ImportPath=ImportPath,
             WeeklyMaintenanceStartTime=WeeklyMaintenanceStartTime,
+            **kwargs
         )
         super(LustreConfiguration, self).__init__(**processed_kwargs)
 
@@ -59,6 +60,7 @@ class WindowsConfiguration(troposphere.fsx.WindowsConfiguration, Mixin):
             DailyAutomaticBackupStartTime=DailyAutomaticBackupStartTime,
             ThroughputCapacity=ThroughputCapacity,
             WeeklyMaintenanceStartTime=WeeklyMaintenanceStartTime,
+            **kwargs
         )
         super(WindowsConfiguration, self).__init__(**processed_kwargs)
 
@@ -91,5 +93,6 @@ class FileSystem(troposphere.fsx.FileSystem, Mixin):
             SubnetIds=SubnetIds,
             Tags=Tags,
             WindowsConfiguration=WindowsConfiguration,
+            **kwargs
         )
         super(FileSystem, self).__init__(**processed_kwargs)

@@ -35,6 +35,7 @@ class Device(troposphere.iot1click.Device, Mixin):
             validation=validation,
             DeviceId=DeviceId,
             Enabled=Enabled,
+            **kwargs
         )
         super(Device, self).__init__(**processed_kwargs)
 
@@ -57,6 +58,7 @@ class Placement(troposphere.iot1click.Placement, Mixin):
             AssociatedDevices=AssociatedDevices,
             Attributes=Attributes,
             PlacementName=PlacementName,
+            **kwargs
         )
         super(Placement, self).__init__(**processed_kwargs)
 
@@ -71,6 +73,7 @@ class PlacementTemplate(troposphere.iot1click.PlacementTemplate, Mixin):
             title=title,
             DefaultAttributes=DefaultAttributes,
             DeviceTemplates=DeviceTemplates,
+            **kwargs
         )
         super(PlacementTemplate, self).__init__(**processed_kwargs)
 
@@ -91,5 +94,6 @@ class Project(troposphere.iot1click.Project, Mixin):
             PlacementTemplate=PlacementTemplate,
             Description=Description,
             ProjectName=ProjectName,
+            **kwargs
         )
         super(Project, self).__init__(**processed_kwargs)

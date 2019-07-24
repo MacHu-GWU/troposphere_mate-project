@@ -40,6 +40,7 @@ class DeliveryOptions(troposphere.pinpointemail.DeliveryOptions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SendingPoolName=SendingPoolName,
+            **kwargs
         )
         super(DeliveryOptions, self).__init__(**processed_kwargs)
 
@@ -52,6 +53,7 @@ class ReputationOptions(troposphere.pinpointemail.ReputationOptions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ReputationMetricsEnabled=ReputationMetricsEnabled,
+            **kwargs
         )
         super(ReputationOptions, self).__init__(**processed_kwargs)
 
@@ -64,6 +66,7 @@ class SendingOptions(troposphere.pinpointemail.SendingOptions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SendingEnabled=SendingEnabled,
+            **kwargs
         )
         super(SendingOptions, self).__init__(**processed_kwargs)
 
@@ -76,6 +79,7 @@ class TrackingOptions(troposphere.pinpointemail.TrackingOptions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CustomRedirectDomain=CustomRedirectDomain,
+            **kwargs
         )
         super(TrackingOptions, self).__init__(**processed_kwargs)
 
@@ -102,6 +106,7 @@ class ConfigurationSet(troposphere.pinpointemail.ConfigurationSet, Mixin):
             SendingOptions=SendingOptions,
             Tags=Tags,
             TrackingOptions=TrackingOptions,
+            **kwargs
         )
         super(ConfigurationSet, self).__init__(**processed_kwargs)
 
@@ -118,6 +123,7 @@ class DimensionConfiguration(troposphere.pinpointemail.DimensionConfiguration, M
             DefaultDimensionValue=DefaultDimensionValue,
             DimensionName=DimensionName,
             DimensionValueSource=DimensionValueSource,
+            **kwargs
         )
         super(DimensionConfiguration, self).__init__(**processed_kwargs)
 
@@ -130,6 +136,7 @@ class CloudWatchDestination(troposphere.pinpointemail.CloudWatchDestination, Mix
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DimensionConfigurations=DimensionConfigurations,
+            **kwargs
         )
         super(CloudWatchDestination, self).__init__(**processed_kwargs)
 
@@ -144,6 +151,7 @@ class KinesisFirehoseDestination(troposphere.pinpointemail.KinesisFirehoseDestin
             title=title,
             DeliveryStreamArn=DeliveryStreamArn,
             IamRoleArn=IamRoleArn,
+            **kwargs
         )
         super(KinesisFirehoseDestination, self).__init__(**processed_kwargs)
 
@@ -156,6 +164,7 @@ class PinpointDestination(troposphere.pinpointemail.PinpointDestination, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ApplicationArn=ApplicationArn,
+            **kwargs
         )
         super(PinpointDestination, self).__init__(**processed_kwargs)
 
@@ -168,6 +177,7 @@ class SnsDestination(troposphere.pinpointemail.SnsDestination, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             TopicArn=TopicArn,
+            **kwargs
         )
         super(SnsDestination, self).__init__(**processed_kwargs)
 
@@ -190,6 +200,7 @@ class EventDestination(troposphere.pinpointemail.EventDestination, Mixin):
             KinesisFirehoseDestination=KinesisFirehoseDestination,
             PinpointDestination=PinpointDestination,
             SnsDestination=SnsDestination,
+            **kwargs
         )
         super(EventDestination, self).__init__(**processed_kwargs)
 
@@ -210,6 +221,7 @@ class ConfigurationSetEventDestination(troposphere.pinpointemail.ConfigurationSe
             ConfigurationSetName=ConfigurationSetName,
             EventDestinationName=EventDestinationName,
             EventDestination=EventDestination,
+            **kwargs
         )
         super(ConfigurationSetEventDestination, self).__init__(**processed_kwargs)
 
@@ -228,6 +240,7 @@ class DedicatedIpPool(troposphere.pinpointemail.DedicatedIpPool, Mixin):
             validation=validation,
             PoolName=PoolName,
             Tags=Tags,
+            **kwargs
         )
         super(DedicatedIpPool, self).__init__(**processed_kwargs)
 
@@ -242,6 +255,7 @@ class MailFromAttributes(troposphere.pinpointemail.MailFromAttributes, Mixin):
             title=title,
             BehaviorOnMxFailure=BehaviorOnMxFailure,
             MailFromDomain=MailFromDomain,
+            **kwargs
         )
         super(MailFromAttributes, self).__init__(**processed_kwargs)
 
@@ -266,5 +280,6 @@ class Identity(troposphere.pinpointemail.Identity, Mixin):
             FeedbackForwardingEnabled=FeedbackForwardingEnabled,
             MailFromAttributes=MailFromAttributes,
             Tags=Tags,
+            **kwargs
         )
         super(Identity, self).__init__(**processed_kwargs)

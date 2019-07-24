@@ -35,6 +35,7 @@ class Alias(troposphere.kms.Alias, Mixin):
             validation=validation,
             AliasName=AliasName,
             TargetKeyId=TargetKeyId,
+            **kwargs
         )
         super(Alias, self).__init__(**processed_kwargs)
 
@@ -63,5 +64,6 @@ class Key(troposphere.kms.Key, Mixin):
             KeyUsage=KeyUsage,
             PendingWindowInDays=PendingWindowInDays,
             Tags=Tags,
+            **kwargs
         )
         super(Key, self).__init__(**processed_kwargs)

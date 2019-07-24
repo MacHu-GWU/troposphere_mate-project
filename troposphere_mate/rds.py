@@ -35,6 +35,7 @@ class ProcessorFeature(troposphere.rds.ProcessorFeature, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(ProcessorFeature, self).__init__(**processed_kwargs)
 
@@ -147,6 +148,7 @@ class DBInstance(troposphere.rds.DBInstance, Mixin):
             UseDefaultProcessorFeatures=UseDefaultProcessorFeatures,
             Timezone=Timezone,
             VPCSecurityGroups=VPCSecurityGroups,
+            **kwargs
         )
         super(DBInstance, self).__init__(**processed_kwargs)
 
@@ -169,6 +171,7 @@ class DBParameterGroup(troposphere.rds.DBParameterGroup, Mixin):
             Family=Family,
             Parameters=Parameters,
             Tags=Tags,
+            **kwargs
         )
         super(DBParameterGroup, self).__init__(**processed_kwargs)
 
@@ -191,6 +194,7 @@ class DBSubnetGroup(troposphere.rds.DBSubnetGroup, Mixin):
             SubnetIds=SubnetIds,
             DBSubnetGroupName=DBSubnetGroupName,
             Tags=Tags,
+            **kwargs
         )
         super(DBSubnetGroup, self).__init__(**processed_kwargs)
 
@@ -209,6 +213,7 @@ class RDSSecurityGroup(troposphere.rds.RDSSecurityGroup, Mixin):
             EC2SecurityGroupId=EC2SecurityGroupId,
             EC2SecurityGroupName=EC2SecurityGroupName,
             EC2SecurityGroupOwnerId=EC2SecurityGroupOwnerId,
+            **kwargs
         )
         super(RDSSecurityGroup, self).__init__(**processed_kwargs)
 
@@ -231,6 +236,7 @@ class DBSecurityGroup(troposphere.rds.DBSecurityGroup, Mixin):
             GroupDescription=GroupDescription,
             EC2VpcId=EC2VpcId,
             Tags=Tags,
+            **kwargs
         )
         super(DBSecurityGroup, self).__init__(**processed_kwargs)
 
@@ -255,6 +261,7 @@ class DBSecurityGroupIngress(troposphere.rds.DBSecurityGroupIngress, Mixin):
             EC2SecurityGroupId=EC2SecurityGroupId,
             EC2SecurityGroupName=EC2SecurityGroupName,
             EC2SecurityGroupOwnerId=EC2SecurityGroupOwnerId,
+            **kwargs
         )
         super(DBSecurityGroupIngress, self).__init__(**processed_kwargs)
 
@@ -279,6 +286,7 @@ class EventSubscription(troposphere.rds.EventSubscription, Mixin):
             EventCategories=EventCategories,
             SourceIds=SourceIds,
             SourceType=SourceType,
+            **kwargs
         )
         super(EventSubscription, self).__init__(**processed_kwargs)
 
@@ -293,6 +301,7 @@ class OptionSetting(troposphere.rds.OptionSetting, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(OptionSetting, self).__init__(**processed_kwargs)
 
@@ -315,6 +324,7 @@ class OptionConfiguration(troposphere.rds.OptionConfiguration, Mixin):
             OptionVersion=OptionVersion,
             Port=Port,
             VpcSecurityGroupMemberships=VpcSecurityGroupMemberships,
+            **kwargs
         )
         super(OptionConfiguration, self).__init__(**processed_kwargs)
 
@@ -339,6 +349,7 @@ class OptionGroup(troposphere.rds.OptionGroup, Mixin):
             OptionGroupDescription=OptionGroupDescription,
             OptionConfigurations=OptionConfigurations,
             Tags=Tags,
+            **kwargs
         )
         super(OptionGroup, self).__init__(**processed_kwargs)
 
@@ -361,6 +372,7 @@ class DBClusterParameterGroup(troposphere.rds.DBClusterParameterGroup, Mixin):
             Family=Family,
             Parameters=Parameters,
             Tags=Tags,
+            **kwargs
         )
         super(DBClusterParameterGroup, self).__init__(**processed_kwargs)
 
@@ -379,6 +391,7 @@ class ScalingConfiguration(troposphere.rds.ScalingConfiguration, Mixin):
             MaxCapacity=MaxCapacity,
             MinCapacity=MinCapacity,
             SecondsUntilAutoPause=SecondsUntilAutoPause,
+            **kwargs
         )
         super(ScalingConfiguration, self).__init__(**processed_kwargs)
 
@@ -445,5 +458,6 @@ class DBCluster(troposphere.rds.DBCluster, Mixin):
             StorageEncrypted=StorageEncrypted,
             Tags=Tags,
             VpcSecurityGroupIds=VpcSecurityGroupIds,
+            **kwargs
         )
         super(DBCluster, self).__init__(**processed_kwargs)

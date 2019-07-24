@@ -63,6 +63,7 @@ class Cluster(troposphere.ecs.Cluster, Mixin):
             validation=validation,
             ClusterName=ClusterName,
             Tags=Tags,
+            **kwargs
         )
         super(Cluster, self).__init__(**processed_kwargs)
 
@@ -81,6 +82,7 @@ class LoadBalancer(troposphere.ecs.LoadBalancer, Mixin):
             ContainerName=ContainerName,
             LoadBalancerName=LoadBalancerName,
             TargetGroupArn=TargetGroupArn,
+            **kwargs
         )
         super(LoadBalancer, self).__init__(**processed_kwargs)
 
@@ -95,6 +97,7 @@ class DeploymentConfiguration(troposphere.ecs.DeploymentConfiguration, Mixin):
             title=title,
             MaximumPercent=MaximumPercent,
             MinimumHealthyPercent=MinimumHealthyPercent,
+            **kwargs
         )
         super(DeploymentConfiguration, self).__init__(**processed_kwargs)
 
@@ -109,6 +112,7 @@ class PlacementConstraint(troposphere.ecs.PlacementConstraint, Mixin):
             title=title,
             Type=Type,
             Expression=Expression,
+            **kwargs
         )
         super(PlacementConstraint, self).__init__(**processed_kwargs)
 
@@ -123,6 +127,7 @@ class PlacementStrategy(troposphere.ecs.PlacementStrategy, Mixin):
             title=title,
             Type=Type,
             Field=Field,
+            **kwargs
         )
         super(PlacementStrategy, self).__init__(**processed_kwargs)
 
@@ -139,6 +144,7 @@ class AwsvpcConfiguration(troposphere.ecs.AwsvpcConfiguration, Mixin):
             Subnets=Subnets,
             AssignPublicIp=AssignPublicIp,
             SecurityGroups=SecurityGroups,
+            **kwargs
         )
         super(AwsvpcConfiguration, self).__init__(**processed_kwargs)
 
@@ -151,6 +157,7 @@ class NetworkConfiguration(troposphere.ecs.NetworkConfiguration, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AwsvpcConfiguration=AwsvpcConfiguration,
+            **kwargs
         )
         super(NetworkConfiguration, self).__init__(**processed_kwargs)
 
@@ -169,6 +176,7 @@ class ServiceRegistry(troposphere.ecs.ServiceRegistry, Mixin):
             ContainerPort=ContainerPort,
             Port=Port,
             RegistryArn=RegistryArn,
+            **kwargs
         )
         super(ServiceRegistry, self).__init__(**processed_kwargs)
 
@@ -219,6 +227,7 @@ class Service(troposphere.ecs.Service, Mixin):
             ServiceName=ServiceName,
             ServiceRegistries=ServiceRegistries,
             Tags=Tags,
+            **kwargs
         )
         super(Service, self).__init__(**processed_kwargs)
 
@@ -233,6 +242,7 @@ class Environment(troposphere.ecs.Environment, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(Environment, self).__init__(**processed_kwargs)
 
@@ -249,6 +259,7 @@ class MountPoint(troposphere.ecs.MountPoint, Mixin):
             ContainerPath=ContainerPath,
             SourceVolume=SourceVolume,
             ReadOnly=ReadOnly,
+            **kwargs
         )
         super(MountPoint, self).__init__(**processed_kwargs)
 
@@ -265,6 +276,7 @@ class PortMapping(troposphere.ecs.PortMapping, Mixin):
             ContainerPort=ContainerPort,
             HostPort=HostPort,
             Protocol=Protocol,
+            **kwargs
         )
         super(PortMapping, self).__init__(**processed_kwargs)
 
@@ -279,6 +291,7 @@ class VolumesFrom(troposphere.ecs.VolumesFrom, Mixin):
             title=title,
             SourceContainer=SourceContainer,
             ReadOnly=ReadOnly,
+            **kwargs
         )
         super(VolumesFrom, self).__init__(**processed_kwargs)
 
@@ -293,6 +306,7 @@ class HostEntry(troposphere.ecs.HostEntry, Mixin):
             title=title,
             Hostname=Hostname,
             IpAddress=IpAddress,
+            **kwargs
         )
         super(HostEntry, self).__init__(**processed_kwargs)
 
@@ -309,6 +323,7 @@ class Device(troposphere.ecs.Device, Mixin):
             ContainerPath=ContainerPath,
             HostPath=HostPath,
             Permissions=Permissions,
+            **kwargs
         )
         super(Device, self).__init__(**processed_kwargs)
 
@@ -329,6 +344,7 @@ class HealthCheck(troposphere.ecs.HealthCheck, Mixin):
             Retries=Retries,
             StartPeriod=StartPeriod,
             Timeout=Timeout,
+            **kwargs
         )
         super(HealthCheck, self).__init__(**processed_kwargs)
 
@@ -343,6 +359,7 @@ class KernelCapabilities(troposphere.ecs.KernelCapabilities, Mixin):
             title=title,
             Add=Add,
             Drop=Drop,
+            **kwargs
         )
         super(KernelCapabilities, self).__init__(**processed_kwargs)
 
@@ -359,6 +376,7 @@ class Tmpfs(troposphere.ecs.Tmpfs, Mixin):
             ContainerPath=ContainerPath,
             MountOptions=MountOptions,
             Size=Size,
+            **kwargs
         )
         super(Tmpfs, self).__init__(**processed_kwargs)
 
@@ -379,6 +397,7 @@ class LinuxParameters(troposphere.ecs.LinuxParameters, Mixin):
             InitProcessEnabled=InitProcessEnabled,
             SharedMemorySize=SharedMemorySize,
             Tmpfs=Tmpfs,
+            **kwargs
         )
         super(LinuxParameters, self).__init__(**processed_kwargs)
 
@@ -393,6 +412,7 @@ class LogConfiguration(troposphere.ecs.LogConfiguration, Mixin):
             title=title,
             LogDriver=LogDriver,
             Options=Options,
+            **kwargs
         )
         super(LogConfiguration, self).__init__(**processed_kwargs)
 
@@ -405,6 +425,7 @@ class RepositoryCredentials(troposphere.ecs.RepositoryCredentials, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CredentialsParameter=CredentialsParameter,
+            **kwargs
         )
         super(RepositoryCredentials, self).__init__(**processed_kwargs)
 
@@ -419,6 +440,7 @@ class ResourceRequirement(troposphere.ecs.ResourceRequirement, Mixin):
             title=title,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(ResourceRequirement, self).__init__(**processed_kwargs)
 
@@ -433,6 +455,7 @@ class Secret(troposphere.ecs.Secret, Mixin):
             title=title,
             Name=Name,
             ValueFrom=ValueFrom,
+            **kwargs
         )
         super(Secret, self).__init__(**processed_kwargs)
 
@@ -449,6 +472,7 @@ class Ulimit(troposphere.ecs.Ulimit, Mixin):
             HardLimit=HardLimit,
             Name=Name,
             SoftLimit=SoftLimit,
+            **kwargs
         )
         super(Ulimit, self).__init__(**processed_kwargs)
 
@@ -463,6 +487,7 @@ class ContainerDependency(troposphere.ecs.ContainerDependency, Mixin):
             title=title,
             Condition=Condition,
             ContainerName=ContainerName,
+            **kwargs
         )
         super(ContainerDependency, self).__init__(**processed_kwargs)
 
@@ -541,6 +566,7 @@ class ContainerDefinition(troposphere.ecs.ContainerDefinition, Mixin):
             User=User,
             VolumesFrom=VolumesFrom,
             WorkingDirectory=WorkingDirectory,
+            **kwargs
         )
         super(ContainerDefinition, self).__init__(**processed_kwargs)
 
@@ -553,6 +579,7 @@ class Host(troposphere.ecs.Host, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SourcePath=SourcePath,
+            **kwargs
         )
         super(Host, self).__init__(**processed_kwargs)
 
@@ -573,6 +600,7 @@ class DockerVolumeConfiguration(troposphere.ecs.DockerVolumeConfiguration, Mixin
             DriverOpts=DriverOpts,
             Labels=Labels,
             Scope=Scope,
+            **kwargs
         )
         super(DockerVolumeConfiguration, self).__init__(**processed_kwargs)
 
@@ -589,6 +617,7 @@ class Volume(troposphere.ecs.Volume, Mixin):
             Name=Name,
             DockerVolumeConfiguration=DockerVolumeConfiguration,
             Host=Host,
+            **kwargs
         )
         super(Volume, self).__init__(**processed_kwargs)
 
@@ -605,6 +634,7 @@ class ProxyConfiguration(troposphere.ecs.ProxyConfiguration, Mixin):
             ContainerName=ContainerName,
             ProxyConfigurationProperties=ProxyConfigurationProperties,
             Type=Type,
+            **kwargs
         )
         super(ProxyConfiguration, self).__init__(**processed_kwargs)
 
@@ -643,5 +673,6 @@ class TaskDefinition(troposphere.ecs.TaskDefinition, Mixin):
             TaskRoleArn=TaskRoleArn,
             Volumes=Volumes,
             ProxyConfiguration=ProxyConfiguration,
+            **kwargs
         )
         super(TaskDefinition, self).__init__(**processed_kwargs)

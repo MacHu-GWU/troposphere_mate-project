@@ -57,6 +57,7 @@ class EgressFilter(troposphere.appmesh.EgressFilter, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Type=Type,
+            **kwargs
         )
         super(EgressFilter, self).__init__(**processed_kwargs)
 
@@ -69,6 +70,7 @@ class MeshSpec(troposphere.appmesh.MeshSpec, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             EgressFilter=EgressFilter,
+            **kwargs
         )
         super(MeshSpec, self).__init__(**processed_kwargs)
 
@@ -89,6 +91,7 @@ class Mesh(troposphere.appmesh.Mesh, Mixin):
             MeshName=MeshName,
             Spec=Spec,
             Tags=Tags,
+            **kwargs
         )
         super(Mesh, self).__init__(**processed_kwargs)
 
@@ -103,6 +106,7 @@ class WeightedTarget(troposphere.appmesh.WeightedTarget, Mixin):
             title=title,
             VirtualNode=VirtualNode,
             Weight=Weight,
+            **kwargs
         )
         super(WeightedTarget, self).__init__(**processed_kwargs)
 
@@ -115,6 +119,7 @@ class HttpRouteAction(troposphere.appmesh.HttpRouteAction, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             WeightedTargets=WeightedTargets,
+            **kwargs
         )
         super(HttpRouteAction, self).__init__(**processed_kwargs)
 
@@ -127,6 +132,7 @@ class HttpRouteMatch(troposphere.appmesh.HttpRouteMatch, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Prefix=Prefix,
+            **kwargs
         )
         super(HttpRouteMatch, self).__init__(**processed_kwargs)
 
@@ -141,6 +147,7 @@ class HttpRoute(troposphere.appmesh.HttpRoute, Mixin):
             title=title,
             Action=Action,
             Match=Match,
+            **kwargs
         )
         super(HttpRoute, self).__init__(**processed_kwargs)
 
@@ -153,6 +160,7 @@ class TcpRouteAction(troposphere.appmesh.TcpRouteAction, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             WeightedTargets=WeightedTargets,
+            **kwargs
         )
         super(TcpRouteAction, self).__init__(**processed_kwargs)
 
@@ -165,6 +173,7 @@ class TcpRoute(troposphere.appmesh.TcpRoute, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Action=Action,
+            **kwargs
         )
         super(TcpRoute, self).__init__(**processed_kwargs)
 
@@ -179,6 +188,7 @@ class RouteSpec(troposphere.appmesh.RouteSpec, Mixin):
             title=title,
             HttpRoute=HttpRoute,
             TcpRoute=TcpRoute,
+            **kwargs
         )
         super(RouteSpec, self).__init__(**processed_kwargs)
 
@@ -203,6 +213,7 @@ class Route(troposphere.appmesh.Route, Mixin):
             Spec=Spec,
             VirtualRouterName=VirtualRouterName,
             Tags=Tags,
+            **kwargs
         )
         super(Route, self).__init__(**processed_kwargs)
 
@@ -215,6 +226,7 @@ class VirtualServiceBackend(troposphere.appmesh.VirtualServiceBackend, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             VirtualServiceName=VirtualServiceName,
+            **kwargs
         )
         super(VirtualServiceBackend, self).__init__(**processed_kwargs)
 
@@ -227,6 +239,7 @@ class Backend(troposphere.appmesh.Backend, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             VirtualService=VirtualService,
+            **kwargs
         )
         super(Backend, self).__init__(**processed_kwargs)
 
@@ -251,6 +264,7 @@ class HealthCheck(troposphere.appmesh.HealthCheck, Mixin):
             UnhealthyThreshold=UnhealthyThreshold,
             Path=Path,
             Port=Port,
+            **kwargs
         )
         super(HealthCheck, self).__init__(**processed_kwargs)
 
@@ -265,6 +279,7 @@ class PortMapping(troposphere.appmesh.PortMapping, Mixin):
             title=title,
             Port=Port,
             Protocol=Protocol,
+            **kwargs
         )
         super(PortMapping, self).__init__(**processed_kwargs)
 
@@ -279,6 +294,7 @@ class Listener(troposphere.appmesh.Listener, Mixin):
             title=title,
             PortMapping=PortMapping,
             HealthCheck=HealthCheck,
+            **kwargs
         )
         super(Listener, self).__init__(**processed_kwargs)
 
@@ -291,6 +307,7 @@ class FileAccessLog(troposphere.appmesh.FileAccessLog, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Path=Path,
+            **kwargs
         )
         super(FileAccessLog, self).__init__(**processed_kwargs)
 
@@ -303,6 +320,7 @@ class AccessLog(troposphere.appmesh.AccessLog, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             File=File,
+            **kwargs
         )
         super(AccessLog, self).__init__(**processed_kwargs)
 
@@ -315,6 +333,7 @@ class Logging(troposphere.appmesh.Logging, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AccessLog=AccessLog,
+            **kwargs
         )
         super(Logging, self).__init__(**processed_kwargs)
 
@@ -329,6 +348,7 @@ class AwsCloudMapInstanceAttribute(troposphere.appmesh.AwsCloudMapInstanceAttrib
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(AwsCloudMapInstanceAttribute, self).__init__(**processed_kwargs)
 
@@ -345,6 +365,7 @@ class AwsCloudMapServiceDiscovery(troposphere.appmesh.AwsCloudMapServiceDiscover
             NamespaceName=NamespaceName,
             ServiceName=ServiceName,
             Attributes=Attributes,
+            **kwargs
         )
         super(AwsCloudMapServiceDiscovery, self).__init__(**processed_kwargs)
 
@@ -357,6 +378,7 @@ class DnsServiceDiscovery(troposphere.appmesh.DnsServiceDiscovery, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Hostname=Hostname,
+            **kwargs
         )
         super(DnsServiceDiscovery, self).__init__(**processed_kwargs)
 
@@ -371,6 +393,7 @@ class ServiceDiscovery(troposphere.appmesh.ServiceDiscovery, Mixin):
             title=title,
             AWSCloudMap=AWSCloudMap,
             DNS=DNS,
+            **kwargs
         )
         super(ServiceDiscovery, self).__init__(**processed_kwargs)
 
@@ -389,6 +412,7 @@ class VirtualNodeSpec(troposphere.appmesh.VirtualNodeSpec, Mixin):
             Listeners=Listeners,
             Logging=Logging,
             ServiceDiscovery=ServiceDiscovery,
+            **kwargs
         )
         super(VirtualNodeSpec, self).__init__(**processed_kwargs)
 
@@ -411,6 +435,7 @@ class VirtualNode(troposphere.appmesh.VirtualNode, Mixin):
             Spec=Spec,
             VirtualNodeName=VirtualNodeName,
             Tags=Tags,
+            **kwargs
         )
         super(VirtualNode, self).__init__(**processed_kwargs)
 
@@ -423,6 +448,7 @@ class VirtualRouterListener(troposphere.appmesh.VirtualRouterListener, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             PortMapping=PortMapping,
+            **kwargs
         )
         super(VirtualRouterListener, self).__init__(**processed_kwargs)
 
@@ -435,6 +461,7 @@ class VirtualRouterSpec(troposphere.appmesh.VirtualRouterSpec, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Listeners=Listeners,
+            **kwargs
         )
         super(VirtualRouterSpec, self).__init__(**processed_kwargs)
 
@@ -457,6 +484,7 @@ class VirtualRouter(troposphere.appmesh.VirtualRouter, Mixin):
             Spec=Spec,
             VirtualRouterName=VirtualRouterName,
             Tags=Tags,
+            **kwargs
         )
         super(VirtualRouter, self).__init__(**processed_kwargs)
 
@@ -469,6 +497,7 @@ class VirtualNodeServiceProvider(troposphere.appmesh.VirtualNodeServiceProvider,
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             VirtualNodeName=VirtualNodeName,
+            **kwargs
         )
         super(VirtualNodeServiceProvider, self).__init__(**processed_kwargs)
 
@@ -481,6 +510,7 @@ class VirtualRouterServiceProvider(troposphere.appmesh.VirtualRouterServiceProvi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             VirtualRouterName=VirtualRouterName,
+            **kwargs
         )
         super(VirtualRouterServiceProvider, self).__init__(**processed_kwargs)
 
@@ -495,6 +525,7 @@ class VirtualServiceProvider(troposphere.appmesh.VirtualServiceProvider, Mixin):
             title=title,
             VirtualNode=VirtualNode,
             VirtualRouter=VirtualRouter,
+            **kwargs
         )
         super(VirtualServiceProvider, self).__init__(**processed_kwargs)
 
@@ -507,6 +538,7 @@ class VirtualServiceSpec(troposphere.appmesh.VirtualServiceSpec, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Provider=Provider,
+            **kwargs
         )
         super(VirtualServiceSpec, self).__init__(**processed_kwargs)
 
@@ -529,5 +561,6 @@ class VirtualService(troposphere.appmesh.VirtualService, Mixin):
             Spec=Spec,
             VirtualServiceName=VirtualServiceName,
             Tags=Tags,
+            **kwargs
         )
         super(VirtualService, self).__init__(**processed_kwargs)

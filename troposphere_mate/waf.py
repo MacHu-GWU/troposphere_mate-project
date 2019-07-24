@@ -37,6 +37,7 @@ class Action(troposphere.waf.Action, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Type=Type,
+            **kwargs
         )
         super(Action, self).__init__(**processed_kwargs)
 
@@ -51,6 +52,7 @@ class FieldToMatch(troposphere.waf.FieldToMatch, Mixin):
             title=title,
             Type=Type,
             Data=Data,
+            **kwargs
         )
         super(FieldToMatch, self).__init__(**processed_kwargs)
 
@@ -71,6 +73,7 @@ class ByteMatchTuples(troposphere.waf.ByteMatchTuples, Mixin):
             TextTransformation=TextTransformation,
             TargetString=TargetString,
             TargetStringBase64=TargetStringBase64,
+            **kwargs
         )
         super(ByteMatchTuples, self).__init__(**processed_kwargs)
 
@@ -85,6 +88,7 @@ class IPSetDescriptors(troposphere.waf.IPSetDescriptors, Mixin):
             title=title,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(IPSetDescriptors, self).__init__(**processed_kwargs)
 
@@ -101,6 +105,7 @@ class Predicates(troposphere.waf.Predicates, Mixin):
             DataId=DataId,
             Negated=Negated,
             Type=Type,
+            **kwargs
         )
         super(Predicates, self).__init__(**processed_kwargs)
 
@@ -117,6 +122,7 @@ class Rules(troposphere.waf.Rules, Mixin):
             Action=Action,
             Priority=Priority,
             RuleId=RuleId,
+            **kwargs
         )
         super(Rules, self).__init__(**processed_kwargs)
 
@@ -131,6 +137,7 @@ class SqlInjectionMatchTuples(troposphere.waf.SqlInjectionMatchTuples, Mixin):
             title=title,
             FieldToMatch=FieldToMatch,
             TextTransformation=TextTransformation,
+            **kwargs
         )
         super(SqlInjectionMatchTuples, self).__init__(**processed_kwargs)
 
@@ -149,6 +156,7 @@ class ByteMatchSet(troposphere.waf.ByteMatchSet, Mixin):
             validation=validation,
             Name=Name,
             ByteMatchTuples=ByteMatchTuples,
+            **kwargs
         )
         super(ByteMatchSet, self).__init__(**processed_kwargs)
 
@@ -167,6 +175,7 @@ class IPSet(troposphere.waf.IPSet, Mixin):
             validation=validation,
             Name=Name,
             IPSetDescriptors=IPSetDescriptors,
+            **kwargs
         )
         super(IPSet, self).__init__(**processed_kwargs)
 
@@ -187,6 +196,7 @@ class Rule(troposphere.waf.Rule, Mixin):
             MetricName=MetricName,
             Name=Name,
             Predicates=Predicates,
+            **kwargs
         )
         super(Rule, self).__init__(**processed_kwargs)
 
@@ -205,6 +215,7 @@ class SqlInjectionMatchSet(troposphere.waf.SqlInjectionMatchSet, Mixin):
             validation=validation,
             Name=Name,
             SqlInjectionMatchTuples=SqlInjectionMatchTuples,
+            **kwargs
         )
         super(SqlInjectionMatchSet, self).__init__(**processed_kwargs)
 
@@ -227,6 +238,7 @@ class WebACL(troposphere.waf.WebACL, Mixin):
             MetricName=MetricName,
             Name=Name,
             Rules=Rules,
+            **kwargs
         )
         super(WebACL, self).__init__(**processed_kwargs)
 
@@ -245,6 +257,7 @@ class SizeConstraint(troposphere.waf.SizeConstraint, Mixin):
             FieldToMatch=FieldToMatch,
             Size=Size,
             TextTransformation=TextTransformation,
+            **kwargs
         )
         super(SizeConstraint, self).__init__(**processed_kwargs)
 
@@ -263,6 +276,7 @@ class SizeConstraintSet(troposphere.waf.SizeConstraintSet, Mixin):
             validation=validation,
             Name=Name,
             SizeConstraints=SizeConstraints,
+            **kwargs
         )
         super(SizeConstraintSet, self).__init__(**processed_kwargs)
 
@@ -277,6 +291,7 @@ class XssMatchTuple(troposphere.waf.XssMatchTuple, Mixin):
             title=title,
             FieldToMatch=FieldToMatch,
             TextTransformation=TextTransformation,
+            **kwargs
         )
         super(XssMatchTuple, self).__init__(**processed_kwargs)
 
@@ -295,5 +310,6 @@ class XssMatchSet(troposphere.waf.XssMatchSet, Mixin):
             validation=validation,
             Name=Name,
             XssMatchTuples=XssMatchTuples,
+            **kwargs
         )
         super(XssMatchSet, self).__init__(**processed_kwargs)

@@ -39,6 +39,7 @@ class TagFilter(troposphere.autoscalingplans.TagFilter, Mixin):
             title=title,
             Key=Key,
             Values=Values,
+            **kwargs
         )
         super(TagFilter, self).__init__(**processed_kwargs)
 
@@ -53,6 +54,7 @@ class ApplicationSource(troposphere.autoscalingplans.ApplicationSource, Mixin):
             title=title,
             CloudFormationStackARN=CloudFormationStackARN,
             TagFilters=TagFilters,
+            **kwargs
         )
         super(ApplicationSource, self).__init__(**processed_kwargs)
 
@@ -67,6 +69,7 @@ class PredefinedScalingMetricSpecification(troposphere.autoscalingplans.Predefin
             title=title,
             PredefinedScalingMetricType=PredefinedScalingMetricType,
             ResourceLabel=ResourceLabel,
+            **kwargs
         )
         super(PredefinedScalingMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -81,6 +84,7 @@ class MetricDimension(troposphere.autoscalingplans.MetricDimension, Mixin):
             title=title,
             Value=Value,
             Name=Name,
+            **kwargs
         )
         super(MetricDimension, self).__init__(**processed_kwargs)
 
@@ -101,6 +105,7 @@ class CustomizedScalingMetricSpecification(troposphere.autoscalingplans.Customiz
             Namespace=Namespace,
             Dimensions=Dimensions,
             Unit=Unit,
+            **kwargs
         )
         super(CustomizedScalingMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -125,6 +130,7 @@ class TargetTrackingConfiguration(troposphere.autoscalingplans.TargetTrackingCon
             ScaleInCooldown=ScaleInCooldown,
             EstimatedInstanceWarmup=EstimatedInstanceWarmup,
             CustomizedScalingMetricSpecification=CustomizedScalingMetricSpecification,
+            **kwargs
         )
         super(TargetTrackingConfiguration, self).__init__(**processed_kwargs)
 
@@ -149,6 +155,7 @@ class CustomizedLoadMetricSpecification(troposphere.autoscalingplans.CustomizedL
             Statistic=Statistic,
             Dimensions=Dimensions,
             Unit=Unit,
+            **kwargs
         )
         super(CustomizedLoadMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -163,6 +170,7 @@ class PredefinedLoadMetricSpecification(troposphere.autoscalingplans.PredefinedL
             title=title,
             PredefinedLoadMetricType=PredefinedLoadMetricType,
             ResourceLabel=ResourceLabel,
+            **kwargs
         )
         super(PredefinedLoadMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -201,6 +209,7 @@ class ScalingInstruction(troposphere.autoscalingplans.ScalingInstruction, Mixin)
             PredictiveScalingMode=PredictiveScalingMode,
             ScalingPolicyUpdateBehavior=ScalingPolicyUpdateBehavior,
             ScheduledActionBufferTime=ScheduledActionBufferTime,
+            **kwargs
         )
         super(ScalingInstruction, self).__init__(**processed_kwargs)
 
@@ -219,5 +228,6 @@ class ScalingPlan(troposphere.autoscalingplans.ScalingPlan, Mixin):
             validation=validation,
             ApplicationSource=ApplicationSource,
             ScalingInstructions=ScalingInstructions,
+            **kwargs
         )
         super(ScalingPlan, self).__init__(**processed_kwargs)

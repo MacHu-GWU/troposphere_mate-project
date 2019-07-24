@@ -35,6 +35,7 @@ class Activity(troposphere.stepfunctions.Activity, Mixin):
             validation=validation,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(Activity, self).__init__(**processed_kwargs)
 
@@ -57,5 +58,6 @@ class StateMachine(troposphere.stepfunctions.StateMachine, Mixin):
             RoleArn=RoleArn,
             StateMachineName=StateMachineName,
             Tags=Tags,
+            **kwargs
         )
         super(StateMachine, self).__init__(**processed_kwargs)

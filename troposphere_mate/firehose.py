@@ -57,6 +57,7 @@ class BufferingHints(troposphere.firehose.BufferingHints, Mixin):
             title=title,
             IntervalInSeconds=IntervalInSeconds,
             SizeInMBs=SizeInMBs,
+            **kwargs
         )
         super(BufferingHints, self).__init__(**processed_kwargs)
 
@@ -73,6 +74,7 @@ class CloudWatchLoggingOptions(troposphere.firehose.CloudWatchLoggingOptions, Mi
             Enabled=Enabled,
             LogGroupName=LogGroupName,
             LogStreamName=LogStreamName,
+            **kwargs
         )
         super(CloudWatchLoggingOptions, self).__init__(**processed_kwargs)
 
@@ -85,6 +87,7 @@ class RetryOptions(troposphere.firehose.RetryOptions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DurationInSeconds=DurationInSeconds,
+            **kwargs
         )
         super(RetryOptions, self).__init__(**processed_kwargs)
 
@@ -97,6 +100,7 @@ class KMSEncryptionConfig(troposphere.firehose.KMSEncryptionConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AWSKMSKeyARN=AWSKMSKeyARN,
+            **kwargs
         )
         super(KMSEncryptionConfig, self).__init__(**processed_kwargs)
 
@@ -111,6 +115,7 @@ class EncryptionConfiguration(troposphere.firehose.EncryptionConfiguration, Mixi
             title=title,
             KMSEncryptionConfig=KMSEncryptionConfig,
             NoEncryptionConfig=NoEncryptionConfig,
+            **kwargs
         )
         super(EncryptionConfiguration, self).__init__(**processed_kwargs)
 
@@ -135,6 +140,7 @@ class S3Configuration(troposphere.firehose.S3Configuration, Mixin):
             CloudWatchLoggingOptions=CloudWatchLoggingOptions,
             EncryptionConfiguration=EncryptionConfiguration,
             Prefix=Prefix,
+            **kwargs
         )
         super(S3Configuration, self).__init__(**processed_kwargs)
 
@@ -151,6 +157,7 @@ class CopyCommand(troposphere.firehose.CopyCommand, Mixin):
             DataTableName=DataTableName,
             CopyOptions=CopyOptions,
             DataTableColumns=DataTableColumns,
+            **kwargs
         )
         super(CopyCommand, self).__init__(**processed_kwargs)
 
@@ -165,6 +172,7 @@ class ProcessorParameter(troposphere.firehose.ProcessorParameter, Mixin):
             title=title,
             ParameterName=ParameterName,
             ParameterValue=ParameterValue,
+            **kwargs
         )
         super(ProcessorParameter, self).__init__(**processed_kwargs)
 
@@ -179,6 +187,7 @@ class Processor(troposphere.firehose.Processor, Mixin):
             title=title,
             Parameters=Parameters,
             Type=Type,
+            **kwargs
         )
         super(Processor, self).__init__(**processed_kwargs)
 
@@ -193,6 +202,7 @@ class ProcessingConfiguration(troposphere.firehose.ProcessingConfiguration, Mixi
             title=title,
             Enabled=Enabled,
             Processors=Processors,
+            **kwargs
         )
         super(ProcessingConfiguration, self).__init__(**processed_kwargs)
 
@@ -225,6 +235,7 @@ class ElasticsearchDestinationConfiguration(troposphere.firehose.ElasticsearchDe
             ProcessingConfiguration=ProcessingConfiguration,
             RetryOptions=RetryOptions,
             S3Configuration=S3Configuration,
+            **kwargs
         )
         super(ElasticsearchDestinationConfiguration, self).__init__(**processed_kwargs)
 
@@ -251,6 +262,7 @@ class RedshiftDestinationConfiguration(troposphere.firehose.RedshiftDestinationC
             Username=Username,
             CloudWatchLoggingOptions=CloudWatchLoggingOptions,
             ProcessingConfiguration=ProcessingConfiguration,
+            **kwargs
         )
         super(RedshiftDestinationConfiguration, self).__init__(**processed_kwargs)
 
@@ -277,6 +289,7 @@ class S3DestinationConfiguration(troposphere.firehose.S3DestinationConfiguration
             EncryptionConfiguration=EncryptionConfiguration,
             ErrorOutputPrefix=ErrorOutputPrefix,
             Prefix=Prefix,
+            **kwargs
         )
         super(S3DestinationConfiguration, self).__init__(**processed_kwargs)
 
@@ -289,6 +302,7 @@ class HiveJsonSerDe(troposphere.firehose.HiveJsonSerDe, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             TimestampFormats=TimestampFormats,
+            **kwargs
         )
         super(HiveJsonSerDe, self).__init__(**processed_kwargs)
 
@@ -305,6 +319,7 @@ class OpenXJsonSerDe(troposphere.firehose.OpenXJsonSerDe, Mixin):
             CaseInsensitive=CaseInsensitive,
             ColumnToJsonKeyMappings=ColumnToJsonKeyMappings,
             ConvertDotsInJsonKeysToUnderscores=ConvertDotsInJsonKeysToUnderscores,
+            **kwargs
         )
         super(OpenXJsonSerDe, self).__init__(**processed_kwargs)
 
@@ -319,6 +334,7 @@ class Deserializer(troposphere.firehose.Deserializer, Mixin):
             title=title,
             HiveJsonSerDe=HiveJsonSerDe,
             OpenXJsonSerDe=OpenXJsonSerDe,
+            **kwargs
         )
         super(Deserializer, self).__init__(**processed_kwargs)
 
@@ -331,6 +347,7 @@ class InputFormatConfiguration(troposphere.firehose.InputFormatConfiguration, Mi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Deserializer=Deserializer,
+            **kwargs
         )
         super(InputFormatConfiguration, self).__init__(**processed_kwargs)
 
@@ -361,6 +378,7 @@ class OrcSerDe(troposphere.firehose.OrcSerDe, Mixin):
             PaddingTolerance=PaddingTolerance,
             RowIndexStride=RowIndexStride,
             StripeSizeBytes=StripeSizeBytes,
+            **kwargs
         )
         super(OrcSerDe, self).__init__(**processed_kwargs)
 
@@ -383,6 +401,7 @@ class ParquetSerDe(troposphere.firehose.ParquetSerDe, Mixin):
             MaxPaddingBytes=MaxPaddingBytes,
             PageSizeBytes=PageSizeBytes,
             WriterVersion=WriterVersion,
+            **kwargs
         )
         super(ParquetSerDe, self).__init__(**processed_kwargs)
 
@@ -397,6 +416,7 @@ class Serializer(troposphere.firehose.Serializer, Mixin):
             title=title,
             OrcSerDe=OrcSerDe,
             ParquetSerDe=ParquetSerDe,
+            **kwargs
         )
         super(Serializer, self).__init__(**processed_kwargs)
 
@@ -409,6 +429,7 @@ class OutputFormatConfiguration(troposphere.firehose.OutputFormatConfiguration, 
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Serializer=Serializer,
+            **kwargs
         )
         super(OutputFormatConfiguration, self).__init__(**processed_kwargs)
 
@@ -431,6 +452,7 @@ class SchemaConfiguration(troposphere.firehose.SchemaConfiguration, Mixin):
             RoleARN=RoleARN,
             TableName=TableName,
             VersionId=VersionId,
+            **kwargs
         )
         super(SchemaConfiguration, self).__init__(**processed_kwargs)
 
@@ -449,6 +471,7 @@ class DataFormatConversionConfiguration(troposphere.firehose.DataFormatConversio
             InputFormatConfiguration=InputFormatConfiguration,
             OutputFormatConfiguration=OutputFormatConfiguration,
             SchemaConfiguration=SchemaConfiguration,
+            **kwargs
         )
         super(DataFormatConversionConfiguration, self).__init__(**processed_kwargs)
 
@@ -483,6 +506,7 @@ class ExtendedS3DestinationConfiguration(troposphere.firehose.ExtendedS3Destinat
             ProcessingConfiguration=ProcessingConfiguration,
             S3BackupConfiguration=S3BackupConfiguration,
             S3BackupMode=S3BackupMode,
+            **kwargs
         )
         super(ExtendedS3DestinationConfiguration, self).__init__(**processed_kwargs)
 
@@ -497,6 +521,7 @@ class KinesisStreamSourceConfiguration(troposphere.firehose.KinesisStreamSourceC
             title=title,
             KinesisStreamARN=KinesisStreamARN,
             RoleARN=RoleARN,
+            **kwargs
         )
         super(KinesisStreamSourceConfiguration, self).__init__(**processed_kwargs)
 
@@ -509,6 +534,7 @@ class SplunkRetryOptions(troposphere.firehose.SplunkRetryOptions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DurationInSeconds=DurationInSeconds,
+            **kwargs
         )
         super(SplunkRetryOptions, self).__init__(**processed_kwargs)
 
@@ -537,6 +563,7 @@ class SplunkDestinationConfiguration(troposphere.firehose.SplunkDestinationConfi
             ProcessingConfiguration=ProcessingConfiguration,
             RetryOptions=RetryOptions,
             S3BackupMode=S3BackupMode,
+            **kwargs
         )
         super(SplunkDestinationConfiguration, self).__init__(**processed_kwargs)
 
@@ -567,5 +594,6 @@ class DeliveryStream(troposphere.firehose.DeliveryStream, Mixin):
             RedshiftDestinationConfiguration=RedshiftDestinationConfiguration,
             S3DestinationConfiguration=S3DestinationConfiguration,
             SplunkDestinationConfiguration=SplunkDestinationConfiguration,
+            **kwargs
         )
         super(DeliveryStream, self).__init__(**processed_kwargs)

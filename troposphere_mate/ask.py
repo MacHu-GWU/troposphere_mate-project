@@ -32,6 +32,7 @@ class AuthenticationConfiguration(troposphere.ask.AuthenticationConfiguration, M
             title=title,
             DefaultAttributes=DefaultAttributes,
             DeviceTemplates=DeviceTemplates,
+            **kwargs
         )
         super(AuthenticationConfiguration, self).__init__(**processed_kwargs)
 
@@ -48,6 +49,7 @@ class SkillPackage(troposphere.ask.SkillPackage, Mixin):
             ClientId=ClientId,
             ClientSecret=ClientSecret,
             RefreshToken=RefreshToken,
+            **kwargs
         )
         super(SkillPackage, self).__init__(**processed_kwargs)
 
@@ -68,5 +70,6 @@ class Skill(troposphere.ask.Skill, Mixin):
             AuthenticationConfiguration=AuthenticationConfiguration,
             SkillPackage=SkillPackage,
             VendorId=VendorId,
+            **kwargs
         )
         super(Skill, self).__init__(**processed_kwargs)

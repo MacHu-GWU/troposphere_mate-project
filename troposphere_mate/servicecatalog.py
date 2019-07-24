@@ -38,6 +38,7 @@ class AcceptedPortfolioShare(troposphere.servicecatalog.AcceptedPortfolioShare, 
             validation=validation,
             PortfolioId=PortfolioId,
             AcceptLanguage=AcceptLanguage,
+            **kwargs
         )
         super(AcceptedPortfolioShare, self).__init__(**processed_kwargs)
 
@@ -56,6 +57,7 @@ class ProvisioningArtifactProperties(troposphere.servicecatalog.ProvisioningArti
             Description=Description,
             DisableTemplateValidation=DisableTemplateValidation,
             Name=Name,
+            **kwargs
         )
         super(ProvisioningArtifactProperties, self).__init__(**processed_kwargs)
 
@@ -90,6 +92,7 @@ class CloudFormationProduct(troposphere.servicecatalog.CloudFormationProduct, Mi
             SupportEmail=SupportEmail,
             SupportUrl=SupportUrl,
             Tags=Tags,
+            **kwargs
         )
         super(CloudFormationProduct, self).__init__(**processed_kwargs)
 
@@ -104,6 +107,7 @@ class ProvisioningParameter(troposphere.servicecatalog.ProvisioningParameter, Mi
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(ProvisioningParameter, self).__init__(**processed_kwargs)
 
@@ -128,6 +132,7 @@ class ProvisioningPreferences(troposphere.servicecatalog.ProvisioningPreferences
             StackSetMaxConcurrencyPercentage=StackSetMaxConcurrencyPercentage,
             StackSetOperationType=StackSetOperationType,
             StackSetRegions=StackSetRegions,
+            **kwargs
         )
         super(ProvisioningPreferences, self).__init__(**processed_kwargs)
 
@@ -164,6 +169,7 @@ class CloudFormationProvisionedProduct(troposphere.servicecatalog.CloudFormation
             ProvisioningParameters=ProvisioningParameters,
             ProvisioningPreferences=ProvisioningPreferences,
             Tags=Tags,
+            **kwargs
         )
         super(CloudFormationProvisionedProduct, self).__init__(**processed_kwargs)
 
@@ -188,6 +194,7 @@ class LaunchNotificationConstraint(troposphere.servicecatalog.LaunchNotification
             ProductId=ProductId,
             AcceptLanguage=AcceptLanguage,
             Description=Description,
+            **kwargs
         )
         super(LaunchNotificationConstraint, self).__init__(**processed_kwargs)
 
@@ -212,6 +219,7 @@ class LaunchRoleConstraint(troposphere.servicecatalog.LaunchRoleConstraint, Mixi
             RoleArn=RoleArn,
             AcceptLanguage=AcceptLanguage,
             Description=Description,
+            **kwargs
         )
         super(LaunchRoleConstraint, self).__init__(**processed_kwargs)
 
@@ -236,6 +244,7 @@ class LaunchTemplateConstraint(troposphere.servicecatalog.LaunchTemplateConstrai
             Rules=Rules,
             AcceptLanguage=AcceptLanguage,
             Description=Description,
+            **kwargs
         )
         super(LaunchTemplateConstraint, self).__init__(**processed_kwargs)
 
@@ -260,6 +269,7 @@ class Portfolio(troposphere.servicecatalog.Portfolio, Mixin):
             AcceptLanguage=AcceptLanguage,
             Description=Description,
             Tags=Tags,
+            **kwargs
         )
         super(Portfolio, self).__init__(**processed_kwargs)
 
@@ -282,6 +292,7 @@ class PortfolioPrincipalAssociation(troposphere.servicecatalog.PortfolioPrincipa
             PrincipalARN=PrincipalARN,
             PrincipalType=PrincipalType,
             AcceptLanguage=AcceptLanguage,
+            **kwargs
         )
         super(PortfolioPrincipalAssociation, self).__init__(**processed_kwargs)
 
@@ -304,6 +315,7 @@ class PortfolioProductAssociation(troposphere.servicecatalog.PortfolioProductAss
             ProductId=ProductId,
             AcceptLanguage=AcceptLanguage,
             SourcePortfolioId=SourcePortfolioId,
+            **kwargs
         )
         super(PortfolioProductAssociation, self).__init__(**processed_kwargs)
 
@@ -324,6 +336,7 @@ class PortfolioShare(troposphere.servicecatalog.PortfolioShare, Mixin):
             AccountId=AccountId,
             PortfolioId=PortfolioId,
             AcceptLanguage=AcceptLanguage,
+            **kwargs
         )
         super(PortfolioShare, self).__init__(**processed_kwargs)
 
@@ -348,6 +361,7 @@ class ResourceUpdateConstraint(troposphere.servicecatalog.ResourceUpdateConstrai
             TagUpdateOnProvisionedProduct=TagUpdateOnProvisionedProduct,
             AcceptLanguage=AcceptLanguage,
             Description=Description,
+            **kwargs
         )
         super(ResourceUpdateConstraint, self).__init__(**processed_kwargs)
 
@@ -380,6 +394,7 @@ class StackSetConstraint(troposphere.servicecatalog.StackSetConstraint, Mixin):
             RegionList=RegionList,
             StackInstanceControl=StackInstanceControl,
             AcceptLanguage=AcceptLanguage,
+            **kwargs
         )
         super(StackSetConstraint, self).__init__(**processed_kwargs)
 
@@ -400,6 +415,7 @@ class TagOption(troposphere.servicecatalog.TagOption, Mixin):
             Key=Key,
             Value=Value,
             Active=Active,
+            **kwargs
         )
         super(TagOption, self).__init__(**processed_kwargs)
 
@@ -418,5 +434,6 @@ class TagOptionAssociation(troposphere.servicecatalog.TagOptionAssociation, Mixi
             validation=validation,
             ResourceId=ResourceId,
             TagOptionId=TagOptionId,
+            **kwargs
         )
         super(TagOptionAssociation, self).__init__(**processed_kwargs)

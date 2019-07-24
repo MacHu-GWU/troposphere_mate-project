@@ -56,6 +56,7 @@ class KeyValue(troposphere.emr.KeyValue, Mixin):
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(KeyValue, self).__init__(**processed_kwargs)
 
@@ -74,6 +75,7 @@ class SecurityConfiguration(troposphere.emr.SecurityConfiguration, Mixin):
             validation=validation,
             SecurityConfiguration=SecurityConfiguration,
             Name=Name,
+            **kwargs
         )
         super(SecurityConfiguration, self).__init__(**processed_kwargs)
 
@@ -92,6 +94,7 @@ class Application(troposphere.emr.Application, Mixin):
             Args=Args,
             Name=Name,
             Version=Version,
+            **kwargs
         )
         super(Application, self).__init__(**processed_kwargs)
 
@@ -106,6 +109,7 @@ class ScriptBootstrapActionConfig(troposphere.emr.ScriptBootstrapActionConfig, M
             title=title,
             Path=Path,
             Args=Args,
+            **kwargs
         )
         super(ScriptBootstrapActionConfig, self).__init__(**processed_kwargs)
 
@@ -120,6 +124,7 @@ class BootstrapActionConfig(troposphere.emr.BootstrapActionConfig, Mixin):
             title=title,
             Name=Name,
             ScriptBootstrapAction=ScriptBootstrapAction,
+            **kwargs
         )
         super(BootstrapActionConfig, self).__init__(**processed_kwargs)
 
@@ -136,6 +141,7 @@ class Configuration(troposphere.emr.Configuration, Mixin):
             Classification=Classification,
             ConfigurationProperties=ConfigurationProperties,
             Configurations=Configurations,
+            **kwargs
         )
         super(Configuration, self).__init__(**processed_kwargs)
 
@@ -152,6 +158,7 @@ class VolumeSpecification(troposphere.emr.VolumeSpecification, Mixin):
             SizeInGB=SizeInGB,
             VolumeType=VolumeType,
             Iops=Iops,
+            **kwargs
         )
         super(VolumeSpecification, self).__init__(**processed_kwargs)
 
@@ -166,6 +173,7 @@ class EbsBlockDeviceConfigs(troposphere.emr.EbsBlockDeviceConfigs, Mixin):
             title=title,
             VolumeSpecification=VolumeSpecification,
             VolumesPerInstance=VolumesPerInstance,
+            **kwargs
         )
         super(EbsBlockDeviceConfigs, self).__init__(**processed_kwargs)
 
@@ -180,6 +188,7 @@ class EbsConfiguration(troposphere.emr.EbsConfiguration, Mixin):
             title=title,
             EbsBlockDeviceConfigs=EbsBlockDeviceConfigs,
             EbsOptimized=EbsOptimized,
+            **kwargs
         )
         super(EbsConfiguration, self).__init__(**processed_kwargs)
 
@@ -194,6 +203,7 @@ class ScalingConstraints(troposphere.emr.ScalingConstraints, Mixin):
             title=title,
             MinCapacity=MinCapacity,
             MaxCapacity=MaxCapacity,
+            **kwargs
         )
         super(ScalingConstraints, self).__init__(**processed_kwargs)
 
@@ -222,6 +232,7 @@ class CloudWatchAlarmDefinition(troposphere.emr.CloudWatchAlarmDefinition, Mixin
             Namespace=Namespace,
             Statistic=Statistic,
             Unit=Unit,
+            **kwargs
         )
         super(CloudWatchAlarmDefinition, self).__init__(**processed_kwargs)
 
@@ -234,6 +245,7 @@ class ScalingTrigger(troposphere.emr.ScalingTrigger, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CloudWatchAlarmDefinition=CloudWatchAlarmDefinition,
+            **kwargs
         )
         super(ScalingTrigger, self).__init__(**processed_kwargs)
 
@@ -250,6 +262,7 @@ class SimpleScalingPolicyConfiguration(troposphere.emr.SimpleScalingPolicyConfig
             ScalingAdjustment=ScalingAdjustment,
             AdjustmentType=AdjustmentType,
             CoolDown=CoolDown,
+            **kwargs
         )
         super(SimpleScalingPolicyConfiguration, self).__init__(**processed_kwargs)
 
@@ -264,6 +277,7 @@ class ScalingAction(troposphere.emr.ScalingAction, Mixin):
             title=title,
             SimpleScalingPolicyConfiguration=SimpleScalingPolicyConfiguration,
             Market=Market,
+            **kwargs
         )
         super(ScalingAction, self).__init__(**processed_kwargs)
 
@@ -282,6 +296,7 @@ class ScalingRule(troposphere.emr.ScalingRule, Mixin):
             Name=Name,
             Trigger=Trigger,
             Description=Description,
+            **kwargs
         )
         super(ScalingRule, self).__init__(**processed_kwargs)
 
@@ -296,6 +311,7 @@ class AutoScalingPolicy(troposphere.emr.AutoScalingPolicy, Mixin):
             title=title,
             Constraints=Constraints,
             Rules=Rules,
+            **kwargs
         )
         super(AutoScalingPolicy, self).__init__(**processed_kwargs)
 
@@ -322,6 +338,7 @@ class InstanceGroupConfigProperty(troposphere.emr.InstanceGroupConfigProperty, M
             EbsConfiguration=EbsConfiguration,
             Market=Market,
             Name=Name,
+            **kwargs
         )
         super(InstanceGroupConfigProperty, self).__init__(**processed_kwargs)
 
@@ -338,6 +355,7 @@ class SpotProvisioningSpecification(troposphere.emr.SpotProvisioningSpecificatio
             TimeoutAction=TimeoutAction,
             TimeoutDurationMinutes=TimeoutDurationMinutes,
             BlockDurationMinutes=BlockDurationMinutes,
+            **kwargs
         )
         super(SpotProvisioningSpecification, self).__init__(**processed_kwargs)
 
@@ -350,6 +368,7 @@ class InstanceFleetProvisioningSpecifications(troposphere.emr.InstanceFleetProvi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SpotSpecification=SpotSpecification,
+            **kwargs
         )
         super(InstanceFleetProvisioningSpecifications, self).__init__(**processed_kwargs)
 
@@ -372,6 +391,7 @@ class InstanceTypeConfig(troposphere.emr.InstanceTypeConfig, Mixin):
             Configurations=Configurations,
             EbsConfiguration=EbsConfiguration,
             WeightedCapacity=WeightedCapacity,
+            **kwargs
         )
         super(InstanceTypeConfig, self).__init__(**processed_kwargs)
 
@@ -392,6 +412,7 @@ class InstanceFleetConfigProperty(troposphere.emr.InstanceFleetConfigProperty, M
             Name=Name,
             TargetOnDemandCapacity=TargetOnDemandCapacity,
             TargetSpotCapacity=TargetSpotCapacity,
+            **kwargs
         )
         super(InstanceFleetConfigProperty, self).__init__(**processed_kwargs)
 
@@ -404,6 +425,7 @@ class PlacementType(troposphere.emr.PlacementType, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AvailabilityZone=AvailabilityZone,
+            **kwargs
         )
         super(PlacementType, self).__init__(**processed_kwargs)
 
@@ -446,6 +468,7 @@ class JobFlowInstancesConfig(troposphere.emr.JobFlowInstancesConfig, Mixin):
             Placement=Placement,
             ServiceAccessSecurityGroup=ServiceAccessSecurityGroup,
             TerminationProtected=TerminationProtected,
+            **kwargs
         )
         super(JobFlowInstancesConfig, self).__init__(**processed_kwargs)
 
@@ -466,6 +489,7 @@ class KerberosAttributes(troposphere.emr.KerberosAttributes, Mixin):
             ADDomainJoinPassword=ADDomainJoinPassword,
             ADDomainJoinUser=ADDomainJoinUser,
             CrossRealmTrustPrincipalPassword=CrossRealmTrustPrincipalPassword,
+            **kwargs
         )
         super(KerberosAttributes, self).__init__(**processed_kwargs)
 
@@ -484,6 +508,7 @@ class HadoopJarStepConfig(troposphere.emr.HadoopJarStepConfig, Mixin):
             Args=Args,
             MainClass=MainClass,
             StepProperties=StepProperties,
+            **kwargs
         )
         super(HadoopJarStepConfig, self).__init__(**processed_kwargs)
 
@@ -500,6 +525,7 @@ class StepConfig(troposphere.emr.StepConfig, Mixin):
             HadoopJarStep=HadoopJarStep,
             Name=Name,
             ActionOnFailure=ActionOnFailure,
+            **kwargs
         )
         super(StepConfig, self).__init__(**processed_kwargs)
 
@@ -552,6 +578,7 @@ class Cluster(troposphere.emr.Cluster, Mixin):
             Steps=Steps,
             Tags=Tags,
             VisibleToAllUsers=VisibleToAllUsers,
+            **kwargs
         )
         super(Cluster, self).__init__(**processed_kwargs)
 
@@ -580,6 +607,7 @@ class InstanceFleetConfig(troposphere.emr.InstanceFleetConfig, Mixin):
             Name=Name,
             TargetOnDemandCapacity=TargetOnDemandCapacity,
             TargetSpotCapacity=TargetSpotCapacity,
+            **kwargs
         )
         super(InstanceFleetConfig, self).__init__(**processed_kwargs)
 
@@ -614,6 +642,7 @@ class InstanceGroupConfig(troposphere.emr.InstanceGroupConfig, Mixin):
             EbsConfiguration=EbsConfiguration,
             Market=Market,
             Name=Name,
+            **kwargs
         )
         super(InstanceGroupConfig, self).__init__(**processed_kwargs)
 
@@ -636,5 +665,6 @@ class Step(troposphere.emr.Step, Mixin):
             HadoopJarStep=HadoopJarStep,
             JobFlowId=JobFlowId,
             Name=Name,
+            **kwargs
         )
         super(Step, self).__init__(**processed_kwargs)

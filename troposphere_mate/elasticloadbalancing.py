@@ -35,6 +35,7 @@ class AppCookieStickinessPolicy(troposphere.elasticloadbalancing.AppCookieSticki
             title=title,
             CookieName=CookieName,
             PolicyName=PolicyName,
+            **kwargs
         )
         super(AppCookieStickinessPolicy, self).__init__(**processed_kwargs)
 
@@ -55,6 +56,7 @@ class HealthCheck(troposphere.elasticloadbalancing.HealthCheck, Mixin):
             Target=Target,
             Timeout=Timeout,
             UnhealthyThreshold=UnhealthyThreshold,
+            **kwargs
         )
         super(HealthCheck, self).__init__(**processed_kwargs)
 
@@ -69,6 +71,7 @@ class LBCookieStickinessPolicy(troposphere.elasticloadbalancing.LBCookieStickine
             title=title,
             CookieExpirationPeriod=CookieExpirationPeriod,
             PolicyName=PolicyName,
+            **kwargs
         )
         super(LBCookieStickinessPolicy, self).__init__(**processed_kwargs)
 
@@ -91,6 +94,7 @@ class Listener(troposphere.elasticloadbalancing.Listener, Mixin):
             InstanceProtocol=InstanceProtocol,
             PolicyNames=PolicyNames,
             SSLCertificateId=SSLCertificateId,
+            **kwargs
         )
         super(Listener, self).__init__(**processed_kwargs)
 
@@ -111,6 +115,7 @@ class Policy(troposphere.elasticloadbalancing.Policy, Mixin):
             Attributes=Attributes,
             InstancePorts=InstancePorts,
             LoadBalancerPorts=LoadBalancerPorts,
+            **kwargs
         )
         super(Policy, self).__init__(**processed_kwargs)
 
@@ -125,6 +130,7 @@ class ConnectionDrainingPolicy(troposphere.elasticloadbalancing.ConnectionDraini
             title=title,
             Enabled=Enabled,
             Timeout=Timeout,
+            **kwargs
         )
         super(ConnectionDrainingPolicy, self).__init__(**processed_kwargs)
 
@@ -137,6 +143,7 @@ class ConnectionSettings(troposphere.elasticloadbalancing.ConnectionSettings, Mi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             IdleTimeout=IdleTimeout,
+            **kwargs
         )
         super(ConnectionSettings, self).__init__(**processed_kwargs)
 
@@ -155,6 +162,7 @@ class AccessLoggingPolicy(troposphere.elasticloadbalancing.AccessLoggingPolicy, 
             EmitInterval=EmitInterval,
             S3BucketName=S3BucketName,
             S3BucketPrefix=S3BucketPrefix,
+            **kwargs
         )
         super(AccessLoggingPolicy, self).__init__(**processed_kwargs)
 
@@ -201,5 +209,6 @@ class LoadBalancer(troposphere.elasticloadbalancing.LoadBalancer, Mixin):
             SecurityGroups=SecurityGroups,
             Subnets=Subnets,
             Tags=Tags,
+            **kwargs
         )
         super(LoadBalancer, self).__init__(**processed_kwargs)

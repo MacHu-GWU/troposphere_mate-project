@@ -40,6 +40,7 @@ class Instance(troposphere.servicediscovery.Instance, Mixin):
             InstanceAttributes=InstanceAttributes,
             ServiceId=ServiceId,
             InstanceId=InstanceId,
+            **kwargs
         )
         super(Instance, self).__init__(**processed_kwargs)
 
@@ -60,6 +61,7 @@ class PrivateDnsNamespace(troposphere.servicediscovery.PrivateDnsNamespace, Mixi
             Name=Name,
             Vpc=Vpc,
             Description=Description,
+            **kwargs
         )
         super(PrivateDnsNamespace, self).__init__(**processed_kwargs)
 
@@ -78,6 +80,7 @@ class PublicDnsNamespace(troposphere.servicediscovery.PublicDnsNamespace, Mixin)
             validation=validation,
             Name=Name,
             Description=Description,
+            **kwargs
         )
         super(PublicDnsNamespace, self).__init__(**processed_kwargs)
 
@@ -94,6 +97,7 @@ class HealthCheckConfig(troposphere.servicediscovery.HealthCheckConfig, Mixin):
             Type=Type,
             FailureThreshold=FailureThreshold,
             ResourcePath=ResourcePath,
+            **kwargs
         )
         super(HealthCheckConfig, self).__init__(**processed_kwargs)
 
@@ -106,6 +110,7 @@ class HealthCheckCustomConfig(troposphere.servicediscovery.HealthCheckCustomConf
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             FailureThreshold=FailureThreshold,
+            **kwargs
         )
         super(HealthCheckCustomConfig, self).__init__(**processed_kwargs)
 
@@ -120,6 +125,7 @@ class DnsRecord(troposphere.servicediscovery.DnsRecord, Mixin):
             title=title,
             TTL=TTL,
             Type=Type,
+            **kwargs
         )
         super(DnsRecord, self).__init__(**processed_kwargs)
 
@@ -136,6 +142,7 @@ class DnsConfig(troposphere.servicediscovery.DnsConfig, Mixin):
             DnsRecords=DnsRecords,
             NamespaceId=NamespaceId,
             RoutingPolicy=RoutingPolicy,
+            **kwargs
         )
         super(DnsConfig, self).__init__(**processed_kwargs)
 
@@ -162,6 +169,7 @@ class Service(troposphere.servicediscovery.Service, Mixin):
             HealthCheckCustomConfig=HealthCheckCustomConfig,
             Name=Name,
             NamespaceId=NamespaceId,
+            **kwargs
         )
         super(Service, self).__init__(**processed_kwargs)
 
@@ -180,5 +188,6 @@ class HttpNamespace(troposphere.servicediscovery.HttpNamespace, Mixin):
             validation=validation,
             Name=Name,
             Description=Description,
+            **kwargs
         )
         super(HttpNamespace, self).__init__(**processed_kwargs)

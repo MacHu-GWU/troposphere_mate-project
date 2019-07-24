@@ -60,6 +60,7 @@ class Connector(troposphere.greengrass.Connector, Mixin):
             ConnectorArn=ConnectorArn,
             Id=Id,
             Parameters=Parameters,
+            **kwargs
         )
         super(Connector, self).__init__(**processed_kwargs)
 
@@ -74,6 +75,7 @@ class ConnectorDefinitionVersion(troposphere.greengrass.ConnectorDefinitionVersi
             title=title,
             ConnectorDefinitionId=ConnectorDefinitionId,
             Connectors=Connectors,
+            **kwargs
         )
         super(ConnectorDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -92,6 +94,7 @@ class ConnectorDefinition(troposphere.greengrass.ConnectorDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            **kwargs
         )
         super(ConnectorDefinition, self).__init__(**processed_kwargs)
 
@@ -110,6 +113,7 @@ class ConnectorDefinitionVersion(troposphere.greengrass.ConnectorDefinitionVersi
             validation=validation,
             ConnectorDefinitionId=ConnectorDefinitionId,
             Connectors=Connectors,
+            **kwargs
         )
         super(ConnectorDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -128,6 +132,7 @@ class Core(troposphere.greengrass.Core, Mixin):
             Id=Id,
             ThingArn=ThingArn,
             SyncShadow=SyncShadow,
+            **kwargs
         )
         super(Core, self).__init__(**processed_kwargs)
 
@@ -142,6 +147,7 @@ class CoreDefinitionVersion(troposphere.greengrass.CoreDefinitionVersion, Mixin)
             title=title,
             CoreDefinitionId=CoreDefinitionId,
             Cores=Cores,
+            **kwargs
         )
         super(CoreDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -160,6 +166,7 @@ class CoreDefinition(troposphere.greengrass.CoreDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            **kwargs
         )
         super(CoreDefinition, self).__init__(**processed_kwargs)
 
@@ -178,6 +185,7 @@ class CoreDefinitionVersion(troposphere.greengrass.CoreDefinitionVersion, Mixin)
             validation=validation,
             CoreDefinitionId=CoreDefinitionId,
             Cores=Cores,
+            **kwargs
         )
         super(CoreDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -196,6 +204,7 @@ class Device(troposphere.greengrass.Device, Mixin):
             Id=Id,
             ThingArn=ThingArn,
             SyncShadow=SyncShadow,
+            **kwargs
         )
         super(Device, self).__init__(**processed_kwargs)
 
@@ -210,6 +219,7 @@ class DeviceDefinitionVersion(troposphere.greengrass.DeviceDefinitionVersion, Mi
             title=title,
             DeviceDefinitionId=DeviceDefinitionId,
             Devices=Devices,
+            **kwargs
         )
         super(DeviceDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -228,6 +238,7 @@ class DeviceDefinition(troposphere.greengrass.DeviceDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            **kwargs
         )
         super(DeviceDefinition, self).__init__(**processed_kwargs)
 
@@ -246,6 +257,7 @@ class DeviceDefinitionVersion(troposphere.greengrass.DeviceDefinitionVersion, Mi
             validation=validation,
             DeviceDefinitionId=DeviceDefinitionId,
             Devices=Devices,
+            **kwargs
         )
         super(DeviceDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -260,6 +272,7 @@ class RunAs(troposphere.greengrass.RunAs, Mixin):
             title=title,
             Gid=Gid,
             Uid=Uid,
+            **kwargs
         )
         super(RunAs, self).__init__(**processed_kwargs)
 
@@ -274,6 +287,7 @@ class Execution(troposphere.greengrass.Execution, Mixin):
             title=title,
             IsolationMode=IsolationMode,
             RunAs=RunAs,
+            **kwargs
         )
         super(Execution, self).__init__(**processed_kwargs)
 
@@ -286,6 +300,7 @@ class DefaultConfig(troposphere.greengrass.DefaultConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Execution=Execution,
+            **kwargs
         )
         super(DefaultConfig, self).__init__(**processed_kwargs)
 
@@ -300,6 +315,7 @@ class ResourceAccessPolicy(troposphere.greengrass.ResourceAccessPolicy, Mixin):
             title=title,
             ResourceId=ResourceId,
             Permission=Permission,
+            **kwargs
         )
         super(ResourceAccessPolicy, self).__init__(**processed_kwargs)
 
@@ -318,6 +334,7 @@ class Environment(troposphere.greengrass.Environment, Mixin):
             Execution=Execution,
             ResourceAccessPolicies=ResourceAccessPolicies,
             Variables=Variables,
+            **kwargs
         )
         super(Environment, self).__init__(**processed_kwargs)
 
@@ -342,6 +359,7 @@ class FunctionConfiguration(troposphere.greengrass.FunctionConfiguration, Mixin)
             MemorySize=MemorySize,
             Pinned=Pinned,
             Timeout=Timeout,
+            **kwargs
         )
         super(FunctionConfiguration, self).__init__(**processed_kwargs)
 
@@ -358,6 +376,7 @@ class Function(troposphere.greengrass.Function, Mixin):
             FunctionArn=FunctionArn,
             FunctionConfiguration=FunctionConfiguration,
             Id=Id,
+            **kwargs
         )
         super(Function, self).__init__(**processed_kwargs)
 
@@ -374,6 +393,7 @@ class FunctionDefinitionVersion(troposphere.greengrass.FunctionDefinitionVersion
             FunctionDefinitionId=FunctionDefinitionId,
             Functions=Functions,
             DefaultConfig=DefaultConfig,
+            **kwargs
         )
         super(FunctionDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -392,6 +412,7 @@ class FunctionDefinition(troposphere.greengrass.FunctionDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            **kwargs
         )
         super(FunctionDefinition, self).__init__(**processed_kwargs)
 
@@ -412,6 +433,7 @@ class FunctionDefinitionVersion(troposphere.greengrass.FunctionDefinitionVersion
             FunctionDefinitionId=FunctionDefinitionId,
             Functions=Functions,
             DefaultConfig=DefaultConfig,
+            **kwargs
         )
         super(FunctionDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -438,6 +460,7 @@ class GroupVersion(troposphere.greengrass.GroupVersion, Mixin):
             LoggerDefinitionVersionArn=LoggerDefinitionVersionArn,
             ResourceDefinitionVersionArn=ResourceDefinitionVersionArn,
             SubscriptionDefinitionVersionArn=SubscriptionDefinitionVersionArn,
+            **kwargs
         )
         super(GroupVersion, self).__init__(**processed_kwargs)
 
@@ -458,6 +481,7 @@ class Group(troposphere.greengrass.Group, Mixin):
             Name=Name,
             InitialVersion=InitialVersion,
             RoleArn=RoleArn,
+            **kwargs
         )
         super(Group, self).__init__(**processed_kwargs)
 
@@ -488,6 +512,7 @@ class GroupVersion(troposphere.greengrass.GroupVersion, Mixin):
             LoggerDefinitionVersionArn=LoggerDefinitionVersionArn,
             ResourceDefinitionVersionArn=ResourceDefinitionVersionArn,
             SubscriptionDefinitionVersionArn=SubscriptionDefinitionVersionArn,
+            **kwargs
         )
         super(GroupVersion, self).__init__(**processed_kwargs)
 
@@ -508,6 +533,7 @@ class Logger(troposphere.greengrass.Logger, Mixin):
             Level=Level,
             Type=Type,
             Space=Space,
+            **kwargs
         )
         super(Logger, self).__init__(**processed_kwargs)
 
@@ -522,6 +548,7 @@ class LoggerDefinitionVersion(troposphere.greengrass.LoggerDefinitionVersion, Mi
             title=title,
             LoggerDefinitionId=LoggerDefinitionId,
             Loggers=Loggers,
+            **kwargs
         )
         super(LoggerDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -540,6 +567,7 @@ class LoggerDefinition(troposphere.greengrass.LoggerDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            **kwargs
         )
         super(LoggerDefinition, self).__init__(**processed_kwargs)
 
@@ -558,6 +586,7 @@ class LoggerDefinitionVersion(troposphere.greengrass.LoggerDefinitionVersion, Mi
             validation=validation,
             LoggerDefinitionId=LoggerDefinitionId,
             Loggers=Loggers,
+            **kwargs
         )
         super(LoggerDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -572,6 +601,7 @@ class GroupOwnerSetting(troposphere.greengrass.GroupOwnerSetting, Mixin):
             title=title,
             AutoAddGroupOwner=AutoAddGroupOwner,
             GroupOwner=GroupOwner,
+            **kwargs
         )
         super(GroupOwnerSetting, self).__init__(**processed_kwargs)
 
@@ -586,6 +616,7 @@ class LocalDeviceResourceData(troposphere.greengrass.LocalDeviceResourceData, Mi
             title=title,
             SourcePath=SourcePath,
             GroupOwnerSetting=GroupOwnerSetting,
+            **kwargs
         )
         super(LocalDeviceResourceData, self).__init__(**processed_kwargs)
 
@@ -602,6 +633,7 @@ class LocalVolumeResourceData(troposphere.greengrass.LocalVolumeResourceData, Mi
             DestinationPath=DestinationPath,
             SourcePath=SourcePath,
             GroupOwnerSetting=GroupOwnerSetting,
+            **kwargs
         )
         super(LocalVolumeResourceData, self).__init__(**processed_kwargs)
 
@@ -616,6 +648,7 @@ class S3MachineLearningModelResourceData(troposphere.greengrass.S3MachineLearnin
             title=title,
             DestinationPath=DestinationPath,
             S3Uri=S3Uri,
+            **kwargs
         )
         super(S3MachineLearningModelResourceData, self).__init__(**processed_kwargs)
 
@@ -630,6 +663,7 @@ class SageMakerMachineLearningModelResourceData(troposphere.greengrass.SageMaker
             title=title,
             DestinationPath=DestinationPath,
             SageMakerJobArn=SageMakerJobArn,
+            **kwargs
         )
         super(SageMakerMachineLearningModelResourceData, self).__init__(**processed_kwargs)
 
@@ -644,6 +678,7 @@ class SecretsManagerSecretResourceData(troposphere.greengrass.SecretsManagerSecr
             title=title,
             ARN=ARN,
             AdditionalStagingLabelsToDownload=AdditionalStagingLabelsToDownload,
+            **kwargs
         )
         super(SecretsManagerSecretResourceData, self).__init__(**processed_kwargs)
 
@@ -664,6 +699,7 @@ class ResourceDataContainer(troposphere.greengrass.ResourceDataContainer, Mixin)
             S3MachineLearningModelResourceData=S3MachineLearningModelResourceData,
             SageMakerMachineLearningModelResourceData=SageMakerMachineLearningModelResourceData,
             SecretsManagerSecretResourceData=SecretsManagerSecretResourceData,
+            **kwargs
         )
         super(ResourceDataContainer, self).__init__(**processed_kwargs)
 
@@ -680,6 +716,7 @@ class ResourceInstance(troposphere.greengrass.ResourceInstance, Mixin):
             Id=Id,
             Name=Name,
             ResourceDataContainer=ResourceDataContainer,
+            **kwargs
         )
         super(ResourceInstance, self).__init__(**processed_kwargs)
 
@@ -694,6 +731,7 @@ class ResourceDefinitionVersion(troposphere.greengrass.ResourceDefinitionVersion
             title=title,
             ResourceDefinitionId=ResourceDefinitionId,
             Resources=Resources,
+            **kwargs
         )
         super(ResourceDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -712,6 +750,7 @@ class ResourceDefinition(troposphere.greengrass.ResourceDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            **kwargs
         )
         super(ResourceDefinition, self).__init__(**processed_kwargs)
 
@@ -730,6 +769,7 @@ class ResourceDefinitionVersion(troposphere.greengrass.ResourceDefinitionVersion
             validation=validation,
             ResourceDefinitionId=ResourceDefinitionId,
             Resources=Resources,
+            **kwargs
         )
         super(ResourceDefinitionVersion, self).__init__(**processed_kwargs)
 
@@ -748,6 +788,7 @@ class Subscription(troposphere.greengrass.Subscription, Mixin):
             Source=Source,
             Subject=Subject,
             Target=Target,
+            **kwargs
         )
         super(Subscription, self).__init__(**processed_kwargs)
 
@@ -760,6 +801,7 @@ class SubscriptionDefinitionVersionProperty(troposphere.greengrass.SubscriptionD
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Subscriptions=Subscriptions,
+            **kwargs
         )
         super(SubscriptionDefinitionVersionProperty, self).__init__(**processed_kwargs)
 
@@ -778,6 +820,7 @@ class SubscriptionDefinition(troposphere.greengrass.SubscriptionDefinition, Mixi
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            **kwargs
         )
         super(SubscriptionDefinition, self).__init__(**processed_kwargs)
 
@@ -796,5 +839,6 @@ class SubscriptionDefinitionVersion(troposphere.greengrass.SubscriptionDefinitio
             validation=validation,
             SubscriptionDefinitionId=SubscriptionDefinitionId,
             Subscriptions=Subscriptions,
+            **kwargs
         )
         super(SubscriptionDefinitionVersion, self).__init__(**processed_kwargs)

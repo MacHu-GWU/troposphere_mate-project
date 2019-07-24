@@ -31,6 +31,7 @@ class ResourcesVpcConfig(troposphere.eks.ResourcesVpcConfig, Mixin):
             title=title,
             SubnetIds=SubnetIds,
             SecurityGroupIds=SecurityGroupIds,
+            **kwargs
         )
         super(ResourcesVpcConfig, self).__init__(**processed_kwargs)
 
@@ -53,5 +54,6 @@ class Cluster(troposphere.eks.Cluster, Mixin):
             RoleArn=RoleArn,
             Name=Name,
             Version=Version,
+            **kwargs
         )
         super(Cluster, self).__init__(**processed_kwargs)

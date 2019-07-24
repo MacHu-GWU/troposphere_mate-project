@@ -44,6 +44,7 @@ class SourceAuth(troposphere.codebuild.SourceAuth, Mixin):
             title=title,
             Type=Type,
             Resource=Resource,
+            **kwargs
         )
         super(SourceAuth, self).__init__(**processed_kwargs)
 
@@ -72,6 +73,7 @@ class Artifacts(troposphere.codebuild.Artifacts, Mixin):
             OverrideArtifactName=OverrideArtifactName,
             Packaging=Packaging,
             Path=Path,
+            **kwargs
         )
         super(Artifacts, self).__init__(**processed_kwargs)
 
@@ -88,6 +90,7 @@ class EnvironmentVariable(troposphere.codebuild.EnvironmentVariable, Mixin):
             Name=Name,
             Value=Value,
             Type=Type,
+            **kwargs
         )
         super(EnvironmentVariable, self).__init__(**processed_kwargs)
 
@@ -102,6 +105,7 @@ class RegistryCredential(troposphere.codebuild.RegistryCredential, Mixin):
             title=title,
             Credential=Credential,
             CredentialProvider=CredentialProvider,
+            **kwargs
         )
         super(RegistryCredential, self).__init__(**processed_kwargs)
 
@@ -126,6 +130,7 @@ class Environment(troposphere.codebuild.Environment, Mixin):
             ImagePullCredentialsType=ImagePullCredentialsType,
             PrivilegedMode=PrivilegedMode,
             RegistryCredential=RegistryCredential,
+            **kwargs
         )
         super(Environment, self).__init__(**processed_kwargs)
 
@@ -142,6 +147,7 @@ class ProjectCache(troposphere.codebuild.ProjectCache, Mixin):
             Type=Type,
             Location=Location,
             Modes=Modes,
+            **kwargs
         )
         super(ProjectCache, self).__init__(**processed_kwargs)
 
@@ -154,6 +160,7 @@ class GitSubmodulesConfig(troposphere.codebuild.GitSubmodulesConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             FetchSubmodules=FetchSubmodules,
+            **kwargs
         )
         super(GitSubmodulesConfig, self).__init__(**processed_kwargs)
 
@@ -182,6 +189,7 @@ class Source(troposphere.codebuild.Source, Mixin):
             Location=Location,
             ReportBuildStatus=ReportBuildStatus,
             SourceIdentifier=SourceIdentifier,
+            **kwargs
         )
         super(Source, self).__init__(**processed_kwargs)
 
@@ -198,6 +206,7 @@ class VpcConfig(troposphere.codebuild.VpcConfig, Mixin):
             SecurityGroupIds=SecurityGroupIds,
             Subnets=Subnets,
             VpcId=VpcId,
+            **kwargs
         )
         super(VpcConfig, self).__init__(**processed_kwargs)
 
@@ -214,6 +223,7 @@ class WebhookFilter(troposphere.codebuild.WebhookFilter, Mixin):
             Pattern=Pattern,
             Type=Type,
             ExcludeMatchedPattern=ExcludeMatchedPattern,
+            **kwargs
         )
         super(WebhookFilter, self).__init__(**processed_kwargs)
 
@@ -228,6 +238,7 @@ class ProjectTriggers(troposphere.codebuild.ProjectTriggers, Mixin):
             title=title,
             Webhook=Webhook,
             FilterGroups=FilterGroups,
+            **kwargs
         )
         super(ProjectTriggers, self).__init__(**processed_kwargs)
 
@@ -244,6 +255,7 @@ class CloudWatchLogs(troposphere.codebuild.CloudWatchLogs, Mixin):
             Status=Status,
             GroupName=GroupName,
             StreamName=StreamName,
+            **kwargs
         )
         super(CloudWatchLogs, self).__init__(**processed_kwargs)
 
@@ -260,6 +272,7 @@ class S3Logs(troposphere.codebuild.S3Logs, Mixin):
             Status=Status,
             EncryptionDisabled=EncryptionDisabled,
             Location=Location,
+            **kwargs
         )
         super(S3Logs, self).__init__(**processed_kwargs)
 
@@ -274,6 +287,7 @@ class LogsConfig(troposphere.codebuild.LogsConfig, Mixin):
             title=title,
             CloudWatchLogs=CloudWatchLogs,
             S3Logs=S3Logs,
+            **kwargs
         )
         super(LogsConfig, self).__init__(**processed_kwargs)
 
@@ -288,6 +302,7 @@ class ProjectSourceVersion(troposphere.codebuild.ProjectSourceVersion, Mixin):
             title=title,
             SourceIdentifier=SourceIdentifier,
             SourceVersion=SourceVersion,
+            **kwargs
         )
         super(ProjectSourceVersion, self).__init__(**processed_kwargs)
 
@@ -336,5 +351,6 @@ class Project(troposphere.codebuild.Project, Mixin):
             TimeoutInMinutes=TimeoutInMinutes,
             Triggers=Triggers,
             VpcConfig=VpcConfig,
+            **kwargs
         )
         super(Project, self).__init__(**processed_kwargs)

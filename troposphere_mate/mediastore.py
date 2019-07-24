@@ -37,6 +37,7 @@ class CorsRule(troposphere.mediastore.CorsRule, Mixin):
             AllowedOrigins=AllowedOrigins,
             ExposeHeaders=ExposeHeaders,
             MaxAgeSeconds=MaxAgeSeconds,
+            **kwargs
         )
         super(CorsRule, self).__init__(**processed_kwargs)
 
@@ -61,5 +62,6 @@ class Container(troposphere.mediastore.Container, Mixin):
             CorsPolicy=CorsPolicy,
             LifecyclePolicy=LifecyclePolicy,
             Policy=Policy,
+            **kwargs
         )
         super(Container, self).__init__(**processed_kwargs)

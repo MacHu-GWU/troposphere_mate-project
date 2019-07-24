@@ -56,6 +56,7 @@ class LifecycleHookSpecification(troposphere.autoscaling.LifecycleHookSpecificat
             NotificationMetadata=NotificationMetadata,
             NotificationTargetARN=NotificationTargetARN,
             RoleARN=RoleARN,
+            **kwargs
         )
         super(LifecycleHookSpecification, self).__init__(**processed_kwargs)
 
@@ -70,6 +71,7 @@ class NotificationConfigurations(troposphere.autoscaling.NotificationConfigurati
             title=title,
             TopicARN=TopicARN,
             NotificationTypes=NotificationTypes,
+            **kwargs
         )
         super(NotificationConfigurations, self).__init__(**processed_kwargs)
 
@@ -84,6 +86,7 @@ class MetricsCollection(troposphere.autoscaling.MetricsCollection, Mixin):
             title=title,
             Granularity=Granularity,
             Metrics=Metrics,
+            **kwargs
         )
         super(MetricsCollection, self).__init__(**processed_kwargs)
 
@@ -100,6 +103,7 @@ class LaunchTemplateSpecification(troposphere.autoscaling.LaunchTemplateSpecific
             Version=Version,
             LaunchTemplateId=LaunchTemplateId,
             LaunchTemplateName=LaunchTemplateName,
+            **kwargs
         )
         super(LaunchTemplateSpecification, self).__init__(**processed_kwargs)
 
@@ -122,6 +126,7 @@ class InstancesDistribution(troposphere.autoscaling.InstancesDistribution, Mixin
             SpotAllocationStrategy=SpotAllocationStrategy,
             SpotInstancePools=SpotInstancePools,
             SpotMaxPrice=SpotMaxPrice,
+            **kwargs
         )
         super(InstancesDistribution, self).__init__(**processed_kwargs)
 
@@ -134,6 +139,7 @@ class LaunchTemplateOverrides(troposphere.autoscaling.LaunchTemplateOverrides, M
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             InstanceType=InstanceType,
+            **kwargs
         )
         super(LaunchTemplateOverrides, self).__init__(**processed_kwargs)
 
@@ -148,6 +154,7 @@ class LaunchTemplate(troposphere.autoscaling.LaunchTemplate, Mixin):
             title=title,
             LaunchTemplateSpecification=LaunchTemplateSpecification,
             Overrides=Overrides,
+            **kwargs
         )
         super(LaunchTemplate, self).__init__(**processed_kwargs)
 
@@ -162,6 +169,7 @@ class MixedInstancesPolicy(troposphere.autoscaling.MixedInstancesPolicy, Mixin):
             title=title,
             LaunchTemplate=LaunchTemplate,
             InstancesDistribution=InstancesDistribution,
+            **kwargs
         )
         super(MixedInstancesPolicy, self).__init__(**processed_kwargs)
 
@@ -220,6 +228,7 @@ class AutoScalingGroup(troposphere.autoscaling.AutoScalingGroup, Mixin):
             TargetGroupARNs=TargetGroupARNs,
             TerminationPolicies=TerminationPolicies,
             VPCZoneIdentifier=VPCZoneIdentifier,
+            **kwargs
         )
         super(AutoScalingGroup, self).__init__(**processed_kwargs)
 
@@ -272,6 +281,7 @@ class LaunchConfiguration(troposphere.autoscaling.LaunchConfiguration, Mixin):
             SecurityGroups=SecurityGroups,
             SpotPrice=SpotPrice,
             UserData=UserData,
+            **kwargs
         )
         super(LaunchConfiguration, self).__init__(**processed_kwargs)
 
@@ -288,6 +298,7 @@ class StepAdjustments(troposphere.autoscaling.StepAdjustments, Mixin):
             ScalingAdjustment=ScalingAdjustment,
             MetricIntervalLowerBound=MetricIntervalLowerBound,
             MetricIntervalUpperBound=MetricIntervalUpperBound,
+            **kwargs
         )
         super(StepAdjustments, self).__init__(**processed_kwargs)
 
@@ -302,6 +313,7 @@ class MetricDimension(troposphere.autoscaling.MetricDimension, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(MetricDimension, self).__init__(**processed_kwargs)
 
@@ -322,6 +334,7 @@ class CustomizedMetricSpecification(troposphere.autoscaling.CustomizedMetricSpec
             Statistic=Statistic,
             Dimensions=Dimensions,
             Unit=Unit,
+            **kwargs
         )
         super(CustomizedMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -336,6 +349,7 @@ class PredefinedMetricSpecification(troposphere.autoscaling.PredefinedMetricSpec
             title=title,
             PredefinedMetricType=PredefinedMetricType,
             ResourceLabel=ResourceLabel,
+            **kwargs
         )
         super(PredefinedMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -354,6 +368,7 @@ class TargetTrackingConfiguration(troposphere.autoscaling.TargetTrackingConfigur
             CustomizedMetricSpecification=CustomizedMetricSpecification,
             DisableScaleIn=DisableScaleIn,
             PredefinedMetricSpecification=PredefinedMetricSpecification,
+            **kwargs
         )
         super(TargetTrackingConfiguration, self).__init__(**processed_kwargs)
 
@@ -388,6 +403,7 @@ class ScalingPolicy(troposphere.autoscaling.ScalingPolicy, Mixin):
             ScalingAdjustment=ScalingAdjustment,
             StepAdjustments=StepAdjustments,
             TargetTrackingConfiguration=TargetTrackingConfiguration,
+            **kwargs
         )
         super(ScalingPolicy, self).__init__(**processed_kwargs)
 
@@ -416,6 +432,7 @@ class ScheduledAction(troposphere.autoscaling.ScheduledAction, Mixin):
             MinSize=MinSize,
             Recurrence=Recurrence,
             StartTime=StartTime,
+            **kwargs
         )
         super(ScheduledAction, self).__init__(**processed_kwargs)
 
@@ -446,6 +463,7 @@ class LifecycleHook(troposphere.autoscaling.LifecycleHook, Mixin):
             NotificationMetadata=NotificationMetadata,
             NotificationTargetARN=NotificationTargetARN,
             RoleARN=RoleARN,
+            **kwargs
         )
         super(LifecycleHook, self).__init__(**processed_kwargs)
 
@@ -484,6 +502,7 @@ class Trigger(troposphere.autoscaling.Trigger, Mixin):
             LowerBreachScaleIncrement=LowerBreachScaleIncrement,
             Unit=Unit,
             UpperBreachScaleIncrement=UpperBreachScaleIncrement,
+            **kwargs
         )
         super(Trigger, self).__init__(**processed_kwargs)
 
@@ -506,6 +525,7 @@ class EBSBlockDevice(troposphere.autoscaling.EBSBlockDevice, Mixin):
             SnapshotId=SnapshotId,
             VolumeSize=VolumeSize,
             VolumeType=VolumeType,
+            **kwargs
         )
         super(EBSBlockDevice, self).__init__(**processed_kwargs)
 
@@ -524,5 +544,6 @@ class BlockDeviceMapping(troposphere.autoscaling.BlockDeviceMapping, Mixin):
             Ebs=Ebs,
             NoDevice=NoDevice,
             VirtualName=VirtualName,
+            **kwargs
         )
         super(BlockDeviceMapping, self).__init__(**processed_kwargs)

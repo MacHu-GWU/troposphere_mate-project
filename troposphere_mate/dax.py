@@ -29,6 +29,7 @@ class SSESpecification(troposphere.dax.SSESpecification, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SSEEnabled=SSEEnabled,
+            **kwargs
         )
         super(SSESpecification, self).__init__(**processed_kwargs)
 
@@ -69,6 +70,7 @@ class Cluster(troposphere.dax.Cluster, Mixin):
             SSESpecification=SSESpecification,
             SecurityGroupIds=SecurityGroupIds,
             Tags=Tags,
+            **kwargs
         )
         super(Cluster, self).__init__(**processed_kwargs)
 
@@ -89,6 +91,7 @@ class ParameterGroup(troposphere.dax.ParameterGroup, Mixin):
             Description=Description,
             ParameterGroupName=ParameterGroupName,
             ParameterNameValues=ParameterNameValues,
+            **kwargs
         )
         super(ParameterGroup, self).__init__(**processed_kwargs)
 
@@ -109,5 +112,6 @@ class SubnetGroup(troposphere.dax.SubnetGroup, Mixin):
             Description=Description,
             SubnetGroupName=SubnetGroupName,
             SubnetIds=SubnetIds,
+            **kwargs
         )
         super(SubnetGroup, self).__init__(**processed_kwargs)

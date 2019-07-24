@@ -38,6 +38,7 @@ class WorkspaceProperties(troposphere.workspaces.WorkspaceProperties, Mixin):
             RunningMode=RunningMode,
             RunningModeAutoStopTimeoutInMinutes=RunningModeAutoStopTimeoutInMinutes,
             UserVolumeSizeGib=UserVolumeSizeGib,
+            **kwargs
         )
         super(WorkspaceProperties, self).__init__(**processed_kwargs)
 
@@ -68,5 +69,6 @@ class Workspace(troposphere.workspaces.Workspace, Mixin):
             UserVolumeEncryptionEnabled=UserVolumeEncryptionEnabled,
             VolumeEncryptionKey=VolumeEncryptionKey,
             WorkspaceProperties=WorkspaceProperties,
+            **kwargs
         )
         super(Workspace, self).__init__(**processed_kwargs)

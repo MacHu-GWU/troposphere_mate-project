@@ -1,12 +1,26 @@
 # -*- coding: utf-8 -*-
 
+"""
+This module aims to add more feature to Original troposphere Class.
+"""
+
+try:
+    from typing import Union
+except:
+    pass
+
+import json
+import troposphere
+from pathlib_mate import PathCls as Path
+from troposphere import AWSObject, Ref, Parameter, Output
+
 from .sentiel import NOTHING, REQUIRED
 from .tagger import (
     tag_property_name_mapper,
     update_tags_for_resource,
     update_tags_for_template,
 )
-import troposphere
+
 
 def preprocess_init_kwargs(**kwargs):
     processed_kwargs = dict()
@@ -17,6 +31,16 @@ def preprocess_init_kwargs(**kwargs):
 
 
 class Mixin(object):
+    def to_json(self, indent=4, sort_keys=True, separators=(',', ': ')):
+        return json.dumps(self.to_dict(), indent=indent,
+                          sort_keys=sort_keys, separators=separators)
+
+    def pprint(self, json_or_yml="json"):
+        if json_or_yml == "json":
+            print(self.to_json(indent=4))
+        else:
+            print(self.to_json(indent=4))
+
     @classmethod
     def get_tags_attr(cls):
         return tag_property_name_mapper.get(cls.resource_type)
@@ -27,7 +51,126 @@ class Mixin(object):
 
 class Template(troposphere.Template):
     def update_tags(self, tags_dct, overwrite=False):
+        """
+        Update
+
+
+        :type tags_dct: Dict[str, Union[str,Callable]]
+        :type overwrite: bool
+        """
         update_tags_for_template(self, tags_dct, overwrite=overwrite)
 
-    def pprint(self):
-        print(self.to_json(indent=4))
+    def to_file(self, path, json_or_yml="json", **kwargs):
+        self.set_version()
+        if json_or_yml == "json":
+            content = self.to_json(**kwargs)
+        elif json_or_yml == "yml":
+            content = self.to_yaml(**kwargs)
+        else:
+            raise Exception
+        Path(path).write_text(content, encoding="utf8")
+
+    def pprint(self, json_or_yml="json"):
+        if json_or_yml == "json":
+            print(self.to_json())
+        else:
+            print(self.to_yaml())
+
+    def remove_parameter(self, parameter):
+        """
+        :type output: Union[Parameter, str]
+        """
+        if isinstance(parameter, Parameter):
+            parameter_logic_id = parameter.title
+        else:
+            parameter_logic_id = parameter
+        if parameter_logic_id not in self.parameters:
+            raise ValueError("Can't remove, Template '{}' not found in the template!".format(parameter_logic_id))
+        del self.parameters[parameter_logic_id]
+
+    def remove_output(self, output):
+        """
+
+        :type output: Union[Output, str]
+        """
+        if isinstance(output, Output):
+            output_logic_id = output.title
+        else:
+            output_logic_id = output
+        if output_logic_id not in self.outputs:
+            raise ValueError("Can't remove, Output '{}' not found in the template!".format(output_logic_id))
+        del self.outputs[output_logic_id]
+
+    def remove_resource(self, resource):
+        """
+        Remove AWS Resource Object from "Resources" and related "Outputs".
+
+        Note:
+
+            You don't have to take care of ``DependsOn`` issue, because if the
+            other resource doesn't requires this resource, then logically you
+            should not put this resource in its ``DependsOne``
+
+        :type resource: Union[AWSObject, str]
+        """
+        if isinstance(resource, AWSObject):
+            resource_logic_id = resource.title
+        else:
+            resource_logic_id = resource
+        if resource_logic_id not in self.resources:
+            raise ValueError("Can't remove, Resource '{}' not found in the template!".format(resource_logic_id))
+        del self.resources[resource_logic_id]
+        for output_logic_id, output in list(self.outputs.items()):
+            if isinstance(output.Value, Ref):
+                if output.Value.data["Ref"] == resource_logic_id:
+                    del self.outputs[output_logic_id]
+
+
+class Parameter(troposphere.Parameter):
+    def __init__(self,
+                 title,
+                 Type=REQUIRED,
+                 Default=NOTHING,
+                 NoEcho=NOTHING,
+                 AllowedValues=NOTHING,
+                 AllowedPattern=NOTHING,
+                 MaxLength=NOTHING,
+                 MinLength=NOTHING,
+                 MaxValue=NOTHING,
+                 MinValue=NOTHING,
+                 Description=NOTHING,
+                 ConstraintDescription=NOTHING,
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Default=Default,
+            NoEcho=NoEcho,
+            AllowedValues=AllowedValues,
+            AllowedPattern=AllowedPattern,
+            MaxLength=MaxLength,
+            MinLength=MinLength,
+            MaxValue=MaxValue,
+            MinValue=MinValue,
+            Description=Description,
+            ConstraintDescription=ConstraintDescription,
+            **kwargs
+        )
+        super(Parameter, self).__init__(**processed_kwargs)
+
+
+class Output(troposphere.Output):
+    def __init__(self,
+                 title,
+                 Value=REQUIRED,
+                 Description=NOTHING,
+                 Export=NOTHING,
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Value=Value,
+            Description=Description,
+            Export=Export,
+            **kwargs
+        )
+        super(Output, self).__init__(**processed_kwargs)

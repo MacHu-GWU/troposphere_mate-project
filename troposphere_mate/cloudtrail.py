@@ -33,6 +33,7 @@ class DataResource(troposphere.cloudtrail.DataResource, Mixin):
             title=title,
             Type=Type,
             Values=Values,
+            **kwargs
         )
         super(DataResource, self).__init__(**processed_kwargs)
 
@@ -49,6 +50,7 @@ class EventSelector(troposphere.cloudtrail.EventSelector, Mixin):
             DataResources=DataResources,
             IncludeManagementEvents=IncludeManagementEvents,
             ReadWriteType=ReadWriteType,
+            **kwargs
         )
         super(EventSelector, self).__init__(**processed_kwargs)
 
@@ -89,5 +91,6 @@ class Trail(troposphere.cloudtrail.Trail, Mixin):
             SnsTopicName=SnsTopicName,
             Tags=Tags,
             TrailName=TrailName,
+            **kwargs
         )
         super(Trail, self).__init__(**processed_kwargs)

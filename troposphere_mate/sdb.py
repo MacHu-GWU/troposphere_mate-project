@@ -27,5 +27,6 @@ class Domain(troposphere.sdb.Domain, Mixin):
             title=title,
             template=template,
             validation=validation,
+            **kwargs
         )
         super(Domain, self).__init__(**processed_kwargs)

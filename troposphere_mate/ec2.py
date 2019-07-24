@@ -76,6 +76,7 @@ class Tag(troposphere.ec2.Tag, Mixin):
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(Tag, self).__init__(**processed_kwargs)
 
@@ -98,6 +99,7 @@ class CustomerGateway(troposphere.ec2.CustomerGateway, Mixin):
             IpAddress=IpAddress,
             Type=Type,
             Tags=Tags,
+            **kwargs
         )
         super(CustomerGateway, self).__init__(**processed_kwargs)
 
@@ -124,6 +126,7 @@ class DHCPOptions(troposphere.ec2.DHCPOptions, Mixin):
             NetbiosNodeType=NetbiosNodeType,
             NtpServers=NtpServers,
             Tags=Tags,
+            **kwargs
         )
         super(DHCPOptions, self).__init__(**processed_kwargs)
 
@@ -140,6 +143,7 @@ class EgressOnlyInternetGateway(troposphere.ec2.EgressOnlyInternetGateway, Mixin
             template=template,
             validation=validation,
             VpcId=VpcId,
+            **kwargs
         )
         super(EgressOnlyInternetGateway, self).__init__(**processed_kwargs)
 
@@ -160,6 +164,7 @@ class EIP(troposphere.ec2.EIP, Mixin):
             InstanceId=InstanceId,
             Domain=Domain,
             PublicIpv4Pool=PublicIpv4Pool,
+            **kwargs
         )
         super(EIP, self).__init__(**processed_kwargs)
 
@@ -184,6 +189,7 @@ class EIPAssociation(troposphere.ec2.EIPAssociation, Mixin):
             InstanceId=InstanceId,
             NetworkInterfaceId=NetworkInterfaceId,
             PrivateIpAddress=PrivateIpAddress,
+            **kwargs
         )
         super(EIPAssociation, self).__init__(**processed_kwargs)
 
@@ -212,6 +218,7 @@ class FlowLog(troposphere.ec2.FlowLog, Mixin):
             LogDestination=LogDestination,
             LogDestinationType=LogDestinationType,
             LogGroupName=LogGroupName,
+            **kwargs
         )
         super(FlowLog, self).__init__(**processed_kwargs)
 
@@ -232,6 +239,7 @@ class NatGateway(troposphere.ec2.NatGateway, Mixin):
             AllocationId=AllocationId,
             SubnetId=SubnetId,
             Tags=Tags,
+            **kwargs
         )
         super(NatGateway, self).__init__(**processed_kwargs)
 
@@ -254,6 +262,7 @@ class EBSBlockDevice(troposphere.ec2.EBSBlockDevice, Mixin):
             SnapshotId=SnapshotId,
             VolumeSize=VolumeSize,
             VolumeType=VolumeType,
+            **kwargs
         )
         super(EBSBlockDevice, self).__init__(**processed_kwargs)
 
@@ -272,6 +281,7 @@ class BlockDeviceMapping(troposphere.ec2.BlockDeviceMapping, Mixin):
             Ebs=Ebs,
             NoDevice=NoDevice,
             VirtualName=VirtualName,
+            **kwargs
         )
         super(BlockDeviceMapping, self).__init__(**processed_kwargs)
 
@@ -286,6 +296,7 @@ class MountPoint(troposphere.ec2.MountPoint, Mixin):
             title=title,
             Device=Device,
             VolumeId=VolumeId,
+            **kwargs
         )
         super(MountPoint, self).__init__(**processed_kwargs)
 
@@ -300,6 +311,7 @@ class Placement(troposphere.ec2.Placement, Mixin):
             title=title,
             AvailabilityZone=AvailabilityZone,
             GroupName=GroupName,
+            **kwargs
         )
         super(Placement, self).__init__(**processed_kwargs)
 
@@ -312,6 +324,7 @@ class CreditSpecification(troposphere.ec2.CreditSpecification, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CPUCredits=CPUCredits,
+            **kwargs
         )
         super(CreditSpecification, self).__init__(**processed_kwargs)
 
@@ -324,6 +337,7 @@ class ElasticGpuSpecification(troposphere.ec2.ElasticGpuSpecification, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Type=Type,
+            **kwargs
         )
         super(ElasticGpuSpecification, self).__init__(**processed_kwargs)
 
@@ -340,6 +354,7 @@ class LaunchTemplateSpecification(troposphere.ec2.LaunchTemplateSpecification, M
             Version=Version,
             LaunchTemplateId=LaunchTemplateId,
             LaunchTemplateName=LaunchTemplateName,
+            **kwargs
         )
         super(LaunchTemplateSpecification, self).__init__(**processed_kwargs)
 
@@ -354,6 +369,7 @@ class PrivateIpAddressSpecification(troposphere.ec2.PrivateIpAddressSpecificatio
             title=title,
             Primary=Primary,
             PrivateIpAddress=PrivateIpAddress,
+            **kwargs
         )
         super(PrivateIpAddressSpecification, self).__init__(**processed_kwargs)
 
@@ -388,6 +404,7 @@ class NetworkInterfaceProperty(troposphere.ec2.NetworkInterfaceProperty, Mixin):
             PrivateIpAddresses=PrivateIpAddresses,
             SecondaryPrivateIpAddressCount=SecondaryPrivateIpAddressCount,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(NetworkInterfaceProperty, self).__init__(**processed_kwargs)
 
@@ -402,6 +419,7 @@ class AssociationParameters(troposphere.ec2.AssociationParameters, Mixin):
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(AssociationParameters, self).__init__(**processed_kwargs)
 
@@ -416,6 +434,7 @@ class SsmAssociations(troposphere.ec2.SsmAssociations, Mixin):
             title=title,
             DocumentName=DocumentName,
             AssociationParameters=AssociationParameters,
+            **kwargs
         )
         super(SsmAssociations, self).__init__(**processed_kwargs)
 
@@ -438,6 +457,7 @@ class Host(troposphere.ec2.Host, Mixin):
             InstanceType=InstanceType,
             AutoPlacement=AutoPlacement,
             HostRecovery=HostRecovery,
+            **kwargs
         )
         super(Host, self).__init__(**processed_kwargs)
 
@@ -450,6 +470,7 @@ class ElasticInferenceAccelerator(troposphere.ec2.ElasticInferenceAccelerator, M
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Type=Type,
+            **kwargs
         )
         super(ElasticInferenceAccelerator, self).__init__(**processed_kwargs)
 
@@ -462,6 +483,7 @@ class LicenseSpecification(troposphere.ec2.LicenseSpecification, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             LicenseConfigurationArn=LicenseConfigurationArn,
+            **kwargs
         )
         super(LicenseSpecification, self).__init__(**processed_kwargs)
 
@@ -542,6 +564,7 @@ class Instance(troposphere.ec2.Instance, Mixin):
             Tenancy=Tenancy,
             UserData=UserData,
             Volumes=Volumes,
+            **kwargs
         )
         super(Instance, self).__init__(**processed_kwargs)
 
@@ -558,6 +581,7 @@ class InternetGateway(troposphere.ec2.InternetGateway, Mixin):
             template=template,
             validation=validation,
             Tags=Tags,
+            **kwargs
         )
         super(InternetGateway, self).__init__(**processed_kwargs)
 
@@ -576,6 +600,7 @@ class NetworkAcl(troposphere.ec2.NetworkAcl, Mixin):
             validation=validation,
             VpcId=VpcId,
             Tags=Tags,
+            **kwargs
         )
         super(NetworkAcl, self).__init__(**processed_kwargs)
 
@@ -590,6 +615,7 @@ class ICMP(troposphere.ec2.ICMP, Mixin):
             title=title,
             Code=Code,
             Type=Type,
+            **kwargs
         )
         super(ICMP, self).__init__(**processed_kwargs)
 
@@ -604,6 +630,7 @@ class PortRange(troposphere.ec2.PortRange, Mixin):
             title=title,
             From=From,
             To=To,
+            **kwargs
         )
         super(PortRange, self).__init__(**processed_kwargs)
 
@@ -636,6 +663,7 @@ class NetworkAclEntry(troposphere.ec2.NetworkAclEntry, Mixin):
             Icmp=Icmp,
             Ipv6CidrBlock=Ipv6CidrBlock,
             PortRange=PortRange,
+            **kwargs
         )
         super(NetworkAclEntry, self).__init__(**processed_kwargs)
 
@@ -670,6 +698,7 @@ class NetworkInterface(troposphere.ec2.NetworkInterface, Mixin):
             SecondaryPrivateIpAddressCount=SecondaryPrivateIpAddressCount,
             SourceDestCheck=SourceDestCheck,
             Tags=Tags,
+            **kwargs
         )
         super(NetworkInterface, self).__init__(**processed_kwargs)
 
@@ -692,6 +721,7 @@ class NetworkInterfaceAttachment(troposphere.ec2.NetworkInterfaceAttachment, Mix
             InstanceId=InstanceId,
             NetworkInterfaceId=NetworkInterfaceId,
             DeleteOnTermination=DeleteOnTermination,
+            **kwargs
         )
         super(NetworkInterfaceAttachment, self).__init__(**processed_kwargs)
 
@@ -712,6 +742,7 @@ class NetworkInterfacePermission(troposphere.ec2.NetworkInterfacePermission, Mix
             AwsAccountId=AwsAccountId,
             NetworkInterfaceId=NetworkInterfaceId,
             Permission=Permission,
+            **kwargs
         )
         super(NetworkInterfacePermission, self).__init__(**processed_kwargs)
 
@@ -746,6 +777,7 @@ class Route(troposphere.ec2.Route, Mixin):
             NetworkInterfaceId=NetworkInterfaceId,
             TransitGatewayId=TransitGatewayId,
             VpcPeeringConnectionId=VpcPeeringConnectionId,
+            **kwargs
         )
         super(Route, self).__init__(**processed_kwargs)
 
@@ -764,6 +796,7 @@ class RouteTable(troposphere.ec2.RouteTable, Mixin):
             validation=validation,
             VpcId=VpcId,
             Tags=Tags,
+            **kwargs
         )
         super(RouteTable, self).__init__(**processed_kwargs)
 
@@ -798,6 +831,7 @@ class SecurityGroupEgress(troposphere.ec2.SecurityGroupEgress, Mixin):
             FromPort=FromPort,
             ToPort=ToPort,
             SourceSecurityGroupId=SourceSecurityGroupId,
+            **kwargs
         )
         super(SecurityGroupEgress, self).__init__(**processed_kwargs)
 
@@ -834,6 +868,7 @@ class SecurityGroupIngress(troposphere.ec2.SecurityGroupIngress, Mixin):
             SourceSecurityGroupId=SourceSecurityGroupId,
             SourceSecurityGroupOwnerId=SourceSecurityGroupOwnerId,
             ToPort=ToPort,
+            **kwargs
         )
         super(SecurityGroupIngress, self).__init__(**processed_kwargs)
 
@@ -866,6 +901,7 @@ class SecurityGroupRule(troposphere.ec2.SecurityGroupRule, Mixin):
             SourceSecurityGroupName=SourceSecurityGroupName,
             SourceSecurityGroupOwnerId=SourceSecurityGroupOwnerId,
             ToPort=ToPort,
+            **kwargs
         )
         super(SecurityGroupRule, self).__init__(**processed_kwargs)
 
@@ -892,6 +928,7 @@ class SecurityGroup(troposphere.ec2.SecurityGroup, Mixin):
             SecurityGroupIngress=SecurityGroupIngress,
             VpcId=VpcId,
             Tags=Tags,
+            **kwargs
         )
         super(SecurityGroup, self).__init__(**processed_kwargs)
 
@@ -920,6 +957,7 @@ class Subnet(troposphere.ec2.Subnet, Mixin):
             Ipv6CidrBlock=Ipv6CidrBlock,
             MapPublicIpOnLaunch=MapPublicIpOnLaunch,
             Tags=Tags,
+            **kwargs
         )
         super(Subnet, self).__init__(**processed_kwargs)
 
@@ -938,6 +976,7 @@ class SubnetNetworkAclAssociation(troposphere.ec2.SubnetNetworkAclAssociation, M
             validation=validation,
             SubnetId=SubnetId,
             NetworkAclId=NetworkAclId,
+            **kwargs
         )
         super(SubnetNetworkAclAssociation, self).__init__(**processed_kwargs)
 
@@ -956,6 +995,7 @@ class SubnetRouteTableAssociation(troposphere.ec2.SubnetRouteTableAssociation, M
             validation=validation,
             RouteTableId=RouteTableId,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(SubnetRouteTableAssociation, self).__init__(**processed_kwargs)
 
@@ -988,6 +1028,7 @@ class Volume(troposphere.ec2.Volume, Mixin):
             SnapshotId=SnapshotId,
             Tags=Tags,
             VolumeType=VolumeType,
+            **kwargs
         )
         super(Volume, self).__init__(**processed_kwargs)
 
@@ -1008,6 +1049,7 @@ class VolumeAttachment(troposphere.ec2.VolumeAttachment, Mixin):
             Device=Device,
             InstanceId=InstanceId,
             VolumeId=VolumeId,
+            **kwargs
         )
         super(VolumeAttachment, self).__init__(**processed_kwargs)
 
@@ -1032,6 +1074,7 @@ class VPC(troposphere.ec2.VPC, Mixin):
             EnableDnsHostnames=EnableDnsHostnames,
             InstanceTenancy=InstanceTenancy,
             Tags=Tags,
+            **kwargs
         )
         super(VPC, self).__init__(**processed_kwargs)
 
@@ -1050,6 +1093,7 @@ class VPCDHCPOptionsAssociation(troposphere.ec2.VPCDHCPOptionsAssociation, Mixin
             validation=validation,
             DhcpOptionsId=DhcpOptionsId,
             VpcId=VpcId,
+            **kwargs
         )
         super(VPCDHCPOptionsAssociation, self).__init__(**processed_kwargs)
 
@@ -1080,6 +1124,7 @@ class VPCEndpoint(troposphere.ec2.VPCEndpoint, Mixin):
             SecurityGroupIds=SecurityGroupIds,
             SubnetIds=SubnetIds,
             VpcEndpointType=VpcEndpointType,
+            **kwargs
         )
         super(VPCEndpoint, self).__init__(**processed_kwargs)
 
@@ -1102,6 +1147,7 @@ class VPCEndpointConnectionNotification(troposphere.ec2.VPCEndpointConnectionNot
             ConnectionNotificationArn=ConnectionNotificationArn,
             ServiceId=ServiceId,
             VPCEndpointId=VPCEndpointId,
+            **kwargs
         )
         super(VPCEndpointConnectionNotification, self).__init__(**processed_kwargs)
 
@@ -1120,6 +1166,7 @@ class VPCEndpointService(troposphere.ec2.VPCEndpointService, Mixin):
             validation=validation,
             NetworkLoadBalancerArns=NetworkLoadBalancerArns,
             AcceptanceRequired=AcceptanceRequired,
+            **kwargs
         )
         super(VPCEndpointService, self).__init__(**processed_kwargs)
 
@@ -1138,6 +1185,7 @@ class VPCEndpointServicePermissions(troposphere.ec2.VPCEndpointServicePermission
             validation=validation,
             ServiceId=ServiceId,
             AllowedPrincipals=AllowedPrincipals,
+            **kwargs
         )
         super(VPCEndpointServicePermissions, self).__init__(**processed_kwargs)
 
@@ -1158,6 +1206,7 @@ class VPCGatewayAttachment(troposphere.ec2.VPCGatewayAttachment, Mixin):
             VpcId=VpcId,
             InternetGatewayId=InternetGatewayId,
             VpnGatewayId=VpnGatewayId,
+            **kwargs
         )
         super(VPCGatewayAttachment, self).__init__(**processed_kwargs)
 
@@ -1172,6 +1221,7 @@ class VpnTunnelOptionsSpecification(troposphere.ec2.VpnTunnelOptionsSpecificatio
             title=title,
             PreSharedKey=PreSharedKey,
             TunnelInsideCidr=TunnelInsideCidr,
+            **kwargs
         )
         super(VpnTunnelOptionsSpecification, self).__init__(**processed_kwargs)
 
@@ -1200,6 +1250,7 @@ class VPNConnection(troposphere.ec2.VPNConnection, Mixin):
             TransitGatewayId=TransitGatewayId,
             VpnGatewayId=VpnGatewayId,
             VpnTunnelOptionsSpecifications=VpnTunnelOptionsSpecifications,
+            **kwargs
         )
         super(VPNConnection, self).__init__(**processed_kwargs)
 
@@ -1218,6 +1269,7 @@ class VPNConnectionRoute(troposphere.ec2.VPNConnectionRoute, Mixin):
             validation=validation,
             DestinationCidrBlock=DestinationCidrBlock,
             VpnConnectionId=VpnConnectionId,
+            **kwargs
         )
         super(VPNConnectionRoute, self).__init__(**processed_kwargs)
 
@@ -1238,6 +1290,7 @@ class VPNGateway(troposphere.ec2.VPNGateway, Mixin):
             Type=Type,
             AmazonSideAsn=AmazonSideAsn,
             Tags=Tags,
+            **kwargs
         )
         super(VPNGateway, self).__init__(**processed_kwargs)
 
@@ -1256,6 +1309,7 @@ class VPNGatewayRoutePropagation(troposphere.ec2.VPNGatewayRoutePropagation, Mix
             validation=validation,
             RouteTableIds=RouteTableIds,
             VpnGatewayId=VpnGatewayId,
+            **kwargs
         )
         super(VPNGatewayRoutePropagation, self).__init__(**processed_kwargs)
 
@@ -1282,6 +1336,7 @@ class VPCPeeringConnection(troposphere.ec2.VPCPeeringConnection, Mixin):
             PeerRegion=PeerRegion,
             PeerOwnerId=PeerOwnerId,
             PeerRoleArn=PeerRoleArn,
+            **kwargs
         )
         super(VPCPeeringConnection, self).__init__(**processed_kwargs)
 
@@ -1294,6 +1349,7 @@ class Monitoring(troposphere.ec2.Monitoring, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Enabled=Enabled,
+            **kwargs
         )
         super(Monitoring, self).__init__(**processed_kwargs)
 
@@ -1328,6 +1384,7 @@ class NetworkInterfaces(troposphere.ec2.NetworkInterfaces, Mixin):
             PrivateIpAddresses=PrivateIpAddresses,
             SecondaryPrivateIpAddressCount=SecondaryPrivateIpAddressCount,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(NetworkInterfaces, self).__init__(**processed_kwargs)
 
@@ -1340,6 +1397,7 @@ class SecurityGroups(troposphere.ec2.SecurityGroups, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             GroupId=GroupId,
+            **kwargs
         )
         super(SecurityGroups, self).__init__(**processed_kwargs)
 
@@ -1352,6 +1410,7 @@ class IamInstanceProfile(troposphere.ec2.IamInstanceProfile, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Arn=Arn,
+            **kwargs
         )
         super(IamInstanceProfile, self).__init__(**processed_kwargs)
 
@@ -1366,6 +1425,7 @@ class SpotFleetTagSpecification(troposphere.ec2.SpotFleetTagSpecification, Mixin
             title=title,
             ResourceType=ResourceType,
             Tags=Tags,
+            **kwargs
         )
         super(SpotFleetTagSpecification, self).__init__(**processed_kwargs)
 
@@ -1410,6 +1470,7 @@ class LaunchSpecifications(troposphere.ec2.LaunchSpecifications, Mixin):
             TagSpecifications=TagSpecifications,
             UserData=UserData,
             WeightedCapacity=WeightedCapacity,
+            **kwargs
         )
         super(LaunchSpecifications, self).__init__(**processed_kwargs)
 
@@ -1430,6 +1491,7 @@ class LaunchTemplateOverrides(troposphere.ec2.LaunchTemplateOverrides, Mixin):
             SpotPrice=SpotPrice,
             SubnetId=SubnetId,
             WeightedCapacity=WeightedCapacity,
+            **kwargs
         )
         super(LaunchTemplateOverrides, self).__init__(**processed_kwargs)
 
@@ -1444,6 +1506,7 @@ class LaunchTemplateConfigs(troposphere.ec2.LaunchTemplateConfigs, Mixin):
             title=title,
             LaunchTemplateSpecification=LaunchTemplateSpecification,
             Overrides=Overrides,
+            **kwargs
         )
         super(LaunchTemplateConfigs, self).__init__(**processed_kwargs)
 
@@ -1456,6 +1519,7 @@ class ClassicLoadBalancer(troposphere.ec2.ClassicLoadBalancer, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Name=Name,
+            **kwargs
         )
         super(ClassicLoadBalancer, self).__init__(**processed_kwargs)
 
@@ -1468,6 +1532,7 @@ class ClassicLoadBalancersConfig(troposphere.ec2.ClassicLoadBalancersConfig, Mix
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ClassicLoadBalancers=ClassicLoadBalancers,
+            **kwargs
         )
         super(ClassicLoadBalancersConfig, self).__init__(**processed_kwargs)
 
@@ -1480,6 +1545,7 @@ class TargetGroup(troposphere.ec2.TargetGroup, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Arn=Arn,
+            **kwargs
         )
         super(TargetGroup, self).__init__(**processed_kwargs)
 
@@ -1492,6 +1558,7 @@ class TargetGroupConfig(troposphere.ec2.TargetGroupConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             TargetGroups=TargetGroups,
+            **kwargs
         )
         super(TargetGroupConfig, self).__init__(**processed_kwargs)
 
@@ -1506,6 +1573,7 @@ class LoadBalancersConfig(troposphere.ec2.LoadBalancersConfig, Mixin):
             title=title,
             ClassicLoadBalancersConfig=ClassicLoadBalancersConfig,
             TargetGroupsConfig=TargetGroupsConfig,
+            **kwargs
         )
         super(LoadBalancersConfig, self).__init__(**processed_kwargs)
 
@@ -1544,6 +1612,7 @@ class SpotFleetRequestConfigData(troposphere.ec2.SpotFleetRequestConfigData, Mix
             Type=Type,
             ValidFrom=ValidFrom,
             ValidUntil=ValidUntil,
+            **kwargs
         )
         super(SpotFleetRequestConfigData, self).__init__(**processed_kwargs)
 
@@ -1560,6 +1629,7 @@ class SpotFleet(troposphere.ec2.SpotFleet, Mixin):
             template=template,
             validation=validation,
             SpotFleetRequestConfigData=SpotFleetRequestConfigData,
+            **kwargs
         )
         super(SpotFleet, self).__init__(**processed_kwargs)
 
@@ -1576,6 +1646,7 @@ class PlacementGroup(troposphere.ec2.PlacementGroup, Mixin):
             template=template,
             validation=validation,
             Strategy=Strategy,
+            **kwargs
         )
         super(PlacementGroup, self).__init__(**processed_kwargs)
 
@@ -1594,6 +1665,7 @@ class SubnetCidrBlock(troposphere.ec2.SubnetCidrBlock, Mixin):
             validation=validation,
             Ipv6CidrBlock=Ipv6CidrBlock,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(SubnetCidrBlock, self).__init__(**processed_kwargs)
 
@@ -1614,6 +1686,7 @@ class VPCCidrBlock(troposphere.ec2.VPCCidrBlock, Mixin):
             VpcId=VpcId,
             AmazonProvidedIpv6CidrBlock=AmazonProvidedIpv6CidrBlock,
             CidrBlock=CidrBlock,
+            **kwargs
         )
         super(VPCCidrBlock, self).__init__(**processed_kwargs)
 
@@ -1628,6 +1701,7 @@ class TagSpecifications(troposphere.ec2.TagSpecifications, Mixin):
             title=title,
             ResourceType=ResourceType,
             Tags=Tags,
+            **kwargs
         )
         super(TagSpecifications, self).__init__(**processed_kwargs)
 
@@ -1644,6 +1718,7 @@ class SpotOptions(troposphere.ec2.SpotOptions, Mixin):
             InstanceInterruptionBehavior=InstanceInterruptionBehavior,
             MaxPrice=MaxPrice,
             SpotInstanceType=SpotInstanceType,
+            **kwargs
         )
         super(SpotOptions, self).__init__(**processed_kwargs)
 
@@ -1658,6 +1733,7 @@ class InstanceMarketOptions(troposphere.ec2.InstanceMarketOptions, Mixin):
             title=title,
             MarketType=MarketType,
             SpotOptions=SpotOptions,
+            **kwargs
         )
         super(InstanceMarketOptions, self).__init__(**processed_kwargs)
 
@@ -1670,6 +1746,7 @@ class LaunchTemplateCreditSpecification(troposphere.ec2.LaunchTemplateCreditSpec
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CpuCredits=CpuCredits,
+            **kwargs
         )
         super(LaunchTemplateCreditSpecification, self).__init__(**processed_kwargs)
 
@@ -1720,6 +1797,7 @@ class LaunchTemplateData(troposphere.ec2.LaunchTemplateData, Mixin):
             SecurityGroupIds=SecurityGroupIds,
             TagSpecifications=TagSpecifications,
             UserData=UserData,
+            **kwargs
         )
         super(LaunchTemplateData, self).__init__(**processed_kwargs)
 
@@ -1738,6 +1816,7 @@ class LaunchTemplate(troposphere.ec2.LaunchTemplate, Mixin):
             validation=validation,
             LaunchTemplateData=LaunchTemplateData,
             LaunchTemplateName=LaunchTemplateName,
+            **kwargs
         )
         super(LaunchTemplate, self).__init__(**processed_kwargs)
 
@@ -1766,6 +1845,7 @@ class TransitGateway(troposphere.ec2.TransitGateway, Mixin):
             DnsSupport=DnsSupport,
             Tags=Tags,
             VpnEcmpSupport=VpnEcmpSupport,
+            **kwargs
         )
         super(TransitGateway, self).__init__(**processed_kwargs)
 
@@ -1788,6 +1868,7 @@ class TransitGatewayAttachment(troposphere.ec2.TransitGatewayAttachment, Mixin):
             TransitGatewayId=TransitGatewayId,
             VpcId=VpcId,
             Tags=Tags,
+            **kwargs
         )
         super(TransitGatewayAttachment, self).__init__(**processed_kwargs)
 
@@ -1810,6 +1891,7 @@ class TransitGatewayRoute(troposphere.ec2.TransitGatewayRoute, Mixin):
             Blackhole=Blackhole,
             DestinationCidrBlock=DestinationCidrBlock,
             TransitGatewayAttachmentId=TransitGatewayAttachmentId,
+            **kwargs
         )
         super(TransitGatewayRoute, self).__init__(**processed_kwargs)
 
@@ -1828,6 +1910,7 @@ class TransitGatewayRouteTable(troposphere.ec2.TransitGatewayRouteTable, Mixin):
             validation=validation,
             TransitGatewayId=TransitGatewayId,
             Tags=Tags,
+            **kwargs
         )
         super(TransitGatewayRouteTable, self).__init__(**processed_kwargs)
 
@@ -1846,6 +1929,7 @@ class TransitGatewayRouteTableAssociation(troposphere.ec2.TransitGatewayRouteTab
             validation=validation,
             TransitGatewayAttachmentId=TransitGatewayAttachmentId,
             TransitGatewayRouteTableId=TransitGatewayRouteTableId,
+            **kwargs
         )
         super(TransitGatewayRouteTableAssociation, self).__init__(**processed_kwargs)
 
@@ -1864,6 +1948,7 @@ class TransitGatewayRouteTablePropagation(troposphere.ec2.TransitGatewayRouteTab
             validation=validation,
             TransitGatewayAttachmentId=TransitGatewayAttachmentId,
             TransitGatewayRouteTableId=TransitGatewayRouteTableId,
+            **kwargs
         )
         super(TransitGatewayRouteTablePropagation, self).__init__(**processed_kwargs)
 
@@ -1880,6 +1965,7 @@ class FleetLaunchTemplateSpecificationRequest(troposphere.ec2.FleetLaunchTemplat
             LaunchTemplateId=LaunchTemplateId,
             LaunchTemplateName=LaunchTemplateName,
             Version=Version,
+            **kwargs
         )
         super(FleetLaunchTemplateSpecificationRequest, self).__init__(**processed_kwargs)
 
@@ -1902,6 +1988,7 @@ class FleetLaunchTemplateOverridesRequest(troposphere.ec2.FleetLaunchTemplateOve
             Priority=Priority,
             SubnetId=SubnetId,
             WeightedCapacity=WeightedCapacity,
+            **kwargs
         )
         super(FleetLaunchTemplateOverridesRequest, self).__init__(**processed_kwargs)
 
@@ -1916,6 +2003,7 @@ class FleetLaunchTemplateConfigRequest(troposphere.ec2.FleetLaunchTemplateConfig
             title=title,
             LaunchTemplateSpecification=LaunchTemplateSpecification,
             Overrides=Overrides,
+            **kwargs
         )
         super(FleetLaunchTemplateConfigRequest, self).__init__(**processed_kwargs)
 
@@ -1928,6 +2016,7 @@ class OnDemandOptionsRequest(troposphere.ec2.OnDemandOptionsRequest, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AllocationStrategy=AllocationStrategy,
+            **kwargs
         )
         super(OnDemandOptionsRequest, self).__init__(**processed_kwargs)
 
@@ -1944,6 +2033,7 @@ class SpotOptionsRequest(troposphere.ec2.SpotOptionsRequest, Mixin):
             AllocationStrategy=AllocationStrategy,
             InstanceInterruptionBehavior=InstanceInterruptionBehavior,
             InstancePoolsToUseCount=InstancePoolsToUseCount,
+            **kwargs
         )
         super(SpotOptionsRequest, self).__init__(**processed_kwargs)
 
@@ -1962,6 +2052,7 @@ class TargetCapacitySpecificationRequest(troposphere.ec2.TargetCapacitySpecifica
             OnDemandTargetCapacity=OnDemandTargetCapacity,
             SpotTargetCapacity=SpotTargetCapacity,
             TotalTargetCapacity=TotalTargetCapacity,
+            **kwargs
         )
         super(TargetCapacitySpecificationRequest, self).__init__(**processed_kwargs)
 
@@ -1998,6 +2089,7 @@ class EC2Fleet(troposphere.ec2.EC2Fleet, Mixin):
             Type=Type,
             ValidFrom=ValidFrom,
             ValidUntil=ValidUntil,
+            **kwargs
         )
         super(EC2Fleet, self).__init__(**processed_kwargs)
 
@@ -2034,6 +2126,7 @@ class CapacityReservation(troposphere.ec2.CapacityReservation, Mixin):
             InstanceMatchCriteria=InstanceMatchCriteria,
             TagSpecifications=TagSpecifications,
             Tenancy=Tenancy,
+            **kwargs
         )
         super(CapacityReservation, self).__init__(**processed_kwargs)
 
@@ -2058,6 +2151,7 @@ class ClientVpnAuthorizationRule(troposphere.ec2.ClientVpnAuthorizationRule, Mix
             AccessGroupId=AccessGroupId,
             AuthorizeAllGroups=AuthorizeAllGroups,
             Description=Description,
+            **kwargs
         )
         super(ClientVpnAuthorizationRule, self).__init__(**processed_kwargs)
 
@@ -2070,6 +2164,7 @@ class CertificateAuthenticationRequest(troposphere.ec2.CertificateAuthentication
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ClientRootCertificateChainArn=ClientRootCertificateChainArn,
+            **kwargs
         )
         super(CertificateAuthenticationRequest, self).__init__(**processed_kwargs)
 
@@ -2082,6 +2177,7 @@ class DirectoryServiceAuthenticationRequest(troposphere.ec2.DirectoryServiceAuth
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DirectoryId=DirectoryId,
+            **kwargs
         )
         super(DirectoryServiceAuthenticationRequest, self).__init__(**processed_kwargs)
 
@@ -2098,6 +2194,7 @@ class ClientAuthenticationRequest(troposphere.ec2.ClientAuthenticationRequest, M
             Type=Type,
             ActiveDirectory=ActiveDirectory,
             MutualAuthentication=MutualAuthentication,
+            **kwargs
         )
         super(ClientAuthenticationRequest, self).__init__(**processed_kwargs)
 
@@ -2114,6 +2211,7 @@ class ConnectionLogOptions(troposphere.ec2.ConnectionLogOptions, Mixin):
             Enabled=Enabled,
             CloudwatchLogGroup=CloudwatchLogGroup,
             CloudwatchLogStream=CloudwatchLogStream,
+            **kwargs
         )
         super(ConnectionLogOptions, self).__init__(**processed_kwargs)
 
@@ -2144,6 +2242,7 @@ class ClientVpnEndpoint(troposphere.ec2.ClientVpnEndpoint, Mixin):
             DnsServers=DnsServers,
             TagSpecifications=TagSpecifications,
             TransportProtocol=TransportProtocol,
+            **kwargs
         )
         super(ClientVpnEndpoint, self).__init__(**processed_kwargs)
 
@@ -2166,6 +2265,7 @@ class ClientVpnRoute(troposphere.ec2.ClientVpnRoute, Mixin):
             DestinationCidrBlock=DestinationCidrBlock,
             TargetVpcSubnetId=TargetVpcSubnetId,
             Description=Description,
+            **kwargs
         )
         super(ClientVpnRoute, self).__init__(**processed_kwargs)
 
@@ -2184,5 +2284,6 @@ class ClientVpnTargetNetworkAssociation(troposphere.ec2.ClientVpnTargetNetworkAs
             validation=validation,
             ClientVpnEndpointId=ClientVpnEndpointId,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(ClientVpnTargetNetworkAssociation, self).__init__(**processed_kwargs)

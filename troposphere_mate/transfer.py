@@ -32,6 +32,7 @@ class EndpointDetails(troposphere.transfer.EndpointDetails, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             VpcEndpointId=VpcEndpointId,
+            **kwargs
         )
         super(EndpointDetails, self).__init__(**processed_kwargs)
 
@@ -46,6 +47,7 @@ class IdentityProviderDetails(troposphere.transfer.IdentityProviderDetails, Mixi
             title=title,
             InvocationRole=InvocationRole,
             Url=Url,
+            **kwargs
         )
         super(IdentityProviderDetails, self).__init__(**processed_kwargs)
 
@@ -72,6 +74,7 @@ class Server(troposphere.transfer.Server, Mixin):
             IdentityProviderType=IdentityProviderType,
             LoggingRole=LoggingRole,
             Tags=Tags,
+            **kwargs
         )
         super(Server, self).__init__(**processed_kwargs)
 
@@ -82,6 +85,7 @@ class SshPublicKey(troposphere.transfer.SshPublicKey, Mixin):
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
+            **kwargs
         )
         super(SshPublicKey, self).__init__(**processed_kwargs)
 
@@ -110,5 +114,6 @@ class User(troposphere.transfer.User, Mixin):
             Policy=Policy,
             SshPublicKeys=SshPublicKeys,
             Tags=Tags,
+            **kwargs
         )
         super(User, self).__init__(**processed_kwargs)

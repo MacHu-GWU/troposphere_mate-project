@@ -31,6 +31,7 @@ class LifecyclePolicy(troposphere.ecr.LifecyclePolicy, Mixin):
             title=title,
             LifecyclePolicyText=LifecyclePolicyText,
             RegistryId=RegistryId,
+            **kwargs
         )
         super(LifecyclePolicy, self).__init__(**processed_kwargs)
 
@@ -51,5 +52,6 @@ class Repository(troposphere.ecr.Repository, Mixin):
             LifecyclePolicy=LifecyclePolicy,
             RepositoryName=RepositoryName,
             RepositoryPolicyText=RepositoryPolicyText,
+            **kwargs
         )
         super(Repository, self).__init__(**processed_kwargs)

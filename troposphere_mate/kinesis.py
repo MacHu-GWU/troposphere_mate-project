@@ -32,6 +32,7 @@ class StreamEncryption(troposphere.kinesis.StreamEncryption, Mixin):
             title=title,
             EncryptionType=EncryptionType,
             KeyId=KeyId,
+            **kwargs
         )
         super(StreamEncryption, self).__init__(**processed_kwargs)
 
@@ -56,6 +57,7 @@ class Stream(troposphere.kinesis.Stream, Mixin):
             ShardCount=ShardCount,
             StreamEncryption=StreamEncryption,
             Tags=Tags,
+            **kwargs
         )
         super(Stream, self).__init__(**processed_kwargs)
 
@@ -74,5 +76,6 @@ class StreamConsumer(troposphere.kinesis.StreamConsumer, Mixin):
             validation=validation,
             ConsumerName=ConsumerName,
             StreamARN=StreamARN,
+            **kwargs
         )
         super(StreamConsumer, self).__init__(**processed_kwargs)

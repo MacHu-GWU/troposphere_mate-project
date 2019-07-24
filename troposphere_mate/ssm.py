@@ -48,6 +48,7 @@ class NotificationConfig(troposphere.ssm.NotificationConfig, Mixin):
             NotificationArn=NotificationArn,
             NotificationEvents=NotificationEvents,
             NotificationType=NotificationType,
+            **kwargs
         )
         super(NotificationConfig, self).__init__(**processed_kwargs)
 
@@ -64,6 +65,7 @@ class LoggingInfo(troposphere.ssm.LoggingInfo, Mixin):
             Region=Region,
             S3Bucket=S3Bucket,
             S3Prefix=S3Prefix,
+            **kwargs
         )
         super(LoggingInfo, self).__init__(**processed_kwargs)
 
@@ -78,6 +80,7 @@ class MaintenanceWindowAutomationParameters(troposphere.ssm.MaintenanceWindowAut
             title=title,
             DocumentVersion=DocumentVersion,
             Parameters=Parameters,
+            **kwargs
         )
         super(MaintenanceWindowAutomationParameters, self).__init__(**processed_kwargs)
 
@@ -94,6 +97,7 @@ class MaintenanceWindowLambdaParameters(troposphere.ssm.MaintenanceWindowLambdaP
             ClientContext=ClientContext,
             Payload=Payload,
             Qualifier=Qualifier,
+            **kwargs
         )
         super(MaintenanceWindowLambdaParameters, self).__init__(**processed_kwargs)
 
@@ -122,6 +126,7 @@ class MaintenanceWindowRunCommandParameters(troposphere.ssm.MaintenanceWindowRun
             Parameters=Parameters,
             ServiceRoleArn=ServiceRoleArn,
             TimeoutSeconds=TimeoutSeconds,
+            **kwargs
         )
         super(MaintenanceWindowRunCommandParameters, self).__init__(**processed_kwargs)
 
@@ -136,6 +141,7 @@ class MaintenanceWindowStepFunctionsParameters(troposphere.ssm.MaintenanceWindow
             title=title,
             Input=Input,
             Name=Name,
+            **kwargs
         )
         super(MaintenanceWindowStepFunctionsParameters, self).__init__(**processed_kwargs)
 
@@ -150,6 +156,7 @@ class PatchFilter(troposphere.ssm.PatchFilter, Mixin):
             title=title,
             Key=Key,
             Values=Values,
+            **kwargs
         )
         super(PatchFilter, self).__init__(**processed_kwargs)
 
@@ -162,6 +169,7 @@ class PatchFilterGroup(troposphere.ssm.PatchFilterGroup, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             PatchFilters=PatchFilters,
+            **kwargs
         )
         super(PatchFilterGroup, self).__init__(**processed_kwargs)
 
@@ -178,6 +186,7 @@ class Rule(troposphere.ssm.Rule, Mixin):
             ApproveAfterDays=ApproveAfterDays,
             ComplianceLevel=ComplianceLevel,
             PatchFilterGroup=PatchFilterGroup,
+            **kwargs
         )
         super(Rule, self).__init__(**processed_kwargs)
 
@@ -190,6 +199,7 @@ class RuleGroup(troposphere.ssm.RuleGroup, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             PatchRules=PatchRules,
+            **kwargs
         )
         super(RuleGroup, self).__init__(**processed_kwargs)
 
@@ -208,6 +218,7 @@ class TaskInvocationParameters(troposphere.ssm.TaskInvocationParameters, Mixin):
             MaintenanceWindowLambdaParameters=MaintenanceWindowLambdaParameters,
             MaintenanceWindowRunCommandParameters=MaintenanceWindowRunCommandParameters,
             MaintenanceWindowStepFunctionsParameters=MaintenanceWindowStepFunctionsParameters,
+            **kwargs
         )
         super(TaskInvocationParameters, self).__init__(**processed_kwargs)
 
@@ -222,6 +233,7 @@ class Targets(troposphere.ssm.Targets, Mixin):
             title=title,
             Key=Key,
             Values=Values,
+            **kwargs
         )
         super(Targets, self).__init__(**processed_kwargs)
 
@@ -236,6 +248,7 @@ class S3OutputLocation(troposphere.ssm.S3OutputLocation, Mixin):
             title=title,
             OutputS3BucketName=OutputS3BucketName,
             OutputS3KeyPrefix=OutputS3KeyPrefix,
+            **kwargs
         )
         super(S3OutputLocation, self).__init__(**processed_kwargs)
 
@@ -248,6 +261,7 @@ class InstanceAssociationOutputLocation(troposphere.ssm.InstanceAssociationOutpu
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             S3Location=S3Location,
+            **kwargs
         )
         super(InstanceAssociationOutputLocation, self).__init__(**processed_kwargs)
 
@@ -278,6 +292,7 @@ class Association(troposphere.ssm.Association, Mixin):
             Parameters=Parameters,
             ScheduleExpression=ScheduleExpression,
             Targets=Targets,
+            **kwargs
         )
         super(Association, self).__init__(**processed_kwargs)
 
@@ -298,6 +313,7 @@ class Document(troposphere.ssm.Document, Mixin):
             Content=Content,
             DocumentType=DocumentType,
             Tags=Tags,
+            **kwargs
         )
         super(Document, self).__init__(**processed_kwargs)
 
@@ -324,6 +340,7 @@ class MaintenanceWindow(troposphere.ssm.MaintenanceWindow, Mixin):
             Name=Name,
             Schedule=Schedule,
             Description=Description,
+            **kwargs
         )
         super(MaintenanceWindow, self).__init__(**processed_kwargs)
 
@@ -350,6 +367,7 @@ class MaintenanceWindowTarget(troposphere.ssm.MaintenanceWindowTarget, Mixin):
             Description=Description,
             Name=Name,
             OwnerInformation=OwnerInformation,
+            **kwargs
         )
         super(MaintenanceWindowTarget, self).__init__(**processed_kwargs)
 
@@ -390,6 +408,7 @@ class MaintenanceWindowTask(troposphere.ssm.MaintenanceWindowTask, Mixin):
             TaskInvocationParameters=TaskInvocationParameters,
             TaskParameters=TaskParameters,
             WindowId=WindowId,
+            **kwargs
         )
         super(MaintenanceWindowTask, self).__init__(**processed_kwargs)
 
@@ -414,6 +433,7 @@ class Parameter(troposphere.ssm.Parameter, Mixin):
             AllowedPattern=AllowedPattern,
             Description=Description,
             Name=Name,
+            **kwargs
         )
         super(Parameter, self).__init__(**processed_kwargs)
 
@@ -430,6 +450,7 @@ class PatchSource(troposphere.ssm.PatchSource, Mixin):
             Configuration=Configuration,
             Name=Name,
             Products=Products,
+            **kwargs
         )
         super(PatchSource, self).__init__(**processed_kwargs)
 
@@ -470,6 +491,7 @@ class PatchBaseline(troposphere.ssm.PatchBaseline, Mixin):
             RejectedPatchesAction=RejectedPatchesAction,
             Sources=Sources,
             Tags=Tags,
+            **kwargs
         )
         super(PatchBaseline, self).__init__(**processed_kwargs)
 
@@ -496,5 +518,6 @@ class ResourceDataSync(troposphere.ssm.ResourceDataSync, Mixin):
             SyncName=SyncName,
             BucketPrefix=BucketPrefix,
             KMSKeyArn=KMSKeyArn,
+            **kwargs
         )
         super(ResourceDataSync, self).__init__(**processed_kwargs)

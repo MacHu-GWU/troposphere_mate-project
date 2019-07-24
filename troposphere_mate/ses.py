@@ -48,6 +48,7 @@ class DimensionConfiguration(troposphere.ses.DimensionConfiguration, Mixin):
             DefaultDimensionValue=DefaultDimensionValue,
             DimensionName=DimensionName,
             DimensionValueSource=DimensionValueSource,
+            **kwargs
         )
         super(DimensionConfiguration, self).__init__(**processed_kwargs)
 
@@ -60,6 +61,7 @@ class CloudWatchDestination(troposphere.ses.CloudWatchDestination, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DimensionConfigurations=DimensionConfigurations,
+            **kwargs
         )
         super(CloudWatchDestination, self).__init__(**processed_kwargs)
 
@@ -74,6 +76,7 @@ class KinesisFirehoseDestination(troposphere.ses.KinesisFirehoseDestination, Mix
             title=title,
             DeliveryStreamARN=DeliveryStreamARN,
             IAMRoleARN=IAMRoleARN,
+            **kwargs
         )
         super(KinesisFirehoseDestination, self).__init__(**processed_kwargs)
 
@@ -94,6 +97,7 @@ class EventDestination(troposphere.ses.EventDestination, Mixin):
             Enabled=Enabled,
             KinesisFirehoseDestination=KinesisFirehoseDestination,
             Name=Name,
+            **kwargs
         )
         super(EventDestination, self).__init__(**processed_kwargs)
 
@@ -112,6 +116,7 @@ class ConfigurationSetEventDestination(troposphere.ses.ConfigurationSetEventDest
             validation=validation,
             ConfigurationSetName=ConfigurationSetName,
             EventDestination=EventDestination,
+            **kwargs
         )
         super(ConfigurationSetEventDestination, self).__init__(**processed_kwargs)
 
@@ -128,6 +133,7 @@ class ConfigurationSet(troposphere.ses.ConfigurationSet, Mixin):
             template=template,
             validation=validation,
             Name=Name,
+            **kwargs
         )
         super(ConfigurationSet, self).__init__(**processed_kwargs)
 
@@ -142,6 +148,7 @@ class IpFilter(troposphere.ses.IpFilter, Mixin):
             title=title,
             Cidr=Cidr,
             Policy=Policy,
+            **kwargs
         )
         super(IpFilter, self).__init__(**processed_kwargs)
 
@@ -156,6 +163,7 @@ class Filter(troposphere.ses.Filter, Mixin):
             title=title,
             IpFilter=IpFilter,
             Name=Name,
+            **kwargs
         )
         super(Filter, self).__init__(**processed_kwargs)
 
@@ -172,6 +180,7 @@ class ReceiptFilter(troposphere.ses.ReceiptFilter, Mixin):
             template=template,
             validation=validation,
             Filter=Filter,
+            **kwargs
         )
         super(ReceiptFilter, self).__init__(**processed_kwargs)
 
@@ -188,6 +197,7 @@ class ReceiptRuleSet(troposphere.ses.ReceiptRuleSet, Mixin):
             template=template,
             validation=validation,
             RuleSetName=RuleSetName,
+            **kwargs
         )
         super(ReceiptRuleSet, self).__init__(**processed_kwargs)
 
@@ -202,6 +212,7 @@ class AddHeaderAction(troposphere.ses.AddHeaderAction, Mixin):
             title=title,
             HeaderName=HeaderName,
             HeaderValue=HeaderValue,
+            **kwargs
         )
         super(AddHeaderAction, self).__init__(**processed_kwargs)
 
@@ -222,6 +233,7 @@ class BounceAction(troposphere.ses.BounceAction, Mixin):
             SmtpReplyCode=SmtpReplyCode,
             StatusCode=StatusCode,
             TopicArn=TopicArn,
+            **kwargs
         )
         super(BounceAction, self).__init__(**processed_kwargs)
 
@@ -238,6 +250,7 @@ class LambdaAction(troposphere.ses.LambdaAction, Mixin):
             FunctionArn=FunctionArn,
             InvocationType=InvocationType,
             TopicArn=TopicArn,
+            **kwargs
         )
         super(LambdaAction, self).__init__(**processed_kwargs)
 
@@ -256,6 +269,7 @@ class S3Action(troposphere.ses.S3Action, Mixin):
             KmsKeyArn=KmsKeyArn,
             ObjectKeyPrefix=ObjectKeyPrefix,
             TopicArn=TopicArn,
+            **kwargs
         )
         super(S3Action, self).__init__(**processed_kwargs)
 
@@ -270,6 +284,7 @@ class SNSAction(troposphere.ses.SNSAction, Mixin):
             title=title,
             Encoding=Encoding,
             TopicArn=TopicArn,
+            **kwargs
         )
         super(SNSAction, self).__init__(**processed_kwargs)
 
@@ -284,6 +299,7 @@ class StopAction(troposphere.ses.StopAction, Mixin):
             title=title,
             Scope=Scope,
             TopicArn=TopicArn,
+            **kwargs
         )
         super(StopAction, self).__init__(**processed_kwargs)
 
@@ -298,6 +314,7 @@ class WorkmailAction(troposphere.ses.WorkmailAction, Mixin):
             title=title,
             OrganizationArn=OrganizationArn,
             TopicArn=TopicArn,
+            **kwargs
         )
         super(WorkmailAction, self).__init__(**processed_kwargs)
 
@@ -322,6 +339,7 @@ class Action(troposphere.ses.Action, Mixin):
             SNSAction=SNSAction,
             StopAction=StopAction,
             WorkmailAction=WorkmailAction,
+            **kwargs
         )
         super(Action, self).__init__(**processed_kwargs)
 
@@ -344,6 +362,7 @@ class Rule(troposphere.ses.Rule, Mixin):
             Recipients=Recipients,
             ScanEnabled=ScanEnabled,
             TlsPolicy=TlsPolicy,
+            **kwargs
         )
         super(Rule, self).__init__(**processed_kwargs)
 
@@ -364,6 +383,7 @@ class ReceiptRule(troposphere.ses.ReceiptRule, Mixin):
             Rule=Rule,
             RuleSetName=RuleSetName,
             After=After,
+            **kwargs
         )
         super(ReceiptRule, self).__init__(**processed_kwargs)
 
@@ -382,6 +402,7 @@ class EmailTemplate(troposphere.ses.EmailTemplate, Mixin):
             SubjectPart=SubjectPart,
             TemplateName=TemplateName,
             TextPart=TextPart,
+            **kwargs
         )
         super(EmailTemplate, self).__init__(**processed_kwargs)
 
@@ -398,5 +419,6 @@ class Template(troposphere.ses.Template, Mixin):
             template=template,
             validation=validation,
             Template=Template,
+            **kwargs
         )
         super(Template, self).__init__(**processed_kwargs)

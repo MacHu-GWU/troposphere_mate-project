@@ -38,6 +38,7 @@ class ScalableTargetAction(troposphere.applicationautoscaling.ScalableTargetActi
             title=title,
             MaxCapacity=MaxCapacity,
             MinCapacity=MinCapacity,
+            **kwargs
         )
         super(ScalableTargetAction, self).__init__(**processed_kwargs)
 
@@ -58,6 +59,7 @@ class ScheduledAction(troposphere.applicationautoscaling.ScheduledAction, Mixin)
             EndTime=EndTime,
             ScalableTargetAction=ScalableTargetAction,
             StartTime=StartTime,
+            **kwargs
         )
         super(ScheduledAction, self).__init__(**processed_kwargs)
 
@@ -86,6 +88,7 @@ class ScalableTarget(troposphere.applicationautoscaling.ScalableTarget, Mixin):
             ScalableDimension=ScalableDimension,
             ServiceNamespace=ServiceNamespace,
             ScheduledActions=ScheduledActions,
+            **kwargs
         )
         super(ScalableTarget, self).__init__(**processed_kwargs)
 
@@ -102,6 +105,7 @@ class StepAdjustment(troposphere.applicationautoscaling.StepAdjustment, Mixin):
             ScalingAdjustment=ScalingAdjustment,
             MetricIntervalLowerBound=MetricIntervalLowerBound,
             MetricIntervalUpperBound=MetricIntervalUpperBound,
+            **kwargs
         )
         super(StepAdjustment, self).__init__(**processed_kwargs)
 
@@ -122,6 +126,7 @@ class StepScalingPolicyConfiguration(troposphere.applicationautoscaling.StepScal
             MetricAggregationType=MetricAggregationType,
             MinAdjustmentMagnitude=MinAdjustmentMagnitude,
             StepAdjustments=StepAdjustments,
+            **kwargs
         )
         super(StepScalingPolicyConfiguration, self).__init__(**processed_kwargs)
 
@@ -136,6 +141,7 @@ class MetricDimension(troposphere.applicationautoscaling.MetricDimension, Mixin)
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(MetricDimension, self).__init__(**processed_kwargs)
 
@@ -156,6 +162,7 @@ class CustomizedMetricSpecification(troposphere.applicationautoscaling.Customize
             MetricName=MetricName,
             Namespace=Namespace,
             Statistic=Statistic,
+            **kwargs
         )
         super(CustomizedMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -170,6 +177,7 @@ class PredefinedMetricSpecification(troposphere.applicationautoscaling.Predefine
             title=title,
             PredefinedMetricType=PredefinedMetricType,
             ResourceLabel=ResourceLabel,
+            **kwargs
         )
         super(PredefinedMetricSpecification, self).__init__(**processed_kwargs)
 
@@ -192,6 +200,7 @@ class TargetTrackingScalingPolicyConfiguration(troposphere.applicationautoscalin
             PredefinedMetricSpecification=PredefinedMetricSpecification,
             ScaleInCooldown=ScaleInCooldown,
             ScaleOutCooldown=ScaleOutCooldown,
+            **kwargs
         )
         super(TargetTrackingScalingPolicyConfiguration, self).__init__(**processed_kwargs)
 
@@ -222,5 +231,6 @@ class ScalingPolicy(troposphere.applicationautoscaling.ScalingPolicy, Mixin):
             ScalingTargetId=ScalingTargetId,
             StepScalingPolicyConfiguration=StepScalingPolicyConfiguration,
             TargetTrackingScalingPolicyConfiguration=TargetTrackingScalingPolicyConfiguration,
+            **kwargs
         )
         super(ScalingPolicy, self).__init__(**processed_kwargs)

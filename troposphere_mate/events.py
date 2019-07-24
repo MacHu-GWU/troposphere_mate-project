@@ -40,6 +40,7 @@ class Condition(troposphere.events.Condition, Mixin):
             Key=Key,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(Condition, self).__init__(**processed_kwargs)
 
@@ -62,6 +63,7 @@ class EventBusPolicy(troposphere.events.EventBusPolicy, Mixin):
             Principal=Principal,
             StatementId=StatementId,
             Condition=Condition,
+            **kwargs
         )
         super(EventBusPolicy, self).__init__(**processed_kwargs)
 
@@ -76,6 +78,7 @@ class EcsParameters(troposphere.events.EcsParameters, Mixin):
             title=title,
             TaskDefinitionArn=TaskDefinitionArn,
             TaskCount=TaskCount,
+            **kwargs
         )
         super(EcsParameters, self).__init__(**processed_kwargs)
 
@@ -90,6 +93,7 @@ class InputTransformer(troposphere.events.InputTransformer, Mixin):
             title=title,
             InputTemplate=InputTemplate,
             InputPathsMap=InputPathsMap,
+            **kwargs
         )
         super(InputTransformer, self).__init__(**processed_kwargs)
 
@@ -102,6 +106,7 @@ class KinesisParameters(troposphere.events.KinesisParameters, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             PartitionKeyPath=PartitionKeyPath,
+            **kwargs
         )
         super(KinesisParameters, self).__init__(**processed_kwargs)
 
@@ -116,6 +121,7 @@ class RunCommandTarget(troposphere.events.RunCommandTarget, Mixin):
             title=title,
             Key=Key,
             Values=Values,
+            **kwargs
         )
         super(RunCommandTarget, self).__init__(**processed_kwargs)
 
@@ -128,6 +134,7 @@ class RunCommandParameters(troposphere.events.RunCommandParameters, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             RunCommandTargets=RunCommandTargets,
+            **kwargs
         )
         super(RunCommandParameters, self).__init__(**processed_kwargs)
 
@@ -140,6 +147,7 @@ class SqsParameters(troposphere.events.SqsParameters, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             MessageGroupId=MessageGroupId,
+            **kwargs
         )
         super(SqsParameters, self).__init__(**processed_kwargs)
 
@@ -170,6 +178,7 @@ class Target(troposphere.events.Target, Mixin):
             RoleArn=RoleArn,
             RunCommandParameters=RunCommandParameters,
             SqsParameters=SqsParameters,
+            **kwargs
         )
         super(Target, self).__init__(**processed_kwargs)
 
@@ -198,5 +207,6 @@ class Rule(troposphere.events.Rule, Mixin):
             ScheduleExpression=ScheduleExpression,
             State=State,
             Targets=Targets,
+            **kwargs
         )
         super(Rule, self).__init__(**processed_kwargs)

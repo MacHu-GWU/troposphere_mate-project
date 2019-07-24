@@ -43,6 +43,7 @@ class Code(troposphere.awslambda.Code, Mixin):
             S3Key=S3Key,
             S3ObjectVersion=S3ObjectVersion,
             ZipFile=ZipFile,
+            **kwargs
         )
         super(Code, self).__init__(**processed_kwargs)
 
@@ -57,6 +58,7 @@ class VPCConfig(troposphere.awslambda.VPCConfig, Mixin):
             title=title,
             SecurityGroupIds=SecurityGroupIds,
             SubnetIds=SubnetIds,
+            **kwargs
         )
         super(VPCConfig, self).__init__(**processed_kwargs)
 
@@ -81,6 +83,7 @@ class EventSourceMapping(troposphere.awslambda.EventSourceMapping, Mixin):
             BatchSize=BatchSize,
             Enabled=Enabled,
             StartingPosition=StartingPosition,
+            **kwargs
         )
         super(EventSourceMapping, self).__init__(**processed_kwargs)
 
@@ -93,6 +96,7 @@ class DeadLetterConfig(troposphere.awslambda.DeadLetterConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             TargetArn=TargetArn,
+            **kwargs
         )
         super(DeadLetterConfig, self).__init__(**processed_kwargs)
 
@@ -105,6 +109,7 @@ class Environment(troposphere.awslambda.Environment, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Variables=Variables,
+            **kwargs
         )
         super(Environment, self).__init__(**processed_kwargs)
 
@@ -117,6 +122,7 @@ class TracingConfig(troposphere.awslambda.TracingConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Mode=Mode,
+            **kwargs
         )
         super(TracingConfig, self).__init__(**processed_kwargs)
 
@@ -163,6 +169,7 @@ class Function(troposphere.awslambda.Function, Mixin):
             Timeout=Timeout,
             TracingConfig=TracingConfig,
             VpcConfig=VpcConfig,
+            **kwargs
         )
         super(Function, self).__init__(**processed_kwargs)
 
@@ -189,6 +196,7 @@ class Permission(troposphere.awslambda.Permission, Mixin):
             EventSourceToken=EventSourceToken,
             SourceAccount=SourceAccount,
             SourceArn=SourceArn,
+            **kwargs
         )
         super(Permission, self).__init__(**processed_kwargs)
 
@@ -203,6 +211,7 @@ class VersionWeight(troposphere.awslambda.VersionWeight, Mixin):
             title=title,
             FunctionVersion=FunctionVersion,
             FunctionWeight=FunctionWeight,
+            **kwargs
         )
         super(VersionWeight, self).__init__(**processed_kwargs)
 
@@ -215,6 +224,7 @@ class AliasRoutingConfiguration(troposphere.awslambda.AliasRoutingConfiguration,
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AdditionalVersionWeights=AdditionalVersionWeights,
+            **kwargs
         )
         super(AliasRoutingConfiguration, self).__init__(**processed_kwargs)
 
@@ -239,6 +249,7 @@ class Alias(troposphere.awslambda.Alias, Mixin):
             Name=Name,
             Description=Description,
             RoutingConfig=RoutingConfig,
+            **kwargs
         )
         super(Alias, self).__init__(**processed_kwargs)
 
@@ -259,6 +270,7 @@ class Version(troposphere.awslambda.Version, Mixin):
             FunctionName=FunctionName,
             CodeSha256=CodeSha256,
             Description=Description,
+            **kwargs
         )
         super(Version, self).__init__(**processed_kwargs)
 
@@ -275,6 +287,7 @@ class Content(troposphere.awslambda.Content, Mixin):
             S3Bucket=S3Bucket,
             S3Key=S3Key,
             S3ObjectVersion=S3ObjectVersion,
+            **kwargs
         )
         super(Content, self).__init__(**processed_kwargs)
 
@@ -299,6 +312,7 @@ class LayerVersion(troposphere.awslambda.LayerVersion, Mixin):
             Description=Description,
             LayerName=LayerName,
             LicenseInfo=LicenseInfo,
+            **kwargs
         )
         super(LayerVersion, self).__init__(**processed_kwargs)
 
@@ -321,5 +335,6 @@ class LayerVersionPermission(troposphere.awslambda.LayerVersionPermission, Mixin
             LayerVersionArn=LayerVersionArn,
             Principal=Principal,
             OrganizationId=OrganizationId,
+            **kwargs
         )
         super(LayerVersionPermission, self).__init__(**processed_kwargs)

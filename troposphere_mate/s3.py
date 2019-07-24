@@ -82,6 +82,7 @@ class CorsRules(troposphere.s3.CorsRules, Mixin):
             ExposedHeaders=ExposedHeaders,
             Id=Id,
             MaxAge=MaxAge,
+            **kwargs
         )
         super(CorsRules, self).__init__(**processed_kwargs)
 
@@ -94,6 +95,7 @@ class CorsConfiguration(troposphere.s3.CorsConfiguration, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CorsRules=CorsRules,
+            **kwargs
         )
         super(CorsConfiguration, self).__init__(**processed_kwargs)
 
@@ -106,6 +108,7 @@ class VersioningConfiguration(troposphere.s3.VersioningConfiguration, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Status=Status,
+            **kwargs
         )
         super(VersioningConfiguration, self).__init__(**processed_kwargs)
 
@@ -118,6 +121,7 @@ class AccelerateConfiguration(troposphere.s3.AccelerateConfiguration, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AccelerationStatus=AccelerationStatus,
+            **kwargs
         )
         super(AccelerateConfiguration, self).__init__(**processed_kwargs)
 
@@ -132,6 +136,7 @@ class RedirectAllRequestsTo(troposphere.s3.RedirectAllRequestsTo, Mixin):
             title=title,
             HostName=HostName,
             Protocol=Protocol,
+            **kwargs
         )
         super(RedirectAllRequestsTo, self).__init__(**processed_kwargs)
 
@@ -152,6 +157,7 @@ class RedirectRule(troposphere.s3.RedirectRule, Mixin):
             Protocol=Protocol,
             ReplaceKeyPrefixWith=ReplaceKeyPrefixWith,
             ReplaceKeyWith=ReplaceKeyWith,
+            **kwargs
         )
         super(RedirectRule, self).__init__(**processed_kwargs)
 
@@ -166,6 +172,7 @@ class RoutingRuleCondition(troposphere.s3.RoutingRuleCondition, Mixin):
             title=title,
             HttpErrorCodeReturnedEquals=HttpErrorCodeReturnedEquals,
             KeyPrefixEquals=KeyPrefixEquals,
+            **kwargs
         )
         super(RoutingRuleCondition, self).__init__(**processed_kwargs)
 
@@ -180,6 +187,7 @@ class RoutingRule(troposphere.s3.RoutingRule, Mixin):
             title=title,
             RedirectRule=RedirectRule,
             RoutingRuleCondition=RoutingRuleCondition,
+            **kwargs
         )
         super(RoutingRule, self).__init__(**processed_kwargs)
 
@@ -198,6 +206,7 @@ class WebsiteConfiguration(troposphere.s3.WebsiteConfiguration, Mixin):
             ErrorDocument=ErrorDocument,
             RedirectAllRequestsTo=RedirectAllRequestsTo,
             RoutingRules=RoutingRules,
+            **kwargs
         )
         super(WebsiteConfiguration, self).__init__(**processed_kwargs)
 
@@ -214,6 +223,7 @@ class LifecycleRuleTransition(troposphere.s3.LifecycleRuleTransition, Mixin):
             StorageClass=StorageClass,
             TransitionDate=TransitionDate,
             TransitionInDays=TransitionInDays,
+            **kwargs
         )
         super(LifecycleRuleTransition, self).__init__(**processed_kwargs)
 
@@ -226,6 +236,7 @@ class AbortIncompleteMultipartUpload(troposphere.s3.AbortIncompleteMultipartUplo
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DaysAfterInitiation=DaysAfterInitiation,
+            **kwargs
         )
         super(AbortIncompleteMultipartUpload, self).__init__(**processed_kwargs)
 
@@ -240,6 +251,7 @@ class NoncurrentVersionTransition(troposphere.s3.NoncurrentVersionTransition, Mi
             title=title,
             StorageClass=StorageClass,
             TransitionInDays=TransitionInDays,
+            **kwargs
         )
         super(NoncurrentVersionTransition, self).__init__(**processed_kwargs)
 
@@ -254,6 +266,7 @@ class TagFilter(troposphere.s3.TagFilter, Mixin):
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(TagFilter, self).__init__(**processed_kwargs)
 
@@ -288,6 +301,7 @@ class LifecycleRule(troposphere.s3.LifecycleRule, Mixin):
             TagFilters=TagFilters,
             Transition=Transition,
             Transitions=Transitions,
+            **kwargs
         )
         super(LifecycleRule, self).__init__(**processed_kwargs)
 
@@ -300,6 +314,7 @@ class LifecycleConfiguration(troposphere.s3.LifecycleConfiguration, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Rules=Rules,
+            **kwargs
         )
         super(LifecycleConfiguration, self).__init__(**processed_kwargs)
 
@@ -314,6 +329,7 @@ class LoggingConfiguration(troposphere.s3.LoggingConfiguration, Mixin):
             title=title,
             DestinationBucketName=DestinationBucketName,
             LogFilePrefix=LogFilePrefix,
+            **kwargs
         )
         super(LoggingConfiguration, self).__init__(**processed_kwargs)
 
@@ -328,6 +344,7 @@ class Rules(troposphere.s3.Rules, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(Rules, self).__init__(**processed_kwargs)
 
@@ -340,6 +357,7 @@ class S3Key(troposphere.s3.S3Key, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Rules=Rules,
+            **kwargs
         )
         super(S3Key, self).__init__(**processed_kwargs)
 
@@ -352,6 +370,7 @@ class Filter(troposphere.s3.Filter, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             S3Key=S3Key,
+            **kwargs
         )
         super(Filter, self).__init__(**processed_kwargs)
 
@@ -368,6 +387,7 @@ class LambdaConfigurations(troposphere.s3.LambdaConfigurations, Mixin):
             Event=Event,
             Function=Function,
             Filter=Filter,
+            **kwargs
         )
         super(LambdaConfigurations, self).__init__(**processed_kwargs)
 
@@ -384,6 +404,7 @@ class QueueConfigurations(troposphere.s3.QueueConfigurations, Mixin):
             Event=Event,
             Queue=Queue,
             Filter=Filter,
+            **kwargs
         )
         super(QueueConfigurations, self).__init__(**processed_kwargs)
 
@@ -400,6 +421,7 @@ class TopicConfigurations(troposphere.s3.TopicConfigurations, Mixin):
             Event=Event,
             Topic=Topic,
             Filter=Filter,
+            **kwargs
         )
         super(TopicConfigurations, self).__init__(**processed_kwargs)
 
@@ -416,6 +438,7 @@ class MetricsConfiguration(troposphere.s3.MetricsConfiguration, Mixin):
             Id=Id,
             Prefix=Prefix,
             TagFilters=TagFilters,
+            **kwargs
         )
         super(MetricsConfiguration, self).__init__(**processed_kwargs)
 
@@ -432,6 +455,7 @@ class NotificationConfiguration(troposphere.s3.NotificationConfiguration, Mixin)
             LambdaConfigurations=LambdaConfigurations,
             QueueConfigurations=QueueConfigurations,
             TopicConfigurations=TopicConfigurations,
+            **kwargs
         )
         super(NotificationConfiguration, self).__init__(**processed_kwargs)
 
@@ -444,6 +468,7 @@ class AccessControlTranslation(troposphere.s3.AccessControlTranslation, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Owner=Owner,
+            **kwargs
         )
         super(AccessControlTranslation, self).__init__(**processed_kwargs)
 
@@ -456,6 +481,7 @@ class EncryptionConfiguration(troposphere.s3.EncryptionConfiguration, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ReplicaKmsKeyID=ReplicaKmsKeyID,
+            **kwargs
         )
         super(EncryptionConfiguration, self).__init__(**processed_kwargs)
 
@@ -476,6 +502,7 @@ class ReplicationConfigurationRulesDestination(troposphere.s3.ReplicationConfigu
             Account=Account,
             EncryptionConfiguration=EncryptionConfiguration,
             StorageClass=StorageClass,
+            **kwargs
         )
         super(ReplicationConfigurationRulesDestination, self).__init__(**processed_kwargs)
 
@@ -488,6 +515,7 @@ class SseKmsEncryptedObjects(troposphere.s3.SseKmsEncryptedObjects, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Status=Status,
+            **kwargs
         )
         super(SseKmsEncryptedObjects, self).__init__(**processed_kwargs)
 
@@ -500,6 +528,7 @@ class SourceSelectionCriteria(troposphere.s3.SourceSelectionCriteria, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SseKmsEncryptedObjects=SseKmsEncryptedObjects,
+            **kwargs
         )
         super(SourceSelectionCriteria, self).__init__(**processed_kwargs)
 
@@ -520,6 +549,7 @@ class ReplicationConfigurationRules(troposphere.s3.ReplicationConfigurationRules
             Status=Status,
             Id=Id,
             SourceSelectionCriteria=SourceSelectionCriteria,
+            **kwargs
         )
         super(ReplicationConfigurationRules, self).__init__(**processed_kwargs)
 
@@ -534,6 +564,7 @@ class ReplicationConfiguration(troposphere.s3.ReplicationConfiguration, Mixin):
             title=title,
             Role=Role,
             Rules=Rules,
+            **kwargs
         )
         super(ReplicationConfiguration, self).__init__(**processed_kwargs)
 
@@ -552,6 +583,7 @@ class Destination(troposphere.s3.Destination, Mixin):
             Format=Format,
             BucketAccountId=BucketAccountId,
             Prefix=Prefix,
+            **kwargs
         )
         super(Destination, self).__init__(**processed_kwargs)
 
@@ -566,6 +598,7 @@ class DataExport(troposphere.s3.DataExport, Mixin):
             title=title,
             Destination=Destination,
             OutputSchemaVersion=OutputSchemaVersion,
+            **kwargs
         )
         super(DataExport, self).__init__(**processed_kwargs)
 
@@ -578,6 +611,7 @@ class StorageClassAnalysis(troposphere.s3.StorageClassAnalysis, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DataExport=DataExport,
+            **kwargs
         )
         super(StorageClassAnalysis, self).__init__(**processed_kwargs)
 
@@ -596,6 +630,7 @@ class AnalyticsConfiguration(troposphere.s3.AnalyticsConfiguration, Mixin):
             StorageClassAnalysis=StorageClassAnalysis,
             Prefix=Prefix,
             TagFilters=TagFilters,
+            **kwargs
         )
         super(AnalyticsConfiguration, self).__init__(**processed_kwargs)
 
@@ -610,6 +645,7 @@ class ServerSideEncryptionByDefault(troposphere.s3.ServerSideEncryptionByDefault
             title=title,
             SSEAlgorithm=SSEAlgorithm,
             KMSMasterKeyID=KMSMasterKeyID,
+            **kwargs
         )
         super(ServerSideEncryptionByDefault, self).__init__(**processed_kwargs)
 
@@ -622,6 +658,7 @@ class ServerSideEncryptionRule(troposphere.s3.ServerSideEncryptionRule, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ServerSideEncryptionByDefault=ServerSideEncryptionByDefault,
+            **kwargs
         )
         super(ServerSideEncryptionRule, self).__init__(**processed_kwargs)
 
@@ -634,6 +671,7 @@ class BucketEncryption(troposphere.s3.BucketEncryption, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ServerSideEncryptionConfiguration=ServerSideEncryptionConfiguration,
+            **kwargs
         )
         super(BucketEncryption, self).__init__(**processed_kwargs)
 
@@ -658,6 +696,7 @@ class InventoryConfiguration(troposphere.s3.InventoryConfiguration, Mixin):
             OptionalFields=OptionalFields,
             ScheduleFrequency=ScheduleFrequency,
             Prefix=Prefix,
+            **kwargs
         )
         super(InventoryConfiguration, self).__init__(**processed_kwargs)
 
@@ -674,6 +713,7 @@ class DefaultRetention(troposphere.s3.DefaultRetention, Mixin):
             Days=Days,
             Mode=Mode,
             Years=Years,
+            **kwargs
         )
         super(DefaultRetention, self).__init__(**processed_kwargs)
 
@@ -686,6 +726,7 @@ class ObjectLockRule(troposphere.s3.ObjectLockRule, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             DefaultRetention=DefaultRetention,
+            **kwargs
         )
         super(ObjectLockRule, self).__init__(**processed_kwargs)
 
@@ -700,6 +741,7 @@ class ObjectLockConfiguration(troposphere.s3.ObjectLockConfiguration, Mixin):
             title=title,
             ObjectLockEnabled=ObjectLockEnabled,
             Rule=Rule,
+            **kwargs
         )
         super(ObjectLockConfiguration, self).__init__(**processed_kwargs)
 
@@ -718,6 +760,7 @@ class PublicAccessBlockConfiguration(troposphere.s3.PublicAccessBlockConfigurati
             BlockPublicPolicy=BlockPublicPolicy,
             IgnorePublicAcls=IgnorePublicAcls,
             RestrictPublicBuckets=RestrictPublicBuckets,
+            **kwargs
         )
         super(PublicAccessBlockConfiguration, self).__init__(**processed_kwargs)
 
@@ -768,6 +811,7 @@ class Bucket(troposphere.s3.Bucket, Mixin):
             Tags=Tags,
             WebsiteConfiguration=WebsiteConfiguration,
             VersioningConfiguration=VersioningConfiguration,
+            **kwargs
         )
         super(Bucket, self).__init__(**processed_kwargs)
 
@@ -786,5 +830,6 @@ class BucketPolicy(troposphere.s3.BucketPolicy, Mixin):
             validation=validation,
             Bucket=Bucket,
             PolicyDocument=PolicyDocument,
+            **kwargs
         )
         super(BucketPolicy, self).__init__(**processed_kwargs)

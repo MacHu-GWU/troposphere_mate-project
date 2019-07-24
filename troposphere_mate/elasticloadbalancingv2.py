@@ -50,6 +50,7 @@ class LoadBalancerAttributes(troposphere.elasticloadbalancingv2.LoadBalancerAttr
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(LoadBalancerAttributes, self).__init__(**processed_kwargs)
 
@@ -62,6 +63,7 @@ class Certificate(troposphere.elasticloadbalancingv2.Certificate, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CertificateArn=CertificateArn,
+            **kwargs
         )
         super(Certificate, self).__init__(**processed_kwargs)
 
@@ -88,6 +90,7 @@ class AuthenticateCognitoConfig(troposphere.elasticloadbalancingv2.AuthenticateC
             Scope=Scope,
             SessionCookieName=SessionCookieName,
             SessionTimeout=SessionTimeout,
+            **kwargs
         )
         super(AuthenticateCognitoConfig, self).__init__(**processed_kwargs)
 
@@ -120,6 +123,7 @@ class AuthenticateOidcConfig(troposphere.elasticloadbalancingv2.AuthenticateOidc
             Scope=Scope,
             SessionCookieName=SessionCookieName,
             SessionTimeout=SessionTimeout,
+            **kwargs
         )
         super(AuthenticateOidcConfig, self).__init__(**processed_kwargs)
 
@@ -142,6 +146,7 @@ class RedirectConfig(troposphere.elasticloadbalancingv2.RedirectConfig, Mixin):
             Port=Port,
             Protocol=Protocol,
             Query=Query,
+            **kwargs
         )
         super(RedirectConfig, self).__init__(**processed_kwargs)
 
@@ -158,6 +163,7 @@ class FixedResponseConfig(troposphere.elasticloadbalancingv2.FixedResponseConfig
             StatusCode=StatusCode,
             ContentType=ContentType,
             MessageBody=MessageBody,
+            **kwargs
         )
         super(FixedResponseConfig, self).__init__(**processed_kwargs)
 
@@ -182,6 +188,7 @@ class Action(troposphere.elasticloadbalancingv2.Action, Mixin):
             Order=Order,
             RedirectConfig=RedirectConfig,
             TargetGroupArn=TargetGroupArn,
+            **kwargs
         )
         super(Action, self).__init__(**processed_kwargs)
 
@@ -194,6 +201,7 @@ class HostHeaderConfig(troposphere.elasticloadbalancingv2.HostHeaderConfig, Mixi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Values=Values,
+            **kwargs
         )
         super(HostHeaderConfig, self).__init__(**processed_kwargs)
 
@@ -208,6 +216,7 @@ class HttpHeaderConfig(troposphere.elasticloadbalancingv2.HttpHeaderConfig, Mixi
             title=title,
             HttpHeaderName=HttpHeaderName,
             Values=Values,
+            **kwargs
         )
         super(HttpHeaderConfig, self).__init__(**processed_kwargs)
 
@@ -220,6 +229,7 @@ class HttpRequestMethodConfig(troposphere.elasticloadbalancingv2.HttpRequestMeth
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Values=Values,
+            **kwargs
         )
         super(HttpRequestMethodConfig, self).__init__(**processed_kwargs)
 
@@ -232,6 +242,7 @@ class PathPatternConfig(troposphere.elasticloadbalancingv2.PathPatternConfig, Mi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Values=Values,
+            **kwargs
         )
         super(PathPatternConfig, self).__init__(**processed_kwargs)
 
@@ -246,6 +257,7 @@ class QueryStringKeyValue(troposphere.elasticloadbalancingv2.QueryStringKeyValue
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(QueryStringKeyValue, self).__init__(**processed_kwargs)
 
@@ -258,6 +270,7 @@ class QueryStringConfig(troposphere.elasticloadbalancingv2.QueryStringConfig, Mi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Values=Values,
+            **kwargs
         )
         super(QueryStringConfig, self).__init__(**processed_kwargs)
 
@@ -270,6 +283,7 @@ class SourceIpConfig(troposphere.elasticloadbalancingv2.SourceIpConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Values=Values,
+            **kwargs
         )
         super(SourceIpConfig, self).__init__(**processed_kwargs)
 
@@ -296,6 +310,7 @@ class Condition(troposphere.elasticloadbalancingv2.Condition, Mixin):
             QueryStringConfig=QueryStringConfig,
             SourceIpConfig=SourceIpConfig,
             Values=Values,
+            **kwargs
         )
         super(Condition, self).__init__(**processed_kwargs)
 
@@ -308,6 +323,7 @@ class Matcher(troposphere.elasticloadbalancingv2.Matcher, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             HttpCode=HttpCode,
+            **kwargs
         )
         super(Matcher, self).__init__(**processed_kwargs)
 
@@ -322,6 +338,7 @@ class SubnetMapping(troposphere.elasticloadbalancingv2.SubnetMapping, Mixin):
             title=title,
             AllocationId=AllocationId,
             SubnetId=SubnetId,
+            **kwargs
         )
         super(SubnetMapping, self).__init__(**processed_kwargs)
 
@@ -336,6 +353,7 @@ class TargetGroupAttribute(troposphere.elasticloadbalancingv2.TargetGroupAttribu
             title=title,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(TargetGroupAttribute, self).__init__(**processed_kwargs)
 
@@ -352,6 +370,7 @@ class TargetDescription(troposphere.elasticloadbalancingv2.TargetDescription, Mi
             Id=Id,
             AvailabilityZone=AvailabilityZone,
             Port=Port,
+            **kwargs
         )
         super(TargetDescription, self).__init__(**processed_kwargs)
 
@@ -378,6 +397,7 @@ class Listener(troposphere.elasticloadbalancingv2.Listener, Mixin):
             Protocol=Protocol,
             Certificates=Certificates,
             SslPolicy=SslPolicy,
+            **kwargs
         )
         super(Listener, self).__init__(**processed_kwargs)
 
@@ -396,6 +416,7 @@ class ListenerCertificate(troposphere.elasticloadbalancingv2.ListenerCertificate
             validation=validation,
             Certificates=Certificates,
             ListenerArn=ListenerArn,
+            **kwargs
         )
         super(ListenerCertificate, self).__init__(**processed_kwargs)
 
@@ -418,6 +439,7 @@ class ListenerRule(troposphere.elasticloadbalancingv2.ListenerRule, Mixin):
             Conditions=Conditions,
             ListenerArn=ListenerArn,
             Priority=Priority,
+            **kwargs
         )
         super(ListenerRule, self).__init__(**processed_kwargs)
 
@@ -466,6 +488,7 @@ class TargetGroup(troposphere.elasticloadbalancingv2.TargetGroup, Mixin):
             TargetType=TargetType,
             UnhealthyThresholdCount=UnhealthyThresholdCount,
             VpcId=VpcId,
+            **kwargs
         )
         super(TargetGroup, self).__init__(**processed_kwargs)
 
@@ -498,5 +521,6 @@ class LoadBalancer(troposphere.elasticloadbalancingv2.LoadBalancer, Mixin):
             Subnets=Subnets,
             Tags=Tags,
             Type=Type,
+            **kwargs
         )
         super(LoadBalancer, self).__init__(**processed_kwargs)

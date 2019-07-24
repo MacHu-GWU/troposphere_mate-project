@@ -40,6 +40,7 @@ class Certificate(troposphere.dms.Certificate, Mixin):
             CertificateIdentifier=CertificateIdentifier,
             CertificatePem=CertificatePem,
             CertificateWallet=CertificateWallet,
+            **kwargs
         )
         super(Certificate, self).__init__(**processed_kwargs)
 
@@ -52,6 +53,7 @@ class DynamoDBSettings(troposphere.dms.DynamoDBSettings, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ServiceAccessRoleArn=ServiceAccessRoleArn,
+            **kwargs
         )
         super(DynamoDBSettings, self).__init__(**processed_kwargs)
 
@@ -84,6 +86,7 @@ class MongoDbSettings(troposphere.dms.MongoDbSettings, Mixin):
             Port=Port,
             ServerName=ServerName,
             Username=Username,
+            **kwargs
         )
         super(MongoDbSettings, self).__init__(**processed_kwargs)
 
@@ -108,6 +111,7 @@ class S3Settings(troposphere.dms.S3Settings, Mixin):
             CsvRowDelimiter=CsvRowDelimiter,
             ExternalTableDefinition=ExternalTableDefinition,
             ServiceAccessRoleArn=ServiceAccessRoleArn,
+            **kwargs
         )
         super(S3Settings, self).__init__(**processed_kwargs)
 
@@ -154,6 +158,7 @@ class Endpoint(troposphere.dms.Endpoint, Mixin):
             SslMode=SslMode,
             Tags=Tags,
             Username=Username,
+            **kwargs
         )
         super(Endpoint, self).__init__(**processed_kwargs)
 
@@ -182,6 +187,7 @@ class EventSubscription(troposphere.dms.EventSubscription, Mixin):
             SourceType=SourceType,
             SubscriptionName=SubscriptionName,
             Tags=Tags,
+            **kwargs
         )
         super(EventSubscription, self).__init__(**processed_kwargs)
 
@@ -222,6 +228,7 @@ class ReplicationInstance(troposphere.dms.ReplicationInstance, Mixin):
             ReplicationSubnetGroupIdentifier=ReplicationSubnetGroupIdentifier,
             Tags=Tags,
             VpcSecurityGroupIds=VpcSecurityGroupIds,
+            **kwargs
         )
         super(ReplicationInstance, self).__init__(**processed_kwargs)
 
@@ -244,6 +251,7 @@ class ReplicationSubnetGroup(troposphere.dms.ReplicationSubnetGroup, Mixin):
             SubnetIds=SubnetIds,
             ReplicationSubnetGroupIdentifier=ReplicationSubnetGroupIdentifier,
             Tags=Tags,
+            **kwargs
         )
         super(ReplicationSubnetGroup, self).__init__(**processed_kwargs)
 
@@ -276,5 +284,6 @@ class ReplicationTask(troposphere.dms.ReplicationTask, Mixin):
             ReplicationTaskIdentifier=ReplicationTaskIdentifier,
             ReplicationTaskSettings=ReplicationTaskSettings,
             Tags=Tags,
+            **kwargs
         )
         super(ReplicationTask, self).__init__(**processed_kwargs)

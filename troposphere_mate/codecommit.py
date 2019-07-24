@@ -37,6 +37,7 @@ class Trigger(troposphere.codecommit.Trigger, Mixin):
             DestinationArn=DestinationArn,
             Events=Events,
             Name=Name,
+            **kwargs
         )
         super(Trigger, self).__init__(**processed_kwargs)
 
@@ -57,5 +58,6 @@ class Repository(troposphere.codecommit.Repository, Mixin):
             RepositoryName=RepositoryName,
             RepositoryDescription=RepositoryDescription,
             Triggers=Triggers,
+            **kwargs
         )
         super(Repository, self).__init__(**processed_kwargs)

@@ -40,6 +40,7 @@ class AliasTarget(troposphere.route53.AliasTarget, Mixin):
             HostedZoneId=HostedZoneId,
             DNSName=DNSName,
             EvaluateTargetHealth=EvaluateTargetHealth,
+            **kwargs
         )
         super(AliasTarget, self).__init__(**processed_kwargs)
 
@@ -56,6 +57,7 @@ class GeoLocation(troposphere.route53.GeoLocation, Mixin):
             ContinentCode=ContinentCode,
             CountryCode=CountryCode,
             SubdivisionCode=SubdivisionCode,
+            **kwargs
         )
         super(GeoLocation, self).__init__(**processed_kwargs)
 
@@ -78,6 +80,7 @@ class RecordSetGroup(troposphere.route53.RecordSetGroup, Mixin):
             HostedZoneName=HostedZoneName,
             RecordSets=RecordSets,
             Comment=Comment,
+            **kwargs
         )
         super(RecordSetGroup, self).__init__(**processed_kwargs)
 
@@ -92,6 +95,7 @@ class AlarmIdentifier(troposphere.route53.AlarmIdentifier, Mixin):
             title=title,
             Name=Name,
             Region=Region,
+            **kwargs
         )
         super(AlarmIdentifier, self).__init__(**processed_kwargs)
 
@@ -134,6 +138,7 @@ class HealthCheckConfiguration(troposphere.route53.HealthCheckConfiguration, Mix
             RequestInterval=RequestInterval,
             ResourcePath=ResourcePath,
             SearchString=SearchString,
+            **kwargs
         )
         super(HealthCheckConfiguration, self).__init__(**processed_kwargs)
 
@@ -152,6 +157,7 @@ class HealthCheck(troposphere.route53.HealthCheck, Mixin):
             validation=validation,
             HealthCheckConfig=HealthCheckConfig,
             HealthCheckTags=HealthCheckTags,
+            **kwargs
         )
         super(HealthCheck, self).__init__(**processed_kwargs)
 
@@ -164,6 +170,7 @@ class HostedZoneConfiguration(troposphere.route53.HostedZoneConfiguration, Mixin
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Comment=Comment,
+            **kwargs
         )
         super(HostedZoneConfiguration, self).__init__(**processed_kwargs)
 
@@ -178,6 +185,7 @@ class HostedZoneVPCs(troposphere.route53.HostedZoneVPCs, Mixin):
             title=title,
             VPCId=VPCId,
             VPCRegion=VPCRegion,
+            **kwargs
         )
         super(HostedZoneVPCs, self).__init__(**processed_kwargs)
 
@@ -190,6 +198,7 @@ class QueryLoggingConfig(troposphere.route53.QueryLoggingConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             CloudWatchLogsLogGroupArn=CloudWatchLogsLogGroupArn,
+            **kwargs
         )
         super(QueryLoggingConfig, self).__init__(**processed_kwargs)
 
@@ -214,6 +223,7 @@ class HostedZone(troposphere.route53.HostedZone, Mixin):
             HostedZoneTags=HostedZoneTags,
             QueryLoggingConfig=QueryLoggingConfig,
             VPCs=VPCs,
+            **kwargs
         )
         super(HostedZone, self).__init__(**processed_kwargs)
 
@@ -228,6 +238,7 @@ class IpAddressRequest(troposphere.route53.IpAddressRequest, Mixin):
             title=title,
             SubnetId=SubnetId,
             Ip=Ip,
+            **kwargs
         )
         super(IpAddressRequest, self).__init__(**processed_kwargs)
 
@@ -252,6 +263,7 @@ class ResolverEndpoint(troposphere.route53.ResolverEndpoint, Mixin):
             SecurityGroupIds=SecurityGroupIds,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(ResolverEndpoint, self).__init__(**processed_kwargs)
 
@@ -266,6 +278,7 @@ class TargetAddress(troposphere.route53.TargetAddress, Mixin):
             title=title,
             Ip=Ip,
             Port=Port,
+            **kwargs
         )
         super(TargetAddress, self).__init__(**processed_kwargs)
 
@@ -292,6 +305,7 @@ class ResolverRule(troposphere.route53.ResolverRule, Mixin):
             ResolverEndpointId=ResolverEndpointId,
             Tags=Tags,
             TargetIps=TargetIps,
+            **kwargs
         )
         super(ResolverRule, self).__init__(**processed_kwargs)
 
@@ -312,5 +326,6 @@ class ResolverRuleAssociation(troposphere.route53.ResolverRuleAssociation, Mixin
             ResolverRuleId=ResolverRuleId,
             VPCId=VPCId,
             Name=Name,
+            **kwargs
         )
         super(ResolverRuleAssociation, self).__init__(**processed_kwargs)

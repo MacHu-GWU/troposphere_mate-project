@@ -35,6 +35,7 @@ class ConfigurationId(troposphere.amazonmq.ConfigurationId, Mixin):
             title=title,
             Id=Id,
             Revision=Revision,
+            **kwargs
         )
         super(ConfigurationId, self).__init__(**processed_kwargs)
 
@@ -51,6 +52,7 @@ class MaintenanceWindow(troposphere.amazonmq.MaintenanceWindow, Mixin):
             DayOfWeek=DayOfWeek,
             TimeOfDay=TimeOfDay,
             TimeZone=TimeZone,
+            **kwargs
         )
         super(MaintenanceWindow, self).__init__(**processed_kwargs)
 
@@ -69,6 +71,7 @@ class User(troposphere.amazonmq.User, Mixin):
             Username=Username,
             ConsoleAccess=ConsoleAccess,
             Groups=Groups,
+            **kwargs
         )
         super(User, self).__init__(**processed_kwargs)
 
@@ -83,6 +86,7 @@ class LogsConfiguration(troposphere.amazonmq.LogsConfiguration, Mixin):
             title=title,
             Audit=Audit,
             General=General,
+            **kwargs
         )
         super(LogsConfiguration, self).__init__(**processed_kwargs)
 
@@ -125,6 +129,7 @@ class Broker(troposphere.amazonmq.Broker, Mixin):
             SecurityGroups=SecurityGroups,
             SubnetIds=SubnetIds,
             Tags=Tags,
+            **kwargs
         )
         super(Broker, self).__init__(**processed_kwargs)
 
@@ -149,6 +154,7 @@ class Configuration(troposphere.amazonmq.Configuration, Mixin):
             EngineVersion=EngineVersion,
             Name=Name,
             Description=Description,
+            **kwargs
         )
         super(Configuration, self).__init__(**processed_kwargs)
 
@@ -167,5 +173,6 @@ class ConfigurationAssociation(troposphere.amazonmq.ConfigurationAssociation, Mi
             validation=validation,
             Broker=Broker,
             Configuration=Configuration,
+            **kwargs
         )
         super(ConfigurationAssociation, self).__init__(**processed_kwargs)

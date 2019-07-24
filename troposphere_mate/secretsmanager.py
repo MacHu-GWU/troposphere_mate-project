@@ -37,6 +37,7 @@ class ResourcePolicy(troposphere.secretsmanager.ResourcePolicy, Mixin):
             validation=validation,
             SecretId=SecretId,
             ResourcePolicy=ResourcePolicy,
+            **kwargs
         )
         super(ResourcePolicy, self).__init__(**processed_kwargs)
 
@@ -49,6 +50,7 @@ class RotationRules(troposphere.secretsmanager.RotationRules, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AutomaticallyAfterDays=AutomaticallyAfterDays,
+            **kwargs
         )
         super(RotationRules, self).__init__(**processed_kwargs)
 
@@ -69,6 +71,7 @@ class RotationSchedule(troposphere.secretsmanager.RotationSchedule, Mixin):
             SecretId=SecretId,
             RotationLambdaARN=RotationLambdaARN,
             RotationRules=RotationRules,
+            **kwargs
         )
         super(RotationSchedule, self).__init__(**processed_kwargs)
 
@@ -89,6 +92,7 @@ class SecretTargetAttachment(troposphere.secretsmanager.SecretTargetAttachment, 
             SecretId=SecretId,
             TargetId=TargetId,
             TargetType=TargetType,
+            **kwargs
         )
         super(SecretTargetAttachment, self).__init__(**processed_kwargs)
 
@@ -119,6 +123,7 @@ class GenerateSecretString(troposphere.secretsmanager.GenerateSecretString, Mixi
             ExcludeLowercase=ExcludeLowercase,
             SecretStringTemplate=SecretStringTemplate,
             ExcludeNumbers=ExcludeNumbers,
+            **kwargs
         )
         super(GenerateSecretString, self).__init__(**processed_kwargs)
 
@@ -145,5 +150,6 @@ class Secret(troposphere.secretsmanager.Secret, Mixin):
             GenerateSecretString=GenerateSecretString,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(Secret, self).__init__(**processed_kwargs)

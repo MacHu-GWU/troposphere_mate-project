@@ -49,6 +49,7 @@ class CloudwatchAlarmAction(troposphere.iot.CloudwatchAlarmAction, Mixin):
             RoleArn=RoleArn,
             StateReason=StateReason,
             StateValue=StateValue,
+            **kwargs
         )
         super(CloudwatchAlarmAction, self).__init__(**processed_kwargs)
 
@@ -71,6 +72,7 @@ class CloudwatchMetricAction(troposphere.iot.CloudwatchMetricAction, Mixin):
             MetricValue=MetricValue,
             RoleArn=RoleArn,
             MetricTimestamp=MetricTimestamp,
+            **kwargs
         )
         super(CloudwatchMetricAction, self).__init__(**processed_kwargs)
 
@@ -99,6 +101,7 @@ class DynamoDBAction(troposphere.iot.DynamoDBAction, Mixin):
             RangeKeyField=RangeKeyField,
             RangeKeyType=RangeKeyType,
             RangeKeyValue=RangeKeyValue,
+            **kwargs
         )
         super(DynamoDBAction, self).__init__(**processed_kwargs)
 
@@ -111,6 +114,7 @@ class PutItemInput(troposphere.iot.PutItemInput, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             TableName=TableName,
+            **kwargs
         )
         super(PutItemInput, self).__init__(**processed_kwargs)
 
@@ -125,6 +129,7 @@ class DynamoDBv2Action(troposphere.iot.DynamoDBv2Action, Mixin):
             title=title,
             PutItem=PutItem,
             RoleArn=RoleArn,
+            **kwargs
         )
         super(DynamoDBv2Action, self).__init__(**processed_kwargs)
 
@@ -145,6 +150,7 @@ class ElasticsearchAction(troposphere.iot.ElasticsearchAction, Mixin):
             Index=Index,
             RoleArn=RoleArn,
             Type=Type,
+            **kwargs
         )
         super(ElasticsearchAction, self).__init__(**processed_kwargs)
 
@@ -161,6 +167,7 @@ class FirehoseAction(troposphere.iot.FirehoseAction, Mixin):
             DeliveryStreamName=DeliveryStreamName,
             RoleArn=RoleArn,
             Separator=Separator,
+            **kwargs
         )
         super(FirehoseAction, self).__init__(**processed_kwargs)
 
@@ -177,6 +184,7 @@ class KinesisAction(troposphere.iot.KinesisAction, Mixin):
             RoleArn=RoleArn,
             StreamName=StreamName,
             PartitionKey=PartitionKey,
+            **kwargs
         )
         super(KinesisAction, self).__init__(**processed_kwargs)
 
@@ -189,6 +197,7 @@ class LambdaAction(troposphere.iot.LambdaAction, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             FunctionArn=FunctionArn,
+            **kwargs
         )
         super(LambdaAction, self).__init__(**processed_kwargs)
 
@@ -203,6 +212,7 @@ class RepublishAction(troposphere.iot.RepublishAction, Mixin):
             title=title,
             RoleArn=RoleArn,
             Topic=Topic,
+            **kwargs
         )
         super(RepublishAction, self).__init__(**processed_kwargs)
 
@@ -219,6 +229,7 @@ class S3Action(troposphere.iot.S3Action, Mixin):
             BucketName=BucketName,
             Key=Key,
             RoleArn=RoleArn,
+            **kwargs
         )
         super(S3Action, self).__init__(**processed_kwargs)
 
@@ -235,6 +246,7 @@ class SnsAction(troposphere.iot.SnsAction, Mixin):
             RoleArn=RoleArn,
             TargetArn=TargetArn,
             MessageFormat=MessageFormat,
+            **kwargs
         )
         super(SnsAction, self).__init__(**processed_kwargs)
 
@@ -251,6 +263,7 @@ class SqsAction(troposphere.iot.SqsAction, Mixin):
             QueueUrl=QueueUrl,
             RoleArn=RoleArn,
             UseBase64=UseBase64,
+            **kwargs
         )
         super(SqsAction, self).__init__(**processed_kwargs)
 
@@ -285,6 +298,7 @@ class Action(troposphere.iot.Action, Mixin):
             S3=S3,
             Sns=Sns,
             Sqs=Sqs,
+            **kwargs
         )
         super(Action, self).__init__(**processed_kwargs)
 
@@ -305,6 +319,7 @@ class TopicRulePayload(troposphere.iot.TopicRulePayload, Mixin):
             Sql=Sql,
             AwsIotSqlVersion=AwsIotSqlVersion,
             Description=Description,
+            **kwargs
         )
         super(TopicRulePayload, self).__init__(**processed_kwargs)
 
@@ -323,6 +338,7 @@ class TopicRule(troposphere.iot.TopicRule, Mixin):
             validation=validation,
             TopicRulePayload=TopicRulePayload,
             RuleName=RuleName,
+            **kwargs
         )
         super(TopicRule, self).__init__(**processed_kwargs)
 
@@ -341,6 +357,7 @@ class ThingPrincipalAttachment(troposphere.iot.ThingPrincipalAttachment, Mixin):
             validation=validation,
             Principal=Principal,
             ThingName=ThingName,
+            **kwargs
         )
         super(ThingPrincipalAttachment, self).__init__(**processed_kwargs)
 
@@ -359,6 +376,7 @@ class Thing(troposphere.iot.Thing, Mixin):
             validation=validation,
             AttributePayload=AttributePayload,
             ThingName=ThingName,
+            **kwargs
         )
         super(Thing, self).__init__(**processed_kwargs)
 
@@ -377,6 +395,7 @@ class PolicyPrincipalAttachment(troposphere.iot.PolicyPrincipalAttachment, Mixin
             validation=validation,
             PolicyName=PolicyName,
             Principal=Principal,
+            **kwargs
         )
         super(PolicyPrincipalAttachment, self).__init__(**processed_kwargs)
 
@@ -395,6 +414,7 @@ class Policy(troposphere.iot.Policy, Mixin):
             validation=validation,
             PolicyDocument=PolicyDocument,
             PolicyName=PolicyName,
+            **kwargs
         )
         super(Policy, self).__init__(**processed_kwargs)
 
@@ -413,5 +433,6 @@ class Certificate(troposphere.iot.Certificate, Mixin):
             validation=validation,
             CertificateSigningRequest=CertificateSigningRequest,
             Status=Status,
+            **kwargs
         )
         super(Certificate, self).__init__(**processed_kwargs)

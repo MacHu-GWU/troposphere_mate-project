@@ -22,5 +22,6 @@ class {{ data.class_name }}({{ data.class_import_name }}, Mixin):
             {%- for property in data.properties %}
             {{ property["name"] }}={{ property["name"] }},
             {%- endfor %}
+            **kwargs
         )
         super({{ data.class_name }}, self).__init__(**processed_kwargs)

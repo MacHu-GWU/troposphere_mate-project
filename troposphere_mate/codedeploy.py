@@ -51,6 +51,7 @@ class GitHubLocation(troposphere.codedeploy.GitHubLocation, Mixin):
             title=title,
             CommitId=CommitId,
             Repository=Repository,
+            **kwargs
         )
         super(GitHubLocation, self).__init__(**processed_kwargs)
 
@@ -71,6 +72,7 @@ class S3Location(troposphere.codedeploy.S3Location, Mixin):
             Key=Key,
             ETag=ETag,
             Version=Version,
+            **kwargs
         )
         super(S3Location, self).__init__(**processed_kwargs)
 
@@ -87,6 +89,7 @@ class Revision(troposphere.codedeploy.Revision, Mixin):
             GitHubLocation=GitHubLocation,
             RevisionType=RevisionType,
             S3Location=S3Location,
+            **kwargs
         )
         super(Revision, self).__init__(**processed_kwargs)
 
@@ -101,6 +104,7 @@ class AutoRollbackConfiguration(troposphere.codedeploy.AutoRollbackConfiguration
             title=title,
             Enabled=Enabled,
             Events=Events,
+            **kwargs
         )
         super(AutoRollbackConfiguration, self).__init__(**processed_kwargs)
 
@@ -117,6 +121,7 @@ class Deployment(troposphere.codedeploy.Deployment, Mixin):
             Revision=Revision,
             Description=Description,
             IgnoreApplicationStopFailures=IgnoreApplicationStopFailures,
+            **kwargs
         )
         super(Deployment, self).__init__(**processed_kwargs)
 
@@ -131,6 +136,7 @@ class DeploymentStyle(troposphere.codedeploy.DeploymentStyle, Mixin):
             title=title,
             DeploymentOption=DeploymentOption,
             DeploymentType=DeploymentType,
+            **kwargs
         )
         super(DeploymentStyle, self).__init__(**processed_kwargs)
 
@@ -147,6 +153,7 @@ class Ec2TagFilters(troposphere.codedeploy.Ec2TagFilters, Mixin):
             Type=Type,
             Key=Key,
             Value=Value,
+            **kwargs
         )
         super(Ec2TagFilters, self).__init__(**processed_kwargs)
 
@@ -163,6 +170,7 @@ class TagFilters(troposphere.codedeploy.TagFilters, Mixin):
             Key=Key,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(TagFilters, self).__init__(**processed_kwargs)
 
@@ -175,6 +183,7 @@ class ElbInfoList(troposphere.codedeploy.ElbInfoList, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Name=Name,
+            **kwargs
         )
         super(ElbInfoList, self).__init__(**processed_kwargs)
 
@@ -187,6 +196,7 @@ class TargetGroupInfoList(troposphere.codedeploy.TargetGroupInfoList, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Name=Name,
+            **kwargs
         )
         super(TargetGroupInfoList, self).__init__(**processed_kwargs)
 
@@ -201,6 +211,7 @@ class LoadBalancerInfo(troposphere.codedeploy.LoadBalancerInfo, Mixin):
             title=title,
             ElbInfoList=ElbInfoList,
             TargetGroupInfoList=TargetGroupInfoList,
+            **kwargs
         )
         super(LoadBalancerInfo, self).__init__(**processed_kwargs)
 
@@ -217,6 +228,7 @@ class OnPremisesInstanceTagFilters(troposphere.codedeploy.OnPremisesInstanceTagF
             Key=Key,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(OnPremisesInstanceTagFilters, self).__init__(**processed_kwargs)
 
@@ -231,6 +243,7 @@ class MinimumHealthyHosts(troposphere.codedeploy.MinimumHealthyHosts, Mixin):
             title=title,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(MinimumHealthyHosts, self).__init__(**processed_kwargs)
 
@@ -249,6 +262,7 @@ class Application(troposphere.codedeploy.Application, Mixin):
             validation=validation,
             ApplicationName=ApplicationName,
             ComputePlatform=ComputePlatform,
+            **kwargs
         )
         super(Application, self).__init__(**processed_kwargs)
 
@@ -267,6 +281,7 @@ class DeploymentConfig(troposphere.codedeploy.DeploymentConfig, Mixin):
             validation=validation,
             DeploymentConfigName=DeploymentConfigName,
             MinimumHealthyHosts=MinimumHealthyHosts,
+            **kwargs
         )
         super(DeploymentConfig, self).__init__(**processed_kwargs)
 
@@ -279,6 +294,7 @@ class Alarm(troposphere.codedeploy.Alarm, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Name=Name,
+            **kwargs
         )
         super(Alarm, self).__init__(**processed_kwargs)
 
@@ -295,6 +311,7 @@ class AlarmConfiguration(troposphere.codedeploy.AlarmConfiguration, Mixin):
             Alarms=Alarms,
             Enabled=Enabled,
             IgnorePollAlarmFailure=IgnorePollAlarmFailure,
+            **kwargs
         )
         super(AlarmConfiguration, self).__init__(**processed_kwargs)
 
@@ -311,6 +328,7 @@ class TriggerConfig(troposphere.codedeploy.TriggerConfig, Mixin):
             TriggerEvents=TriggerEvents,
             TriggerName=TriggerName,
             TriggerTargetArn=TriggerTargetArn,
+            **kwargs
         )
         super(TriggerConfig, self).__init__(**processed_kwargs)
 
@@ -323,6 +341,7 @@ class Ec2TagSetListObject(troposphere.codedeploy.Ec2TagSetListObject, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Ec2TagGroup=Ec2TagGroup,
+            **kwargs
         )
         super(Ec2TagSetListObject, self).__init__(**processed_kwargs)
 
@@ -335,6 +354,7 @@ class Ec2TagSet(troposphere.codedeploy.Ec2TagSet, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Ec2TagSetList=Ec2TagSetList,
+            **kwargs
         )
         super(Ec2TagSet, self).__init__(**processed_kwargs)
 
@@ -347,6 +367,7 @@ class OnPremisesTagSetObject(troposphere.codedeploy.OnPremisesTagSetObject, Mixi
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             OnPremisesTagGroup=OnPremisesTagGroup,
+            **kwargs
         )
         super(OnPremisesTagSetObject, self).__init__(**processed_kwargs)
 
@@ -359,6 +380,7 @@ class OnPremisesTagSetList(troposphere.codedeploy.OnPremisesTagSetList, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             OnPremisesTagSetList=OnPremisesTagSetList,
+            **kwargs
         )
         super(OnPremisesTagSetList, self).__init__(**processed_kwargs)
 
@@ -371,6 +393,7 @@ class OnPremisesTagSet(troposphere.codedeploy.OnPremisesTagSet, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             OnPremisesTagSetList=OnPremisesTagSetList,
+            **kwargs
         )
         super(OnPremisesTagSet, self).__init__(**processed_kwargs)
 
@@ -415,5 +438,6 @@ class DeploymentGroup(troposphere.codedeploy.DeploymentGroup, Mixin):
             OnPremisesInstanceTagFilters=OnPremisesInstanceTagFilters,
             OnPremisesInstanceTagSet=OnPremisesInstanceTagSet,
             TriggerConfigurations=TriggerConfigurations,
+            **kwargs
         )
         super(DeploymentGroup, self).__init__(**processed_kwargs)

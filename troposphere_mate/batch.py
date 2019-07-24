@@ -44,6 +44,7 @@ class LaunchTemplateSpecification(troposphere.batch.LaunchTemplateSpecification,
             LaunchTemplateId=LaunchTemplateId,
             LaunchTemplateName=LaunchTemplateName,
             Version=Version,
+            **kwargs
         )
         super(LaunchTemplateSpecification, self).__init__(**processed_kwargs)
 
@@ -84,6 +85,7 @@ class ComputeResources(troposphere.batch.ComputeResources, Mixin):
             PlacementGroup=PlacementGroup,
             Tags=Tags,
             DesiredvCpus=DesiredvCpus,
+            **kwargs
         )
         super(ComputeResources, self).__init__(**processed_kwargs)
 
@@ -100,6 +102,7 @@ class MountPoints(troposphere.batch.MountPoints, Mixin):
             ReadOnly=ReadOnly,
             SourceVolume=SourceVolume,
             ContainerPath=ContainerPath,
+            **kwargs
         )
         super(MountPoints, self).__init__(**processed_kwargs)
 
@@ -112,6 +115,7 @@ class VolumesHost(troposphere.batch.VolumesHost, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SourcePath=SourcePath,
+            **kwargs
         )
         super(VolumesHost, self).__init__(**processed_kwargs)
 
@@ -126,6 +130,7 @@ class Volumes(troposphere.batch.Volumes, Mixin):
             title=title,
             Host=Host,
             Name=Name,
+            **kwargs
         )
         super(Volumes, self).__init__(**processed_kwargs)
 
@@ -140,6 +145,7 @@ class Environment(troposphere.batch.Environment, Mixin):
             title=title,
             Value=Value,
             Name=Name,
+            **kwargs
         )
         super(Environment, self).__init__(**processed_kwargs)
 
@@ -154,6 +160,7 @@ class ResourceRequirement(troposphere.batch.ResourceRequirement, Mixin):
             title=title,
             Type=Type,
             Value=Value,
+            **kwargs
         )
         super(ResourceRequirement, self).__init__(**processed_kwargs)
 
@@ -170,6 +177,7 @@ class Ulimit(troposphere.batch.Ulimit, Mixin):
             SoftLimit=SoftLimit,
             HardLimit=HardLimit,
             Name=Name,
+            **kwargs
         )
         super(Ulimit, self).__init__(**processed_kwargs)
 
@@ -206,6 +214,7 @@ class ContainerProperties(troposphere.batch.ContainerProperties, Mixin):
             ReadonlyRootFilesystem=ReadonlyRootFilesystem,
             ResourceRequirements=ResourceRequirements,
             Ulimits=Ulimits,
+            **kwargs
         )
         super(ContainerProperties, self).__init__(**processed_kwargs)
 
@@ -218,6 +227,7 @@ class RetryStrategy(troposphere.batch.RetryStrategy, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Attempts=Attempts,
+            **kwargs
         )
         super(RetryStrategy, self).__init__(**processed_kwargs)
 
@@ -230,6 +240,7 @@ class Timeout(troposphere.batch.Timeout, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             AttemptDurationSeconds=AttemptDurationSeconds,
+            **kwargs
         )
         super(Timeout, self).__init__(**processed_kwargs)
 
@@ -256,6 +267,7 @@ class JobDefinition(troposphere.batch.JobDefinition, Mixin):
             Parameters=Parameters,
             RetryStrategy=RetryStrategy,
             Timeout=Timeout,
+            **kwargs
         )
         super(JobDefinition, self).__init__(**processed_kwargs)
 
@@ -280,6 +292,7 @@ class ComputeEnvironment(troposphere.batch.ComputeEnvironment, Mixin):
             ComputeResources=ComputeResources,
             ComputeEnvironmentName=ComputeEnvironmentName,
             State=State,
+            **kwargs
         )
         super(ComputeEnvironment, self).__init__(**processed_kwargs)
 
@@ -294,6 +307,7 @@ class ComputeEnvironmentOrder(troposphere.batch.ComputeEnvironmentOrder, Mixin):
             title=title,
             ComputeEnvironment=ComputeEnvironment,
             Order=Order,
+            **kwargs
         )
         super(ComputeEnvironmentOrder, self).__init__(**processed_kwargs)
 
@@ -316,5 +330,6 @@ class JobQueue(troposphere.batch.JobQueue, Mixin):
             Priority=Priority,
             State=State,
             JobQueueName=JobQueueName,
+            **kwargs
         )
         super(JobQueue, self).__init__(**processed_kwargs)

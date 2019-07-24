@@ -52,6 +52,7 @@ class DeadLetterQueue(troposphere.serverless.DeadLetterQueue, Mixin):
             title=title,
             Type=Type,
             TargetArn=TargetArn,
+            **kwargs
         )
         super(DeadLetterQueue, self).__init__(**processed_kwargs)
 
@@ -68,6 +69,7 @@ class S3Location(troposphere.serverless.S3Location, Mixin):
             Bucket=Bucket,
             Key=Key,
             Version=Version,
+            **kwargs
         )
         super(S3Location, self).__init__(**processed_kwargs)
 
@@ -82,6 +84,7 @@ class Hooks(troposphere.serverless.Hooks, Mixin):
             title=title,
             PreTraffic=PreTraffic,
             PostTraffic=PostTraffic,
+            **kwargs
         )
         super(Hooks, self).__init__(**processed_kwargs)
 
@@ -102,6 +105,7 @@ class DeploymentPreference(troposphere.serverless.DeploymentPreference, Mixin):
             Hooks=Hooks,
             Enabled=Enabled,
             Role=Role,
+            **kwargs
         )
         super(DeploymentPreference, self).__init__(**processed_kwargs)
 
@@ -158,6 +162,7 @@ class Function(troposphere.serverless.Function, Mixin):
             Layers=Layers,
             AutoPublishAlias=AutoPublishAlias,
             ReservedConcurrentExecutions=ReservedConcurrentExecutions,
+            **kwargs
         )
         super(Function, self).__init__(**processed_kwargs)
 
@@ -172,6 +177,7 @@ class CognitoAuthIdentity(troposphere.serverless.CognitoAuthIdentity, Mixin):
             title=title,
             Header=Header,
             ValidationExpression=ValidationExpression,
+            **kwargs
         )
         super(CognitoAuthIdentity, self).__init__(**processed_kwargs)
 
@@ -188,6 +194,7 @@ class LambdaTokenAuthIdentity(troposphere.serverless.LambdaTokenAuthIdentity, Mi
             Header=Header,
             ValidationExpression=ValidationExpression,
             ReauthorizeEvery=ReauthorizeEvery,
+            **kwargs
         )
         super(LambdaTokenAuthIdentity, self).__init__(**processed_kwargs)
 
@@ -208,6 +215,7 @@ class LambdaRequestAuthIdentity(troposphere.serverless.LambdaRequestAuthIdentity
             StageVariables=StageVariables,
             Context=Context,
             ReauthorizeEvery=ReauthorizeEvery,
+            **kwargs
         )
         super(LambdaRequestAuthIdentity, self).__init__(**processed_kwargs)
 
@@ -222,6 +230,7 @@ class CognitoAuth(troposphere.serverless.CognitoAuth, Mixin):
             title=title,
             UserPoolArn=UserPoolArn,
             Identity=Identity,
+            **kwargs
         )
         super(CognitoAuth, self).__init__(**processed_kwargs)
 
@@ -240,6 +249,7 @@ class LambdaTokenAuth(troposphere.serverless.LambdaTokenAuth, Mixin):
             FunctionArn=FunctionArn,
             FunctionInvokeRole=FunctionInvokeRole,
             Identity=Identity,
+            **kwargs
         )
         super(LambdaTokenAuth, self).__init__(**processed_kwargs)
 
@@ -258,6 +268,7 @@ class LambdaRequestAuth(troposphere.serverless.LambdaRequestAuth, Mixin):
             FunctionArn=FunctionArn,
             FunctionInvokeRole=FunctionInvokeRole,
             Identity=Identity,
+            **kwargs
         )
         super(LambdaRequestAuth, self).__init__(**processed_kwargs)
 
@@ -276,6 +287,7 @@ class Authorizers(troposphere.serverless.Authorizers, Mixin):
             CognitoAuth=CognitoAuth,
             LambdaTokenAuth=LambdaTokenAuth,
             LambdaRequestAuth=LambdaRequestAuth,
+            **kwargs
         )
         super(Authorizers, self).__init__(**processed_kwargs)
 
@@ -290,6 +302,7 @@ class Auth(troposphere.serverless.Auth, Mixin):
             title=title,
             DefaultAuthorizer=DefaultAuthorizer,
             Authorizers=Authorizers,
+            **kwargs
         )
         super(Auth, self).__init__(**processed_kwargs)
 
@@ -310,6 +323,7 @@ class Cors(troposphere.serverless.Cors, Mixin):
             AllowHeaders=AllowHeaders,
             AllowMethods=AllowMethods,
             MaxAge=MaxAge,
+            **kwargs
         )
         super(Cors, self).__init__(**processed_kwargs)
 
@@ -354,6 +368,7 @@ class Api(troposphere.serverless.Api, Mixin):
             Name=Name,
             TracingEnabled=TracingEnabled,
             Variables=Variables,
+            **kwargs
         )
         super(Api, self).__init__(**processed_kwargs)
 
@@ -368,6 +383,7 @@ class PrimaryKey(troposphere.serverless.PrimaryKey, Mixin):
             title=title,
             Name=Name,
             Type=Type,
+            **kwargs
         )
         super(PrimaryKey, self).__init__(**processed_kwargs)
 
@@ -392,6 +408,7 @@ class SimpleTable(troposphere.serverless.SimpleTable, Mixin):
             SSESpecification=SSESpecification,
             Tags=Tags,
             TableName=TableName,
+            **kwargs
         )
         super(SimpleTable, self).__init__(**processed_kwargs)
 
@@ -418,6 +435,7 @@ class LayerVersion(troposphere.serverless.LayerVersion, Mixin):
             LayerName=LayerName,
             LicenseInfo=LicenseInfo,
             RetentionPolicy=RetentionPolicy,
+            **kwargs
         )
         super(LayerVersion, self).__init__(**processed_kwargs)
 
@@ -438,6 +456,7 @@ class S3Event(troposphere.serverless.S3Event, Mixin):
             Bucket=Bucket,
             Events=Events,
             Filter=Filter,
+            **kwargs
         )
         super(S3Event, self).__init__(**processed_kwargs)
 
@@ -454,6 +473,7 @@ class SNSEvent(troposphere.serverless.SNSEvent, Mixin):
             template=template,
             validation=validation,
             Topic=Topic,
+            **kwargs
         )
         super(SNSEvent, self).__init__(**processed_kwargs)
 
@@ -474,6 +494,7 @@ class KinesisEvent(troposphere.serverless.KinesisEvent, Mixin):
             Stream=Stream,
             StartingPosition=StartingPosition,
             BatchSize=BatchSize,
+            **kwargs
         )
         super(KinesisEvent, self).__init__(**processed_kwargs)
 
@@ -494,6 +515,7 @@ class DynamoDBEvent(troposphere.serverless.DynamoDBEvent, Mixin):
             Stream=Stream,
             StartingPosition=StartingPosition,
             BatchSize=BatchSize,
+            **kwargs
         )
         super(DynamoDBEvent, self).__init__(**processed_kwargs)
 
@@ -514,6 +536,7 @@ class ApiEvent(troposphere.serverless.ApiEvent, Mixin):
             Path=Path,
             Method=Method,
             RestApiId=RestApiId,
+            **kwargs
         )
         super(ApiEvent, self).__init__(**processed_kwargs)
 
@@ -532,6 +555,7 @@ class ScheduleEvent(troposphere.serverless.ScheduleEvent, Mixin):
             validation=validation,
             Schedule=Schedule,
             Input=Input,
+            **kwargs
         )
         super(ScheduleEvent, self).__init__(**processed_kwargs)
 
@@ -552,6 +576,7 @@ class CloudWatchEvent(troposphere.serverless.CloudWatchEvent, Mixin):
             Pattern=Pattern,
             Input=Input,
             InputPath=InputPath,
+            **kwargs
         )
         super(CloudWatchEvent, self).__init__(**processed_kwargs)
 
@@ -570,6 +595,7 @@ class IoTRuleEvent(troposphere.serverless.IoTRuleEvent, Mixin):
             validation=validation,
             Sql=Sql,
             AwsIotSqlVersion=AwsIotSqlVersion,
+            **kwargs
         )
         super(IoTRuleEvent, self).__init__(**processed_kwargs)
 
@@ -584,6 +610,7 @@ class AlexaSkillEvent(troposphere.serverless.AlexaSkillEvent, Mixin):
             title=title,
             template=template,
             validation=validation,
+            **kwargs
         )
         super(AlexaSkillEvent, self).__init__(**processed_kwargs)
 
@@ -602,5 +629,6 @@ class SQSEvent(troposphere.serverless.SQSEvent, Mixin):
             validation=validation,
             Queue=Queue,
             BatchSize=BatchSize,
+            **kwargs
         )
         super(SQSEvent, self).__init__(**processed_kwargs)

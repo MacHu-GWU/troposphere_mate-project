@@ -39,6 +39,7 @@ class AccessKey(troposphere.iam.AccessKey, Mixin):
             UserName=UserName,
             Serial=Serial,
             Status=Status,
+            **kwargs
         )
         super(AccessKey, self).__init__(**processed_kwargs)
 
@@ -63,6 +64,7 @@ class PolicyType(troposphere.iam.PolicyType, Mixin):
             Groups=Groups,
             Roles=Roles,
             Users=Users,
+            **kwargs
         )
         super(PolicyType, self).__init__(**processed_kwargs)
 
@@ -77,6 +79,7 @@ class Policy(troposphere.iam.Policy, Mixin):
             title=title,
             PolicyDocument=PolicyDocument,
             PolicyName=PolicyName,
+            **kwargs
         )
         super(Policy, self).__init__(**processed_kwargs)
 
@@ -99,6 +102,7 @@ class Group(troposphere.iam.Group, Mixin):
             ManagedPolicyArns=ManagedPolicyArns,
             Path=Path,
             Policies=Policies,
+            **kwargs
         )
         super(Group, self).__init__(**processed_kwargs)
 
@@ -119,6 +123,7 @@ class InstanceProfile(troposphere.iam.InstanceProfile, Mixin):
             Roles=Roles,
             Path=Path,
             InstanceProfileName=InstanceProfileName,
+            **kwargs
         )
         super(InstanceProfile, self).__init__(**processed_kwargs)
 
@@ -149,6 +154,7 @@ class Role(troposphere.iam.Role, Mixin):
             Policies=Policies,
             RoleName=RoleName,
             Tags=Tags,
+            **kwargs
         )
         super(Role, self).__init__(**processed_kwargs)
 
@@ -169,6 +175,7 @@ class ServiceLinkedRole(troposphere.iam.ServiceLinkedRole, Mixin):
             AWSServiceName=AWSServiceName,
             CustomSuffix=CustomSuffix,
             Description=Description,
+            **kwargs
         )
         super(ServiceLinkedRole, self).__init__(**processed_kwargs)
 
@@ -183,6 +190,7 @@ class LoginProfile(troposphere.iam.LoginProfile, Mixin):
             title=title,
             Password=Password,
             PasswordResetRequired=PasswordResetRequired,
+            **kwargs
         )
         super(LoginProfile, self).__init__(**processed_kwargs)
 
@@ -211,6 +219,7 @@ class User(troposphere.iam.User, Mixin):
             PermissionsBoundary=PermissionsBoundary,
             Policies=Policies,
             UserName=UserName,
+            **kwargs
         )
         super(User, self).__init__(**processed_kwargs)
 
@@ -229,6 +238,7 @@ class UserToGroupAddition(troposphere.iam.UserToGroupAddition, Mixin):
             validation=validation,
             GroupName=GroupName,
             Users=Users,
+            **kwargs
         )
         super(UserToGroupAddition, self).__init__(**processed_kwargs)
 
@@ -257,5 +267,6 @@ class ManagedPolicy(troposphere.iam.ManagedPolicy, Mixin):
             Path=Path,
             Roles=Roles,
             Users=Users,
+            **kwargs
         )
         super(ManagedPolicy, self).__init__(**processed_kwargs)

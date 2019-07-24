@@ -35,5 +35,6 @@ class NamedQuery(troposphere.athena.NamedQuery, Mixin):
             QueryString=QueryString,
             Description=Description,
             Name=Name,
+            **kwargs
         )
         super(NamedQuery, self).__init__(**processed_kwargs)

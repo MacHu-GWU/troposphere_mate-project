@@ -32,6 +32,7 @@ class RedrivePolicy(troposphere.sqs.RedrivePolicy, Mixin):
             title=title,
             deadLetterTargetArn=deadLetterTargetArn,
             maxReceiveCount=maxReceiveCount,
+            **kwargs
         )
         super(RedrivePolicy, self).__init__(**processed_kwargs)
 
@@ -70,6 +71,7 @@ class Queue(troposphere.sqs.Queue, Mixin):
             RedrivePolicy=RedrivePolicy,
             Tags=Tags,
             VisibilityTimeout=VisibilityTimeout,
+            **kwargs
         )
         super(Queue, self).__init__(**processed_kwargs)
 
@@ -88,5 +90,6 @@ class QueuePolicy(troposphere.sqs.QueuePolicy, Mixin):
             validation=validation,
             Queues=Queues,
             PolicyDocument=PolicyDocument,
+            **kwargs
         )
         super(QueuePolicy, self).__init__(**processed_kwargs)

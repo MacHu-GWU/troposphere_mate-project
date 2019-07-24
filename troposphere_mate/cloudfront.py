@@ -50,6 +50,7 @@ class Cookies(troposphere.cloudfront.Cookies, Mixin):
             title=title,
             Forward=Forward,
             WhitelistedNames=WhitelistedNames,
+            **kwargs
         )
         super(Cookies, self).__init__(**processed_kwargs)
 
@@ -68,6 +69,7 @@ class ForwardedValues(troposphere.cloudfront.ForwardedValues, Mixin):
             Cookies=Cookies,
             Headers=Headers,
             QueryStringCacheKeys=QueryStringCacheKeys,
+            **kwargs
         )
         super(ForwardedValues, self).__init__(**processed_kwargs)
 
@@ -82,6 +84,7 @@ class LambdaFunctionAssociation(troposphere.cloudfront.LambdaFunctionAssociation
             title=title,
             EventType=EventType,
             LambdaFunctionARN=LambdaFunctionARN,
+            **kwargs
         )
         super(LambdaFunctionAssociation, self).__init__(**processed_kwargs)
 
@@ -120,6 +123,7 @@ class CacheBehavior(troposphere.cloudfront.CacheBehavior, Mixin):
             MinTTL=MinTTL,
             SmoothStreaming=SmoothStreaming,
             TrustedSigners=TrustedSigners,
+            **kwargs
         )
         super(CacheBehavior, self).__init__(**processed_kwargs)
 
@@ -156,6 +160,7 @@ class DefaultCacheBehavior(troposphere.cloudfront.DefaultCacheBehavior, Mixin):
             MinTTL=MinTTL,
             SmoothStreaming=SmoothStreaming,
             TrustedSigners=TrustedSigners,
+            **kwargs
         )
         super(DefaultCacheBehavior, self).__init__(**processed_kwargs)
 
@@ -170,6 +175,7 @@ class S3Origin(troposphere.cloudfront.S3Origin, Mixin):
             title=title,
             DomainName=DomainName,
             OriginAccessIdentity=OriginAccessIdentity,
+            **kwargs
         )
         super(S3Origin, self).__init__(**processed_kwargs)
 
@@ -192,6 +198,7 @@ class CustomOriginConfig(troposphere.cloudfront.CustomOriginConfig, Mixin):
             OriginKeepaliveTimeout=OriginKeepaliveTimeout,
             OriginReadTimeout=OriginReadTimeout,
             OriginSSLProtocols=OriginSSLProtocols,
+            **kwargs
         )
         super(CustomOriginConfig, self).__init__(**processed_kwargs)
 
@@ -206,6 +213,7 @@ class OriginCustomHeader(troposphere.cloudfront.OriginCustomHeader, Mixin):
             title=title,
             HeaderName=HeaderName,
             HeaderValue=HeaderValue,
+            **kwargs
         )
         super(OriginCustomHeader, self).__init__(**processed_kwargs)
 
@@ -218,6 +226,7 @@ class S3OriginConfig(troposphere.cloudfront.S3OriginConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             OriginAccessIdentity=OriginAccessIdentity,
+            **kwargs
         )
         super(S3OriginConfig, self).__init__(**processed_kwargs)
 
@@ -240,6 +249,7 @@ class Origin(troposphere.cloudfront.Origin, Mixin):
             OriginCustomHeaders=OriginCustomHeaders,
             OriginPath=OriginPath,
             S3OriginConfig=S3OriginConfig,
+            **kwargs
         )
         super(Origin, self).__init__(**processed_kwargs)
 
@@ -256,6 +266,7 @@ class Logging(troposphere.cloudfront.Logging, Mixin):
             Bucket=Bucket,
             IncludeCookies=IncludeCookies,
             Prefix=Prefix,
+            **kwargs
         )
         super(Logging, self).__init__(**processed_kwargs)
 
@@ -274,6 +285,7 @@ class CustomErrorResponse(troposphere.cloudfront.CustomErrorResponse, Mixin):
             ErrorCachingMinTTL=ErrorCachingMinTTL,
             ResponseCode=ResponseCode,
             ResponsePagePath=ResponsePagePath,
+            **kwargs
         )
         super(CustomErrorResponse, self).__init__(**processed_kwargs)
 
@@ -288,6 +300,7 @@ class GeoRestriction(troposphere.cloudfront.GeoRestriction, Mixin):
             title=title,
             RestrictionType=RestrictionType,
             Locations=Locations,
+            **kwargs
         )
         super(GeoRestriction, self).__init__(**processed_kwargs)
 
@@ -300,6 +313,7 @@ class Restrictions(troposphere.cloudfront.Restrictions, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             GeoRestriction=GeoRestriction,
+            **kwargs
         )
         super(Restrictions, self).__init__(**processed_kwargs)
 
@@ -320,6 +334,7 @@ class ViewerCertificate(troposphere.cloudfront.ViewerCertificate, Mixin):
             IamCertificateId=IamCertificateId,
             MinimumProtocolVersion=MinimumProtocolVersion,
             SslSupportMethod=SslSupportMethod,
+            **kwargs
         )
         super(ViewerCertificate, self).__init__(**processed_kwargs)
 
@@ -360,6 +375,7 @@ class DistributionConfig(troposphere.cloudfront.DistributionConfig, Mixin):
             Restrictions=Restrictions,
             ViewerCertificate=ViewerCertificate,
             WebACLId=WebACLId,
+            **kwargs
         )
         super(DistributionConfig, self).__init__(**processed_kwargs)
 
@@ -378,6 +394,7 @@ class Distribution(troposphere.cloudfront.Distribution, Mixin):
             validation=validation,
             DistributionConfig=DistributionConfig,
             Tags=Tags,
+            **kwargs
         )
         super(Distribution, self).__init__(**processed_kwargs)
 
@@ -390,6 +407,7 @@ class CloudFrontOriginAccessIdentityConfig(troposphere.cloudfront.CloudFrontOrig
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Comment=Comment,
+            **kwargs
         )
         super(CloudFrontOriginAccessIdentityConfig, self).__init__(**processed_kwargs)
 
@@ -406,6 +424,7 @@ class CloudFrontOriginAccessIdentity(troposphere.cloudfront.CloudFrontOriginAcce
             template=template,
             validation=validation,
             CloudFrontOriginAccessIdentityConfig=CloudFrontOriginAccessIdentityConfig,
+            **kwargs
         )
         super(CloudFrontOriginAccessIdentity, self).__init__(**processed_kwargs)
 
@@ -420,6 +439,7 @@ class TrustedSigners(troposphere.cloudfront.TrustedSigners, Mixin):
             title=title,
             Enabled=Enabled,
             AwsAccountNumbers=AwsAccountNumbers,
+            **kwargs
         )
         super(TrustedSigners, self).__init__(**processed_kwargs)
 
@@ -444,6 +464,7 @@ class StreamingDistributionConfig(troposphere.cloudfront.StreamingDistributionCo
             Aliases=Aliases,
             Logging=Logging,
             PriceClass=PriceClass,
+            **kwargs
         )
         super(StreamingDistributionConfig, self).__init__(**processed_kwargs)
 
@@ -462,5 +483,6 @@ class StreamingDistribution(troposphere.cloudfront.StreamingDistribution, Mixin)
             validation=validation,
             StreamingDistributionConfig=StreamingDistributionConfig,
             Tags=Tags,
+            **kwargs
         )
         super(StreamingDistribution, self).__init__(**processed_kwargs)

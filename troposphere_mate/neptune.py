@@ -41,6 +41,7 @@ class DBClusterParameterGroup(troposphere.neptune.DBClusterParameterGroup, Mixin
             Parameters=Parameters,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(DBClusterParameterGroup, self).__init__(**processed_kwargs)
 
@@ -83,6 +84,7 @@ class DBCluster(troposphere.neptune.DBCluster, Mixin):
             StorageEncrypted=StorageEncrypted,
             Tags=Tags,
             VpcSecurityGroupIds=VpcSecurityGroupIds,
+            **kwargs
         )
         super(DBCluster, self).__init__(**processed_kwargs)
 
@@ -119,6 +121,7 @@ class DBInstance(troposphere.neptune.DBInstance, Mixin):
             DBSubnetGroupName=DBSubnetGroupName,
             PreferredMaintenanceWindow=PreferredMaintenanceWindow,
             Tags=Tags,
+            **kwargs
         )
         super(DBInstance, self).__init__(**processed_kwargs)
 
@@ -143,6 +146,7 @@ class DBParameterGroup(troposphere.neptune.DBParameterGroup, Mixin):
             Parameters=Parameters,
             Name=Name,
             Tags=Tags,
+            **kwargs
         )
         super(DBParameterGroup, self).__init__(**processed_kwargs)
 
@@ -165,5 +169,6 @@ class DBSubnetGroup(troposphere.neptune.DBSubnetGroup, Mixin):
             SubnetIds=SubnetIds,
             DBSubnetGroupName=DBSubnetGroupName,
             Tags=Tags,
+            **kwargs
         )
         super(DBSubnetGroup, self).__init__(**processed_kwargs)

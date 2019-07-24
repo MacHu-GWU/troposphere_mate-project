@@ -50,6 +50,7 @@ class ApiKey(troposphere.appsync.ApiKey, Mixin):
             ApiId=ApiId,
             Description=Description,
             Expires=Expires,
+            **kwargs
         )
         super(ApiKey, self).__init__(**processed_kwargs)
 
@@ -66,6 +67,7 @@ class DynamoDBConfig(troposphere.appsync.DynamoDBConfig, Mixin):
             AwsRegion=AwsRegion,
             TableName=TableName,
             UseCallerCredentials=UseCallerCredentials,
+            **kwargs
         )
         super(DynamoDBConfig, self).__init__(**processed_kwargs)
 
@@ -80,6 +82,7 @@ class ElasticsearchConfig(troposphere.appsync.ElasticsearchConfig, Mixin):
             title=title,
             AwsRegion=AwsRegion,
             Endpoint=Endpoint,
+            **kwargs
         )
         super(ElasticsearchConfig, self).__init__(**processed_kwargs)
 
@@ -94,6 +97,7 @@ class AwsIamConfig(troposphere.appsync.AwsIamConfig, Mixin):
             title=title,
             SigningRegion=SigningRegion,
             SigningServiceName=SigningServiceName,
+            **kwargs
         )
         super(AwsIamConfig, self).__init__(**processed_kwargs)
 
@@ -108,6 +112,7 @@ class AuthorizationConfig(troposphere.appsync.AuthorizationConfig, Mixin):
             title=title,
             AuthorizationType=AuthorizationType,
             AwsIamConfig=AwsIamConfig,
+            **kwargs
         )
         super(AuthorizationConfig, self).__init__(**processed_kwargs)
 
@@ -122,6 +127,7 @@ class HttpConfig(troposphere.appsync.HttpConfig, Mixin):
             title=title,
             Endpoint=Endpoint,
             AuthorizationConfig=AuthorizationConfig,
+            **kwargs
         )
         super(HttpConfig, self).__init__(**processed_kwargs)
 
@@ -134,6 +140,7 @@ class LambdaConfig(troposphere.appsync.LambdaConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             LambdaFunctionArn=LambdaFunctionArn,
+            **kwargs
         )
         super(LambdaConfig, self).__init__(**processed_kwargs)
 
@@ -154,6 +161,7 @@ class RdsHttpEndpointConfig(troposphere.appsync.RdsHttpEndpointConfig, Mixin):
             DbClusterIdentifier=DbClusterIdentifier,
             DatabaseName=DatabaseName,
             Schema=Schema,
+            **kwargs
         )
         super(RdsHttpEndpointConfig, self).__init__(**processed_kwargs)
 
@@ -168,6 +176,7 @@ class RelationalDatabaseConfig(troposphere.appsync.RelationalDatabaseConfig, Mix
             title=title,
             RdsHttpEndpointConfig=RdsHttpEndpointConfig,
             RelationalDatasourceType=RelationalDatasourceType,
+            **kwargs
         )
         super(RelationalDatabaseConfig, self).__init__(**processed_kwargs)
 
@@ -202,6 +211,7 @@ class DataSource(troposphere.appsync.DataSource, Mixin):
             LambdaConfig=LambdaConfig,
             ServiceRoleArn=ServiceRoleArn,
             RelationalDatabaseConfig=RelationalDatabaseConfig,
+            **kwargs
         )
         super(DataSource, self).__init__(**processed_kwargs)
 
@@ -234,6 +244,7 @@ class FunctionConfiguration(troposphere.appsync.FunctionConfiguration, Mixin):
             RequestMappingTemplateS3Location=RequestMappingTemplateS3Location,
             ResponseMappingTemplate=ResponseMappingTemplate,
             ResponseMappingTemplateS3Location=ResponseMappingTemplateS3Location,
+            **kwargs
         )
         super(FunctionConfiguration, self).__init__(**processed_kwargs)
 
@@ -248,6 +259,7 @@ class LogConfig(troposphere.appsync.LogConfig, Mixin):
             title=title,
             CloudWatchLogsRoleArn=CloudWatchLogsRoleArn,
             FieldLogLevel=FieldLogLevel,
+            **kwargs
         )
         super(LogConfig, self).__init__(**processed_kwargs)
 
@@ -266,6 +278,7 @@ class OpenIDConnectConfig(troposphere.appsync.OpenIDConnectConfig, Mixin):
             ClientId=ClientId,
             IatTTL=IatTTL,
             Issuer=Issuer,
+            **kwargs
         )
         super(OpenIDConnectConfig, self).__init__(**processed_kwargs)
 
@@ -284,6 +297,7 @@ class UserPoolConfig(troposphere.appsync.UserPoolConfig, Mixin):
             AwsRegion=AwsRegion,
             DefaultAction=DefaultAction,
             UserPoolId=UserPoolId,
+            **kwargs
         )
         super(UserPoolConfig, self).__init__(**processed_kwargs)
 
@@ -300,6 +314,7 @@ class AdditionalAuthenticationProviders(troposphere.appsync.AdditionalAuthentica
             AuthenticationType=AuthenticationType,
             OpenIDConnectConfig=OpenIDConnectConfig,
             UserPoolConfig=UserPoolConfig,
+            **kwargs
         )
         super(AdditionalAuthenticationProviders, self).__init__(**processed_kwargs)
 
@@ -328,6 +343,7 @@ class GraphQLApi(troposphere.appsync.GraphQLApi, Mixin):
             OpenIDConnectConfig=OpenIDConnectConfig,
             UserPoolConfig=UserPoolConfig,
             Tags=Tags,
+            **kwargs
         )
         super(GraphQLApi, self).__init__(**processed_kwargs)
 
@@ -348,6 +364,7 @@ class GraphQLSchema(troposphere.appsync.GraphQLSchema, Mixin):
             ApiId=ApiId,
             Definition=Definition,
             DefinitionS3Location=DefinitionS3Location,
+            **kwargs
         )
         super(GraphQLSchema, self).__init__(**processed_kwargs)
 
@@ -360,6 +377,7 @@ class PipelineConfig(troposphere.appsync.PipelineConfig, Mixin):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Functions=Functions,
+            **kwargs
         )
         super(PipelineConfig, self).__init__(**processed_kwargs)
 
@@ -394,5 +412,6 @@ class Resolver(troposphere.appsync.Resolver, Mixin):
             RequestMappingTemplateS3Location=RequestMappingTemplateS3Location,
             ResponseMappingTemplate=ResponseMappingTemplate,
             ResponseMappingTemplateS3Location=ResponseMappingTemplateS3Location,
+            **kwargs
         )
         super(Resolver, self).__init__(**processed_kwargs)

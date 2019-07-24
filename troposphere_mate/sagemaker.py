@@ -38,6 +38,7 @@ class GitConfig(troposphere.sagemaker.GitConfig, Mixin):
             RepositoryUrl=RepositoryUrl,
             Branch=Branch,
             SecretArn=SecretArn,
+            **kwargs
         )
         super(GitConfig, self).__init__(**processed_kwargs)
 
@@ -56,6 +57,7 @@ class CodeRepository(troposphere.sagemaker.CodeRepository, Mixin):
             validation=validation,
             GitConfig=GitConfig,
             CodeRepositoryName=CodeRepositoryName,
+            **kwargs
         )
         super(CodeRepository, self).__init__(**processed_kwargs)
 
@@ -76,6 +78,7 @@ class Endpoint(troposphere.sagemaker.Endpoint, Mixin):
             EndpointConfigName=EndpointConfigName,
             Tags=Tags,
             EndpointName=EndpointName,
+            **kwargs
         )
         super(Endpoint, self).__init__(**processed_kwargs)
 
@@ -96,6 +99,7 @@ class ProductionVariant(troposphere.sagemaker.ProductionVariant, Mixin):
             InitialInstanceCount=InitialInstanceCount,
             InstanceType=InstanceType,
             InitialVariantWeight=InitialVariantWeight,
+            **kwargs
         )
         super(ProductionVariant, self).__init__(**processed_kwargs)
 
@@ -118,6 +122,7 @@ class EndpointConfig(troposphere.sagemaker.EndpointConfig, Mixin):
             Tags=Tags,
             EndpointConfigName=EndpointConfigName,
             KmsKeyId=KmsKeyId,
+            **kwargs
         )
         super(EndpointConfig, self).__init__(**processed_kwargs)
 
@@ -136,6 +141,7 @@ class ContainerDefinition(troposphere.sagemaker.ContainerDefinition, Mixin):
             ContainerHostname=ContainerHostname,
             Environment=Environment,
             ModelDataUrl=ModelDataUrl,
+            **kwargs
         )
         super(ContainerDefinition, self).__init__(**processed_kwargs)
 
@@ -150,6 +156,7 @@ class VpcConfig(troposphere.sagemaker.VpcConfig, Mixin):
             title=title,
             Subnets=Subnets,
             SecurityGroupIds=SecurityGroupIds,
+            **kwargs
         )
         super(VpcConfig, self).__init__(**processed_kwargs)
 
@@ -176,6 +183,7 @@ class Model(troposphere.sagemaker.Model, Mixin):
             ModelName=ModelName,
             VpcConfig=VpcConfig,
             Tags=Tags,
+            **kwargs
         )
         super(Model, self).__init__(**processed_kwargs)
 
@@ -188,6 +196,7 @@ class NotebookInstanceLifecycleHook(troposphere.sagemaker.NotebookInstanceLifecy
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Content=Content,
+            **kwargs
         )
         super(NotebookInstanceLifecycleHook, self).__init__(**processed_kwargs)
 
@@ -208,6 +217,7 @@ class NotebookInstanceLifecycleConfig(troposphere.sagemaker.NotebookInstanceLife
             NotebookInstanceLifecycleConfigName=NotebookInstanceLifecycleConfigName,
             OnCreate=OnCreate,
             OnStart=OnStart,
+            **kwargs
         )
         super(NotebookInstanceLifecycleConfig, self).__init__(**processed_kwargs)
 
@@ -250,5 +260,6 @@ class NotebookInstance(troposphere.sagemaker.NotebookInstance, Mixin):
             SubnetId=SubnetId,
             Tags=Tags,
             VolumeSizeInGB=VolumeSizeInGB,
+            **kwargs
         )
         super(NotebookInstance, self).__init__(**processed_kwargs)

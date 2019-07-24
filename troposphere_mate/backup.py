@@ -36,6 +36,7 @@ class LifecycleResourceType(troposphere.backup.LifecycleResourceType, Mixin):
             title=title,
             DeleteAfterDays=DeleteAfterDays,
             MoveToColdStorageAfterDays=MoveToColdStorageAfterDays,
+            **kwargs
         )
         super(LifecycleResourceType, self).__init__(**processed_kwargs)
 
@@ -60,6 +61,7 @@ class BackupRuleResourceType(troposphere.backup.BackupRuleResourceType, Mixin):
             RecoveryPointTags=RecoveryPointTags,
             ScheduleExpression=ScheduleExpression,
             StartWindowMinutes=StartWindowMinutes,
+            **kwargs
         )
         super(BackupRuleResourceType, self).__init__(**processed_kwargs)
 
@@ -74,6 +76,7 @@ class BackupPlanResourceType(troposphere.backup.BackupPlanResourceType, Mixin):
             title=title,
             BackupPlanName=BackupPlanName,
             BackupPlanRule=BackupPlanRule,
+            **kwargs
         )
         super(BackupPlanResourceType, self).__init__(**processed_kwargs)
 
@@ -92,6 +95,7 @@ class BackupPlan(troposphere.backup.BackupPlan, Mixin):
             validation=validation,
             BackupPlan=BackupPlan,
             BackupPlanTags=BackupPlanTags,
+            **kwargs
         )
         super(BackupPlan, self).__init__(**processed_kwargs)
 
@@ -108,6 +112,7 @@ class ConditionResourceType(troposphere.backup.ConditionResourceType, Mixin):
             ConditionKey=ConditionKey,
             ConditionType=ConditionType,
             ConditionValue=ConditionValue,
+            **kwargs
         )
         super(ConditionResourceType, self).__init__(**processed_kwargs)
 
@@ -126,6 +131,7 @@ class BackupSelectionResourceType(troposphere.backup.BackupSelectionResourceType
             SelectionName=SelectionName,
             ListOfTags=ListOfTags,
             Resources=Resources,
+            **kwargs
         )
         super(BackupSelectionResourceType, self).__init__(**processed_kwargs)
 
@@ -144,6 +150,7 @@ class BackupSelection(troposphere.backup.BackupSelection, Mixin):
             validation=validation,
             BackupPlanId=BackupPlanId,
             BackupSelection=BackupSelection,
+            **kwargs
         )
         super(BackupSelection, self).__init__(**processed_kwargs)
 
@@ -158,6 +165,7 @@ class NotificationObjectType(troposphere.backup.NotificationObjectType, Mixin):
             title=title,
             BackupVaultEvents=BackupVaultEvents,
             SNSTopicArn=SNSTopicArn,
+            **kwargs
         )
         super(NotificationObjectType, self).__init__(**processed_kwargs)
 
@@ -182,5 +190,6 @@ class BackupVault(troposphere.backup.BackupVault, Mixin):
             BackupVaultTags=BackupVaultTags,
             EncryptionKeyArn=EncryptionKeyArn,
             Notifications=Notifications,
+            **kwargs
         )
         super(BackupVault, self).__init__(**processed_kwargs)

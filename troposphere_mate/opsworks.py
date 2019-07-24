@@ -57,6 +57,7 @@ class Source(troposphere.opsworks.Source, Mixin):
             Type=Type,
             Url=Url,
             Username=Username,
+            **kwargs
         )
         super(Source, self).__init__(**processed_kwargs)
 
@@ -73,6 +74,7 @@ class SslConfiguration(troposphere.opsworks.SslConfiguration, Mixin):
             Certificate=Certificate,
             PrivateKey=PrivateKey,
             Chain=Chain,
+            **kwargs
         )
         super(SslConfiguration, self).__init__(**processed_kwargs)
 
@@ -87,6 +89,7 @@ class ChefConfiguration(troposphere.opsworks.ChefConfiguration, Mixin):
             title=title,
             BerkshelfVersion=BerkshelfVersion,
             ManageBerkshelf=ManageBerkshelf,
+            **kwargs
         )
         super(ChefConfiguration, self).__init__(**processed_kwargs)
 
@@ -107,6 +110,7 @@ class Recipes(troposphere.opsworks.Recipes, Mixin):
             Setup=Setup,
             Shutdown=Shutdown,
             Undeploy=Undeploy,
+            **kwargs
         )
         super(Recipes, self).__init__(**processed_kwargs)
 
@@ -131,6 +135,7 @@ class VolumeConfiguration(troposphere.opsworks.VolumeConfiguration, Mixin):
             Iops=Iops,
             RaidLevel=RaidLevel,
             VolumeType=VolumeType,
+            **kwargs
         )
         super(VolumeConfiguration, self).__init__(**processed_kwargs)
 
@@ -145,6 +150,7 @@ class StackConfigurationManager(troposphere.opsworks.StackConfigurationManager, 
             title=title,
             Name=Name,
             Version=Version,
+            **kwargs
         )
         super(StackConfigurationManager, self).__init__(**processed_kwargs)
 
@@ -169,6 +175,7 @@ class TimeBasedAutoScaling(troposphere.opsworks.TimeBasedAutoScaling, Mixin):
             Friday=Friday,
             Saturday=Saturday,
             Sunday=Sunday,
+            **kwargs
         )
         super(TimeBasedAutoScaling, self).__init__(**processed_kwargs)
 
@@ -191,6 +198,7 @@ class AutoScalingThresholds(troposphere.opsworks.AutoScalingThresholds, Mixin):
             LoadThreshold=LoadThreshold,
             MemoryThreshold=MemoryThreshold,
             ThresholdsWaitTime=ThresholdsWaitTime,
+            **kwargs
         )
         super(AutoScalingThresholds, self).__init__(**processed_kwargs)
 
@@ -207,6 +215,7 @@ class Environment(troposphere.opsworks.Environment, Mixin):
             Key=Key,
             Value=Value,
             Secure=Secure,
+            **kwargs
         )
         super(Environment, self).__init__(**processed_kwargs)
 
@@ -223,6 +232,7 @@ class LoadBasedAutoScaling(troposphere.opsworks.LoadBasedAutoScaling, Mixin):
             DownScaling=DownScaling,
             Enable=Enable,
             UpScaling=UpScaling,
+            **kwargs
         )
         super(LoadBasedAutoScaling, self).__init__(**processed_kwargs)
 
@@ -239,6 +249,7 @@ class DataSource(troposphere.opsworks.DataSource, Mixin):
             Arn=Arn,
             DatabaseName=DatabaseName,
             Type=Type,
+            **kwargs
         )
         super(DataSource, self).__init__(**processed_kwargs)
 
@@ -277,6 +288,7 @@ class App(troposphere.opsworks.App, Mixin):
             Environment=Environment,
             Shortname=Shortname,
             SslConfiguration=SslConfiguration,
+            **kwargs
         )
         super(App, self).__init__(**processed_kwargs)
 
@@ -297,6 +309,7 @@ class ElasticLoadBalancerAttachment(troposphere.opsworks.ElasticLoadBalancerAtta
             ElasticLoadBalancerName=ElasticLoadBalancerName,
             LayerId=LayerId,
             Tags=Tags,
+            **kwargs
         )
         super(ElasticLoadBalancerAttachment, self).__init__(**processed_kwargs)
 
@@ -317,6 +330,7 @@ class EbsBlockDevice(troposphere.opsworks.EbsBlockDevice, Mixin):
             SnapshotId=SnapshotId,
             VolumeSize=VolumeSize,
             VolumeType=VolumeType,
+            **kwargs
         )
         super(EbsBlockDevice, self).__init__(**processed_kwargs)
 
@@ -335,6 +349,7 @@ class BlockDeviceMapping(troposphere.opsworks.BlockDeviceMapping, Mixin):
             Ebs=Ebs,
             NoDevice=NoDevice,
             VirtualName=VirtualName,
+            **kwargs
         )
         super(BlockDeviceMapping, self).__init__(**processed_kwargs)
 
@@ -391,6 +406,7 @@ class Instance(troposphere.opsworks.Instance, Mixin):
             TimeBasedAutoScaling=TimeBasedAutoScaling,
             VirtualizationType=VirtualizationType,
             Volumes=Volumes,
+            **kwargs
         )
         super(Instance, self).__init__(**processed_kwargs)
 
@@ -405,6 +421,7 @@ class ShutdownEventConfiguration(troposphere.opsworks.ShutdownEventConfiguration
             title=title,
             DelayUntilElbConnectionsDrained=DelayUntilElbConnectionsDrained,
             ExecutionTimeout=ExecutionTimeout,
+            **kwargs
         )
         super(ShutdownEventConfiguration, self).__init__(**processed_kwargs)
 
@@ -417,6 +434,7 @@ class LifeCycleConfiguration(troposphere.opsworks.LifeCycleConfiguration, Mixin)
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ShutdownEventConfiguration=ShutdownEventConfiguration,
+            **kwargs
         )
         super(LifeCycleConfiguration, self).__init__(**processed_kwargs)
 
@@ -465,6 +483,7 @@ class Layer(troposphere.opsworks.Layer, Mixin):
             LoadBasedAutoScaling=LoadBasedAutoScaling,
             Packages=Packages,
             VolumeConfigurations=VolumeConfigurations,
+            **kwargs
         )
         super(Layer, self).__init__(**processed_kwargs)
 
@@ -481,6 +500,7 @@ class RdsDbInstance(troposphere.opsworks.RdsDbInstance, Mixin):
             DbPassword=DbPassword,
             DbUser=DbUser,
             RdsDbInstanceArn=RdsDbInstanceArn,
+            **kwargs
         )
         super(RdsDbInstance, self).__init__(**processed_kwargs)
 
@@ -495,6 +515,7 @@ class ElasticIp(troposphere.opsworks.ElasticIp, Mixin):
             title=title,
             Ip=Ip,
             Name=Name,
+            **kwargs
         )
         super(ElasticIp, self).__init__(**processed_kwargs)
 
@@ -559,6 +580,7 @@ class Stack(troposphere.opsworks.Stack, Mixin):
             UseCustomCookbooks=UseCustomCookbooks,
             UseOpsworksSecurityGroups=UseOpsworksSecurityGroups,
             VpcId=VpcId,
+            **kwargs
         )
         super(Stack, self).__init__(**processed_kwargs)
 
@@ -581,6 +603,7 @@ class UserProfile(troposphere.opsworks.UserProfile, Mixin):
             AllowSelfManagement=AllowSelfManagement,
             SshPublicKey=SshPublicKey,
             SshUsername=SshUsername,
+            **kwargs
         )
         super(UserProfile, self).__init__(**processed_kwargs)
 
@@ -603,6 +626,7 @@ class Volume(troposphere.opsworks.Volume, Mixin):
             StackId=StackId,
             MountPoint=MountPoint,
             Name=Name,
+            **kwargs
         )
         super(Volume, self).__init__(**processed_kwargs)
 
@@ -617,6 +641,7 @@ class EngineAttribute(troposphere.opsworks.EngineAttribute, Mixin):
             title=title,
             Name=Name,
             Value=Value,
+            **kwargs
         )
         super(EngineAttribute, self).__init__(**processed_kwargs)
 
@@ -665,5 +690,6 @@ class Server(troposphere.opsworks.Server, Mixin):
             SecurityGroupIds=SecurityGroupIds,
             ServerName=ServerName,
             SubnetIds=SubnetIds,
+            **kwargs
         )
         super(Server, self).__init__(**processed_kwargs)
