@@ -151,6 +151,9 @@ if __name__ == "__main__":
         REQUIRES = list()
 
     EXTRA_REQUIRE = dict()
+    EXTRA_REQUIRE[':python_version == "2.7"'] = [
+        "typing"
+    ]
 
     try:
         EXTRA_REQUIRE["tests"] = read_requirements_file("requirements-test.txt")

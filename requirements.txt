@@ -1,3 +1,6 @@
 troposphere==2.4.9
+typing
 picage
 pathlib_mate
+superjson
+configirl
