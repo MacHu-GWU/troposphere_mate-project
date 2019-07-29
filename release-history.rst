@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.4 (TODO)
+0.0.5 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,6 +13,19 @@ Release and Version History
 **Bugfixes**
 
 **Miscellaneous**
+
+
+0.0.4 (2019-07-29)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add ``Canned`` module.
+- allow ``Canned.to_file`` dump template.
+- allow ``Template.remove_resource_by_tag()`` method.
+
+**Minor Improvements**
+
+- add ``from troposphere_mate import Canned``
 
 
 0.0.3 (2019-07-24)
