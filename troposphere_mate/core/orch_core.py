@@ -75,3 +75,39 @@ def resolve_pipeline(plan):
             dct[tier_env] = tier_list
         pipeline.append((list(dct[tier_env]), tier_env))
     return pipeline
+
+
+class ResourceFilter(object):
+    """
+    Construct a Resource Filter Class to decide if a specific AWS Resource
+    should be ignored or not.
+
+    1. Explicit Deny
+    2. Explicit Allow
+    3. Default Deny
+    """
+
+    def __init__(self,
+                 ignored_stack_id_list,
+                 allowed_stack_id_list):
+        self.ignored_stack_id_list = ignored_stack_id_list
+        self.allowed_stack_id_list = allowed_stack_id_list
+
+    def filter(self, resource, template):
+        """
+        Check if we want to keep this resource in the cloudformation.
+        If ``True``, we keep it. if ``False`` we call
+        ``Template.remove_resource(resource)`` to remove it,
+
+        :type resource: AWSObject
+        :type template: Template
+        :rtype: bool
+        """
+        # if resource.
+        if resource.resource_type == "AWS::CloudFormation::Stack":
+            if resource.title in self.allowed_stack_id_list:
+                return True
+            else:
+                return False
+        else:
+            return True

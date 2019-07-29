@@ -22,6 +22,8 @@ try:
         Parameter,
         Output,
     )
-    from troposphere_mate.core.canned import Canned, MultiEnvBasicConfig, ConfigClass, Constant, Derivable
+    from troposphere_mate.core.canned import (
+        Canned, MultiEnvBasicConfig, ConfigClass, Constant, Derivable
+    )
 except ImportError as e:
     pass

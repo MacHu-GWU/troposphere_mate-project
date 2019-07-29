@@ -72,16 +72,27 @@ class Orchestration(object):
         self._plan_file = None  # type: str
         self._plan = None  # type: List[List[str, str]]
 
+    def _validate_canned_klass(self, canned_klass):
+        """
+        :type tier: Type[Canned]
+        """
+        if canned_klass.rel_path is None:
+            raise ValueError("You have to specify ``{}.rel_path`` class variable! "
+                             "It is where the template file actually stored. "
+                             "For example: './99-master.json'. ".format(canned_klass.__name__))
+
     def add_tier(self, tier):
         """
         :type tier: Type[Canned]
         """
+        self._validate_canned_klass(tier)
         self._tiers[tier] = None
 
     def add_master_tier(self, tier):
         """
         :type tier: Type[Canned]
         """
+        self._validate_canned_klass(tier)
         self._master_tier = tier
 
     def set_config_dir(self, path):
@@ -149,7 +160,7 @@ class Orchestration(object):
 
             # collect template instance and file path
             # so we can generate final template files at once
-            template_file_list = list() # type: List[TemplateFile]
+            template_file_list = list()  # type: List[TemplateFile]
 
             master_can = self._master_tier(**config_data)
             master_can.create_template()
@@ -157,7 +168,6 @@ class Orchestration(object):
             # master_can_label = self.canlabel_mapper[self.master_canlabel_id]
             # master_can = master_can_label.can_class(**config_data)
             # master_can.CONFIG_DIR = deploy_workspace_dir.abspath
-
             master_template_path = Path(deploy_workspace_dir, master_can.rel_path)
             template_file_list.append(
                 TemplateFile(
@@ -165,6 +175,14 @@ class Orchestration(object):
                     filepath=master_template_path,
                 )
             )
+
+            # allowed_stack_id_list = [
+            #     resource_id
+            #     for resource_id in can_id_list
+            #     if resource_id in master_can.TIER_LIST_TO_DEPLOY.get_value()
+            # ]
+            # r_filter = ResourceFilter(allowed_stack_id_list)
+
 
             # print(pipeline)
             # for tier in self._tiers:
