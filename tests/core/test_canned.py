@@ -23,8 +23,8 @@ class CannedTier(MultiEnvBasicConfig):
 class TestCanned(object):
     @classmethod
     def setup_class(cls):
-        Path(__file__).change(new_basename="template.json") \
-            .write_text("Hello World", encoding="utf-8")
+        with open(Path(__file__).change(new_basename="template.json").abspath, "wb") as f:
+            f.write("Hello World".encode("utf-8"))
 
     @classmethod
     def teardown_class(cls):

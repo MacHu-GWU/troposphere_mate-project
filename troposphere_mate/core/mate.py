@@ -70,7 +70,8 @@ class Template(troposphere.Template):
             content = self.to_yaml(**kwargs)
         else:
             raise Exception
-        Path(path).write_text(content, encoding="utf8")
+        with open(path, "wb") as f:
+            f.write(content.encode("utf8"))
 
     def pprint(self, json_or_yml="json"):
         if json_or_yml == "json":
