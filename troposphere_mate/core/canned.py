@@ -21,6 +21,16 @@ class Canned(ConfigClass):
     Represent a Canned CloudFormation Template. Defines the creation logic and
     parameters of a Template. It is a Factory Class for Template.
 
+    :type logic_id: str
+    :param logic_id: logic id of this template been used in the master
+        template as a nested template
+
+    :type root_dir: str
+    :param root_dir: dir path of where the template file been created
+
+    :type rel_path: str
+    :param metadata: relative path of where the template file been created
+
     **中文文档**
 
     Canned 的英文是 罐装的. 这里是表示, 此类是一个 Template 的罐头, 类本身实际是一个
@@ -36,38 +46,40 @@ class Canned(ConfigClass):
     换言之, 定义时还未可知. 所以我们要将配置参数和创建模板分离开.
     """
     _create_template_called_counter = 0
+    logic_id = None  # type: str
+    root_dir = None  # type: str
+    rel_path = None  # type: str
 
     def __init__(self,
                  metadata=None,
-                 logic_id=None,
-                 root_dir=None,
-                 rel_path=None,
                  **kwargs):
         """
         :type metadata: OrderedDict
         :param metadata: arbitrary metadata
-
-        :type logic_id: str
-        :param logic_id: logic id of this template been used in the master
-            template as a nested template
-
-        :type root_dir: str
-        :param root_dir: dir path of where the template file been created
-
-        :type rel_path: str
-        :param metadata: relative path of where the template file been created
         """
         super(Canned, self).__init__(**kwargs)
 
         self.template = None  # type: Template
-        self.logic_id = logic_id  # type: str
-        self.root_dir = root_dir  # type: str
-        self.rel_path = rel_path  # type: str
         self.metadata = OrderedDict() if metadata is None else metadata
 
     @property
     def abspath(self):
         return os.path.join(self.root_dir, self.rel_path)
+
+    def to_file(self, json_or_yml="json", overwrite=False, **kwargs):
+        if self.template is None:
+            raise Exception("Before dumping to template file, Canned Template "
+                            "has to call Canned.create_template() method first!")
+        try:
+            abspath = self.abspath
+        except:
+            raise ValueError("you have to specify `Canned.root_dir` and `Canned.rel_path` "
+                             "first to derive the template path.")
+        if os.path.exists(abspath):
+            if overwrite is False:
+                raise EnvironmentError("%s already exists! You can use "
+                                       ".to_file(..., overwrite=True) to enable overwrite.")
+        self.template.to_file(abspath, json_or_yml=json_or_yml, **kwargs)
 
     def create_template(self, **kwargs):
         if self._create_template_called_counter != 0:
@@ -77,7 +89,8 @@ class Canned(ConfigClass):
         self.pre_create_template_hooker(**kwargs)
         self.do_create_template(**kwargs)
         if not isinstance(self.template, Template):
-            raise TypeError("Canned.do_create_template() method has to return a {}".format(Template))
+            raise TypeError("Canned.do_create_template() method has to return a {}".format(Template.__name__))
+        self.template.set_version()
         self.post_create_template_hooker(**kwargs)
 
         return self.template
@@ -137,4 +150,7 @@ class MultiEnvBasicConfig(Canned):
         )
 
     def post_create_template_hooker(self, **kwargs):
+        """
+        Automatically update common tags after the template been created.
+        """
         self.template.update_tags(self.COMMON_TAGS.get_value(), overwrite=False)
