@@ -6,7 +6,7 @@ Package Description.
 
 from ._version import __version__
 
-__short_description__ = "Package short description."
+__short_description__ = "Orchestrate AWS Resource in Pythonic Way."
 __license__ = "MIT"
 __author__ = "Sanhe Hu"
 __author_email__ = "husanhe@gmail.com"
@@ -22,6 +22,6 @@ try:
         Parameter,
         Output,
     )
-    from troposphere_mate.core.canned import ConfigClass, MultiEnvBasicConfig, Constant, Derivable
+    from troposphere_mate.core.canned import Canned, MultiEnvBasicConfig, ConfigClass, Constant, Derivable
 except ImportError as e:
     pass

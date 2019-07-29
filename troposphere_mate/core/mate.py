@@ -52,8 +52,7 @@ class Mixin(object):
 class Template(troposphere.Template):
     def update_tags(self, tags_dct, overwrite=False):
         """
-        Update
-
+        Batch Update Tags to all resource that support tags.
 
         :type tags_dct: Dict[str, Union[str,Callable]]
         :type overwrite: bool
@@ -61,6 +60,9 @@ class Template(troposphere.Template):
         update_tags_for_template(self, tags_dct, overwrite=overwrite)
 
     def to_file(self, path, json_or_yml="json", **kwargs):
+        """
+        Dump template to a json or yml file.
+        """
         self.set_version()
         if json_or_yml == "json":
             content = self.to_json(**kwargs)
@@ -78,6 +80,8 @@ class Template(troposphere.Template):
 
     def remove_parameter(self, parameter):
         """
+        Remove a parameter.
+
         :type output: Union[Parameter, str]
         """
         if isinstance(parameter, Parameter):
@@ -90,6 +94,7 @@ class Template(troposphere.Template):
 
     def remove_output(self, output):
         """
+        Remove a parameter.
 
         :type output: Union[Output, str]
         """
@@ -124,6 +129,18 @@ class Template(troposphere.Template):
             if isinstance(output.Value, Ref):
                 if output.Value.data["Ref"] == resource_logic_id:
                     del self.outputs[output_logic_id]
+
+    def remove_resource_by_tag(self, tag, tag_field_in_metadata="tags"):
+        """
+        If you specified Tags (a list of string) in Metadata field, you can
+        batch remove resource by tag
+
+        :type tag: str
+        :type tag_field_in_metadata:  str
+        """
+        for resource_logic_id, resource in list(self.resources.items()):
+            if tag in resource.resource.get("Metadata", {}).get(tag_field_in_metadata, []):
+                self.remove_resource(resource)
 
 
 class Parameter(troposphere.Parameter):

@@ -76,9 +76,7 @@ class TestTemplate(object):
         assert len(tpl.resources) == 0
         assert len(tpl.outputs) == 0
 
-
     def test_remove_parameter_and_output(self):
-
         from troposphere_mate import canned
 
         tpl = Template()
@@ -92,6 +90,33 @@ class TestTemplate(object):
         tpl.remove_output(o1)
         assert len(tpl.parameters) == 0
         assert len(tpl.outputs) == 0
+
+    def test_remove_resource_by_tag(self):
+        from troposphere_mate import s3
+        tpl = Template()
+        bucket1 = s3.Bucket(
+            "Bucket1",
+            template=tpl,
+            BucketName="bucket1",
+            Metadata={"tags": ["tier1", "tier_bucket"]}
+        )
+        bucket2 = s3.Bucket(
+            "Bucket2",
+            template=tpl,
+            BucketName="bucket2",
+            Metadata={"tags": ["tier2", "tier_bucket"]}
+        )
+        bucket3 = s3.Bucket(
+            "Bucket3",
+            template=tpl,
+            BucketName="bucket3",
+            Metadata={"tags": ["tier3", "tier_bucket"]}
+        )
+        assert len(tpl.resources) == 3
+        tpl.remove_resource_by_tag("tier1")
+        assert len(tpl.resources) == 2
+        tpl.remove_resource_by_tag("tier_bucket")
+        assert len(tpl.resources) == 0
 
 
 if __name__ == "__main__":
