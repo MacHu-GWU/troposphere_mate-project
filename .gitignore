@@ -5,6 +5,11 @@ troposphere_mate-*/
 troposphere_mate/orch_example/
 playground/
 
+tests/canned/*.json
+tests/core/*.json
+tests/*.json
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
