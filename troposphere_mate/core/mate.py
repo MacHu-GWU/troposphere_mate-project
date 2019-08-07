@@ -11,8 +11,7 @@ except:
 
 import json
 import troposphere
-from pathlib_mate import PathCls as Path
-from troposphere import AWSObject, Ref, Parameter, Output
+from troposphere import AWSObject, Ref, Parameter, Output, depends_on_helper
 
 from .sentiel import NOTHING, REQUIRED
 from .tagger import (
@@ -48,6 +47,11 @@ class Mixin(object):
     def update_tags(self, tags_dct, overwrite=False):
         update_tags_for_resource(self, tags_dct, overwrite=overwrite)
 
+    def add_to_template(self):
+        # Bound it to template if we know it
+        if self.template is not None:
+            self.template.add_resource(self)
+
 
 class Template(troposphere.Template):
     def update_tags(self, tags_dct, overwrite=False):
@@ -78,6 +82,18 @@ class Template(troposphere.Template):
             print(self.to_json())
         else:
             print(self.to_yaml())
+
+    def add_resource(self, resource, ignore_duplicate=False):
+        """
+
+        :param resource:
+        :param ignore_duplicate:
+        :return:
+        """
+        if ignore_duplicate:
+            if resource.title in self.resources:
+                return
+        super(Template, self).add_resource(resource)
 
     def remove_parameter(self, parameter):
         """
@@ -123,24 +139,29 @@ class Template(troposphere.Template):
             resource_logic_id = resource.title
         else:
             resource_logic_id = resource
+
         if resource_logic_id not in self.resources:
             raise ValueError("Can't remove, Resource '{}' not found in the template!".format(resource_logic_id))
-        del self.resources[resource_logic_id]
+        to_delete_output_logic_id_list = list()
         for output_logic_id, output in list(self.outputs.items()):
-            if isinstance(output.Value, Ref):
-                if output.Value.data["Ref"] == resource_logic_id:
-                    del self.outputs[output_logic_id]
+            if resource_logic_id in output.depends_on_resources:
+                to_delete_output_logic_id_list.append(output_logic_id)
 
-    def remove_resource_by_tag(self, tag, tag_field_in_metadata="tags"):
+        del self.resources[resource_logic_id]
+        for output_logic_id in to_delete_output_logic_id_list:
+            self.remove_output(output_logic_id)
+
+
+    def remove_resource_by_label(self, label, label_field_in_metadata="labels"):
         """
         If you specified Tags (a list of string) in Metadata field, you can
         batch remove resource by tag
 
-        :type tag: str
-        :type tag_field_in_metadata:  str
+        :type label: str
+        :type label_field_in_metadata:  str
         """
         for resource_logic_id, resource in list(self.resources.items()):
-            if tag in resource.resource.get("Metadata", {}).get(tag_field_in_metadata, []):
+            if label in resource.resource.get("Metadata", {}).get(label_field_in_metadata, []):
                 self.remove_resource(resource)
 
 
@@ -183,6 +204,7 @@ class Output(troposphere.Output):
                  Value=REQUIRED,
                  Description=NOTHING,
                  Export=NOTHING,
+                 DependsOn=NOTHING,
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -192,3 +214,7 @@ class Output(troposphere.Output):
             **kwargs
         )
         super(Output, self).__init__(**processed_kwargs)
+        if DependsOn is NOTHING:
+            object.__setattr__(self, "depends_on_resources", [])
+        else:
+            object.__setattr__(self, "depends_on_resources", depends_on_helper(DependsOn))

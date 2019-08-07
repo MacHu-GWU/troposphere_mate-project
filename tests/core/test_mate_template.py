@@ -69,10 +69,13 @@ class TestTemplate(object):
             ]),
             ManagedPolicyArns=[canned.iam.AWSManagedPolicyArn.awsLambdaBasicExecutionRole, ]
         )
-        tpl.add_output(Output("MyRoleArn", Value=Ref(role)))
+        tpl.add_output(Output("MyRoleArn", Value=Ref(role), DependsOn=[role,]))
+
         assert len(tpl.resources) == 1
         assert len(tpl.outputs) == 1
+
         tpl.remove_resource(role)
+
         assert len(tpl.resources) == 0
         assert len(tpl.outputs) == 0
 
@@ -84,38 +87,41 @@ class TestTemplate(object):
         tpl.add_parameter(p1)
         o1 = Output("O1", Value=Ref("P1"))
         tpl.add_output(o1)
+
         assert len(tpl.parameters) == 1
         assert len(tpl.outputs) == 1
+
         tpl.remove_parameter(p1)
         tpl.remove_output(o1)
+
         assert len(tpl.parameters) == 0
         assert len(tpl.outputs) == 0
 
-    def test_remove_resource_by_tag(self):
+    def test_remove_resource_by_label(self):
         from troposphere_mate import s3
         tpl = Template()
         bucket1 = s3.Bucket(
             "Bucket1",
             template=tpl,
             BucketName="bucket1",
-            Metadata={"tags": ["tier1", "tier_bucket"]}
+            Metadata={"labels": ["tier1", "tier_bucket"]}
         )
         bucket2 = s3.Bucket(
             "Bucket2",
             template=tpl,
             BucketName="bucket2",
-            Metadata={"tags": ["tier2", "tier_bucket"]}
+            Metadata={"labels": ["tier2", "tier_bucket"]}
         )
         bucket3 = s3.Bucket(
             "Bucket3",
             template=tpl,
             BucketName="bucket3",
-            Metadata={"tags": ["tier3", "tier_bucket"]}
+            Metadata={"labels": ["tier3", "tier_bucket"]}
         )
         assert len(tpl.resources) == 3
-        tpl.remove_resource_by_tag("tier1")
+        tpl.remove_resource_by_label("tier1")
         assert len(tpl.resources) == 2
-        tpl.remove_resource_by_tag("tier_bucket")
+        tpl.remove_resource_by_label("tier_bucket")
         assert len(tpl.resources) == 0
 
 

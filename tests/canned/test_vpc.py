@@ -14,7 +14,6 @@ def test():
         N_PRIVATE_SUBNET=2,
         USE_NAT_GW_PER_PRIVATE_SUBNET_FLAG=True,
     )
-    can.pprint()
     tpl = can.create_template()
 
     assert can.vpc is not None

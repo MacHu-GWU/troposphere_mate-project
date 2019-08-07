@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.5 (TODO)
+0.0.6 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,6 +13,14 @@ Release and Version History
 **Bugfixes**
 
 **Miscellaneous**
+
+
+0.0.5 (2019-08-07)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add logical ``DependsOn`` argument to Output, allow user to define dependent AWS Resource for an Output. So the ``Template.remove_resource()`` can also remove Output that depends on this resource.
+- rename ``Template.remove_resource_by_tag()`` method to ``Template.remove_resource_by_label()``.
 
 
 0.0.4 (2019-07-29)
