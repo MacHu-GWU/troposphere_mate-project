@@ -121,7 +121,7 @@ How ``troposphere_mate`` implements:
             ...
 
 
-Additional Features
+Additional Powerful Features
 ------------------------------------------------------------------------------
 
 .. contents::
@@ -132,7 +132,7 @@ Additional Features
 Batch Tagging
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes you want to apply a set of common tags to all AWS Resource defined in a Template. ``trpoosphere_mate`` allows you to:
+Sometimes you want to **apply a set of common tags to all AWS Resource** defined in a Template. ``trpoosphere_mate`` allows you to:
 
 - apply common tags to specified list of AWS Resource or all of Resources in a Template.
 - custom tag creation logic function, let's say based on the Resource Type.
@@ -295,6 +295,84 @@ In other word, you don't need to remember the properties and the syntax.
     )
 
 If you want to contribute your auto-associate logic to ``troposphere_mate``, please submit `issue <https://github.com/MacHu-GWU/troposphere_mate-project/issues>`_ or help me to improve. Here's an `example <https://github.com/MacHu-GWU/troposphere_mate-project/blob/master/troposphere_mate/core/associate.py>`_.
+
+
+Partial Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+At most of the times, eventually your cloudformation template becomes very big. There are some common use case in development and deployment:
+
+1. **You want to reuse the AWS Resource from an Big Architect Design, only deploy selected AWS Resource, without editing the template.**
+2. **You want to gradually deploy AWS Resource instead of deploy everything in one command, while you are doing development or debugging, without editing the template.**
+
+`troposphere_mate <https://github.com/MacHu-GWU/troposphere_mate-project>`_ **allows you to define labels for your AWS Resource** in ``Metadata`` field, then you can use ``Template.remove_resource_by_label(label="a label", label_field_in_metadata="labels")`` method to **batch remove AWS Resource from your template**.
+
+More importantly, `troposphere_mate <https://github.com/MacHu-GWU/troposphere_mate-project>`_ **allows you to explicitly defines dependent AWS Resource for Output object, so when you remove the resource, related output will automatically removed**, which is not supported by native CloudFormation or ``troposphere``.
+
+Example:
+
+.. code-block:: python
+
+    from troposphere_mate import ec2, rds
+
+    class Labels:
+        tier1_vpc = "tier1_vpc"
+        vpc = "vpc"
+        sg = "security_group"
+        tier2_rds = "tier2_rds"
+        db_subnet_group = "db_subnet_group"
+        db_instance = "db_instance"
+
+    tpl = Template()
+
+    vpc = ec2.VPC(
+        "VPC",
+        template=tpl,
+        Metadata={"labels": [Labels.tier1_vpc, Labels.vpc]},
+        ...
+    )
+
+    sg_ssh = ec2.SecurityGroup(
+        "SecurityGroupSSH",
+        template=tpl,
+        Metadata={"labels": [Labels.tier1_vpc, Labels.sg]},
+        ...
+    )
+
+    rds_db_subnet_group = rds.DBSubnetGroup(
+        "DBInstance",
+        template=tpl,
+        Metadata={"labels": [Labels.tier2_rds, Labels.db_subnet_group]}
+    )
+
+    rds_instance = rds.DBInstance(
+        "DBInstance",
+        template=tpl,
+        Metadata={"labels": [Labels.tier2_rds, Labels.db_instance]}
+    )
+
+    tpl.add_output(
+        Output(
+            "VPC",
+            Description="VPC ID",
+            Value=Ref(vpc),
+            Export=Export("vpc-id")),
+            DependsOn=[vpc,], # specify the dependent AWS Resource, so when you remove the resource, related output will automatically removed
+        ),
+    )
+
+    assert len(tpl.resources) == 4
+    assert len(tpl.outputs) == 1
+
+    tpl.remove_resource_by_label(Labels.db_instance)
+    assert len(tpl.resources) == 3
+
+    tpl.remove_resource_by_label(Labels.tier2_rds)
+    assert len(tpl.resources) == 2
+
+    tpl.remove_resource_by_label(Labels.tier1_vpc)
+    assert len(tpl.resources) == 0
+    assert len(tpl.outputs) == 0
 
 
 .. _install:
