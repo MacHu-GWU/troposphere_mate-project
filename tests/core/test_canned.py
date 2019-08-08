@@ -2,10 +2,37 @@
 
 from __future__ import unicode_literals
 import pytest
-from pytest import raises, approx
+from pytest import raises
 from pathlib_mate import PathCls as Path
-from troposphere_mate import Template, s3
-from troposphere_mate.core.canned import Canned, MultiEnvBasicConfig
+from troposphere_mate import Template, Parameter
+from troposphere_mate import s3
+from troposphere_mate.core.canned import (
+    Canned, MultiEnvBasicConfig,
+    slugify, camelcase, helper_fn_sub
+)
+
+
+def test_slugify():
+    assert slugify("my_project") == "my-project"
+
+
+def test_camelcase():
+    assert camelcase("my_project") == "MyProject"
+
+
+def test_helper_fn_sub():
+    param_env_name = Parameter("EnvName", Type="String")
+    param_bucket_name = Parameter("BucketName", Type="String")
+    sub = helper_fn_sub("{}-{}", param_env_name, param_bucket_name)
+    assert sub.to_dict() == {
+        "Fn::Sub": [
+            "${EnvName}-${BucketName}",
+            {
+                "EnvName": {"Ref": "EnvName"},
+                "BucketName": {"Ref": "BucketName"},
+            }
+        ]
+    }
 
 
 class CannedTier(MultiEnvBasicConfig):

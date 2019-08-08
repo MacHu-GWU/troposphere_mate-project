@@ -133,7 +133,8 @@ class TemplateFile(object):
     @filepath.validator
     def check_filepath(self, attribute, value):
         if not Path(value).is_absolute():
-            raise ValueError("You have to use absolute path for 'TemplateFile.filepath`!")
+            raise ValueError(
+                "You have to use absolute path for 'TemplateFile.filepath`!")
 
     def make_file(self, json_or_yml="json"):
         self.template.to_file(self.filepath, json_or_yml=json_or_yml)
@@ -209,7 +210,6 @@ class Orchestration(object):
 
         nested_can_mapper = dict()  # type: Dict[str, Canned]
 
-
         returned_list = list()
 
         STOP_AT_IND = 4
@@ -217,7 +217,8 @@ class Orchestration(object):
         for can_id_list, env_tag in pipeline:
             counter += 1
 
-            deploy_workspace_dir = Path(temp_dir, "{}-{}".format(str(counter).zfill(3), env_tag))
+            deploy_workspace_dir = Path(
+                temp_dir, "{}-{}".format(str(counter).zfill(3), env_tag))
             deploy_workspace_dir.mkdir(parents=True, exist_ok=True)
             returned_list.append(deploy_workspace_dir)
 
@@ -229,7 +230,8 @@ class Orchestration(object):
             master_can.CONFIG_DIR = deploy_workspace_dir.abspath
             master_can.create_template()
 
-            master_template_path = Path(deploy_workspace_dir, master_can_label.filename)
+            master_template_path = Path(
+                deploy_workspace_dir, master_can_label.filename)
             template_file_list.append(
                 TemplateFile(
                     template=master_can.template,
@@ -263,7 +265,8 @@ class Orchestration(object):
 
                         template_file = TemplateFile(
                             template=nested_can.template,
-                            filepath=Path(deploy_workspace_dir, nested_canlabel.filename)
+                            filepath=Path(deploy_workspace_dir,
+                                          nested_canlabel.filename)
                         )
                         template_file_list.append(template_file)
 

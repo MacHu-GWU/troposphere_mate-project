@@ -46,16 +46,19 @@ class CannedCommonLambdaFunctionIamRole(MultiEnvBasicConfig):
         self.iam_role_lbd_basic_exec = iam.Role(
             "IamRoleLambdaBasicExecution",
             template=self.template,
-            RoleName="{}-lbd-basic-exec".format(self.ENVIRONMENT_NAME.get_value()),
-            AssumeRolePolicyDocument=create_assume_role_policy_document([AWSServiceName.aws_Lambda]),
+            RoleName="{}-lbd-basic-exec".format(
+                self.ENVIRONMENT_NAME.get_value()),
+            AssumeRolePolicyDocument=create_assume_role_policy_document(
+                [AWSServiceName.aws_Lambda]),
             ManagedPolicyArns=[AWSManagedPolicyArn.awsLambdaBasicExecutionRole]
         )
         self.iam_role_lbd_s3_full_access = iam.Role(
             "IamRoleLambdaS3Execution",
             template=self.template,
-            RoleName="{}-lbd-s3-exec".format(self.ENVIRONMENT_NAME.get_value()),
-            AssumeRolePolicyDocument=create_assume_role_policy_document([AWSServiceName.aws_Lambda]),
+            RoleName="{}-lbd-s3-exec".format(
+                self.ENVIRONMENT_NAME.get_value()),
+            AssumeRolePolicyDocument=create_assume_role_policy_document(
+                [AWSServiceName.aws_Lambda]),
             ManagedPolicyArns=[AWSManagedPolicyArn.awsLambdaBasicExecutionRole]
         )
         return self.template
-

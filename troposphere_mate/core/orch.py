@@ -57,7 +57,8 @@ class TemplateFile(object):
 
     def check_filepath(self):
         if not Path(self.filepath).is_absolute():
-            raise ValueError("You have to use absolute path for 'TemplateFile.filepath`!")
+            raise ValueError(
+                "You have to use absolute path for 'TemplateFile.filepath`!")
 
     def make_file(self, json_or_yml="json"):
         self.template.to_file(self.filepath, json_or_yml=json_or_yml)
@@ -115,7 +116,8 @@ class Orchestration(object):
         if self._plan is None:
             self._plan = plan
         else:
-            raise Exception("orchestration plan has been defined already! {}".format(self._plan))
+            raise Exception(
+                "orchestration plan has been defined already! {}".format(self._plan))
 
     def _validate_canned(self):
         for key, value in self._tiers.items():
@@ -139,8 +141,10 @@ class Orchestration(object):
         for env_tag in env_tag_list:
             p = Path(self._config_dir, "{}.json".format(env_tag))
             if not p.exists():
-                raise FileNotFoundError("the config file of environment `{}` not exists at '{}'".format(env_tag, p))
-            config_data_mapper[env_tag] = json.load(p.abspath, ignore_comments=True, verbose=False)
+                raise FileNotFoundError(
+                    "the config file of environment `{}` not exists at '{}'".format(env_tag, p))
+            config_data_mapper[env_tag] = json.load(
+                p.abspath, ignore_comments=True, verbose=False)
 
         pipeline = resolve_pipeline(self._plan)
 
@@ -168,7 +172,8 @@ class Orchestration(object):
             # master_can_label = self.canlabel_mapper[self.master_canlabel_id]
             # master_can = master_can_label.can_class(**config_data)
             # master_can.CONFIG_DIR = deploy_workspace_dir.abspath
-            master_template_path = Path(deploy_workspace_dir, master_can.rel_path)
+            master_template_path = Path(
+                deploy_workspace_dir, master_can.rel_path)
             template_file_list.append(
                 TemplateFile(
                     template=master_can.template,
@@ -182,7 +187,6 @@ class Orchestration(object):
             #     if resource_id in master_can.TIER_LIST_TO_DEPLOY.get_value()
             # ]
             # r_filter = ResourceFilter(allowed_stack_id_list)
-
 
             # print(pipeline)
             # for tier in self._tiers:

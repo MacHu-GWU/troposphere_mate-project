@@ -2,6 +2,8 @@
 # for more info: https://coverage.readthedocs.io/en/latest/config.html
 [run]
 omit =
+    troposphere_mate/canned/iam/const_aws_managed_policy_arn.py
+    troposphere_mate/canned/iam/const_aws_service_name.py
     troposphere_mate/_version.py
     troposphere_mate/cli.py
     troposphere_mate/pkg/*

@@ -24,12 +24,14 @@ class TestMixin(object):
             title="MyEC2Instance",
             Tags=Tags(Name="my-ec2"),
         )
-        ec2_inst.update_tags(dict(Name="another-ec2", Project="MyProject"), overwrite=False)
+        ec2_inst.update_tags(
+            dict(Name="another-ec2", Project="MyProject"), overwrite=False)
         assert tags_list_to_dct(ec2_inst.Tags.to_dict()) == dict(
             Name="my-ec2",
             Project="MyProject",
         )
-        ec2_inst.update_tags(dict(Name="another-ec2", Project="MyProject"), overwrite=True)
+        ec2_inst.update_tags(
+            dict(Name="another-ec2", Project="MyProject"), overwrite=True)
         assert tags_list_to_dct(ec2_inst.Tags.to_dict()) == dict(
             Name="another-ec2",
             Project="MyProject",

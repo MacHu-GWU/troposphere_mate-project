@@ -31,7 +31,8 @@ class ModuleTemplate(object):
     additional_imports = attr.ib()  # type: list
     class_templates = attr.ib()  # type: list
 
-    tpl = Template(Path(__file__).change(new_basename="module.tpl").read_text())
+    tpl = Template(Path(__file__).change(
+        new_basename="module.tpl").read_text())
 
     def render(self):
         return self.tpl.render(data=self)
@@ -127,7 +128,8 @@ def main():
                         .replace("(AWSObject):", "") \
                         .replace("(AWSProperty):", "") \
                         .strip()
-                    class_import_name = "{}.{}".format(module_import_name, class_name)
+                    class_import_name = "{}.{}".format(
+                        module_import_name, class_name)
                     properties = list()
                     props = getattr(imported_module, class_name).props
 
@@ -151,13 +153,17 @@ def main():
                                 if len(the_type) == 1:
                                     the_type = the_type[0]
                                     if the_type.__name__ not in builtin_types:
-                                        additional_imports.append(the_type.__name__)
-                                        typehint_usename = "List[_{}]".format(the_type.__name__)
+                                        additional_imports.append(
+                                            the_type.__name__)
+                                        typehint_usename = "List[_{}]".format(
+                                            the_type.__name__)
                                     else:
                                         if the_type.__name__ == "str":
-                                            typehint_usename = "List[Union[{}, AWSHelperFn]]".format(the_type.__name__)
+                                            typehint_usename = "List[Union[{}, AWSHelperFn]]".format(
+                                                the_type.__name__)
                                         else:
-                                            typehint_usename = "List[{}]".format(the_type.__name__)
+                                            typehint_usename = "List[{}]".format(
+                                                the_type.__name__)
                                 else:
                                     typehint_usename = "Any"
                             elif isinstance(the_type, tuple):
@@ -168,10 +174,12 @@ def main():
                                         l.append("_{}".format(typ.__name__))
                                     else:
                                         if typ.__name__ == "str":
-                                            l.append("Union[{}, AWSHelperFn]".format(typ.__name__))
+                                            l.append(
+                                                "Union[{}, AWSHelperFn]".format(typ.__name__))
                                         else:
                                             l.append(typ.__name__)
-                                typehint_usename = "Union[{}]".format(", ".join(l))
+                                typehint_usename = "Union[{}]".format(
+                                    ", ".join(l))
                             elif inspect.isfunction(the_type):
                                 if the_type.__name__ in validator_to_typehint_mapper:
                                     typehint_usename = validator_to_typehint_mapper[the_type.__name__]
@@ -179,11 +187,14 @@ def main():
                                     typehint_usename = "Any"
                             else:
                                 if the_type.__name__ not in builtin_types:
-                                    additional_imports.append(the_type.__name__)
-                                    typehint_usename = "_{}".format(the_type.__name__)
+                                    additional_imports.append(
+                                        the_type.__name__)
+                                    typehint_usename = "_{}".format(
+                                        the_type.__name__)
                                 else:
                                     if the_type.__name__ == "str":
-                                        typehint_usename = "Union[{}, AWSHelperFn]".format(the_type.__name__)
+                                        typehint_usename = "Union[{}, AWSHelperFn]".format(
+                                            the_type.__name__)
                                     else:
                                         typehint_usename = the_type.__name__
 
@@ -218,7 +229,8 @@ def main():
                 additional_imports=additional_imports,
                 class_templates=class_templates,
             )
-            target_module_path = Path(TROPOSPHERE_MATE_DIR, p.relative_to(TROPOSPHERE_DIR))
+            target_module_path = Path(
+                TROPOSPHERE_MATE_DIR, p.relative_to(TROPOSPHERE_DIR))
             target_module_path.write_text(module_template.render())
             generated_files.append(target_module_path)
 

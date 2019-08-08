@@ -23,14 +23,17 @@ def test_mutable_aws_object():
         RoleName="my-role",
         AssumeRolePolicyDocument={},
     )
-    assert tpl.to_dict()["Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role"
-    assert "ManagedPolicyArns" not in tpl.to_dict()["Resources"]["MyRole"]["Properties"]
+    assert tpl.to_dict()[
+        "Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role"
+    assert "ManagedPolicyArns" not in tpl.to_dict(
+    )["Resources"]["MyRole"]["Properties"]
 
     my_role.RoleName = "my-role-two"
     my_role.ManagedPolicyArns = [
         Ref(my_policy)
     ]
-    assert tpl.to_dict()["Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role-two"
+    assert tpl.to_dict()[
+        "Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role-two"
     assert tpl.to_dict()["Resources"]["MyRole"]["Properties"]["ManagedPolicyArns"] == [
         {"Ref": "MyPolicy"}
     ]

@@ -13,7 +13,49 @@ except:
 import os
 from collections import OrderedDict
 from configirl import Constant, Derivable, ConfigClass
-from troposphere_mate.core.mate import Template
+from troposphere import Ref, Sub
+from .mate import Template
+
+
+def slugify(name):
+    return name.replace("_", "-")
+
+
+def camelcase(name):
+    return "".join([
+        word[0].upper() + word[1:].lower()
+        for word in slugify(name).split("-")
+    ])
+
+
+def helper_fn_sub(text, *params):
+    """
+    A helper function to construct FnSub snippet easily. It uses python
+    str.format place holder ``{}``, it will be replaced with parameters
+    substitution. For example, ``helper_fn_sub("{}-my-ec2-instance", param_env_name)``
+    will be translate to this. The ``param_env_name`` is the EnvName template
+    parameter::
+
+        {
+            "Fn::Sub": [
+                "${EnvName}-my-ec2-instance"
+                {
+                    "EnvName": {
+                        "Ref": {
+                            "EnvName"
+                        }
+                    }
+                }
+            ]
+        }
+    """
+    return Sub(
+        text.format(*["${" + param.title + "}" for param in params]),
+        {
+            param.title: Ref(param)
+            for param in params
+        }
+    )
 
 
 class Canned(ConfigClass):
@@ -83,13 +125,15 @@ class Canned(ConfigClass):
 
     def create_template(self, **kwargs):
         if self._create_template_called_counter != 0:
-            raise Warning(".create_template() method should be only call once!")
+            raise Warning(
+                ".create_template() method should be only call once!")
         self._create_template_called_counter += 1
 
         self.pre_create_template_hooker(**kwargs)
         self.do_create_template(**kwargs)
         if not isinstance(self.template, Template):
-            raise TypeError("Canned.do_create_template() method has to return a {}".format(Template.__name__))
+            raise TypeError("Canned.do_create_template() method has to return a {}".format(
+                Template.__name__))
         self.template.set_version()
         self.post_create_template_hooker(**kwargs)
 
@@ -153,4 +197,5 @@ class MultiEnvBasicConfig(Canned):
         """
         Automatically update common tags after the template been created.
         """
-        self.template.update_tags(self.COMMON_TAGS.get_value(), overwrite=False)
+        self.template.update_tags(
+            self.COMMON_TAGS.get_value(), overwrite=False)

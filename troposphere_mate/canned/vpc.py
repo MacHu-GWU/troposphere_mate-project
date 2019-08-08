@@ -268,7 +268,8 @@ class VPCTier(MultiEnvBasicConfig):
                     DependsOn=[private_route_table, subnet],
                 )
 
-        group_name = "{}/sg/allow-ssh-from-anywhere".format(self.ENVIRONMENT_NAME.get_value())
+        group_name = "{}/sg/allow-ssh-from-anywhere".format(
+            self.ENVIRONMENT_NAME.get_value())
         sg_for_ssh = ec2.SecurityGroup(
             "SGForSSH",
             template=template,
@@ -299,10 +300,12 @@ class VPCTier(MultiEnvBasicConfig):
                        Ref(subnet)
                        for subnet in private_subnet_list
                    ])),
-            Output(sg_for_ssh.title, Description="Security Group ID", Value=Ref(sg_for_ssh))
+            Output(sg_for_ssh.title, Description="Security Group ID",
+                   Value=Ref(sg_for_ssh))
         ]
         for subnet in subnet_list:
-            output = Output(subnet.title, Description="{} ID".format(subnet.title), Value=Ref(subnet))
+            output = Output(subnet.title, Description="{} ID".format(
+                subnet.title), Value=Ref(subnet))
             outputs.append(output)
 
         for output in outputs:

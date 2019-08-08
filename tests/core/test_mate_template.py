@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
+from pytest import raises
 import functools
 from troposphere_mate import Template, Tags, Ref, Parameter, Output
 from troposphere_mate.core.tagger import tags_list_to_dct
@@ -55,6 +56,45 @@ class TestTemplate(object):
             Creator="Bob",
         )
 
+    def test_add_parameter_resource_output(self):
+        from troposphere_mate import apigateway
+
+        tpl = Template()
+        param_project_name = Parameter(
+            "ProjectName",
+            Type="String"
+        )
+
+        rest_api = apigateway.RestApi(
+            "RestApi",
+            template=tpl,
+            Name=Ref(param_project_name),
+            EndpointConfiguration=apigateway.EndpointConfiguration(
+                Types=[
+                    "REGIONAL"
+                ]
+            )
+        )
+
+        output_rest_api_id = Output(
+            "RestApiId",
+            Value=Ref(rest_api)
+        )
+
+        tpl.add_parameter(param_project_name)
+        with raises(ValueError):
+            tpl.add_parameter(param_project_name)
+        tpl.add_parameter(param_project_name, ignore_duplicate=True)
+
+        with raises(ValueError):
+            tpl.add_resource(rest_api)
+        tpl.add_resource(rest_api, ignore_duplicate=True)
+
+        tpl.add_output(output_rest_api_id)
+        with raises(ValueError):
+            tpl.add_output(output_rest_api_id)
+        tpl.add_output(output_rest_api_id, ignore_duplicate=True)
+
     def test_remove_resource(self):
         from troposphere_mate import iam
         from troposphere_mate import canned
@@ -67,9 +107,11 @@ class TestTemplate(object):
             AssumeRolePolicyDocument=canned.iam.create_assume_role_policy_document([
                 canned.iam.AWSServiceName.aws_Lambda
             ]),
-            ManagedPolicyArns=[canned.iam.AWSManagedPolicyArn.awsLambdaBasicExecutionRole, ]
+            ManagedPolicyArns=[
+                canned.iam.AWSManagedPolicyArn.awsLambdaBasicExecutionRole, ]
         )
-        tpl.add_output(Output("MyRoleArn", Value=Ref(role), DependsOn=[role,]))
+        tpl.add_output(
+            Output("MyRoleArn", Value=Ref(role), DependsOn=[role, ]))
 
         assert len(tpl.resources) == 1
         assert len(tpl.outputs) == 1
@@ -88,11 +130,22 @@ class TestTemplate(object):
         o1 = Output("O1", Value=Ref("P1"))
         tpl.add_output(o1)
 
+        # before state
         assert len(tpl.parameters) == 1
         assert len(tpl.outputs) == 1
 
+        # test remove by object
         tpl.remove_parameter(p1)
         tpl.remove_output(o1)
+
+        assert len(tpl.parameters) == 0
+        assert len(tpl.outputs) == 0
+
+        # test remove by str
+        tpl.add_parameter(p1)
+        tpl.add_output(o1)
+        tpl.remove_parameter(p1.title)
+        tpl.remove_output(o1.title)
 
         assert len(tpl.parameters) == 0
         assert len(tpl.outputs) == 0

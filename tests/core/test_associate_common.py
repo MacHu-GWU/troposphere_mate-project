@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from pytest import raises, approx
 from troposphere import Template, Tags, Ref, AWSObject, Output, GetAtt
 from troposphere_mate import associate
-from troposphere_mate import ec2, awslambda, iam
+from troposphere_mate import ec2, awslambda, iam, apigateway
 
 iam_role = iam.Role(
     title="MyIamRole",
@@ -59,6 +58,26 @@ ec2_inst = ec2.Instance(
     title="MyInstance",
 )
 
+rest_api = apigateway.RestApi(
+    title="RestApi",
+    Name="my-api",
+)
+
+api_resource = apigateway.Resource(
+    title="MyResource",
+    RestApiId="nothing",
+    ParentId=GetAtt(rest_api, "RootResourceId"),
+    PathPart="my-resource",
+)
+
+api_method = apigateway.Method(
+    title="MyResourceGet",
+    RestApiId="nothing",
+    ResourceId="nothing",
+    AuthorizationType="none",
+    HttpMethod="GET",
+)
+
 
 def test_associate_AwsLambdaFunction_IamRole_Ec2Subnet_Ec2SecurityGroup():
     tpl = Template()
@@ -70,8 +89,9 @@ def test_associate_AwsLambdaFunction_IamRole_Ec2Subnet_Ec2SecurityGroup():
     tpl.add_resource(sg)
 
     assert tpl.to_dict()["Resources"]["MyFunc"]["Properties"]["Role"] == \
-           "arn:aws:iam::111122223333:role/todo"
-    assert "VpcConfig" not in tpl.to_dict()["Resources"]["MyFunc"]["Properties"]
+        "arn:aws:iam::111122223333:role/todo"
+    assert "VpcConfig" not in tpl.to_dict(
+    )["Resources"]["MyFunc"]["Properties"]
 
     associate(lbd_func, iam_role)
     associate(lbd_func, sg)
@@ -99,6 +119,23 @@ def test_associate_AwsLambdaFunction_IamRole_Ec2Subnet_Ec2SecurityGroup():
         ]
     }
 
+    # test if duplicate association breaks the DependsOn
+    associate(lbd_func, iam_role)
+    assert tpl.to_dict()["Resources"]["MyFunc"]["DependsOn"] == [
+        "MyIamRole", "LambdaSG", "PublicSubnet1", "PublicSubnet2"
+    ]
+
+
+def test_associate_RestApi_ApiResource_ApiMethod():
+    assert api_resource.RestApiId == "nothing"
+    associate(api_resource, rest_api)
+    assert isinstance(api_resource.RestApiId, Ref)
+
+    assert api_method.RestApiId == "nothing"
+    associate(api_method, rest_api)
+    assert isinstance(api_method.RestApiId, Ref)
+
+
 def test_associate_EC2Instance_IamRole_Ec2Subnet_Ec2SecurityGroup():
     tpl = Template()
     tpl.add_resource(lbd_func)
@@ -108,7 +145,6 @@ def test_associate_EC2Instance_IamRole_Ec2Subnet_Ec2SecurityGroup():
     tpl.add_resource(public_subnet2)
     tpl.add_resource(sg)
     tpl.add_resource(ec2_inst)
-
 
 
 if __name__ == "__main__":

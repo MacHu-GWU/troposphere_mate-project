@@ -50,7 +50,8 @@ def resolve_pipeline(plan):
             continue
 
         if tier_env != previous_env:
-            if len(pipeline_change_set):  # if it is not empty, then it could be a item right after a deploy now signal
+            # if it is not empty, then it could be a item right after a deploy now signal
+            if len(pipeline_change_set):
                 if job != pipeline_change_set[-1]:
                     pipeline_change_set.append(job)
             else:  # if it is empty, then it is the first job, just append it

@@ -8,7 +8,8 @@ from troposphere_mate.core.associate import associate
 def test_associate_not_defined():
     from troposphere_mate import ec2, rds
     with raises(NotImplementedError):
-        associate(ec2.Instance(title="MyEc2"), rds.DBInstance(title="MyRds", DBInstanceClass="t2.micro"))
+        associate(ec2.Instance(title="MyEc2"), rds.DBInstance(
+            title="MyRds", DBInstanceClass="t2.micro"))
 
 
 if __name__ == "__main__":

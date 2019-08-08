@@ -6,7 +6,7 @@ This module aims to add more feature to Original troposphere Class.
 
 try:
     from typing import Union
-except:
+except:  # pragma: no cover
     pass
 
 import json
@@ -47,11 +47,6 @@ class Mixin(object):
     def update_tags(self, tags_dct, overwrite=False):
         update_tags_for_resource(self, tags_dct, overwrite=overwrite)
 
-    def add_to_template(self):
-        # Bound it to template if we know it
-        if self.template is not None:
-            self.template.add_resource(self)
-
 
 class Template(troposphere.Template):
     def update_tags(self, tags_dct, overwrite=False):
@@ -63,7 +58,7 @@ class Template(troposphere.Template):
         """
         update_tags_for_template(self, tags_dct, overwrite=overwrite)
 
-    def to_file(self, path, json_or_yml="json", **kwargs):
+    def to_file(self, path, json_or_yml="json", **kwargs):  # pragma: no cover
         """
         Dump template to a json or yml file.
         """
@@ -77,18 +72,36 @@ class Template(troposphere.Template):
         with open(path, "wb") as f:
             f.write(content.encode("utf8"))
 
-    def pprint(self, json_or_yml="json"):
+    def pprint(self, json_or_yml="json"):  # pragma: no cover
         if json_or_yml == "json":
             print(self.to_json())
         else:
             print(self.to_yaml())
 
+    def add_parameter(self, parameter, ignore_duplicate=False):
+        """
+        :type resource: Parameter
+        :type ignore_duplicate: bool
+        """
+        if ignore_duplicate:
+            if parameter.title in self.parameters:
+                return
+        super(Template, self).add_parameter(parameter)
+
+    def add_output(self, output, ignore_duplicate=False):
+        """
+        :type resource: Output
+        :type ignore_duplicate: bool
+        """
+        if ignore_duplicate:
+            if output.title in self.outputs:
+                return
+        super(Template, self).add_output(output)
+
     def add_resource(self, resource, ignore_duplicate=False):
         """
-
-        :param resource:
-        :param ignore_duplicate:
-        :return:
+        :type resource: AWSObject
+        :type ignore_duplicate: bool
         """
         if ignore_duplicate:
             if resource.title in self.resources:
@@ -106,7 +119,8 @@ class Template(troposphere.Template):
         else:
             parameter_logic_id = parameter
         if parameter_logic_id not in self.parameters:
-            raise ValueError("Can't remove, Template '{}' not found in the template!".format(parameter_logic_id))
+            raise ValueError("Can't remove, Template '{}' not found in the template!".format(
+                parameter_logic_id))
         del self.parameters[parameter_logic_id]
 
     def remove_output(self, output):
@@ -120,7 +134,8 @@ class Template(troposphere.Template):
         else:
             output_logic_id = output
         if output_logic_id not in self.outputs:
-            raise ValueError("Can't remove, Output '{}' not found in the template!".format(output_logic_id))
+            raise ValueError(
+                "Can't remove, Output '{}' not found in the template!".format(output_logic_id))
         del self.outputs[output_logic_id]
 
     def remove_resource(self, resource):
@@ -141,7 +156,8 @@ class Template(troposphere.Template):
             resource_logic_id = resource
 
         if resource_logic_id not in self.resources:
-            raise ValueError("Can't remove, Resource '{}' not found in the template!".format(resource_logic_id))
+            raise ValueError(
+                "Can't remove, Resource '{}' not found in the template!".format(resource_logic_id))
         to_delete_output_logic_id_list = list()
         for output_logic_id, output in list(self.outputs.items()):
             if resource_logic_id in output.depends_on_resources:
@@ -150,7 +166,6 @@ class Template(troposphere.Template):
         del self.resources[resource_logic_id]
         for output_logic_id in to_delete_output_logic_id_list:
             self.remove_output(output_logic_id)
-
 
     def remove_resource_by_label(self, label, label_field_in_metadata="labels"):
         """
@@ -217,4 +232,5 @@ class Output(troposphere.Output):
         if DependsOn is NOTHING:
             object.__setattr__(self, "depends_on_resources", [])
         else:
-            object.__setattr__(self, "depends_on_resources", depends_on_helper(DependsOn))
+            object.__setattr__(self, "depends_on_resources",
+                               depends_on_helper(DependsOn))

@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from troposphere import Tags, Tag, AWSObject, Template
+from pathlib_mate import PathCls as Path
+import picage
+import json
 import sys
 import importlib
 
 if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
     from typing import Type, Dict, Union, Callable
 
-import json
-import picage
-from pathlib_mate import PathCls as Path
-from troposphere import Tags, Tag, AWSObject, Template
 
-
-def _get_tags_attr(aws_object_class): # pragma: no cover
+def _get_tags_attr(aws_object_class):  # pragma: no cover
     """
     :type aws_object_class: Type[AWSObject]
 
@@ -64,13 +63,15 @@ def get_tag_property_name_mapper():  # pragma: no cover
     return tag_property_name_mapper
 
 
-
-tag_property_name_mapper_cache_file = Path(__file__).change(new_basename="tag_property_name_mapper.json")
+tag_property_name_mapper_cache_file = Path(__file__).change(
+    new_basename="tag_property_name_mapper.json")
 if tag_property_name_mapper_cache_file.exists():
-    tag_property_name_mapper = json.loads(tag_property_name_mapper_cache_file.read_text())
-else: # pragma: no cover
+    tag_property_name_mapper = json.loads(
+        tag_property_name_mapper_cache_file.read_text())
+else:  # pragma: no cover
     tag_property_name_mapper = get_tag_property_name_mapper()
-    tag_property_name_mapper_cache_file.write_text(json.dumps(tag_property_name_mapper))
+    tag_property_name_mapper_cache_file.write_text(
+        json.dumps(tag_property_name_mapper))
 
 
 def get_tags_attr(resource):
@@ -93,6 +94,7 @@ def tags_list_to_dct(lst):
 
 class ResourceDoesnotSupportTagsError(TypeError):
     pass
+
 
 def update_tags_for_resource(resource, tags_dct, overwrite=False):
     """
@@ -138,7 +140,7 @@ def update_tags_for_template(tpl, tags_dct, overwrite=False):
     for res in tpl.resources.values():
         try:
             update_tags_for_resource(res, tags_dct, overwrite=overwrite)
-        except ResourceDoesnotSupportTagsError: # pragma: no cover
+        except ResourceDoesnotSupportTagsError:  # pragma: no cover
             pass
-        except Exception as e: # pragma: no cover
+        except Exception as e:  # pragma: no cover
             raise

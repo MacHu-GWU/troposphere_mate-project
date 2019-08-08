@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from troposphere_mate import Template, Tags, Ref, Output
-from troposphere_mate import Select, GetAZs
-from troposphere_mate import awslambda, apigateway
-from troposphere_mate.core.canned import MultiEnvBasicConfig, Constant, Derivable
+from troposphere_mate.core.canned import MultiEnvBasicConfig
 
 
 class Config(MultiEnvBasicConfig):
@@ -16,3 +13,5 @@ class Config(MultiEnvBasicConfig):
         PATCH = "PATCH"
         DELET = "DELETE"
         ANY = "ANY"
+        HEAD = "HEAD"
+        OPTION = "OPTION"

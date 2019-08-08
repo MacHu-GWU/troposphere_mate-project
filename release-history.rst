@@ -4,9 +4,23 @@ Release and Version History
 ==============================================================================
 
 
-0.0.6 (TODO)
+0.0.7 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
+
+**Minor Improvements**
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
+0.0.6 (2019-08-08)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add ``ignore_duplicate=False`` arg in ``Template.add_parameter``, ``Template.add_output``, ``Template.add_resource``
+- add ApiGateway related auto Association.
 
 **Minor Improvements**
 
