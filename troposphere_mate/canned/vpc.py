@@ -321,7 +321,7 @@ class VPCTier(MultiEnvBasicConfig):
         return template
 
     def get_nth_public_subnet(self, nth):
-        return self.public_subnet_list[nth-1]
+        return self.public_subnet_list[nth - 1]
 
     def get_nth_private_subnet(self, nth):
-        return self.private_subnet_list[nth-1]
+        return self.private_subnet_list[nth - 1]

@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.7 (TODO)
+0.0.8 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,6 +13,13 @@ Release and Version History
 **Bugfixes**
 
 **Miscellaneous**
+
+
+0.0.7 (2019-09-07)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add ``Template.from_dict()`` factory method! **Now you can create troposphere_mate.Template class from dictionry now!**
 
 
 0.0.6 (2019-08-08)

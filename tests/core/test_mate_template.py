@@ -8,6 +8,16 @@ from troposphere_mate.core.tagger import tags_list_to_dct
 
 
 class TestTemplate(object):
+    def test_from_dict(self):
+        from troposphere_mate.apigateway import RestApi
+
+        tpl = Template()
+        RestApi("RestApi", template=tpl, Name="MyApi")
+        dct = tpl.to_dict()
+        tpl = Template.from_dict(dct)
+        tpl.remove_resource_by_label(label="na")
+        assert tpl.to_dict() == dct
+
     def test_update_tags(self):
         from troposphere_mate import ec2
 

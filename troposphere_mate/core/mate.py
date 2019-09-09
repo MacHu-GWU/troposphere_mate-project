@@ -12,7 +12,7 @@ except:  # pragma: no cover
 import json
 import troposphere
 from troposphere import AWSObject, Ref, Parameter, Output, depends_on_helper
-
+from troposphere.template_generator import TemplateGenerator
 from .sentiel import NOTHING, REQUIRED
 from .tagger import (
     tag_property_name_mapper,
@@ -49,6 +49,28 @@ class Mixin(object):
 
 
 class Template(troposphere.Template):
+    @classmethod
+    def from_dict(cls, dct):
+        """
+        Factory method to construct a Troposphere template from dictionary data.
+
+        :type dct: dict
+
+        :return: Template
+        """
+        tpl = TemplateGenerator(dct)
+        real_template = cls()
+        real_template.description = tpl.description
+        real_template.metadata = tpl.metadata
+        real_template.conditions = tpl.conditions
+        real_template.mappings = tpl.mappings
+        real_template.outputs = tpl.outputs
+        real_template.parameters = tpl.parameters
+        real_template.resources = tpl.resources
+        real_template.version = tpl.version
+        real_template.transform = tpl.transform
+        return real_template
+
     def update_tags(self, tags_dct, overwrite=False):
         """
         Batch Update Tags to all resource that support tags.
