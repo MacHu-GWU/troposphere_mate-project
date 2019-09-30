@@ -16,14 +16,18 @@ try:
     from troposphere import *
     from troposphere import AWSObject as TroposphereAWSObject
 
-    from .core.associate import associate
+    from .associate import associate, LinkerApi
+    from .associate.metadata import TROPOSPHERE_METADATA_FIELD_NAME
     from .core.mate import (
         Template,
         Parameter,
         Output,
+        DEFAULT_LABELS_FIELD,
     )
-    from troposphere_mate.core.canned import (
-        Canned, MultiEnvBasicConfig, ConfigClass, Constant, Derivable
+    from .core.canned import (
+        Canned, MultiEnvBasicConfig, ConfigClass, Constant, Derivable,
+        slugify, camelcase, helper_fn_sub,
     )
+    from .core.sentiel import Sentinel, REQUIRED, NOTHING
 except ImportError as e:
     pass

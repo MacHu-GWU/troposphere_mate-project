@@ -10,6 +10,7 @@ except:  # pragma: no cover
     pass
 
 import json
+import importlib
 import troposphere
 from troposphere import AWSObject, Ref, Parameter, Output, depends_on_helper
 from troposphere.template_generator import TemplateGenerator
@@ -19,6 +20,8 @@ from .tagger import (
     update_tags_for_resource,
     update_tags_for_template,
 )
+
+DEFAULT_LABELS_FIELD = "labels"
 
 
 def preprocess_init_kwargs(**kwargs):
@@ -48,6 +51,53 @@ class Mixin(object):
         update_tags_for_resource(self, tags_dct, overwrite=overwrite)
 
 
+def convert_to_mate_resource(troposphere_resource):
+    troposphere_mate_module_name = troposphere_resource.__class__.__module__ \
+        .replace("troposphere.", "troposphere_mate.")
+    troposphere_mate_module = importlib.import_module(troposphere_mate_module_name)
+    troposphere_mate_aws_resource_class = getattr(
+        troposphere_mate_module, troposphere_resource.__class__.__name__
+    )
+    kwargs = {
+        "title": troposphere_resource.title,
+        "Metadata": troposphere_resource.resource.get("Metadata"),
+        "Condition": troposphere_resource.resource.get("Condition"),
+        "CreationPolicy": troposphere_resource.resource.get("CreationPolicy"),
+        "DeletionPolicy": troposphere_resource.resource.get("DeletionPolicy"),
+        "DependsOn": troposphere_resource.resource.get("DependsOn"),
+        "UpdatePolicy": troposphere_resource.resource.get("UpdatePolicy"),
+        "UpdateReplacePolicy": troposphere_resource.resource.get("UpdateReplacePolicy"),
+    }
+    kwargs = {
+        k: v
+        for k, v in kwargs.items() if v is not None
+    }
+    for key in troposphere_resource.props:
+        value = troposphere_resource.resource.get("Properties", {}).get(key)
+        if value is not None:
+            kwargs[key] = value
+    troposphere_mate_resource = troposphere_mate_aws_resource_class(**kwargs)
+    return troposphere_mate_resource
+
+
+def convert_to_mate_output(troposphere_output):
+    """
+    TODO 将 troposphere_mate dump 成 dict 在转回来 会丢失 Output.DependsOn 的信息
+    """
+    kwargs = {
+        "title": troposphere_output.title,
+        "DependsOn": troposphere_output.resource.get("DependsOn"),
+    }
+    kwargs = {
+        k: v
+        for k, v in kwargs.items() if v is not None
+    }
+    for key, value in troposphere_output.resource.items():
+        kwargs[key] = value
+    troposphere_mate_output = Output(**kwargs)
+    return troposphere_mate_output
+
+
 class Template(troposphere.Template):
     @classmethod
     def from_dict(cls, dct):
@@ -64,9 +114,15 @@ class Template(troposphere.Template):
         real_template.metadata = tpl.metadata
         real_template.conditions = tpl.conditions
         real_template.mappings = tpl.mappings
-        real_template.outputs = tpl.outputs
+        real_template.outputs = {
+            k: convert_to_mate_output(v)
+            for k, v in tpl.outputs.items()
+        }
         real_template.parameters = tpl.parameters
-        real_template.resources = tpl.resources
+        real_template.resources = {
+            k: convert_to_mate_resource(v)
+            for k, v in tpl.resources.items()
+        }
         real_template.version = tpl.version
         real_template.transform = tpl.transform
         return real_template
@@ -189,7 +245,7 @@ class Template(troposphere.Template):
         for output_logic_id in to_delete_output_logic_id_list:
             self.remove_output(output_logic_id)
 
-    def remove_resource_by_label(self, label, label_field_in_metadata="labels"):
+    def remove_resource_by_label(self, label, label_field_in_metadata=DEFAULT_LABELS_FIELD):
         """
         If you specified Tags (a list of string) in Metadata field, you can
         batch remove resource by tag
@@ -200,6 +256,21 @@ class Template(troposphere.Template):
         for resource_logic_id, resource in list(self.resources.items()):
             if label in resource.resource.get("Metadata", {}).get(label_field_in_metadata, []):
                 self.remove_resource(resource)
+
+    def create_resource_type_label(self, label_field_in_metadata=DEFAULT_LABELS_FIELD):
+        """
+        Put resource type in Metadata. Allow you to use resource type to
+        easily filter resources.
+        """
+        for resource_logic_id, resource in self.resources.items():
+            try:
+                metadata = resource.Metadata
+                metadata.setdefault(label_field_in_metadata, [])
+            except:
+                metadata = {label_field_in_metadata: []}
+            if resource.resource_type not in metadata[label_field_in_metadata]:
+                metadata[DEFAULT_LABELS_FIELD].append(resource.resource_type)
+            resource.Metadata = metadata
 
 
 class Parameter(troposphere.Parameter):

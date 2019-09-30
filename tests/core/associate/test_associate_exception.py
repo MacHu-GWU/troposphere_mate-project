@@ -2,7 +2,7 @@
 
 import pytest
 from pytest import raises
-from troposphere_mate.core.associate import associate
+from troposphere_mate import associate
 
 
 def test_associate_not_defined():

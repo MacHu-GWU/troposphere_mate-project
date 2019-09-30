@@ -4,9 +4,22 @@ Release and Version History
 ==============================================================================
 
 
+0.0.9(TODO)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+**Minor Improvements**
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
 0.0.8 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
+
+- now the template object returned by ``Template.from_dict()``, comes with troposphere_mate AWS Object, instead of raw troposphere AWS Object. on 0.0.7, dump and load will lose troposphere_mate specified features
 
 **Minor Improvements**
 

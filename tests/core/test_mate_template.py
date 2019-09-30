@@ -3,7 +3,7 @@
 import pytest
 from pytest import raises
 import functools
-from troposphere_mate import Template, Tags, Ref, Parameter, Output
+from troposphere_mate import Template, Tags, Ref, Parameter, Output, DEFAULT_LABELS_FIELD
 from troposphere_mate.core.tagger import tags_list_to_dct
 
 
@@ -12,11 +12,29 @@ class TestTemplate(object):
         from troposphere_mate.apigateway import RestApi
 
         tpl = Template()
-        RestApi("RestApi", template=tpl, Name="MyApi")
+        rest_api = RestApi(
+            "RestApi",
+            template=tpl,
+            Metadata={"description": "a rest api"},
+            Name="MyApi",
+        )
+        tpl.add_output(
+            Output(
+                "RestApiId",
+                Value=Ref(rest_api),
+                DependsOn=[
+                    rest_api
+                ]
+            )
+        )
+
         dct = tpl.to_dict()
         tpl = Template.from_dict(dct)
         tpl.remove_resource_by_label(label="na")
         assert tpl.to_dict() == dct
+
+        assert isinstance(tpl.resources["RestApi"], RestApi)
+        assert isinstance(tpl.outputs["RestApiId"], Output)
 
     def test_update_tags(self):
         from troposphere_mate import ec2
@@ -186,6 +204,18 @@ class TestTemplate(object):
         assert len(tpl.resources) == 2
         tpl.remove_resource_by_label("tier_bucket")
         assert len(tpl.resources) == 0
+
+    def test_create_resource_type_label(self):
+        from troposphere_mate import s3
+        tpl = Template()
+        bucket = s3.Bucket(
+            "Bucket",
+            template=tpl,
+            BucketName="bucket",
+        )
+        tpl.create_resource_type_label()
+        tpl.create_resource_type_label()
+        assert len(tpl.to_dict()["Resources"]["Bucket"]["Metadata"][DEFAULT_LABELS_FIELD]) == 1
 
 
 if __name__ == "__main__":
