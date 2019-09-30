@@ -20,6 +20,9 @@ Release and Version History
 **Features and Improvements**
 
 - now the template object returned by ``Template.from_dict()``, comes with troposphere_mate AWS Object, instead of raw troposphere AWS Object. on 0.0.7, dump and load will lose troposphere_mate specified features
+- now the magic ``troposphere_mate.associate`` method support more than 2 aws object and more key word argument
+- rewrite the AWS Object association linker class, allow it to be easily extended.
+- **DROP support for Python3.4 and Python3.5**
 
 **Minor Improvements**
 
