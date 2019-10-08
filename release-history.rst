@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.9(TODO)
+0.0.10(TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -15,7 +15,18 @@ Release and Version History
 **Miscellaneous**
 
 
-0.0.8 (TODO)
+0.0.9 (2019-10-08)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- ``troposphere_mate.Template.create_resource_type_label()`` method now automatically add resource_type of DependsOn to Metadata labels field. Because usually we use Metadata labels field to batch remove resource from template. If you remove a resource, then any other resource which depends on this one should also be removed.
+
+**Minor Improvements**
+
+- ``troposphere_mate.AwsObject`` now support many built-in property method to allow developer to directly access Reference Intrinsic or Return Values. The idle will give you the hint of what return value you can directly use. So you don't need to lookup the cloudformation document.
+
+
+0.0.8 (2019-09-26)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -23,12 +34,6 @@ Release and Version History
 - now the magic ``troposphere_mate.associate`` method support more than 2 aws object and more key word argument
 - rewrite the AWS Object association linker class, allow it to be easily extended.
 - **DROP support for Python3.4 and Python3.5**
-
-**Minor Improvements**
-
-**Bugfixes**
-
-**Miscellaneous**
 
 
 0.0.7 (2019-09-07)
@@ -44,12 +49,6 @@ Release and Version History
 
 - add ``ignore_duplicate=False`` arg in ``Template.add_parameter``, ``Template.add_output``, ``Template.add_resource``
 - add ApiGateway related auto Association.
-
-**Minor Improvements**
-
-**Bugfixes**
-
-**Miscellaneous**
 
 
 0.0.5 (2019-08-07)
@@ -88,13 +87,6 @@ Release and Version History
 - removed dependencies ``attrs``, now explicitly use Python __init__ syntax for the code generation.
 - removed the convertion layer that transform troposphere_mate.AWSObject to troposphere.AWSObject, now **troposphere_mate.AWSObject just subclass of troposphere.AWSObject**
 - Now Template and any AWSObject support ``.update_tags(dict(NAME="my-project", STAGE="dev"), overwrite=False) method to allow you apply common tags.
-
-**Minor Improvements**
-
-**Bugfixes**
-
-**Miscellaneous**
-
 
 0.0.1 (2019-07-07)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

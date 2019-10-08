@@ -9,17 +9,15 @@ try:
 except:  # pragma: no cover
     pass
 
-import json
 import importlib
 import troposphere
 from troposphere import AWSObject, Ref, Parameter, Output, depends_on_helper
 from troposphere.template_generator import TemplateGenerator
 from .sentiel import NOTHING, REQUIRED
 from .tagger import (
-    tag_property_name_mapper,
-    update_tags_for_resource,
     update_tags_for_template,
 )
+from .aws_object import Mixin
 
 DEFAULT_LABELS_FIELD = "labels"
 
@@ -30,25 +28,6 @@ def preprocess_init_kwargs(**kwargs):
         if value is not NOTHING:
             processed_kwargs[key] = value
     return processed_kwargs
-
-
-class Mixin(object):
-    def to_json(self, indent=4, sort_keys=True, separators=(',', ': ')):
-        return json.dumps(self.to_dict(), indent=indent,
-                          sort_keys=sort_keys, separators=separators)
-
-    def pprint(self, json_or_yml="json"):
-        if json_or_yml == "json":
-            print(self.to_json(indent=4))
-        else:
-            print(self.to_json(indent=4))
-
-    @classmethod
-    def get_tags_attr(cls):
-        return tag_property_name_mapper.get(cls.resource_type)
-
-    def update_tags(self, tags_dct, overwrite=False):
-        update_tags_for_resource(self, tags_dct, overwrite=overwrite)
 
 
 def convert_to_mate_resource(troposphere_resource):
@@ -268,8 +247,22 @@ class Template(troposphere.Template):
                 metadata.setdefault(label_field_in_metadata, [])
             except:
                 metadata = {label_field_in_metadata: []}
-            if resource.resource_type not in metadata[label_field_in_metadata]:
-                metadata[DEFAULT_LABELS_FIELD].append(resource.resource_type)
+
+            try:
+                depends_on = resource.DependsOn
+                if not isinstance(depends_on, list):
+                    depends_on = [depends_on, ]
+
+                for depends_on_resource_id in depends_on:
+                    resource_type = self.resources[depends_on_resource_id].resource_type
+                    if resource_type not in metadata[label_field_in_metadata]:
+                        metadata[DEFAULT_LABELS_FIELD].append(resource_type)
+            except:
+                pass
+
+            resource_type = resource.resource_type
+            if resource_type not in metadata[label_field_in_metadata]:
+                metadata[DEFAULT_LABELS_FIELD].append(resource_type)
             resource.Metadata = metadata
 
 

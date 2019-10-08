@@ -4,6 +4,7 @@ import pytest
 from troposphere_mate import iam, ec2
 from troposphere_mate import Tags
 from troposphere_mate.core.tagger import tags_list_to_dct
+from troposphere_mate import Ref, GetAtt, Sub
 
 
 class TestMixin(object):
@@ -36,6 +37,13 @@ class TestMixin(object):
             Name="another-ec2",
             Project="MyProject",
         )
+
+    def test_return_values(self):
+        from troposphere_mate import s3
+
+        s3_bucket = s3.Bucket("LogicId")
+        assert isinstance(s3_bucket.s3_bucket_name, Ref)
+        assert isinstance(s3_bucket.s3_bucket_arn, GetAtt)
 
 
 if __name__ == "__main__":

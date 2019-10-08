@@ -206,16 +206,25 @@ class TestTemplate(object):
         assert len(tpl.resources) == 0
 
     def test_create_resource_type_label(self):
-        from troposphere_mate import s3
+        from troposphere_mate import s3, apigateway
         tpl = Template()
-        bucket = s3.Bucket(
+        s3_bucket = s3.Bucket(
             "Bucket",
             template=tpl,
-            BucketName="bucket",
+            BucketName="my-bucket",
+        )
+        rest_api = apigateway.RestApi(
+            "RestApi",
+            template=tpl,
+            DependsOn=[
+                s3_bucket,
+            ]
         )
         tpl.create_resource_type_label()
-        tpl.create_resource_type_label()
+        tpl.create_resource_type_label()  # see if second call raise exception
+
         assert len(tpl.to_dict()["Resources"]["Bucket"]["Metadata"][DEFAULT_LABELS_FIELD]) == 1
+        assert len(tpl.to_dict()["Resources"]["RestApi"]["Metadata"][DEFAULT_LABELS_FIELD]) == 2
 
 
 if __name__ == "__main__":
