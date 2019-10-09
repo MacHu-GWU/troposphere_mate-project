@@ -151,6 +151,8 @@ class Canned(ConfigClass):
 
 class MultiEnvBasicConfig(Canned):
     """
+    A multi environment / stage config settings.
+
     **中文文档**
 
     一个常用的 Multi Stage / Environment 的配置模板.
@@ -199,3 +201,80 @@ class MultiEnvBasicConfig(Canned):
         """
         self.template.update_tags(
             self.COMMON_TAGS.get_value(), overwrite=False)
+
+
+class ServerlessConfig(MultiEnvBasicConfig):  # pragma: no cover
+    """
+    Serverless application config settings for common fields.
+    """
+    AWS_PROFILE_FOR_DEPLOY = Constant()
+    AWS_PROFILE_FOR_BOTO3 = Derivable()
+
+    @AWS_PROFILE_FOR_BOTO3.getter
+    def get_AWS_PROFILE_FOR_BOTO3(self):
+        if self.is_aws_lambda_runtime():
+            return None
+        elif self.is_aws_ec2_runtime():
+            return None
+        elif self.is_ci_runtime():
+            return None
+        else:
+            return self.AWS_PROFILE_FOR_DEPLOY.get_value()
+
+    S3_BUCKET_FOR_DEPLOY = Constant()
+    S3_PREFIX_LAMBDA_ARTIFACT = Constant()
+    """
+    usually it is ``lambda/{github_account_username}/{github_repo_name}``.
+    The final source code s3 key is  
+    ``lambda/{github_account_username}/{github_repo_name}/{version}/source.zip``
+    run ``make lbd-info`` command to get more information
+    """
+
+    LAMBDA_LAYER_ARNS = Constant()
+    LAMBDA_LATEST_LAYER_ARNS = Derivable(dont_dump=True)
+    """
+    Latest lambda layer arn for ``awslambda.Function.Layers`` property
+    """
+
+    @LAMBDA_LATEST_LAYER_ARNS.getter
+    def get_LAMBDA_LATEST_LAYER_ARNS(self):
+        import boto3
+        boto_ses = boto3.session.Session(profile_name=self.AWS_PROFILE_FOR_BOTO3.get_value())
+        lbd_client = boto_ses.client("lambda")
+        latest_layer_arn = None
+        list_layers_response = lbd_client.list_layers()
+        for layer_data in list_layers_response["Layers"]:
+            if layer_data["LayerName"] == self.PROJECT_NAME_SLUG.get_value():
+                latest_layer_arn = layer_data["LatestMatchingVersion"]["LayerVersionArn"]
+        if latest_layer_arn is None:
+            raise ValueError
+        return [
+            latest_layer_arn,
+        ]
+
+    API_GATEWAY_REST_API_NAME = Derivable()
+
+    @API_GATEWAY_REST_API_NAME.getter
+    def get_API_GATEWAY_REST_API_NAME(self):
+        return self.ENVIRONMENT_NAME.get_value()
+
+    API_GATEWAY_REST_API_DEPLOYMENT_STAGE_NAME = Derivable()
+
+    @API_GATEWAY_REST_API_DEPLOYMENT_STAGE_NAME.getter
+    def get_API_GATEWAY_REST_API_DEPLOYMENT_STAGE_NAME(self):
+        return self.STAGE.get_value()
+
+    S3_URI_ATHENA_RESULT = Derivable()
+
+    @S3_URI_ATHENA_RESULT.getter
+    def get_S3_URI_ATHENA_RESULT(self):
+        return "s3://{}/athena/result".format(self.S3_BUCKET_FOR_DEPLOY.get_value())
+
+    ATHENA_DATABASE_NAME = Derivable()
+
+    @ATHENA_DATABASE_NAME.getter
+    def get_ATHENA_DATABASE_NAME(self):
+        return self.ENVIRONMENT_NAME.get_value().replace("-", "_")
+
+    LABELS_TO_DEPLOY = Constant()
+    LABELS_TO_IGNORE = Constant()

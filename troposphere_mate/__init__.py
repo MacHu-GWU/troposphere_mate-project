@@ -25,9 +25,11 @@ try:
         DEFAULT_LABELS_FIELD,
     )
     from .core.canned import (
-        Canned, MultiEnvBasicConfig, ConfigClass, Constant, Derivable,
+        Canned, MultiEnvBasicConfig, ServerlessConfig,
+        ConfigClass, Constant, Derivable,
         slugify, camelcase, helper_fn_sub,
     )
     from .core.sentiel import Sentinel, REQUIRED, NOTHING
+    from .core.stack_deploy import upload_template, package, deploy_stack, link_stack_template
 except ImportError as e:
     pass

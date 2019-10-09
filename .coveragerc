@@ -14,6 +14,7 @@ omit =
     troposphere_mate/core/sentiel.py
     troposphere_mate/core/orch.py
     troposphere_mate/core/orchestration.py
+    troposphere_mate/core/stack_deploy.py
     troposphere_mate/canned/dev/*
     troposphere_mate/orch_example//*
 

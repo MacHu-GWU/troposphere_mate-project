@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.10(TODO)
+0.0.11 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,6 +13,14 @@ Release and Version History
 **Bugfixes**
 
 **Miscellaneous**
+
+
+0.0.10 (2019-10-09)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add ``troposphere_mate.core.canned.ServerlessConfig`` config template for AWS Lambda Serverless App
+- add ``troposphere_mate.core.stack_deploy.py`` module to simplify the deployment from boto3 cloudformation api.
 
 
 0.0.9 (2019-10-08)

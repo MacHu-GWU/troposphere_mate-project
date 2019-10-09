@@ -6,6 +6,17 @@ from pytest import raises, approx
 
 def test():
     import troposphere_mate
+    from troposphere_mate import (
+        associate, LinkerApi,
+        TROPOSPHERE_METADATA_FIELD_NAME,
+        Template, Parameter, Output, DEFAULT_LABELS_FIELD,
+        Canned, MultiEnvBasicConfig, ServerlessConfig,
+        ConfigClass, Constant, Derivable,
+        slugify, camelcase, helper_fn_sub,
+        Sentinel, REQUIRED, NOTHING,
+        link_stack_template, upload_template, package, deploy_stack,
+    )
+
     from troposphere_mate import serverless
     from troposphere_mate import cloudtrail
     from troposphere_mate import redshift
