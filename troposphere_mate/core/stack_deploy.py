@@ -23,7 +23,7 @@ def upload_template(s3_client,
     Upload cloudformation template to s3 bucket and returns template url.
     It is a format like this https://s3.amazonaws.com/<s3-bucket-name>/<s3-key>
 
-    :type boto_session:
+    :type s3_client:
     :type template_content: str
     :type bucket_name: str
     :type prefix: str
@@ -55,16 +55,28 @@ def package(s3_client,
             verbose=False,
             _is_master=True):
     """
+    Package cloudformation template. If it includes nested template,
+    then it also converts relative path in TemplateUrl field into s3 uri.
 
-    :type boto_session:
+    The nested template packaging feature requires assign
+    :class:`troposphere_mate.Template` to
+    :attr:`troposphere_mate.cloudformation.Stack._template` attribute.
+    You could use the :func:`link_stack_template(stack, template)`
+
+    :type s3_client:
     :type template: Template
-    :return:
+    :type bucket_name: str
+    :type prefix: str
+    :type verbose: bool
+    :type _is_master: bool
+
+    :rtype: str
 
     **中文文档**
 
     按照 Nested Stack 的顺序, 将所有的 Template 上传到 S3, 并用 S3 Url 替换
     ``cloudformation.Stack.TemplateUrl`` 属性. 最终返回 Master Template 的
-    S3 Url
+    S3 Url.
     """
     for _, resource in template.resources.items():
         if resource.resource_type == Stack.resource_type:
@@ -112,6 +124,9 @@ def package(s3_client,
 
 def link_stack_template(stack, template):
     """
+    Link :class:`troposphere_mate.cloudformation.Stack` with
+    :class:`troposphere_mate.Template`, to indicate that the cloudformation
+    template represent the nested stack.
 
     :type stack: Stack
     :type template: Template
@@ -126,7 +141,7 @@ def link_stack_template(stack, template):
     object.__setattr__(stack, "_template", template)
 
 
-def deploy_stack(boto_ses,
+def deploy_stack(cf_client,
                  stack_name,
                  template_url,
                  stack_tags=None,
@@ -134,18 +149,22 @@ def deploy_stack(boto_ses,
                  execution_role_arn=None,
                  include_iam=False):
     """
+    Deploy cloudformation template from s3.
 
-    :param boto_ses:
-    :param stack_name:
-    :param template_url:
-    :param stack_tags:
-    :param stack_parameters:
-    :param execution_role_arn:
-    :param include_iam:
-    :return:
+    :type cf_client:
+    :type stack_name: str
+    :type template_url: str
+    :type stack_tags: dict
+    :type stack_parameters: dict
+    :type execution_role_arn: str
+    :type include_iam: bool
+
+    :rtype: dict
+
+    **中文文档**
+
+    部署 Cloudformation Template. 自动决定是 Create 还是 Update.
     """
-    cf_client = boto_ses.client("cloudformation")
-
     # detect if which api call we should use, create_stack or update_stack
     try:
         res = cf_client.describe_stacks(
@@ -204,7 +223,7 @@ def deploy_stack(boto_ses,
         update_stack_kwargs = create_or_update_stack_kwargs
         update_stack_response = cf_client.update_stack(**update_stack_kwargs)
         return update_stack_response
-    else: # run create_stack
+    else:  # run create_stack
         create_stack_kwargs = create_or_update_stack_kwargs
         create_stack_response = cf_client.create_stack(**create_stack_kwargs)
         return create_stack_response
