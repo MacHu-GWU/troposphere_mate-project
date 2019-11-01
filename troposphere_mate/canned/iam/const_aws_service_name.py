@@ -1,5 +1,39 @@
 # -*- coding: utf-8 -*-
 
+try:
+    import typing
+except:
+    pass
+
+
+def create_assume_role_policy_document(trusted_entity_list):
+    """
+    Create assume role policy document for IAM role
+
+    :type trusted_entity_list: typing.List[str]
+    :rtype: dict
+
+    Example::
+
+        create_assume_role_policy_document([
+            TrustedEntityList.aws_lambda
+        ])
+
+    """
+    return {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "{}.amazonaws.com".format(service)
+                },
+                "Action": "sts:AssumeRole"
+            }
+            for service in trusted_entity_list
+        ]
+    }
+
 
 class AWSServiceName:
     alexa_for_Business = "a4b"
