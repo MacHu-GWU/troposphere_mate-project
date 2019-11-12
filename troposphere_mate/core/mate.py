@@ -11,7 +11,7 @@ except:  # pragma: no cover
 
 import importlib
 import troposphere
-from troposphere import AWSObject, Ref, Parameter, Output, depends_on_helper
+from troposphere import AWSObject, depends_on_helper
 from troposphere.template_generator import TemplateGenerator
 from .sentiel import NOTHING, REQUIRED
 from .tagger import (

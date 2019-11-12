@@ -5,11 +5,11 @@ try:
 except:
     pass
 
-from troposphere import Ref, Select, GetAZs, Tags, Join
+from troposphere_mate import Ref, Select, GetAtt, GetAZs, Join, Tags, Export
 
 from .. import ec2
-from ..core.mate import Template, Output
-from ..core.canned import MultiEnvBasicConfig, Constant, Derivable
+from ..core.canned import MultiEnvBasicConfig, Constant, Derivable, helper_fn_sub
+from ..core.mate import Template, Parameter, Output
 
 
 class AZPropertyValues:
@@ -99,11 +99,26 @@ class VPCTier(MultiEnvBasicConfig):
     eip_list = None  # type: List[ec2.EIP]
     ngw_list = None  # type: List[ec2.NatGateway]
     public_route_table = None  # type: ec2.RouteTable
-    sg_for_ssh = None  # type: ec2.SecurityGroup
+    sg_for_ssh_from_anywhere = None  # type: ec2.SecurityGroup
 
     def do_create_template(self):
         template = Template()
         self.template = template
+
+        param_env_name = Parameter(
+            "EnvironmentName",
+            Type="String",
+            Default=self.ENVIRONMENT_NAME.get_value(),
+        )
+        param_stage = Parameter(
+            "Stage",
+            Type="String",
+            Default=self.STAGE.get_value(),
+        )
+        template.add_parameter(param_stage)
+        template.add_parameter(param_env_name)
+
+        output_list = list()
 
         vpc = ec2.VPC(
             "VPC",
@@ -121,10 +136,12 @@ class VPCTier(MultiEnvBasicConfig):
                 VpcId=Ref(vpc),
                 AvailabilityZone=AZPropertyValues.get_nth_az(ind + 1),
                 MapPublicIpOnLaunch=True,
-                Tags=Tags(Name="{}/ngw/public{}".format(
-                    self.ENVIRONMENT_NAME.get_value(),
-                    ind + 1,
-                )),
+                Tags=Tags(
+                    Name=helper_fn_sub(
+                        "{}/subnet/public%s" % (ind + 1,),
+                        param_env_name
+                    )
+                ),
                 DependsOn=[vpc, ],
             )
             public_subnet_list.append(subnet)
@@ -138,11 +155,13 @@ class VPCTier(MultiEnvBasicConfig):
                 CidrBlock=cidr,
                 VpcId=Ref(vpc),
                 AvailabilityZone=AZPropertyValues.get_nth_az(ind + 1),
-                MapPublicIpOnLaunch=True,
-                Tags=Tags(Name="{}/ngw/priavte{}".format(
-                    self.ENVIRONMENT_NAME.get_value(),
-                    ind + 1,
-                )),
+                MapPublicIpOnLaunch=False,
+                Tags=Tags(
+                    Name=helper_fn_sub(
+                        "{}/subnet/priavte%s" % (ind + 1,),
+                        param_env_name
+                    )
+                ),
                 DependsOn=[vpc, ],
             )
             private_subnet_list.append(subnet)
@@ -152,6 +171,7 @@ class VPCTier(MultiEnvBasicConfig):
         self.subnet_list = subnet_list
 
         # igw for public subnet
+        # internet gateway is a component that allow VPC to visit public internet
         igw = ec2.InternetGateway(
             "IGW",
             template=template,
@@ -160,6 +180,10 @@ class VPCTier(MultiEnvBasicConfig):
             "IGWAttachVPC",
             template=template,
             VpcId=Ref(vpc),
+            InternetGatewayId=Ref(igw),
+            DependsOn=[
+                vpc, igw,
+            ]
         )
         self.igw = igw
 
@@ -171,18 +195,24 @@ class VPCTier(MultiEnvBasicConfig):
                 "EIP{}".format(ind),
                 template=template,
                 Domain="vpc",
+                DependsOn=[
+                    igw_attach_vpc,
+                ]
             )
             eip_list.append(eip)
 
             ngw = ec2.NatGateway(
                 "NGW{}".format(ind),
                 template=template,
-                AllocationId=Ref(eip),
+                AllocationId=GetAtt(eip, "AllocationId"),
                 SubnetId=Ref(public_subnet_list[ind - 1]),
-                Tags=Tags(Name="{}/ngw/public{}".format(
-                    self.ENVIRONMENT_NAME.get_value(),
-                    ind,
-                ))
+                Tags=Tags(
+                    Name=helper_fn_sub(
+                        "{}/ngw/public%s" % ind,
+                        param_env_name
+                    )
+                ),
+                DependsOn=eip_list,
             )
             ngw_list.append(ngw)
         self.eip_list = eip_list
@@ -193,9 +223,9 @@ class VPCTier(MultiEnvBasicConfig):
             "PublicRouteTable",
             template=template,
             VpcId=Ref(vpc),
-            Tags=Tags(Name="{}/public-routes".format(
-                self.ENVIRONMENT_NAME.get_value(),
-            ))
+            Tags=Tags(
+                Name=helper_fn_sub("{}/public-routes", param_env_name)
+            )
         )
         self.public_route_table = public_route_table
 
@@ -217,18 +247,21 @@ class VPCTier(MultiEnvBasicConfig):
             )
 
         # private route
-
         if self.USE_NAT_GW_PER_PRIVATE_SUBNET_FLAG.get_value() is True:
             for ind, subnet in enumerate(private_subnet_list):
                 private_route_table = ec2.RouteTable(
                     "PrivateRouteTable{}".format(ind + 1),
                     template=template,
                     VpcId=Ref(vpc),
-                    Tags=Tags(Name="{}/private-routes{}".format(
-                        self.ENVIRONMENT_NAME.get_value(),
-                        ind + 1,
-                    ))
+                    Tags=Tags(
+                        Name=helper_fn_sub(
+                            "{}/private-routes%s" % (ind + 1,),
+                            param_env_name
+                        )
+                    ),
+                    DependsOn=[vpc, ]
                 )
+                # Route anything to nat gateway
                 private_route_default = ec2.Route(
                     "PrivateRoute{}Default".format(ind + 1),
                     template=template,
@@ -248,9 +281,10 @@ class VPCTier(MultiEnvBasicConfig):
                 "PrivateRouteTable",
                 template=template,
                 VpcId=Ref(vpc),
-                Tags=Tags(Name="{}/private-routes".format(
-                    self.ENVIRONMENT_NAME.get_value(),
-                ))
+                Tags=Tags(
+                    Name=helper_fn_sub("{}/private-routes", param_env_name)
+                ),
+                DependsOn=[vpc, ],
             )
             private_route_default = ec2.Route(
                 "PrivateRouteDefault",
@@ -270,8 +304,8 @@ class VPCTier(MultiEnvBasicConfig):
 
         group_name = "{}/sg/allow-ssh-from-anywhere".format(
             self.ENVIRONMENT_NAME.get_value())
-        sg_for_ssh = ec2.SecurityGroup(
-            "SGForSSH",
+        sg_for_ssh_from_anywhere = ec2.SecurityGroup(
+            "SGForSSHFromAnywhere",
             template=template,
             GroupDescription="Allow SSH In",
             GroupName=group_name,
@@ -286,29 +320,59 @@ class VPCTier(MultiEnvBasicConfig):
             ],
             Tags=Tags(Name=group_name),
         )
-        self.sg_for_ssh = sg_for_ssh
+        self.sg_for_ssh_from_anywhere = sg_for_ssh_from_anywhere
 
-        outputs = [
-            Output(vpc.title, Description="VPC ID", Value=Ref(vpc)),
-            Output("PublicSubnets", Description="The public subnet IDs",
-                   Value=Join(",", [
-                       Ref(subnet)
-                       for subnet in public_subnet_list
-                   ])),
-            Output("PrivateSubnets", Description="The private subnet IDs",
-                   Value=Join(",", [
-                       Ref(subnet)
-                       for subnet in private_subnet_list
-                   ])),
-            Output(sg_for_ssh.title, Description="Security Group ID",
-                   Value=Ref(sg_for_ssh))
-        ]
+        output_list.extend([
+            Output(
+                vpc.title + "Id",
+                Description="VPC ID",
+                Value=Ref(vpc),
+                Export=Export(helper_fn_sub("{}-vpc-id", param_env_name)),
+                DependsOn=vpc,
+            ),
+            Output(
+                "PublicSubnetIds",
+                Description="comma delimited public subnet Ids",
+                Value=Join(
+                    ",",
+                    [
+                        Ref(subnet)
+                        for subnet in self.public_subnet_list
+                    ]
+                ),
+                Export=Export(helper_fn_sub("{}-public-subnet-ids", param_env_name)),
+                DependsOn=self.public_subnet_list,
+            ),
+            Output(
+                "PrivateSubnetIds",
+                Description="comma delimited private subnet Ids",
+                Value=Join(",",
+                           [
+                               Ref(subnet)
+                               for subnet in self.private_subnet_list
+                           ]
+                           ),
+                Export=Export(helper_fn_sub("{}-private-subnet-ids", param_env_name)),
+                DependsOn=self.private_subnet_list,
+            ),
+            Output(
+                sg_for_ssh_from_anywhere.title + "Id",
+                Description="Security Group ID",
+                Value=Ref(sg_for_ssh_from_anywhere),
+                Export=Export(helper_fn_sub("{}-sg-id-allow-ssh-from-anywhere", param_env_name))
+            )
+        ])
+
         for subnet in subnet_list:
-            output = Output(subnet.title, Description="{} ID".format(
-                subnet.title), Value=Ref(subnet))
-            outputs.append(output)
+            output = Output(
+                subnet.title+"Id",
+                Description="{} ID".format(subnet.title),
+                Value=Ref(subnet),
+                DependsOn=subnet,
+            )
+            output_list.append(output)
 
-        for output in outputs:
+        for output in output_list:
             template.add_output(output)
 
         common_tags = dict(
