@@ -15,7 +15,12 @@ def test():
         slugify, camelcase, helper_fn_sub,
         Sentinel, REQUIRED, NOTHING,
         link_stack_template, upload_template, package, deploy_stack,
+        StackManager,
+        canned
     )
+
+    _ = canned.iam.AWSServiceName
+    _ = canned.iam.AWSManagedPolicyArn
 
     from troposphere_mate import serverless
     from troposphere_mate import cloudtrail

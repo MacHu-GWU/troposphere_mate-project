@@ -30,6 +30,11 @@ try:
         slugify, camelcase, helper_fn_sub,
     )
     from .core.sentiel import Sentinel, REQUIRED, NOTHING
-    from .core.stack_deploy import upload_template, package, deploy_stack, link_stack_template
+    from .core.stack_deploy import (
+        upload_template, package, deploy_stack, link_stack_template,
+        StackManager,
+    )
+
+    from . import canned
 except ImportError as e:
     pass

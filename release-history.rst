@@ -4,13 +4,31 @@ Release and Version History
 ==============================================================================
 
 
-0.0.11 (TODO)
+0.0.12 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
 **Minor Improvements**
 
 **Bugfixes**
+
+**Miscellaneous**
+
+
+0.0.11 (TODO)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add ``StackManager`` utility class, make deploy cloudformation from troposphere_mate easy
+- now ``deploy_stack`` use ``cf_client`` as first argument
+
+**Minor Improvements**
+
+- now canned template can be visited from ``troposhere_mate.canned...`` syntax
+
+**Bugfixes**
+
+- fix canned VPC template
 
 **Miscellaneous**
 

@@ -23,7 +23,7 @@ def test():
     assert can.eip_list is not None
     assert can.ngw_list is not None
     assert can.public_route_table is not None
-    assert can.sg_for_ssh is not None
+    assert can.sg_for_ssh_from_anywhere is not None
 
 
 if __name__ == "__main__":
