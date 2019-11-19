@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import json
 import hashlib
+import json
+
 from troposphere.cloudformation import Stack
+
 from .mate import Template
 
 
@@ -227,3 +229,40 @@ def deploy_stack(cf_client,
         create_stack_kwargs = create_or_update_stack_kwargs
         create_stack_response = cf_client.create_stack(**create_stack_kwargs)
         return create_stack_response
+
+
+class StackManager(object):
+    def __init__(self, boto_ses, cft_bucket):
+        self.boto_ses = boto_ses
+        self.cft_bucket = cft_bucket
+
+    @property
+    def s3_client(self):
+        return self.boto_ses.client("s3")
+
+    @property
+    def cf_client(self):
+        return self.boto_ses.client("cloudformation")
+
+    def deploy(self,
+               template,
+               stack_name,
+               stack_tags=None,
+               stack_parameters=None,
+               execution_role_arn=None,
+               include_iam=False):
+        template_url = package(self.s3_client,
+                               template,
+                               self.cft_bucket,
+                               prefix=DEFAULT_CLOUDFORMATION_TEMPLATE_UPLOAD_PREFIX,
+                               verbose=False,
+                               _is_master=True)
+        deploy_stack(
+            self.cf_client,
+            stack_name,
+            template_url,
+            stack_tags=stack_tags,
+            stack_parameters=stack_parameters,
+            execution_role_arn=execution_role_arn,
+            include_iam=include_iam
+        )

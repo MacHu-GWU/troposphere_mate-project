@@ -4,11 +4,15 @@ import boto3
 from troposphere_mate import Template, apigateway, cloudformation
 from troposphere_mate.core.stack_deploy import (
     upload_template, link_stack_template, package, deploy_stack,
+    StackManager,
 )
 
-boto_ses = boto3.session.Session(profile_name="eq_sanhe")
-s3_client = boto_ses.client("s3")
+aws_profile = "eq_sanhe"
 bucket_name = "eq-sanhe-for-everything"
+
+boto_ses = boto3.session.Session(profile_name=aws_profile)
+s3_client = boto_ses.client("s3")
+cf_client = boto_ses.client("cloudformation")
 
 
 def test_upload_template():
@@ -142,7 +146,7 @@ def test_deploy_stack():
     )
 
     deploy_stack(
-        boto_ses=boto_ses,
+        cf_client=cf_client,
         stack_name="troposphere-mate-stack-deploy-test",
         template_url=template_url,
         stack_tags={"Creator": "Sanhe"},
@@ -150,3 +154,25 @@ def test_deploy_stack():
 
 
 # test_deploy_stack()
+
+
+stack_manager = StackManager(
+    boto_ses=boto_ses,
+    cft_bucket=bucket_name,
+)
+
+
+def test_stack_manager():
+    template = Template()
+    restapi = apigateway.RestApi(
+        "RestApi",
+        template=template,
+        Name="troposphere-mate-test",
+    )
+    stack_manager.deploy(
+        template,
+        stack_name="troposphere-mate-stack-manager-test",
+    )
+
+
+# test_stack_manager()
