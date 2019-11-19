@@ -9,6 +9,8 @@ tests/canned/*.json
 tests/core/*.json
 tests/*.json
 
+master.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

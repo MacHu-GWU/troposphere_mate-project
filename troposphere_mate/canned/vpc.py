@@ -31,15 +31,17 @@ class AZPropertyValues:
 
 class VPCTier(MultiEnvBasicConfig):
     VPC_CIDR_ID = Constant()  # an Integer between 0 - 255
+    N_PUBLIC_SUBNET = Constant()  # an Integer between 1-3
+    N_PRIVATE_SUBNET = Constant()  # an Integer between 1-3
+    USE_NAT_GW_PER_PRIVATE_SUBNET_FLAG = Constant()  # bool, True or False
+
+    SSH_ALLOWWED_IP_ADDRESSES = Constant(default="")  # string, delimited by comma
 
     VPC_CIDR = Derivable()
 
     @VPC_CIDR.getter
     def get_VPC_CIDR(self):
         return "10.{}.0.0/16".format(self.VPC_CIDR_ID.get_value())
-
-    N_PUBLIC_SUBNET = Constant()
-    N_PRIVATE_SUBNET = Constant()
 
     def get_nth_public_subnet_cidr(self, nth):
         return "10.{}.{}.0/24".format(
@@ -70,8 +72,6 @@ class VPCTier(MultiEnvBasicConfig):
             self.get_nth_private_subnet_cidr(nth)
             for nth in range(1, 1 + self.N_PUBLIC_SUBNET.get_value())
         ]
-
-    USE_NAT_GW_PER_PRIVATE_SUBNET_FLAG = Constant()
 
     @USE_NAT_GW_PER_PRIVATE_SUBNET_FLAG.validator
     def check_use_nat_gw_per_private_subnet_flag(self, value):
@@ -124,6 +124,7 @@ class VPCTier(MultiEnvBasicConfig):
             "VPC",
             template=template,
             CidrBlock=self.VPC_CIDR.get_value(),
+            EnableDnsHostnames=True,
         )
         self.vpc = vpc
 
@@ -241,6 +242,7 @@ class VPCTier(MultiEnvBasicConfig):
         for ind, subnet in enumerate(public_subnet_list):
             route_table_association = ec2.SubnetRouteTableAssociation(
                 "PublicSubnet{}RouteTableAssociation".format(ind + 1),
+                template=template,
                 RouteTableId=Ref(public_route_table),
                 SubnetId=Ref(subnet),
                 DependsOn=[public_route_table, subnet],
@@ -267,11 +269,12 @@ class VPCTier(MultiEnvBasicConfig):
                     template=template,
                     RouteTableId=Ref(private_route_table),
                     DestinationCidrBlock="0.0.0.0/0",
-                    GatewayId=Ref(ngw_list[ind]),
+                    NatGatewayId=Ref(ngw_list[ind]),
                     DependsOn=[private_route_table, ngw_list[ind]],
                 )
                 route_table_association = ec2.SubnetRouteTableAssociation(
                     "PrivateSubnet{}RouteTableAssociation".format(ind + 1),
+                    template=template,
                     RouteTableId=Ref(private_route_table),
                     SubnetId=Ref(subnet),
                     DependsOn=[private_route_table, subnet],
@@ -291,7 +294,7 @@ class VPCTier(MultiEnvBasicConfig):
                 template=template,
                 RouteTableId=Ref(private_route_table),
                 DestinationCidrBlock="0.0.0.0/0",
-                GatewayId=Ref(ngw_list[0]),
+                NatGatewayId=Ref(ngw_list[0]),
                 DependsOn=[private_route_table, ngw_list[0]],
             )
             for ind, subnet in enumerate(private_subnet_list):
@@ -365,7 +368,7 @@ class VPCTier(MultiEnvBasicConfig):
 
         for subnet in subnet_list:
             output = Output(
-                subnet.title+"Id",
+                subnet.title + "Id",
                 Description="{} ID".format(subnet.title),
                 Value=Ref(subnet),
                 DependsOn=subnet,

@@ -18,7 +18,7 @@ vpc_tier = VPCTier(
     USE_NAT_GW_PER_PRIVATE_SUBNET_FLAG=False,
 )
 vpc_tier.create_template()
-
+vpc_tier.template.to_file("master.json")
 template_url = upload_template(
     s3_client,
     template_content=vpc_tier.template.to_json(),
