@@ -39,6 +39,10 @@ class MixinReturnValues(object): # pragma: no cover
         return GetAtt(self, "Arn")
 
     @property
+    def iam_instance_profile(self):
+        return Ref(self)
+
+    @property
     def s3_bucket_name(self):
         return Ref(self)
 
