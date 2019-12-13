@@ -375,6 +375,31 @@ Example:
     assert len(tpl.outputs) == 0
 
 
+Deploy from Python
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    import boto3
+    from troposphere_mate import Template, StackManager
+
+    boto_ses = boto3.Session(profile_name="my-profile")
+    bucket_name = "my-cloudformation-upload-bucket"
+
+    stack_manager = StackManager(
+        boto_ses=boto_ses,
+        cft_bucket=bucket_name,
+    )
+
+    template = Template()
+    ... write your cloudformation template in troposphere_mate
+
+    stack_manager.deploy(
+        template,
+        stack_name="my-stack-dev",
+    )
+
+
 .. _install:
 
 Install
