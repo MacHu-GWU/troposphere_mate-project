@@ -1,4 +1,4 @@
-troposphere==2.4.9
+troposphere==2.5.3
 typing
 picage
 pathlib_mate
