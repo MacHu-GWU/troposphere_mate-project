@@ -6,3 +6,4 @@ wheel>=0.33.1   # make pre-compiled distribution package
 boto3
 superjson
 pysnooper
+attrs
