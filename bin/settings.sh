@@ -16,7 +16,7 @@ package_name="troposphere_mate"
 py_ver_major="3"
 py_ver_minor="6"
 py_ver_micro="2"
-use_pyenv="Y" # "Y" or "N"
+use_pyenv="N" # "Y" or "N"
 supported_py_versions="2.7.13 3.4.6 3.5.3 3.6.2" # e.g: "2.7.13 3.6.2"
 
 
