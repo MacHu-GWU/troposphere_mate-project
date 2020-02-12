@@ -10,6 +10,9 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 
 import troposphere.kinesisanalyticsv2
 
+# monkey patch
+troposphere.kinesisanalyticsv2.VALID_RUNTIME_ENVIRONMENTS = ('SQL-1_0', 'FLINK-1_6')
+
 from troposphere.kinesisanalyticsv2 import (
     ApplicationCodeConfiguration as _ApplicationCodeConfiguration,
     ApplicationConfiguration as _ApplicationConfiguration,
