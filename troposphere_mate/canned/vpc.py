@@ -300,6 +300,7 @@ class VPCTier(MultiEnvBasicConfig):
             for ind, subnet in enumerate(private_subnet_list):
                 route_table_association = ec2.SubnetRouteTableAssociation(
                     "PrivateSubnet{}RouteTableAssociation".format(ind + 1),
+                    template=template,
                     RouteTableId=Ref(private_route_table),
                     SubnetId=Ref(subnet),
                     DependsOn=[private_route_table, subnet],
