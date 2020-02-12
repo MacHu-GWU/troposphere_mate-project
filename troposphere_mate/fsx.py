@@ -12,6 +12,7 @@ import troposphere.fsx
 
 from troposphere.fsx import (
     LustreConfiguration as _LustreConfiguration,
+    SelfManagedActiveDirectoryConfiguration as _SelfManagedActiveDirectoryConfiguration,
     Tags as _Tags,
     WindowsConfiguration as _WindowsConfiguration,
 )
@@ -42,6 +43,29 @@ class LustreConfiguration(troposphere.fsx.LustreConfiguration, Mixin):
         super(LustreConfiguration, self).__init__(**processed_kwargs)
 
 
+class SelfManagedActiveDirectoryConfiguration(troposphere.fsx.SelfManagedActiveDirectoryConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 DnsIps=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 DomainName=NOTHING, # type: Union[str, AWSHelperFn]
+                 FileSystemAdministratorsGroup=NOTHING, # type: Union[str, AWSHelperFn]
+                 OrganizationalUnitDistinguishedName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Password=NOTHING, # type: Union[str, AWSHelperFn]
+                 UserName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DnsIps=DnsIps,
+            DomainName=DomainName,
+            FileSystemAdministratorsGroup=FileSystemAdministratorsGroup,
+            OrganizationalUnitDistinguishedName=OrganizationalUnitDistinguishedName,
+            Password=Password,
+            UserName=UserName,
+            **kwargs
+        )
+        super(SelfManagedActiveDirectoryConfiguration, self).__init__(**processed_kwargs)
+
+
 class WindowsConfiguration(troposphere.fsx.WindowsConfiguration, Mixin):
     def __init__(self,
                  title=None,
@@ -49,6 +73,7 @@ class WindowsConfiguration(troposphere.fsx.WindowsConfiguration, Mixin):
                  AutomaticBackupRetentionDays=NOTHING, # type: int
                  CopyTagsToBackups=NOTHING, # type: bool
                  DailyAutomaticBackupStartTime=NOTHING, # type: Union[str, AWSHelperFn]
+                 SelfManagedActiveDirectoryConfiguration=NOTHING, # type: _SelfManagedActiveDirectoryConfiguration
                  ThroughputCapacity=NOTHING, # type: int
                  WeeklyMaintenanceStartTime=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
@@ -58,6 +83,7 @@ class WindowsConfiguration(troposphere.fsx.WindowsConfiguration, Mixin):
             AutomaticBackupRetentionDays=AutomaticBackupRetentionDays,
             CopyTagsToBackups=CopyTagsToBackups,
             DailyAutomaticBackupStartTime=DailyAutomaticBackupStartTime,
+            SelfManagedActiveDirectoryConfiguration=SelfManagedActiveDirectoryConfiguration,
             ThroughputCapacity=ThroughputCapacity,
             WeeklyMaintenanceStartTime=WeeklyMaintenanceStartTime,
             **kwargs

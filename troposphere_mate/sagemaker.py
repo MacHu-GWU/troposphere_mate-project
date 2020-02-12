@@ -11,9 +11,12 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 import troposphere.sagemaker
 
 from troposphere.sagemaker import (
+    CognitoMemberDefinition as _CognitoMemberDefinition,
     ContainerDefinition as _ContainerDefinition,
     GitConfig as _GitConfig,
+    MemberDefinition as _MemberDefinition,
     NotebookInstanceLifecycleHook as _NotebookInstanceLifecycleHook,
+    NotificationConfiguration as _NotificationConfiguration,
     ProductionVariant as _ProductionVariant,
     Tags as _Tags,
     VpcConfig as _VpcConfig,
@@ -263,3 +266,71 @@ class NotebookInstance(troposphere.sagemaker.NotebookInstance, Mixin):
             **kwargs
         )
         super(NotebookInstance, self).__init__(**processed_kwargs)
+
+
+class CognitoMemberDefinition(troposphere.sagemaker.CognitoMemberDefinition, Mixin):
+    def __init__(self,
+                 title=None,
+                 CognitoClientId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CognitoUserGroup=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CognitoUserPool=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CognitoClientId=CognitoClientId,
+            CognitoUserGroup=CognitoUserGroup,
+            CognitoUserPool=CognitoUserPool,
+            **kwargs
+        )
+        super(CognitoMemberDefinition, self).__init__(**processed_kwargs)
+
+
+class MemberDefinition(troposphere.sagemaker.MemberDefinition, Mixin):
+    def __init__(self,
+                 title=None,
+                 CognitoMemberDefinition=REQUIRED, # type: _CognitoMemberDefinition
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CognitoMemberDefinition=CognitoMemberDefinition,
+            **kwargs
+        )
+        super(MemberDefinition, self).__init__(**processed_kwargs)
+
+
+class NotificationConfiguration(troposphere.sagemaker.NotificationConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 NotificationTopicArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            NotificationTopicArn=NotificationTopicArn,
+            **kwargs
+        )
+        super(NotificationConfiguration, self).__init__(**processed_kwargs)
+
+
+class Workteam(troposphere.sagemaker.Workteam, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 MemberDefinitions=NOTHING, # type: List[_MemberDefinition]
+                 NotificationConfiguration=NOTHING, # type: _NotificationConfiguration
+                 Tags=NOTHING, # type: _Tags
+                 WorkteamName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Description=Description,
+            MemberDefinitions=MemberDefinitions,
+            NotificationConfiguration=NotificationConfiguration,
+            Tags=Tags,
+            WorkteamName=WorkteamName,
+            **kwargs
+        )
+        super(Workteam, self).__init__(**processed_kwargs)

@@ -12,6 +12,7 @@ import troposphere.ask
 
 from troposphere.ask import (
     AuthenticationConfiguration as _AuthenticationConfiguration,
+    Overrides as _Overrides,
     SkillPackage as _SkillPackage,
 )
 
@@ -22,22 +23,20 @@ from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-class AuthenticationConfiguration(troposphere.ask.AuthenticationConfiguration, Mixin):
+class Overrides(troposphere.ask.Overrides, Mixin):
     def __init__(self,
                  title=None,
-                 DefaultAttributes=NOTHING, # type: json_checker
-                 DeviceTemplates=NOTHING, # type: json_checker
+                 Manifest=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
-            DefaultAttributes=DefaultAttributes,
-            DeviceTemplates=DeviceTemplates,
+            Manifest=Manifest,
             **kwargs
         )
-        super(AuthenticationConfiguration, self).__init__(**processed_kwargs)
+        super(Overrides, self).__init__(**processed_kwargs)
 
 
-class SkillPackage(troposphere.ask.SkillPackage, Mixin):
+class AuthenticationConfiguration(troposphere.ask.AuthenticationConfiguration, Mixin):
     def __init__(self,
                  title=None,
                  ClientId=REQUIRED, # type: Union[str, AWSHelperFn]
@@ -49,6 +48,27 @@ class SkillPackage(troposphere.ask.SkillPackage, Mixin):
             ClientId=ClientId,
             ClientSecret=ClientSecret,
             RefreshToken=RefreshToken,
+            **kwargs
+        )
+        super(AuthenticationConfiguration, self).__init__(**processed_kwargs)
+
+
+class SkillPackage(troposphere.ask.SkillPackage, Mixin):
+    def __init__(self,
+                 title=None,
+                 S3Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
+                 S3Key=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Overrides=NOTHING, # type: _Overrides
+                 S3BucketRole=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3ObjectVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            S3Bucket=S3Bucket,
+            S3Key=S3Key,
+            Overrides=Overrides,
+            S3BucketRole=S3BucketRole,
+            S3ObjectVersion=S3ObjectVersion,
             **kwargs
         )
         super(SkillPackage, self).__init__(**processed_kwargs)

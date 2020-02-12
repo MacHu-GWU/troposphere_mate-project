@@ -14,8 +14,10 @@ from troposphere.batch import (
     ComputeEnvironmentOrder as _ComputeEnvironmentOrder,
     ComputeResources as _ComputeResources,
     ContainerProperties as _ContainerProperties,
+    Device as _Device,
     Environment as _Environment,
     LaunchTemplateSpecification as _LaunchTemplateSpecification,
+    LinuxParameters as _LinuxParameters,
     MountPoints as _MountPoints,
     ResourceRequirement as _ResourceRequirement,
     RetryStrategy as _RetryStrategy,
@@ -59,6 +61,7 @@ class ComputeResources(troposphere.batch.ComputeResources, Mixin):
                  MinvCpus=REQUIRED, # type: int
                  InstanceRole=REQUIRED, # type: Union[str, AWSHelperFn]
                  InstanceTypes=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 AllocationStrategy=NOTHING, # type: Any
                  SpotIamFleetRole=NOTHING, # type: Union[str, AWSHelperFn]
                  BidPercentage=NOTHING, # type: int
                  LaunchTemplate=NOTHING, # type: _LaunchTemplateSpecification
@@ -77,6 +80,7 @@ class ComputeResources(troposphere.batch.ComputeResources, Mixin):
             MinvCpus=MinvCpus,
             InstanceRole=InstanceRole,
             InstanceTypes=InstanceTypes,
+            AllocationStrategy=AllocationStrategy,
             SpotIamFleetRole=SpotIamFleetRole,
             BidPercentage=BidPercentage,
             LaunchTemplate=LaunchTemplate,
@@ -88,6 +92,36 @@ class ComputeResources(troposphere.batch.ComputeResources, Mixin):
             **kwargs
         )
         super(ComputeResources, self).__init__(**processed_kwargs)
+
+
+class Device(troposphere.batch.Device, Mixin):
+    def __init__(self,
+                 title=None,
+                 ContainerPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 HostPath=NOTHING, # type: Union[str, AWSHelperFn]
+                 Permissions=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ContainerPath=ContainerPath,
+            HostPath=HostPath,
+            Permissions=Permissions,
+            **kwargs
+        )
+        super(Device, self).__init__(**processed_kwargs)
+
+
+class LinuxParameters(troposphere.batch.LinuxParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 Devices=NOTHING, # type: List[_Device]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Devices=Devices,
+            **kwargs
+        )
+        super(LinuxParameters, self).__init__(**processed_kwargs)
 
 
 class MountPoints(troposphere.batch.MountPoints, Mixin):
@@ -185,35 +219,39 @@ class Ulimit(troposphere.batch.Ulimit, Mixin):
 class ContainerProperties(troposphere.batch.ContainerProperties, Mixin):
     def __init__(self,
                  title=None,
+                 Image=REQUIRED, # type: Union[str, AWSHelperFn]
                  Memory=REQUIRED, # type: int
                  Vcpus=REQUIRED, # type: int
-                 Image=REQUIRED, # type: Union[str, AWSHelperFn]
-                 MountPoints=NOTHING, # type: List[_MountPoints]
-                 User=NOTHING, # type: Union[str, AWSHelperFn]
-                 Volumes=NOTHING, # type: List[_Volumes]
                  Command=NOTHING, # type: List[Union[str, AWSHelperFn]]
-                 Privileged=NOTHING, # type: bool
                  Environment=NOTHING, # type: List[_Environment]
+                 InstanceType=NOTHING, # type: Union[str, AWSHelperFn]
                  JobRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 LinuxParameters=NOTHING, # type: _LinuxParameters
+                 MountPoints=NOTHING, # type: List[_MountPoints]
+                 Privileged=NOTHING, # type: bool
                  ReadonlyRootFilesystem=NOTHING, # type: bool
                  ResourceRequirements=NOTHING, # type: List[_ResourceRequirement]
                  Ulimits=NOTHING, # type: List[_Ulimit]
+                 User=NOTHING, # type: Union[str, AWSHelperFn]
+                 Volumes=NOTHING, # type: List[_Volumes]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
+            Image=Image,
             Memory=Memory,
             Vcpus=Vcpus,
-            Image=Image,
-            MountPoints=MountPoints,
-            User=User,
-            Volumes=Volumes,
             Command=Command,
-            Privileged=Privileged,
             Environment=Environment,
+            InstanceType=InstanceType,
             JobRoleArn=JobRoleArn,
+            LinuxParameters=LinuxParameters,
+            MountPoints=MountPoints,
+            Privileged=Privileged,
             ReadonlyRootFilesystem=ReadonlyRootFilesystem,
             ResourceRequirements=ResourceRequirements,
             Ulimits=Ulimits,
+            User=User,
+            Volumes=Volumes,
             **kwargs
         )
         super(ContainerProperties, self).__init__(**processed_kwargs)

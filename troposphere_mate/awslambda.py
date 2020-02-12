@@ -15,7 +15,10 @@ from troposphere.awslambda import (
     Code as _Code,
     Content as _Content,
     DeadLetterConfig as _DeadLetterConfig,
+    DestinationConfig as _DestinationConfig,
     Environment as _Environment,
+    OnFailure as _OnFailure,
+    ProvisionedConcurrencyConfiguration as _ProvisionedConcurrencyConfiguration,
     Tags as _Tags,
     TracingConfig as _TracingConfig,
     VPCConfig as _VPCConfig,
@@ -63,6 +66,57 @@ class VPCConfig(troposphere.awslambda.VPCConfig, Mixin):
         super(VPCConfig, self).__init__(**processed_kwargs)
 
 
+class OnFailure(troposphere.awslambda.OnFailure, Mixin):
+    def __init__(self,
+                 title=None,
+                 Destination=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Destination=Destination,
+            **kwargs
+        )
+        super(OnFailure, self).__init__(**processed_kwargs)
+
+
+class DestinationConfig(troposphere.awslambda.DestinationConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 OnFailure=REQUIRED, # type: _OnFailure
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            OnFailure=OnFailure,
+            **kwargs
+        )
+        super(DestinationConfig, self).__init__(**processed_kwargs)
+
+
+class EventInvokeConfig(troposphere.awslambda.EventInvokeConfig, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 FunctionName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Qualifier=REQUIRED, # type: Union[str, AWSHelperFn]
+                 DestinationConfig=NOTHING, # type: _DestinationConfig
+                 MaximumEventAgeInSeconds=NOTHING, # type: int
+                 MaximumRetryAttempts=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            FunctionName=FunctionName,
+            Qualifier=Qualifier,
+            DestinationConfig=DestinationConfig,
+            MaximumEventAgeInSeconds=MaximumEventAgeInSeconds,
+            MaximumRetryAttempts=MaximumRetryAttempts,
+            **kwargs
+        )
+        super(EventInvokeConfig, self).__init__(**processed_kwargs)
+
+
 class EventSourceMapping(troposphere.awslambda.EventSourceMapping, Mixin):
     def __init__(self,
                  title, # type: str
@@ -71,7 +125,13 @@ class EventSourceMapping(troposphere.awslambda.EventSourceMapping, Mixin):
                  EventSourceArn=REQUIRED, # type: Union[str, AWSHelperFn]
                  FunctionName=REQUIRED, # type: Union[str, AWSHelperFn]
                  BatchSize=NOTHING, # type: int
+                 BisectBatchOnFunctionError=NOTHING, # type: bool
+                 DestinationConfig=NOTHING, # type: _DestinationConfig
                  Enabled=NOTHING, # type: bool
+                 MaximumBatchingWindowInSeconds=NOTHING, # type: int
+                 MaximumRecordAgeInSeconds=NOTHING, # type: int
+                 MaximumRetryAttempts=NOTHING, # type: int
+                 ParallelizationFactor=NOTHING, # type: int
                  StartingPosition=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -81,7 +141,13 @@ class EventSourceMapping(troposphere.awslambda.EventSourceMapping, Mixin):
             EventSourceArn=EventSourceArn,
             FunctionName=FunctionName,
             BatchSize=BatchSize,
+            BisectBatchOnFunctionError=BisectBatchOnFunctionError,
+            DestinationConfig=DestinationConfig,
             Enabled=Enabled,
+            MaximumBatchingWindowInSeconds=MaximumBatchingWindowInSeconds,
+            MaximumRecordAgeInSeconds=MaximumRecordAgeInSeconds,
+            MaximumRetryAttempts=MaximumRetryAttempts,
+            ParallelizationFactor=ParallelizationFactor,
             StartingPosition=StartingPosition,
             **kwargs
         )
@@ -229,6 +295,19 @@ class AliasRoutingConfiguration(troposphere.awslambda.AliasRoutingConfiguration,
         super(AliasRoutingConfiguration, self).__init__(**processed_kwargs)
 
 
+class ProvisionedConcurrencyConfiguration(troposphere.awslambda.ProvisionedConcurrencyConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ProvisionedConcurrentExecutions=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ProvisionedConcurrentExecutions=ProvisionedConcurrentExecutions,
+            **kwargs
+        )
+        super(ProvisionedConcurrencyConfiguration, self).__init__(**processed_kwargs)
+
+
 class Alias(troposphere.awslambda.Alias, Mixin):
     def __init__(self,
                  title, # type: str
@@ -238,6 +317,7 @@ class Alias(troposphere.awslambda.Alias, Mixin):
                  FunctionVersion=REQUIRED, # type: Union[str, AWSHelperFn]
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProvisionedConcurrencyConfig=NOTHING, # type: _ProvisionedConcurrencyConfiguration
                  RoutingConfig=NOTHING, # type: _AliasRoutingConfiguration
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -248,6 +328,7 @@ class Alias(troposphere.awslambda.Alias, Mixin):
             FunctionVersion=FunctionVersion,
             Name=Name,
             Description=Description,
+            ProvisionedConcurrencyConfig=ProvisionedConcurrencyConfig,
             RoutingConfig=RoutingConfig,
             **kwargs
         )
@@ -262,6 +343,7 @@ class Version(troposphere.awslambda.Version, Mixin):
                  FunctionName=REQUIRED, # type: Union[str, AWSHelperFn]
                  CodeSha256=NOTHING, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProvisionedConcurrencyConfig=NOTHING, # type: _ProvisionedConcurrencyConfiguration
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -270,6 +352,7 @@ class Version(troposphere.awslambda.Version, Mixin):
             FunctionName=FunctionName,
             CodeSha256=CodeSha256,
             Description=Description,
+            ProvisionedConcurrencyConfig=ProvisionedConcurrencyConfig,
             **kwargs
         )
         super(Version, self).__init__(**processed_kwargs)

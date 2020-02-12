@@ -174,6 +174,7 @@ class ReplicationGroup(troposphere.elasticache.ReplicationGroup, Mixin):
                  CacheSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
                  Engine=NOTHING, # type: Union[str, AWSHelperFn]
                  EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
                  NodeGroupConfiguration=NOTHING, # type: list
                  NotificationTopicArn=NOTHING, # type: Union[str, AWSHelperFn]
                  NumCacheClusters=NOTHING, # type: int
@@ -208,6 +209,7 @@ class ReplicationGroup(troposphere.elasticache.ReplicationGroup, Mixin):
             CacheSubnetGroupName=CacheSubnetGroupName,
             Engine=Engine,
             EngineVersion=EngineVersion,
+            KmsKeyId=KmsKeyId,
             NodeGroupConfiguration=NodeGroupConfiguration,
             NotificationTopicArn=NotificationTopicArn,
             NumCacheClusters=NumCacheClusters,
@@ -236,7 +238,7 @@ class NodeGroupConfiguration(troposphere.elasticache.NodeGroupConfiguration, Mix
                  title=None,
                  NodeGroupId=NOTHING, # type: Any
                  PrimaryAvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
-                 ReplicaAvailabilityZones=NOTHING, # type: Union[str, AWSHelperFn]
+                 ReplicaAvailabilityZones=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  ReplicaCount=NOTHING, # type: int
                  Slots=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):

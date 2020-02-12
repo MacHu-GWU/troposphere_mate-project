@@ -179,12 +179,14 @@ class Rule(troposphere.ssm.Rule, Mixin):
                  title=None,
                  ApproveAfterDays=NOTHING, # type: int
                  ComplianceLevel=NOTHING, # type: str
+                 EnableNonSecurity=NOTHING, # type: bool
                  PatchFilterGroup=NOTHING, # type: _PatchFilterGroup
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ApproveAfterDays=ApproveAfterDays,
             ComplianceLevel=ComplianceLevel,
+            EnableNonSecurity=EnableNonSecurity,
             PatchFilterGroup=PatchFilterGroup,
             **kwargs
         )
@@ -329,6 +331,10 @@ class MaintenanceWindow(troposphere.ssm.MaintenanceWindow, Mixin):
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  Schedule=REQUIRED, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 EndDate=NOTHING, # type: Union[str, AWSHelperFn]
+                 ScheduleTimezone=NOTHING, # type: Union[str, AWSHelperFn]
+                 StartDate=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -340,6 +346,10 @@ class MaintenanceWindow(troposphere.ssm.MaintenanceWindow, Mixin):
             Name=Name,
             Schedule=Schedule,
             Description=Description,
+            EndDate=EndDate,
+            ScheduleTimezone=ScheduleTimezone,
+            StartDate=StartDate,
+            Tags=Tags,
             **kwargs
         )
         super(MaintenanceWindow, self).__init__(**processed_kwargs)
@@ -423,6 +433,9 @@ class Parameter(troposphere.ssm.Parameter, Mixin):
                  AllowedPattern=NOTHING, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Policies=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: dict
+                 Tier=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -433,6 +446,9 @@ class Parameter(troposphere.ssm.Parameter, Mixin):
             AllowedPattern=AllowedPattern,
             Description=Description,
             Name=Name,
+            Policies=Policies,
+            Tags=Tags,
+            Tier=Tier,
             **kwargs
         )
         super(Parameter, self).__init__(**processed_kwargs)

@@ -11,6 +11,8 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 import troposphere.rds
 
 from troposphere.rds import (
+    DBClusterRole as _DBClusterRole,
+    DBInstanceRole as _DBInstanceRole,
     OptionConfiguration as _OptionConfiguration,
     OptionSetting as _OptionSetting,
     ProcessorFeature as _ProcessorFeature,
@@ -23,6 +25,23 @@ from troposphere import Template, AWSHelperFn
 from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
 from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
+
+
+class DBInstanceRole(troposphere.rds.DBInstanceRole, Mixin):
+    def __init__(self,
+                 title=None,
+                 FeatureName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Status=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            FeatureName=FeatureName,
+            RoleArn=RoleArn,
+            Status=Status,
+            **kwargs
+        )
+        super(DBInstanceRole, self).__init__(**processed_kwargs)
 
 
 class ProcessorFeature(troposphere.rds.ProcessorFeature, Mixin):
@@ -48,6 +67,7 @@ class DBInstance(troposphere.rds.DBInstance, Mixin):
                  DBInstanceClass=REQUIRED, # type: Union[str, AWSHelperFn]
                  AllocatedStorage=NOTHING, # type: int
                  AllowMajorVersionUpgrade=NOTHING, # type: bool
+                 AssociatedRoles=NOTHING, # type: List[_DBInstanceRole]
                  AutoMinorVersionUpgrade=NOTHING, # type: bool
                  AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
                  BackupRetentionPeriod=NOTHING, # type: Any
@@ -102,6 +122,7 @@ class DBInstance(troposphere.rds.DBInstance, Mixin):
             DBInstanceClass=DBInstanceClass,
             AllocatedStorage=AllocatedStorage,
             AllowMajorVersionUpgrade=AllowMajorVersionUpgrade,
+            AssociatedRoles=AssociatedRoles,
             AutoMinorVersionUpgrade=AutoMinorVersionUpgrade,
             AvailabilityZone=AvailabilityZone,
             BackupRetentionPeriod=BackupRetentionPeriod,
@@ -377,6 +398,23 @@ class DBClusterParameterGroup(troposphere.rds.DBClusterParameterGroup, Mixin):
         super(DBClusterParameterGroup, self).__init__(**processed_kwargs)
 
 
+class DBClusterRole(troposphere.rds.DBClusterRole, Mixin):
+    def __init__(self,
+                 title=None,
+                 RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FeatureName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Status=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RoleArn=RoleArn,
+            FeatureName=FeatureName,
+            Status=Status,
+            **kwargs
+        )
+        super(DBClusterRole, self).__init__(**processed_kwargs)
+
+
 class ScalingConfiguration(troposphere.rds.ScalingConfiguration, Mixin):
     def __init__(self,
                  title=None,
@@ -402,6 +440,7 @@ class DBCluster(troposphere.rds.DBCluster, Mixin):
                  template=None, # type: Template
                  validation=True, # type: bool
                  Engine=REQUIRED, # type: Any
+                 AssociatedRoles=NOTHING, # type: List[_DBClusterRole]
                  AvailabilityZones=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  BacktrackWindow=NOTHING, # type: Any
                  BackupRetentionPeriod=NOTHING, # type: Any
@@ -411,6 +450,7 @@ class DBCluster(troposphere.rds.DBCluster, Mixin):
                  DBSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
                  DeletionProtection=NOTHING, # type: bool
                  EnableCloudwatchLogsExports=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 EnableHttpEndpoint=NOTHING, # type: bool
                  EnableIAMDatabaseAuthentication=NOTHING, # type: bool
                  EngineMode=NOTHING, # type: Any
                  EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
@@ -421,11 +461,14 @@ class DBCluster(troposphere.rds.DBCluster, Mixin):
                  PreferredBackupWindow=NOTHING, # type: Any
                  PreferredMaintenanceWindow=NOTHING, # type: Union[str, AWSHelperFn]
                  ReplicationSourceIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 RestoreType=NOTHING, # type: Union[str, AWSHelperFn]
                  ScalingConfiguration=NOTHING, # type: _ScalingConfiguration
-                 SourceRegion=NOTHING, # type: Union[str, AWSHelperFn]
                  SnapshotIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceDBClusterIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
+                 SourceRegion=NOTHING, # type: Union[str, AWSHelperFn]
                  StorageEncrypted=NOTHING, # type: bool
                  Tags=NOTHING, # type: Union[_Tags, list]
+                 UseLatestRestorableTime=NOTHING, # type: bool
                  VpcSecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -433,6 +476,7 @@ class DBCluster(troposphere.rds.DBCluster, Mixin):
             template=template,
             validation=validation,
             Engine=Engine,
+            AssociatedRoles=AssociatedRoles,
             AvailabilityZones=AvailabilityZones,
             BacktrackWindow=BacktrackWindow,
             BackupRetentionPeriod=BackupRetentionPeriod,
@@ -442,6 +486,7 @@ class DBCluster(troposphere.rds.DBCluster, Mixin):
             DBSubnetGroupName=DBSubnetGroupName,
             DeletionProtection=DeletionProtection,
             EnableCloudwatchLogsExports=EnableCloudwatchLogsExports,
+            EnableHttpEndpoint=EnableHttpEndpoint,
             EnableIAMDatabaseAuthentication=EnableIAMDatabaseAuthentication,
             EngineMode=EngineMode,
             EngineVersion=EngineVersion,
@@ -452,11 +497,14 @@ class DBCluster(troposphere.rds.DBCluster, Mixin):
             PreferredBackupWindow=PreferredBackupWindow,
             PreferredMaintenanceWindow=PreferredMaintenanceWindow,
             ReplicationSourceIdentifier=ReplicationSourceIdentifier,
+            RestoreType=RestoreType,
             ScalingConfiguration=ScalingConfiguration,
-            SourceRegion=SourceRegion,
             SnapshotIdentifier=SnapshotIdentifier,
+            SourceDBClusterIdentifier=SourceDBClusterIdentifier,
+            SourceRegion=SourceRegion,
             StorageEncrypted=StorageEncrypted,
             Tags=Tags,
+            UseLatestRestorableTime=UseLatestRestorableTime,
             VpcSecurityGroupIds=VpcSecurityGroupIds,
             **kwargs
         )

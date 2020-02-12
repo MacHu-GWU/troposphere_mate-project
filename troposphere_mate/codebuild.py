@@ -325,6 +325,7 @@ class Project(troposphere.codebuild.Project, Mixin):
                  SecondaryArtifacts=NOTHING, # type: List[_Artifacts]
                  SecondarySourceVersions=NOTHING, # type: List[_ProjectSourceVersion]
                  SecondarySources=NOTHING, # type: List[_Source]
+                 SourceVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  Tags=NOTHING, # type: _Tags
                  TimeoutInMinutes=NOTHING, # type: int
                  Triggers=NOTHING, # type: _ProjectTriggers
@@ -347,6 +348,7 @@ class Project(troposphere.codebuild.Project, Mixin):
             SecondaryArtifacts=SecondaryArtifacts,
             SecondarySourceVersions=SecondarySourceVersions,
             SecondarySources=SecondarySources,
+            SourceVersion=SourceVersion,
             Tags=Tags,
             TimeoutInMinutes=TimeoutInMinutes,
             Triggers=Triggers,

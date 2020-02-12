@@ -48,7 +48,7 @@ class BackupRuleResourceType(troposphere.backup.BackupRuleResourceType, Mixin):
                  TargetBackupVault=REQUIRED, # type: Union[str, AWSHelperFn]
                  CompletionWindowMinutes=NOTHING, # type: float
                  Lifecycle=NOTHING, # type: _LifecycleResourceType
-                 RecoveryPointTags=NOTHING, # type: json_checker
+                 RecoveryPointTags=NOTHING, # type: dict
                  ScheduleExpression=NOTHING, # type: Union[str, AWSHelperFn]
                  StartWindowMinutes=NOTHING, # type: float
                  **kwargs):
@@ -177,7 +177,7 @@ class BackupVault(troposphere.backup.BackupVault, Mixin):
                  validation=True, # type: bool
                  BackupVaultName=REQUIRED, # type: str
                  AccessPolicy=NOTHING, # type: json_checker
-                 BackupVaultTags=NOTHING, # type: json_checker
+                 BackupVaultTags=NOTHING, # type: dict
                  EncryptionKeyArn=NOTHING, # type: Union[str, AWSHelperFn]
                  Notifications=NOTHING, # type: _NotificationObjectType
                  **kwargs):

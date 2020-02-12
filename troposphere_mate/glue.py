@@ -12,6 +12,7 @@ import troposphere.glue
 
 from troposphere.glue import (
     Action as _Action,
+    CatalogTarget as _CatalogTarget,
     CloudWatchEncryption as _CloudWatchEncryption,
     Column as _Column,
     Condition as _Condition,
@@ -21,14 +22,19 @@ from troposphere.glue import (
     CsvClassifier as _CsvClassifier,
     DataCatalogEncryptionSettingsProperty as _DataCatalogEncryptionSettingsProperty,
     DatabaseInput as _DatabaseInput,
+    DynamoDBTarget as _DynamoDBTarget,
     EncryptionAtRest as _EncryptionAtRest,
     EncryptionConfiguration as _EncryptionConfiguration,
     ExecutionProperty as _ExecutionProperty,
+    FindMatchesParameters as _FindMatchesParameters,
+    GlueTables as _GlueTables,
     GrokClassifier as _GrokClassifier,
+    InputRecordTables as _InputRecordTables,
     JdbcTarget as _JdbcTarget,
     JobBookmarksEncryption as _JobBookmarksEncryption,
     JobCommand as _JobCommand,
     JsonClassifier as _JsonClassifier,
+    NotificationProperty as _NotificationProperty,
     Order as _Order,
     PartitionInput as _PartitionInput,
     PhysicalConnectionRequirements as _PhysicalConnectionRequirements,
@@ -41,8 +47,8 @@ from troposphere.glue import (
     SkewedInfo as _SkewedInfo,
     StorageDescriptor as _StorageDescriptor,
     TableInput as _TableInput,
-    Tags as _Tags,
     Targets as _Targets,
+    TransformParameters as _TransformParameters,
     XMLClassifier as _XMLClassifier,
 )
 
@@ -239,6 +245,34 @@ class SchemaChangePolicy(troposphere.glue.SchemaChangePolicy, Mixin):
         super(SchemaChangePolicy, self).__init__(**processed_kwargs)
 
 
+class CatalogTarget(troposphere.glue.CatalogTarget, Mixin):
+    def __init__(self,
+                 title=None,
+                 DatabaseName=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tables=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DatabaseName=DatabaseName,
+            Tables=Tables,
+            **kwargs
+        )
+        super(CatalogTarget, self).__init__(**processed_kwargs)
+
+
+class DynamoDBTarget(troposphere.glue.DynamoDBTarget, Mixin):
+    def __init__(self,
+                 title=None,
+                 Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Path=Path,
+            **kwargs
+        )
+        super(DynamoDBTarget, self).__init__(**processed_kwargs)
+
+
 class JdbcTarget(troposphere.glue.JdbcTarget, Mixin):
     def __init__(self,
                  title=None,
@@ -274,11 +308,15 @@ class S3Target(troposphere.glue.S3Target, Mixin):
 class Targets(troposphere.glue.Targets, Mixin):
     def __init__(self,
                  title=None,
+                 CatalogTargets=NOTHING, # type: List[_CatalogTarget]
+                 DynamoDBTargets=NOTHING, # type: List[_DynamoDBTarget]
                  JdbcTargets=NOTHING, # type: List[_JdbcTarget]
                  S3Targets=NOTHING, # type: List[_S3Target]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
+            CatalogTargets=CatalogTargets,
+            DynamoDBTargets=DynamoDBTargets,
             JdbcTargets=JdbcTargets,
             S3Targets=S3Targets,
             **kwargs
@@ -302,7 +340,7 @@ class Crawler(troposphere.glue.Crawler, Mixin):
                  Schedule=NOTHING, # type: _Schedule
                  SchemaChangePolicy=NOTHING, # type: _SchemaChangePolicy
                  TablePrefix=NOTHING, # type: Union[str, AWSHelperFn]
-                 Tags=NOTHING, # type: _Tags
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -432,31 +470,39 @@ class DevEndpoint(troposphere.glue.DevEndpoint, Mixin):
                  title, # type: str
                  template=None, # type: Template
                  validation=True, # type: bool
-                 PublicKey=REQUIRED, # type: Union[str, AWSHelperFn]
                  RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Arguments=NOTHING, # type: dict
                  EndpointName=NOTHING, # type: Union[str, AWSHelperFn]
                  ExtraJarsS3Path=NOTHING, # type: Union[str, AWSHelperFn]
                  ExtraPythonLibsS3Path=NOTHING, # type: Union[str, AWSHelperFn]
+                 GlueVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  NumberOfNodes=NOTHING, # type: int
+                 NumberOfWorkers=NOTHING, # type: int
+                 PublicKey=NOTHING, # type: Union[str, AWSHelperFn]
                  SecurityConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
                  SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  SubnetId=NOTHING, # type: Union[str, AWSHelperFn]
-                 Tags=NOTHING, # type: _Tags
+                 Tags=NOTHING, # type: dict
+                 WorkerType=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             template=template,
             validation=validation,
-            PublicKey=PublicKey,
             RoleArn=RoleArn,
+            Arguments=Arguments,
             EndpointName=EndpointName,
             ExtraJarsS3Path=ExtraJarsS3Path,
             ExtraPythonLibsS3Path=ExtraPythonLibsS3Path,
+            GlueVersion=GlueVersion,
             NumberOfNodes=NumberOfNodes,
+            NumberOfWorkers=NumberOfWorkers,
+            PublicKey=PublicKey,
             SecurityConfiguration=SecurityConfiguration,
             SecurityGroupIds=SecurityGroupIds,
             SubnetId=SubnetId,
             Tags=Tags,
+            WorkerType=WorkerType,
             **kwargs
         )
         super(DevEndpoint, self).__init__(**processed_kwargs)
@@ -492,15 +538,30 @@ class JobCommand(troposphere.glue.JobCommand, Mixin):
     def __init__(self,
                  title=None,
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 PythonVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  ScriptLocation=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Name=Name,
+            PythonVersion=PythonVersion,
             ScriptLocation=ScriptLocation,
             **kwargs
         )
         super(JobCommand, self).__init__(**processed_kwargs)
+
+
+class NotificationProperty(troposphere.glue.NotificationProperty, Mixin):
+    def __init__(self,
+                 title=None,
+                 NotifyDelayAfter=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            NotifyDelayAfter=NotifyDelayAfter,
+            **kwargs
+        )
+        super(NotificationProperty, self).__init__(**processed_kwargs)
 
 
 class Job(troposphere.glue.Job, Mixin):
@@ -515,11 +576,17 @@ class Job(troposphere.glue.Job, Mixin):
                  DefaultArguments=NOTHING, # type: dict
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  ExecutionProperty=NOTHING, # type: _ExecutionProperty
+                 GlueVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  LogUri=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaxCapacity=NOTHING, # type: float
                  MaxRetries=NOTHING, # type: float
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 NotificationProperty=NOTHING, # type: _NotificationProperty
+                 NumberOfWorkers=NOTHING, # type: int
                  SecurityConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
-                 Tags=NOTHING, # type: _Tags
+                 Tags=NOTHING, # type: dict
+                 Timeout=NOTHING, # type: int
+                 WorkerType=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -532,14 +599,123 @@ class Job(troposphere.glue.Job, Mixin):
             DefaultArguments=DefaultArguments,
             Description=Description,
             ExecutionProperty=ExecutionProperty,
+            GlueVersion=GlueVersion,
             LogUri=LogUri,
+            MaxCapacity=MaxCapacity,
             MaxRetries=MaxRetries,
             Name=Name,
+            NotificationProperty=NotificationProperty,
+            NumberOfWorkers=NumberOfWorkers,
             SecurityConfiguration=SecurityConfiguration,
             Tags=Tags,
+            Timeout=Timeout,
+            WorkerType=WorkerType,
             **kwargs
         )
         super(Job, self).__init__(**processed_kwargs)
+
+
+class GlueTables(troposphere.glue.GlueTables, Mixin):
+    def __init__(self,
+                 title=None,
+                 DatabaseName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TableName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CatalogId=NOTHING, # type: Union[str, AWSHelperFn]
+                 ConnectionName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DatabaseName=DatabaseName,
+            TableName=TableName,
+            CatalogId=CatalogId,
+            ConnectionName=ConnectionName,
+            **kwargs
+        )
+        super(GlueTables, self).__init__(**processed_kwargs)
+
+
+class InputRecordTables(troposphere.glue.InputRecordTables, Mixin):
+    def __init__(self,
+                 title=None,
+                 GlueTables=NOTHING, # type: List[_GlueTables]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            GlueTables=GlueTables,
+            **kwargs
+        )
+        super(InputRecordTables, self).__init__(**processed_kwargs)
+
+
+class FindMatchesParameters(troposphere.glue.FindMatchesParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 PrimaryKeyColumnName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccuracyCostTradeoff=NOTHING, # type: float
+                 EnforceProvidedLabels=NOTHING, # type: bool
+                 PrecisionRecallTradeoff=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            PrimaryKeyColumnName=PrimaryKeyColumnName,
+            AccuracyCostTradeoff=AccuracyCostTradeoff,
+            EnforceProvidedLabels=EnforceProvidedLabels,
+            PrecisionRecallTradeoff=PrecisionRecallTradeoff,
+            **kwargs
+        )
+        super(FindMatchesParameters, self).__init__(**processed_kwargs)
+
+
+class TransformParameters(troposphere.glue.TransformParameters, Mixin):
+    def __init__(self,
+                 title=None,
+                 TransformType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 FindMatchesParameters=NOTHING, # type: _FindMatchesParameters
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TransformType=TransformType,
+            FindMatchesParameters=FindMatchesParameters,
+            **kwargs
+        )
+        super(TransformParameters, self).__init__(**processed_kwargs)
+
+
+class MLTransform(troposphere.glue.MLTransform, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 InputRecordTables=REQUIRED, # type: _InputRecordTables
+                 Role=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TransformParameters=REQUIRED, # type: _TransformParameters
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 GlueVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaxCapacity=NOTHING, # type: float
+                 MaxRetries=NOTHING, # type: int
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 NumberOfWorkers=NOTHING, # type: int
+                 Timeout=NOTHING, # type: int
+                 WorkerType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            InputRecordTables=InputRecordTables,
+            Role=Role,
+            TransformParameters=TransformParameters,
+            Description=Description,
+            GlueVersion=GlueVersion,
+            MaxCapacity=MaxCapacity,
+            MaxRetries=MaxRetries,
+            Name=Name,
+            NumberOfWorkers=NumberOfWorkers,
+            Timeout=Timeout,
+            WorkerType=WorkerType,
+            **kwargs
+        )
+        super(MLTransform, self).__init__(**processed_kwargs)
 
 
 class Column(troposphere.glue.Column, Mixin):
@@ -816,12 +992,14 @@ class Action(troposphere.glue.Action, Mixin):
     def __init__(self,
                  title=None,
                  Arguments=NOTHING, # type: dict
+                 CrawlerName=NOTHING, # type: Union[str, AWSHelperFn]
                  JobName=NOTHING, # type: Union[str, AWSHelperFn]
                  SecurityConfiguration=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Arguments=Arguments,
+            CrawlerName=CrawlerName,
             JobName=JobName,
             SecurityConfiguration=SecurityConfiguration,
             **kwargs
@@ -832,12 +1010,16 @@ class Action(troposphere.glue.Action, Mixin):
 class Condition(troposphere.glue.Condition, Mixin):
     def __init__(self,
                  title=None,
+                 CrawlerName=NOTHING, # type: Union[str, AWSHelperFn]
+                 CrawlState=NOTHING, # type: Union[str, AWSHelperFn]
                  JobName=NOTHING, # type: Union[str, AWSHelperFn]
                  LogicalOperator=NOTHING, # type: Union[str, AWSHelperFn]
                  State=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
+            CrawlerName=CrawlerName,
+            CrawlState=CrawlState,
             JobName=JobName,
             LogicalOperator=LogicalOperator,
             State=State,
@@ -867,12 +1049,14 @@ class Trigger(troposphere.glue.Trigger, Mixin):
                  template=None, # type: Template
                  validation=True, # type: bool
                  Actions=REQUIRED, # type: List[_Action]
-                 Type=REQUIRED, # type: Any
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
                  Predicate=NOTHING, # type: _Predicate
                  Schedule=NOTHING, # type: Union[str, AWSHelperFn]
-                 Tags=NOTHING, # type: _Tags
+                 StartOnCreation=NOTHING, # type: bool
+                 Tags=NOTHING, # type: dict
+                 WorkflowName=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -884,7 +1068,32 @@ class Trigger(troposphere.glue.Trigger, Mixin):
             Name=Name,
             Predicate=Predicate,
             Schedule=Schedule,
+            StartOnCreation=StartOnCreation,
             Tags=Tags,
+            WorkflowName=WorkflowName,
             **kwargs
         )
         super(Trigger, self).__init__(**processed_kwargs)
+
+
+class Workflow(troposphere.glue.Workflow, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 DefaultRunProperties=NOTHING, # type: dict
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            DefaultRunProperties=DefaultRunProperties,
+            Description=Description,
+            Name=Name,
+            Tags=Tags,
+            **kwargs
+        )
+        super(Workflow, self).__init__(**processed_kwargs)

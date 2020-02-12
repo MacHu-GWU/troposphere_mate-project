@@ -87,6 +87,7 @@ class ConnectorDefinition(troposphere.greengrass.ConnectorDefinition, Mixin):
                  validation=True, # type: bool
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _ConnectorDefinitionVersion
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -94,6 +95,7 @@ class ConnectorDefinition(troposphere.greengrass.ConnectorDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            Tags=Tags,
             **kwargs
         )
         super(ConnectorDefinition, self).__init__(**processed_kwargs)
@@ -159,6 +161,7 @@ class CoreDefinition(troposphere.greengrass.CoreDefinition, Mixin):
                  validation=True, # type: bool
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _CoreDefinitionVersion
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -166,6 +169,7 @@ class CoreDefinition(troposphere.greengrass.CoreDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            Tags=Tags,
             **kwargs
         )
         super(CoreDefinition, self).__init__(**processed_kwargs)
@@ -231,6 +235,7 @@ class DeviceDefinition(troposphere.greengrass.DeviceDefinition, Mixin):
                  validation=True, # type: bool
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _DeviceDefinitionVersion
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -238,6 +243,7 @@ class DeviceDefinition(troposphere.greengrass.DeviceDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            Tags=Tags,
             **kwargs
         )
         super(DeviceDefinition, self).__init__(**processed_kwargs)
@@ -405,6 +411,7 @@ class FunctionDefinition(troposphere.greengrass.FunctionDefinition, Mixin):
                  validation=True, # type: bool
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _FunctionDefinitionVersion
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -412,6 +419,7 @@ class FunctionDefinition(troposphere.greengrass.FunctionDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            Tags=Tags,
             **kwargs
         )
         super(FunctionDefinition, self).__init__(**processed_kwargs)
@@ -473,6 +481,7 @@ class Group(troposphere.greengrass.Group, Mixin):
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _GroupVersion
                  RoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -481,6 +490,7 @@ class Group(troposphere.greengrass.Group, Mixin):
             Name=Name,
             InitialVersion=InitialVersion,
             RoleArn=RoleArn,
+            Tags=Tags,
             **kwargs
         )
         super(Group, self).__init__(**processed_kwargs)
@@ -560,6 +570,7 @@ class LoggerDefinition(troposphere.greengrass.LoggerDefinition, Mixin):
                  validation=True, # type: bool
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _LoggerDefinitionVersion
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -567,6 +578,7 @@ class LoggerDefinition(troposphere.greengrass.LoggerDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            Tags=Tags,
             **kwargs
         )
         super(LoggerDefinition, self).__init__(**processed_kwargs)
@@ -743,6 +755,7 @@ class ResourceDefinition(troposphere.greengrass.ResourceDefinition, Mixin):
                  validation=True, # type: bool
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _ResourceDefinitionVersion
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -750,6 +763,7 @@ class ResourceDefinition(troposphere.greengrass.ResourceDefinition, Mixin):
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            Tags=Tags,
             **kwargs
         )
         super(ResourceDefinition, self).__init__(**processed_kwargs)
@@ -813,6 +827,7 @@ class SubscriptionDefinition(troposphere.greengrass.SubscriptionDefinition, Mixi
                  validation=True, # type: bool
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  InitialVersion=NOTHING, # type: _SubscriptionDefinitionVersionProperty
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -820,6 +835,7 @@ class SubscriptionDefinition(troposphere.greengrass.SubscriptionDefinition, Mixi
             validation=validation,
             Name=Name,
             InitialVersion=InitialVersion,
+            Tags=Tags,
             **kwargs
         )
         super(SubscriptionDefinition, self).__init__(**processed_kwargs)

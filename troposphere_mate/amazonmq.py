@@ -12,6 +12,7 @@ import troposphere.amazonmq
 
 from troposphere.amazonmq import (
     ConfigurationId as _ConfigurationId,
+    EncryptionOptions as _EncryptionOptions,
     LogsConfiguration as _LogsConfiguration,
     MaintenanceWindow as _MaintenanceWindow,
     Tags as _Tags,
@@ -38,6 +39,21 @@ class ConfigurationId(troposphere.amazonmq.ConfigurationId, Mixin):
             **kwargs
         )
         super(ConfigurationId, self).__init__(**processed_kwargs)
+
+
+class EncryptionOptions(troposphere.amazonmq.EncryptionOptions, Mixin):
+    def __init__(self,
+                 title=None,
+                 UseAwsOwnedKey=REQUIRED, # type: bool
+                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            UseAwsOwnedKey=UseAwsOwnedKey,
+            KmsKeyId=KmsKeyId,
+            **kwargs
+        )
+        super(EncryptionOptions, self).__init__(**processed_kwargs)
 
 
 class MaintenanceWindow(troposphere.amazonmq.MaintenanceWindow, Mixin):
@@ -105,6 +121,7 @@ class Broker(troposphere.amazonmq.Broker, Mixin):
                  HostInstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
                  PubliclyAccessible=REQUIRED, # type: bool
                  Configuration=NOTHING, # type: _ConfigurationId
+                 EncryptionOptions=NOTHING, # type: _EncryptionOptions
                  Logs=NOTHING, # type: _LogsConfiguration
                  MaintenanceWindowStartTime=NOTHING, # type: _MaintenanceWindow
                  SecurityGroups=NOTHING, # type: List[Union[str, AWSHelperFn]]
@@ -124,6 +141,7 @@ class Broker(troposphere.amazonmq.Broker, Mixin):
             HostInstanceType=HostInstanceType,
             PubliclyAccessible=PubliclyAccessible,
             Configuration=Configuration,
+            EncryptionOptions=EncryptionOptions,
             Logs=Logs,
             MaintenanceWindowStartTime=MaintenanceWindowStartTime,
             SecurityGroups=SecurityGroups,

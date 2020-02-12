@@ -18,6 +18,7 @@ from troposphere.applicationautoscaling import (
     ScheduledAction as _ScheduledAction,
     StepAdjustment as _StepAdjustment,
     StepScalingPolicyConfiguration as _StepScalingPolicyConfiguration,
+    SuspendedState as _SuspendedState,
     TargetTrackingScalingPolicyConfiguration as _TargetTrackingScalingPolicyConfiguration,
 )
 
@@ -64,6 +65,23 @@ class ScheduledAction(troposphere.applicationautoscaling.ScheduledAction, Mixin)
         super(ScheduledAction, self).__init__(**processed_kwargs)
 
 
+class SuspendedState(troposphere.applicationautoscaling.SuspendedState, Mixin):
+    def __init__(self,
+                 title=None,
+                 DynamicScalingInSuspended=NOTHING, # type: bool
+                 DynamicScalingOutSuspended=NOTHING, # type: bool
+                 ScheduledScalingSuspended=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DynamicScalingInSuspended=DynamicScalingInSuspended,
+            DynamicScalingOutSuspended=DynamicScalingOutSuspended,
+            ScheduledScalingSuspended=ScheduledScalingSuspended,
+            **kwargs
+        )
+        super(SuspendedState, self).__init__(**processed_kwargs)
+
+
 class ScalableTarget(troposphere.applicationautoscaling.ScalableTarget, Mixin):
     def __init__(self,
                  title, # type: str
@@ -76,6 +94,7 @@ class ScalableTarget(troposphere.applicationautoscaling.ScalableTarget, Mixin):
                  ScalableDimension=REQUIRED, # type: Union[str, AWSHelperFn]
                  ServiceNamespace=REQUIRED, # type: Union[str, AWSHelperFn]
                  ScheduledActions=NOTHING, # type: List[_ScheduledAction]
+                 SuspendedState=NOTHING, # type: _SuspendedState
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -88,6 +107,7 @@ class ScalableTarget(troposphere.applicationautoscaling.ScalableTarget, Mixin):
             ScalableDimension=ScalableDimension,
             ServiceNamespace=ServiceNamespace,
             ScheduledActions=ScheduledActions,
+            SuspendedState=SuspendedState,
             **kwargs
         )
         super(ScalableTarget, self).__init__(**processed_kwargs)

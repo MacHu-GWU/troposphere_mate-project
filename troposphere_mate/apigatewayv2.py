@@ -12,7 +12,10 @@ import troposphere.apigatewayv2
 
 from troposphere.apigatewayv2 import (
     AccessLogSettings as _AccessLogSettings,
+    BodyS3Location as _BodyS3Location,
+    Cors as _Cors,
     DomainNameConfiguration as _DomainNameConfiguration,
+    JWTConfiguration as _JWTConfiguration,
     RouteSettings as _RouteSettings,
 )
 
@@ -23,40 +26,46 @@ from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-class AccessLogSettings(troposphere.apigatewayv2.AccessLogSettings, Mixin):
+class BodyS3Location(troposphere.apigatewayv2.BodyS3Location, Mixin):
     def __init__(self,
                  title=None,
-                 DestinationArn=NOTHING, # type: Union[str, AWSHelperFn]
-                 Format=NOTHING, # type: Union[str, AWSHelperFn]
+                 Bucket=NOTHING, # type: Union[str, AWSHelperFn]
+                 Etag=NOTHING, # type: Union[str, AWSHelperFn]
+                 Key=NOTHING, # type: Union[str, AWSHelperFn]
+                 Version=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
-            DestinationArn=DestinationArn,
-            Format=Format,
+            Bucket=Bucket,
+            Etag=Etag,
+            Key=Key,
+            Version=Version,
             **kwargs
         )
-        super(AccessLogSettings, self).__init__(**processed_kwargs)
+        super(BodyS3Location, self).__init__(**processed_kwargs)
 
 
-class RouteSettings(troposphere.apigatewayv2.RouteSettings, Mixin):
+class Cors(troposphere.apigatewayv2.Cors, Mixin):
     def __init__(self,
                  title=None,
-                 DataTraceEnabled=NOTHING, # type: Union[str, AWSHelperFn]
-                 DetailedMetricsEnabled=NOTHING, # type: bool
-                 LoggingLevel=NOTHING, # type: Any
-                 ThrottlingBurstLimit=NOTHING, # type: int
-                 ThrottlingRateLimit=NOTHING, # type: float
+                 AllowCredentials=NOTHING, # type: bool
+                 AllowHeaders=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 AllowMethods=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 AllowOrigins=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 ExposeHeaders=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 MaxAge=NOTHING, # type: int
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
-            DataTraceEnabled=DataTraceEnabled,
-            DetailedMetricsEnabled=DetailedMetricsEnabled,
-            LoggingLevel=LoggingLevel,
-            ThrottlingBurstLimit=ThrottlingBurstLimit,
-            ThrottlingRateLimit=ThrottlingRateLimit,
+            AllowCredentials=AllowCredentials,
+            AllowHeaders=AllowHeaders,
+            AllowMethods=AllowMethods,
+            AllowOrigins=AllowOrigins,
+            ExposeHeaders=ExposeHeaders,
+            MaxAge=MaxAge,
             **kwargs
         )
-        super(RouteSettings, self).__init__(**processed_kwargs)
+        super(Cors, self).__init__(**processed_kwargs)
 
 
 class Api(troposphere.apigatewayv2.Api, Mixin):
@@ -64,24 +73,42 @@ class Api(troposphere.apigatewayv2.Api, Mixin):
                  title, # type: str
                  template=None, # type: Template
                  validation=True, # type: bool
-                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
-                 ProtocolType=REQUIRED, # type: Union[str, AWSHelperFn]
-                 RouteSelectionExpression=REQUIRED, # type: Union[str, AWSHelperFn]
                  ApiKeySelectionExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 BasePath=NOTHING, # type: Union[str, AWSHelperFn]
+                 Body=NOTHING, # type: dict
+                 BodyS3Location=NOTHING, # type: _BodyS3Location
+                 CorsConfiguration=NOTHING, # type: _Cors
+                 CredentialsArn=NOTHING, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  DisableSchemaValidation=NOTHING, # type: bool
+                 FailOnWarnings=NOTHING, # type: bool
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 ProtocolType=NOTHING, # type: Union[str, AWSHelperFn]
+                 RouteKey=NOTHING, # type: Union[str, AWSHelperFn]
+                 RouteSelectionExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: dict
+                 Target=NOTHING, # type: Union[str, AWSHelperFn]
                  Version=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             template=template,
             validation=validation,
-            Name=Name,
-            ProtocolType=ProtocolType,
-            RouteSelectionExpression=RouteSelectionExpression,
             ApiKeySelectionExpression=ApiKeySelectionExpression,
+            BasePath=BasePath,
+            Body=Body,
+            BodyS3Location=BodyS3Location,
+            CorsConfiguration=CorsConfiguration,
+            CredentialsArn=CredentialsArn,
             Description=Description,
             DisableSchemaValidation=DisableSchemaValidation,
+            FailOnWarnings=FailOnWarnings,
+            Name=Name,
+            ProtocolType=ProtocolType,
+            RouteKey=RouteKey,
+            RouteSelectionExpression=RouteSelectionExpression,
+            Tags=Tags,
+            Target=Target,
             Version=Version,
             **kwargs
         )
@@ -111,6 +138,21 @@ class ApiMapping(troposphere.apigatewayv2.ApiMapping, Mixin):
         super(ApiMapping, self).__init__(**processed_kwargs)
 
 
+class JWTConfiguration(troposphere.apigatewayv2.JWTConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Audience=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 Issuer=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Audience=Audience,
+            Issuer=Issuer,
+            **kwargs
+        )
+        super(JWTConfiguration, self).__init__(**processed_kwargs)
+
+
 class Authorizer(troposphere.apigatewayv2.Authorizer, Mixin):
     def __init__(self,
                  title, # type: str
@@ -118,12 +160,13 @@ class Authorizer(troposphere.apigatewayv2.Authorizer, Mixin):
                  validation=True, # type: bool
                  ApiId=REQUIRED, # type: Union[str, AWSHelperFn]
                  AuthorizerType=REQUIRED, # type: Any
-                 AuthorizerUri=REQUIRED, # type: Union[str, AWSHelperFn]
                  IdentitySource=REQUIRED, # type: List[Union[str, AWSHelperFn]]
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  AuthorizerCredentialsArn=NOTHING, # type: Union[str, AWSHelperFn]
                  AuthorizerResultTtlInSeconds=NOTHING, # type: Any
+                 AuthorizerUri=NOTHING, # type: Union[str, AWSHelperFn]
                  IdentityValidationExpression=NOTHING, # type: Union[str, AWSHelperFn]
+                 JwtConfiguration=NOTHING, # type: _JWTConfiguration
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -131,12 +174,13 @@ class Authorizer(troposphere.apigatewayv2.Authorizer, Mixin):
             validation=validation,
             ApiId=ApiId,
             AuthorizerType=AuthorizerType,
-            AuthorizerUri=AuthorizerUri,
             IdentitySource=IdentitySource,
             Name=Name,
             AuthorizerCredentialsArn=AuthorizerCredentialsArn,
             AuthorizerResultTtlInSeconds=AuthorizerResultTtlInSeconds,
+            AuthorizerUri=AuthorizerUri,
             IdentityValidationExpression=IdentityValidationExpression,
+            JwtConfiguration=JwtConfiguration,
             **kwargs
         )
         super(Authorizer, self).__init__(**processed_kwargs)
@@ -187,6 +231,7 @@ class DomainName(troposphere.apigatewayv2.DomainName, Mixin):
                  validation=True, # type: bool
                  DomainName=REQUIRED, # type: Union[str, AWSHelperFn]
                  DomainNameConfigurations=NOTHING, # type: List[_DomainNameConfiguration]
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -194,6 +239,7 @@ class DomainName(troposphere.apigatewayv2.DomainName, Mixin):
             validation=validation,
             DomainName=DomainName,
             DomainNameConfigurations=DomainNameConfigurations,
+            Tags=Tags,
             **kwargs
         )
         super(DomainName, self).__init__(**processed_kwargs)
@@ -213,6 +259,7 @@ class Integration(troposphere.apigatewayv2.Integration, Mixin):
                  IntegrationMethod=NOTHING, # type: Union[str, AWSHelperFn]
                  IntegrationUri=NOTHING, # type: Union[str, AWSHelperFn]
                  PassthroughBehavior=NOTHING, # type: Any
+                 PayloadFormatVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  RequestParameters=NOTHING, # type: dict
                  RequestTemplates=NOTHING, # type: dict
                  TemplateSelectionExpression=NOTHING, # type: Union[str, AWSHelperFn]
@@ -231,6 +278,7 @@ class Integration(troposphere.apigatewayv2.Integration, Mixin):
             IntegrationMethod=IntegrationMethod,
             IntegrationUri=IntegrationUri,
             PassthroughBehavior=PassthroughBehavior,
+            PayloadFormatVersion=PayloadFormatVersion,
             RequestParameters=RequestParameters,
             RequestTemplates=RequestTemplates,
             TemplateSelectionExpression=TemplateSelectionExpression,
@@ -360,6 +408,42 @@ class RouteResponse(troposphere.apigatewayv2.RouteResponse, Mixin):
         super(RouteResponse, self).__init__(**processed_kwargs)
 
 
+class AccessLogSettings(troposphere.apigatewayv2.AccessLogSettings, Mixin):
+    def __init__(self,
+                 title=None,
+                 DestinationArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 Format=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DestinationArn=DestinationArn,
+            Format=Format,
+            **kwargs
+        )
+        super(AccessLogSettings, self).__init__(**processed_kwargs)
+
+
+class RouteSettings(troposphere.apigatewayv2.RouteSettings, Mixin):
+    def __init__(self,
+                 title=None,
+                 DataTraceEnabled=NOTHING, # type: bool
+                 DetailedMetricsEnabled=NOTHING, # type: bool
+                 LoggingLevel=NOTHING, # type: Any
+                 ThrottlingBurstLimit=NOTHING, # type: int
+                 ThrottlingRateLimit=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DataTraceEnabled=DataTraceEnabled,
+            DetailedMetricsEnabled=DetailedMetricsEnabled,
+            LoggingLevel=LoggingLevel,
+            ThrottlingBurstLimit=ThrottlingBurstLimit,
+            ThrottlingRateLimit=ThrottlingRateLimit,
+            **kwargs
+        )
+        super(RouteSettings, self).__init__(**processed_kwargs)
+
+
 class Stage(troposphere.apigatewayv2.Stage, Mixin):
     def __init__(self,
                  title, # type: str
@@ -368,12 +452,14 @@ class Stage(troposphere.apigatewayv2.Stage, Mixin):
                  ApiId=REQUIRED, # type: Union[str, AWSHelperFn]
                  StageName=REQUIRED, # type: Union[str, AWSHelperFn]
                  AccessLogSettings=NOTHING, # type: _AccessLogSettings
+                 AutoDeploy=NOTHING, # type: bool
                  ClientCertificateId=NOTHING, # type: Union[str, AWSHelperFn]
                  DefaultRouteSettings=NOTHING, # type: _RouteSettings
                  DeploymentId=NOTHING, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  RouteSettings=NOTHING, # type: dict
                  StageVariables=NOTHING, # type: dict
+                 Tags=NOTHING, # type: dict
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -382,12 +468,14 @@ class Stage(troposphere.apigatewayv2.Stage, Mixin):
             ApiId=ApiId,
             StageName=StageName,
             AccessLogSettings=AccessLogSettings,
+            AutoDeploy=AutoDeploy,
             ClientCertificateId=ClientCertificateId,
             DefaultRouteSettings=DefaultRouteSettings,
             DeploymentId=DeploymentId,
             Description=Description,
             RouteSettings=RouteSettings,
             StageVariables=StageVariables,
+            Tags=Tags,
             **kwargs
         )
         super(Stage, self).__init__(**processed_kwargs)

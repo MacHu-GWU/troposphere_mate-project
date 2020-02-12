@@ -95,10 +95,14 @@ class SSESpecification(troposphere.dynamodb.SSESpecification, Mixin):
     def __init__(self,
                  title=None,
                  SSEEnabled=REQUIRED, # type: bool
+                 KMSMasterKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 SSEType=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             SSEEnabled=SSEEnabled,
+            KMSMasterKeyId=KMSMasterKeyId,
+            SSEType=SSEType,
             **kwargs
         )
         super(SSESpecification, self).__init__(**processed_kwargs)

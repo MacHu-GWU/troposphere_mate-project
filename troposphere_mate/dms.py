@@ -11,7 +11,9 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 import troposphere.dms
 
 from troposphere.dms import (
-    DynamoDBSettings as _DynamoDBSettings,
+    DynamoDbSettings as _DynamoDbSettings,
+    ElasticsearchSettings as _ElasticsearchSettings,
+    KinesisSettings as _KinesisSettings,
     MongoDbSettings as _MongoDbSettings,
     S3Settings as _S3Settings,
     Tags as _Tags,
@@ -45,17 +47,53 @@ class Certificate(troposphere.dms.Certificate, Mixin):
         super(Certificate, self).__init__(**processed_kwargs)
 
 
-class DynamoDBSettings(troposphere.dms.DynamoDBSettings, Mixin):
+class DynamoDbSettings(troposphere.dms.DynamoDbSettings, Mixin):
     def __init__(self,
                  title=None,
-                 ServiceAccessRoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ServiceAccessRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ServiceAccessRoleArn=ServiceAccessRoleArn,
             **kwargs
         )
-        super(DynamoDBSettings, self).__init__(**processed_kwargs)
+        super(DynamoDbSettings, self).__init__(**processed_kwargs)
+
+
+class ElasticsearchSettings(troposphere.dms.ElasticsearchSettings, Mixin):
+    def __init__(self,
+                 title=None,
+                 EndpointUri=NOTHING, # type: Union[str, AWSHelperFn]
+                 ErrorRetryDuration=NOTHING, # type: int
+                 FullLoadErrorPercentage=NOTHING, # type: int
+                 ServiceAccessRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EndpointUri=EndpointUri,
+            ErrorRetryDuration=ErrorRetryDuration,
+            FullLoadErrorPercentage=FullLoadErrorPercentage,
+            ServiceAccessRoleArn=ServiceAccessRoleArn,
+            **kwargs
+        )
+        super(ElasticsearchSettings, self).__init__(**processed_kwargs)
+
+
+class KinesisSettings(troposphere.dms.KinesisSettings, Mixin):
+    def __init__(self,
+                 title=None,
+                 MessageFormat=NOTHING, # type: Union[str, AWSHelperFn]
+                 ServiceAccessRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 StreamArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MessageFormat=MessageFormat,
+            ServiceAccessRoleArn=ServiceAccessRoleArn,
+            StreamArn=StreamArn,
+            **kwargs
+        )
+        super(KinesisSettings, self).__init__(**processed_kwargs)
 
 
 class MongoDbSettings(troposphere.dms.MongoDbSettings, Mixin):
@@ -63,10 +101,10 @@ class MongoDbSettings(troposphere.dms.MongoDbSettings, Mixin):
                  title=None,
                  AuthMechanism=NOTHING, # type: Union[str, AWSHelperFn]
                  AuthSource=NOTHING, # type: Union[str, AWSHelperFn]
+                 AuthType=NOTHING, # type: Union[str, AWSHelperFn]
                  DatabaseName=NOTHING, # type: Union[str, AWSHelperFn]
                  DocsToInvestigate=NOTHING, # type: Union[str, AWSHelperFn]
                  ExtractDocId=NOTHING, # type: Union[str, AWSHelperFn]
-                 KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
                  NestingLevel=NOTHING, # type: Union[str, AWSHelperFn]
                  Password=NOTHING, # type: Union[str, AWSHelperFn]
                  Port=NOTHING, # type: int
@@ -77,10 +115,10 @@ class MongoDbSettings(troposphere.dms.MongoDbSettings, Mixin):
             title=title,
             AuthMechanism=AuthMechanism,
             AuthSource=AuthSource,
+            AuthType=AuthType,
             DatabaseName=DatabaseName,
             DocsToInvestigate=DocsToInvestigate,
             ExtractDocId=ExtractDocId,
-            KmsKeyId=KmsKeyId,
             NestingLevel=NestingLevel,
             Password=Password,
             Port=Port,
@@ -125,9 +163,11 @@ class Endpoint(troposphere.dms.Endpoint, Mixin):
                  EngineName=REQUIRED, # type: Union[str, AWSHelperFn]
                  CertificateArn=NOTHING, # type: Union[str, AWSHelperFn]
                  DatabaseName=NOTHING, # type: Union[str, AWSHelperFn]
-                 DynamoDbSettings=NOTHING, # type: _DynamoDBSettings
+                 DynamoDbSettings=NOTHING, # type: _DynamoDbSettings
+                 ElasticsearchSettings=NOTHING, # type: _ElasticsearchSettings
                  EndpointIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
                  ExtraConnectionAttributes=NOTHING, # type: Union[str, AWSHelperFn]
+                 KinesisSettings=NOTHING, # type: _KinesisSettings
                  KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
                  MongoDbSettings=NOTHING, # type: _MongoDbSettings
                  Password=NOTHING, # type: Union[str, AWSHelperFn]
@@ -147,8 +187,10 @@ class Endpoint(troposphere.dms.Endpoint, Mixin):
             CertificateArn=CertificateArn,
             DatabaseName=DatabaseName,
             DynamoDbSettings=DynamoDbSettings,
+            ElasticsearchSettings=ElasticsearchSettings,
             EndpointIdentifier=EndpointIdentifier,
             ExtraConnectionAttributes=ExtraConnectionAttributes,
+            KinesisSettings=KinesisSettings,
             KmsKeyId=KmsKeyId,
             MongoDbSettings=MongoDbSettings,
             Password=Password,
@@ -173,7 +215,7 @@ class EventSubscription(troposphere.dms.EventSubscription, Mixin):
                  EventCategories=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  SourceIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  SourceType=NOTHING, # type: Union[str, AWSHelperFn]
-                 SubscriptionName=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubscriptionName=NOTHING, # type: Union[str, AWSHelperFn]
                  Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -199,6 +241,7 @@ class ReplicationInstance(troposphere.dms.ReplicationInstance, Mixin):
                  validation=True, # type: bool
                  ReplicationInstanceClass=REQUIRED, # type: Union[str, AWSHelperFn]
                  AllocatedStorage=NOTHING, # type: int
+                 AllowMajorVersionUpgrade=NOTHING, # type: bool
                  AutoMinorVersionUpgrade=NOTHING, # type: bool
                  AvailabilityZone=NOTHING, # type: Union[str, AWSHelperFn]
                  EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
@@ -217,6 +260,7 @@ class ReplicationInstance(troposphere.dms.ReplicationInstance, Mixin):
             validation=validation,
             ReplicationInstanceClass=ReplicationInstanceClass,
             AllocatedStorage=AllocatedStorage,
+            AllowMajorVersionUpgrade=AllowMajorVersionUpgrade,
             AutoMinorVersionUpgrade=AutoMinorVersionUpgrade,
             AvailabilityZone=AvailabilityZone,
             EngineVersion=EngineVersion,
@@ -266,7 +310,9 @@ class ReplicationTask(troposphere.dms.ReplicationTask, Mixin):
                  SourceEndpointArn=REQUIRED, # type: Union[str, AWSHelperFn]
                  TableMappings=REQUIRED, # type: Union[str, AWSHelperFn]
                  TargetEndpointArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CdcStartPosition=NOTHING, # type: Union[str, AWSHelperFn]
                  CdcStartTime=NOTHING, # type: int
+                 CdcStopPosition=NOTHING, # type: Union[str, AWSHelperFn]
                  ReplicationTaskIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
                  ReplicationTaskSettings=NOTHING, # type: Union[str, AWSHelperFn]
                  Tags=NOTHING, # type: _Tags
@@ -280,7 +326,9 @@ class ReplicationTask(troposphere.dms.ReplicationTask, Mixin):
             SourceEndpointArn=SourceEndpointArn,
             TableMappings=TableMappings,
             TargetEndpointArn=TargetEndpointArn,
+            CdcStartPosition=CdcStartPosition,
             CdcStartTime=CdcStartTime,
+            CdcStopPosition=CdcStopPosition,
             ReplicationTaskIdentifier=ReplicationTaskIdentifier,
             ReplicationTaskSettings=ReplicationTaskSettings,
             Tags=Tags,

@@ -24,6 +24,7 @@ from troposphere.codepipeline import (
     OutputArtifacts as _OutputArtifacts,
     Settings as _Settings,
     Stages as _Stages,
+    Tags as _Tags,
     WebhookAuthConfiguration as _WebhookAuthConfiguration,
     WebhookFilterRule as _WebhookFilterRule,
 )
@@ -223,6 +224,7 @@ class Actions(troposphere.codepipeline.Actions, Mixin):
                  Name=REQUIRED, # type: Union[str, AWSHelperFn]
                  Configuration=NOTHING, # type: dict
                  InputArtifacts=NOTHING, # type: List[_InputArtifacts]
+                 Namespace=NOTHING, # type: Union[str, AWSHelperFn]
                  OutputArtifacts=NOTHING, # type: List[_OutputArtifacts]
                  Region=NOTHING, # type: Union[str, AWSHelperFn]
                  RoleArn=NOTHING, # type: Union[str, AWSHelperFn]
@@ -234,6 +236,7 @@ class Actions(troposphere.codepipeline.Actions, Mixin):
             Name=Name,
             Configuration=Configuration,
             InputArtifacts=InputArtifacts,
+            Namespace=Namespace,
             OutputArtifacts=OutputArtifacts,
             Region=Region,
             RoleArn=RoleArn,
@@ -271,6 +274,7 @@ class CustomActionType(troposphere.codepipeline.CustomActionType, Mixin):
                  Provider=REQUIRED, # type: Union[str, AWSHelperFn]
                  ConfigurationProperties=NOTHING, # type: List[_ConfigurationProperties]
                  Settings=NOTHING, # type: _Settings
+                 Tags=NOTHING, # type: _Tags
                  Version=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -283,6 +287,7 @@ class CustomActionType(troposphere.codepipeline.CustomActionType, Mixin):
             Provider=Provider,
             ConfigurationProperties=ConfigurationProperties,
             Settings=Settings,
+            Tags=Tags,
             Version=Version,
             **kwargs
         )
@@ -301,6 +306,7 @@ class Pipeline(troposphere.codepipeline.Pipeline, Mixin):
                  DisableInboundStageTransitions=NOTHING, # type: List[_DisableInboundStageTransitions]
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
                  RestartExecutionOnUpdate=NOTHING, # type: bool
+                 Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -313,6 +319,7 @@ class Pipeline(troposphere.codepipeline.Pipeline, Mixin):
             DisableInboundStageTransitions=DisableInboundStageTransitions,
             Name=Name,
             RestartExecutionOnUpdate=RestartExecutionOnUpdate,
+            Tags=Tags,
             **kwargs
         )
         super(Pipeline, self).__init__(**processed_kwargs)

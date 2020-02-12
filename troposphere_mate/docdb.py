@@ -31,6 +31,7 @@ class DBCluster(troposphere.docdb.DBCluster, Mixin):
                  DBClusterIdentifier=NOTHING, # type: Union[str, AWSHelperFn]
                  DBClusterParameterGroupName=NOTHING, # type: Union[str, AWSHelperFn]
                  DBSubnetGroupName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EnableCloudwatchLogsExports=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  EngineVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
                  MasterUserPassword=NOTHING, # type: Union[str, AWSHelperFn]
@@ -52,6 +53,7 @@ class DBCluster(troposphere.docdb.DBCluster, Mixin):
             DBClusterIdentifier=DBClusterIdentifier,
             DBClusterParameterGroupName=DBClusterParameterGroupName,
             DBSubnetGroupName=DBSubnetGroupName,
+            EnableCloudwatchLogsExports=EnableCloudwatchLogsExports,
             EngineVersion=EngineVersion,
             KmsKeyId=KmsKeyId,
             MasterUserPassword=MasterUserPassword,

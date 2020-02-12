@@ -8,13 +8,11 @@ import sys
 if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no cover
     from typing import Union, List, Any
 
-import troposphere.codecommit
+import troposphere.codestar
 
-from troposphere.codecommit import (
+from troposphere.codestar import (
     Code as _Code,
     S3 as _S3,
-    Tags as _Tags,
-    Trigger as _Trigger,
 )
 
 
@@ -24,7 +22,7 @@ from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-class S3(troposphere.codecommit.S3, Mixin):
+class S3(troposphere.codestar.S3, Mixin):
     def __init__(self,
                  title=None,
                  Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
@@ -41,7 +39,7 @@ class S3(troposphere.codecommit.S3, Mixin):
         super(S3, self).__init__(**processed_kwargs)
 
 
-class Code(troposphere.codecommit.Code, Mixin):
+class Code(troposphere.codestar.Code, Mixin):
     def __init__(self,
                  title=None,
                  S3=REQUIRED, # type: _S3
@@ -54,47 +52,30 @@ class Code(troposphere.codecommit.Code, Mixin):
         super(Code, self).__init__(**processed_kwargs)
 
 
-class Trigger(troposphere.codecommit.Trigger, Mixin):
-    def __init__(self,
-                 title=None,
-                 Branches=NOTHING, # type: List[Union[str, AWSHelperFn]]
-                 CustomData=NOTHING, # type: Union[str, AWSHelperFn]
-                 DestinationArn=NOTHING, # type: Union[str, AWSHelperFn]
-                 Events=NOTHING, # type: List[Union[str, AWSHelperFn]]
-                 Name=NOTHING, # type: Union[str, AWSHelperFn]
-                 **kwargs):
-        processed_kwargs = preprocess_init_kwargs(
-            title=title,
-            Branches=Branches,
-            CustomData=CustomData,
-            DestinationArn=DestinationArn,
-            Events=Events,
-            Name=Name,
-            **kwargs
-        )
-        super(Trigger, self).__init__(**processed_kwargs)
-
-
-class Repository(troposphere.codecommit.Repository, Mixin):
+class GitHubRepository(troposphere.codestar.GitHubRepository, Mixin):
     def __init__(self,
                  title, # type: str
                  template=None, # type: Template
                  validation=True, # type: bool
+                 RepositoryAccessToken=REQUIRED, # type: Union[str, AWSHelperFn]
                  RepositoryName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RepositoryOwner=REQUIRED, # type: Union[str, AWSHelperFn]
                  Code=NOTHING, # type: _Code
+                 EnableIssues=NOTHING, # type: bool
+                 IsPrivate=NOTHING, # type: bool
                  RepositoryDescription=NOTHING, # type: Union[str, AWSHelperFn]
-                 Tags=NOTHING, # type: _Tags
-                 Triggers=NOTHING, # type: List[_Trigger]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             template=template,
             validation=validation,
+            RepositoryAccessToken=RepositoryAccessToken,
             RepositoryName=RepositoryName,
+            RepositoryOwner=RepositoryOwner,
             Code=Code,
+            EnableIssues=EnableIssues,
+            IsPrivate=IsPrivate,
             RepositoryDescription=RepositoryDescription,
-            Tags=Tags,
-            Triggers=Triggers,
             **kwargs
         )
-        super(Repository, self).__init__(**processed_kwargs)
+        super(GitHubRepository, self).__init__(**processed_kwargs)

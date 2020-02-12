@@ -11,6 +11,7 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 import troposphere.efs
 
 from troposphere.efs import (
+    LifecyclePolicy as _LifecyclePolicy,
     Tags as _Tags,
 )
 
@@ -21,6 +22,19 @@ from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
+class LifecyclePolicy(troposphere.efs.LifecyclePolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 TransitionToIA=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            TransitionToIA=TransitionToIA,
+            **kwargs
+        )
+        super(LifecyclePolicy, self).__init__(**processed_kwargs)
+
+
 class FileSystem(troposphere.efs.FileSystem, Mixin):
     def __init__(self,
                  title, # type: str
@@ -29,6 +43,7 @@ class FileSystem(troposphere.efs.FileSystem, Mixin):
                  Encrypted=NOTHING, # type: bool
                  FileSystemTags=NOTHING, # type: _Tags
                  KmsKeyId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LifecyclePolicies=NOTHING, # type: List[_LifecyclePolicy]
                  PerformanceMode=NOTHING, # type: Union[str, AWSHelperFn]
                  ProvisionedThroughputInMibps=NOTHING, # type: float
                  ThroughputMode=NOTHING, # type: Any
@@ -40,6 +55,7 @@ class FileSystem(troposphere.efs.FileSystem, Mixin):
             Encrypted=Encrypted,
             FileSystemTags=FileSystemTags,
             KmsKeyId=KmsKeyId,
+            LifecyclePolicies=LifecyclePolicies,
             PerformanceMode=PerformanceMode,
             ProvisionedThroughputInMibps=ProvisionedThroughputInMibps,
             ThroughputMode=ThroughputMode,

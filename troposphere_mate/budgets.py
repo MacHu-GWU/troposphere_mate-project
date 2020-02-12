@@ -27,21 +27,6 @@ from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
-class Spend(troposphere.budgets.Spend, Mixin):
-    def __init__(self,
-                 title=None,
-                 Amount=REQUIRED, # type: float
-                 Unit=REQUIRED, # type: Union[str, AWSHelperFn]
-                 **kwargs):
-        processed_kwargs = preprocess_init_kwargs(
-            title=title,
-            Amount=Amount,
-            Unit=Unit,
-            **kwargs
-        )
-        super(Spend, self).__init__(**processed_kwargs)
-
-
 class CostTypes(troposphere.budgets.CostTypes, Mixin):
     def __init__(self,
                  title=None,
@@ -75,6 +60,21 @@ class CostTypes(troposphere.budgets.CostTypes, Mixin):
         super(CostTypes, self).__init__(**processed_kwargs)
 
 
+class Spend(troposphere.budgets.Spend, Mixin):
+    def __init__(self,
+                 title=None,
+                 Amount=REQUIRED, # type: float
+                 Unit=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Amount=Amount,
+            Unit=Unit,
+            **kwargs
+        )
+        super(Spend, self).__init__(**processed_kwargs)
+
+
 class TimePeriod(troposphere.budgets.TimePeriod, Mixin):
     def __init__(self,
                  title=None,
@@ -99,6 +99,7 @@ class BudgetData(troposphere.budgets.BudgetData, Mixin):
                  BudgetName=NOTHING, # type: Union[str, AWSHelperFn]
                  CostFilters=NOTHING, # type: dict
                  CostTypes=NOTHING, # type: _CostTypes
+                 PlannedBudgetLimits=NOTHING, # type: dict
                  TimePeriod=NOTHING, # type: _TimePeriod
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -109,6 +110,7 @@ class BudgetData(troposphere.budgets.BudgetData, Mixin):
             BudgetName=BudgetName,
             CostFilters=CostFilters,
             CostTypes=CostTypes,
+            PlannedBudgetLimits=PlannedBudgetLimits,
             TimePeriod=TimePeriod,
             **kwargs
         )

@@ -134,6 +134,7 @@ class Role(troposphere.iam.Role, Mixin):
                  template=None, # type: Template
                  validation=True, # type: bool
                  AssumeRolePolicyDocument=REQUIRED, # type: Union[dict]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
                  ManagedPolicyArns=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  MaxSessionDuration=NOTHING, # type: int
                  Path=NOTHING, # type: str
@@ -147,6 +148,7 @@ class Role(troposphere.iam.Role, Mixin):
             template=template,
             validation=validation,
             AssumeRolePolicyDocument=AssumeRolePolicyDocument,
+            Description=Description,
             ManagedPolicyArns=ManagedPolicyArns,
             MaxSessionDuration=MaxSessionDuration,
             Path=Path,
@@ -206,6 +208,7 @@ class User(troposphere.iam.User, Mixin):
                  Path=NOTHING, # type: str
                  PermissionsBoundary=NOTHING, # type: Union[str, AWSHelperFn]
                  Policies=NOTHING, # type: List[_Policy]
+                 Tags=NOTHING, # type: _Tags
                  UserName=NOTHING, # type: str
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -218,6 +221,7 @@ class User(troposphere.iam.User, Mixin):
             Path=Path,
             PermissionsBoundary=PermissionsBoundary,
             Policies=Policies,
+            Tags=Tags,
             UserName=UserName,
             **kwargs
         )

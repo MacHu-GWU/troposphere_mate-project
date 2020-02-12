@@ -32,7 +32,7 @@ from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 class Action(troposphere.waf.Action, Mixin):
     def __init__(self,
                  title=None,
-                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Type=REQUIRED, # type: Any
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,

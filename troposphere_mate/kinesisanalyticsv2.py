@@ -40,6 +40,7 @@ from troposphere.kinesisanalyticsv2 import (
     RecordFormat as _RecordFormat,
     ReferenceDataSource as _ReferenceDataSource,
     ReferenceSchema as _ReferenceSchema,
+    S3ContentLocation as _S3ContentLocation,
     S3ReferenceDataSource as _S3ReferenceDataSource,
     SqlApplicationConfiguration as _SqlApplicationConfiguration,
 )
@@ -72,11 +73,13 @@ class CodeContent(troposphere.kinesisanalyticsv2.CodeContent, Mixin):
     def __init__(self,
                  title=None,
                  ZipFileContent=NOTHING, # type: Union[str, AWSHelperFn]
+                 S3ContentLocation=NOTHING, # type: _S3ContentLocation
                  TextContent=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             ZipFileContent=ZipFileContent,
+            S3ContentLocation=S3ContentLocation,
             TextContent=TextContent,
             **kwargs
         )

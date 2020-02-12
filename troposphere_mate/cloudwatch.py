@@ -11,10 +11,12 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 import troposphere.cloudwatch
 
 from troposphere.cloudwatch import (
+    Configuration as _Configuration,
     Metric as _Metric,
     MetricDataQuery as _MetricDataQuery,
     MetricDimension as _MetricDimension,
     MetricStat as _MetricStat,
+    Range as _Range,
 )
 
 
@@ -103,7 +105,6 @@ class Alarm(troposphere.cloudwatch.Alarm, Mixin):
                  validation=True, # type: bool
                  ComparisonOperator=REQUIRED, # type: Union[str, AWSHelperFn]
                  EvaluationPeriods=REQUIRED, # type: int
-                 Threshold=REQUIRED, # type: float
                  ActionsEnabled=NOTHING, # type: bool
                  AlarmActions=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  AlarmDescription=NOTHING, # type: Union[str, AWSHelperFn]
@@ -119,6 +120,8 @@ class Alarm(troposphere.cloudwatch.Alarm, Mixin):
                  OKActions=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  Period=NOTHING, # type: int
                  Statistic=NOTHING, # type: Union[str, AWSHelperFn]
+                 Threshold=NOTHING, # type: float
+                 ThresholdMetricId=NOTHING, # type: Union[str, AWSHelperFn]
                  TreatMissingData=NOTHING, # type: Union[str, AWSHelperFn]
                  Unit=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
@@ -128,7 +131,6 @@ class Alarm(troposphere.cloudwatch.Alarm, Mixin):
             validation=validation,
             ComparisonOperator=ComparisonOperator,
             EvaluationPeriods=EvaluationPeriods,
-            Threshold=Threshold,
             ActionsEnabled=ActionsEnabled,
             AlarmActions=AlarmActions,
             AlarmDescription=AlarmDescription,
@@ -144,6 +146,8 @@ class Alarm(troposphere.cloudwatch.Alarm, Mixin):
             OKActions=OKActions,
             Period=Period,
             Statistic=Statistic,
+            Threshold=Threshold,
+            ThresholdMetricId=ThresholdMetricId,
             TreatMissingData=TreatMissingData,
             Unit=Unit,
             **kwargs
@@ -168,3 +172,79 @@ class Dashboard(troposphere.cloudwatch.Dashboard, Mixin):
             **kwargs
         )
         super(Dashboard, self).__init__(**processed_kwargs)
+
+
+class Range(troposphere.cloudwatch.Range, Mixin):
+    def __init__(self,
+                 title=None,
+                 EndTime=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StartTime=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EndTime=EndTime,
+            StartTime=StartTime,
+            **kwargs
+        )
+        super(Range, self).__init__(**processed_kwargs)
+
+
+class Configuration(troposphere.cloudwatch.Configuration, Mixin):
+    def __init__(self,
+                 title=None,
+                 ExcludedTimeRanges=NOTHING, # type: List[_Range]
+                 MetricTimeZone=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ExcludedTimeRanges=ExcludedTimeRanges,
+            MetricTimeZone=MetricTimeZone,
+            **kwargs
+        )
+        super(Configuration, self).__init__(**processed_kwargs)
+
+
+class AnomalyDetector(troposphere.cloudwatch.AnomalyDetector, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 MetricName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Namespace=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Stat=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Configuration=NOTHING, # type: _Configuration
+                 Dimensions=NOTHING, # type: List[_MetricDimension]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            MetricName=MetricName,
+            Namespace=Namespace,
+            Stat=Stat,
+            Configuration=Configuration,
+            Dimensions=Dimensions,
+            **kwargs
+        )
+        super(AnomalyDetector, self).__init__(**processed_kwargs)
+
+
+class InsightRule(troposphere.cloudwatch.InsightRule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 RuleBody=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RuleName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 RuleState=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            RuleBody=RuleBody,
+            RuleName=RuleName,
+            RuleState=RuleState,
+            **kwargs
+        )
+        super(InsightRule, self).__init__(**processed_kwargs)

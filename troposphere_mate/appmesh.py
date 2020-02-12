@@ -16,14 +16,25 @@ from troposphere.appmesh import (
     AwsCloudMapServiceDiscovery as _AwsCloudMapServiceDiscovery,
     Backend as _Backend,
     DnsServiceDiscovery as _DnsServiceDiscovery,
+    Duration as _Duration,
     EgressFilter as _EgressFilter,
     FileAccessLog as _FileAccessLog,
+    GrpcRetryPolicy as _GrpcRetryPolicy,
+    GrpcRoute as _GrpcRoute,
+    GrpcRouteAction as _GrpcRouteAction,
+    GrpcRouteMatch as _GrpcRouteMatch,
+    GrpcRouteMetadata as _GrpcRouteMetadata,
+    GrpcRouteMetadataMatchMethod as _GrpcRouteMetadataMatchMethod,
+    HeaderMatchMethod as _HeaderMatchMethod,
     HealthCheck as _HealthCheck,
+    HttpRetryPolicy as _HttpRetryPolicy,
     HttpRoute as _HttpRoute,
     HttpRouteAction as _HttpRouteAction,
+    HttpRouteHeader as _HttpRouteHeader,
     HttpRouteMatch as _HttpRouteMatch,
     Listener as _Listener,
     Logging as _Logging,
+    MatchRange as _MatchRange,
     MeshSpec as _MeshSpec,
     PortMapping as _PortMapping,
     RouteSpec as _RouteSpec,
@@ -96,6 +107,42 @@ class Mesh(troposphere.appmesh.Mesh, Mixin):
         super(Mesh, self).__init__(**processed_kwargs)
 
 
+class Duration(troposphere.appmesh.Duration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Unit=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Unit=Unit,
+            Value=Value,
+            **kwargs
+        )
+        super(Duration, self).__init__(**processed_kwargs)
+
+
+class GrpcRetryPolicy(troposphere.appmesh.GrpcRetryPolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaxRetries=REQUIRED, # type: int
+                 PerRetryTimeout=REQUIRED, # type: _Duration
+                 GrpcRetryEvents=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 HttpRetryEvents=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 TcpRetryEvents=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaxRetries=MaxRetries,
+            PerRetryTimeout=PerRetryTimeout,
+            GrpcRetryEvents=GrpcRetryEvents,
+            HttpRetryEvents=HttpRetryEvents,
+            TcpRetryEvents=TcpRetryEvents,
+            **kwargs
+        )
+        super(GrpcRetryPolicy, self).__init__(**processed_kwargs)
+
+
 class WeightedTarget(troposphere.appmesh.WeightedTarget, Mixin):
     def __init__(self,
                  title=None,
@@ -111,6 +158,125 @@ class WeightedTarget(troposphere.appmesh.WeightedTarget, Mixin):
         super(WeightedTarget, self).__init__(**processed_kwargs)
 
 
+class GrpcRouteAction(troposphere.appmesh.GrpcRouteAction, Mixin):
+    def __init__(self,
+                 title=None,
+                 WeightedTargets=REQUIRED, # type: List[_WeightedTarget]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            WeightedTargets=WeightedTargets,
+            **kwargs
+        )
+        super(GrpcRouteAction, self).__init__(**processed_kwargs)
+
+
+class MatchRange(troposphere.appmesh.MatchRange, Mixin):
+    def __init__(self,
+                 title=None,
+                 End=REQUIRED, # type: int
+                 Start=REQUIRED, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            End=End,
+            Start=Start,
+            **kwargs
+        )
+        super(MatchRange, self).__init__(**processed_kwargs)
+
+
+class GrpcRouteMetadataMatchMethod(troposphere.appmesh.GrpcRouteMetadataMatchMethod, Mixin):
+    def __init__(self,
+                 title=None,
+                 Exact=NOTHING, # type: Union[str, AWSHelperFn]
+                 Prefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 Range=NOTHING, # type: _MatchRange
+                 Regex=NOTHING, # type: Union[str, AWSHelperFn]
+                 Suffix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Exact=Exact,
+            Prefix=Prefix,
+            Range=Range,
+            Regex=Regex,
+            Suffix=Suffix,
+            **kwargs
+        )
+        super(GrpcRouteMetadataMatchMethod, self).__init__(**processed_kwargs)
+
+
+class GrpcRouteMetadata(troposphere.appmesh.GrpcRouteMetadata, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Invert=NOTHING, # type: bool
+                 Match=NOTHING, # type: _GrpcRouteMetadataMatchMethod
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Invert=Invert,
+            Match=Match,
+            **kwargs
+        )
+        super(GrpcRouteMetadata, self).__init__(**processed_kwargs)
+
+
+class GrpcRouteMatch(troposphere.appmesh.GrpcRouteMatch, Mixin):
+    def __init__(self,
+                 title=None,
+                 Metadata=NOTHING, # type: List[_GrpcRouteMetadata]
+                 MethodName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ServiceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Metadata=Metadata,
+            MethodName=MethodName,
+            ServiceName=ServiceName,
+            **kwargs
+        )
+        super(GrpcRouteMatch, self).__init__(**processed_kwargs)
+
+
+class GrpcRoute(troposphere.appmesh.GrpcRoute, Mixin):
+    def __init__(self,
+                 title=None,
+                 Action=REQUIRED, # type: _GrpcRouteAction
+                 Match=REQUIRED, # type: _GrpcRouteMatch
+                 RetryPolicy=NOTHING, # type: _GrpcRetryPolicy
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Action=Action,
+            Match=Match,
+            RetryPolicy=RetryPolicy,
+            **kwargs
+        )
+        super(GrpcRoute, self).__init__(**processed_kwargs)
+
+
+class HttpRetryPolicy(troposphere.appmesh.HttpRetryPolicy, Mixin):
+    def __init__(self,
+                 title=None,
+                 MaxRetries=REQUIRED, # type: int
+                 PerRetryTimeout=REQUIRED, # type: _Duration
+                 HttpRetryEvents=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 TcpRetryEvents=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            MaxRetries=MaxRetries,
+            PerRetryTimeout=PerRetryTimeout,
+            HttpRetryEvents=HttpRetryEvents,
+            TcpRetryEvents=TcpRetryEvents,
+            **kwargs
+        )
+        super(HttpRetryPolicy, self).__init__(**processed_kwargs)
+
+
 class HttpRouteAction(troposphere.appmesh.HttpRouteAction, Mixin):
     def __init__(self,
                  title=None,
@@ -124,14 +290,58 @@ class HttpRouteAction(troposphere.appmesh.HttpRouteAction, Mixin):
         super(HttpRouteAction, self).__init__(**processed_kwargs)
 
 
+class HeaderMatchMethod(troposphere.appmesh.HeaderMatchMethod, Mixin):
+    def __init__(self,
+                 title=None,
+                 Exact=NOTHING, # type: Union[str, AWSHelperFn]
+                 Prefix=NOTHING, # type: Union[str, AWSHelperFn]
+                 Range=NOTHING, # type: _MatchRange
+                 Regex=NOTHING, # type: Union[str, AWSHelperFn]
+                 Suffix=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Exact=Exact,
+            Prefix=Prefix,
+            Range=Range,
+            Regex=Regex,
+            Suffix=Suffix,
+            **kwargs
+        )
+        super(HeaderMatchMethod, self).__init__(**processed_kwargs)
+
+
+class HttpRouteHeader(troposphere.appmesh.HttpRouteHeader, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Invert=NOTHING, # type: bool
+                 Match=NOTHING, # type: _HeaderMatchMethod
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Invert=Invert,
+            Match=Match,
+            **kwargs
+        )
+        super(HttpRouteHeader, self).__init__(**processed_kwargs)
+
+
 class HttpRouteMatch(troposphere.appmesh.HttpRouteMatch, Mixin):
     def __init__(self,
                  title=None,
                  Prefix=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Headers=NOTHING, # type: List[_HttpRouteHeader]
+                 Method=NOTHING, # type: Union[str, AWSHelperFn]
+                 Scheme=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Prefix=Prefix,
+            Headers=Headers,
+            Method=Method,
+            Scheme=Scheme,
             **kwargs
         )
         super(HttpRouteMatch, self).__init__(**processed_kwargs)
@@ -142,11 +352,13 @@ class HttpRoute(troposphere.appmesh.HttpRoute, Mixin):
                  title=None,
                  Action=REQUIRED, # type: _HttpRouteAction
                  Match=REQUIRED, # type: _HttpRouteMatch
+                 RetryPolicy=NOTHING, # type: _HttpRetryPolicy
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Action=Action,
             Match=Match,
+            RetryPolicy=RetryPolicy,
             **kwargs
         )
         super(HttpRoute, self).__init__(**processed_kwargs)
@@ -181,12 +393,18 @@ class TcpRoute(troposphere.appmesh.TcpRoute, Mixin):
 class RouteSpec(troposphere.appmesh.RouteSpec, Mixin):
     def __init__(self,
                  title=None,
+                 GrpcRoute=NOTHING, # type: _GrpcRoute
+                 Http2Route=NOTHING, # type: _HttpRoute
                  HttpRoute=NOTHING, # type: _HttpRoute
+                 Priority=NOTHING, # type: int
                  TcpRoute=NOTHING, # type: _TcpRoute
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
+            GrpcRoute=GrpcRoute,
+            Http2Route=Http2Route,
             HttpRoute=HttpRoute,
+            Priority=Priority,
             TcpRoute=TcpRoute,
             **kwargs
         )

@@ -12,6 +12,7 @@ import troposphere.ecr
 
 from troposphere.ecr import (
     LifecyclePolicy as _LifecyclePolicy,
+    Tags as _Tags,
 )
 
 
@@ -44,6 +45,7 @@ class Repository(troposphere.ecr.Repository, Mixin):
                  LifecyclePolicy=NOTHING, # type: _LifecyclePolicy
                  RepositoryName=NOTHING, # type: Union[str, AWSHelperFn]
                  RepositoryPolicyText=NOTHING, # type: Union[dict]
+                 Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -52,6 +54,7 @@ class Repository(troposphere.ecr.Repository, Mixin):
             LifecyclePolicy=LifecyclePolicy,
             RepositoryName=RepositoryName,
             RepositoryPolicyText=RepositoryPolicyText,
+            Tags=Tags,
             **kwargs
         )
         super(Repository, self).__init__(**processed_kwargs)

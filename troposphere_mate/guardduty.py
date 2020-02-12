@@ -28,12 +28,14 @@ class Detector(troposphere.guardduty.Detector, Mixin):
                  template=None, # type: Template
                  validation=True, # type: bool
                  Enable=REQUIRED, # type: bool
+                 FindingPublishingFrequency=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             template=template,
             validation=validation,
             Enable=Enable,
+            FindingPublishingFrequency=FindingPublishingFrequency,
             **kwargs
         )
         super(Detector, self).__init__(**processed_kwargs)

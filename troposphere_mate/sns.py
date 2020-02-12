@@ -12,6 +12,7 @@ import troposphere.sns
 
 from troposphere.sns import (
     Subscription as _Subscription,
+    Tags as _Tags,
 )
 
 
@@ -47,6 +48,7 @@ class SubscriptionResource(troposphere.sns.SubscriptionResource, Mixin):
                  Endpoint=NOTHING, # type: Union[str, AWSHelperFn]
                  FilterPolicy=NOTHING, # type: dict
                  RawMessageDelivery=NOTHING, # type: bool
+                 RedrivePolicy=NOTHING, # type: dict
                  Region=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -59,6 +61,7 @@ class SubscriptionResource(troposphere.sns.SubscriptionResource, Mixin):
             Endpoint=Endpoint,
             FilterPolicy=FilterPolicy,
             RawMessageDelivery=RawMessageDelivery,
+            RedrivePolicy=RedrivePolicy,
             Region=Region,
             **kwargs
         )
@@ -92,6 +95,7 @@ class Topic(troposphere.sns.Topic, Mixin):
                  DisplayName=NOTHING, # type: Union[str, AWSHelperFn]
                  KmsMasterKeyId=NOTHING, # type: Union[str, AWSHelperFn]
                  Subscription=NOTHING, # type: List[_Subscription]
+                 Tags=NOTHING, # type: _Tags
                  TopicName=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -101,6 +105,7 @@ class Topic(troposphere.sns.Topic, Mixin):
             DisplayName=DisplayName,
             KmsMasterKeyId=KmsMasterKeyId,
             Subscription=Subscription,
+            Tags=Tags,
             TopicName=TopicName,
             **kwargs
         )

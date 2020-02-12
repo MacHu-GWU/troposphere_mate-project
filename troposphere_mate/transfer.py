@@ -13,7 +13,6 @@ import troposphere.transfer
 from troposphere.transfer import (
     EndpointDetails as _EndpointDetails,
     IdentityProviderDetails as _IdentityProviderDetails,
-    SshPublicKey as _SshPublicKey,
     Tags as _Tags,
 )
 
@@ -79,17 +78,6 @@ class Server(troposphere.transfer.Server, Mixin):
         super(Server, self).__init__(**processed_kwargs)
 
 
-class SshPublicKey(troposphere.transfer.SshPublicKey, Mixin):
-    def __init__(self,
-                 title=None,
-                 **kwargs):
-        processed_kwargs = preprocess_init_kwargs(
-            title=title,
-            **kwargs
-        )
-        super(SshPublicKey, self).__init__(**processed_kwargs)
-
-
 class User(troposphere.transfer.User, Mixin):
     def __init__(self,
                  title, # type: str
@@ -100,7 +88,7 @@ class User(troposphere.transfer.User, Mixin):
                  UserName=REQUIRED, # type: Union[str, AWSHelperFn]
                  HomeDirectory=NOTHING, # type: Union[str, AWSHelperFn]
                  Policy=NOTHING, # type: Union[str, AWSHelperFn]
-                 SshPublicKeys=NOTHING, # type: List[_SshPublicKey]
+                 SshPublicKeys=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(

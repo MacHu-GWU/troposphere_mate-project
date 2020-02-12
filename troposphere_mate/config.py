@@ -13,11 +13,15 @@ import troposphere.config
 from troposphere.config import (
     AccountAggregationSources as _AccountAggregationSources,
     ConfigSnapshotDeliveryProperties as _ConfigSnapshotDeliveryProperties,
+    ExecutionControls as _ExecutionControls,
     OrganizationAggregationSource as _OrganizationAggregationSource,
+    OrganizationCustomRuleMetadata as _OrganizationCustomRuleMetadata,
+    OrganizationManagedRuleMetadata as _OrganizationManagedRuleMetadata,
     RecordingGroup as _RecordingGroup,
     Scope as _Scope,
     Source as _Source,
     SourceDetails as _SourceDetails,
+    SsmControls as _SsmControls,
 )
 
 
@@ -257,6 +261,113 @@ class DeliveryChannel(troposphere.config.DeliveryChannel, Mixin):
         super(DeliveryChannel, self).__init__(**processed_kwargs)
 
 
+class OrganizationCustomRuleMetadata(troposphere.config.OrganizationCustomRuleMetadata, Mixin):
+    def __init__(self,
+                 title=None,
+                 LambdaFunctionArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 OrganizationConfigRuleTriggerTypes=REQUIRED, # type: List[Union[str, AWSHelperFn]]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 InputParameters=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaximumExecutionFrequency=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResourceIdScope=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResourceTypesScope=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 TagKeyScope=NOTHING, # type: Union[str, AWSHelperFn]
+                 TagValueScope=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LambdaFunctionArn=LambdaFunctionArn,
+            OrganizationConfigRuleTriggerTypes=OrganizationConfigRuleTriggerTypes,
+            Description=Description,
+            InputParameters=InputParameters,
+            MaximumExecutionFrequency=MaximumExecutionFrequency,
+            ResourceIdScope=ResourceIdScope,
+            ResourceTypesScope=ResourceTypesScope,
+            TagKeyScope=TagKeyScope,
+            TagValueScope=TagValueScope,
+            **kwargs
+        )
+        super(OrganizationCustomRuleMetadata, self).__init__(**processed_kwargs)
+
+
+class OrganizationManagedRuleMetadata(troposphere.config.OrganizationManagedRuleMetadata, Mixin):
+    def __init__(self,
+                 title=None,
+                 RuleIdentifier=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 InputParameters=NOTHING, # type: Union[str, AWSHelperFn]
+                 MaximumExecutionFrequency=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResourceIdScope=NOTHING, # type: Union[str, AWSHelperFn]
+                 ResourceTypesScope=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 TagKeyScope=NOTHING, # type: Union[str, AWSHelperFn]
+                 TagValueScope=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            RuleIdentifier=RuleIdentifier,
+            Description=Description,
+            InputParameters=InputParameters,
+            MaximumExecutionFrequency=MaximumExecutionFrequency,
+            ResourceIdScope=ResourceIdScope,
+            ResourceTypesScope=ResourceTypesScope,
+            TagKeyScope=TagKeyScope,
+            TagValueScope=TagValueScope,
+            **kwargs
+        )
+        super(OrganizationManagedRuleMetadata, self).__init__(**processed_kwargs)
+
+
+class OrganizationConfigRule(troposphere.config.OrganizationConfigRule, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 OrganizationConfigRuleName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ExcludedAccounts=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 OrganizationCustomRuleMetadata=NOTHING, # type: _OrganizationCustomRuleMetadata
+                 OrganizationManagedRuleMetadata=NOTHING, # type: _OrganizationManagedRuleMetadata
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            OrganizationConfigRuleName=OrganizationConfigRuleName,
+            ExcludedAccounts=ExcludedAccounts,
+            OrganizationCustomRuleMetadata=OrganizationCustomRuleMetadata,
+            OrganizationManagedRuleMetadata=OrganizationManagedRuleMetadata,
+            **kwargs
+        )
+        super(OrganizationConfigRule, self).__init__(**processed_kwargs)
+
+
+class SsmControls(troposphere.config.SsmControls, Mixin):
+    def __init__(self,
+                 title=None,
+                 ConcurrentExecutionRatePercentage=NOTHING, # type: int
+                 ErrorPercentage=NOTHING, # type: int
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            ConcurrentExecutionRatePercentage=ConcurrentExecutionRatePercentage,
+            ErrorPercentage=ErrorPercentage,
+            **kwargs
+        )
+        super(SsmControls, self).__init__(**processed_kwargs)
+
+
+class ExecutionControls(troposphere.config.ExecutionControls, Mixin):
+    def __init__(self,
+                 title=None,
+                 SsmControls=NOTHING, # type: _SsmControls
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SsmControls=SsmControls,
+            **kwargs
+        )
+        super(ExecutionControls, self).__init__(**processed_kwargs)
+
+
 class RemediationConfiguration(troposphere.config.RemediationConfiguration, Mixin):
     def __init__(self,
                  title, # type: str
@@ -265,8 +376,12 @@ class RemediationConfiguration(troposphere.config.RemediationConfiguration, Mixi
                  ConfigRuleName=REQUIRED, # type: Union[str, AWSHelperFn]
                  TargetId=REQUIRED, # type: Union[str, AWSHelperFn]
                  TargetType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Automatic=NOTHING, # type: bool
+                 ExecutionControls=NOTHING, # type: _ExecutionControls
+                 MaximumAutomaticAttempts=NOTHING, # type: int
                  Parameters=NOTHING, # type: dict
                  ResourceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 RetryAttemptSeconds=NOTHING, # type: int
                  TargetVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -276,8 +391,12 @@ class RemediationConfiguration(troposphere.config.RemediationConfiguration, Mixi
             ConfigRuleName=ConfigRuleName,
             TargetId=TargetId,
             TargetType=TargetType,
+            Automatic=Automatic,
+            ExecutionControls=ExecutionControls,
+            MaximumAutomaticAttempts=MaximumAutomaticAttempts,
             Parameters=Parameters,
             ResourceType=ResourceType,
+            RetryAttemptSeconds=RetryAttemptSeconds,
             TargetVersion=TargetVersion,
             **kwargs
         )

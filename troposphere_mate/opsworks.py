@@ -657,6 +657,9 @@ class Server(troposphere.opsworks.Server, Mixin):
                  AssociatePublicIpAddress=NOTHING, # type: bool
                  BackupId=NOTHING, # type: Union[str, AWSHelperFn]
                  BackupRetentionCount=NOTHING, # type: int
+                 CustomCertificate=NOTHING, # type: Union[str, AWSHelperFn]
+                 CustomDomain=NOTHING, # type: Union[str, AWSHelperFn]
+                 CustomPrivateKey=NOTHING, # type: Union[str, AWSHelperFn]
                  DisableAutomatedBackup=NOTHING, # type: bool
                  Engine=NOTHING, # type: Union[str, AWSHelperFn]
                  EngineAttributes=NOTHING, # type: List[_EngineAttribute]
@@ -679,6 +682,9 @@ class Server(troposphere.opsworks.Server, Mixin):
             AssociatePublicIpAddress=AssociatePublicIpAddress,
             BackupId=BackupId,
             BackupRetentionCount=BackupRetentionCount,
+            CustomCertificate=CustomCertificate,
+            CustomDomain=CustomDomain,
+            CustomPrivateKey=CustomPrivateKey,
             DisableAutomatedBackup=DisableAutomatedBackup,
             Engine=Engine,
             EngineAttributes=EngineAttributes,

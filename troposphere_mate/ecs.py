@@ -12,15 +12,19 @@ import troposphere.ecs
 
 from troposphere.ecs import (
     AwsvpcConfiguration as _AwsvpcConfiguration,
+    ClusterSetting as _ClusterSetting,
     ContainerDefinition as _ContainerDefinition,
     ContainerDependency as _ContainerDependency,
     DeploymentConfiguration as _DeploymentConfiguration,
+    DeploymentController as _DeploymentController,
     Device as _Device,
     DockerVolumeConfiguration as _DockerVolumeConfiguration,
     Environment as _Environment,
+    FirelensConfiguration as _FirelensConfiguration,
     HealthCheck as _HealthCheck,
     Host as _Host,
     HostEntry as _HostEntry,
+    InferenceAccelerator as _InferenceAccelerator,
     KernelCapabilities as _KernelCapabilities,
     LinuxParameters as _LinuxParameters,
     LoadBalancer as _LoadBalancer,
@@ -33,8 +37,10 @@ from troposphere.ecs import (
     ProxyConfiguration as _ProxyConfiguration,
     RepositoryCredentials as _RepositoryCredentials,
     ResourceRequirement as _ResourceRequirement,
+    Scale as _Scale,
     Secret as _Secret,
     ServiceRegistry as _ServiceRegistry,
+    SystemControl as _SystemControl,
     Tags as _Tags,
     Tmpfs as _Tmpfs,
     Ulimit as _Ulimit,
@@ -49,12 +55,28 @@ from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
 
 
+class ClusterSetting(troposphere.ecs.ClusterSetting, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            Value=Value,
+            **kwargs
+        )
+        super(ClusterSetting, self).__init__(**processed_kwargs)
+
+
 class Cluster(troposphere.ecs.Cluster, Mixin):
     def __init__(self,
                  title, # type: str
                  template=None, # type: Template
                  validation=True, # type: bool
                  ClusterName=NOTHING, # type: Union[str, AWSHelperFn]
+                 ClusterSettings=NOTHING, # type: List[_ClusterSetting]
                  Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -62,10 +84,32 @@ class Cluster(troposphere.ecs.Cluster, Mixin):
             template=template,
             validation=validation,
             ClusterName=ClusterName,
+            ClusterSettings=ClusterSettings,
             Tags=Tags,
             **kwargs
         )
         super(Cluster, self).__init__(**processed_kwargs)
+
+
+class PrimaryTaskSet(troposphere.ecs.PrimaryTaskSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Cluster=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Service=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TaskSetId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Cluster=Cluster,
+            Service=Service,
+            TaskSetId=TaskSetId,
+            **kwargs
+        )
+        super(PrimaryTaskSet, self).__init__(**processed_kwargs)
 
 
 class LoadBalancer(troposphere.ecs.LoadBalancer, Mixin):
@@ -100,6 +144,19 @@ class DeploymentConfiguration(troposphere.ecs.DeploymentConfiguration, Mixin):
             **kwargs
         )
         super(DeploymentConfiguration, self).__init__(**processed_kwargs)
+
+
+class DeploymentController(troposphere.ecs.DeploymentController, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            **kwargs
+        )
+        super(DeploymentController, self).__init__(**processed_kwargs)
 
 
 class PlacementConstraint(troposphere.ecs.PlacementConstraint, Mixin):
@@ -189,6 +246,7 @@ class Service(troposphere.ecs.Service, Mixin):
                  TaskDefinition=REQUIRED, # type: Union[str, AWSHelperFn]
                  Cluster=NOTHING, # type: Union[str, AWSHelperFn]
                  DeploymentConfiguration=NOTHING, # type: _DeploymentConfiguration
+                 DeploymentController=NOTHING, # type: _DeploymentController
                  DesiredCount=NOTHING, # type: int
                  EnableECSManagedTags=NOTHING, # type: bool
                  HealthCheckGracePeriodSeconds=NOTHING, # type: int
@@ -212,6 +270,7 @@ class Service(troposphere.ecs.Service, Mixin):
             TaskDefinition=TaskDefinition,
             Cluster=Cluster,
             DeploymentConfiguration=DeploymentConfiguration,
+            DeploymentController=DeploymentController,
             DesiredCount=DesiredCount,
             EnableECSManagedTags=EnableECSManagedTags,
             HealthCheckGracePeriodSeconds=HealthCheckGracePeriodSeconds,
@@ -328,6 +387,21 @@ class Device(troposphere.ecs.Device, Mixin):
         super(Device, self).__init__(**processed_kwargs)
 
 
+class FirelensConfiguration(troposphere.ecs.FirelensConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Type=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Options=NOTHING, # type: dict
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Type=Type,
+            Options=Options,
+            **kwargs
+        )
+        super(FirelensConfiguration, self).__init__(**processed_kwargs)
+
+
 class HealthCheck(troposphere.ecs.HealthCheck, Mixin):
     def __init__(self,
                  title=None,
@@ -402,16 +476,33 @@ class LinuxParameters(troposphere.ecs.LinuxParameters, Mixin):
         super(LinuxParameters, self).__init__(**processed_kwargs)
 
 
+class Secret(troposphere.ecs.Secret, Mixin):
+    def __init__(self,
+                 title=None,
+                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ValueFrom=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Name=Name,
+            ValueFrom=ValueFrom,
+            **kwargs
+        )
+        super(Secret, self).__init__(**processed_kwargs)
+
+
 class LogConfiguration(troposphere.ecs.LogConfiguration, Mixin):
     def __init__(self,
                  title=None,
                  LogDriver=REQUIRED, # type: Union[str, AWSHelperFn]
                  Options=NOTHING, # type: dict
+                 SecretOptions=NOTHING, # type: List[_Secret]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             LogDriver=LogDriver,
             Options=Options,
+            SecretOptions=SecretOptions,
             **kwargs
         )
         super(LogConfiguration, self).__init__(**processed_kwargs)
@@ -445,19 +536,19 @@ class ResourceRequirement(troposphere.ecs.ResourceRequirement, Mixin):
         super(ResourceRequirement, self).__init__(**processed_kwargs)
 
 
-class Secret(troposphere.ecs.Secret, Mixin):
+class SystemControl(troposphere.ecs.SystemControl, Mixin):
     def __init__(self,
                  title=None,
-                 Name=REQUIRED, # type: Union[str, AWSHelperFn]
-                 ValueFrom=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Namespace=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Value=REQUIRED, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
-            Name=Name,
-            ValueFrom=ValueFrom,
+            Namespace=Namespace,
+            Value=Value,
             **kwargs
         )
-        super(Secret, self).__init__(**processed_kwargs)
+        super(SystemControl, self).__init__(**processed_kwargs)
 
 
 class Ulimit(troposphere.ecs.Ulimit, Mixin):
@@ -507,9 +598,11 @@ class ContainerDefinition(troposphere.ecs.ContainerDefinition, Mixin):
                  Environment=NOTHING, # type: List[_Environment]
                  Essential=NOTHING, # type: bool
                  ExtraHosts=NOTHING, # type: List[_HostEntry]
+                 FirelensConfiguration=NOTHING, # type: _FirelensConfiguration
                  HealthCheck=NOTHING, # type: _HealthCheck
                  Hostname=NOTHING, # type: Union[str, AWSHelperFn]
                  Image=NOTHING, # type: Union[str, AWSHelperFn]
+                 Interactive=NOTHING, # type: bool
                  Links=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  LinuxParameters=NOTHING, # type: _LinuxParameters
                  LogConfiguration=NOTHING, # type: _LogConfiguration
@@ -519,12 +612,14 @@ class ContainerDefinition(troposphere.ecs.ContainerDefinition, Mixin):
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
                  PortMappings=NOTHING, # type: List[_PortMapping]
                  Privileged=NOTHING, # type: bool
+                 PseudoTerminal=NOTHING, # type: bool
                  ReadonlyRootFilesystem=NOTHING, # type: bool
                  RepositoryCredentials=NOTHING, # type: _RepositoryCredentials
                  ResourceRequirements=NOTHING, # type: List[_ResourceRequirement]
                  Secrets=NOTHING, # type: List[_Secret]
                  StartTimeout=NOTHING, # type: int
                  StopTimeout=NOTHING, # type: int
+                 SystemControls=NOTHING, # type: List[_SystemControl]
                  Ulimits=NOTHING, # type: List[_Ulimit]
                  User=NOTHING, # type: Union[str, AWSHelperFn]
                  VolumesFrom=NOTHING, # type: List[_VolumesFrom]
@@ -544,9 +639,11 @@ class ContainerDefinition(troposphere.ecs.ContainerDefinition, Mixin):
             Environment=Environment,
             Essential=Essential,
             ExtraHosts=ExtraHosts,
+            FirelensConfiguration=FirelensConfiguration,
             HealthCheck=HealthCheck,
             Hostname=Hostname,
             Image=Image,
+            Interactive=Interactive,
             Links=Links,
             LinuxParameters=LinuxParameters,
             LogConfiguration=LogConfiguration,
@@ -556,12 +653,14 @@ class ContainerDefinition(troposphere.ecs.ContainerDefinition, Mixin):
             Name=Name,
             PortMappings=PortMappings,
             Privileged=Privileged,
+            PseudoTerminal=PseudoTerminal,
             ReadonlyRootFilesystem=ReadonlyRootFilesystem,
             RepositoryCredentials=RepositoryCredentials,
             ResourceRequirements=ResourceRequirements,
             Secrets=Secrets,
             StartTimeout=StartTimeout,
             StopTimeout=StopTimeout,
+            SystemControls=SystemControls,
             Ulimits=Ulimits,
             User=User,
             VolumesFrom=VolumesFrom,
@@ -622,6 +721,21 @@ class Volume(troposphere.ecs.Volume, Mixin):
         super(Volume, self).__init__(**processed_kwargs)
 
 
+class InferenceAccelerator(troposphere.ecs.InferenceAccelerator, Mixin):
+    def __init__(self,
+                 title=None,
+                 DeviceName=NOTHING, # type: Union[str, AWSHelperFn]
+                 DeviceType=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            DeviceName=DeviceName,
+            DeviceType=DeviceType,
+            **kwargs
+        )
+        super(InferenceAccelerator, self).__init__(**processed_kwargs)
+
+
 class ProxyConfiguration(troposphere.ecs.ProxyConfiguration, Mixin):
     def __init__(self,
                  title=None,
@@ -648,14 +762,17 @@ class TaskDefinition(troposphere.ecs.TaskDefinition, Mixin):
                  Cpu=NOTHING, # type: Union[str, AWSHelperFn]
                  ExecutionRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
                  Family=NOTHING, # type: Union[str, AWSHelperFn]
+                 InferenceAccelerators=NOTHING, # type: List[_InferenceAccelerator]
+                 IpcMode=NOTHING, # type: Union[str, AWSHelperFn]
                  Memory=NOTHING, # type: Union[str, AWSHelperFn]
                  NetworkMode=NOTHING, # type: Union[str, AWSHelperFn]
+                 PidMode=NOTHING, # type: Union[str, AWSHelperFn]
                  PlacementConstraints=NOTHING, # type: List[_PlacementConstraint]
+                 ProxyConfiguration=NOTHING, # type: _ProxyConfiguration
                  RequiresCompatibilities=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  Tags=NOTHING, # type: _Tags
                  TaskRoleArn=NOTHING, # type: Union[str, AWSHelperFn]
                  Volumes=NOTHING, # type: List[_Volume]
-                 ProxyConfiguration=NOTHING, # type: _ProxyConfiguration
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -665,14 +782,67 @@ class TaskDefinition(troposphere.ecs.TaskDefinition, Mixin):
             Cpu=Cpu,
             ExecutionRoleArn=ExecutionRoleArn,
             Family=Family,
+            InferenceAccelerators=InferenceAccelerators,
+            IpcMode=IpcMode,
             Memory=Memory,
             NetworkMode=NetworkMode,
+            PidMode=PidMode,
             PlacementConstraints=PlacementConstraints,
+            ProxyConfiguration=ProxyConfiguration,
             RequiresCompatibilities=RequiresCompatibilities,
             Tags=Tags,
             TaskRoleArn=TaskRoleArn,
             Volumes=Volumes,
-            ProxyConfiguration=ProxyConfiguration,
             **kwargs
         )
         super(TaskDefinition, self).__init__(**processed_kwargs)
+
+
+class Scale(troposphere.ecs.Scale, Mixin):
+    def __init__(self,
+                 title=None,
+                 Unit=NOTHING, # type: Union[str, AWSHelperFn]
+                 Value=NOTHING, # type: float
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Unit=Unit,
+            Value=Value,
+            **kwargs
+        )
+        super(Scale, self).__init__(**processed_kwargs)
+
+
+class TaskSet(troposphere.ecs.TaskSet, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Cluster=REQUIRED, # type: Union[str, AWSHelperFn]
+                 Service=REQUIRED, # type: Union[str, AWSHelperFn]
+                 TaskDefinition=REQUIRED, # type: Union[str, AWSHelperFn]
+                 ExternalId=NOTHING, # type: Union[str, AWSHelperFn]
+                 LaunchType=NOTHING, # type: Union[str, AWSHelperFn]
+                 LoadBalancers=NOTHING, # type: List[_LoadBalancer]
+                 NetworkConfiguration=NOTHING, # type: _NetworkConfiguration
+                 PlatformVersion=NOTHING, # type: Union[str, AWSHelperFn]
+                 Scale=NOTHING, # type: _Scale
+                 ServiceRegistries=NOTHING, # type: List[_ServiceRegistry]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Cluster=Cluster,
+            Service=Service,
+            TaskDefinition=TaskDefinition,
+            ExternalId=ExternalId,
+            LaunchType=LaunchType,
+            LoadBalancers=LoadBalancers,
+            NetworkConfiguration=NetworkConfiguration,
+            PlatformVersion=PlatformVersion,
+            Scale=Scale,
+            ServiceRegistries=ServiceRegistries,
+            **kwargs
+        )
+        super(TaskSet, self).__init__(**processed_kwargs)

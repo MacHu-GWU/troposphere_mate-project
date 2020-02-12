@@ -11,6 +11,7 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 import troposphere.appstream
 
 from troposphere.appstream import (
+    AccessEndpoint as _AccessEndpoint,
     ApplicationSettings as _ApplicationSettings,
     ComputeCapacity as _ComputeCapacity,
     DomainJoinInfo as _DomainJoinInfo,
@@ -77,21 +78,6 @@ class ComputeCapacity(troposphere.appstream.ComputeCapacity, Mixin):
         super(ComputeCapacity, self).__init__(**processed_kwargs)
 
 
-class VpcConfig(troposphere.appstream.VpcConfig, Mixin):
-    def __init__(self,
-                 title=None,
-                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
-                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
-                 **kwargs):
-        processed_kwargs = preprocess_init_kwargs(
-            title=title,
-            SecurityGroupIds=SecurityGroupIds,
-            SubnetIds=SubnetIds,
-            **kwargs
-        )
-        super(VpcConfig, self).__init__(**processed_kwargs)
-
-
 class DomainJoinInfo(troposphere.appstream.DomainJoinInfo, Mixin):
     def __init__(self,
                  title=None,
@@ -105,6 +91,21 @@ class DomainJoinInfo(troposphere.appstream.DomainJoinInfo, Mixin):
             **kwargs
         )
         super(DomainJoinInfo, self).__init__(**processed_kwargs)
+
+
+class VpcConfig(troposphere.appstream.VpcConfig, Mixin):
+    def __init__(self,
+                 title=None,
+                 SecurityGroupIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 SubnetIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            SecurityGroupIds=SecurityGroupIds,
+            SubnetIds=SubnetIds,
+            **kwargs
+        )
+        super(VpcConfig, self).__init__(**processed_kwargs)
 
 
 class Fleet(troposphere.appstream.Fleet, Mixin):
@@ -152,12 +153,28 @@ class Fleet(troposphere.appstream.Fleet, Mixin):
         super(Fleet, self).__init__(**processed_kwargs)
 
 
+class AccessEndpoint(troposphere.appstream.AccessEndpoint, Mixin):
+    def __init__(self,
+                 title=None,
+                 EndpointType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 VpceId=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            EndpointType=EndpointType,
+            VpceId=VpceId,
+            **kwargs
+        )
+        super(AccessEndpoint, self).__init__(**processed_kwargs)
+
+
 class ImageBuilder(troposphere.appstream.ImageBuilder, Mixin):
     def __init__(self,
                  title, # type: str
                  template=None, # type: Template
                  validation=True, # type: bool
                  InstanceType=REQUIRED, # type: Union[str, AWSHelperFn]
+                 AccessEndpoints=NOTHING, # type: List[_AccessEndpoint]
                  AppstreamAgentVersion=NOTHING, # type: Union[str, AWSHelperFn]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  DisplayName=NOTHING, # type: Union[str, AWSHelperFn]
@@ -174,6 +191,7 @@ class ImageBuilder(troposphere.appstream.ImageBuilder, Mixin):
             template=template,
             validation=validation,
             InstanceType=InstanceType,
+            AccessEndpoints=AccessEndpoints,
             AppstreamAgentVersion=AppstreamAgentVersion,
             Description=Description,
             DisplayName=DisplayName,
@@ -189,23 +207,19 @@ class ImageBuilder(troposphere.appstream.ImageBuilder, Mixin):
         super(ImageBuilder, self).__init__(**processed_kwargs)
 
 
-class StackFleetAssociation(troposphere.appstream.StackFleetAssociation, Mixin):
+class ApplicationSettings(troposphere.appstream.ApplicationSettings, Mixin):
     def __init__(self,
-                 title, # type: str
-                 template=None, # type: Template
-                 validation=True, # type: bool
-                 FleetName=REQUIRED, # type: Union[str, AWSHelperFn]
-                 StackName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 title=None,
+                 Enabled=REQUIRED, # type: bool
+                 SettingsGroup=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
-            template=template,
-            validation=validation,
-            FleetName=FleetName,
-            StackName=StackName,
+            Enabled=Enabled,
+            SettingsGroup=SettingsGroup,
             **kwargs
         )
-        super(StackFleetAssociation, self).__init__(**processed_kwargs)
+        super(ApplicationSettings, self).__init__(**processed_kwargs)
 
 
 class StorageConnector(troposphere.appstream.StorageConnector, Mixin):
@@ -240,31 +254,18 @@ class UserSetting(troposphere.appstream.UserSetting, Mixin):
         super(UserSetting, self).__init__(**processed_kwargs)
 
 
-class ApplicationSettings(troposphere.appstream.ApplicationSettings, Mixin):
-    def __init__(self,
-                 title=None,
-                 Enabled=REQUIRED, # type: bool
-                 SettingsGroup=NOTHING, # type: Union[str, AWSHelperFn]
-                 **kwargs):
-        processed_kwargs = preprocess_init_kwargs(
-            title=title,
-            Enabled=Enabled,
-            SettingsGroup=SettingsGroup,
-            **kwargs
-        )
-        super(ApplicationSettings, self).__init__(**processed_kwargs)
-
-
 class Stack(troposphere.appstream.Stack, Mixin):
     def __init__(self,
                  title, # type: str
                  template=None, # type: Template
                  validation=True, # type: bool
+                 AccessEndpoints=NOTHING, # type: List[_AccessEndpoint]
                  ApplicationSettings=NOTHING, # type: _ApplicationSettings
                  AttributesToDelete=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  DeleteStorageConnectors=NOTHING, # type: bool
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  DisplayName=NOTHING, # type: Union[str, AWSHelperFn]
+                 EmbedHostDomains=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  FeedbackURL=NOTHING, # type: Union[str, AWSHelperFn]
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
                  RedirectURL=NOTHING, # type: Union[str, AWSHelperFn]
@@ -276,11 +277,13 @@ class Stack(troposphere.appstream.Stack, Mixin):
             title=title,
             template=template,
             validation=validation,
+            AccessEndpoints=AccessEndpoints,
             ApplicationSettings=ApplicationSettings,
             AttributesToDelete=AttributesToDelete,
             DeleteStorageConnectors=DeleteStorageConnectors,
             Description=Description,
             DisplayName=DisplayName,
+            EmbedHostDomains=EmbedHostDomains,
             FeedbackURL=FeedbackURL,
             Name=Name,
             RedirectURL=RedirectURL,
@@ -290,6 +293,25 @@ class Stack(troposphere.appstream.Stack, Mixin):
             **kwargs
         )
         super(Stack, self).__init__(**processed_kwargs)
+
+
+class StackFleetAssociation(troposphere.appstream.StackFleetAssociation, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 FleetName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 StackName=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            FleetName=FleetName,
+            StackName=StackName,
+            **kwargs
+        )
+        super(StackFleetAssociation, self).__init__(**processed_kwargs)
 
 
 class StackUserAssociation(troposphere.appstream.StackUserAssociation, Mixin):

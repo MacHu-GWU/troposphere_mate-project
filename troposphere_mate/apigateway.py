@@ -95,6 +95,7 @@ class ApiKey(troposphere.apigateway.ApiKey, Mixin):
                  GenerateDistinctId=NOTHING, # type: bool
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
                  StageKeys=NOTHING, # type: List[_StageKey]
+                 Tags=NOTHING, # type: _Tags
                  Value=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -107,6 +108,7 @@ class ApiKey(troposphere.apigateway.ApiKey, Mixin):
             GenerateDistinctId=GenerateDistinctId,
             Name=Name,
             StageKeys=StageKeys,
+            Tags=Tags,
             Value=Value,
             **kwargs
         )
@@ -196,12 +198,14 @@ class ClientCertificate(troposphere.apigateway.ClientCertificate, Mixin):
                  template=None, # type: Template
                  validation=True, # type: bool
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             template=template,
             validation=validation,
             Description=Description,
+            Tags=Tags,
             **kwargs
         )
         super(ClientCertificate, self).__init__(**processed_kwargs)
@@ -394,10 +398,12 @@ class EndpointConfiguration(troposphere.apigateway.EndpointConfiguration, Mixin)
     def __init__(self,
                  title=None,
                  Types=NOTHING, # type: List[Union[str, AWSHelperFn]]
+                 VpcEndpointIds=NOTHING, # type: List[Union[str, AWSHelperFn]]
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
             Types=Types,
+            VpcEndpointIds=VpcEndpointIds,
             **kwargs
         )
         super(EndpointConfiguration, self).__init__(**processed_kwargs)
@@ -412,6 +418,8 @@ class DomainName(troposphere.apigateway.DomainName, Mixin):
                  CertificateArn=NOTHING, # type: Union[str, AWSHelperFn]
                  EndpointConfiguration=NOTHING, # type: _EndpointConfiguration
                  RegionalCertificateArn=NOTHING, # type: Union[str, AWSHelperFn]
+                 SecurityPolicy=NOTHING, # type: Union[str, AWSHelperFn]
+                 Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -421,6 +429,8 @@ class DomainName(troposphere.apigateway.DomainName, Mixin):
             CertificateArn=CertificateArn,
             EndpointConfiguration=EndpointConfiguration,
             RegionalCertificateArn=RegionalCertificateArn,
+            SecurityPolicy=SecurityPolicy,
+            Tags=Tags,
             **kwargs
         )
         super(DomainName, self).__init__(**processed_kwargs)
@@ -649,6 +659,7 @@ class RestApi(troposphere.apigateway.RestApi, Mixin):
                  Name=NOTHING, # type: Union[str, AWSHelperFn]
                  Parameters=NOTHING, # type: dict
                  Policy=NOTHING, # type: dict
+                 Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
             title=title,
@@ -666,6 +677,7 @@ class RestApi(troposphere.apigateway.RestApi, Mixin):
             Name=Name,
             Parameters=Parameters,
             Policy=Policy,
+            Tags=Tags,
             **kwargs
         )
         super(RestApi, self).__init__(**processed_kwargs)
@@ -771,6 +783,7 @@ class UsagePlan(troposphere.apigateway.UsagePlan, Mixin):
                  ApiStages=NOTHING, # type: List[_ApiStage]
                  Description=NOTHING, # type: Union[str, AWSHelperFn]
                  Quota=NOTHING, # type: _QuotaSettings
+                 Tags=NOTHING, # type: _Tags
                  Throttle=NOTHING, # type: _ThrottleSettings
                  UsagePlanName=NOTHING, # type: Union[str, AWSHelperFn]
                  **kwargs):
@@ -781,6 +794,7 @@ class UsagePlan(troposphere.apigateway.UsagePlan, Mixin):
             ApiStages=ApiStages,
             Description=Description,
             Quota=Quota,
+            Tags=Tags,
             Throttle=Throttle,
             UsagePlanName=UsagePlanName,
             **kwargs

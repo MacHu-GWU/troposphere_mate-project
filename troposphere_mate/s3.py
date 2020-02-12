@@ -54,6 +54,7 @@ from troposphere.s3 import (
     Tags as _Tags,
     TopicConfigurations as _TopicConfigurations,
     VersioningConfiguration as _VersioningConfiguration,
+    VpcConfiguration as _VpcConfiguration,
     WebsiteConfiguration as _WebsiteConfiguration,
 )
 
@@ -62,6 +63,69 @@ from troposphere import Template, AWSHelperFn
 from troposphere_mate.core.mate import preprocess_init_kwargs, Mixin
 from troposphere_mate.core.sentiel import REQUIRED, NOTHING
 
+
+
+class PublicAccessBlockConfiguration(troposphere.s3.PublicAccessBlockConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 BlockPublicAcls=NOTHING, # type: bool
+                 BlockPublicPolicy=NOTHING, # type: bool
+                 IgnorePublicAcls=NOTHING, # type: bool
+                 RestrictPublicBuckets=NOTHING, # type: bool
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            BlockPublicAcls=BlockPublicAcls,
+            BlockPublicPolicy=BlockPublicPolicy,
+            IgnorePublicAcls=IgnorePublicAcls,
+            RestrictPublicBuckets=RestrictPublicBuckets,
+            **kwargs
+        )
+        super(PublicAccessBlockConfiguration, self).__init__(**processed_kwargs)
+
+
+class VpcConfiguration(troposphere.s3.VpcConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 VpcId=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            VpcId=VpcId,
+            **kwargs
+        )
+        super(VpcConfiguration, self).__init__(**processed_kwargs)
+
+
+class AccessPoint(troposphere.s3.AccessPoint, Mixin):
+    def __init__(self,
+                 title, # type: str
+                 template=None, # type: Template
+                 validation=True, # type: bool
+                 Bucket=REQUIRED, # type: Union[str, AWSHelperFn]
+                 CreationDate=NOTHING, # type: Union[str, AWSHelperFn]
+                 Name=NOTHING, # type: Union[str, AWSHelperFn]
+                 NetworkOrigin=NOTHING, # type: Union[str, AWSHelperFn]
+                 Policy=NOTHING, # type: dict
+                 PolicyStatus=NOTHING, # type: dict
+                 PublicAccessBlockConfiguration=NOTHING, # type: _PublicAccessBlockConfiguration
+                 VpcConfiguration=NOTHING, # type: _VpcConfiguration
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            template=template,
+            validation=validation,
+            Bucket=Bucket,
+            CreationDate=CreationDate,
+            Name=Name,
+            NetworkOrigin=NetworkOrigin,
+            Policy=Policy,
+            PolicyStatus=PolicyStatus,
+            PublicAccessBlockConfiguration=PublicAccessBlockConfiguration,
+            VpcConfiguration=VpcConfiguration,
+            **kwargs
+        )
+        super(AccessPoint, self).__init__(**processed_kwargs)
 
 
 class CorsRules(troposphere.s3.CorsRules, Mixin):

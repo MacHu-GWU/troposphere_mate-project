@@ -39,6 +39,11 @@ class ModuleTemplate(object):
 
 
 # See troposphere.validators.py for more information
+
+from troposphere import validators
+
+_ = validators
+
 validator_to_typehint_mapper = {
     "boolean": "bool",
     "integer": "int",

@@ -11,6 +11,9 @@ if sys.version_info.major >= 3 and sys.version_info.minor >= 5:  # pragma: no co
 import troposphere.stepfunctions
 
 from troposphere.stepfunctions import (
+    CloudWatchLogsLogGroup as _CloudWatchLogsLogGroup,
+    LogDestination as _LogDestination,
+    LoggingConfiguration as _LoggingConfiguration,
     Tags as _Tags,
 )
 
@@ -40,6 +43,49 @@ class Activity(troposphere.stepfunctions.Activity, Mixin):
         super(Activity, self).__init__(**processed_kwargs)
 
 
+class CloudWatchLogsLogGroup(troposphere.stepfunctions.CloudWatchLogsLogGroup, Mixin):
+    def __init__(self,
+                 title=None,
+                 LogGroupArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            LogGroupArn=LogGroupArn,
+            **kwargs
+        )
+        super(CloudWatchLogsLogGroup, self).__init__(**processed_kwargs)
+
+
+class LogDestination(troposphere.stepfunctions.LogDestination, Mixin):
+    def __init__(self,
+                 title=None,
+                 CloudWatchLogsLogGroup=NOTHING, # type: _CloudWatchLogsLogGroup
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            CloudWatchLogsLogGroup=CloudWatchLogsLogGroup,
+            **kwargs
+        )
+        super(LogDestination, self).__init__(**processed_kwargs)
+
+
+class LoggingConfiguration(troposphere.stepfunctions.LoggingConfiguration, Mixin):
+    def __init__(self,
+                 title=None,
+                 Destinations=NOTHING, # type: List[_LogDestination]
+                 IncludeExecutionData=NOTHING, # type: bool
+                 Level=NOTHING, # type: Union[str, AWSHelperFn]
+                 **kwargs):
+        processed_kwargs = preprocess_init_kwargs(
+            title=title,
+            Destinations=Destinations,
+            IncludeExecutionData=IncludeExecutionData,
+            Level=Level,
+            **kwargs
+        )
+        super(LoggingConfiguration, self).__init__(**processed_kwargs)
+
+
 class StateMachine(troposphere.stepfunctions.StateMachine, Mixin):
     def __init__(self,
                  title, # type: str
@@ -47,7 +93,9 @@ class StateMachine(troposphere.stepfunctions.StateMachine, Mixin):
                  validation=True, # type: bool
                  DefinitionString=REQUIRED, # type: Union[str, AWSHelperFn]
                  RoleArn=REQUIRED, # type: Union[str, AWSHelperFn]
+                 LoggingConfiguration=NOTHING, # type: _LoggingConfiguration
                  StateMachineName=NOTHING, # type: Union[str, AWSHelperFn]
+                 StateMachineType=NOTHING, # type: Union[str, AWSHelperFn]
                  Tags=NOTHING, # type: _Tags
                  **kwargs):
         processed_kwargs = preprocess_init_kwargs(
@@ -56,7 +104,9 @@ class StateMachine(troposphere.stepfunctions.StateMachine, Mixin):
             validation=validation,
             DefinitionString=DefinitionString,
             RoleArn=RoleArn,
+            LoggingConfiguration=LoggingConfiguration,
             StateMachineName=StateMachineName,
+            StateMachineType=StateMachineType,
             Tags=Tags,
             **kwargs
         )
