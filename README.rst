@@ -207,12 +207,22 @@ Any AWS Resource object and Template object has a utility method ``.update_tags(
 Auto Reference
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes, you just know you need to associate one AWS Resource to another, but you
-have to lookup the Document to find out which Property and what is the Syntax to do that.
+Sometimes, you just know you need to associate one AWS Resource to another, but you have to lookup the Document to find out which Property and what is the Syntax to do that.
 
 For example, **if you want to associate an IAM Role, VPC Subnet, Security Group to a Lambda Function, how do you know whether it is REF or GetAtt ARN can get you the resource arn?**.
 
-Suppose you already have:
+**With troposphere_mate, it's just one line of code**:
+
+.. code-block:: python
+
+    from troposphere_mate import iam, awslambda, associate
+
+    iam_role = iam.Role("IamRole")
+    lbd_func = awslambda.Function("LbdFunc")
+    associate(iam_role, lbd_func)
+
+
+Let's take a look at a full example. Suppose you already have:
 
 .. code-block:: python
 
@@ -295,6 +305,17 @@ In other word, **you don't need to remember the properties and the syntax**.
     )
 
 If you want to contribute your auto-associate logic to ``troposphere_mate``, please submit `issue <https://github.com/MacHu-GWU/troposphere_mate-project/issues>`_ or help me to improve. Here's an `example <https://github.com/MacHu-GWU/troposphere_mate-project/blob/master/troposphere_mate/core/associate.py>`_.
+
+
+Return Values Hint
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Cloudformation return values API is NOT consistent! Sometimes you have no idea which syntax, ``Ref`` or ``GetAtt Arn`` gives you the real Arn. Sometimes the Ref, sometimes the GetAtt.
+
+``troposphere_mate`` **provides tons of property method allows you to quickly access the value in form of intrinsic function when you need to reference it**.
+
+.. image:: https://user-images.githubusercontent.com/6800411/74405874-308f0c80-4dfc-11ea-9c93-98ae366e4b71.png
+    :width: 600 px
 
 
 Remove Resource and auto-remove dependent resource and Output
@@ -435,6 +456,8 @@ Example:
 Deploy from Python
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The boto3 api doesn't come with ``aws cloudformation package`` api. But troposphere_mate supports ``package`` and Nested Stack!
+
 .. code-block:: python
 
     import boto3
@@ -455,6 +478,8 @@ Deploy from Python
         template,
         stack_name="my-stack-dev",
     )
+
+nested stack docs todo ...
 
 
 .. _install:
