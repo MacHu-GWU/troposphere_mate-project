@@ -1,7 +1,31 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from troposphere_mate import Template, Tags, Ref, Output, GetAtt
+
+from troposphere_mate import Template, Tags, Ref, Output, GetAtt, apigateway
+from troposphere_mate.core.mate import is_x_depends_on_y
+
+
+def test_is_x_depends_on_y():
+    res1 = apigateway.RestApi("Res1", Name="MyRestApi1")
+    res2 = apigateway.RestApi("Res2", Name="MyRestApi2", DependsOn=res1)
+    assert is_x_depends_on_y(res1, res2) is False
+    assert is_x_depends_on_y(res2, res1) is True
+
+    res1 = apigateway.RestApi("Res1", Name="MyRestApi1")
+    res2 = apigateway.RestApi("Res2", Name="MyRestApi2", DependsOn=[res1, ])
+    assert is_x_depends_on_y(res1, res2) is False
+    assert is_x_depends_on_y(res2, res1) is True
+
+    res1 = apigateway.RestApi("Res1", Name="MyRestApi1")
+    res2 = apigateway.RestApi("Res2", Name="MyRestApi2")
+    assert is_x_depends_on_y(res1, res2) is False
+    assert is_x_depends_on_y(res2, res1) is False
+
+    res1 = apigateway.RestApi("Res1", Name="MyRestApi1")
+    res2 = apigateway.RestApi("Res2", Name="MyRestApi2", DependsOn=set())
+    assert is_x_depends_on_y(res1, res2) is False
+    assert is_x_depends_on_y(res2, res1) is False
 
 
 def test_mutable_aws_object():
@@ -24,7 +48,7 @@ def test_mutable_aws_object():
         AssumeRolePolicyDocument={},
     )
     assert tpl.to_dict()[
-        "Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role"
+               "Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role"
     assert "ManagedPolicyArns" not in tpl.to_dict(
     )["Resources"]["MyRole"]["Properties"]
 
@@ -33,7 +57,7 @@ def test_mutable_aws_object():
         Ref(my_policy)
     ]
     assert tpl.to_dict()[
-        "Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role-two"
+               "Resources"]["MyRole"]["Properties"]["RoleName"] == "my-role-two"
     assert tpl.to_dict()["Resources"]["MyRole"]["Properties"]["ManagedPolicyArns"] == [
         {"Ref": "MyPolicy"}
     ]

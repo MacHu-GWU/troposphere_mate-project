@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
+import functools
+
 import pytest
 from pytest import raises
-import functools
+
 from troposphere_mate import (
     Template, Tags, Ref, Parameter, Output, DEFAULT_LABELS_FIELD, mtdt,
     apigateway,
 )
 from troposphere_mate.core.tagger import tags_list_to_dct
+
 
 class TestOutput(object):
     def test_init(self):
@@ -22,39 +25,59 @@ class TestOutput(object):
         output_rest_api_id = Output(
             "RestApiId",
             Value=Ref(rest_api),
-            DependsOn=[rest_api,],
+            DependsOn=[rest_api, ],
         )
         assert output_rest_api_id.depends_on_resources == ["RestApi", ]
 
 
+class Canned(object):
+    def __init__(self):
+        self.tpl = Template()
+
+        self.param_env_name = Parameter(
+            "EnvName",
+            Type="String"
+        )
+
+        self.rest_api_x = apigateway.RestApi(
+            "RestApiX",
+            template=self.tpl,
+            Name="MyRestApiX",
+        )
+        self.rest_api_y = apigateway.RestApi(
+            "RestApiY",
+            template=self.tpl,
+            Name="MyRestApiY",
+            DependsOn=self.rest_api_x,
+        )
+        self.rest_api_z = apigateway.RestApi(
+            "RestApiZ",
+            template=self.tpl,
+            Name="MyRestApiZ",
+            DependsOn=self.rest_api_y
+        )
+
+        self.output_rest_api_x_id = Output(
+            "RestApiXId",
+            Value=Ref(self.rest_api_x),
+            DependsOn=self.rest_api_x,
+        )
+        self.tpl.add_output(self.output_rest_api_x_id)
+        self.output_rest_api_y_id = Output(
+            "RestApiYId",
+            Value=Ref(self.rest_api_y),
+            DependsOn=self.rest_api_y,
+        )
+        self.tpl.add_output(self.output_rest_api_y_id)
+        self.output_rest_api_z_id = Output(
+            "RestApiZId",
+            Value=Ref(self.rest_api_z),
+            DependsOn=self.rest_api_z,
+        )
+        self.tpl.add_output(self.output_rest_api_z_id)
+
+
 class TestTemplate(object):
-    def test_from_dict(self):
-        from troposphere_mate.apigateway import RestApi
-
-        tpl = Template()
-        rest_api = RestApi(
-            "RestApi",
-            template=tpl,
-            Metadata={"description": "a rest api"},
-            Name="MyApi",
-        )
-        tpl.add_output(
-            Output(
-                "RestApiId",
-                Value=Ref(rest_api),
-                DependsOn=rest_api
-            )
-        )
-
-        dct = tpl.to_dict()
-        tpl = Template.from_dict(dct)
-
-        tpl.remove_resource_by_label(label="na")
-        assert tpl.to_dict() == dct
-
-        assert isinstance(tpl.resources["RestApi"], RestApi)
-        assert isinstance(tpl.outputs["RestApiId"], Output)
-
     def test_update_tags(self):
         from troposphere_mate import ec2
 
@@ -149,38 +172,26 @@ class TestTemplate(object):
         # print(getattr(tpl.outputs[output_rest_api_id.title], mtdt.TemplateLevelField.OUTPUTS_DEPENDS_ON))
 
     def test_remove_resource(self):
-        from troposphere_mate import iam
-        from troposphere_mate import canned
+        can = Canned()
+        assert can.tpl.n_resource == 3
+        assert can.tpl.n_output == 3
 
-        tpl = Template()
-        role = iam.Role(
-            "MyRole",
-            template=tpl,
-            RoleName="my-role",
-            AssumeRolePolicyDocument=canned.iam.create_assume_role_policy_document([
-                canned.iam.AWSServiceName.aws_Lambda
-            ]),
-            ManagedPolicyArns=[
-                canned.iam.AWSManagedPolicyArn.awsLambdaBasicExecutionRole, ]
-        )
+        can.tpl.remove_resource(can.rest_api_z)
+        assert can.tpl.n_resource == 2
+        assert can.tpl.n_output == 2
 
-        # output depends on iam role
-        tpl.add_output(
-            Output("MyRoleArn", Value=Ref(role), DependsOn=role)
-        )
+        can.tpl.remove_resource(can.rest_api_x)
+        assert can.tpl.n_resource == 0
+        assert can.tpl.n_output == 0
 
-        assert len(tpl.resources) == 1
-        assert len(tpl.outputs) == 1
-
-        # remove iam role, outputs also been removed
-        tpl.remove_resource(role)
-
-        assert len(tpl.resources) == 0
-        assert len(tpl.outputs) == 0
+        # since y depends on x, z depends on y, removes x also removes
+        # y and z, and their outputs
+        can = Canned()
+        can.tpl.remove_resource(can.rest_api_x.title)
+        assert can.tpl.n_resource == 0
+        assert can.tpl.n_output == 0
 
     def test_remove_parameter_and_output(self):
-        from troposphere_mate import canned
-
         tpl = Template()
         p1 = Parameter("P1", Type="string")
         o1 = Output("O1", Value=Ref("P1"))
@@ -233,10 +244,10 @@ class TestTemplate(object):
             Metadata={DEFAULT_LABELS_FIELD: ["tier3", "tier_bucket"]}
         )
         assert len(tpl.resources) == 3
-        tpl.remove_resource_by_label("tier1")
-        assert len(tpl.resources) == 2
-        tpl.remove_resource_by_label("tier_bucket")
-        assert len(tpl.resources) == 0
+        # tpl.remove_resource_by_label("tier1")
+        # assert len(tpl.resources) == 2
+        # tpl.remove_resource_by_label("tier_bucket")
+        # assert len(tpl.resources) == 0
 
     def test_create_resource_type_label(self):
         from troposphere_mate import s3, apigateway
@@ -258,6 +269,38 @@ class TestTemplate(object):
 
         assert len(tpl.to_dict()["Resources"]["Bucket"]["Metadata"][DEFAULT_LABELS_FIELD]) == 1
         assert len(tpl.to_dict()["Resources"]["RestApi"]["Metadata"][DEFAULT_LABELS_FIELD]) == 2
+
+    def test_from_dict(self):
+        from troposphere_mate.apigateway import RestApi
+
+        tpl = Template()
+        rest_api = RestApi(
+            "RestApi",
+            template=tpl,
+            Metadata={"description": "a rest api"},
+            Name="MyApi",
+        )
+        output_rest_api_id = Output(
+            "RestApiId",
+            Value=Ref(rest_api),
+            DependsOn=rest_api
+        )
+        tpl.add_output(output_rest_api_id)
+
+        dct = tpl.to_dict()
+        # print(tpl.to_json())
+        tpl = Template.from_dict(dct)
+        tpl.remove_resource_by_label(label="na")
+        assert tpl.to_dict() == dct
+
+        assert isinstance(tpl.resources["RestApi"], RestApi)
+        assert isinstance(tpl.outputs["RestApiId"], Output)
+        assert getattr(
+            tpl.outputs[output_rest_api_id.title],
+            mtdt.TemplateLevelField.OUTPUTS_DEPENDS_ON,
+        ) == [rest_api.title, ]
+
+        assert tpl.to_dict() == dct
 
 
 if __name__ == "__main__":

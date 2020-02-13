@@ -10,8 +10,10 @@ except:  # pragma: no cover
     pass
 
 import importlib
+import warnings
 
 import troposphere
+from six import string_types
 from troposphere import AWSObject, depends_on_helper
 from troposphere.template_generator import TemplateGenerator
 
@@ -70,14 +72,13 @@ def convert_to_mate_resource(troposphere_resource, troposphere_mate_template):
 
 def convert_to_mate_output(troposphere_output, troposphere_mate_template):
     """
-    TODO 将 troposphere_mate dump 成 dict 在转回来 会丢失 Output.DependsOn 的信息
+    This method converts ``troposphere.AWSObject`` to ``troposphere_mate.AWSObject``.
+
+    :type troposphere_output: troposphere.Output
+    :rtype: Output
     """
-    print("=" * 80)
-    print(troposphere_output)
-    print("=" * 80)
     kwargs = {
         "title": troposphere_output.title,
-        "DependsOn": troposphere_output.resource.get("DependsOn"),
     }
     kwargs = {
         k: v
@@ -85,8 +86,39 @@ def convert_to_mate_output(troposphere_output, troposphere_mate_template):
     }
     for key, value in troposphere_output.resource.items():
         kwargs[key] = value
+
+    mtdt.initiate_default_template_metadata(troposphere_mate_template)
+
+    DependsOn = troposphere_mate_template.metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
+        [mtdt.TemplateLevelField.OUTPUTS] \
+        .get(troposphere_output.title, {}) \
+        .get(mtdt.TemplateLevelField.OUTPUTS_DEPENDS_ON, [])
+    kwargs["DependsOn"] = DependsOn
+
     troposphere_mate_output = Output(**kwargs)
     return troposphere_mate_output
+
+
+def is_x_depends_on_y(res_x, res_y):
+    """
+    Returns a boolean value to indicte that whether Resource X depends on
+    Resource Y.
+
+    :type res_x: AWSObject
+    :type res_y: AWSObject
+    :rtype: bool
+    """
+    try:
+        _ = res_x.DependsOn
+    except AttributeError:
+        return False
+
+    if isinstance(res_x.DependsOn, string_types):
+        return res_y.title == res_x.DependsOn
+    elif isinstance(res_x.DependsOn, (list, tuple)):
+        return res_y.title in res_x.DependsOn
+    else:
+        return False
 
 
 class Template(troposphere.Template):
@@ -180,13 +212,6 @@ class Template(troposphere.Template):
         if not isinstance(self.metadata, dict):
             self.metadata = {}
 
-        self.metadata.setdefault(
-            mtdt.TROPOSPHERE_METADATA_FIELD_NAME,
-            {
-                "Outputs": {},
-            }
-        )
-
         mtdt.initiate_default_template_metadata(self)
         self.metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
             [mtdt.TemplateLevelField.OUTPUTS] \
@@ -209,7 +234,7 @@ class Template(troposphere.Template):
                 return
         super(Template, self).add_resource(resource)
 
-    def remove_parameter(self, parameter):
+    def remove_parameter(self, parameter, ignore_not_exists=False):
         """
         Remove a parameter.
 
@@ -220,11 +245,12 @@ class Template(troposphere.Template):
         else:
             parameter_logic_id = parameter
         if parameter_logic_id not in self.parameters:
-            raise ValueError("Can't remove, Template '{}' not found in the template!".format(
-                parameter_logic_id))
+            if not ignore_not_exists:
+                raise ValueError("Can't remove, Template '{}' not found in the template!".format(
+                    parameter_logic_id))
         del self.parameters[parameter_logic_id]
 
-    def remove_output(self, output):
+    def remove_output(self, output, ignore_not_exists=False):
         """
         Remove a parameter.
 
@@ -235,40 +261,93 @@ class Template(troposphere.Template):
         else:
             output_logic_id = output
         if output_logic_id not in self.outputs:
-            raise ValueError(
-                "Can't remove, Output '{}' not found in the template!".format(output_logic_id))
+            if ignore_not_exists:
+                return
+            else:
+                raise ValueError(
+                    "Can't remove, Output '{}' not found in the template!".format(output_logic_id))
         del self.outputs[output_logic_id]
 
-    def remove_resource(self, resource):
+    def remove_resource(self,
+                        resource,
+                        ignore_not_exists=False,
+                        remove_dependent=True,
+                        _to_delete_resources=None,
+                        _to_delete_outputs=None,
+                        _first_time_called=False):
         """
         Remove AWS Resource Object from "Resources" and related "Outputs".
 
         Note:
 
-            You don't have to take care of ``DependsOn`` issue, because if the
-            other resource doesn't requires this resource, then logically you
-            should not put this resource in its ``DependsOne``
+            there's no need to worry that, supposed that X depends on Y,
+            you removed Y, so the DependsOn field in X doesn't make sense.
+
+            because it doesn't make sense that you remove Y but not remove X.
 
         :type resource: Union[AWSObject, str]
+        :type ignore_not_exists: bool
+        :type remove_dependent: bool
+        :type _to_delete_resources: list
+        :param _to_delete_resources: internal implementation variables
+        :type _to_delete_outputs: list
+        :param _to_delete_outputs: internal implementation variables
+        :type _first_time_called: bool
+        :param _first_time_called: internal implementation variables
         """
+        if not remove_dependent:  # pragma: no cover
+            warnings.warn("`remove_dependent=False` might leave invalid dependencies "
+                          "relationship. For example X depends on Y, you removed Y "
+                          "but forgot to remove X!")
+
         if isinstance(resource, AWSObject):
             resource_logic_id = resource.title
         else:
             resource_logic_id = resource
 
+        if _to_delete_resources is None:
+            _to_delete_resources = list()
+            _first_time_called = True
+        if _to_delete_outputs is None:
+            _to_delete_outputs = list()
+
         if resource_logic_id not in self.resources:
-            raise ValueError(
-                "Can't remove, Resource '{}' not found in the template!".format(resource_logic_id))
-        to_delete_output_logic_id_list = list()
+            if ignore_not_exists:
+                return
+            else:
+                raise ValueError(
+                    "Can't remove, Resource '{}' not found in the template!".format(resource_logic_id))
+
+        if not isinstance(resource, AWSObject):
+            resource = self.resources[resource_logic_id]  # type: AWSObject
+
+        _to_delete_resources.append(resource_logic_id)
 
         # iterate all output, find all outputs depends on this resource
         for output_logic_id, output in list(self.outputs.items()):
             if resource_logic_id in output.depends_on_resources:
-                to_delete_output_logic_id_list.append(output_logic_id)
+                _to_delete_outputs.append(output_logic_id)
 
-        del self.resources[resource_logic_id]
-        for output_logic_id in to_delete_output_logic_id_list:
-            self.remove_output(output_logic_id)
+        # recursively remove all resource that explicitly depends on this resource.
+        if remove_dependent:
+            for res_logic_id, res in list(self.resources.items()):
+                if is_x_depends_on_y(res, resource):
+                    self.remove_resource(
+                        res,
+                        ignore_not_exists=True,
+                        remove_dependent=remove_dependent,
+                        _to_delete_resources=_to_delete_resources,
+                        _to_delete_outputs=_to_delete_outputs,
+                    )
+
+        if _first_time_called:
+            for resource_logic_id in _to_delete_resources:
+                if resource_logic_id in self.resources:
+                    del self.resources[resource_logic_id]
+
+            for output_logic_id in _to_delete_outputs:
+                if output_logic_id in self.outputs:
+                    del self.outputs[output_logic_id]
 
     def remove_resource_by_label(self, label, label_field_in_metadata=DEFAULT_LABELS_FIELD):
         """
@@ -310,6 +389,36 @@ class Template(troposphere.Template):
             if resource_type not in metadata[label_field_in_metadata]:
                 metadata[DEFAULT_LABELS_FIELD].append(resource_type)
             resource.Metadata = metadata
+
+    @property
+    def param_ids(self):
+        l = list(self.parameters)
+        l.sort()
+        return l
+
+    @property
+    def n_param(self):
+        return len(self.parameters)
+
+    @property
+    def resource_ids(self):
+        l = list(self.resources)
+        l.sort()
+        return l
+
+    @property
+    def n_resource(self):
+        return len(self.resources)
+
+    @property
+    def outputs_ids(self):
+        l = list(self.outputs)
+        l.sort()
+        return l
+
+    @property
+    def n_output(self):
+        return len(self.outputs)
 
 
 class Parameter(troposphere.Parameter):

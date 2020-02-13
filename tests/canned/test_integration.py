@@ -5,8 +5,6 @@ TODO try to use inherit mehcanism to integrate multiple canned template, not doa
 """
 
 import pytest
-from pytest import raises, approx
-
 from troposphere_mate.canned import iam
 
 
@@ -16,7 +14,7 @@ def test():
         STAGE="dev",
     )
     can_common_lbd_func_iam_role.create_template()
-    print(can_common_lbd_func_iam_role.template.to_json())
+    can_common_lbd_func_iam_role.template.to_json()
 
 
 
