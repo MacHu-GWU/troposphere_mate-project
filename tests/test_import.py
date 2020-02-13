@@ -8,16 +8,19 @@ def test():
     import troposphere_mate
     from troposphere_mate import (
         associate, LinkerApi,
-        Template, Parameter, Output, DEFAULT_LABELS_FIELD,
+        Template, Parameter, Output, Condition, DEFAULT_LABELS_FIELD,
+        Ref, Sub, GetAtt, FindInMap, Base64, Cidr, GetAZs, ImportValue, Join,
+        Select, Split,
+        And, Equals, If, Not, Or, 
         Canned, MultiEnvBasicConfig, ServerlessConfig,
         ConfigClass, Constant, Derivable,
         slugify, camelcase, helper_fn_sub,
         Sentinel, REQUIRED, NOTHING,
         link_stack_template, upload_template, package, deploy_stack,
         StackManager,
-        canned
+        mtdt,
+        canned,
     )
-    from troposphere_mate import TROPOSPHERE_METADATA_FIELD_NAME
 
     _ = canned.iam.AWSServiceName
     _ = canned.iam.AWSManagedPolicyArn

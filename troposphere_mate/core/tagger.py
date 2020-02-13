@@ -99,13 +99,22 @@ def tags_list_to_dct(lst):
 
 
 class ResourceDoesnotSupportTagsError(TypeError):
+    """
+    A custom error class to indicate that an AWS resource doesn't support tag.
+    """
     pass
 
 
 def update_tags_for_resource(resource, tags_dct, overwrite=False):
     """
+    apply tags to an aws resource. you can toggle on and off the
+    tag value overwrites.
+
     :type resource: AWSObject
     :type tags_dct: Dict[str, Union[str,Callable]]
+    :param tags_dct: value could be a string, cloudformation intrinsic function
+        or a callable function that take only one argument which is
+        the current resource, and returns a tag value.
     :type overwrite: bool
     """
     tags_attr = resource.get_tags_attr()

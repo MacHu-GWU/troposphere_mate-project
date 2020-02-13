@@ -3,8 +3,8 @@
 import pytest
 from troposphere import Ref, GetAtt, Sub
 from troposphere_mate.associate import LinkerApi, associate
-from troposphere_mate.core.metadata import API_RESOURCE_FULL_PATH_FIELD_NAME
-from troposphere_mate import awslambda, apigateway, events, TROPOSPHERE_METADATA_FIELD_NAME
+from troposphere_mate.core.metadata import TROPOSPHERE_METADATA_FIELD_NAME, ResourceLevelField
+from troposphere_mate import awslambda, apigateway, events
 
 
 class TestLbdPermissionWithAwsLambdaFunctionWithApiAuthorizer(object):
@@ -119,7 +119,7 @@ class TestLbdPermissionForApiMethodTriggerLambdaFunc(object):
 
         api_method = apigateway.Method(
             "ApiMethod",
-            Metadata={TROPOSPHERE_METADATA_FIELD_NAME: {API_RESOURCE_FULL_PATH_FIELD_NAME: "users"}},
+            Metadata={TROPOSPHERE_METADATA_FIELD_NAME: {ResourceLevelField.ApiResource.FULL_PATH: "users"}},
             AuthorizationType="none",
             HttpMethod="POST",
             ResourceId="",

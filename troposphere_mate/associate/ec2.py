@@ -4,10 +4,9 @@
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 """
 
-from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
-
+from troposphere_mate import Ref
 from troposphere_mate import ec2, iam
-from troposphere_mate import Ref, GetAtt, Sub
+from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
 
 
 class LinkerApi(LinkerApi_):

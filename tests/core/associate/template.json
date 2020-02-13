@@ -1,0 +1,21 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "EnvName": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "EnvName": {
+            "Type": "AWS::ApiGateway::RestApi",
+            "Properties": {
+                "Name": "MyRestApi"
+            }
+        }
+    },
+    "Outputs": {
+        "MyOutput": {
+            "Value": {"Ref": "EnvName"}
+        }
+    }
+}

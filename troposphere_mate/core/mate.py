@@ -15,17 +15,14 @@ import troposphere
 from troposphere import AWSObject, depends_on_helper
 from troposphere.template_generator import TemplateGenerator
 
+from . import metadata as mtdt
 from .aws_object import Mixin
 from .sentiel import NOTHING, REQUIRED
 from .tagger import (
     update_tags_for_template,
 )
 
-DEFAULT_LABELS_FIELD = "labels"
-DEPENDS_ON_RESOURCES_FIELD = "depends_on_resources"
-
-TOP_LEVEL_METADATA_FIELD = "TROPOSPHERE_MATE_RESERVED"
-TOP_LEVEL_METADATA_OUTPUTS_FIELD = "Outputs"
+DEFAULT_LABELS_FIELD = mtdt.ResourceLevelField.LABELS
 
 
 def preprocess_init_kwargs(**kwargs):
@@ -184,16 +181,22 @@ class Template(troposphere.Template):
             self.metadata = {}
 
         self.metadata.setdefault(
-            TOP_LEVEL_METADATA_FIELD,
+            mtdt.TROPOSPHERE_METADATA_FIELD_NAME,
             {
                 "Outputs": {},
             }
         )
 
-        if hasattr(output, DEPENDS_ON_RESOURCES_FIELD):
-            self.metadata[TOP_LEVEL_METADATA_FIELD][TOP_LEVEL_METADATA_OUTPUTS_FIELD].setdefault(output.title, {})
-            self.metadata[TOP_LEVEL_METADATA_FIELD][TOP_LEVEL_METADATA_OUTPUTS_FIELD][output.title][
-                DEPENDS_ON_RESOURCES_FIELD] = getattr(output, DEPENDS_ON_RESOURCES_FIELD)
+        mtdt.initiate_default_template_metadata(self)
+        self.metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
+            [mtdt.TemplateLevelField.OUTPUTS] \
+            .setdefault(output.title, {})
+        self.metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
+            [mtdt.TemplateLevelField.OUTPUTS] \
+            [output.title] \
+            [mtdt.TemplateLevelField.OUTPUTS_DEPENDS_ON] \
+            = getattr(output, mtdt.TemplateLevelField.OUTPUTS_DEPENDS_ON)
+
         super(Template, self).add_output(output)
 
     def add_resource(self, resource, ignore_duplicate=False):
@@ -359,9 +362,9 @@ class Output(troposphere.Output):
         )
         super(Output, self).__init__(**processed_kwargs)
         if DependsOn is NOTHING:
-            object.__setattr__(self, DEPENDS_ON_RESOURCES_FIELD, [])
+            object.__setattr__(self, mtdt.TemplateLevelField.OUTPUTS_DEPENDS_ON, [])
         else:
             depends_on = depends_on_helper(DependsOn)
             if not isinstance(depends_on, list):
                 depends_on = [depends_on, ]
-            object.__setattr__(self, DEPENDS_ON_RESOURCES_FIELD, depends_on)
+            object.__setattr__(self, mtdt.TemplateLevelField.OUTPUTS_DEPENDS_ON, depends_on)

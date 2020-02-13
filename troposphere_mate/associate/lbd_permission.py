@@ -4,14 +4,13 @@
 Reference: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
 """
 
-from ..core.metadata import (
-    initiate_default_metadata,
-    TROPOSPHERE_METADATA_FIELD_NAME,
-    API_RESOURCE_FULL_PATH_FIELD_NAME,
-)
-from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
-from troposphere_mate import awslambda, events, apigateway
 from troposphere_mate import Ref, GetAtt, Sub
+from troposphere_mate import awslambda, events, apigateway
+from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
+from ..core.metadata import (
+    TROPOSPHERE_METADATA_FIELD_NAME,
+    ResourceLevelField,
+)
 
 
 class LinkerApi(LinkerApi_):
@@ -118,7 +117,7 @@ class LinkerApi(LinkerApi_):
                         "RestApiId": Ref(api_method.RestApiId),
                         "HttpMethod": api_method.HttpMethod,
                         "ResourcePath": api_method.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][
-                            API_RESOURCE_FULL_PATH_FIELD_NAME]
+                            ResourceLevelField.ApiResource.FULL_PATH]
                     }
                 )
             except:

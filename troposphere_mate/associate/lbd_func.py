@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
-from troposphere_mate import awslambda, iam, ec2, sqs, kms
 from troposphere_mate import Ref, GetAtt
+from troposphere_mate import awslambda, iam, ec2, sqs, kms
+from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
 
 
 class LinkerApi(LinkerApi_):

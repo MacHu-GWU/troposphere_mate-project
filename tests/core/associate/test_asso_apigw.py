@@ -2,9 +2,9 @@
 
 import pytest
 from troposphere import Ref, GetAtt, Sub
+
+from troposphere_mate import awslambda, apigateway, mtdt
 from troposphere_mate.associate import LinkerApi, associate
-from troposphere_mate.core.metadata import API_RESOURCE_FULL_PATH_FIELD_NAME
-from troposphere_mate import awslambda, apigateway, TROPOSPHERE_METADATA_FIELD_NAME
 
 rest_api = apigateway.RestApi("RestApi")
 
@@ -22,7 +22,8 @@ class TestApiResourceWithRestApi(object):
         associate(api_resource, rest_api, has_parent_resource=False)
         assert isinstance(api_resource.RestApiId, Ref)
         assert isinstance(api_resource.ParentId, GetAtt)
-        assert api_resource.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME] == "users"
+        assert api_resource.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME][
+                   mtdt.ResourceLevelField.ApiResource.FULL_PATH] == "users"
 
 
 class TestApiResourceWithParentApiResource(object):
@@ -43,12 +44,13 @@ class TestApiResourceWithParentApiResource(object):
         )
         associate(api_resource1, api_resource2)
         assert isinstance(api_resource1.ParentId, Ref)
-        assert len(api_resource1.Metadata[TROPOSPHERE_METADATA_FIELD_NAME]) == 0
+        assert len(api_resource1.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME]) == 0
 
         associate(api_resource2, rest_api, has_parent_resource=False)
         associate(api_resource1, api_resource2)
 
-        assert api_resource1.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME] == "rest/users"
+        assert api_resource1.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME][
+                   mtdt.ResourceLevelField.ApiResource.FULL_PATH] == "rest/users"
 
 
 class TestApiMethodWithApiResource(object):
@@ -69,11 +71,12 @@ class TestApiMethodWithApiResource(object):
             RestApiId="",
         )
         associate(api_method, api_resource)
-        assert len(api_method.Metadata[TROPOSPHERE_METADATA_FIELD_NAME]) == 0
+        assert len(api_method.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME]) == 0
 
         associate(api_resource, rest_api, has_parent_resource=False)
         associate(api_method, api_resource)
-        assert api_method.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME] == "users"
+        assert api_method.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME][
+                   mtdt.ResourceLevelField.ApiResource.FULL_PATH] == "users"
 
 
 class TestApiMethodWithLambdFunction(object):

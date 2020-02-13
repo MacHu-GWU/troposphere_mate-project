@@ -19,7 +19,7 @@ SEP = " with "
 
 def create_resource_type_key(resource_type_list):
     """
-    :type resource_type_list: typing.List[typing.Type[typing.Any]]
+    :type resource_type_list: typing.List[typing.Type[AWSObject]]
     """
     resource_type_name_list = list()
     for resource_type in resource_type_list:

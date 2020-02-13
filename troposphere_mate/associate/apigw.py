@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from ..core.metadata import (
-    initiate_default_metadata,
-    TROPOSPHERE_METADATA_FIELD_NAME,
-    API_RESOURCE_FULL_PATH_FIELD_NAME,
-)
-from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
-from troposphere_mate import awslambda, events, apigateway
 from troposphere_mate import Ref, GetAtt, Sub
+from troposphere_mate import awslambda, apigateway
+from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
+from ..core.metadata import (
+    TROPOSPHERE_METADATA_FIELD_NAME,
+    ResourceLevelField,
+    initiate_default_resource_metadata,
+)
 
 
 class LinkerApi(LinkerApi_):
@@ -23,8 +23,9 @@ class LinkerApi(LinkerApi_):
             if has_parent_resource is False:
                 api_resource.ParentId = GetAtt(rest_api, "RootResourceId")
 
-                metadata = initiate_default_metadata(api_resource)
-                metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME] = api_resource.PathPart
+                metadata = initiate_default_resource_metadata(api_resource)
+                metadata[TROPOSPHERE_METADATA_FIELD_NAME][
+                    ResourceLevelField.ApiResource.FULL_PATH] = api_resource.PathPart
 
                 api_resource.Metadata = metadata
 
@@ -39,10 +40,10 @@ class LinkerApi(LinkerApi_):
 
         def associate(self, api_resource1, api_resource2, **kwargs):
             api_resource1.ParentId = Ref(api_resource2)
-            metadata = initiate_default_metadata(api_resource1)
+            metadata = initiate_default_resource_metadata(api_resource1)
             try:
-                metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME] = "{}/{}".format(
-                    api_resource2.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME],
+                metadata[TROPOSPHERE_METADATA_FIELD_NAME][ResourceLevelField.ApiResource.FULL_PATH] = "{}/{}".format(
+                    api_resource2.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][ResourceLevelField.ApiResource.FULL_PATH],
                     api_resource1.PathPart
                 )
             except:
@@ -67,10 +68,10 @@ class LinkerApi(LinkerApi_):
 
             api_method.ResourceId = Ref(api_resource)
 
-            metadata = initiate_default_metadata(api_method)
+            metadata = initiate_default_resource_metadata(api_method)
             try:
-                metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME] = \
-                    api_resource.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][API_RESOURCE_FULL_PATH_FIELD_NAME]
+                metadata[TROPOSPHERE_METADATA_FIELD_NAME][ResourceLevelField.ApiResource.FULL_PATH] = \
+                    api_resource.Metadata[TROPOSPHERE_METADATA_FIELD_NAME][ResourceLevelField.ApiResource.FULL_PATH]
             except:
                 pass
 

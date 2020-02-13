@@ -2,8 +2,9 @@
 
 import pytest
 from troposphere import Ref, GetAtt
-from troposphere_mate.associate import LinkerApi, associate
+
 from troposphere_mate import awslambda, sqs, kinesis, dynamodb
+from troposphere_mate.associate import LinkerApi, associate
 
 lbd_func = awslambda.Function(
     title="MyFunc",

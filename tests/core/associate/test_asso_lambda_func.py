@@ -2,8 +2,9 @@
 
 import pytest
 from troposphere import Ref, GetAtt
-from troposphere_mate.associate import LinkerApi, associate
+
 from troposphere_mate import awslambda, iam, ec2, sqs, kms
+from troposphere_mate.associate import LinkerApi, associate
 
 iam_role = iam.Role(
     title="MyIamRole",
