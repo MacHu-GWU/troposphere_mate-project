@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+This iam policy tier is deeply nested.
+"""
+
 from troposphere_mate import Template, Parameter, Output, Export, iam, helper_fn_sub
 
 template = Template()
@@ -32,6 +36,7 @@ iam_ec2_instance_policy = iam.ManagedPolicy(
     },
 )
 
+# allow cross reference from other stack
 output_iam_ec2_instance_policy_name = Output(
     "IamInstancePolicyArn",
     Value=iam_ec2_instance_policy.iam_managed_policy_arn,

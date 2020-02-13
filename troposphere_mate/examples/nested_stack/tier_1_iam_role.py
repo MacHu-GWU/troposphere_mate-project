@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+This iam role tier is nested under the iam instance profile tier.
+"""
+
 from troposphere_mate import (
     Template, Parameter, Output, canned, helper_fn_sub, Ref, GetAtt, Export,
     iam, cloudformation,
@@ -46,6 +50,7 @@ iam_ec_instance_role = iam.Role(
     DependsOn=iam_policy_stack,
 )
 
+# allow cross reference from other stack
 output_iam_ec2_instance_role_name = Output(
     "IamInstanceRoleName",
     Value=iam_ec_instance_role.iam_role_name,

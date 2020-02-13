@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+This iam instance profile tier is the master stack.
+"""
+
 from troposphere_mate import (
     Template, Parameter, Output, GetAtt, helper_fn_sub, Ref, Export,
     iam, cloudformation,
@@ -44,6 +48,7 @@ iam_instance_profile = iam.InstanceProfile(
     DependsOn=iam_role_stack,
 )
 
+# allow cross reference from other stack
 output_iam_ec2_instance_profile_name = Output(
     "IamInstanceProfileName",
     Value=iam_instance_profile.iam_instance_profile_name,
