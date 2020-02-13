@@ -5,6 +5,11 @@ from troposphere_mate import (
     iam, cloudformation,
     link_stack_template,
 )
+
+# IMPORTANT!
+# import the nested stack python module,
+# allows to cross reference parameter or output and
+# bind "AWS::Cloudformation::Stack" with nested stack template
 from . import tier_1_iam_role
 
 template = Template()
@@ -20,16 +25,19 @@ iam_role_stack = cloudformation.Stack(
     "IamRoleStack",
     template=template,
     TemplateURL="",
+    # cross reference parameter
     Parameters={
         tier_1_iam_role.param_env_name.title: Ref(param_env_name),
     },
 )
+# bind nested stack with a template
 link_stack_template(stack=iam_role_stack, template=tier_1_iam_role.template)
 
 iam_instance_profile = iam.InstanceProfile(
     "IamInstanceProfileWebServer",
     template=template,
     InstanceProfileName=helper_fn_sub("{}-web-server", param_env_name),
+    # cross reference output
     Roles=[
         GetAtt(iam_role_stack, f"Outputs.{tier_1_iam_role.output_iam_ec2_instance_role_name.title}"),
     ],
