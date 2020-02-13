@@ -31,7 +31,8 @@ try:
     )
     from .core.sentiel import Sentinel, REQUIRED, NOTHING
     from .core.stack_deploy import (
-        upload_template, package, deploy_stack, link_stack_template,
+        upload_template, package, deploy_stack,
+        link_stack_template,
         StackManager,
     )
 

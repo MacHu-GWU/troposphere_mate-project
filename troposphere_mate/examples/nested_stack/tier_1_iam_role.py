@@ -26,7 +26,7 @@ iam_policy_stack = cloudformation.Stack(
 )
 link_stack_template(stack=iam_policy_stack, template=tier_1_1_iam_policy.template)
 
-iam_instance_role = iam.Role(
+iam_ec_instance_role = iam.Role(
     "IamRoleWebServer",
     template=template,
     RoleName=helper_fn_sub("{}-web-server", param_env_name),
@@ -41,16 +41,16 @@ iam_instance_role = iam.Role(
 
 output_iam_ec2_instance_role_name = Output(
     "IamInstanceRoleName",
-    Value=iam_instance_role.iam_role_name,
+    Value=iam_ec_instance_role.iam_role_name,
     Export=Export(helper_fn_sub("{}-iam-ec2-instance-role-name", param_env_name)),
-    DependsOn=iam_instance_role,
+    DependsOn=iam_ec_instance_role,
 )
 template.add_output(output_iam_ec2_instance_role_name)
 
 output_iam_ec2_instance_role_arn = Output(
     "IamInstanceRoleArn",
-    Value=iam_instance_role.iam_role_arn,
+    Value=iam_ec_instance_role.iam_role_arn,
     Export=Export(helper_fn_sub("{}-iam-ec2-instance-role-arn", param_env_name)),
-    DependsOn=iam_instance_role,
+    DependsOn=iam_ec_instance_role,
 )
 template.add_output(output_iam_ec2_instance_role_arn)

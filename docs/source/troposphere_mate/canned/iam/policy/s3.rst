@@ -1,0 +1,5 @@
+s3
+==
+
+.. automodule:: troposphere_mate.canned.iam.policy.s3
+    :members:

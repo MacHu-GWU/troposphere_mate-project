@@ -208,8 +208,15 @@ jinja_contexts = {
 
 # Api Reference Doc
 import docfly
+import picage
 
 package_name = troposphere_mate.__name__
+
+ignored_package_list = list()
+for sub_module in picage.Package(package_name).sub_modules:
+    if sub_module != "_version":
+        ignored_package_list.append("{}.{}".format(package_name, sub_module))
+
 docfly.ApiReferenceDoc(
     conf_file=__file__,
     package_name=package_name,
@@ -217,7 +224,10 @@ docfly.ApiReferenceDoc(
         "%s.pkg" % package_name,
         "%s.docs" % package_name,
         "%s.tests" % package_name,
-    ]
+        "%s.examples" % package_name,
+        "%s.orch_example" % package_name,
+        "%s.code_generator" % package_name,
+    ] + ignored_package_list
 ).fly()
 
 

@@ -4,8 +4,7 @@ import hashlib
 import json
 
 from troposphere.cloudformation import Stack
-
-from .mate import Template
+from .mate import Template, Output
 
 
 def md5_of_text(text):

@@ -13,6 +13,7 @@ env_name = "tropo-mate-examples-nested-stack-dev"
 boto_ses = boto3.session.Session(profile_name=aws_profile, region_name=aws_region)
 
 sm = StackManager(boto_ses=boto_ses, cft_bucket=cft_bucket)
+
 sm.deploy(
     template=tier_master_iam_inst_profile.template,
     stack_name=env_name,
