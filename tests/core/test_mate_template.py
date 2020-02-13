@@ -78,6 +78,15 @@ class Canned(object):
 
 
 class TestTemplate(object):
+    def test_property_method(self):
+        can = Canned()
+        _ = can.tpl.param_ids
+        _ = can.tpl.n_param
+        _ = can.tpl.resource_ids
+        _ = can.tpl.n_resource
+        _ = can.tpl.outputs_ids
+        _ = can.tpl.n_output
+
     def test_update_tags(self):
         from troposphere_mate import ec2
 

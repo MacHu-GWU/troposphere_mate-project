@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.12 (TODO)
+0.0.13 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -15,7 +15,24 @@ Release and Version History
 **Miscellaneous**
 
 
-0.0.11 (TODO)
+0.0.12 (2020-02-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- now to_dict and from_dict can successfully recovery ``Output.DependsOn`` information. Which means when you remove a Resource, it also removes the dependent Output. And you can easily serialize and deserialize it worry freely.
+- tons of property method added, you can easily reference resource name, resource arn and additional return values easily. No need to lookup cloudformation document. For example: ``iam.Role.iam_role_arn``, ``iam.Role.iam_role_name``, etc ...
+
+
+**Minor Improvements**
+
+- add a metadata.py submodule, import name is ``troposphere_mate.mtdt``, it allows you to visit those constant field name used in metadata.
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
+0.0.11 (2019-11-19)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
