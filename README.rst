@@ -51,7 +51,7 @@
 Welcome to ``troposphere_mate`` Documentation
 ==============================================================================
 
-``troposphere_mate`` is **a productive Pythonic Cloudformation Orchestration Tool**.
+``troposphere_mate`` is **a productive Pythonic CloudFormation Orchestration Tool. It gives you possibility that makes Cloudformation way more powerful than before, easier to maintain big template, or even bring any custom feature to CloudFormation**.
 
 .. contents::
     :depth: 1
@@ -210,7 +210,7 @@ Auto Reference
 Sometimes, you just know you need to associate one AWS Resource to another, but you
 have to lookup the Document to find out which Property and what is the Syntax to do that.
 
-For example, **if you want to associate an IAM Role, VPC Subnet, Security Group to a Lambda Function**.
+For example, **if you want to associate an IAM Role, VPC Subnet, Security Group to a Lambda Function, how do you know whether it is REF or GetAtt ARN can get you the resource arn?**.
 
 Suppose you already have:
 
@@ -276,7 +276,7 @@ With ``troposphere_mate``, you just need to do this:
     associate(lbd_func, public_subnet1)
     associate(lbd_func, public_subnet2)
 
-In other word, you don't need to remember the properties and the syntax.
+In other word, **you don't need to remember the properties and the syntax**.
 
 .. code-block:: python
 
@@ -297,6 +297,63 @@ In other word, you don't need to remember the properties and the syntax.
 If you want to contribute your auto-associate logic to ``troposphere_mate``, please submit `issue <https://github.com/MacHu-GWU/troposphere_mate-project/issues>`_ or help me to improve. Here's an `example <https://github.com/MacHu-GWU/troposphere_mate-project/blob/master/troposphere_mate/core/associate.py>`_.
 
 
+Remove Resource and auto-remove dependent resource and Output
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you declared ``DependsOn`` in AWS Resource or AWS Output (**YES, ``troposphere_mate`` supports ``Output.DependsOn`` too!**), when you remove a resource, it also removes all other resources and outputs depends on this one, because it no longer be able to correctly created.
+
+**You will never leave a 'cracked' template**.
+
+In this example, you will see that, since Z depends on Y, Y depends on X. If you removed X, then X, Y, Z and their outputs are all gone!
+
+.. code-block:: python
+
+    from troposphere_mate import Template, apigateway, Output, Ref
+
+    tpl = Template()
+
+    rest_api_x = apigateway.RestApi(
+        "RestApiX",
+        template=tpl,
+        Name="MyRestApiX",
+    )
+    rest_api_y = apigateway.RestApi(
+        "RestApiY",
+        template=tpl,
+        Name="MyRestApiY",
+        DependsOn=rest_api_x,
+    )
+    rest_api_z = apigateway.RestApi(
+        "RestApiZ",
+        template=tpl,
+        Name="MyRestApiZ",
+        DependsOn=rest_api_y
+    )
+
+    output_rest_api_x_id = Output(
+        "RestApiXId",
+        Value=Ref(rest_api_x),
+        DependsOnself.rest_api_x,
+    )
+    tpl.add_output(output_rest_api_x_id)
+
+    output_rest_api_y_id = Output(
+        "RestApiYId",
+        Value=Ref(rest_api_y),
+        DependsOn=rest_api_y,
+    )
+    tpl.add_output(output_rest_api_y_id)
+
+    output_rest_api_z_id = Output(
+        "RestApiZId",
+        Value=Ref(rest_api_z),
+        DependsOn=rest_api_z,
+    )
+    tpl.add_output(output_rest_api_z_id)
+
+    tpl.remove_resource(rest_api_x)
+
+
 Partial Deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -305,9 +362,9 @@ At most of the times, eventually your cloudformation template becomes very big. 
 1. **You want to reuse the AWS Resource from an Big Architect Design, only deploy selected AWS Resource, without editing the template.**
 2. **You want to gradually deploy AWS Resource instead of deploy everything in one command, while you are doing development or debugging, without editing the template.**
 
-`troposphere_mate <https://github.com/MacHu-GWU/troposphere_mate-project>`_ **allows you to define labels for your AWS Resource** in ``Metadata`` field, then you can use ``Template.remove_resource_by_label(label="a label", label_field_in_metadata="labels")`` method to **batch remove AWS Resource from your template**.
+`troposphere_mate <https://github.com/MacHu-GWU/troposphere_mate-project>`_ **allows you to define labels for your AWS Resource** in ``Metadata`` field, then you can use ``Template.remove_resource_by_label(label="a label", label_field_in_metadata="labels")`` method to **remove group of AWS Resource from your template (mostly for the same tier)**.
 
-More importantly, `troposphere_mate <https://github.com/MacHu-GWU/troposphere_mate-project>`_ **allows you to explicitly defines dependent AWS Resource for Output object, so when you remove the resource, related output will automatically removed**, which is not supported by native CloudFormation or ``troposphere``.
+More importantly, `troposphere_mate <https://github.com/MacHu-GWU/troposphere_mate-project>`_ **allows you to explicitly defines dependent AWS Resource for Output object, so when you remove the resource, related output will automatically removed**, which is NOT supported by native CloudFormation or ``troposphere``.
 
 Example:
 
