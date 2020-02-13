@@ -10,16 +10,22 @@ except:  # pragma: no cover
     pass
 
 import importlib
+
 import troposphere
 from troposphere import AWSObject, depends_on_helper
 from troposphere.template_generator import TemplateGenerator
+
+from .aws_object import Mixin
 from .sentiel import NOTHING, REQUIRED
 from .tagger import (
     update_tags_for_template,
 )
-from .aws_object import Mixin
 
 DEFAULT_LABELS_FIELD = "labels"
+DEPENDS_ON_RESOURCES_FIELD = "depends_on_resources"
+
+TOP_LEVEL_METADATA_FIELD = "TROPOSPHERE_MATE_RESERVED"
+TOP_LEVEL_METADATA_OUTPUTS_FIELD = "Outputs"
 
 
 def preprocess_init_kwargs(**kwargs):
@@ -30,7 +36,13 @@ def preprocess_init_kwargs(**kwargs):
     return processed_kwargs
 
 
-def convert_to_mate_resource(troposphere_resource):
+def convert_to_mate_resource(troposphere_resource, troposphere_mate_template):
+    """
+    This method converts ``troposphere.AWSObject`` to ``troposphere_mate.AWSObject``.
+
+    :type troposphere_resource: AWSObject
+    :rtype: Mixin
+    """
     troposphere_mate_module_name = troposphere_resource.__class__.__module__ \
         .replace("troposphere.", "troposphere_mate.")
     troposphere_mate_module = importlib.import_module(troposphere_mate_module_name)
@@ -59,10 +71,13 @@ def convert_to_mate_resource(troposphere_resource):
     return troposphere_mate_resource
 
 
-def convert_to_mate_output(troposphere_output):
+def convert_to_mate_output(troposphere_output, troposphere_mate_template):
     """
     TODO 将 troposphere_mate dump 成 dict 在转回来 会丢失 Output.DependsOn 的信息
     """
+    print("=" * 80)
+    print(troposphere_output)
+    print("=" * 80)
     kwargs = {
         "title": troposphere_output.title,
         "DependsOn": troposphere_output.resource.get("DependsOn"),
@@ -86,25 +101,36 @@ class Template(troposphere.Template):
         :type dct: dict
 
         :return: Template
+
+        .. note::
+
+            troposphere provides a factory class TemplateGenerator to
+            deserialize the dict data to troposphere.Template object.
+
+            troposphere_mate.Template should be able to do the same things.
+
+            To reuse ``TemplateGenerator`` code, we convert
+            ``troposphere.Template`` to ``troposphere_mate.Template``
+            afterwards.
         """
-        tpl = TemplateGenerator(dct)
-        real_template = cls()
-        real_template.description = tpl.description
-        real_template.metadata = tpl.metadata
-        real_template.conditions = tpl.conditions
-        real_template.mappings = tpl.mappings
-        real_template.outputs = {
-            k: convert_to_mate_output(v)
-            for k, v in tpl.outputs.items()
+        tropo_tpl = TemplateGenerator(dct)
+        tropo_mate_tpl = cls()
+        tropo_mate_tpl.description = tropo_tpl.description
+        tropo_mate_tpl.metadata = tropo_tpl.metadata
+        tropo_mate_tpl.conditions = tropo_tpl.conditions
+        tropo_mate_tpl.mappings = tropo_tpl.mappings
+        tropo_mate_tpl.outputs = {
+            k: convert_to_mate_output(v, tropo_mate_tpl)
+            for k, v in tropo_tpl.outputs.items()
         }
-        real_template.parameters = tpl.parameters
-        real_template.resources = {
-            k: convert_to_mate_resource(v)
-            for k, v in tpl.resources.items()
+        tropo_mate_tpl.parameters = tropo_tpl.parameters
+        tropo_mate_tpl.resources = {
+            k: convert_to_mate_resource(v, tropo_mate_tpl)
+            for k, v in tropo_tpl.resources.items()
         }
-        real_template.version = tpl.version
-        real_template.transform = tpl.transform
-        return real_template
+        tropo_mate_tpl.version = tropo_tpl.version
+        tropo_mate_tpl.transform = tropo_tpl.transform
+        return tropo_mate_tpl
 
     def update_tags(self, tags_dct, overwrite=False):
         """
@@ -153,6 +179,21 @@ class Template(troposphere.Template):
         if ignore_duplicate:
             if output.title in self.outputs:
                 return
+
+        if not isinstance(self.metadata, dict):
+            self.metadata = {}
+
+        self.metadata.setdefault(
+            TOP_LEVEL_METADATA_FIELD,
+            {
+                "Outputs": {},
+            }
+        )
+
+        if hasattr(output, DEPENDS_ON_RESOURCES_FIELD):
+            self.metadata[TOP_LEVEL_METADATA_FIELD][TOP_LEVEL_METADATA_OUTPUTS_FIELD].setdefault(output.title, {})
+            self.metadata[TOP_LEVEL_METADATA_FIELD][TOP_LEVEL_METADATA_OUTPUTS_FIELD][output.title][
+                DEPENDS_ON_RESOURCES_FIELD] = getattr(output, DEPENDS_ON_RESOURCES_FIELD)
         super(Template, self).add_output(output)
 
     def add_resource(self, resource, ignore_duplicate=False):
@@ -216,6 +257,8 @@ class Template(troposphere.Template):
             raise ValueError(
                 "Can't remove, Resource '{}' not found in the template!".format(resource_logic_id))
         to_delete_output_logic_id_list = list()
+
+        # iterate all output, find all outputs depends on this resource
         for output_logic_id, output in list(self.outputs.items()):
             if resource_logic_id in output.depends_on_resources:
                 to_delete_output_logic_id_list.append(output_logic_id)
@@ -316,7 +359,9 @@ class Output(troposphere.Output):
         )
         super(Output, self).__init__(**processed_kwargs)
         if DependsOn is NOTHING:
-            object.__setattr__(self, "depends_on_resources", [])
+            object.__setattr__(self, DEPENDS_ON_RESOURCES_FIELD, [])
         else:
-            object.__setattr__(self, "depends_on_resources",
-                               depends_on_helper(DependsOn))
+            depends_on = depends_on_helper(DependsOn)
+            if not isinstance(depends_on, list):
+                depends_on = [depends_on, ]
+            object.__setattr__(self, DEPENDS_ON_RESOURCES_FIELD, depends_on)
