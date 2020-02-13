@@ -3,7 +3,10 @@
 import pytest
 from pytest import raises
 import functools
-from troposphere_mate import Template, Tags, Ref, Parameter, Output, DEFAULT_LABELS_FIELD
+from troposphere_mate import (
+    Template, Tags, Ref, Parameter, Output, DEFAULT_LABELS_FIELD,
+    TROPOSPHERE_METADATA_FIELD_NAME,
+)
 from troposphere_mate.core.tagger import tags_list_to_dct
 
 
@@ -22,14 +25,13 @@ class TestTemplate(object):
             Output(
                 "RestApiId",
                 Value=Ref(rest_api),
-                DependsOn=[
-                    rest_api
-                ]
+                DependsOn=rest_api
             )
         )
 
         dct = tpl.to_dict()
         tpl = Template.from_dict(dct)
+
         tpl.remove_resource_by_label(label="na")
         assert tpl.to_dict() == dct
 

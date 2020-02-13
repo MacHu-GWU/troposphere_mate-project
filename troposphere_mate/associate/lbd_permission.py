@@ -4,9 +4,10 @@
 Reference: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
 """
 
-from .metadata import (
+from ..core.metadata import (
     initiate_default_metadata,
-    TROPOSPHERE_METADATA_FIELD_NAME, API_RESOURCE_FULL_PATH_FIELD_NAME,
+    TROPOSPHERE_METADATA_FIELD_NAME,
+    API_RESOURCE_FULL_PATH_FIELD_NAME,
 )
 from ..core.associate_linker import Linker, x_depends_on_y, LinkerApi as LinkerApi_
 from troposphere_mate import awslambda, events, apigateway

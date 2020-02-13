@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from troposphere import Ref, GetAtt, Sub
+from troposphere import Ref
+
+from troposphere_mate import ec2
 from troposphere_mate.associate import LinkerApi, associate
-from troposphere_mate.associate.metadata import TROPOSPHERE_METADATA_FIELD_NAME, API_RESOURCE_FULL_PATH_FIELD_NAME
-from troposphere_mate import ec2, iam
 
 
 class TestEc2InstanceWithSubnet(object):
@@ -53,7 +53,7 @@ class TestSecurityGroupWithVpc(object):
         )
         associate(sg, vpc)
         assert isinstance(sg.VpcId, Ref)
-        
+
 
 if __name__ == "__main__":
     import os

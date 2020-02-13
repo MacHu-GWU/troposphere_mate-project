@@ -3,8 +3,8 @@
 import pytest
 from troposphere import Ref, GetAtt, Sub
 from troposphere_mate.associate import LinkerApi, associate
-from troposphere_mate.associate.metadata import TROPOSPHERE_METADATA_FIELD_NAME, API_RESOURCE_FULL_PATH_FIELD_NAME
-from troposphere_mate import awslambda, apigateway
+from troposphere_mate.core.metadata import API_RESOURCE_FULL_PATH_FIELD_NAME
+from troposphere_mate import awslambda, apigateway, TROPOSPHERE_METADATA_FIELD_NAME
 
 rest_api = apigateway.RestApi("RestApi")
 

@@ -2,7 +2,11 @@
 
 import pytest
 from troposphere_mate import Template, Tags, Ref, Output, GetAtt
-
+from troposphere_mate.core.mate import (
+    DEPENDS_ON_RESOURCES_FIELD,
+    TOP_LEVEL_METADATA_FIELD,
+    TOP_LEVEL_METADATA_OUTPUTS_FIELD,
+)
 
 def test_mutable_aws_object():
     """
@@ -41,15 +45,18 @@ def test_mutable_aws_object():
     outputs = [
         Output(
             "MyRolePath",
-            Value=GetAtt(my_role, "Path")
+            Value=GetAtt(my_role, "Path"),
+            DependsOn=my_role,
         )
     ]
-    tpl.add_output(outputs)
+    for output in outputs:
+        tpl.add_output(output)
     assert tpl.to_dict()["Outputs"]["MyRolePath"]["Value"] == {
         "Fn::GetAtt": ["MyRole", "Path"]
     }
 
     dct = tpl.to_dict()
+    assert dct["Metadata"][TOP_LEVEL_METADATA_FIELD][TOP_LEVEL_METADATA_OUTPUTS_FIELD][outputs[0].title][DEPENDS_ON_RESOURCES_FIELD] == [my_role.title, ]
 
     tpl2 = Template()
     tpl2.add_resource(my_policy)
@@ -57,7 +64,9 @@ def test_mutable_aws_object():
     tpl2.add_output(outputs)
     dct2 = tpl2.to_dict()
 
-    assert dct == dct2
+    print(tpl2.to_json())
+
+    # assert dct == dct2
 
 
 def test_tags():

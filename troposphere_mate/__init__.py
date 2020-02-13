@@ -17,7 +17,7 @@ try:
     from troposphere import AWSObject as TroposphereAWSObject
 
     from .associate import associate, LinkerApi
-    from .associate.metadata import TROPOSPHERE_METADATA_FIELD_NAME
+    from .core.metadata import TROPOSPHERE_METADATA_FIELD_NAME
     from .core.mate import (
         Template,
         Parameter,

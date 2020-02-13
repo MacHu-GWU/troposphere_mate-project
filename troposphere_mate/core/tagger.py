@@ -32,6 +32,12 @@ def _get_tags_attr(aws_object_class):  # pragma: no cover
 
 
 def get_tag_property_name_mapper():  # pragma: no cover
+    """
+
+    .. note::
+
+        fetch all AWS Object that has ``.Tags`` property.
+    """
     TROPOSPHERE_NAME = "troposphere"
     pkg = picage.Package(TROPOSPHERE_NAME)
     TROPOSPHERE_DIR = pkg.path
