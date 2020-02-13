@@ -104,6 +104,7 @@ def test_package_with_simple_template():
 
 
 def test_deploy_stack():
+    # tier11
     tpl_tier11 = Template(
         Metadata={"Description": "Tier 1-1"},
     )
@@ -113,6 +114,7 @@ def test_deploy_stack():
         Name="troposphere-mate-test",
     )
 
+    # tier1
     tpl_tier1 = Template(
         Metadata={"Description": "Tier 1"},
     )
@@ -121,11 +123,15 @@ def test_deploy_stack():
         template=tpl_tier1,
         TemplateURL="",
     )
+
+    # link
     link_stack_template(
         stack=nest_stack_tier11,
         template=tpl_tier11,
     )
 
+
+    # master
     tpl_master = Template(
         Metadata={"Description": "Master Tier"},
     )
@@ -134,10 +140,21 @@ def test_deploy_stack():
         template=tpl_master,
         TemplateURL="",
     )
+
     link_stack_template(
         stack=nest_stack_tier1,
         template=tpl_tier1,
     )
+
+    stack_manager = StackManager(
+        boto_ses=boto_ses,
+        cft_bucket=bucket_name,
+    )
+    stack_manager.deploy(
+        template=tpl_master,
+
+    )
+
     template_url = package(
         s3_client=s3_client,
         template=tpl_master,
