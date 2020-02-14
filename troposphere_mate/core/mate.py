@@ -373,17 +373,18 @@ class Template(troposphere.Template):
             except:
                 metadata = {label_field_in_metadata: []}
 
-            try:
-                depends_on = resource.DependsOn
-                if not isinstance(depends_on, list):
-                    depends_on = [depends_on, ]
-
-                for depends_on_resource_id in depends_on:
-                    resource_type = self.resources[depends_on_resource_id].resource_type
-                    if resource_type not in metadata[label_field_in_metadata]:
-                        metadata[DEFAULT_LABELS_FIELD].append(resource_type)
-            except:
-                pass
+            # TODO: since we have remove_resource(..., remove_dependent=True) method, no need to inject AWS Resource Name of the dependent to the metadata
+            # try:
+            #     depends_on = resource.DependsOn
+            #     if not isinstance(depends_on, list):
+            #         depends_on = [depends_on, ]
+            #
+            #     for depends_on_resource_id in depends_on:
+            #         resource_type = self.resources[depends_on_resource_id].resource_type
+            #         if resource_type not in metadata[label_field_in_metadata]:
+            #             metadata[DEFAULT_LABELS_FIELD].append(resource_type)
+            # except:
+            #     pass
 
             resource_type = resource.resource_type
             if resource_type not in metadata[label_field_in_metadata]:
