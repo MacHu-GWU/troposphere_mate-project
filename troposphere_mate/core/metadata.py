@@ -20,6 +20,9 @@ class ResourceLevelField:
         #
         FULL_PATH = "resource_full_path"
 
+    class CftStack:
+        IS_NESTED_STACK = "is_nested_stack"
+
 
 def initiate_default_template_metadata(template):
     """

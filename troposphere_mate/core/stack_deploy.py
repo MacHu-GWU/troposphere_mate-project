@@ -4,7 +4,9 @@ import hashlib
 import json
 
 from troposphere.cloudformation import Stack
-from .mate import Template, Output
+
+from . import metadata as mtdt
+from .mate import Template
 
 
 def md5_of_text(text):
@@ -139,6 +141,9 @@ def link_stack_template(stack, template):
     将 Nested Stack 和 Nested Stack 显式地联系起来. 使得 package 方法能够和 awscli
     中的一样, 能将 Nested Stack 中 TemplateUrl 所指定的 Template 联合打包上传.
     """
+    mtdt.initiate_default_resource_metadata(stack)
+    stack.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
+        [mtdt.ResourceLevelField.CftStack.IS_NESTED_STACK] = True
     object.__setattr__(stack, "_template", template)
 
 
@@ -231,6 +236,10 @@ def deploy_stack(cf_client,
 
 
 class StackManager(object):
+    """
+
+    """
+
     def __init__(self, boto_ses, cft_bucket):
         self.boto_ses = boto_ses
         self.cft_bucket = cft_bucket
@@ -250,13 +259,23 @@ class StackManager(object):
                stack_parameters=None,
                execution_role_arn=None,
                include_iam=False):
+        """
+        Create or update CloudFormation template.
+
+        :type template: Template
+        :type stack_name: str
+        :type stack_tags: dict
+        :type stack_parameters: dict
+        :type execution_role_arn: str
+        :type include_iam: bool
+        """
         template_url = package(self.s3_client,
                                template,
                                self.cft_bucket,
                                prefix=DEFAULT_CLOUDFORMATION_TEMPLATE_UPLOAD_PREFIX,
                                verbose=False,
                                _is_master=True)
-        deploy_stack(
+        return deploy_stack(
             self.cf_client,
             stack_name,
             template_url,

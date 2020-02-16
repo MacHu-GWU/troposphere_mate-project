@@ -277,7 +277,7 @@ class TestTemplate(object):
         tpl.create_resource_type_label()  # see if second call raise exception
 
         assert len(tpl.to_dict()["Resources"]["Bucket"]["Metadata"][DEFAULT_LABELS_FIELD]) == 1
-        assert len(tpl.to_dict()["Resources"]["RestApi"]["Metadata"][DEFAULT_LABELS_FIELD]) == 2
+        assert len(tpl.to_dict()["Resources"]["RestApi"]["Metadata"][DEFAULT_LABELS_FIELD]) == 1
 
     def test_from_dict(self):
         from troposphere_mate.apigateway import RestApi
@@ -310,6 +310,83 @@ class TestTemplate(object):
         ) == [rest_api.title, ]
 
         assert tpl.to_dict() == dct
+
+    def test_iter_nested_template(self):
+        from troposphere_mate import apigateway, cloudformation, link_stack_template
+
+        tpl_1_1 = Template(Metadata={"id": "11"})
+        apigateway.RestApi("RestApi", template=tpl_1_1, Name="MyRestApi")
+
+        tpl_1_2 = Template(Metadata={"id": "12"})
+        apigateway.RestApi("RestApi", template=tpl_1_2, Name="MyRestApi")
+
+        tpl_2_1 = Template(Metadata={"id": "21"})
+        apigateway.RestApi("RestApi", template=tpl_2_1, Name="MyRestApi")
+
+        tpl_2_2 = Template(Metadata={"id": "22"})
+        apigateway.RestApi("RestApi", template=tpl_2_2, Name="MyRestApi")
+
+        tpl_1 = Template(Metadata={"id": "1"})
+        stack11 = cloudformation.Stack(
+            "Stack11",
+            template=tpl_1,
+            TemplateURL="",
+        )
+        stack12 = cloudformation.Stack(
+            "Stack12",
+            template=tpl_1,
+            TemplateURL="",
+        )
+        link_stack_template(stack=stack11, template=tpl_1_1)
+        link_stack_template(stack=stack12, template=tpl_1_2)
+
+        tpl_2 = Template(Metadata={"id": "2"})
+        stack21 = cloudformation.Stack(
+            "Stack21",
+            template=tpl_2,
+            TemplateURL="",
+        )
+        stack22 = cloudformation.Stack(
+            "Stack22",
+            template=tpl_2,
+            TemplateURL="",
+        )
+        link_stack_template(stack=stack21, template=tpl_2_1)
+        link_stack_template(stack=stack22, template=tpl_2_2)
+
+        tpl = Template(Metadata={"id": "0"})
+        stack1 = cloudformation.Stack(
+            "Stack1",
+            template=tpl,
+            TemplateURL="",
+        )
+        stack2 = cloudformation.Stack(
+            "Stack2",
+            template=tpl,
+            TemplateURL="",
+        )
+        link_stack_template(stack=stack1, template=tpl_1)
+        link_stack_template(stack=stack2, template=tpl_2)
+
+        assert stack1.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
+                   [mtdt.ResourceLevelField.CftStack.IS_NESTED_STACK] is True
+        assert stack2.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
+                   [mtdt.ResourceLevelField.CftStack.IS_NESTED_STACK] is True
+
+        ids = [template.metadata["id"] for template in tpl.iter_nested_template(depth_first=True)]
+        assert ids == [
+            "1", "11", "12", "2", "21", "22"
+        ]
+
+        ids = [template.metadata["id"] for template in tpl.iter_nested_template(depth_first=False)]
+        assert ids == [
+            "1", "2", "11", "12", "21", "22"
+        ]
+
+    def test_iter_nested_template_edge_case(self):
+        tpl = Template()
+        assert tpl.iter_nested_template(depth_first=True) == []
+        assert tpl.iter_nested_template(depth_first=False) == []
 
 
 if __name__ == "__main__":

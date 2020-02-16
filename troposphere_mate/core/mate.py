@@ -5,7 +5,7 @@ This module aims to add more feature to Original troposphere Class.
 """
 
 try:
-    from typing import Union
+    from typing import Union, List
 except:  # pragma: no cover
     pass
 
@@ -14,7 +14,7 @@ import warnings
 
 import troposphere
 from six import string_types
-from troposphere import AWSObject, depends_on_helper
+from troposphere import AWSObject, depends_on_helper, cloudformation
 from troposphere.template_generator import TemplateGenerator
 
 from . import metadata as mtdt
@@ -420,6 +420,48 @@ class Template(troposphere.Template):
     @property
     def n_output(self):
         return len(self.outputs)
+
+    def iter_nested_template(self,
+                             depth_first=True,
+                             _templates=None,
+                             _first_time_called=False):
+        """
+        Iterate nested template recursively.
+
+        :type depth_first: bool
+        :param _templates: an internal implementation variable.
+        :param _first_time_called: an internal implementation variable.
+        :rtype: List[Template]
+        """
+        if _templates is None:
+            _templates = list()
+            _first_time_called = True
+
+        _templates_this_level = list() # type: List[Template]
+
+        for resource in self.resources.values():
+            if resource.resource_type == cloudformation.Stack.resource_type:
+                template = resource._template
+                _templates.append(template)
+                # collect this level template, could be used in width first mode later
+                _templates_this_level.append(resource._template)
+                if depth_first:
+                    template.iter_nested_template(
+                        depth_first=depth_first,
+                        _templates=_templates,
+                        _first_time_called=False,
+                    )
+
+        if not depth_first:
+            for template in _templates_this_level:
+                template.iter_nested_template(
+                    depth_first=depth_first,
+                    _templates=_templates,
+                    _first_time_called=False,
+                )
+
+        if _first_time_called:
+            return _templates
 
 
 class Parameter(troposphere.Parameter):
