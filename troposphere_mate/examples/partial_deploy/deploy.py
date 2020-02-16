@@ -10,10 +10,11 @@ aws_region = "us-east-1"
 cft_bucket = "eq-sanhe-for-everything"
 env_name = "tropo-mate-examples-partial-deploy-dev"
 
+#--- only uncomment 1 line at a time to play with it ---
 # cft.template.remove_resource_by_label(iam.InstanceProfile.resource_type)
 # cft.template.remove_resource_by_label(iam.Role.resource_type)
 # cft.template.remove_resource_by_label(iam.Policy.resource_type)
-#
+
 # cft.template.remove_resource_by_label(cft.LABEL_IAM_INSTANCE_PROFILE_TIER)
 # cft.template.remove_resource_by_label(cft.LABEL_IAM_ROLE_TIER)
 # cft.template.remove_resource_by_label(cft.LABEL_IAM_POLICY_TIER)

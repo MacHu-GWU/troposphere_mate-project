@@ -365,6 +365,11 @@ class Template(troposphere.Template):
         """
         Put resource type in Metadata. Allow you to use resource type to
         easily filter resources.
+
+        .. versionchanged:: 0.0.13
+
+            no longer to create dependent resource type label to metadata.
+            because it confuses users.
         """
         for resource_logic_id, resource in self.resources.items():
             try:
@@ -372,19 +377,6 @@ class Template(troposphere.Template):
                 metadata.setdefault(label_field_in_metadata, [])
             except:
                 metadata = {label_field_in_metadata: []}
-
-            # TODO: since we have remove_resource(..., remove_dependent=True) method, no need to inject AWS Resource Name of the dependent to the metadata
-            # try:
-            #     depends_on = resource.DependsOn
-            #     if not isinstance(depends_on, list):
-            #         depends_on = [depends_on, ]
-            #
-            #     for depends_on_resource_id in depends_on:
-            #         resource_type = self.resources[depends_on_resource_id].resource_type
-            #         if resource_type not in metadata[label_field_in_metadata]:
-            #             metadata[DEFAULT_LABELS_FIELD].append(resource_type)
-            # except:
-            #     pass
 
             resource_type = resource.resource_type
             if resource_type not in metadata[label_field_in_metadata]:

@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.13 (TODO)
+0.0.14 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,6 +13,25 @@ Release and Version History
 **Bugfixes**
 
 **Miscellaneous**
+
+
+0.0.13 (2020-02-15)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- now ``Template.remove_resource`` method also removes dependent using the ``DependsOn`` attributes.
+- ``Template.create_resource_type_label`` no longer to create dependent resource type label to metadata. because it confuses users.
+
+**Minor Improvements**
+
+- add ``Template.iter_nested_template`` method to recursively iterate nested templates.
+
+**Bugfixes**
+
+**Miscellaneous**
+
+- add two best practice examples, **nested stack** and **partial deploy**.
+- host doc site on readthedocs.
 
 
 0.0.12 (2020-02-13)

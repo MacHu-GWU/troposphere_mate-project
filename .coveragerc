@@ -16,7 +16,8 @@ omit =
     troposphere_mate/core/orchestration.py
     troposphere_mate/core/stack_deploy.py
     troposphere_mate/canned/dev/*
-    troposphere_mate/orch_example//*
+    troposphere_mate/examples/*
+    troposphere_mate/orch_example/*
 
     troposphere_mate/accessanalyzer.py
     troposphere_mate/amazonmq.py

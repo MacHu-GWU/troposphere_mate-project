@@ -22,7 +22,7 @@ these things obviously breaks the ``DIY - DO NOT REPEAT YOURSELF`` philosophy in
 Best Practice
 ------------------------------------------------------------------------------
 
-In this example, a three layers nested stack structure example is provided.
+In this example, a three layers nested stack structure example is provided. For the sample template code, take a look at https://github.com/MacHu-GWU/troposphere_mate-project/tree/master/troposphere_mate/examples/nested_stack.
 
 They are:
 
