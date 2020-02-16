@@ -373,15 +373,17 @@ class TestTemplate(object):
         assert stack2.Metadata[mtdt.TROPOSPHERE_METADATA_FIELD_NAME] \
                    [mtdt.ResourceLevelField.CftStack.IS_NESTED_STACK] is True
 
-        ids = [template.metadata["id"] for template in tpl.iter_nested_template(depth_first=True)]
-        assert ids == [
-            "1", "11", "12", "2", "21", "22"
-        ]
+        import sys
+        if sys.version_info.major >= 3:
+            ids = [template.metadata["id"] for template in tpl.iter_nested_template(depth_first=True)]
+            assert ids == [
+                "1", "11", "12", "2", "21", "22"
+            ]
 
-        ids = [template.metadata["id"] for template in tpl.iter_nested_template(depth_first=False)]
-        assert ids == [
-            "1", "2", "11", "12", "21", "22"
-        ]
+            ids = [template.metadata["id"] for template in tpl.iter_nested_template(depth_first=False)]
+            assert ids == [
+                "1", "2", "11", "12", "21", "22"
+            ]
 
     def test_iter_nested_template_edge_case(self):
         tpl = Template()
