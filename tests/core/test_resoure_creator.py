@@ -47,7 +47,7 @@ def test_flatten_dct():
         ],
         "character": ["nice", "friendly"],
     }
-    jprint(flatten_dct(dct))
+    # jprint(flatten_dct(dct))
     assert flatten_dct(dct) == [
         [
             "id",

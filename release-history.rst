@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.14 (TODO)
+0.0.15 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -13,6 +13,21 @@ Release and Version History
 **Bugfixes**
 
 **Miscellaneous**
+
+
+0.0.14 (2020-03-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- add StackManager.delete method
+
+**Minor Improvements**
+
+- add ec2 launch template, elb, dynamodb, elastic cache, elastic search property attributes
+
+**Bugfixes**
+
+- Fix troposphere module import in aws_object.py
 
 
 0.0.13 (2020-02-15)
