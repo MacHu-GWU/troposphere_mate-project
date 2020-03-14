@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
 
 import json
+import warnings
 from troposphere import Ref, GetAtt, Sub, AWS_REGION
 from .tagger import tag_property_name_mapper, update_tags_for_resource
 
 try:
     from troposphere import (
         AWSObject,
-        iam, s3, sqs, sns, awslambda, apigateway, ec2, ecr, ecs, vpc,
+        iam, s3, sqs, sns, awslambda, apigateway,
+        ec2,
+        elasticloadbalancing, elasticloadbalancingv2, applicationautoscaling,
+        ecr, ecs,
+        ssm,
         kms, secretsmanager, kinesis, firehose, kinesisanalyticsv2,
-        events, servicecatalog, glue, rds, redshift,
+        events, servicecatalog, glue,
+        dynamodb, rds, redshift, elasticache, elasticsearch,
     )
-except:
-    pass
+except ImportError as e:
+    warnings.warn(str(e))
 
 try:
     from typing import Type
@@ -273,6 +279,16 @@ class MixinReturnValues(object): # pragma: no cover
         validate_resource_type(self, ec2.Volume)
         return Ref(self)
 
+    @property
+    def ec2_launch_template_default_version_number(self):
+        validate_resource_type(self, ec2.LaunchTemplate)
+        return GetAtt(self, "DefaultVersionNumber")
+
+    @property
+    def ec2_launch_template_latest_version_number(self):
+        validate_resource_type(self, ec2.LaunchTemplate)
+        return GetAtt(self, "LatestVersionNumber")
+
     # VPC
     @property
     def vpc_id(self):
@@ -367,7 +383,7 @@ class MixinReturnValues(object): # pragma: no cover
         validate_resource_type(self, ec2.Route)
         return Ref(self)
 
-    # EPI
+    # EIP
     @property
     def eip_ip_address(self):
         validate_resource_type(self, ec2.EIP)
@@ -377,6 +393,32 @@ class MixinReturnValues(object): # pragma: no cover
     def eip_vpc_allocation_id(self):
         validate_resource_type(self, ec2.EIP)
         return GetAtt(self, "AllocationId")
+
+    # ELB
+    @property
+    def elb_load_balancer_canonical_hosted_zone_name(self):
+        validate_resource_type(self, elasticloadbalancing.LoadBalancer)
+        return GetAtt(self, "CanonicalHostedZoneName")
+
+    @property
+    def elb_load_balancer_canonical_hosted_zone_name_id(self):
+        validate_resource_type(self, elasticloadbalancing.LoadBalancer)
+        return GetAtt(self, "CanonicalHostedZoneNameID")
+
+    @property
+    def elb_load_balancer_dns_name(self):
+        validate_resource_type(self, elasticloadbalancing.LoadBalancer)
+        return GetAtt(self, "DNSName")
+
+    @property
+    def elb_load_balancer_source_security_group_name(self):
+        validate_resource_type(self, elasticloadbalancing.LoadBalancer)
+        return GetAtt(self, "SourceSecurityGroup.GroupName")
+
+    @property
+    def elb_load_balancer_source_security_group_owner_alias(self):
+        validate_resource_type(self, elasticloadbalancing.LoadBalancer)
+        return GetAtt(self, "SourceSecurityGroup.OwnerAlias")
 
     # ECR
     @property
@@ -538,6 +580,17 @@ class MixinReturnValues(object): # pragma: no cover
         validate_resource_type(self, glue.Workflow)
         return Ref(self)
 
+    # DynamoDB
+    @property
+    def dynamodb_table_arn(self):
+        validate_resource_type(self, dynamodb.Table)
+        return GetAtt(self, "Arn")
+
+    @property
+    def dynamodb_table_stream_arn(self):
+        validate_resource_type(self, dynamodb.Table)
+        return GetAtt(self, "StreamArn")
+
     # RDS
     @property
     def rds_db_cluster_name(self):
@@ -594,6 +647,50 @@ class MixinReturnValues(object): # pragma: no cover
     def redshift_cluster_connect_port(self):
         validate_resource_type(self, redshift.Cluster)
         return GetAtt(self, "Endpoint.Port")
+
+    # Elastic Cache
+    @property
+    def elastic_cache_cluster_configuration_endpoint_address(self):
+        validate_resource_type(self, elasticache.CacheCluster)
+        return GetAtt(self, "ConfigurationEndpoint.Address")
+
+    @property
+    def elastic_cache_cluster_configuration_endpoint_port(self):
+        validate_resource_type(self, elasticache.CacheCluster)
+        return GetAtt(self, "ConfigurationEndpoint.Port")
+
+    @property
+    def elastic_cache_cluster_redis_endpoint_address(self):
+        validate_resource_type(self, elasticache.CacheCluster)
+        return GetAtt(self, "RedisEndpoint.Address")
+
+    @property
+    def elastic_cache_cluster_redis_endpoint_port(self):
+        validate_resource_type(self, elasticache.CacheCluster)
+        return GetAtt(self, "RedisEndpoint.Port")
+
+    # Elastic Search
+    @property
+    def elastic_search_domain_arn(self):
+        validate_resource_type(self, elasticsearch.Domain)
+        return GetAtt(self, "DomainArn")
+
+    @property
+    def elastic_search_domain_endpoint(self):
+        validate_resource_type(self, elasticsearch.Domain)
+        return GetAtt(self, "DomainEndpoint")
+
+    # System Manager
+    @property
+    def ssm_parameter_type(self):
+        validate_resource_type(self, ssm.Parameter)
+        return GetAtt(self, "Type")
+
+    @property
+    def ssm_parameter_value(self):
+        validate_resource_type(self, ssm.Parameter)
+        return GetAtt(self, "Value")
+
 
 
 class Mixin(MixinReturnValues):
