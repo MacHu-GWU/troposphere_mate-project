@@ -180,16 +180,22 @@ stack_manager = StackManager(
 
 
 def test_stack_manager():
+    """
+    First time, run stack_manager.deploy, comment out stack_manager.delete
+    Second time, comment out stack_manager.deploy, run stack_manager.delete.
+    """
+    stack_name = "troposphere-mate-stack-manager-test"
     template = Template()
-    restapi = apigateway.RestApi(
+    apigateway.RestApi(
         "RestApi",
         template=template,
         Name="troposphere-mate-test",
     )
     stack_manager.deploy(
         template,
-        stack_name="troposphere-mate-stack-manager-test",
+        stack_name=stack_name,
     )
 
+    # stack_manager.delete(stack_name=stack_name)
 
-# test_stack_manager()
+test_stack_manager()

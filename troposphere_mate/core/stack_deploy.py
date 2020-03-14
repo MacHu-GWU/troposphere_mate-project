@@ -8,6 +8,11 @@ from troposphere.cloudformation import Stack
 from . import metadata as mtdt
 from .mate import Template
 
+try:
+    import typing
+except:
+    pass
+
 
 def md5_of_text(text):
     md5 = hashlib.md5()
@@ -284,3 +289,25 @@ class StackManager(object):
             execution_role_arn=execution_role_arn,
             include_iam=include_iam
         )
+
+    def delete(self,
+               stack_name,
+               retain_resources=None,
+               execution_role_arn=None):
+        """
+        Delete a CloudFormation stack.
+
+        :type stack_name: str
+        :type retain_resources: typing.List[str]
+        :type execution_role_arn: str
+        """
+        if retain_resources is None:
+            retain_resources = list()
+        delete_stack_kwargs = dict(
+            StackName=stack_name,
+            RetainResources=retain_resources,
+        )
+        if execution_role_arn is not None:
+            delete_stack_kwargs["RoleARN"] = execution_role_arn
+
+        return self.cf_client.delete_stack(**delete_stack_kwargs)
