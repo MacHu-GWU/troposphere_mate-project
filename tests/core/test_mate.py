@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-
 from troposphere_mate import Template, Tags, Ref, Output, GetAtt, apigateway
 from troposphere_mate.core.mate import is_x_depends_on_y
 
