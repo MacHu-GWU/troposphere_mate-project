@@ -51,6 +51,8 @@
 Welcome to ``troposphere_mate`` Documentation
 ==============================================================================
 
+**THIS PROJECT IS DEPRECATED**, I don't want to rely on troposphere anymore and reinvent `cottonformation <https://github.com/MacHu-GWU/cottonformation-project>`_ from stratch and actively working on it.
+
 ``troposphere_mate`` is **a productive Pythonic CloudFormation Orchestration Tool. It gives you possibility that makes Cloudformation way more powerful than before, easier to maintain big template, or even bring any custom feature to CloudFormation**.
 
 .. contents::
