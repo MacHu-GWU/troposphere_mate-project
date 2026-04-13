@@ -1,5 +1,5 @@
 # dependencies for test
-pytest==3.2.3       # test framework
+pytest==9.0.3       # test framework
 pytest-cov==2.5.1   # coverage test
 
 pathlib_mate    # autopep8 your code
